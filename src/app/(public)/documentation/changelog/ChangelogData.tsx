@@ -21,6 +21,15 @@ export type ChangelogItemType = {
  */
 const changelogData: ChangelogItemType[] = [
 	{
+		version: '12.1.0',
+		date: '2024-11-10',
+		newChanges: [
+			<div>
+				🚀 AI Image Generation App (DALL-E 3) added. <Link to="/apps/ai-image-generator">Checkout!</Link>
+			</div>
+		]
+	},
+	{
 		version: '12.0.0',
 		date: '2024-10-21',
 		newChanges: [
