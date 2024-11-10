@@ -60,6 +60,16 @@ const navigationConfig: FuseNavItemType[] = [
 		translate: 'APPLICATIONS',
 		children: [
 			{
+				id: 'apps.ai-image-generator',
+				title: 'AI Image Generator',
+				type: 'item',
+				icon: 'heroicons-outline:photo',
+				url: '/apps/ai-image-generator',
+				badge: {
+					title: 'NEW'
+				}
+			},
+			{
 				id: 'apps.academy',
 				title: 'Academy',
 				type: 'item',
