@@ -16,59 +16,6 @@
         "apps.mailbox",
         "apps.contacts"
       ]
-    },
-    {
-      "id": "XgbuVEXBU5gtSKdbQRP1Zbbby1i1",
-      "password": "5;4+0IOx:\\Dy",
-      "role": "admin",
-      "displayName": "Abbott Keitch",
-      "photoURL": "/assets/images/avatars/brian-hughes.jpg",
-      "email": "admin@fusetheme.com",
-      "settings": {
-        "layout": {},
-        "theme": {}
-      },
-      "shortcuts": [
-        "apps.calendar",
-        "apps.mailbox",
-        "apps.contacts"
-      ]
-    },
-    {
-      "id": "XgbuVEXBU6gtSKdbTYR1Zbbby1i3",
-      "password": "staff",
-      "role": "staff",
-      "displayName": "Arnold Matlock",
-      "photoURL": "/assets/images/avatars/Arnold.jpg",
-      "email": "staff@fusetheme.com",
-      "settings": {
-        "layout": {
-          "style": "layout2",
-          "config": {
-            "mode": "boxed",
-            "scroll": "content",
-            "navbar": {
-              "display": true
-            },
-            "toolbar": {
-              "display": true,
-              "position": "below"
-            },
-            "footer": {
-              "display": true,
-              "style": "fixed"
-            }
-          }
-        },
-        "customScrollbars": true,
-        "theme": {}
-      },
-      "shortcuts": [
-        "apps.calendar",
-        "apps.mailbox",
-        "apps.contacts",
-        "apps.tasks"
-      ]
     }
   ],
   "profile_albums": [
@@ -25068,6 +25015,397 @@
       "name": "Zimbabwe",
       "code": "+263",
       "flagImagePos": "-1px -2789px"
+    }
+  ],
+  "ai_image_generator_presets": [
+    {
+      "id": "1",
+      "name": "Mountain Lake Sunrise",
+      "settings": {
+        "prompt": "A serene mountain lake at sunrise, reflecting snow-capped peaks",
+        "negativePrompt": "people, buildings, boats, man-made structures",
+        "size": "1024x1024",
+        "artStyle": "realistic",
+        "style": "natural",
+        "mood": "peaceful",
+        "lighting": "golden_hour",
+        "quality": "standard"
+      },
+      "createdAt": 1709654400000
+    },
+    {
+      "id": "2",
+      "name": "Cyberpunk Market",
+      "settings": {
+        "prompt": "Cyberpunk street market with holographic advertisements and flying vehicles",
+        "negativePrompt": "natural elements, daylight, historical buildings",
+        "size": "1024x1024",
+        "artStyle": "cyberpunk",
+        "style": "vivid",
+        "mood": "mysterious",
+        "lighting": "neon_glow",
+        "quality": "hd"
+      },
+      "createdAt": 1709568000000
+    },
+    {
+      "id": "3",
+      "name": "Wizard Library",
+      "settings": {
+        "prompt": "Ancient wizard's library with floating books and magical artifacts",
+        "negativePrompt": "modern technology, contemporary clothing",
+        "size": "1024x1024",
+        "artStyle": "fantasy_art",
+        "style": "natural",
+        "mood": "mystical",
+        "lighting": "candlelight",
+        "quality": "standard"
+      },
+      "createdAt": 1709481600000
+    },
+    {
+      "id": "4",
+      "name": "Future Samurai",
+      "settings": {
+        "prompt": "Futuristic samurai warrior in a cherry blossom garden",
+        "negativePrompt": "guns, modern weapons, urban environment",
+        "size": "1024x1024",
+        "artStyle": "anime",
+        "style": "vivid",
+        "mood": "dramatic",
+        "lighting": "backlit",
+        "quality": "hd"
+      },
+      "createdAt": 1709395200000
+    },
+    {
+      "id": "5",
+      "name": "Bioluminescent Reef",
+      "settings": {
+        "prompt": "Underwater bioluminescent coral reef with exotic sea creatures",
+        "negativePrompt": "humans, boats, pollution",
+        "size": "1024x1024",
+        "artStyle": "digital_painting",
+        "style": "natural",
+        "mood": "ethereal",
+        "lighting": "bioluminescent_glow",
+        "quality": "hd"
+      },
+      "createdAt": 1709308800000
+    },
+    {
+      "id": "6",
+      "name": "Pixel Haunted House",
+      "settings": {
+        "prompt": "8-bit style haunted mansion at midnight",
+        "negativePrompt": "realistic textures, smooth gradients",
+        "size": "1024x1024",
+        "artStyle": "pixel_art",
+        "style": "natural",
+        "mood": "dark_fantasy",
+        "lighting": "spotlight",
+        "quality": "standard"
+      },
+      "createdAt": 1709222400000
+    },
+    {
+      "id": "7",
+      "name": "Autumn Waterfall",
+      "settings": {
+        "prompt": "Misty forest waterfall in autumn colors",
+        "negativePrompt": "people, buildings, vehicles",
+        "size": "1024x1024",
+        "artStyle": "watercolor",
+        "style": "natural",
+        "mood": "serene",
+        "lighting": "soft_ambient",
+        "quality": "hd"
+      },
+      "createdAt": 1709136000000
+    },
+    {
+      "id": "8",
+      "name": "Superhero Battle",
+      "settings": {
+        "prompt": "Superhero battle in a rain-soaked city",
+        "negativePrompt": "daytime scenes, peaceful settings",
+        "size": "1024x1024",
+        "artStyle": "comic_book",
+        "style": "vivid",
+        "mood": "heroic",
+        "lighting": "low_key",
+        "quality": "hd"
+      },
+      "createdAt": 1709049600000
+    },
+    {
+      "id": "9",
+      "name": "Space Portrait",
+      "settings": {
+        "prompt": "Dreamy portrait of a girl with butterflies in space",
+        "negativePrompt": "realistic backgrounds, earth-like settings",
+        "size": "1024x1024",
+        "artStyle": "surrealism",
+        "style": "natural",
+        "mood": "romantic",
+        "lighting": "studio",
+        "quality": "standard"
+      },
+      "createdAt": 1708963200000
+    },
+    {
+      "id": "10",
+      "name": "Retro Arcade",
+      "settings": {
+        "prompt": "Retro-style arcade with vintage gaming machines",
+        "negativePrompt": "modern technology, outdoor scenes",
+        "size": "1024x1024",
+        "artStyle": "pixel_art",
+        "style": "natural",
+        "mood": "nostalgic",
+        "lighting": "neon_glow",
+        "quality": "standard"
+      },
+      "createdAt": 1708876800000
+    },
+    {
+      "id": "11",
+      "name": "Western Showdown",
+      "settings": {
+        "prompt": "Wild west showdown at high noon",
+        "negativePrompt": "modern elements, urban settings",
+        "size": "1024x1024",
+        "artStyle": "realistic",
+        "style": "natural",
+        "mood": "tense",
+        "lighting": "natural",
+        "quality": "hd"
+      },
+      "createdAt": 1708790400000
+    },
+    {
+      "id": "12",
+      "name": "Floating Islands",
+      "settings": {
+        "prompt": "Floating islands with waterfalls in a sunset sky",
+        "negativePrompt": "modern buildings, vehicles, people",
+        "size": "1024x1024",
+        "artStyle": "fantasy_art",
+        "style": "natural",
+        "mood": "uplifting",
+        "lighting": "golden_hour",
+        "quality": "hd"
+      },
+      "createdAt": 1708704000000
+    }
+  ],
+  "ai_image_generator_items": [
+    {
+      "id": "1",
+      "favorite": true,
+      "formData": {
+        "prompt": "Cyberpunk street market with holographic advertisements and flying vehicles",
+        "negativePrompt": "natural elements, daylight, historical buildings",
+        "size": "1024x1024",
+        "artStyle": "cyberpunk",
+        "style": "vivid",
+        "mood": "mysterious",
+        "lighting": "neon_glow",
+        "quality": "hd"
+      },
+      "response": {
+        "created": 1731149290,
+        "data": [
+          {
+            "revised_prompt": "A cyberpunk-inspired setting where the juxtaposition of the modern and the futuristic comes alive. Envision a crowded street market under the dark velvet sky of an unknown city. Vendors of diverse ethnic backgrounds peddle their exotic wares under the harsh yet vibrant glow of intense neon lights. Illuminated holographic advertisements of brilliant hues dance above their heads, adding to the city's enigmatic atmosphere. Amidst this human chaos, flying vehicles zoom across the sky, their paths traced by streaks of light. Despite the overarching aura of mysterious intrigue, the scene is devoid of natural elements, daylight, and historical structures. All painted in the canvas of a futuristic art style with a wash of neon colors, dark urban themes, and sci-fi elements.",
+            "url": "/assets/images/apps/ai-image-generator/mock-storage/img-NHuvpWzGMHK0ijIJdZOejTU9.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "2",
+      "favorite": false,
+      "formData": {
+        "prompt": "A serene mountain lake at sunrise, reflecting snow-capped peaks",
+        "negativePrompt": "people, buildings, boats, man-made structures",
+        "size": "1024x1024",
+        "artStyle": "realistic",
+        "style": "natural",
+        "mood": "peaceful",
+        "lighting": "golden_hour",
+        "quality": "standard"
+      },
+      "response": {
+        "created": 1731149087,
+        "data": [
+          {
+            "revised_prompt": "Create an image in a true-to-life photographic style with natural textures and lighting. This should depict a calm and serene mountain lake at sunrise, reflecting the snow-capped peaks on its mirror-like surface. No human presence or man-made structures should be included. The scene should evoke a sense of tranquility. The lighting should come from a low sun, giving rise to warm, soft, directional light with long shadows.",
+            "url": "/assets/images/apps/ai-image-generator/mock-storage/img-8gLbwpqBrc1IDzZPIBYXAm9A.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "3",
+      "favorite": true,
+      "formData": {
+        "prompt": "Superhero battle in a rain-soaked city",
+        "negativePrompt": "daytime scenes, peaceful settings",
+        "size": "1024x1024",
+        "artStyle": "comic_book",
+        "style": "vivid",
+        "mood": "heroic",
+        "lighting": "low_key",
+        "quality": "hd"
+      },
+      "response": {
+        "created": 1731148572,
+        "data": [
+          {
+            "revised_prompt": "An inspiring battle scene in a rain-soaked city under the cover of night. This depiction should evoke the mood of an epic superhero clash. With strong contrast, dark tones and shadows playing a significant role in the image, showcasing the power and form of the characters in their heroic struggle. The art style is bold with thick outlines and flat, vibrant colors capturing comic strips' essence. Emphasize the intensity of the situation and the dynamic lighting effects, illuminating the heroes' struggle against the adversity they face.",
+            "url": "/assets/images/apps/ai-image-generator/mock-storage/img-lmedAH9nAcSvCWNDkaa4TJKz.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "4",
+      "favorite": false,
+      "formData": {
+        "prompt": "Ancient wizard's library with floating books and magical artifacts",
+        "negativePrompt": "modern technology, contemporary clothing",
+        "size": "1024x1024",
+        "artStyle": "fantasy_art",
+        "style": "natural",
+        "mood": "mystical",
+        "lighting": "candlelight",
+        "quality": "standard"
+      },
+      "response": {
+        "created": 1731150059,
+        "data": [
+          {
+            "revised_prompt": "Old wizard's library set in an ancient era, filled with hovering books and enigmatic magical artifacts. The space excludes any modern technology and individuals in contemporary clothing. The artistic interpretation should follow a genre characterized by imagination and mythical elements, encapsulating enchanted landscapes, fantastical creatures and a rich use of color. The over-all mood should evoke an air of mysticism and ethereality with a hint of mystery. The lighting should resemble the soft and warm glow of flickering candlelight, creating a cozy and historical ambiance.",
+            "url": "/assets/images/apps/ai-image-generator/mock-storage/img-7SQGty2KdzDNUx178Qv1fNPG.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "5",
+      "favorite": true,
+      "formData": {
+        "prompt": "Futuristic samurai warrior in a cherry blossom garden",
+        "negativePrompt": "guns, modern weapons, urban environment",
+        "size": "1024x1024",
+        "artStyle": "anime",
+        "style": "vivid",
+        "mood": "dramatic",
+        "lighting": "backlit",
+        "quality": "hd"
+      },
+      "response": {
+        "created": 1731150638,
+        "data": [
+          {
+            "revised_prompt": "A futuristic samurai warrior, possibly of an Asian descent, poised in readiness in a tranquil garden adorned with blooming cherry blossoms. The warrior, beset with intricate, technology-infused armor of the future, is void of any guns or modern weapons. Invoking the style of pre-1912 Japanese woodblock prints, the scene combines bold lines and vibrant colors, suggestive of a Japanese animation-inspired artwork. Emotionally intense, the scene is heavily charged with dramatic lighting and shadow work, with the light source emanating from behind the subject, lending a striking silhouette effect against the soft glow of the garden.",
+            "url": "/assets/images/apps/ai-image-generator/mock-storage/img-YxPlnuFQ453Rq6uZPPDDnjBp.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "d14c4b8c-d553-4fe3-b286-dbe93eeff0d1",
+      "formData": {
+        "prompt": "Underwater bioluminescent coral reef with exotic sea creatures",
+        "negativePrompt": "humans, boats, pollution",
+        "size": "1024x1024",
+        "style": "natural",
+        "quality": "hd",
+        "artStyle": "digital_painting",
+        "mood": "ethereal",
+        "lighting": "bioluminescent_glow"
+      },
+      "favorite": false,
+      "response": {
+        "created": 1731194277,
+        "data": [
+          {
+            "revised_prompt": "A captivating visual of an underwater mystical world, filled with bioluminescent coral reefs and unique, exotic sea creatures in a surreal, radiant environment. The scene is depicted in a painterly style with soft and gentle brush strokes that resonate with digital artistic themes. The mood of the scene is ethereal; sparks of soft bioluminescent lighting coming off the sea flora and fauna contribute to a dreamlike, mysterious feel. There are no traces of humans, boats, or pollution in this beautiful underwater tableau.",
+            "url": "/assets/images/apps/ai-image-generator/mock-storage/img-fnxNrbFKTaPGc06qkYhwVrLB.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "40dce929-4fe3-4b77-9cf5-96ed754750eb",
+      "formData": {
+        "prompt": "Retro-style arcade with vintage gaming machines",
+        "negativePrompt": "modern technology, outdoor scenes",
+        "size": "1024x1024",
+        "style": "natural",
+        "quality": "standard",
+        "artStyle": "pixel_art",
+        "mood": "nostalgic",
+        "lighting": "neon_glow"
+      },
+      "favorite": false,
+      "response": {
+        "created": 1731222401,
+        "data": [
+          {
+            "revised_prompt": "A retro-style arcade filled with vintage gaming machines. The scene features a nostalgic and sentimental atmosphere with soft lighting, emitting a sense of history and cherished memories. The arcade is illuminated by vivid neon lights, casting colorful glows on the machines and giving off an urban vibe. The overall art style is reminiscent of the retro 8-bit or 16-bit era, with a pixelated, grid-based look that's representative of classic video games. The machines are covered with dust and scuffs, but still function, showcasing decades-old games that were once the height of technology.",
+            "url": "/assets/images/apps/ai-image-generator/mock-storage/img-0VSR40G0dwjWBL3XjAHB4vPu.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e49df1dd-f7bd-435e-9f25-538aa54f7462",
+      "formData": {
+        "prompt": "8-bit style haunted mansion at midnight",
+        "negativePrompt": "realistic textures, smooth gradients",
+        "size": "1024x1024",
+        "style": "natural",
+        "quality": "standard",
+        "artStyle": "pixel_art",
+        "mood": "dark_fantasy",
+        "lighting": "spotlight"
+      },
+      "favorite": false,
+      "response": {
+        "created": 1731222509,
+        "data": [
+          {
+            "revised_prompt": "Create an image of a haunted mansion. The house should be depicted in a retro 8-bit or 16-bit style, giving it a pixelated, grid-based look, akin to classic video games. It is midnight, and the surrounding scene should be dark and mysterious, however, the structure remains a focal point through dramatic illumination, appearing brightly lit against the darker background. Despite the haunted theme, imbue the scene with a sense of fantasy. Please refrain from using realistic textures and smooth gradients as this is intended to be a retro-themed image.",
+            "url": "/assets/images/apps/ai-image-generator/mock-storage/img-RrCHzYKMxl4G2ye1E77P0kxG.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "93802ca9-2404-423f-a6cf-1eea56d57c32",
+      "formData": {
+        "prompt": "Misty forest waterfall in autumn colors",
+        "negativePrompt": "people, buildings, vehicles",
+        "size": "1024x1024",
+        "style": "natural",
+        "quality": "hd",
+        "artStyle": "watercolor",
+        "mood": "serene",
+        "lighting": "soft_ambient"
+      },
+      "favorite": false,
+      "response": {
+        "created": 1731222950,
+        "data": [
+          {
+            "revised_prompt": "Imagine a serene and tranquil scene of a misty forest waterfall. The ambiance is enhanced by the colorful hues of autumn. The waterfall cascades down gently in the midst of the fog, offering a sense of calmness. Render this image in the style characterized by soft and fluid brush strokes with translucent layers of color blending. The lighting in this composition should be gentle and diffused, with minimum shadows to add to its dreamy aesthetic. This image should not include any people, buildings or vehicles.",
+            "url": "/assets/images/apps/ai-image-generator/mock-storage/img-f4stVCcfCySKLns6bPly61Al.png"
+          }
+        ]
+      }
     }
   ]
 }
