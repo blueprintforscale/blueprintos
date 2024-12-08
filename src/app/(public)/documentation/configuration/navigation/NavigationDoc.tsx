@@ -26,7 +26,7 @@ function NavigationDoc() {
 				className="mb-16"
 				component="p"
 			>
-				The theme navigation is located in the file <code>app/configs/navigationConfig.ts</code>, which serves
+				The theme navigation is located in the file <code>src/configs/navigationConfig.ts</code>, which serves
 				as an initial state in the Fuse.navigation redux store.
 			</Typography>
 

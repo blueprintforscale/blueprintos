@@ -1,7 +1,7 @@
 'use client';
 
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import { ReactNode, forwardRef } from 'react';
+import { ReactNode } from 'react';
 
 type CustomLinkProps = Omit<NextLinkProps, 'href'> & {
 	to?: string;
@@ -9,9 +9,12 @@ type CustomLinkProps = Omit<NextLinkProps, 'href'> & {
 	children?: ReactNode;
 	className?: string;
 	role?: string;
+	ref?: React.RefObject<HTMLAnchorElement>;
 };
 
-const Link = forwardRef<HTMLAnchorElement, CustomLinkProps>(({ to, href, children, className, role, ...rest }, ref) => {
+function Link(props: CustomLinkProps) {
+	const { ref, to, href, children, className, role, ...rest } = props;
+
 	return (
 		<NextLink
 			className={className}
@@ -23,6 +26,6 @@ const Link = forwardRef<HTMLAnchorElement, CustomLinkProps>(({ to, href, childre
 			{children}
 		</NextLink>
 	);
-});
+}
 
 export default Link;

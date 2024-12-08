@@ -42,7 +42,6 @@ function HelpCenterGuide() {
 
 				<div
 					className="mt-32 sm:mt-48 max-w-none prose dark:prose-invert"
-					// eslint-disable-next-line react/no-danger
 					dangerouslySetInnerHTML={{ __html: guide.content }}
 				/>
 

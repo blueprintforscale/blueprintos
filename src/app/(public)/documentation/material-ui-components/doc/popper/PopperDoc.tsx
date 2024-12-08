@@ -39,19 +39,19 @@ function PopperDoc(props) {
 			<Typography className="text-5xl my-16 font-700" component="h1">Popper</Typography>
 <Typography className="description">A Popper can be used to display some content on top of another. It's an alternative to react-popper.</Typography>
 
-<Typography className="text-base mb-32" component="div">Some important features of the <code>{`Popper`}</code> component:</Typography>
+<Typography className="text-base mb-32" component="div">Some important features of the Popper component:</Typography>
 <ul className="space-y-16">
 <li>🕷 Popper relies on the 3rd party library (<a href="https://popper.js.org/">Popper.js</a>) for perfect positioning.</li>
 <li>💄 It&#39;s an alternative API to react-popper. It aims for simplicity.</li>
-<li>The children is <a href="/material-ui/react-portal/"><code>{`Portal`}</code></a> to the body of the document to avoid rendering problems.
+<li>Its child element is a <a href="/base-ui/react-portal/">Base UI Portal</a> on the body of the document to avoid rendering problems.
 You can disable this behavior with <code>{`disablePortal`}</code>.</li>
-<li>The scroll isn&#39;t blocked like with the <a href="/material-ui/react-popover/"><code>{`Popover`}</code></a> component.
+<li>The scroll isn&#39;t blocked like with the <a href="/material-ui/react-popover/">Popover</a> component.
 The placement of the popper updates with the available area in the viewport.</li>
-<li>Clicking away does not hide the <code>{`Popper`}</code> component.
-If you need this behavior, you can use <a href="/material-ui/react-click-away-listener/"><code>{`ClickAwayListener`}</code></a> - see the example in the <a href="/material-ui/react-menu/#menulist-composition">menu documentation section</a>.</li>
+<li>Clicking away does not hide the Popper component.
+If you need this behavior, you can use the <a href="/base-ui/react-click-away-listener/">Base UI Click-Away Listener</a> - see the example in the <a href="/material-ui/react-menu/#menulist-composition">menu documentation section</a>.</li>
 <li>The <code>{`anchorEl`}</code> is passed as the reference object to create a new <code>{`Popper.js`}</code> instance.</li>
 </ul>
-<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Basic popper</Typography>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Basic Popper</Typography>
 <Typography className="text-base mb-32" component="div"><FuseExample
                     name="SimplePopper.js"
                     className="my-16"
@@ -104,7 +104,7 @@ You need to create an object shaped like the <a href="https://popper.js.org/docs
                     component={VirtualElementPopperComponent} 
                     raw={VirtualElementPopperRaw}
                     /></Typography>
-<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Complementary projects</Typography>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Supplementary projects</Typography>
 <Typography className="text-base mb-32" component="div">For more advanced use cases you might be able to take advantage of:</Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">material-ui-popup-state</Typography>
 <Typography className="text-base mb-32" component="div"><img src="https://img.shields.io/github/stars/jcoreio/material-ui-popup-state?style=social&label=Star" alt="stars"/>

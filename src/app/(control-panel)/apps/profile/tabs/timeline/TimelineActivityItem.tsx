@@ -2,7 +2,7 @@ import Avatar from '@mui/material/Avatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
-import { ProfileActivity } from '@/app/(control-panel)/apps/profile/ProfileApi';
+import { ProfileActivity } from '../../ProfileApi';
 
 type ActivityItemProps = {
 	item: ProfileActivity;

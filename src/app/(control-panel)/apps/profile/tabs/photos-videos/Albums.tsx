@@ -1,5 +1,5 @@
 import FuseLoading from '@fuse/core/FuseLoading';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import ListSubheader from '@mui/material/ListSubheader';
 import Typography from '@mui/material/Typography';
 import { useGetProfileAlbumsQuery } from '../../ProfileApi';

@@ -2,7 +2,6 @@ import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
 import { TabsProps } from '@mui/material/Tabs/Tabs';
 import Box from '@mui/material/Box';
-import * as React from 'react';
 import clsx from 'clsx';
 
 type StyledTabsProps = TabsProps;

@@ -1,5 +1,5 @@
 import FuseLoading from '@fuse/core/FuseLoading';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';

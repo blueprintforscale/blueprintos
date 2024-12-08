@@ -1,7 +1,7 @@
 'use client';
 
 import * as Prism from 'prismjs';
-import { ElementType, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { ElementType, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import './prism-languages';
 import { alpha, styled } from '@mui/material/styles';
 import clsx from 'clsx';
@@ -15,15 +15,18 @@ type FuseHighlightProps = {
 	component?: ElementType;
 	className: string;
 	copy?: boolean;
+	ref?: React.RefObject<HTMLDivElement>;
 };
 
 /**
  * FuseHighlight
  * Highlight language-specific syntax with Prism.js
  */
-const FuseHighlight = forwardRef<HTMLDivElement, FuseHighlightProps>((props, ref) => {
-	const { copy = true, async = false, children, className, component: Wrapper = 'code' } = props;
+function FuseHighlight(props: FuseHighlightProps) {
+	const { copy = true, async = false, children, className, component: Wrapper = 'code', ref } = props;
+
 	const innerRef = useRef<HTMLDivElement>(null);
+
 	useImperativeHandle(ref, () => innerRef.current, [innerRef]);
 	const [open, setOpen] = useState(false);
 
@@ -37,7 +40,7 @@ const FuseHighlight = forwardRef<HTMLDivElement, FuseHighlightProps>((props, ref
 
 	useEffect(() => {
 		setSource(trimCode(children));
-	}, [trimCode, children]);
+	}, [children]);
 
 	useEffect(() => {
 		highlight();
@@ -88,7 +91,7 @@ const FuseHighlight = forwardRef<HTMLDivElement, FuseHighlightProps>((props, ref
 			</Wrapper>
 		</div>
 	);
-});
+}
 
 function trimCode(children: FuseHighlightProps['children']) {
 	const sourceString = typeof children === 'string' ? children : children?.default;

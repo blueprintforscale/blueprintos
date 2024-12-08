@@ -4,14 +4,13 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import FusePageCarded from '@fuse/core/FusePageCarded';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from '@fuse/core/Link';
 import _ from 'lodash';
 import { FormProvider, useForm } from 'react-hook-form';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
-import * as React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import FuseTabs from 'src/components/tabs/FuseTabs';
@@ -38,7 +37,7 @@ const schema = z.object({
 function Product() {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
-	const routeParams = useParams();
+	const routeParams = useParams<{ productId: string }>();
 
 	const { productId } = routeParams;
 

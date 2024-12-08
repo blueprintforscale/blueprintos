@@ -109,8 +109,8 @@ The <code>{`helperText`}</code> prop can then be used to provide feedback to the
                     raw={ValidationTextFieldsRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Multiline</Typography>
-<Typography className="text-base mb-32" component="div">The <code>{`multiline`}</code> prop transforms the text field into a <a href="/material-ui/react-textarea-autosize/">TextareaAutosize</a> element.
-Unless the <code>{`rows`}</code> prop is set, the height of the text field dynamically matches its content (using <a href="/material-ui/react-textarea-autosize/">TextareaAutosize</a>).
+<Typography className="text-base mb-32" component="div">The <code>{`multiline`}</code> prop transforms the Text Field into a <a href="/base-ui/react-textarea-autosize/">Base UI Textarea Autosize</a> element.
+Unless the <code>{`rows`}</code> prop is set, the height of the text field dynamically matches its content.
 You can use the <code>{`minRows`}</code> and <code>{`maxRows`}</code> props to bound it.</Typography>
 <Typography className="text-base mb-32" component="div"><FuseExample
                     name="MultilineTextFields.js"
@@ -355,7 +355,7 @@ In some circumstances, we can&#39;t determine the &quot;shrink&quot; state (numb
 
 <FuseHighlight component="pre" className="language-jsx">
 {` 
-<TextField InputLabelProps={{ shrink: true }} />
+<TextField slotProps={{ inputLabel: { shrink: true } }} />
 `}
 </FuseHighlight>
 <Typography className="text-base mb-32" component="div">or</Typography>
@@ -441,10 +441,12 @@ const MyInputComponent = React.forwardRef((props, ref) => {
 
 // usage
 <TextField
-  InputProps={{
-    inputComponent: MyInputComponent,
-    inputProps: {
-      component: SomeThirdPartyComponent,
+  slotProps={{
+    input: {
+      inputComponent: MyInputComponent,
+      inputProps: {
+        component: SomeThirdPartyComponent,
+      },
     },
   
 />;
@@ -477,15 +479,15 @@ Until the UI is hydrated <code>{`TextField`}</code> without an explicit <code>{`
 </FormControl>
 `}
 </FuseHighlight>
-<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Complementary projects</Typography>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Supplementary projects</Typography>
+
+
 <Typography className="text-base mb-32" component="div">For more advanced use cases, you might be able to take advantage of:</Typography>
 <ul className="space-y-16">
-<li><a href="https://react-hook-form.com/">react-hook-form</a>: React hook for form validation.</li>
-<li><a href="https://github.com/dohomi/react-hook-form-mui">react-hook-form-mui</a>: Material UI and react-hook-form combined.</li>
+<li><a href="https://github.com/dohomi/react-hook-form-mui">react-hook-form-mui</a>: Material UI and <a href="https://react-hook-form.com/">react-hook-form</a> combined.</li>
 <li><a href="https://github.com/stackworx/formik-mui">formik-material-ui</a>: Bindings for using Material UI with <a href="https://formik.org/">formik</a>.</li>
 <li><a href="https://github.com/lookfirst/mui-rff">mui-rff</a>: Bindings for using Material UI with <a href="https://final-form.org/react">React Final Form</a>.</li>
 <li><a href="https://www.npmjs.com/package/@ui-schema/ds-material">@ui-schema/ds-material</a> Bindings for using Material UI with <a href="https://github.com/ui-schema/ui-schema">UI Schema</a>. JSON Schema compatible.</li>
-<li><a href="https://www.data-driven-forms.org/provided-mappers/mui-component-mapper">@data-driven-forms/mui-component-mapper</a>: Bindings for using Material UI with <a href="https://github.com/data-driven-forms/react-forms">Data Driven Forms</a>.</li>
 </ul>
 
 		</>

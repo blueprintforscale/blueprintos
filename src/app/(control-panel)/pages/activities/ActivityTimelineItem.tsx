@@ -35,7 +35,6 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 				{!last && <TimelineConnector />}
 			</TimelineSeparator>
 			<TimelineContent className="flex flex-col items-start pb-48 pt-0">
-				{/* eslint-disable-next-line react/no-danger */}
 				{item.description && <div dangerouslySetInnerHTML={{ __html: item.description }} />}
 
 				<div className="mt-8 flex flex-col text-md leading-5 sm:mt-4 sm:flex-row sm:items-center sm:space-x-8">
@@ -78,7 +77,6 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 							})
 						})}
 					>
-						{/* eslint-disable-next-line react/no-danger */}
 						<div dangerouslySetInnerHTML={{ __html: item.extraContent }} />
 					</Box>
 				)}

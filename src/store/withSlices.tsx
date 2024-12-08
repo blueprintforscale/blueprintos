@@ -58,7 +58,7 @@ const withSlices =
 				};
 
 				injectSlices();
-			}, [slices]);
+			}, []);
 
 			if (!isInjected) {
 				return null; // Or a loading indicator

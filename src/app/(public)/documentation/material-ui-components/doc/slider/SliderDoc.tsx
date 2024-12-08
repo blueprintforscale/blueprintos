@@ -194,9 +194,9 @@ You can learn more about this in the <a href="/material-ui/customization/how-to-
                     component={VerticalSliderComponent} 
                     raw={VerticalSliderRaw}
                     /></Typography>
-<Typography className="text-base mb-32" component="div"><strong>WARNING</strong>: Chrome, Safari and newer Edge versions that is any browser based on WebKit exposes <code>{`<Slider orientation="vertical" />`}</code> as horizontal (<a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1158217">chromium issue #1158217</a>).
+<Typography className="text-base mb-32" component="div"><strong>WARNING</strong>: Chrome, Safari and newer Edge versions that is any browser based on WebKit exposes <code>{`<Slider orientation="vertical" />`}</code> as horizontal (<a href="https://issues.chromium.org/issues/40736841">chromium issue #40736841</a>).
 By applying <code>{`-webkit-appearance: slider-vertical;`}</code> the slider is exposed as vertical.</Typography>
-<Typography className="text-base mb-32" component="div">However, by applying <code>{`-webkit-appearance: slider-vertical;`}</code> keyboard navigation for horizontal keys (<kbd className="key">Arrow Left</kbd>, <kbd className="key">Arrow Right</kbd>) is reversed (<a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1162640">chromium issue #1162640</a>).
+<Typography className="text-base mb-32" component="div">However, by applying <code>{`-webkit-appearance: slider-vertical;`}</code> keyboard navigation for horizontal keys (<kbd className="key">Arrow Left</kbd>, <kbd className="key">Arrow Right</kbd>) is reversed (<a href="https://issues.chromium.org/issues/40739626">chromium issue #40739626</a>).
 Usually, up and right should increase and left and down should decrease the value.
 If you apply <code>{`-webkit-appearance`}</code> you could prevent keyboard navigation for horizontal arrow keys for a truly vertical slider.
 This might be less confusing to users compared to a change in direction.</Typography>

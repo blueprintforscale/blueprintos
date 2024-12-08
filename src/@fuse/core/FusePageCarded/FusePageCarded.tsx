@@ -3,11 +3,10 @@
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
-import { forwardRef, memo, ReactNode, useImperativeHandle, useRef } from 'react';
+import { memo, ReactNode, useImperativeHandle, useRef, RefObject } from 'react';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { SystemStyleObject } from '@mui/system/styleFunctionSx/styleFunctionSx';
 import { Theme } from '@mui/system';
-import { PartialDeep } from 'type-fest/source/partial-deep';
 import FusePageCardedSidebar from './FusePageCardedSidebar';
 import FusePageCardedHeader from './FusePageCardedHeader';
 import { FuseScrollbarsProps } from '../FuseScrollbars/FuseScrollbars';
@@ -15,9 +14,6 @@ import { FuseScrollbarsProps } from '../FuseScrollbars/FuseScrollbars';
 const headerHeight = 120;
 const toolbarHeight = 64;
 
-/**
- * Props for the FusePageCarded component.
- */
 type FusePageCardedProps = SystemStyleObject<Theme> & {
 	className?: string;
 	leftSidebarContent?: ReactNode;
@@ -33,7 +29,8 @@ type FusePageCardedProps = SystemStyleObject<Theme> & {
 	rightSidebarWidth?: number;
 	rightSidebarOnClose?: () => void;
 	leftSidebarOnClose?: () => void;
-	contentScrollbarsProps?: PartialDeep<FuseScrollbarsProps>;
+	contentScrollbarsProps?: FuseScrollbarsProps;
+	ref?: RefObject<{ toggleLeftSidebar: (val: boolean) => void; toggleRightSidebar: (val: boolean) => void }>;
 };
 
 const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
@@ -184,13 +181,7 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 	}
 }));
 
-/**
- * The FusePageCarded component is a carded page layout with left and right sidebars.
- */
-const FusePageCarded = forwardRef<
-	{ toggleLeftSidebar: (T: boolean) => void; toggleRightSidebar: (T: boolean) => void },
-	FusePageCardedProps
->((props, ref) => {
+function FusePageCarded(props: FusePageCardedProps) {
 	const {
 		scroll = 'page',
 		className,
@@ -206,7 +197,8 @@ const FusePageCarded = forwardRef<
 		rightSidebarVariant = 'permanent',
 		rightSidebarOnClose,
 		leftSidebarOnClose,
-		contentScrollbarsProps
+		contentScrollbarsProps,
+		ref
 	} = props;
 
 	const leftSidebarRef = useRef<{ toggleSidebar: (T: boolean) => void }>(null);
@@ -214,12 +206,15 @@ const FusePageCarded = forwardRef<
 	const rootRef = useRef(null);
 
 	useImperativeHandle(ref, () => ({
-		rootRef,
 		toggleLeftSidebar: (val: boolean) => {
-			leftSidebarRef.current.toggleSidebar(val);
+			if (leftSidebarRef.current) {
+				leftSidebarRef.current.toggleSidebar(val);
+			}
 		},
 		toggleRightSidebar: (val: boolean) => {
-			rightSidebarRef.current.toggleSidebar(val);
+			if (rightSidebarRef.current) {
+				rightSidebarRef.current.toggleSidebar(val);
+			}
 		}
 	}));
 
@@ -248,7 +243,7 @@ const FusePageCarded = forwardRef<
 				})}
 			/>
 			<Root
-				className={clsx('FusePageCarded-root', `FusePageCarded-scroll-${props.scroll}`, className)}
+				className={clsx('FusePageCarded-root', `FusePageCarded-scroll-${scroll}`, className)}
 				ref={rootRef}
 				scroll={scroll}
 				leftSidebarWidth={leftSidebarWidth}
@@ -292,8 +287,8 @@ const FusePageCarded = forwardRef<
 			</Root>
 		</>
 	);
-});
+}
 
-const StyledFusePageCarded: typeof FusePageCarded = memo(styled(FusePageCarded)``);
+const StyledFusePageCarded = memo(styled(FusePageCarded)``);
 
 export default StyledFusePageCarded;

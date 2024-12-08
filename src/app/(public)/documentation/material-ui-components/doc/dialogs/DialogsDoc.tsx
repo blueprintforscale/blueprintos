@@ -221,7 +221,7 @@ This will make the entire dialog draggable.</Typography>
 <Typography className="text-base mb-32" component="div">Follow the <a href="/material-ui/react-modal/#performance">Modal performance section</a>.</Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Limitations</Typography>
 <Typography className="text-base mb-32" component="div">Follow the <a href="/material-ui/react-modal/#limitations">Modal limitations section</a>.</Typography>
-<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Complementary projects</Typography>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Supplementary projects</Typography>
 <Typography className="text-base mb-32" component="div">For more advanced use cases you might be able to take advantage of:</Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">material-ui-confirm</Typography>
 <Typography className="text-base mb-32" component="div"><img src="https://img.shields.io/github/stars/jonatanklosko/material-ui-confirm?style=social&label=Star" alt="stars"/>
@@ -229,6 +229,45 @@ This will make the entire dialog draggable.</Typography>
 <Typography className="text-base mb-32" component="div">The package <a href="https://github.com/jonatanklosko/material-ui-confirm/"><code>{`material-ui-confirm`}</code></a> provides dialogs for confirming user actions without writing boilerplate code.</Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Accessibility</Typography>
 <Typography className="text-base mb-32" component="div">Follow the <a href="/material-ui/react-modal/#accessibility">Modal accessibility section</a>.</Typography>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Toolpad (Beta)</Typography>
+<Typography className="text-15 mt-20 mb-10 font-700" component="h3">useDialogs</Typography>
+<Typography className="text-base mb-32" component="div">You can create and manipulate dialogs imperatively with the <a href="https://mui.com/toolpad/core/react-use-dialogs/"><code>{`useDialogs()`}</code></a> API in <code>{`@toolpad/core`}</code>. This hook handles</Typography>
+<ul className="space-y-16">
+<li>state management for opening and closing dialogs</li>
+<li>passing data to dialogs and receiving results back from them</li>
+<li>stacking multiple dialogs</li>
+<li>themed, asynchronous versions of <code>{`window.alert()`}</code>, <code>{`window.confirm()`}</code> and <code>{`window.prompt()`}</code></li>
+</ul>
+<Typography className="text-base mb-32" component="div">The following example demonstrates some of these features:</Typography>
+
+<FuseHighlight component="pre" className="language-tsx">
+{` 
+const handleDelete = async () => {
+  const id = await dialogs.prompt('Enter the ID to delete', {
+    okText: 'Delete',
+    cancelText: 'Cancel',
+  });
+
+  if (id) {
+    const deleteConfirmed = await dialogs.confirm(
+      \`Are you sure you want to delete "${id}?\`,
+    );
+    if (deleteConfirmed) {
+      try {
+        setIsDeleting(true);
+        await mockApiDelete(id);
+        dialogs.alert('Deleted!');
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Unknown error';
+        await dialogs.open(MyCustomDialog, { id, error: message });
+      } finally {
+        setIsDeleting(false);
+      }
+    }
+  }
+};
+`}
+</FuseHighlight>
 
 		</>
 	);

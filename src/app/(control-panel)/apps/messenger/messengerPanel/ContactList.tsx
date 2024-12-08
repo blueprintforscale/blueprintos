@@ -1,7 +1,7 @@
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { memo, useMemo, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import clsx from 'clsx';

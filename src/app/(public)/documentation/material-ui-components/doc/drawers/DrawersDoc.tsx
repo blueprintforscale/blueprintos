@@ -198,6 +198,9 @@ When expanded, it appears as the standard persistent navigation drawer.</Typogra
                     component={ClippedDrawerComponent} 
                     raw={ClippedDrawerRaw}
                     /></Typography>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Toolpad (Beta)</Typography>
+<Typography className="text-15 mt-20 mb-10 font-700" component="h3">Dashboard Layout</Typography>
+<Typography className="text-base mb-32" component="div">The <a href="https://mui.com/toolpad/core/react-dashboard-layout/">DashboardLayout</a> component from <code>{`@toolpad/core`}</code> is the starting point for dashboarding applications. It takes care of application layout, theming, navigation, and more. An example usage of this component:</Typography>
 
 		</>
 	);

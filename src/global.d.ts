@@ -2,7 +2,7 @@
  * The module for importing CSS files.
  */
 declare module '*.css' {
-	const content: { [className: string]: string };
+	const content: Record<string, string>;
 	export default content;
 }
 
@@ -11,9 +11,7 @@ declare module '*.css' {
  */
 type ProcessType = NodeJS.Process & {
 	browser: boolean;
-	env: {
-		[key: string]: string | undefined;
-	};
+	env: Record<string, string | undefined>;
 };
 
 /**
@@ -30,6 +28,7 @@ interface HotModule {
 	};
 }
 
+// eslint-disable-next-line @next/next/no-assign-module-variable
 declare const module: HotModule;
 
 declare module '*?raw' {

@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-console
-console.log(`**************************************************************
+ console.log(`**************************************************************
 *                                                            *
 *  Fuse React Development:                                   *
 *                                                            *

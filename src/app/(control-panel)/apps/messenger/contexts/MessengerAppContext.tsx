@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-type MessengerAppContextType = {
+export type MessengerAppContextType = {
 	setMainSidebarOpen: (isOpen?: boolean) => void;
 	setContactSidebarOpen: (contactId?: string) => void;
 	setUserSidebarOpen: (isOpen?: boolean) => void;

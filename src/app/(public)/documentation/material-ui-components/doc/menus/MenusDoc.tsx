@@ -148,7 +148,7 @@ You can use the same list composition features with the <code>{`MenuItem`}</code
                     raw={LongMenuRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Limitations</Typography>
-<Typography className="text-base mb-32" component="div">There is <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=327437">a flexbox bug</a> that prevents <code>{`text-overflow: ellipsis`}</code> from working in a flexbox layout.
+<Typography className="text-base mb-32" component="div">There is <a href="https://issues.chromium.org/issues/40344463">a flexbox bug</a> that prevents <code>{`text-overflow: ellipsis`}</code> from working in a flexbox layout.
 You can use the <code>{`Typography`}</code> component with <code>{`noWrap`}</code> to workaround this issue:</Typography>
 <Typography className="text-base mb-32" component="div"><FuseExample
                     name="TypographyMenu.js"
@@ -175,7 +175,7 @@ You can use the <code>{`Typography`}</code> component with <code>{`noWrap`}</cod
                     component={ContextMenuComponent} 
                     raw={ContextMenuRaw}
                     /></Typography>
-<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Complementary projects</Typography>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Supplementary projects</Typography>
 <Typography className="text-base mb-32" component="div">For more advanced use cases you might be able to take advantage of:</Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">material-ui-popup-state</Typography>
 <Typography className="text-base mb-32" component="div"><img src="https://img.shields.io/github/stars/jcoreio/material-ui-popup-state?style=social&label=Star" alt="stars"/>

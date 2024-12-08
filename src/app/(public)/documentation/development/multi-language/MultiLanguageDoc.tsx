@@ -160,7 +160,7 @@ function MultiLanguageDoc() {
 				className="language-jsx mb-24"
 			>
 				{`
-import { useI18n } from '@i18n/I18nProvider';
+import useI18n from '@i18n/useI18n';
 
 const { changeLanguage } = useI18n();
 
@@ -234,7 +234,7 @@ const handleLanguageChange = async (newLanguageId) => {
 				className="language-jsx mb-24"
 			>
 				{`
-import { useI18n } from '@i18n/I18nProvider';
+import useI18n from '@i18n/useI18n';
 
 function MyComponent() {
   const { language, changeLanguage, langDirection } = useI18n();

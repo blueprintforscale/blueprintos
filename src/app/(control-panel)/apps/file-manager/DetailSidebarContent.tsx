@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useAppDispatch } from 'src/store/hooks';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
@@ -22,7 +22,7 @@ function DetailSidebarContent() {
 
 	useEffect(() => {
 		dispatch(resetSelectedItemId());
-	}, [pathname]);
+	}, [dispatch, pathname]);
 
 	if (!selectedItem) {
 		return null;

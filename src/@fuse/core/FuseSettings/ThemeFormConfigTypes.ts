@@ -22,9 +22,7 @@ type SwitchFieldType = FormFieldBaseType & {
 	type: 'switch';
 };
 
-type GroupFieldChildrenType = {
-	[key: string]: RadioFieldType | SwitchFieldType | NumberFieldType | GroupFieldType;
-};
+type GroupFieldChildrenType = Record<string, RadioFieldType | SwitchFieldType | NumberFieldType | GroupFieldType>;
 
 /**
  * The GroupFieldType type defines the shape of a group form field.
@@ -41,8 +39,6 @@ export type AnyFormFieldType = RadioFieldType | SwitchFieldType | NumberFieldTyp
  * The ThemeFormConfigTypes type is an object where the keys are strings and the values are AnyFormFieldType objects.
  * It is used to generate the form fields based on the configuration in the themeLayoutConfigs object.
  */
-type ThemeFormConfigTypes = {
-	[key: string]: AnyFormFieldType;
-};
+type ThemeFormConfigTypes = Record<string, AnyFormFieldType>;
 
 export default ThemeFormConfigTypes;

@@ -11,6 +11,7 @@ import { Theme } from '@mui/system/createTheme/createTheme';
  */
 function useThemeMediaQuery(themeCallbackFunc: (theme: Theme) => string) {
 	const theme = useTheme();
+
 	const query = themeCallbackFunc(theme).replace('@media ', '');
 
 	// State to track whether the component has mounted

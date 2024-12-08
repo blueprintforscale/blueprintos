@@ -113,6 +113,9 @@ You can learn more about this in the <a href="/material-ui/customization/how-to-
 <li>To prevent screen reader announcement of the visual separators between links, they are hidden with <code>{`aria-hidden`}</code>.</li>
 <li>A nav element labeled with <code>{`aria-label`}</code> identifies the structure as a breadcrumb trail and makes it a navigation landmark so that it is easy to locate.</li>
 </ul>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Toolpad (Beta)</Typography>
+<Typography className="text-15 mt-20 mb-10 font-700" component="h3">Page Container</Typography>
+<Typography className="text-base mb-32" component="div">The <a href="https://mui.com/toolpad/core/react-page-container/">PageContainer</a> component in <code>{`@toolpad/core`}</code> is the ideal wrapper for the content of your dashboard. It makes the Material UI Container navigation-aware and extends it with page title, breadcrumbs, actions, and more.</Typography>
 
 		</>
 	);

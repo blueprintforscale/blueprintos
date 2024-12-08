@@ -4,7 +4,7 @@ import FuseMessage from '@fuse/core/FuseMessage';
 import clsx from 'clsx';
 import { ReactNode, memo } from 'react';
 import { Layout2ConfigDefaultsType } from 'src/components/theme-layouts/layout2/Layout2Config';
-import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import FooterLayout2 from './components/FooterLayout2';
 import LeftSideLayout2 from './components/LeftSideLayout2';
 import NavbarWrapperLayout2 from './components/NavbarWrapperLayout2';

@@ -3,7 +3,7 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Box from '@mui/material/Box';
 import { alpha } from '@mui/material/styles';
 

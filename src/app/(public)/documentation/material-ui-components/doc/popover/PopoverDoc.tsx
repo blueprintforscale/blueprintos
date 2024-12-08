@@ -93,7 +93,7 @@ interface PopoverVirtualElement {
 The usage of a virtual element for the Popover component requires the <code>{`nodeType`}</code> property.
 This is different from virtual elements used for the <a href="/material-ui/react-popper/#virtual-element"><code>{`Popper`}</code></a> or <a href="/material-ui/react-tooltip/#virtual-element"><code>{`Tooltip`}</code></a> components, both of which don&#39;t require the property.
 :::</Typography>
-<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Complementary projects</Typography>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Supplementary projects</Typography>
 <Typography className="text-base mb-32" component="div">For more advanced use cases, you might be able to take advantage of:</Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">material-ui-popup-state</Typography>
 <Typography className="text-base mb-32" component="div"><img src="https://img.shields.io/github/stars/jcoreio/material-ui-popup-state?style=social&label=Star" alt="stars"/>

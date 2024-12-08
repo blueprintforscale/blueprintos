@@ -65,7 +65,7 @@ The columns can be configured with multiple breakpoints to specify the column sp
 <li>Item widths are set in percentages, so they&#39;re always fluid and sized relative to their parent element.</li>
 <li>There are five default grid breakpoints: xs, sm, md, lg, and xl. If you need custom breakpoints, check out <a href="#custom-breakpoints">custom breakpoints grid</a>.</li>
 <li>You can give integer values for each breakpoint, to indicate how many of the 12 available columns are occupied by the component when the viewport width satisfies the <a href="/material-ui/customization/breakpoints/#default-breakpoints">breakpoint constraints</a>.</li>
-<li>It uses negative margins and padding to create gaps between children, which behave similarly to <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">the <code>{`gap`}</code> CSS property</a>.</li>
+<li>It uses <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">the <code>{`gap`}</code> CSS property</a> to add spacing between items.</li>
 <li>It does <em>not</em> support row spanning. Children elements cannot span multiple rows. We recommend using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout">CSS Grid</a> if you need this functionality.</li>
 <li>It does <em>not</em> automatically place children. It will try to fit the children one by one, and if there is not enough space, the rest of the children will start on the next line, and so on. If you need auto-placement, we recommend using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Auto-placement_in_grid_layout">CSS Grid</a> instead.</li>
 </ul>
@@ -177,7 +177,7 @@ It will also inherit the props of the top-level grid if it receives those props.
 </FuseHighlight>
 <Typography className="text-base mb-32" component="div">:::</Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Inheriting spacing</Typography>
-<Typography className="text-base mb-32" component="div">A nested grid container will inherits the row and column spacing from its parent unless the <code>{`spacing`}</code> prop is specified to the instance.</Typography>
+<Typography className="text-base mb-32" component="div">A nested grid container inherits the row and column spacing from its parent unless the <code>{`spacing`}</code> prop is specified to the instance.</Typography>
 <Typography className="text-base mb-32" component="div"><FuseExample
                     name="NestedGrid.js"
                     className="my-16"
@@ -186,7 +186,7 @@ It will also inherit the props of the top-level grid if it receives those props.
                     raw={NestedGridRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Inheriting columns</Typography>
-<Typography className="text-base mb-32" component="div">A nested grid container will inherits the columns from its parent unless the <code>{`columns`}</code> prop is specified to the instance.</Typography>
+<Typography className="text-base mb-32" component="div">A nested grid container inherits the columns from its parent unless the <code>{`columns`}</code> prop is specified to the instance.</Typography>
 <Typography className="text-base mb-32" component="div"><FuseExample
                     name="NestedGridColumns.js"
                     className="my-16"

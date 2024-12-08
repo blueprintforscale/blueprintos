@@ -1,6 +1,4 @@
-type GithubIssueOverviewData = {
-	[key: string]: number;
-};
+type GithubIssueOverviewData = Record<string, number>;
 
 type GithubIssueSeriesData = {
 	name: string;

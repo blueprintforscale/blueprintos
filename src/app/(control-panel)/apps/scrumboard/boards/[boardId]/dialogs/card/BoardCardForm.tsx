@@ -273,6 +273,7 @@ function BoardCardForm() {
 							renderTags={(value, getTagProps) =>
 								value.map((option, index) => {
 									if (typeof option === 'string') {
+										// eslint-disable-next-line react/jsx-key
 										return <span />;
 									}
 

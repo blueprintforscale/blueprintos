@@ -1,12 +1,17 @@
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
-import { forwardRef, ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { closeNoteDialog, selectNoteDialogId } from '../../notesAppSlice';
 import NoteForm from '../../components/note-form/NoteForm';
 
-const Transition = forwardRef(function Transition(props: { children: ReactElement<ReactNode> }, ref) {
-	const { children, ...other } = props;
+type TransitionProps = {
+	children: ReactElement<ReactNode>;
+	ref?: React.RefObject<HTMLDivElement>;
+};
+
+const Transition = function Transition(props: TransitionProps) {
+	const { children, ref, ...other } = props;
 
 	return (
 		<Slide
@@ -17,7 +22,7 @@ const Transition = forwardRef(function Transition(props: { children: ReactElemen
 			{children}
 		</Slide>
 	);
-});
+};
 
 /**
  * The note dialog.

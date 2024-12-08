@@ -196,9 +196,7 @@ function lex(src: string): marked.TokensList {
 
 	let next;
 
-	// eslint-disable-next-line no-cond-assign
 	while ((next = self?.inlineQueue?.shift()) !== undefined) {
-		// eslint-disable-next-line  @typescript-eslint/no-unsafe-member-access
 		self?.inlineTokens(next?.src as string, next?.tokens as marked.TokensList);
 	}
 

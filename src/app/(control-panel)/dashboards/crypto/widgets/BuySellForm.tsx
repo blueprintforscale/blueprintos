@@ -62,17 +62,8 @@ const schema = z.object({
  */
 function BuySellForm() {
 	const { data: widgets, isLoading } = useGetCryptoDashboardWidgetsQuery();
-
-	if (isLoading) {
-		return <FuseLoading />;
-	}
-
 	const wallets = widgets?.wallets as WalletsType;
 	const prices = widgets?.prices as PricesType;
-
-	if (!wallets || !prices) {
-		return null;
-	}
 
 	const { handleSubmit, reset, control, watch, formState, setValue } = useForm<FormType>({
 		defaultValues,
@@ -88,6 +79,14 @@ function BuySellForm() {
 
 	function onSubmit(_data: FormType) {
 		reset();
+	}
+
+	if (isLoading) {
+		return <FuseLoading />;
+	}
+
+	if (!wallets || !prices) {
+		return null;
 	}
 
 	return (

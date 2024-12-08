@@ -1,7 +1,7 @@
 'use client';
 
 import FusePageSimple from '@fuse/core/FusePageSimple';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import FuseLoading from '@fuse/core/FuseLoading';
 import FinanceDashboardAppHeader from './FinanceDashboardAppHeader';
 import PreviousStatementWidget from './widgets/PreviousStatementWidget';

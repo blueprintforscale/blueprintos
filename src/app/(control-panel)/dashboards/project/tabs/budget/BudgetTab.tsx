@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import BudgetDistributionWidget from './widgets/BudgetDistributionWidget';
 import WeeklyExpensesWidget from './widgets/WeeklyExpensesWidget';
 import MonthlyExpensesWidget from './widgets/MonthlyExpensesWidget';

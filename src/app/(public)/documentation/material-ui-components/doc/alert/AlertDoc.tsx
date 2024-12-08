@@ -188,11 +188,11 @@ import AlertTitle from '@mui/material/AlertTitle';
 {` 
 <div className="MuiPaper-root MuiAlert-root" role="alert">
   <div className="MuiAlert-icon">
-    <!-- svg icon here -->
+    
   </div>
   <div className="MuiAlert-message">This is how an Alert renders in the DOM.</div>
   <div className="MuiAlert-action">
-    <!-- optional action element here -->
+    
   </div>
 </div>
 `}

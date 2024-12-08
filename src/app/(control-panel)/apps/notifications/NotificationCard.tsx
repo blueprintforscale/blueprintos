@@ -14,7 +14,7 @@ import red from '@mui/material/colors/red';
 import orange from '@mui/material/colors/orange';
 import yellow from '@mui/material/colors/yellow';
 import { useContrastMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
-import { Notification } from './NotificationApi';
+import { Notification } from '@/app/(control-panel)/apps/notifications/NotificationApi';
 
 type NotificationCardProps = {
 	item: Notification;
@@ -108,7 +108,6 @@ function NotificationCard(props: NotificationCardProps) {
 					{item.description && (
 						<div
 							className="line-clamp-2"
-							// eslint-disable-next-line react/no-danger
 							dangerouslySetInnerHTML={{ __html: item.description }}
 						/>
 					)}

@@ -1,6 +1,6 @@
 import FuseLoading from '@fuse/core/FuseLoading';
-import { motion } from 'framer-motion';
-import { useGetProfilePostsQuery } from '@/app/(control-panel)/apps/profile/ProfileApi';
+import { motion } from 'motion/react';
+import { useGetProfilePostsQuery } from '../../ProfileApi';
 import TimelinePostItem from './TimelinePostItem';
 
 const item = {
@@ -15,7 +15,7 @@ function TimelinePosts() {
 		return <FuseLoading />;
 	}
 
-	return posts.map((post) => (
+	return posts?.map?.((post) => (
 		<motion.div
 			variants={item}
 			key={post.id}

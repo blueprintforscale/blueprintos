@@ -72,7 +72,10 @@ export const changeThemeMode = (theme: FuseThemeType, mode: 'dark' | 'light'): F
 // Custom hook for contrast theme
 export const useContrastMainTheme = (bgColor: string): Theme => {
 	const isDark = (color: string): boolean => getContrastRatio(color, '#ffffff') >= 3;
-	return isDark(bgColor) ? useMainThemeDark() : useMainThemeLight();
+	const darkTheme = useMainThemeDark();
+	const lightTheme = useMainThemeLight();
+
+	return isDark(bgColor) ? darkTheme : lightTheme;
 };
 
 export const useMainThemeDark = (): Theme => {

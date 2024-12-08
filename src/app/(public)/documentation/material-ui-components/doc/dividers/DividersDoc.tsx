@@ -139,7 +139,7 @@ This ensures that it&#39;s not announced by screen readers while still preservin
 <FuseHighlight component="pre" className="language-html">
 {` 
 <hr className="MuiDivider-root">
-  <!-- Divider children goes here -->
+  
 </hr>
 `}
 </FuseHighlight>

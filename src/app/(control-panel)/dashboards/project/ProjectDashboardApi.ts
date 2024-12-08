@@ -47,9 +47,7 @@ export type ProjectDashboardWidgetType =
 	| TaskDistributionDataType
 	| TeamMemberType[];
 
-export type GetProjectDashboardWidgetsApiResponse = {
-	[key: string]: ProjectDashboardWidgetType;
-};
+export type GetProjectDashboardWidgetsApiResponse = Record<string, ProjectDashboardWidgetType>;
 
 export type GetProjectDashboardWidgetsApiArg = void;
 

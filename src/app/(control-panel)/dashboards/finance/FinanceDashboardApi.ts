@@ -34,9 +34,7 @@ export type FinanceDashboardWidgetType =
 	| PreviousStatementWidgetType
 	| RecentTransactionsWidgetType;
 
-export type GetFinanceDashboardWidgetsApiResponse = {
-	[key: string]: FinanceDashboardWidgetType;
-};
+export type GetFinanceDashboardWidgetsApiResponse = Record<string, FinanceDashboardWidgetType>;
 
 export type GetFinanceDashboardWidgetsApiArg = void;
 

@@ -62,6 +62,7 @@ function SecurityTab() {
 
 	useEffect(() => {
 		reset({ ...securitySettings, currentPassword: '', newPassword: '' });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isSuccess]);
 
 	useEffect(() => {

@@ -232,7 +232,6 @@ function ContactView() {
 								<FuseSvgIcon>heroicons-outline:bars-3-bottom-left</FuseSvgIcon>
 								<div
 									className="max-w-none ml-24 prose dark:prose-invert"
-									// eslint-disable-next-line react/no-danger
 									dangerouslySetInnerHTML={{ __html: contact.notes }}
 								/>
 							</div>

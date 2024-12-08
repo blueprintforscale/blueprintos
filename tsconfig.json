@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-     "@auth/*": [
+      "@auth/*": [
         "./src/@auth/*"
       ],
       "@i18n": [
@@ -60,15 +60,14 @@
     "incremental": true
   },
   "exclude": [
-    "src/app/(public)/documentation/material-ui-components/components/**/*",
-    "src/app/(public)/documentation/material-ui-components/doc/**/*",
     "node_modules"
   ],
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "tailwind.config.js",
+    "./src/global.d.ts",
+    "tailwind.config.ts",
+    "next-env.d.ts",
     ".next/types/**/*.ts",
     "next.config.mjs",
     "build/types/**/*.ts"

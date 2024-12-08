@@ -140,7 +140,7 @@ import SnackbarContent from '@mui/material/SnackbarContent';
                     component={ConsecutiveSnackbarsComponent} 
                     raw={ConsecutiveSnackbarsRaw}
                     /></Typography>
-<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Third-party integrations</Typography>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Supplementary components</Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">notistack</Typography>
 <Typography className="text-base mb-32" component="div"><img src="https://img.shields.io/github/stars/iamhosseindhv/notistack.svg?style=social&label=Star" alt="stars"/>
 <img src="https://img.shields.io/npm/dm/notistack.svg" alt="npm downloads"/></Typography>
@@ -188,7 +188,7 @@ export default function MyComponent() {
 <div role="presentation" className="MuiSnackbar-root">
   <div className="MuiPaper-root MuiSnackbarContent-root" role="alert">
     <div className="MuiSnackbarContent-message">
-      <!-- Snackbar content goes here -->
+      
     </div>
   </div>
 </div>

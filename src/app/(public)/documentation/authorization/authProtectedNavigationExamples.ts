@@ -26,13 +26,6 @@ const authProtectedNavigationExamples = [
 		icon: 'exit_to_app'
 	},
 	{
-		id: 'auth-admin-example',
-		title: 'Admin: Auth protected page (only for admin)',
-		type: 'item',
-		url: '/auth/admin-role-example',
-		icon: 'security'
-	},
-	{
 		id: 'only-admin-navigation-item',
 		title: 'Nav item only for Admin (only for admin)',
 		type: 'item',
@@ -41,26 +34,12 @@ const authProtectedNavigationExamples = [
 		icon: 'verified_user'
 	},
 	{
-		id: 'auth-staff-example',
-		title: 'Staff: Auth protected page (only for staff)',
-		type: 'item',
-		url: '/auth/staff-role-example',
-		icon: 'security'
-	},
-	{
 		id: 'only-staff-navigation-item',
 		title: 'Nav item only for Staff (only for staff)',
 		type: 'item',
 		auth: authRoles.staff,
 		url: '/auth/staff-role-example',
 		icon: 'verified_user'
-	},
-	{
-		id: 'auth-guest-example',
-		title: 'Guest: Auth protected page (only for guest)',
-		type: 'item',
-		url: '/auth/guest-role-example',
-		icon: 'security'
 	},
 	{
 		id: 'only-guest-navigation-item',

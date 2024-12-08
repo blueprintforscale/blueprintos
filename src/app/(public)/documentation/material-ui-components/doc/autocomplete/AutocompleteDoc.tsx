@@ -7,8 +7,6 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
 import Icon from '@mui/material/Icon';
 import Typography from '@mui/material/Typography';
-import ComboBoxComponent from '../../components/autocomplete/ComboBox';
-import ComboBoxRaw from '../../components/autocomplete/ComboBox.tsx?raw';
 import PlaygroundComponent from '../../components/autocomplete/Playground';
 import PlaygroundRaw from '../../components/autocomplete/Playground.tsx?raw';
 import CountrySelectComponent from '../../components/autocomplete/CountrySelect';
@@ -63,12 +61,12 @@ import VirtualizeRaw from '../../components/autocomplete/Virtualize.tsx?raw';
 function AutocompleteDoc(props) {
 	return (
 		<>
-			<Button
+			<Button 
 				className="normal-case absolute right-0 not-prose"
 				variant="contained"
 				color="secondary"
-				component="a"
-				href="https://mui.com/components/autocomplete"
+				component="a" 
+				href="https://mui.com/components/autocomplete" 
 				target="_blank"
 				role="button"
 				size="small"
@@ -87,7 +85,6 @@ function AutocompleteDoc(props) {
 <Typography className="text-base mb-32" component="div">It&#39;s meant to be an improved version of the &quot;react-select&quot; and &quot;downshift&quot; packages.</Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Combo box</Typography>
 <Typography className="text-base mb-32" component="div">The value must be chosen from a predefined set of allowed values.</Typography>
-
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Options structure</Typography>
 <Typography className="text-base mb-32" component="div">By default, the component accepts the following options structures:</Typography>
 
@@ -120,7 +117,7 @@ const options = ['The Godfather', 'Pulp Fiction'];
                     name="Playground.js"
                     className="my-16"
                     iframe={false}
-                    component={PlaygroundComponent}
+                    component={PlaygroundComponent} 
                     raw={PlaygroundRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Country select</Typography>
@@ -129,7 +126,7 @@ const options = ['The Godfather', 'Pulp Fiction'];
                     name="CountrySelect.js"
                     className="my-16"
                     iframe={false}
-                    component={CountrySelectComponent}
+                    component={CountrySelectComponent} 
                     raw={CountrySelectRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Controlled states</Typography>
@@ -154,7 +151,7 @@ const options = ['The Godfather', 'Pulp Fiction'];
                     name="ControllableStates.js"
                     className="my-16"
                     iframe={false}
-                    component={ControllableStatesComponent}
+                    component={ControllableStatesComponent} 
                     raw={ControllableStatesRaw}
                     /></Typography>
 <Typography className="text-base mb-32" component="div">:::warning</Typography>
@@ -185,7 +182,7 @@ The fix includes memoizing the value, so it changes only when needed.
                     name="FreeSolo.js"
                     className="my-16"
                     iframe={false}
-                    component={FreeSoloComponent}
+                    component={FreeSoloComponent} 
                     raw={FreeSoloRaw}
                     /></Typography>
 <Typography className="text-base mb-32" component="div">:::warning
@@ -204,7 +201,7 @@ Be careful when using the free solo mode with non-string options, as it may caus
                     name="FreeSoloCreateOption.js"
                     className="my-16"
                     iframe={false}
-                    component={FreeSoloCreateOptionComponent}
+                    component={FreeSoloCreateOptionComponent} 
                     raw={FreeSoloCreateOptionRaw}
                     /></Typography>
 <Typography className="text-base mb-32" component="div">You could also display a dialog when the user wants to add a new value.</Typography>
@@ -212,7 +209,7 @@ Be careful when using the free solo mode with non-string options, as it may caus
                     name="FreeSoloCreateOptionDialog.js"
                     className="my-16"
                     iframe={false}
-                    component={FreeSoloCreateOptionDialogComponent}
+                    component={FreeSoloCreateOptionDialogComponent} 
                     raw={FreeSoloCreateOptionDialogRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Grouped</Typography>
@@ -223,7 +220,7 @@ otherwise, you will notice duplicate headers.</Typography>
                     name="Grouped.js"
                     className="my-16"
                     iframe={false}
-                    component={GroupedComponent}
+                    component={GroupedComponent} 
                     raw={GroupedRaw}
                     /></Typography>
 <Typography className="text-base mb-32" component="div">To control how the groups are rendered, provide a custom <code>{`renderGroup`}</code> prop.
@@ -237,7 +234,7 @@ This is a function that accepts an object with two fields:</Typography>
                     name="RenderGroup.js"
                     className="my-16"
                     iframe={false}
-                    component={RenderGroupComponent}
+                    component={RenderGroupComponent} 
                     raw={RenderGroupRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Disabled options</Typography>
@@ -245,7 +242,7 @@ This is a function that accepts an object with two fields:</Typography>
                     name="DisabledOptions.js"
                     className="my-16"
                     iframe={false}
-                    component={DisabledOptionsComponent}
+                    component={DisabledOptionsComponent} 
                     raw={DisabledOptionsRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2"><code>{`useAutocomplete`}</code></Typography>
@@ -273,7 +270,7 @@ import useAutocomplete from '@mui/material/useAutocomplete';
                     name="UseAutocomplete.js"
                     className="my-16"
                     iframe={false}
-                    component={UseAutocompleteComponent}
+                    component={UseAutocompleteComponent} 
                     raw={UseAutocompleteRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Customized hook</Typography>
@@ -281,7 +278,7 @@ import useAutocomplete from '@mui/material/useAutocomplete';
                     name="CustomizedHook.js"
                     className="my-16"
                     iframe={false}
-                    component={CustomizedHookComponent}
+                    component={CustomizedHookComponent} 
                     raw={CustomizedHookRaw}
                     /></Typography>
 <Typography className="text-base mb-32" component="div">Head to the <a href="#customization">customization</a> section for an example with the <code>{`Autocomplete`}</code> component instead of the hook.</Typography>
@@ -297,7 +294,7 @@ import useAutocomplete from '@mui/material/useAutocomplete';
                     name="Asynchronous.js"
                     className="my-16"
                     iframe={false}
-                    component={AsynchronousComponent}
+                    component={AsynchronousComponent} 
                     raw={AsynchronousRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Search as you type</Typography>
@@ -324,7 +321,7 @@ For this demo, we need to load the <a href="https://developers.google.com/maps/d
                     name="GoogleMaps.js"
                     className="my-16"
                     iframe={false}
-                    component={GoogleMapsComponent}
+                    component={GoogleMapsComponent} 
                     raw={GoogleMapsRaw}
                     /></Typography>
 <Typography className="text-base mb-32" component="div">:::error
@@ -336,7 +333,7 @@ Before you can start using the Google Maps JavaScript API and Places API, you ne
                     name="Tags.js"
                     className="my-16"
                     iframe={false}
-                    component={TagsComponent}
+                    component={TagsComponent} 
                     raw={TagsRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Fixed options</Typography>
@@ -345,7 +342,7 @@ Before you can start using the Google Maps JavaScript API and Places API, you ne
                     name="FixedTags.js"
                     className="my-16"
                     iframe={false}
-                    component={FixedTagsComponent}
+                    component={FixedTagsComponent} 
                     raw={FixedTagsRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Checkboxes</Typography>
@@ -353,7 +350,7 @@ Before you can start using the Google Maps JavaScript API and Places API, you ne
                     name="CheckboxesTags.js"
                     className="my-16"
                     iframe={false}
-                    component={CheckboxesTagsComponent}
+                    component={CheckboxesTagsComponent} 
                     raw={CheckboxesTagsRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Limit tags</Typography>
@@ -362,7 +359,7 @@ Before you can start using the Google Maps JavaScript API and Places API, you ne
                     name="LimitTags.js"
                     className="my-16"
                     iframe={false}
-                    component={LimitTagsComponent}
+                    component={LimitTagsComponent} 
                     raw={LimitTagsRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Sizes</Typography>
@@ -371,7 +368,7 @@ Before you can start using the Google Maps JavaScript API and Places API, you ne
                     name="Sizes.js"
                     className="my-16"
                     iframe={false}
-                    component={SizesComponent}
+                    component={SizesComponent} 
                     raw={SizesRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Customization</Typography>
@@ -386,7 +383,7 @@ If you&#39;re using a custom input component inside the Autocomplete, make sure 
                     name="CustomInputAutocomplete.js"
                     className="my-16"
                     iframe={false}
-                    component={CustomInputAutocompleteComponent}
+                    component={CustomInputAutocompleteComponent} 
                     raw={CustomInputAutocompleteRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Globally Customized Options</Typography>
@@ -399,7 +396,7 @@ This approach enables different options for each Autocomplete component while ke
                     name="GloballyCustomizedOptions.js"
                     className="my-16"
                     iframe={false}
-                    component={GloballyCustomizedOptionsComponent}
+                    component={GloballyCustomizedOptionsComponent} 
                     raw={GloballyCustomizedOptionsRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">GitHub&#39;s picker</Typography>
@@ -408,7 +405,7 @@ This approach enables different options for each Autocomplete component while ke
                     name="GitHubLabel.js"
                     className="my-16"
                     iframe={false}
-                    component={GitHubLabelComponent}
+                    component={GitHubLabelComponent} 
                     raw={GitHubLabelRaw}
                     /></Typography>
 <Typography className="text-base mb-32" component="div">Head to the <a href="#customized-hook">Customized hook</a> section for a customization example with the <code>{`useAutocomplete`}</code> hook instead of the component.</Typography>
@@ -418,7 +415,7 @@ This approach enables different options for each Autocomplete component while ke
                     name="AutocompleteHint.js"
                     className="my-16"
                     iframe={false}
-                    component={AutocompleteHintComponent}
+                    component={AutocompleteHintComponent} 
                     raw={AutocompleteHintRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Highlights</Typography>
@@ -427,7 +424,7 @@ This approach enables different options for each Autocomplete component while ke
                     name="Highlights.js"
                     className="my-16"
                     iframe={false}
-                    component={HighlightsComponent}
+                    component={HighlightsComponent} 
                     raw={HighlightsRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Custom filter</Typography>
@@ -470,7 +467,7 @@ const filterOptions = createFilterOptions({
                     name="Filter.js"
                     className="my-16"
                     iframe={false}
-                    component={FilterComponent}
+                    component={FilterComponent} 
                     raw={FilterRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">Advanced</Typography>
@@ -491,7 +488,7 @@ const filterOptions = (options, { inputValue }) => matchSorter(options, inputVal
                     name="Virtualize.js"
                     className="my-16"
                     iframe={false}
-                    component={VirtualizeComponent}
+                    component={VirtualizeComponent} 
                     raw={VirtualizeRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Events</Typography>
@@ -515,7 +512,7 @@ const filterOptions = (options, { inputValue }) => matchSorter(options, inputVal
 <Typography className="text-base mb-32" component="div">Browsers have heuristics to help the user fill in form inputs.
 However, this can harm the UX of the component.</Typography>
 <Typography className="text-base mb-32" component="div">By default, the component disables the input <strong>autocomplete</strong> feature (remembering what the user has typed for a given field in a previous session) with the <code>{`autoComplete="off"`}</code> attribute.
-Google Chrome does not currently support this attribute setting (<a href="https://bugs.chromium.org/p/chromium/issues/detail?id=587466">Issue 587466</a>).
+Google Chrome does not currently support this attribute setting (<a href="https://issues.chromium.org/issues/41239842">Issue 41239842</a>).
 A possible workaround is to remove the <code>{`id`}</code> to have the component generate a random one.</Typography>
 <Typography className="text-base mb-32" component="div">In addition to remembering past entered values, the browser might also propose <strong>autofill</strong> suggestions (saved login, address, or payment details).
 In the event you want the avoid autofill, you can try the following:</Typography>

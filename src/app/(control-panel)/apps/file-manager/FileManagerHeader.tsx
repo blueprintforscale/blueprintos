@@ -1,7 +1,7 @@
 'use client';
 
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Button from '@mui/material/Button';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Breadcrumbs from '@mui/material/Breadcrumbs';

@@ -3,7 +3,7 @@
  * It provides methods for registering and emitting events.
  */
 class EventEmitter {
-	private events: { [eventName: string]: Set<(...args: unknown[]) => void> };
+	private events: Record<string, Set<(...args: unknown[]) => void>>;
 
 	constructor() {
 		this.events = {};

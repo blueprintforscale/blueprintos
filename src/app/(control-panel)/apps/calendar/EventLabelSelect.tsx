@@ -2,7 +2,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import { useGetCalendarLabelsQuery } from './CalendarApi';
 
@@ -10,13 +9,14 @@ export type EventLabelSelectProps = {
 	value: string;
 	onChange: (value: string) => void;
 	className?: string;
+	ref?: React.RefObject<HTMLElement>;
 };
 
 /**
  * The event label select.
  */
-const EventLabelSelect = forwardRef<HTMLElement, EventLabelSelectProps>((props, ref) => {
-	const { value, onChange, className } = props;
+function EventLabelSelect(props: EventLabelSelectProps) {
+	const { value, onChange, className, ref } = props;
 	const { data: labels } = useGetCalendarLabelsQuery();
 
 	const handleChange = (event: SelectChangeEvent) => {
@@ -54,6 +54,6 @@ const EventLabelSelect = forwardRef<HTMLElement, EventLabelSelectProps>((props, 
 			</Select>
 		</FormControl>
 	);
-});
+}
 
 export default EventLabelSelect;

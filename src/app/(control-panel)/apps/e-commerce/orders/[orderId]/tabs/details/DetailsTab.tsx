@@ -2,10 +2,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import GoogleMap from 'google-map-react';
 import { useState } from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useParams } from 'next/navigation';
@@ -14,42 +12,14 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
-import { useGetECommerceOrderQuery } from '../../../ECommerceApi';
-import OrdersStatus from '../../OrdersStatus';
-
-const mapKey = process.env.NEXT_PUBLIC_MAP_KEY;
-
-type MarkerPropsType = {
-	text: string;
-	lat: number;
-	lng: number;
-};
-
-/**
- * The marker.
- */
-function Marker(props: MarkerPropsType) {
-	const { text, lat, lng } = props;
-	return (
-		<Tooltip
-			title={
-				<div>
-					{text}
-					<br />
-					{lat}, {lng}
-				</div>
-			}
-			placement="top"
-		>
-			<FuseSvgIcon className="text-red">heroicons-outline:map-pin</FuseSvgIcon>
-		</Tooltip>
-	);
-}
+import { useGetECommerceOrderQuery } from '../../../../ECommerceApi';
+import OrdersStatus from '../../../OrdersStatus';
+import GoogleAddressMap from './GoogleAddressMap';
 
 /**
  * The order details tab.
  */
-function OrderDetailsTab() {
+function DetailsTab() {
 	const routeParams = useParams();
 
 	const { orderId } = routeParams as { orderId: string };
@@ -140,22 +110,12 @@ function OrderDetailsTab() {
 									{order.customer.shippingAddress.address}
 								</Typography>
 								<div className="w-full h-320 rounded-xl overflow-hidden mx-8">
-									<GoogleMap
-										bootstrapURLKeys={{
-											key: mapKey
-										}}
-										defaultZoom={15}
-										defaultCenter={{
+									<GoogleAddressMap
+										center={{
 											lng: order.customer.shippingAddress.lng,
 											lat: order.customer.shippingAddress.lat
 										}}
-									>
-										<Marker
-											text={order.customer.shippingAddress.address}
-											lat={order.customer.shippingAddress.lat}
-											lng={order.customer.shippingAddress.lng}
-										/>
-									</GoogleMap>
+									/>
 								</div>
 							</AccordionDetails>
 						</Accordion>
@@ -174,22 +134,12 @@ function OrderDetailsTab() {
 									{order.customer.invoiceAddress.address}
 								</Typography>
 								<div className="w-full h-320 rounded-xl overflow-hidden mx-8">
-									<GoogleMap
-										bootstrapURLKeys={{
-											key: mapKey
-										}}
-										defaultZoom={15}
-										defaultCenter={{
+									<GoogleAddressMap
+										center={{
 											lng: order.customer.invoiceAddress.lng,
 											lat: order.customer.invoiceAddress.lat
 										}}
-									>
-										<Marker
-											text={order.customer.invoiceAddress.address}
-											lat={order.customer.invoiceAddress.lat}
-											lng={order.customer.invoiceAddress.lng}
-										/>
-									</GoogleMap>
+									/>
 								</div>
 							</AccordionDetails>
 						</Accordion>
@@ -358,4 +308,4 @@ function OrderDetailsTab() {
 	);
 }
 
-export default OrderDetailsTab;
+export default DetailsTab;

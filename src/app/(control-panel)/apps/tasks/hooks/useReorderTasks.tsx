@@ -16,6 +16,7 @@ function useReorderTasks() {
 
 			updateTasksItems(ordered.map((task, index) => ({ id: task.id, order: index })));
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[tasks]
 	);
 

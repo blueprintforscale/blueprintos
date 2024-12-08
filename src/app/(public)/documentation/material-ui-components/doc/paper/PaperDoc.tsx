@@ -102,7 +102,7 @@ Add the <code>{`square`}</code> prop for square corners:</Typography>
 <FuseHighlight component="pre" className="language-html">
 {` 
 <div className="MuiPaper-root">
-  <!-- Paper contents -->
+  
 </div>
 `}
 </FuseHighlight>

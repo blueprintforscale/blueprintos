@@ -20,10 +20,9 @@ function SchemePreview(props: SchemePreviewProps) {
 
 	const _theme = useTheme();
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const primaryColor: string = theme.palette.primary[500] ? theme.palette.primary[500] : theme.palette.primary.main;
 	const primaryColorContrast = theme.palette.primary.contrastText || _theme.palette.getContrastText(primaryColor);
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
 	const secondaryColor: string = theme.palette.secondary[500]
 		? theme.palette.secondary[500]
 		: theme.palette.secondary.main;

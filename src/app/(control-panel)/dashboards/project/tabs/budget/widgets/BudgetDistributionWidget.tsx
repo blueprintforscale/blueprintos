@@ -2,13 +2,12 @@ import Paper from '@mui/material/Paper';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { memo } from 'react';
-import dynamic from 'next/dynamic';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
 import _ from 'lodash';
 import BudgetDistributionDataType from './types/BudgetDistributionDataType';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
-
+import dynamic from 'next/dynamic';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
@@ -16,19 +15,8 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  */
 function BudgetDistributionWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
-
-	if (isLoading) {
-		return <FuseLoading />;
-	}
-
 	const widget = widgets?.budgetDistribution as BudgetDistributionDataType;
-
-	if (!widget) {
-		return null;
-	}
-
 	const { categories, series } = widget;
-
 	const theme = useTheme();
 
 	const chartOptions: ApexOptions = {
@@ -92,6 +80,15 @@ function BudgetDistributionWidget() {
 			tickAmount: 7
 		}
 	};
+
+	if (isLoading) {
+		return <FuseLoading />;
+	}
+
+	if (!widget) {
+		return null;
+	}
+
 	return (
 		<Paper className="flex flex-col flex-auto p-24 shadow rounded-xl overflow-hidden h-full">
 			<Typography className="text-lg font-medium tracking-tight leading-6 truncate">

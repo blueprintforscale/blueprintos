@@ -38,26 +38,22 @@ type FuseNavHorizontalItemProps = FuseNavItemComponentProps & WithRouterProps;
  */
 function FuseNavHorizontalItem(props: FuseNavHorizontalItemProps) {
 	const { item, checkPermission } = props;
-
 	const component = item.url ? NavLinkAdapter : 'li';
 
-	let itemProps;
+	const itemProps = useMemo(
+		() => ({
+			...(component !== 'li' && {
+				disabled: item.disabled,
+				to: item.url || '',
+				end: item.end,
+				role: 'button',
+				exact: item?.exact
+			})
+		}),
+		[item, component]
+	);
 
-	if (typeof component !== 'string') {
-		itemProps = {
-			disabled: item.disabled,
-			to: item.url || '',
-			end: item.end,
-			role: 'button',
-			exact: item?.exact
-		};
-	}
-
-	if (checkPermission && !item?.hasPermission) {
-		return null;
-	}
-
-	return useMemo(
+	const memoizedContent = useMemo(
 		() => (
 			<Root
 				component={component}
@@ -88,8 +84,14 @@ function FuseNavHorizontalItem(props: FuseNavHorizontalItemProps) {
 				)}
 			</Root>
 		),
-		[item.badge, item.exact, item.icon, item.iconClass, item.title, item.url]
+		[component, item.active, item.badge, item.icon, item.iconClass, item.sx, item.title, itemProps]
 	);
+
+	if (checkPermission && !item?.hasPermission) {
+		return null;
+	}
+
+	return memoizedContent;
 }
 
 const NavHorizontalItemWithMemo = memo(FuseNavHorizontalItem);

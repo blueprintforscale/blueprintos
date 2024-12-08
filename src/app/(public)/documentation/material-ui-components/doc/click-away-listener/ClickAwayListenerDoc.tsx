@@ -32,7 +32,7 @@ function ClickAwayListenerDoc(props) {
 <Typography className="text-base mb-32" component="div">:::warning
 Please refer to the <a href="/base-ui/react-click-away-listener/">Click-Away Listener</a> component page in the Base UI docs for demos and details on usage.</Typography>
 <Typography className="text-base mb-32" component="div">Click-Away Listener is a part of the standalone <a href="/base-ui/">Base UI</a> component library.
-It is currently re-exported from <code>{`@mui/material`}</code> for your convenience, but it will be removed from this package in a future major version, after <code>{`@mui/base`}</code> gets a stable release.
+It is currently re-exported from <code>{`@mui/material`}</code> for your convenience, but it will be removed from this package in a future major version after Base UI gets a stable release.
 :::</Typography>
 
 		</>

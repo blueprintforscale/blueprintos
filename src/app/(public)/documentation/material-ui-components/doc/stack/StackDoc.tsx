@@ -206,7 +206,7 @@ You can reproduce the issue with:</Typography>
 <FuseHighlight component="pre" className="language-html">
 {` 
 <div className="MuiStack-root">
-  <!-- Stack contents -->
+  
 </div>
 `}
 </FuseHighlight>

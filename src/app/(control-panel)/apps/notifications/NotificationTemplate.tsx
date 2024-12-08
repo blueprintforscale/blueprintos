@@ -1,4 +1,3 @@
-import { ForwardedRef, forwardRef } from 'react';
 import { SnackbarContent } from 'notistack';
 import NotificationCard from './NotificationCard';
 import { Notification } from './NotificationApi';
@@ -6,13 +5,14 @@ import { Notification } from './NotificationApi';
 type NotificationTemplateProps = {
 	item: Notification;
 	onClose: () => void;
+	ref?: React.Ref<HTMLDivElement>;
 };
 
 /**
  * The notification template.
  */
-const NotificationTemplate = forwardRef((props: NotificationTemplateProps, ref: ForwardedRef<HTMLDivElement>) => {
-	const { item } = props;
+function NotificationTemplate(props: NotificationTemplateProps) {
+	const { item, ref } = props;
 
 	return (
 		<SnackbarContent
@@ -25,6 +25,6 @@ const NotificationTemplate = forwardRef((props: NotificationTemplateProps, ref: 
 			/>
 		</SnackbarContent>
 	);
-});
+}
 
 export default NotificationTemplate;

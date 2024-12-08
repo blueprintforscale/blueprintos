@@ -2,7 +2,6 @@ import Paper from '@mui/material/Paper';
 import { lighten, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { memo, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import Box from '@mui/material/Box';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
@@ -10,7 +9,7 @@ import FuseTab from 'src/components/tabs/FuseTab';
 import FuseTabs from 'src/components/tabs/FuseTabs';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
 import TaskDistributionDataType from './types/TaskDistributionDataType';
-
+import dynamic from 'next/dynamic';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
@@ -18,8 +17,16 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  */
 function TaskDistributionWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
-
 	const widget = widgets?.taskDistribution as TaskDistributionDataType;
+	const { overview, series, labels, ranges } = widget;
+	const [tabValue, setTabValue] = useState(0);
+	const currentRange = Object.keys(ranges)[tabValue];
+	const [awaitRender, setAwaitRender] = useState(true);
+	const theme = useTheme();
+
+	useEffect(() => {
+		setAwaitRender(false);
+	}, []);
 
 	if (isLoading) {
 		return <FuseLoading />;
@@ -28,13 +35,6 @@ function TaskDistributionWidget() {
 	if (!widget) {
 		return null;
 	}
-
-	const { overview, series, labels, ranges } = widget;
-	const [tabValue, setTabValue] = useState(0);
-	const currentRange = Object.keys(ranges)[tabValue];
-	const [awaitRender, setAwaitRender] = useState(true);
-
-	const theme = useTheme();
 
 	const chartOptions: ApexOptions = {
 		chart: {
@@ -66,8 +66,7 @@ function TaskDistributionWidget() {
 		states: {
 			hover: {
 				filter: {
-					type: 'darken',
-					value: 0.75
+					type: 'darken'
 				}
 			}
 		},
@@ -94,10 +93,6 @@ function TaskDistributionWidget() {
 			}
 		}
 	};
-
-	useEffect(() => {
-		setAwaitRender(false);
-	}, []);
 
 	if (awaitRender) {
 		return null;

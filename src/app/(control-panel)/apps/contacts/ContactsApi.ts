@@ -166,9 +166,7 @@ export type GroupedContacts = {
 	children?: Contact[];
 };
 
-export type AccumulatorType = {
-	[key: string]: GroupedContacts;
-};
+export type AccumulatorType = Record<string, GroupedContacts>;
 
 export const {
 	useGetContactsItemQuery,
@@ -217,9 +215,7 @@ export const selectGroupedFilteredContacts = (contacts: Contact[]) =>
 			a?.name?.localeCompare(b.name, 'es', { sensitivity: 'base' })
 		);
 
-		const groupedObject: {
-			[key: string]: GroupedContacts;
-		} = sortedContacts?.reduce<AccumulatorType>((r, e) => {
+		const groupedObject: Record<string, GroupedContacts> = sortedContacts?.reduce<AccumulatorType>((r, e) => {
 			// get first letter of name of current element
 			const group = e.name[0];
 

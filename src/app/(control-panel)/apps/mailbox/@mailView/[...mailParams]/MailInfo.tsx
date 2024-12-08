@@ -17,7 +17,7 @@ type MailInfoProps = {
 function MailInfo(props: MailInfoProps) {
 	const { className } = props;
 
-	const { data: mail, isLoading } = useGetMail();
+	const { data: mail } = useGetMail();
 
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);

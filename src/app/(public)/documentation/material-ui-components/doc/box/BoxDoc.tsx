@@ -15,12 +15,12 @@ import BoxSxRaw from '../../components/box/BoxSx.tsx?raw';
 function BoxDoc(props) {
 	return (
 		<>
-			<Button
+			<Button 
 				className="normal-case absolute right-0 not-prose"
 				variant="contained"
 				color="secondary"
-				component="a"
-				href="https://mui.com/components/box"
+				component="a" 
+				href="https://mui.com/components/box" 
 				target="_blank"
 				role="button"
 				size="small"
@@ -28,6 +28,7 @@ function BoxDoc(props) {
 			>
 				Reference
 			</Button>
+			
 
 <Typography className="text-5xl my-16 font-700" component="h1">Box</Typography>
 <Typography className="description">The Box component is a generic, theme-aware container with access to CSS utilities from MUI System.</Typography>
@@ -53,7 +54,7 @@ The demo below replaces the <code>{`<div>`}</code> with a <code>{`<section>`}</c
                     name="BoxBasic.js"
                     className="my-16"
                     iframe={false}
-                    component={BoxBasicComponent}
+                    component={BoxBasicComponent} 
                     raw={BoxBasicRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Customization</Typography>
@@ -64,7 +65,7 @@ The demo below shows how to apply colors from the theme using this prop:</Typogr
                     name="BoxSx.js"
                     className="my-16"
                     iframe={false}
-                    component={BoxSxComponent}
+                    component={BoxSxComponent} 
                     raw={BoxSxRaw}
                     /></Typography>
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">With MUI System props</Typography>
@@ -86,7 +87,7 @@ The demo below shows how to apply colors from the theme using this prop:</Typogr
 <FuseHighlight component="pre" className="language-html">
 {` 
 <div className="MuiBox-root">
-  <!-- contents of the Box -->
+  
 </div>
 `}
 </FuseHighlight>

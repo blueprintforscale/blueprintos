@@ -1,7 +1,6 @@
 import Paper from '@mui/material/Paper';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import IconButton from '@mui/material/IconButton';
-import dynamic from 'next/dynamic';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { ApexOptions } from 'apexcharts';
@@ -9,7 +8,7 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import _ from 'lodash';
 import ExpensesDataType from './types/ExpensesDataType';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
-
+import dynamic from 'next/dynamic';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
@@ -17,17 +16,7 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  */
 function MonthlyExpensesWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
-
-	if (isLoading) {
-		return <FuseLoading />;
-	}
-
 	const widget = widgets?.monthlyExpenses as ExpensesDataType;
-
-	if (!widget) {
-		return null;
-	}
-
 	const { amount, series, labels } = widget;
 	const theme = useTheme();
 
@@ -61,6 +50,15 @@ function MonthlyExpensesWidget() {
 			}
 		}
 	};
+
+	if (isLoading) {
+		return <FuseLoading />;
+	}
+
+	if (!widget) {
+		return null;
+	}
+
 	return (
 		<Paper className="flex flex-col flex-auto shadow rounded-xl overflow-hidden">
 			<div className="flex items-center justify-between pt-8 px-8">

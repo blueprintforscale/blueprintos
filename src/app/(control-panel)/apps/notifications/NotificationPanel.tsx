@@ -45,7 +45,7 @@ function NotificationPanel() {
 	const [deleteNotifications] = useDeleteNotificationsMutation();
 	const [addNotification] = useCreateNotificationMutation();
 
-	const { data: notifications, isLoading } = useGetAllNotificationsQuery();
+	const { data: notifications } = useGetAllNotificationsQuery();
 
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -53,6 +53,7 @@ function NotificationPanel() {
 		if (state) {
 			dispatch(closeNotificationPanel());
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pathname, dispatch]);
 
 	useEffect(() => {
@@ -80,7 +81,7 @@ function NotificationPanel() {
 				)
 			});
 		}, 2000);
-	}, []);
+	}, [addNotification, closeSnackbar, enqueueSnackbar]);
 
 	function handleClose() {
 		dispatch(closeNotificationPanel());

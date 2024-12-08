@@ -77,6 +77,7 @@ function NewLabelForm(props: LabelFormProps) {
 		if (isValid && !_.isEmpty(dirtyFields) && !_.isEqual(label, watchedLabelForm)) {
 			handleOnChange(watchedLabelForm);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [watchedLabelForm, label, handleOnChange, dirtyFields]);
 
 	function handleOnRemove() {

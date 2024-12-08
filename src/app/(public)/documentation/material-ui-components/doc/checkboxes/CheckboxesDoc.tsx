@@ -106,6 +106,7 @@ If you have a single option, avoid using a checkbox and use an on/off switch ins
 <Typography className="text-base mb-32" component="div">A checkbox input can only have two states in a form: checked or unchecked.
 It either submits its value or doesn&#39;t.
 Visually, there are <strong>three</strong> states a checkbox can be in: checked, unchecked, or indeterminate.</Typography>
+<Typography className="text-base mb-32" component="div">You can change the indeterminate icon using the <code>{`indeterminateIcon`}</code> prop.</Typography>
 <Typography className="text-base mb-32" component="div"><FuseExample
                     name="IndeterminateCheckbox.js"
                     className="my-16"

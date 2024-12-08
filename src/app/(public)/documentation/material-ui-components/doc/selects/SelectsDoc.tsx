@@ -292,7 +292,7 @@ If you use the ListSubheader directly, <strong>no additional code is required</s
 :::</Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Accessibility</Typography>
 <Typography className="text-base mb-32" component="div">To properly label your <code>{`Select`}</code> input you need an extra element with an <code>{`id`}</code> that contains a label.
-That <code>{`id`}</code> needs to match the <code>{`labelId`}</code> of the <code>{`Select`}</code> e.g.</Typography>
+That <code>{`id`}</code> needs to match the <code>{`labelId`}</code> of the <code>{`Select`}</code>, for example:</Typography>
 
 <FuseHighlight component="pre" className="language-jsx">
 {` 

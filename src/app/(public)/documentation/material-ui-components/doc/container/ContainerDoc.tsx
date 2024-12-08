@@ -63,6 +63,9 @@ The max-width matches the min-width of the current breakpoint.</Typography>
 <Container fixed>
 `}
 </FuseHighlight>
+<Typography className="text-3xl mt-24 mb-10 font-700" component="h2">Toolpad (Beta)</Typography>
+<Typography className="text-15 mt-20 mb-10 font-700" component="h3">Page Container</Typography>
+<Typography className="text-base mb-32" component="div">The <a href="https://mui.com/toolpad/core/react-page-container/">PageContainer</a> component in <code>{`@toolpad/core`}</code> is the ideal wrapper for the content of your dashboard. It makes the Material UI Container navigation-aware and extends it with page title, breadcrumbs, actions, and more.</Typography>
 
 		</>
 	);

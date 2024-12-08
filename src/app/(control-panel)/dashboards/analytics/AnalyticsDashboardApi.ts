@@ -40,9 +40,7 @@ export type AnalyticsDashboardWidgetType =
 	| VisitsWidgetType
 	| VisitorsVsPageViewsType;
 
-export type GetAnalyticsDashboardWidgetsApiResponse = {
-	[key: string]: AnalyticsDashboardWidgetType;
-};
+export type GetAnalyticsDashboardWidgetsApiResponse = Record<string, AnalyticsDashboardWidgetType>;
 export type GetAnalyticsDashboardWidgetsApiArg = void;
 
 export const { useGetAnalyticsDashboardWidgetsQuery } = AnalyticsDashboardApi;

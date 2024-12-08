@@ -27,6 +27,8 @@ import TotalAvatarsComponent from '../../components/avatars/TotalAvatars';
 import TotalAvatarsRaw from '../../components/avatars/TotalAvatars.tsx?raw';
 import CustomSurplusAvatarsComponent from '../../components/avatars/CustomSurplusAvatars';
 import CustomSurplusAvatarsRaw from '../../components/avatars/CustomSurplusAvatars.tsx?raw';
+import SpacingComponent from '../../components/avatars/Spacing';
+import SpacingRaw from '../../components/avatars/Spacing.tsx?raw';
 import BadgeAvatarsComponent from '../../components/avatars/BadgeAvatars';
 import BadgeAvatarsRaw from '../../components/avatars/BadgeAvatars.tsx?raw';
 
@@ -146,6 +148,15 @@ The following demo generates the color based on the name of the person.</Typogra
                     iframe={false}
                     component={CustomSurplusAvatarsComponent} 
                     raw={CustomSurplusAvatarsRaw}
+                    /></Typography>
+<Typography className="text-15 mt-20 mb-10 font-700" component="h3">Spacing</Typography>
+<Typography className="text-base mb-32" component="div">You can change the spacing between avatars using the <code>{`spacing`}</code> prop. You can use one of the presets (<code>{`"medium"`}</code>, the default, or <code>{`"small"`}</code>) or set a custom numeric value.</Typography>
+<Typography className="text-base mb-32" component="div"><FuseExample
+                    name="Spacing.js"
+                    className="my-16"
+                    iframe={false}
+                    component={SpacingComponent} 
+                    raw={SpacingRaw}
                     /></Typography>
 <Typography className="text-3xl mt-24 mb-10 font-700" component="h2">With badge</Typography>
 <Typography className="text-base mb-32" component="div"><FuseExample

@@ -5,25 +5,22 @@ import { useGetMailboxFoldersQuery, useGetMailboxLabelsQuery, useGetMailboxMails
 function useGetMails() {
 	const { mailParams } = useParams<{ mailParams: string[] }>();
 	const [category, subCategory] = mailParams;
-
 	const { data: folders } = useGetMailboxFoldersQuery();
 	const { data: labels } = useGetMailboxLabelsQuery();
 
+	let queryParams = {};
+
 	if (category === 'folders') {
 		const folderId = _.find(folders, { slug: subCategory })?.id;
-		return useGetMailboxMailsQuery({ folder: folderId });
-	}
-
-	if (category === 'filters') {
-		return useGetMailboxMailsQuery({ [subCategory]: true });
-	}
-
-	if (category === 'labels') {
+		queryParams = { folder: folderId };
+	} else if (category === 'filters') {
+		queryParams = { [subCategory]: true };
+	} else if (category === 'labels') {
 		const labelId = _.find(labels, { slug: subCategory })?.id;
-		return useGetMailboxMailsQuery({ labels: labelId });
+		queryParams = { labels: labelId };
 	}
 
-	return useGetMailboxMailsQuery({});
+	return useGetMailboxMailsQuery(queryParams);
 }
 
 export default useGetMails;

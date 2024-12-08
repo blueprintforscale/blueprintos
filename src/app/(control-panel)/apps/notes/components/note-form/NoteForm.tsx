@@ -57,7 +57,6 @@ const schema = z.object({
 		.boolean()
 		.optional()
 		.refine(
-			// eslint-disable-next-line func-names
 			function (
 				this: {
 					parent: NotesNote;
@@ -90,7 +89,7 @@ type NoteFormProps = WithRouterProps & {
 function NoteForm(props: NoteFormProps) {
 	const { variant = 'edit', onClose } = props;
 	const [showList, setShowList] = useState(false);
-	const routeParams = useParams();
+	const routeParams = useParams<{ id: string; labelId: string }>();
 
 	const [updateNote] = useUpdateNotesItemMutation();
 	const [removeNote] = useDeleteNotesItemMutation();
@@ -125,6 +124,7 @@ function NoteForm(props: NoteFormProps) {
 				)
 			);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [variant, routeParams, note]);
 
 	useEffect(() => {

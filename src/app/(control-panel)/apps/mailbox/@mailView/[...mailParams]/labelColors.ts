@@ -21,9 +21,7 @@ export type LabelColorDef = {
 	combined: string;
 };
 
-export type LabelColorDefsType = {
-	[key in LabelColorsType]: LabelColorDef;
-};
+export type LabelColorDefsType = Record<LabelColorsType, LabelColorDef>;
 
 /**
  * The label color definitions.

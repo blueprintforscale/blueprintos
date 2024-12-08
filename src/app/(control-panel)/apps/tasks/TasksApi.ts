@@ -36,6 +36,7 @@ const TasksApi = api
 							})
 						);
 					} catch (err) {
+						console.error(err);
 						dispatch(showMessage({ message: 'Error saving list order' }));
 					}
 				}

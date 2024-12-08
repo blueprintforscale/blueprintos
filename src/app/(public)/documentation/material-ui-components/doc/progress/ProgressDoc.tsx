@@ -198,7 +198,10 @@ After 1.0 second, you can display a loader to keep user&#39;s flow of thought un
 <Typography className="text-15 mt-20 mb-10 font-700" component="h3">High CPU load</Typography>
 <Typography className="text-base mb-32" component="div">Under heavy load, you might lose the stroke dash animation or see random <code>{`CircularProgress`}</code> ring widths.
 You should run processor intensive operations in a web worker or by batch in order not to block the main rendering thread.</Typography>
-<Typography className="text-base mb-32" component="div"><img src="/material-ui-static/images/progress/heavy-load.gif" alt="heavy load"/></Typography>
+<video autoplay muted loop playsinline width="1082" height="158" style="width: 541px;">
+  <source src="/material-ui-static/material-ui/react-components/progress-heavy-load.mp4" type="video/mp4" />
+</video>
+
 <Typography className="text-base mb-32" component="div">When it&#39;s not possible, you can leverage the <code>{`disableShrink`}</code> prop to mitigate the issue.
 See <a href="https://github.com/mui/material-ui/issues/10327">this issue</a>.</Typography>
 <Typography className="text-base mb-32" component="div"><FuseExample

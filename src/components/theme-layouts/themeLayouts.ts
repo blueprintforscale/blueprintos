@@ -6,9 +6,7 @@ import Layout3 from './layout3/Layout3';
 /**
  * The type definition for the theme layouts.
  */
-export type themeLayoutsType = {
-	[key: string]: ComponentType<{ children?: React.ReactNode }>;
-};
+export type themeLayoutsType = Record<string, ComponentType<{ children?: React.ReactNode }>>;
 
 /**
  * The theme layouts.

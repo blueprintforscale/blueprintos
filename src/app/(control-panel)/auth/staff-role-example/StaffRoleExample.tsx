@@ -41,7 +41,7 @@ function StaffRoleExample() {
 						className="language-js"
 					>
 						{`
-              import {authRoles} from '@auth';
+              import {authRoles} from 'auth';
               import StaffRoleExample from './StaffRoleExample';
 
               export const StaffRoleExampleConfig = {

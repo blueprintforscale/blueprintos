@@ -6,9 +6,7 @@ import { PartialDeep } from 'type-fest';
 
 class FuseNavigationHelper {
 	static selectById(nav: FuseNavItemType[], id: string): FuseNavItemType | undefined {
-		for (let i = 0; i < nav.length; i += 1) {
-			const item = nav[i];
-
+		for (const item of nav) {
 			if (item.id === id) {
 				return item;
 			}
@@ -132,15 +130,11 @@ class FuseNavigationHelper {
 	 *  Convert to flat navigation
 	 */
 	static getFlatNavigation(navigationItems: FuseNavItemType[] = [], flatNavigation = []) {
-		for (let i = 0; i < navigationItems.length; i += 1) {
-			const navItem = navigationItems[i];
-
+		for (const navItem of navigationItems) {
 			if (navItem.type === 'item') {
 				const _navtItem = FuseNavItemModel(navItem);
 				flatNavigation.push(_navtItem);
-			}
-
-			if (navItem.type === 'collapse' || navItem.type === 'group') {
+			} else if (navItem.type === 'collapse' || navItem.type === 'group') {
 				if (navItem.children) {
 					this.getFlatNavigation(navItem.children, flatNavigation);
 				}
@@ -179,7 +173,7 @@ class FuseNavigationHelper {
 		return authArr.includes(userRole as string);
 	}
 
-	static flattenNavigation(navigation: FuseNavItemType[], parentOrder: string = ''): FuseFlatNavItemType[] {
+	static flattenNavigation(navigation: FuseNavItemType[], parentOrder = ''): FuseFlatNavItemType[] {
 		if (!navigation) {
 			return [];
 		}
@@ -199,7 +193,7 @@ class FuseNavigationHelper {
 	}
 
 	static unflattenNavigation(navigation: FuseFlatNavItemType[]): FuseNavItemType[] {
-		const itemMap: { [id: string]: FuseNavItemType } = {};
+		const itemMap: Record<string, FuseNavItemType> = {};
 		navigation.forEach((item) => {
 			itemMap[item.id] = { ...item, children: [] };
 		});

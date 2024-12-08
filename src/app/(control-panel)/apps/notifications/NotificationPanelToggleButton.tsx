@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import { useAppDispatch } from 'src/store/hooks';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { ReactNode, useEffect, useRef, useState } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation } from 'motion/react';
 import { useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { toggleNotificationPanel } from './notificationPanelSlice';
@@ -41,6 +41,7 @@ function NotificationPanelToggleButton(props: NotificationPanelToggleButtonProps
 	const theme = useTheme();
 	const dispatch = useAppDispatch();
 	const controls = useAnimation();
+
 	useEffect(() => {
 		if (animate) {
 			controls.start({
@@ -55,6 +56,7 @@ function NotificationPanelToggleButton(props: NotificationPanelToggleButtonProps
 				color: theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary
 			});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [animate, controls]);
 
 	useEffect(() => {

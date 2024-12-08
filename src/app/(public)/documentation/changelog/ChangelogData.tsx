@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import Typography from '@mui/material/Typography';
 import { ReactNode } from 'react';
 import Link from '@fuse/core/Link';

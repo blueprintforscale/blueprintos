@@ -40,7 +40,7 @@ const Root = styled('div')(({ theme }) => ({
 }));
 
 export type FuseThemeType = { palette: PartialDeep<Palette> };
-export type FuseThemesType = { [key: string]: FuseThemeType };
+export type FuseThemesType = Record<string, FuseThemeType>;
 export type FuseSettingsConfigType = {
 	layout: { style?: string; config?: PartialDeep<themeLayoutDefaultsProps> };
 	customScrollbars?: boolean;
@@ -81,6 +81,7 @@ function FuseSettings(props: FuseSettingsProps) {
 		if (!_.isEqual(settings, form)) {
 			reset(settings);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [settings]);
 
 	useEffect(() => {
@@ -156,7 +157,7 @@ function FuseSettings(props: FuseSettingsProps) {
 							control={control}
 						/>
 					),
-					[form, control]
+					[layoutFormConfigs, control]
 				)}
 
 				<Typography

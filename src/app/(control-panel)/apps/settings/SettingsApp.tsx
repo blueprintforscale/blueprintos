@@ -13,6 +13,7 @@ const Root = styled(FusePageSimple)(() => ({
 	'& .FusePageCarded-sidebar': {},
 	'& .FusePageCarded-leftSidebar': {}
 }));
+
 type SettingsAppProps = {
 	children: React.ReactNode;
 };

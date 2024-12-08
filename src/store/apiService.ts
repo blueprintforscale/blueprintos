@@ -9,7 +9,7 @@ const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, o
 ) => {
 	const result = await fetchBaseQuery({
 		baseUrl: API_BASE_URL,
-		prepareHeaders: (headers, { getState }) => {
+		prepareHeaders: (headers) => {
 			Object.entries(globalHeaders).forEach(([key, value]) => {
 				headers.set(key, value);
 			});
