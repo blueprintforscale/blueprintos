@@ -1,23 +1,58 @@
-module.exports = {
-    "root": true,
-    "parser": '@typescript-eslint/parser',
-    "parserOptions": {
-        "tsconfigRootDir": __dirname,
-        "project": ['./tsconfig.json'],
-        "sourceType": "module",
+import tseslint from 'typescript-eslint';
+import eslintPluginPrettier from 'eslint-plugin-prettier';
+import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
+import eslintPluginReactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import eslint from '@eslint/js';
+import eslintPluginReact from 'eslint-plugin-react';
+import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
+import { FlatCompat } from '@eslint/eslintrc';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({
+    baseDirectory: __dirname
+});
+
+export default tseslint.config({
+    files: ['**/*.ts', '**/*.tsx'],
+    ignores: [
+        '**/app/(public)/documentation/material-ui-components/components/**',
+        '**/app/(public)/documentation/material-ui-components/doc/**',
+        '**/utils/node-scripts/fuse-react-message.js',
+        '**/.next/**',
+    ],
+    languageOptions: {
+        parser: tseslint.parser,
+        parserOptions: {
+            project: true,
+        },
     },
-    "plugins": [
-        "@typescript-eslint",
-        "prettier",
-        "unused-imports",
-        "react-refresh"
+    plugins: {
+        "@typescript-eslint": tseslint.plugin,
+        "unused-imports": eslintPluginUnusedImports,
+        "react": eslintPluginReact,
+        "react-hooks": eslintPluginReactHooks,
+        "react-refresh": eslintPluginReactRefresh,
+        "prettier": eslintPluginPrettier,
+    },
+    extends: [
+        // Eslint
+        eslint.configs.recommended,
+        ...compat.extends('next/core-web-vitals'),
+        // TypeScript
+        ...tseslint.configs.recommended,
+        ...tseslint.configs.stylistic,
+        // React
+        eslintPluginReact.configs.flat.recommended,
+        eslintPluginReact.configs.flat['jsx-runtime'],
+        ...compat.extends('plugin:react-hooks/recommended'),
+        // Prettier
+        eslintPluginPrettierRecommended
     ],
-    "extends": [
-        "airbnb",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "plugin:prettier/recommended"
-    ],
-    "settings": {
+    settings: {
         "import/resolver": {
             "node": {
                 "extensions": [
@@ -27,14 +62,12 @@ module.exports = {
                     ".tsx"
                 ]
             }
+        },
+        "react": {
+            "version": "detect"
         }
     },
-    "ignorePatterns": [
-        "src/app/(public)/documentation/material-ui-components/components/**",
-        "src/app/(public)/documentation/material-ui-components/doc/**",
-        "tailwind.config.js"
-    ],
-    "rules": {
+    rules: {
         "prettier/prettier": [
             "warn",
             {
@@ -54,7 +87,7 @@ module.exports = {
             }
         ],
         "quotes": [
-            1,
+            "warn",
             "single",
             {
                 "allowTemplateLiterals": true,
@@ -69,15 +102,10 @@ module.exports = {
             { "blankLine": "always", "prev": "*", "next": "function" }
         ],
         "no-console": ["error", { "allow": ["error"] }],
-        // Disabling because this rule is extremely slow.
         "import/no-cycle": "off",
-        // Disabling because this rule is slow and not a common violation.
         "import/no-named-as-default": "off",
-        // Disabling because this rule is slow and not a common violation.
         "import/no-named-as-default-member": "off",
-        // This rule is already covered by the TypeScript compiler.
         "import/default": "off",
-        // This rule is already covered by the TypeScript compiler.
         "import/no-unresolved": "off",
         "operator-linebreak": "off",
         "no-param-reassign": "off",
@@ -94,13 +122,17 @@ module.exports = {
         "max-classes-per-file": "off",
         "react/jsx-filename-extension": "off",
         "import/extensions": "off",
-        "@typescript-eslint/no-unused-vars": "off",
-        "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+
+        // Unused imports
         "unused-imports/no-unused-imports": "error",
-        "unused-imports/no-unused-vars": [
-            "warn",
-            { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
-        ],
+
+        // TypeScript
+        "@typescript-eslint/no-unused-vars": ["warn", {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+        }],
+        "@typescript-eslint/consistent-type-definitions": ["off"],
         "@typescript-eslint/ban-ts-ignore": "off",
         "@typescript-eslint/no-empty-function": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
@@ -111,8 +143,9 @@ module.exports = {
         "@typescript-eslint/no-floating-promises": "off",
         "@typescript-eslint/no-misused-promises": "off",
         "@typescript-eslint/require-await": "off",
-        "no-useless-constructor": "off",
-        "no-tabs": "off",
+        "@typescript-eslint/no-empty-object-type": "off",
+
+        // React
         "react/jsx-indent": "off",
         "react/jsx-indent-props": "off",
         "react/react-in-jsx-scope": "off",
@@ -121,15 +154,18 @@ module.exports = {
         "react/prop-types": "off",
         "react/require-default-props": "off",
         "react/no-unescaped-entities": "off",
-        "no-underscore-dangle": "off",
         "react/jsx-no-bind": "off",
         "react/jsx-props-no-spreading": "off",
         "react/no-array-index-key": "off",
+        "react/jsx-pascal-case": "off",
+        "react-refresh/only-export-components": "warn",
+
+        "no-useless-constructor": "off",
+        "no-tabs": "off",
+        "no-underscore-dangle": "off",
         "no-restricted-exports": ["off", { "restrictedNamedExports": ["default"] }],
         "import/no-import-module-exports": "off",
         "import/no-extraneous-dependencies": "off",
         "camelcase": "off",
-        "react/jsx-pascal-case": "off",
-        "react-refresh/only-export-components": "warn"
     },
-}
+});
