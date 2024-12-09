@@ -1,4 +1,6 @@
 'use client';
+
+import _ from 'lodash';
 import React, { useEffect, useMemo } from 'react';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
 import { themeLayoutsType } from 'src/components/theme-layouts/themeLayouts';
@@ -24,12 +26,18 @@ export type FuseLayoutProps = {
  * the new settings to generate layouts.
  */
 function FuseLayout(props: FuseLayoutProps) {
-	const { layouts, children } = props;
+	const { layouts, children, settings: forcedSettings } = props;
 
 	const { data: current } = useFuseSettings();
-	const layoutSetting = useMemo(() => current.layout, [current]);
-	const layoutStyle = useMemo(() => layoutSetting.style, [layoutSetting]);
+	const currentLayoutSetting = useMemo(() => current.layout, [current]);
 	const pathname = usePathname();
+
+	const layoutSetting = useMemo(
+		() => _.merge({}, currentLayoutSetting, forcedSettings),
+		[currentLayoutSetting, forcedSettings]
+	);
+
+	const layoutStyle = useMemo(() => layoutSetting.style, [layoutSetting]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
