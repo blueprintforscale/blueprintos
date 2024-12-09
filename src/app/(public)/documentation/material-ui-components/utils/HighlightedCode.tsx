@@ -1,12 +1,13 @@
-import { forwardRef } from 'react';
 import FuseHighlight from '@fuse/core/FuseHighlight';
 
 type HighlightedCodeProps = {
 	code: string;
 	language: string;
+	ref?: React.RefObject<HTMLDivElement>;
 };
-export const HighlightedCode = forwardRef<HTMLDivElement, HighlightedCodeProps>((props, ref) => {
-	const { code, language, ...other } = props;
+
+export function HighlightedCode(props: HighlightedCodeProps) {
+	const { code, ref, language, ...other } = props;
 
 	return (
 		<FuseHighlight
@@ -18,6 +19,6 @@ export const HighlightedCode = forwardRef<HTMLDivElement, HighlightedCodeProps>(
 			{code}
 		</FuseHighlight>
 	);
-});
+}
 
 export default HighlightedCode;

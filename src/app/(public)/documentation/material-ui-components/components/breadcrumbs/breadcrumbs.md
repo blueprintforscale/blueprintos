@@ -50,10 +50,6 @@ You can learn more about this in the [overrides documentation page](/material-ui
 
 {{"demo": "CustomizedBreadcrumbs.js"}}
 
-## Integration with react-router
-
-{{"demo": "RouterBreadcrumbs.js", "bg": true}}
-
 ## Accessibility
 
 (WAI-ARIA: https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/)

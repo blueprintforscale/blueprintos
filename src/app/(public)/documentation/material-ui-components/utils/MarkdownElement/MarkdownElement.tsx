@@ -1,7 +1,6 @@
 import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import { marked } from 'marked';
-import PropTypes from 'prop-types';
 import { Grammar } from 'prismjs';
 import prism from './prism';
 
@@ -60,11 +59,13 @@ const Root = styled('div')(({ theme }) => ({
 		'& code': {
 			fontSize: 'inherit',
 			lineHeight: 'inherit',
+
 			// Remove scroll on small screens.
 			wordBreak: 'break-word'
 		},
 		'& .anchor-link-style': {
 			opacity: 0,
+
 			// To prevent the link to get the focus.
 			display: 'none'
 		},
@@ -95,18 +96,12 @@ const Root = styled('div')(({ theme }) => ({
 			fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace'
 		},
 		'& .required': {
-			color: '#9BC89B',
-			...theme.applyStyles('light', {
-				color: '#006500'
-			})
+			color: theme.palette.mode === 'light' ? '#006500' : '#9BC89B'
 		},
 		'& .prop-type': {
 			fontSize: 13,
 			fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
-			color: '#DBB0D0',
-			...theme.applyStyles('light', {
-				color: '#932981'
-			})
+			color: theme.palette.mode === 'light' ? '#932981' : '#DBB0D0'
 		},
 		'& .prop-default': {
 			fontSize: 13,
@@ -266,7 +261,7 @@ marked.setOptions({
 
 type MarkdownElementProps = {
 	className?: string;
-	text: string;
+	text?: string;
 };
 
 function MarkdownElement(props: MarkdownElementProps) {
@@ -280,10 +275,5 @@ function MarkdownElement(props: MarkdownElementProps) {
 		/>
 	);
 }
-
-MarkdownElement.propTypes = {
-	className: PropTypes.string,
-	text: PropTypes.string
-};
 
 export default MarkdownElement;
