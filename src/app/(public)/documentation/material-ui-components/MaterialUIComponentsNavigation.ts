@@ -95,12 +95,6 @@ const MaterialUIComponentsNavigation = {
 			url: '/documentation/material-ui-components/doc/chips'
 		},
 		{
-			id: 'clickAwayListener',
-			title: 'Click Away Listener',
-			type: 'item',
-			url: '/documentation/material-ui-components/doc/click-away-listener'
-		},
-		{
 			id: 'container',
 			title: 'Container',
 			type: 'item',

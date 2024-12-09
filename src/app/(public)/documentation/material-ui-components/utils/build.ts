@@ -196,7 +196,12 @@ function getContents(markdown: string) {
 }
 
 const excludedDemos = [
-	'ComboBox.js'
+	'ComboBox.js',
+	'DashboardLayoutBasic.js',
+	'PageContainerBasic.js',
+	'PageContainerBasic.js',
+	'ToolpadDialogsNoSnap.js',
+	'ToolpadDialogs.js'
 	// Add other demo filenames you want to exclude
 ];
 
@@ -537,7 +542,8 @@ async function removeExcludedComponents() {
 		path.resolve(examplesDirectory, './icons'),
 		path.resolve(examplesDirectory, './portal'),
 		path.resolve(examplesDirectory, './textarea-autosize'),
-		path.resolve(examplesDirectory, './no-ssr')
+		path.resolve(examplesDirectory, './no-ssr'),
+		path.resolve(examplesDirectory, './click-away-listener')
 	];
 
 	try {
@@ -657,12 +663,21 @@ async function build() {
 						return {
 							...config,
 							ignores: [],
+							languageOptions: {
+								...config.languageOptions,
+								parserOptions: {
+									...config.languageOptions?.parserOptions,
+									project: null,
+									tsconfigRootDir: null
+								}
+							},
 							rules: {
 								...config.rules,
 								'@typescript-eslint/no-unused-vars': 'off',
 								'no-irregular-whitespace': 'off',
 								'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
-								'react/jsx-boolean-value': ['error', 'never']
+								'react/jsx-boolean-value': ['error', 'never'],
+								'@next/next/no-img-element': 'off'
 							}
 						};
 					});
