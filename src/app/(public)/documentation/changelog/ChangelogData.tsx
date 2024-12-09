@@ -22,6 +22,52 @@ export type ChangelogItemType = {
  */
 const changelogData: ChangelogItemType[] = [
 	{
+		version: '13.0.0',
+		date: '2024-12-09',
+		newChanges: [
+			'🚀 React updated to v19',
+			'🛣️ React Router updated to v7',
+			'🎨 Material-UI updated to v6.1.10',
+			'⚡ Next.js updated to v15.0.4',
+			'🔐  Auth.js updated',
+			'🗺️ google-map-react replaced with @react-google-maps/api',
+			'🔧 ESLint configuration updated to use flat config',
+			'📊 Apex Charts updated to v4.1.0',
+			'🎯 Tailwind CSS updated to v3.4.16',
+			'🛠️ Added @hookform/devtools example usage',
+			'📚 MUI documentation updated',
+			'🔄 Node.js minimum version updated to v22.12.0 (LTS)',
+			'📦 npm minimum version updated to v10.9.0'
+		],
+		breakingChanges: ['forwardRef removed (deprecated in React v19)', 'React v19 migrations applied'],
+		fixedChanges: [
+			'AWS authentication fixes',
+			'CSS property fixes in app-base.css',
+			'Various type fixes',
+			'React v19 compatibility issues resolved'
+		],
+		notes: (
+			<div className="text-base p-24 border-2 rounded-xl w-full max-w-lg mt-40 mb-24">
+				<Typography component="div">
+					<ul className="list-disc">
+						<li className="leading-loose">
+							This major version includes significant updates to core dependencies and requires React 19
+							compatibility.
+						</li>
+						<li className="leading-loose">
+							The Google Maps integration has been completely revamped with the new @react-google-maps/api
+							library.
+						</li>
+						<li className="leading-loose">
+							ESLint now uses the new flat config system which may require updates to your custom
+							configurations.
+						</li>
+					</ul>
+				</Typography>
+			</div>
+		)
+	},
+	{
 		version: '12.1.0',
 		date: '2024-11-10',
 		newChanges: [
