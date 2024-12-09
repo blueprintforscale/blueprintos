@@ -1,6 +1,5 @@
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
-import { ForwardedRef, forwardRef } from 'react';
 import clsx from 'clsx';
 import FormHelperText from '@mui/material/FormHelperText';
 import PhoneNumberInput from './PhoneNumberInput';
@@ -13,13 +12,14 @@ type PhoneNumberSelectorProps = {
 	className?: string;
 	error?: boolean;
 	helperText?: string;
+	ref?: React.Ref<HTMLDivElement>;
 };
 
 /**
  * The phone number selector.
  */
-const PhoneNumberSelector = forwardRef((props: PhoneNumberSelectorProps, ref: ForwardedRef<HTMLDivElement>) => {
-	const { value, onChange, className, error, helperText } = props;
+function PhoneNumberSelector(props: PhoneNumberSelectorProps) {
+	const { value, onChange, className, error, helperText, ref } = props;
 
 	return (
 		<div
@@ -51,6 +51,6 @@ const PhoneNumberSelector = forwardRef((props: PhoneNumberSelectorProps, ref: Fo
 			</Button>
 		</div>
 	);
-});
+}
 
 export default PhoneNumberSelector;

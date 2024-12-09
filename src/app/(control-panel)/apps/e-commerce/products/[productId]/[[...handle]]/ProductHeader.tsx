@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useFormContext } from 'react-hook-form';
 import { useParams } from 'next/navigation';
 import _ from 'lodash';

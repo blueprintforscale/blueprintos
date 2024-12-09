@@ -46,7 +46,7 @@ type BoardListHeaderProps = {
  * The board list header component.
  */
 function BoardListHeader(props: BoardListHeaderProps) {
-	const { boardId, list, cardIds, className, handleProps } = props;
+	const { list, cardIds, className, handleProps } = props;
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
 	const [formOpen, setFormOpen] = useState(false);

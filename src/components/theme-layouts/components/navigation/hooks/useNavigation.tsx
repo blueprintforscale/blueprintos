@@ -4,7 +4,7 @@ import { useAppSelector } from 'src/store/hooks';
 import { useMemo } from 'react';
 import i18n from '@i18n';
 import useUser from '@auth/useUser';
-import { useI18n } from '@i18n/I18nProvider';
+import useI18n from '@i18n/useI18n';
 import FuseUtils from '@fuse/utils';
 import FuseNavigationHelper from '@fuse/utils/FuseNavigationHelper';
 import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType';
@@ -32,7 +32,8 @@ function useNavigation() {
 		const translatedValues = setAdditionalData(_navigation);
 
 		return translatedValues;
-	}, [navigationData, languageId]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [navigationData, userRole, languageId]);
 
 	const flattenNavigation = useMemo(() => {
 		return FuseNavigationHelper.flattenNavigation(navigation);

@@ -1,25 +1,10 @@
 'use client';
-
-import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 import i18n from './i18n';
-
-export type LanguageType = {
-	id: string;
-	title: string;
-	flag: string;
-};
-
-type I18nContextType = {
-	language: LanguageType;
-	languageId: string;
-	languages: LanguageType[];
-	changeLanguage: (languageId: string) => Promise<void>;
-	langDirection: 'ltr' | 'rtl';
-};
-
-const I18nContext = createContext<I18nContextType | undefined>(undefined);
+import I18nContext from './I18nContext';
+import { LanguageType } from './I18nContext';
 
 type I18nProviderProps = {
 	children: React.ReactNode;
@@ -52,10 +37,10 @@ export function I18nProvider(props: I18nProviderProps) {
 		if (settingsThemeDirection !== langDirection) {
 			setSettings({ direction: langDirection });
 		}
-	}, [languageId, settingsThemeDirection]);
+	}, [languageId, setSettings, settingsThemeDirection]);
 
 	return (
-		<I18nContext.Provider
+		<I18nContext
 			value={useMemo(
 				() => ({
 					language: _.find(languages, { id: languageId }),
@@ -64,20 +49,10 @@ export function I18nProvider(props: I18nProviderProps) {
 					languages,
 					changeLanguage
 				}),
-				[languageId, languages]
+				[languageId]
 			)}
 		>
 			{children}
-		</I18nContext.Provider>
+		</I18nContext>
 	);
 }
-
-export const useI18n = () => {
-	const context = useContext(I18nContext);
-
-	if (!context) {
-		throw new Error('useI18n must be used within an I18nProvider');
-	}
-
-	return context;
-};

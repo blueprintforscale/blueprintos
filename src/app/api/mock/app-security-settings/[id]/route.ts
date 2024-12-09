@@ -4,8 +4,8 @@ import { SettingsSecurity } from '@/app/(control-panel)/apps/settings/SettingsAp
 /**
  * GET api/mock/app-security-settings/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('app_security_settings');
 	const item = await api.find<SettingsSecurity>(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * PUT api/mock/app-security-settings/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('app_security_settings');
 	const data = (await req.json()) as SettingsSecurity;
 	const updatedItem = await api.update<SettingsSecurity>(id, data);

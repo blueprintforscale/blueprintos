@@ -60,8 +60,8 @@ function ReactHookFormDoc() {
 			</Typography>
 
 			<ul>
-				<li className="mb-8">src/app/(control-panel)/sign-in/SignInPage.tsx</li>
-				<li className="mb-8">src/app/(control-panel)/sign-up/SignUpPage.tsx</li>
+				<li className="mb-8">@/app/(control-panel)/sign-in/SignInPage.tsx</li>
+				<li className="mb-8">@/app/(control-panel)/sign-up/SignUpPage.tsx</li>
 				<li className="mb-8">.</li>
 				<li className="mb-8">.</li>
 				<li className="mb-8">.</li>

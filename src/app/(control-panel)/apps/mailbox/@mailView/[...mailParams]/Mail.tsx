@@ -60,7 +60,7 @@ function Mail() {
 				<Paper className="flex flex-col flex-0 w-full shadow rounded-xl overflow-hidden">
 					<div className="flex flex-col py-32 px-24">
 						<div className="flex items-start w-full">
-							<Avatar src={mail.from.avatar} />
+							<Avatar src={mail?.from?.avatar} />
 
 							<div className="ml-16 min-w-0">
 								<Typography className="font-semibold truncate">

@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import ModernPricingCard from './ModernPricingCard';
 import ModernPricingFeatureItem from './ModernPricingFeatureItem';

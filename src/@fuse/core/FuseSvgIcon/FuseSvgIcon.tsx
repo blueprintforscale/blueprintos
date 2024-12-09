@@ -1,10 +1,8 @@
 'use client';
-
 import { styled } from '@mui/material/styles';
 import { Box, BoxProps } from '@mui/material';
 import Icon from '@mui/material/Icon';
 import clsx from 'clsx';
-import { forwardRef } from 'react';
 
 type FuseSvgIconProps = BoxProps & {
 	fill?: string;
@@ -12,6 +10,7 @@ type FuseSvgIconProps = BoxProps & {
 	viewBox?: string;
 	size?: number | string;
 	color?: 'inherit' | 'disabled' | 'primary' | 'secondary' | 'action' | 'error' | 'info' | 'success' | 'warning';
+	ref?: React.RefObject<SVGSVGElement>;
 };
 
 /**
@@ -43,8 +42,8 @@ const Root = styled(Box)<FuseSvgIconProps>(({ theme, size = 20, color = 'inherit
  * It uses various MUI components to render the icon.
  * The component is memoized to prevent unnecessary re-renders.
  */
-const FuseSvgIcon = forwardRef<SVGSVGElement, FuseSvgIconProps>((props, ref) => {
-	const { children, className = '', color = 'inherit' } = props;
+function FuseSvgIcon(props: FuseSvgIconProps) {
+	const { children, className = '', color = 'inherit', ref } = props;
 
 	if (typeof children !== 'string') {
 		return null;
@@ -76,6 +75,6 @@ const FuseSvgIcon = forwardRef<SVGSVGElement, FuseSvgIconProps>((props, ref) => 
 			<use xlinkHref={`/assets/icons/${iconPath}`} />
 		</Root>
 	);
-});
+}
 
 export default FuseSvgIcon;

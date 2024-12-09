@@ -5,11 +5,10 @@ import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import { ApexOptions } from 'apexcharts';
-import dynamic from 'next/dynamic';
 import { useAppSelector } from 'src/store/hooks';
 import AgeWidgetModelType from './types/AgeWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
-
+import dynamic from 'next/dynamic';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
@@ -17,11 +16,6 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  */
 function AgeWidget() {
 	const widget = useAppSelector(selectWidget<AgeWidgetModelType>('age'));
-
-	if (!widget) {
-		return null;
-	}
-
 	const { series, labels, uniqueVisitors } = widget;
 	const [awaitRender, setAwaitRender] = useState(true);
 	const theme = useTheme();
@@ -93,6 +87,10 @@ function AgeWidget() {
 	}, []);
 
 	if (awaitRender) {
+		return null;
+	}
+
+	if (!widget) {
 		return null;
 	}
 

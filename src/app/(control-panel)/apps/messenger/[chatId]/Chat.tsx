@@ -12,7 +12,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Toolbar from '@mui/material/Toolbar';
 import { useParams } from 'next/navigation';
 import Box from '@mui/material/Box';
-import Error404Page from '@/app/(public)/404/Error404Page';
+import Error404Page from 'src/app/(public)/404/Error404Page';
 import ChatMoreMenu from './ChatMoreMenu';
 import {
 	Message,

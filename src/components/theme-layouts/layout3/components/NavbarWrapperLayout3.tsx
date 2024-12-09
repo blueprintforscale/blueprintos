@@ -12,7 +12,7 @@ import NavbarToggleFab from 'src/components/theme-layouts/components/navbar/Navb
 import withSlices from 'src/store/withSlices';
 import usePathname from '@fuse/hooks/usePathname';
 import { useNavbarTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
-import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import NavbarLayout3 from './NavbarLayout3';
 import NavbarMobileLayout3 from './NavbarMobileLayout3';
 
@@ -51,7 +51,7 @@ function NavbarWrapperLayout3(props: NavbarWrapperLayout3Props) {
 		if (isMobile) {
 			dispatch(navbarCloseMobile());
 		}
-	}, [pathname, isMobile]);
+	}, [pathname, isMobile, dispatch]);
 
 	return (
 		<>

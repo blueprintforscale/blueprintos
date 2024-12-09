@@ -8,7 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { useGetProfileAboutQuery } from '../../ProfileApi';

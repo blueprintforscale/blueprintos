@@ -7,7 +7,7 @@ import { darken } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import SimplePricingCard from './SimplePricingCard';
 import SimplePricingFeatureItem from './SimplePricingFeatureItem';

@@ -92,6 +92,7 @@ function EventDialog() {
 				id: FuseUtils.generateGUID()
 			});
 		}
+		// eslint-disable-next-line
 	}, [eventDialog.data, eventDialog.type, reset]);
 
 	/**
@@ -269,7 +270,7 @@ function EventDialog() {
 						render={({ field }) => (
 							<EventLabelSelect
 								className="mt-8 mb-16"
-								{...(field as EventLabelSelectProps)}
+								{...(field as unknown as EventLabelSelectProps)}
 							/>
 						)}
 					/>

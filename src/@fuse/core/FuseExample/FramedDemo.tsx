@@ -9,7 +9,7 @@ import { ReactElement } from 'react';
 
 type FramedDemoProps = {
 	document: Document;
-	children: ReactElement;
+	children: ReactElement<{ window?: () => Window }>;
 };
 
 /**

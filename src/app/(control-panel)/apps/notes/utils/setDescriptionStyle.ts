@@ -1,10 +1,11 @@
 // 1. Types
-type FontSizeMapping = {
-	[key: number]: {
+type FontSizeMapping = Record<
+	number,
+	{
 		fontSize: number;
 		lineHeight: number;
-	};
-};
+	}
+>;
 
 type setDescriptionStyleType = (sentence: string, refEl: HTMLElement | null, enabled: boolean) => void;
 

@@ -5,7 +5,6 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import CardContent from '@mui/material/CardContent';
-import * as React from 'react';
 import { lighten } from '@mui/material/styles';
 import AuthJsForm from '@auth/forms/AuthJsForm';
 

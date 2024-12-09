@@ -73,6 +73,7 @@ function ImageGeneratorForm() {
 
 	useEffect(() => {
 		reset(defaultValues);
+		// eslint-disable-next-line
 	}, []);
 
 	function handleOnLoadPreset(preset: AiImageGenPreset) {

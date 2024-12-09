@@ -12,7 +12,7 @@ import {
 import withSlices from 'src/store/withSlices';
 import usePathname from '@fuse/hooks/usePathname';
 import { useNavbarTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
-import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import NavbarLayout2 from './NavbarLayout2';
 import NavbarMobileLayout2 from './NavbarMobileLayout2';
 
@@ -52,7 +52,7 @@ function NavbarWrapperLayout2(props: NavbarWrapperLayout2Props) {
 		if (isMobile) {
 			dispatch(navbarCloseMobile());
 		}
-	}, [pathname, isMobile]);
+	}, [pathname, isMobile, dispatch]);
 
 	return (
 		<>

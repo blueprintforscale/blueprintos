@@ -31,6 +31,7 @@ const AcademyApi = apiService
 						await queryFulfilled;
 						dispatch(showMessage({ message: 'Course Saved' }));
 					} catch (err) {
+						console.error(err);
 						dispatch(showMessage({ message: 'Error Saving the course!' }));
 					}
 				},
@@ -44,10 +45,10 @@ const AcademyApi = apiService
 				invalidatesTags: ['academy_courses']
 			}),
 			getAcademyCourseSteps: build.query<GetAcademyCourseStepsApiResponse, GetAcademyCourseStepsApiArg>({
-				query: (queryArg) => ({
+				query: (_queryArg) => ({
 					url: `/api/mock/academy/course-steps`,
 					params: {
-						// courseId: queryArg.courseId
+						// courseId: _queryArg.courseId
 						courseId: '0' // demo
 					}
 				}),
@@ -57,8 +58,8 @@ const AcademyApi = apiService
 				GetAcademyCourseStepContentApiResponse,
 				GetAcademyCourseStepContentApiArg
 			>({
-				query: (stepId) => ({
-					// url: `/api/mock/academy/course-step-contents/${stepId}`,
+				query: (_stepId) => ({
+					// url: `/api/mock/academy/course-step-contents/${_stepId}`,
 					url: `/api/mock/academy/course-step-contents/0` // demo
 				}),
 				providesTags: ['academy_course']

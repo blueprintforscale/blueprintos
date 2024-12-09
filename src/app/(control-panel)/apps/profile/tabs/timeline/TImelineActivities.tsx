@@ -1,6 +1,6 @@
 import FuseLoading from '@fuse/core/FuseLoading';
 import List from '@mui/material/List';
-import { useGetProfileActivitiesQuery } from '@/app/(control-panel)/apps/profile/ProfileApi';
+import { useGetProfileActivitiesQuery } from '../../ProfileApi';
 import TimelineActivityItem from './TimelineActivityItem';
 
 function TImelineActivities() {

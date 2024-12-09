@@ -2,7 +2,7 @@ import _ from 'lodash';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { cloneElement, memo } from 'react';
+import { cloneElement, memo, type JSX } from 'react';
 
 /**
  * This component renders a demo sidebar content which contains List with ListItemButton and ListItemText for -30- times.

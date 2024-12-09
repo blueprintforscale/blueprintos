@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Checkbox, FormLabel } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';

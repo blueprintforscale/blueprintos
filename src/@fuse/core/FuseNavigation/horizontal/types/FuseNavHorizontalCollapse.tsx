@@ -50,37 +50,32 @@ function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 	const { item, nestedLevel, dense, checkPermission } = props;
 	const [opened, setOpened] = useState(false);
 	const [isMounted, setIsMounted] = useState(false);
-
 	const pathname = usePathname();
 	const theme = useTheme();
+	const component = item.url ? NavLinkAdapter : 'li';
+
+	const itemProps = useMemo(
+		() => ({
+			...(component !== 'li' && {
+				disabled: item.disabled,
+				to: item.url,
+				end: item.end,
+				role: 'button',
+				exact: item?.exact
+			})
+		}),
+		[item, component]
+	);
 
 	const handleToggle = useDebounce((open: boolean) => {
 		setOpened(open);
 	}, 150);
 
-	const component = item.url ? NavLinkAdapter : 'li';
-
-	let itemProps;
-
-	if (typeof component !== 'string') {
-		itemProps = {
-			disabled: item.disabled,
-			to: item.url,
-			end: item.end,
-			role: 'button',
-			exact: item?.exact
-		};
-	}
-
-	if (checkPermission && !item?.hasPermission) {
-		return null;
-	}
-
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
 
-	return useMemo(
+	const memoizedContent = useMemo(
 		() => (
 			<ul className="relative px-0">
 				<Manager>
@@ -194,8 +189,14 @@ function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 				</Manager>
 			</ul>
 		),
-		[dense, handleToggle, item, nestedLevel, opened, pathname, theme.direction]
+		[component, dense, handleToggle, isMounted, item, itemProps, nestedLevel, opened, pathname, theme.direction]
 	);
+
+	if (checkPermission && !item?.hasPermission) {
+		return null;
+	}
+
+	return memoizedContent;
 }
 
 const NavHorizontalCollapseWithMemo = memo(FuseNavHorizontalCollapse);

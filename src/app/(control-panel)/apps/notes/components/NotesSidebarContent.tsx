@@ -3,7 +3,7 @@ import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
 import ListItemText from '@mui/material/ListItemText';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useAppDispatch } from 'src/store/hooks';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { NavLinkAdapterPropsType } from '@fuse/core/NavLinkAdapter/NavLinkAdapter';
@@ -58,7 +58,7 @@ function NotesSidebarContent() {
 				<List>
 					<StyledListItemButton
 						component={NavLinkAdapter}
-						to="/apps/notes"
+						to="/apps/notes/all"
 						activeClassName="active"
 					>
 						<FuseSvgIcon

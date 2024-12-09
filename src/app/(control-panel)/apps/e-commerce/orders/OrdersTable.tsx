@@ -1,9 +1,7 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { useMemo } from 'react';
 import { type MRT_ColumnDef } from 'material-react-table';
 import DataTable from 'src/components/data-table/DataTable';
 import { ListItemIcon, MenuItem, Paper } from '@mui/material';
-import * as React from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';

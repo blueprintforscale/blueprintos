@@ -25,16 +25,17 @@ const Root = styled('div')({
 
 /* The props for the WYSIWYG editor component.
  */
-type WYSIWYGEditorComponentProps = {
+type WYSIWYGEditorProps = {
 	className?: string;
 	onChange: (T: string) => void;
+	ref: React.ForwardedRef<HTMLDivElement>;
 };
 
 /**
  * The WYSIWYG editor component.
  */
-function WYSIWYGEditorComponent(props: WYSIWYGEditorComponentProps, ref: React.ForwardedRef<HTMLDivElement>) {
-	const { onChange, className = '' } = props;
+function WYSIWYGEditor(props: WYSIWYGEditorProps) {
+	const { onChange, className = '', ref } = props;
 
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -59,7 +60,5 @@ function WYSIWYGEditorComponent(props: WYSIWYGEditorComponentProps, ref: React.F
 		</Root>
 	);
 }
-
-const WYSIWYGEditor = React.forwardRef(WYSIWYGEditorComponent);
 
 export default WYSIWYGEditor;

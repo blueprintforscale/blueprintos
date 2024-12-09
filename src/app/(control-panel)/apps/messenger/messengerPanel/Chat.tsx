@@ -180,6 +180,7 @@ function Chat(props: ChatProps) {
 									);
 								})
 							: null;
+						// eslint-disable-next-line
 					}, [chat, user?.id])}
 				</div>
 				{chat?.length === 0 && (
@@ -245,7 +246,7 @@ function Chat(props: ChatProps) {
 						</form>
 					)
 				);
-			}, [chat, messageText, selectedChatId])}
+			}, [chat, messageText, selectedChatId, sendMessage])}
 		</Paper>
 	);
 }

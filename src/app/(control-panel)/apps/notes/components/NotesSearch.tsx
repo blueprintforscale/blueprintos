@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import { OutlinedInput } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { setSearchText, selectSearchText } from '../notesAppSlice';

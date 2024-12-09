@@ -129,9 +129,7 @@ class FuseUtils {
 			return Boolean(value && typeof value === 'object' && !Array.isArray(value) && typeof value !== 'function');
 		}
 
-		for (let i = 0; i < propArray.length; i += 1) {
-			const prop = propArray[i];
-
+		for (const prop of propArray) {
 			const value = itemObj[prop];
 
 			if (typeof value === 'string') {
@@ -331,7 +329,7 @@ class FuseUtils {
 
 		const randomColor = mainColors[Math.floor(Math.random() * mainColors.length)];
 
-		return (colors as { [key: string]: Color })[randomColor][hue];
+		return (colors as Record<string, Color>)[randomColor][hue];
 	}
 
 	/**

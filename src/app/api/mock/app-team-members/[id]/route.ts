@@ -4,8 +4,8 @@ import { SettingsTeamMember } from '@/app/(control-panel)/apps/settings/Settings
 /**
  * PUT api/mock/app-team-members/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('app_team_members');
 	const data = (await req.json()) as SettingsTeamMember;
 	const updatedItem = await api.update<SettingsTeamMember>(id, data);
@@ -20,8 +20,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 /**
  * DELETE api/mock/app-team-members/{id}
  */
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('app_team_members');
 
 	const result = await api.delete([id]);

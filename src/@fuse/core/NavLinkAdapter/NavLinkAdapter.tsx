@@ -1,8 +1,8 @@
-import { forwardRef, CSSProperties, ReactNode } from 'react';
 import Link from '@fuse/core/Link';
+import { CSSProperties, ReactNode } from 'react';
 import usePathname from '@fuse/hooks/usePathname';
-import clsx from 'clsx';
 import useNavigate from '@fuse/hooks/useNavigate';
+import clsx from 'clsx';
 
 export type NavLinkAdapterPropsType = {
 	activeClassName?: string;
@@ -14,6 +14,7 @@ export type NavLinkAdapterPropsType = {
 	style?: CSSProperties;
 	role?: string;
 	exact?: boolean;
+	ref?: React.RefObject<HTMLAnchorElement>;
 };
 
 /**
@@ -21,11 +22,24 @@ export type NavLinkAdapterPropsType = {
  * It adds the ability to navigate programmatically using the useRouter hook.
  * The component is memoized to prevent unnecessary re-renders.
  */
-const NavLinkAdapter = forwardRef<HTMLAnchorElement, NavLinkAdapterPropsType>((props, ref) => {
-	const { activeClassName = 'active', activeStyle, role = 'button', to, href, exact = false, ..._props } = props;
+function NavLinkAdapter(props: NavLinkAdapterPropsType) {
+	const {
+		children,
+		activeClassName = 'active',
+		activeStyle,
+		role = 'button',
+		to,
+		href,
+		exact,
+		ref,
+		..._props
+	} = props;
+
 	const navigate = useNavigate();
 	const pathname = usePathname();
+
 	const targetUrl = to || href;
+
 	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault();
 		navigate(targetUrl);
@@ -46,9 +60,7 @@ const NavLinkAdapter = forwardRef<HTMLAnchorElement, NavLinkAdapterPropsType>((p
 			passHref
 			legacyBehavior
 		>
-			{/* eslint-disable-next-line jsx-a11y/anchor-is-valid,jsx-a11y/no-static-element-interactions */}
 			<a
-				ref={ref}
 				role={role}
 				onClick={handleClick}
 				onKeyDown={handleKeyDown}
@@ -59,10 +71,10 @@ const NavLinkAdapter = forwardRef<HTMLAnchorElement, NavLinkAdapterPropsType>((p
 				)}
 				style={isActive ? { ..._props.style, ...activeStyle } : _props.style}
 			>
-				{props.children}
+				{children}
 			</a>
 		</Link>
 	);
-});
+}
 
 export default NavLinkAdapter;

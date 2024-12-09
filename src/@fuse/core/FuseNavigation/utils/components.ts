@@ -1,3 +1,3 @@
-const components: { [key: string]: React.FC<unknown> } = {};
+const components: Record<string, React.FC<unknown>> = {};
 
 export default components;

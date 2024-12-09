@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 
 import { useParams } from 'next/navigation';
 import Link from '@fuse/core/Link';
-import { useGetECommerceOrderQuery } from '../../../ECommerceApi';
+import { useGetECommerceOrderQuery } from '../../../../ECommerceApi';
 
 /**
  * The products tab.

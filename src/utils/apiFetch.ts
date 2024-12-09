@@ -33,7 +33,7 @@ export const removeGlobalHeaders = (headerKeys: string[]) => {
 };
 
 // Main apiFetch function with interceptors and type safety
-const apiFetch = async <T>(endpoint: string, options: FetchOptions = {}) => {
+const apiFetch = async (endpoint: string, options: FetchOptions = {}) => {
 	const { headers, ...restOptions } = options;
 	const method = restOptions.method || 'GET';
 	// Set default headers, including global headers

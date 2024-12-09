@@ -1,7 +1,6 @@
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { memo, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
@@ -9,7 +8,7 @@ import { ApexOptions } from 'apexcharts';
 import { useAppSelector } from 'src/store/hooks';
 import LanguageWidgetType from './types/LanguageWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
-
+import dynamic from 'next/dynamic';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
@@ -17,11 +16,6 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  */
 function LanguageWidget() {
 	const widget = useAppSelector(selectWidget<LanguageWidgetType>('language'));
-
-	if (!widget) {
-		return null;
-	}
-
 	const { series, labels, uniqueVisitors } = widget;
 	const [awaitRender, setAwaitRender] = useState(true);
 	const theme = useTheme();
@@ -93,6 +87,10 @@ function LanguageWidget() {
 	}, []);
 
 	if (awaitRender) {
+		return null;
+	}
+
+	if (!widget) {
 		return null;
 	}
 

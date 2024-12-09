@@ -4,8 +4,8 @@ import { AiImageGenItem } from '@/app/(control-panel)/apps/ai-image-generator/Ai
 /**
  * GET api/mock/ai-image-generator/items/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('ai_image_generator_items');
 	const item = await api.find(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * PUT api/mock/ai-image-generator/items/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('ai_image_generator_items');
 	const data = (await req.json()) as AiImageGenItem;
 	const updatedItem = await api.update(id, data);
@@ -35,8 +35,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 /**
  * DELETE api/mock/ai-image-generator/items/{id}
  */
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('ai_image_generator_items');
 
 	const result = await api.delete([id]);

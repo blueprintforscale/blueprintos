@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import { memo } from 'react';
 import Paper from '@mui/material/Paper';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi';
@@ -64,7 +64,7 @@ function TeamMembersWidget() {
 					<div className="flex items-center w-full border-t divide-x">
 						<a
 							className="flex flex-auto items-center justify-center py-16 hover:bg-hover"
-							to={`mailto:${member.email}`}
+							href={`mailto:${member.email}`}
 							role="button"
 						>
 							<FuseSvgIcon
@@ -77,7 +77,7 @@ function TeamMembersWidget() {
 						</a>
 						<a
 							className="flex flex-auto items-center justify-center py-16 hover:bg-hover"
-							to={`tel${member.phone}`}
+							href={`tel${member.phone}`}
 							role="button"
 						>
 							<FuseSvgIcon

@@ -13,16 +13,18 @@ type MainLayoutProps = Omit<FuseLayoutProps, 'layouts'> & {
 	rightSidePanel?: boolean;
 };
 
-function MainLayout({
-	children,
-	navbar,
-	toolbar,
-	footer,
-	leftSidePanel,
-	rightSidePanel,
-	settings = {}, // Default to an empty object if settings is undefined
-	...rest
-}: MainLayoutProps) {
+function MainLayout(props: MainLayoutProps) {
+	const {
+		children,
+		navbar,
+		toolbar,
+		footer,
+		leftSidePanel,
+		rightSidePanel,
+		settings = {}, // Default to an empty object if settings is undefined
+		...rest
+	} = props;
+
 	const mergedSettings = useMemo(() => {
 		const shorthandSettings = {
 			config: {

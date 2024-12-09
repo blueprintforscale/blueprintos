@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Button from '@mui/material/Button';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';

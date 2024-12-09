@@ -2,7 +2,6 @@
 
 import FusePageCarded from '@fuse/core/FusePageCarded';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
-import * as React from 'react';
 import { useAppSelector } from 'src/store/hooks';
 import DetailSidebarContent from './DetailSidebarContent';
 import FileManagerHeader from './FileManagerHeader';

@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { lighten } from '@mui/material/styles';
 import Box from '@mui/material/Box';

@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode, useMemo, useEffect, useCallback } from 'react';
+import { useState, ReactNode, useMemo, useEffect, useCallback } from 'react';
 import _ from 'lodash';
 import { defaultSettings, getParsedQuerySettings } from '@fuse/default-settings';
 import settingsConfig from 'src/configs/settingsConfig';
@@ -6,16 +6,7 @@ import themeLayoutConfigs from 'src/components/theme-layouts/themeLayoutConfigs'
 import { FuseSettingsConfigType, FuseThemesType } from '@fuse/core/FuseSettings/FuseSettings';
 import useUser from '@auth/useUser';
 import { PartialDeep } from 'type-fest';
-
-// FuseSettingsContext type
-export type FuseSettingsContextType = {
-	data: FuseSettingsConfigType;
-	setSettings: (newSettings: Partial<FuseSettingsConfigType>) => FuseSettingsConfigType;
-	changeTheme: (newTheme: FuseThemesType) => void;
-};
-
-// Context with a default value of undefined
-export const FuseSettingsContext = createContext<FuseSettingsContextType | undefined>(undefined);
+import FuseSettingsContext from './FuseSettingsContext';
 
 // Get initial settings
 const getInitialSettings = (): FuseSettingsConfigType => {
@@ -94,7 +85,7 @@ export function FuseSettingsProvider({ children }: { children: ReactNode }) {
 	);
 
 	return (
-		<FuseSettingsContext.Provider
+		<FuseSettingsContext
 			value={useMemo(
 				() => ({
 					data,
@@ -105,7 +96,7 @@ export function FuseSettingsProvider({ children }: { children: ReactNode }) {
 			)}
 		>
 			{children}
-		</FuseSettingsContext.Provider>
+		</FuseSettingsContext>
 	);
 }
 

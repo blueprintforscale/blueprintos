@@ -1,7 +1,7 @@
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import NoteLabel from '../NoteLabel';

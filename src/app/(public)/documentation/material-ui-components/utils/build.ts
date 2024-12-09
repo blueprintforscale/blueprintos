@@ -10,12 +10,14 @@ import path, { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const demoDir = '@/app/(public)/documentation/material-ui-components/components';
-const rootDirectory = '@/app/(public)/documentation/material-ui-components';
+const demoDir = './src/app/(public)/documentation/material-ui-components/components';
+const rootDirectory = './src/app/(public)/documentation/material-ui-components';
 const examplesDirectory = path.resolve(rootDirectory, './components');
 const pagesDirectory = path.resolve(rootDirectory, './doc');
 const routesFilePath = path.resolve(rootDirectory, './MaterialUIComponentsRoute.tsx');
 const navigationFilePath = path.resolve(rootDirectory, './MaterialUIComponentsNavigation.ts');
+const projectDir = path.resolve(rootDirectory, '..', '..', '..', '..', '..');
+const nodeModulesDir = path.resolve(projectDir, 'node_modules');
 
 const demoRegexp = /^"demo": "(.*)"/;
 const componentRegexp = /^"component": "(.*)"/;
@@ -28,20 +30,17 @@ marked.Lexer.prototype.lex = function lex(src) {
 		.replace(/\t/g, '    ')
 		.replace(/\u2424/g, '\n');
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
 	this.blockTokens(src, this.tokens);
 
 	let next: { src: string; tokens: { type: string; raw: string }[] };
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	// eslint-disable-next-line no-cond-assign,@typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
+
 	while ((next = this.inlineQueue.shift() as { src: string; tokens: { type: 'space'; raw: string }[] })) {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
 		this.inlineTokens(next.src, next.tokens);
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
 	return this.tokens;
 };
 
@@ -108,7 +107,7 @@ const removeFile = async (filePath: string) => {
 		log('Successfully deleted the file.');
 	} catch (error) {
 		if (error) {
-			log('File does not exist.', filePath);
+			// log('File does not exist.', filePath);
 		}
 	}
 	return true;
@@ -132,7 +131,8 @@ async function checkExistence(dirPath: string) {
 		await fsp.access(dirPath);
 		// If the promise resolves, the file or directory exists
 		return true;
-	} catch (error) {
+	} catch (_error) {
+		// log(_error);
 		// If the promise is rejected, the file or directory does not exist
 		return false;
 	}
@@ -195,8 +195,18 @@ function getContents(markdown: string) {
 		.filter((content) => !emptyRegExp.test(content)); // Remove empty lines
 }
 
+const excludedDemos = [
+	'ComboBox.js',
+	'DashboardLayoutBasic.js',
+	'PageContainerBasic.js',
+	'PageContainerBasic.js',
+	'ToolpadDialogsNoSnap.js',
+	'ToolpadDialogs.js'
+	// Add other demo filenames you want to exclude
+];
+
 function getHtmlCode(markdownSource: string, fileDir: string) {
-	const folderName = path.basename(fileDir); // example: simple-zoom
+	const folderName = path.basename(fileDir);
 
 	markdownSource = eraseMdSection(markdownSource, folderName, 'breadcrumbs', 'Integration with react-router');
 	markdownSource = eraseMdSection(markdownSource, folderName, 'pagination', 'Router integration');
@@ -214,9 +224,14 @@ function getHtmlCode(markdownSource: string, fileDir: string) {
 
 		if (match && !isMuiYou) {
 			const demoOptions = JSON.parse(`{${content}}`) as { demo: string; iframe?: boolean };
-			const name = demoOptions.demo; // example: SimpleZoom.js
-			const nameWithoutExt = path.basename(name, path.extname(name)); // example: SimpleZoom
-			// const filePath = path.resolve(fileDir, name);
+			const name = demoOptions.demo;
+
+			// Check if the demo is in the excluded list
+			if (excludedDemos.includes(name)) {
+				return ''; // Skip rendering this demo
+			}
+
+			const nameWithoutExt = path.basename(name, path.extname(name));
 
 			const tsxFilePath = path.resolve(fileDir, `${nameWithoutExt}.tsx`);
 			const tsFilePath = path.resolve(fileDir, `${nameWithoutExt}.ts`);
@@ -225,7 +240,6 @@ function getHtmlCode(markdownSource: string, fileDir: string) {
 
 			let fileType = '';
 
-			// if has tsx file remove others if exists
 			if (fs.existsSync(tsxFilePath)) {
 				removeFile(tsFilePath);
 				removeFile(jsFilePath);
@@ -247,8 +261,6 @@ function getHtmlCode(markdownSource: string, fileDir: string) {
 			}
 
 			if (fileType !== '') {
-				// const selectedFileName = path.basename(filePath);
-				// const importPath = `../components/${folderName}/${selectedFileName}`;
 				const componentPath = `../../components/${folderName}/${nameWithoutExt}`;
 
 				const iframe = !!demoOptions.iframe;
@@ -285,14 +297,16 @@ function getHtmlCode(markdownSource: string, fileDir: string) {
 		.replace(/}"/g, '}')
 		.replace(/(<\s*\/?\s*)p(\s*([^>]*)?\s*>)/g, '$1Typography$2')
 		.replace(/class=/g, 'className=')
-		// .replace(/<img([^>]+)(\s*[^/])>/gm, '$1/>')
 		.replace(/<img([^>]+)>/gi, '<img$1/>')
 		.replace(/<br>/g, '<br/>')
 		.replace(/\/static\//g, '/material-ui-static/')
 		.replace(/<!-- #default-branch-switch -->/g, '')
 		.replace(/<ul>/g, '<ul className="space-y-16">')
 		.replace(/<ul start="(\d+)">/g, '<ul className="space-y-16" start={$1}>')
-		.replace(/<ol start="(\d+)">/g, '<ol start={$1}>');
+		.replace(/<ol start="(\d+)">/g, '<ol start={$1}>')
+		.replace(/<codeblock[\s\S]*?>/g, '<div className="space-y-12">')
+		.replace(/<\/codeblock>/g, '</div>')
+		.replace(/<!--[\s\S]*?-->/g, '');
 
 	return { htmlCode, importPaths: importPathList.join('\n') };
 }
@@ -401,47 +415,6 @@ export default ${fileName}Doc;
 	fs.writeFileSync(path.resolve(targetDir, 'page.tsx'), pageContent);
 }
 
-function writeRouteFile(pages: string[]) {
-	const imports = pages.map((page) => {
-		const componentName = _.upperFirst(_.camelCase(page));
-		return `import ${componentName} from './doc/${page}';`;
-	});
-
-	const routes = pages.map((page) => {
-		const componentName = _.upperFirst(_.camelCase(page));
-		return `
-			{
-				path: '/documentation/material-ui-components/${page}',
-				component: ${componentName}
-			}`;
-	});
-
-	const content = `
-		import { lazy } from 'react';
-		import { Navigate } from 'react-router-dom';
-		import DocumentationPageLayout from '../DocumentationPageLayout';
-        
-        ${imports.join('')}
-        
-        const routes = [
-			{
-				path: '/documentation/material-ui-components',
-				component: DocumentationPageLayout,
-				children: [
-					{
-						path: '',
-						component: () => <Navigate to="/documentation/material-ui-components/accordion" />
-					},
-					${routes.join(',')}
-				]
-			}
-		];
-        
-        export default routes;
-        `;
-	fs.writeFileSync(path.resolve(routesFilePath), content);
-}
-
 function writeNavigationFile(pages: string[]) {
 	const navigation = pages.map((page) => {
 		const componentName = _.startCase(page);
@@ -460,7 +433,7 @@ function writeNavigationFile(pages: string[]) {
 			title: 'Material UI Components',
 			type: 'collapse',
 			icon: 'layers',
-			children: [${navigation.join(',')}]
+			children: [${navigation.join()}]
 		};
 												
         export default MaterialUIComponentsNavigation;
@@ -553,8 +526,8 @@ async function replaceInExamples() {
 
 			try {
 				fsp.writeFile(file, result, 'utf8');
-			} catch (writeErr) {
-				// console.error(writeErr);
+			} catch (error) {
+				log(error);
 			}
 		});
 	});
@@ -569,7 +542,8 @@ async function removeExcludedComponents() {
 		path.resolve(examplesDirectory, './icons'),
 		path.resolve(examplesDirectory, './portal'),
 		path.resolve(examplesDirectory, './textarea-autosize'),
-		path.resolve(examplesDirectory, './no-ssr')
+		path.resolve(examplesDirectory, './no-ssr'),
+		path.resolve(examplesDirectory, './click-away-listener')
 	];
 
 	try {
@@ -676,7 +650,66 @@ async function build() {
 
 			log('Navigation file created.');
 
-			log('Done');
+			const eslintPath = path.resolve(projectDir, './node_modules/.bin/eslint');
+			const eslintConfigPath = path.resolve(projectDir, './eslint.config.mjs');
+
+			const tempConfigPath = path.join(nodeModulesDir, '.temp-eslint.mjs');
+
+			async function createEslintConfig() {
+				const configContent = `
+					import baseConfig from '${eslintConfigPath}';
+					
+					export default baseConfig.map(config => {
+						return {
+							...config,
+							ignores: [],
+							languageOptions: {
+								...config.languageOptions,
+								parserOptions: {
+									...config.languageOptions?.parserOptions,
+									project: null,
+									tsconfigRootDir: null
+								}
+							},
+							rules: {
+								...config.rules,
+								'@typescript-eslint/no-unused-vars': 'off',
+								'no-irregular-whitespace': 'off',
+								'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
+								'react/jsx-boolean-value': ['error', 'never'],
+								'@next/next/no-img-element': 'off'
+							}
+						};
+					});
+				`;
+
+				await fsp.writeFile(tempConfigPath, configContent);
+			}
+
+			createEslintConfig();
+
+			process.chdir(projectDir);
+
+			async function runEslintCommand(filesDir: string) {
+				return runCommand(eslintPath, [`${filesDir}`, '--fix', '--config', tempConfigPath]);
+			}
+
+			const promises = [runEslintCommand(pagesDirectory), runEslintCommand(navigationFilePath)];
+
+			Promise.all(promises)
+				.then(() => {
+					log('Linting done.');
+					log(`Done`);
+				})
+				.catch((err) => {
+					if (err) {
+						log(err);
+					}
+				})
+				.finally(async () => {
+					log('Eslint format completed.');
+					await removeFile(tempConfigPath);
+				});
 		});
 	});
 }
@@ -684,6 +717,15 @@ async function build() {
 function runCommand(command: string, args: string[]) {
 	return new Promise((resolve, reject) => {
 		const process = spawn(command, args);
+
+		process.stdout.on('data', (data) => {
+			log(`stdout: ${data}`);
+		});
+
+		process.stderr.on('data', (data) => {
+			log(`stderr: ${data}`);
+		});
+
 		process.on('close', (code) => {
 			if (code !== 0) {
 				reject(new Error(`Command "${command}" exited with code ${code}`));

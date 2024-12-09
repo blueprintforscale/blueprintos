@@ -9,7 +9,7 @@ import { useAppSelector } from 'src/store/hooks';
 import themeOptions from 'src/configs/themeOptions';
 import _ from 'lodash';
 import LightDarkModeToggle from 'src/components/LightDarkModeToggle';
-import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import { useToolbarTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 import NotificationPanelToggleButton from '@/app/(control-panel)/apps/notifications/NotificationPanelToggleButton';
 import AdjustFontSize from '../../components/AdjustFontSize';

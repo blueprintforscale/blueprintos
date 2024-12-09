@@ -9,14 +9,14 @@ const isUrlInChildren = (parent: FuseNavItemType, url: Pathname) => {
 		return false;
 	}
 
-	for (let i = 0; i < parent.children.length; i += 1) {
-		if (parent.children[i].children) {
-			if (isUrlInChildren(parent.children[i], url)) {
+	for (const navItem of parent.children) {
+		if (navItem.children) {
+			if (isUrlInChildren(navItem, url)) {
 				return true;
 			}
 		}
 
-		if (parent.children[i].url === url || url.includes(parent.children[i].url)) {
+		if (navItem.url === url || url.includes(navItem.url)) {
 			return true;
 		}
 	}

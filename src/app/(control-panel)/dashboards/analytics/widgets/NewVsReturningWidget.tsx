@@ -1,7 +1,6 @@
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { memo, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
@@ -9,7 +8,7 @@ import { ApexOptions } from 'apexcharts';
 import { useAppSelector } from 'src/store/hooks';
 import NewVsReturningWidgetType from './types/NewVsReturningWidgetType';
 import { selectWidget } from '../AnalyticsDashboardApi';
-
+import dynamic from 'next/dynamic';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
@@ -17,13 +16,7 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  */
 function NewVsReturningWidget() {
 	const widget = useAppSelector(selectWidget<NewVsReturningWidgetType>('newVsReturning'));
-
-	if (!widget) {
-		return null;
-	}
-
 	const { series, labels, uniqueVisitors } = widget;
-
 	const [awaitRender, setAwaitRender] = useState(true);
 	const theme = useTheme();
 
@@ -94,6 +87,10 @@ function NewVsReturningWidget() {
 	}, []);
 
 	if (awaitRender) {
+		return null;
+	}
+
+	if (!widget) {
 		return null;
 	}
 

@@ -110,6 +110,7 @@ function ContactForm(props: ContactFormProps) {
 		} else {
 			reset({ ...contact });
 		}
+		// eslint-disable-next-line
 	}, [contact, reset, routeParams]);
 
 	/**
@@ -125,6 +126,7 @@ function ContactForm(props: ContactFormProps) {
 		} else {
 			updateContact({ id: contact.id, ...form });
 		}
+		// eslint-disable-next-line
 	}, [form]);
 
 	function handleRemoveContact() {

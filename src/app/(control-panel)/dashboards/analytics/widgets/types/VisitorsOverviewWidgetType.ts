@@ -10,13 +10,9 @@ type SeriesData = {
 	data: DataPoint[];
 };
 
-type Series = {
-	[key: string]: SeriesData[];
-};
+type Series = Record<string, SeriesData[]>;
 
-type Ranges = {
-	[key: string]: string;
-};
+type Ranges = Record<string, string>;
 
 /**
  * Visitors Overview Widget Type

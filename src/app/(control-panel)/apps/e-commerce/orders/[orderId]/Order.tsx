@@ -3,19 +3,18 @@
 import FusePageCarded from '@fuse/core/FusePageCarded';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { SyntheticEvent, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from '@fuse/core/Link';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
-import * as React from 'react';
 import FuseLoading from '@fuse/core/FuseLoading';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import FuseTabs from 'src/components/tabs/FuseTabs';
 import FuseTab from 'src/components/tabs/FuseTab';
-import InvoiceTab from './tabs/InvoiceTab';
-import OrderDetailsTab from './tabs/OrderDetailsTab';
-import ProductsTab from './tabs/ProductsTab';
+import InvoiceTab from './tabs/invoice/InvoiceTab';
+import DetailsTab from './tabs/details/DetailsTab';
+import ProductsTab from './tabs/products/ProductsTab';
 import { useGetECommerceOrderQuery } from '../../ECommerceApi';
 
 /**
@@ -126,7 +125,7 @@ function Order() {
 					</FuseTabs>
 					{order && (
 						<>
-							{tabValue === 'details' && <OrderDetailsTab />}
+							{tabValue === 'details' && <DetailsTab />}
 							{tabValue === 'products' && <ProductsTab />}
 							{tabValue === 'invoice' && <InvoiceTab order={order} />}
 						</>

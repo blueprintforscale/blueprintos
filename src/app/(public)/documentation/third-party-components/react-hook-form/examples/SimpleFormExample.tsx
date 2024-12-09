@@ -19,6 +19,7 @@ import { DateTimePicker } from '@mui/x-date-pickers';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { DevTool } from '@hookform/devtools';
 
 let renderCount = 0;
 
@@ -375,6 +376,10 @@ function SimpleFormExample() {
 					</Typography>
 				</div>
 			</div>
+			<DevTool
+				control={control}
+				styles={{ button: { position: 'relative' } }}
+			/>
 		</div>
 	);
 }

@@ -15,6 +15,7 @@ function useDebounce<T extends (...args: never[]) => void>(callback: T, delay: n
 		callbackRef.current = callback;
 	}, [callback]);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const debouncedFn = useCallback(
 		_.debounce((...args: never[]) => {
 			callbackRef.current(...args);

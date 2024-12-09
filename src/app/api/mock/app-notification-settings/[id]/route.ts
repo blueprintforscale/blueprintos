@@ -4,8 +4,8 @@ import { SettingsNotifications } from '@/app/(control-panel)/apps/settings/Setti
 /**
  * GET api/mock/app-notification-settings/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('app_notification_settings');
 	const item = await api.find<SettingsNotifications>(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * PUT api/mock/app-notification-settings/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('app_notification_settings');
 	const data = (await req.json()) as SettingsNotifications;
 	const updatedItem = await api.update<SettingsNotifications>(id, data);

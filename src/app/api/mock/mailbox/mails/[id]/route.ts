@@ -4,8 +4,8 @@ import { MailboxMail } from '@/app/(control-panel)/apps/mailbox/MailboxApi';
 /**
  * GET api/mock/mailbox/mails/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('mailbox_mails');
 	const item = await api.find<MailboxMail>(id);
 

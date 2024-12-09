@@ -4,7 +4,6 @@ import AvatarGroup from '@mui/material/AvatarGroup';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import * as React from 'react';
 import AuthJsForm from '@auth/forms/AuthJsForm';
 
 /**

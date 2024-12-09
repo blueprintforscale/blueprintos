@@ -1,6 +1,5 @@
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
-import { ForwardedRef, forwardRef } from 'react';
 import clsx from 'clsx';
 import EmailInput from './EmailInput';
 import { ContactEmailModel } from '../../models/ContactModel';
@@ -10,13 +9,14 @@ type ContactEmailSelectorProps = {
 	value: ContactEmail[] | undefined;
 	onChange: (T: ContactEmail[]) => void;
 	className?: string;
+	ref?: React.Ref<HTMLDivElement>;
 };
 
 /**
  * The contact email selector.
  */
-const ContactEmailSelector = forwardRef((props: ContactEmailSelectorProps, ref: ForwardedRef<HTMLDivElement>) => {
-	const { value, onChange, className } = props;
+function ContactEmailSelector(props: ContactEmailSelectorProps) {
+	const { value, onChange, className, ref } = props;
 
 	return (
 		<div
@@ -46,6 +46,6 @@ const ContactEmailSelector = forwardRef((props: ContactEmailSelectorProps, ref: 
 			</Button>
 		</div>
 	);
-});
+}
 
 export default ContactEmailSelector;

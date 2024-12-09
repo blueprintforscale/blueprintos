@@ -26,7 +26,7 @@ export default CryptoDashboardApi;
 
 export type CryptoDashboardWidgetType = BTCWidgetType | WalletsType | WatchlistType;
 
-export type GetCryptoDashboardWidgetsApiResponse = { [key: string]: CryptoDashboardWidgetType };
+export type GetCryptoDashboardWidgetsApiResponse = Record<string, CryptoDashboardWidgetType>;
 
 export type GetCryptoDashboardWidgetsApiArg = void;
 

@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import IconButton from '@mui/material/IconButton';

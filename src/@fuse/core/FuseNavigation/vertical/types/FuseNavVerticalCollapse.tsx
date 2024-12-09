@@ -1,12 +1,11 @@
 'use client';
-
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { alpha, styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 import clsx from 'clsx';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import List, { ListProps } from '@mui/material/List';
 import isUrlInChildren from '@fuse/core/FuseNavigation/isUrlInChildren';
 import { ListItemButton } from '@mui/material';
@@ -52,40 +51,25 @@ function needsToBeOpened(pathname: string, item: FuseNavItemType) {
  */
 function FuseNavVerticalCollapse(props: FuseNavItemComponentProps) {
 	const pathname = usePathname();
-
 	const { item, nestedLevel = 0, onItemClick, checkPermission } = props;
-
 	const [open, setOpen] = useState(() => needsToBeOpened(pathname, item));
-
 	const itempadding = nestedLevel > 0 ? 38 + nestedLevel * 16 : 16;
-
-	useEffect(() => {
-		if (needsToBeOpened(pathname, item)) {
-			if (!open) {
-				setOpen(true);
-			}
-		}
-	}, [pathname, item]);
-
 	const component = item.url ? NavLinkAdapter : 'li';
 
-	let itemProps = {};
+	const itemProps = useMemo(
+		() => ({
+			...(component !== 'li' && {
+				disabled: item.disabled,
+				to: item.url,
+				end: item.end,
+				role: 'button',
+				exact: item?.exact
+			})
+		}),
+		[item, component]
+	);
 
-	if (typeof component !== 'string') {
-		itemProps = {
-			disabled: item.disabled,
-			to: item.url,
-			end: item.end,
-			role: 'button',
-			exact: item?.exact
-		};
-	}
-
-	if (checkPermission && !item?.hasPermission) {
-		return null;
-	}
-
-	return useMemo(
+	const memoizedContent = useMemo(
 		() => (
 			<Root
 				className={clsx(open && 'open')}
@@ -165,18 +149,28 @@ function FuseNavVerticalCollapse(props: FuseNavItemComponentProps) {
 			</Root>
 		),
 		[
+			checkPermission,
+			component,
 			item.badge,
 			item.children,
 			item.icon,
 			item.iconClass,
+			item.subtitle,
+			item.sx,
 			item.title,
-			item.url,
+			itemProps,
 			itempadding,
 			nestedLevel,
 			onItemClick,
 			open
 		]
 	);
+
+	if (checkPermission && !item?.hasPermission) {
+		return null;
+	}
+
+	return memoizedContent;
 }
 
 const NavVerticalCollapse = FuseNavVerticalCollapse;

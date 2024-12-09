@@ -6,7 +6,6 @@ import FuseSettings, { FuseSettingsConfigType } from '@fuse/core/FuseSettings/Fu
 import FuseSettingsViewerDialog from 'src/components/theme-layouts/components/FuseSettingsViewerDialog';
 import { styled, useTheme } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import { forwardRef } from 'react';
 import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
 import useUser from '@auth/useUser';
@@ -33,10 +32,11 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
 
 type TransitionProps = {
 	children?: React.ReactElement;
+	ref?: React.RefObject<HTMLDivElement>;
 };
 
-const Transition = forwardRef((props: TransitionProps, ref) => {
-	const { children, ...other } = props;
+function Transition(props: TransitionProps) {
+	const { children, ref, ...other } = props;
 
 	const theme = useTheme();
 
@@ -53,7 +53,7 @@ const Transition = forwardRef((props: TransitionProps, ref) => {
 			{children}
 		</Slide>
 	);
-});
+}
 
 type SettingsPanelProps = {
 	settingsHandlers: SwipeableHandlers;

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { FuseSettingsContext, FuseSettingsContextType } from '../FuseSettingsProvider';
+import FuseSettingsContext, { FuseSettingsContextType } from '../FuseSettingsContext';
 
 const useFuseSettings = (): FuseSettingsContextType => {
 	const context = useContext(FuseSettingsContext);

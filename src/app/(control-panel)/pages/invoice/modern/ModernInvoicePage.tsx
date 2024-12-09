@@ -2,7 +2,7 @@
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Typography from '@mui/material/Typography';
 
 /**

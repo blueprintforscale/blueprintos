@@ -1,8 +1,7 @@
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { lighten } from '@mui/material/styles';
-import { motion } from 'framer-motion';
-import * as React from 'react';
+import { motion } from 'motion/react';
 import FuseLoading from '@fuse/core/FuseLoading';
 import FolderItem from './FolderItem';
 import FileItem from './FileItem';

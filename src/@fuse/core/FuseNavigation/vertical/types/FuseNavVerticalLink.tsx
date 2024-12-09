@@ -1,5 +1,4 @@
 'use client';
-
 import { styled } from '@mui/material/styles';
 import ListItemText from '@mui/material/ListItemText';
 import clsx from 'clsx';
@@ -47,28 +46,23 @@ const Root = styled(ListItemButton)<ListItemButtonStyleProps>(({ theme, ...props
  */
 function FuseNavVerticalLink(props: FuseNavItemComponentProps) {
 	const { item, nestedLevel = 0, onItemClick, checkPermission } = props;
-
 	const itempadding = nestedLevel > 0 ? 38 + nestedLevel * 16 : 16;
-
-	let itemProps = {};
-
 	const component = item.url ? Link : 'li';
 
-	if (typeof component !== 'string') {
-		itemProps = {
-			disabled: item.disabled,
-			to: item.url,
-			role: 'button',
-			target: item.target ? item.target : '_blank',
-			exact: item?.exact
-		};
-	}
+	const itemProps = useMemo(
+		() => ({
+			...(component !== 'li' && {
+				disabled: item.disabled,
+				to: item.url,
+				role: 'button',
+				target: item.target ? item.target : '_blank',
+				exact: item?.exact
+			})
+		}),
+		[item, component]
+	);
 
-	if (checkPermission && !item?.hasPermission) {
-		return null;
-	}
-
-	return useMemo(
+	const memoizedContent = useMemo(
 		() => (
 			<Root
 				component={component}
@@ -100,8 +94,14 @@ function FuseNavVerticalLink(props: FuseNavItemComponentProps) {
 				{item.badge && <FuseNavBadge badge={item.badge} />}
 			</Root>
 		),
-		[item, itempadding, onItemClick, checkPermission]
+		[component, itempadding, item, itemProps, onItemClick]
 	);
+
+	if (checkPermission && !item?.hasPermission) {
+		return null;
+	}
+
+	return memoizedContent;
 }
 
 const NavVerticalLink = FuseNavVerticalLink;

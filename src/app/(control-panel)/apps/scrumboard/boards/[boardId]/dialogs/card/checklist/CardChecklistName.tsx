@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useImperativeHandle, useState, MouseEvent } from 'react';
+import { useEffect, useImperativeHandle, useState, MouseEvent } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import IconButton from '@mui/material/IconButton';
@@ -29,13 +29,14 @@ export type CardChecklistHandle = {
 type CardChecklistNameProps = {
 	name: string;
 	onNameChange: (name: string) => void;
+	ref?: React.RefObject<CardChecklistHandle>;
 };
 
 /**
  * The card checklist name component.
  */
-const CardChecklistName = forwardRef<CardChecklistHandle, CardChecklistNameProps>((props, ref) => {
-	const { name, onNameChange } = props;
+function CardChecklistName(props: CardChecklistNameProps) {
+	const { name, onNameChange, ref } = props;
 
 	const [formOpen, setFormOpen] = useState(false);
 	const { control, formState, handleSubmit, reset } = useForm<FormType>({
@@ -114,6 +115,6 @@ const CardChecklistName = forwardRef<CardChecklistHandle, CardChecklistNameProps
 			{name}
 		</Typography>
 	);
-});
+}
 
 export default CardChecklistName;

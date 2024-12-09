@@ -6,7 +6,7 @@ function useEventListener<T extends Event>(
 	element: HTMLElement | Window = window
 ) {
 	// Create a mutable ref object to store the handler
-	const savedHandler = useRef<(event: T) => void>();
+	const savedHandler = useRef<(event: T) => void>(undefined);
 
 	// Update ref.current value if handler changes
 	useEffect(() => {

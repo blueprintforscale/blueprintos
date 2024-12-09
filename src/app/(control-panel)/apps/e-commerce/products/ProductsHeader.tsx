@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';

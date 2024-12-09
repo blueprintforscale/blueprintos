@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { forwardRef, MouseEvent, useState } from 'react';
+import { ForwardedRef, MouseEvent, useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -48,13 +47,14 @@ type TaskPrioritySelectorProps = {
 	value: number;
 	onChange: (val: number) => void;
 	className?: string;
+	ref: ForwardedRef<HTMLButtonElement>;
 };
 
 /**
  * The task priority selector.
  */
-const TaskPrioritySelector = forwardRef<HTMLButtonElement, TaskPrioritySelectorProps>((props, ref) => {
-	const { value = 0, onChange, className } = props;
+function TaskPrioritySelector(props: TaskPrioritySelectorProps) {
+	const { value = 0, onChange, className, ref } = props;
 
 	const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 	const open = Boolean(anchorEl);
@@ -120,6 +120,6 @@ const TaskPrioritySelector = forwardRef<HTMLButtonElement, TaskPrioritySelectorP
 			</Menu>
 		</>
 	);
-});
+}
 
 export default TaskPrioritySelector;

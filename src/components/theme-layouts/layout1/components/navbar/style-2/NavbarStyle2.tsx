@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 
 import { Theme } from '@mui/system/createTheme';
 import { useEffect } from 'react';
-import { useFuseLayoutSettings } from '@fuse/core/FuseLayout/FuseLayout';
+import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import NavbarStyle2Content from './NavbarStyle2Content';
 import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';

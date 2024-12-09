@@ -4,7 +4,7 @@ import FusePageSimple from '@fuse/core/FusePageSimple';
 import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { SyntheticEvent, useState } from 'react';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import FuseTabs from 'src/components/tabs/FuseTabs';

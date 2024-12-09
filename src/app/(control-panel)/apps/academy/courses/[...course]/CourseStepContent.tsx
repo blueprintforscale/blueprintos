@@ -37,7 +37,6 @@ function CourseStepContent(props: CourseStepContentProps) {
 
 			<div
 				className="prose prose-sm dark:prose-invert w-full max-w-full"
-				// eslint-disable-next-line react/no-danger
 				dangerouslySetInnerHTML={{ __html: stepContent?.html || '' }}
 				dir={theme.direction}
 			/>

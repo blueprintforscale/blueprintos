@@ -1,3 +1,3 @@
-import HelpCenterApp from './HelpCenterApp';
+import HelpCenterHome from './home/HelpCenterHome';
 
-export default HelpCenterApp;
+export default HelpCenterHome;

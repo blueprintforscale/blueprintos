@@ -1,5 +1,4 @@
 'use client';
-
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { alpha, styled } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
@@ -71,25 +70,21 @@ export type FuseNavVerticalTabProps = Omit<FuseNavigationProps, 'navigation'> & 
  * */
 function FuseNavVerticalTab(props: FuseNavVerticalTabProps) {
 	const { item, onItemClick, firstLevel, dense, selectedId, checkPermission } = props;
-
 	const component = item.url ? NavLinkAdapter : 'li';
 
-	let itemProps = {};
+	const itemProps = useMemo(
+		() => ({
+			...(component !== 'li' && {
+				disabled: item.disabled,
+				to: item.url,
+				end: item.end,
+				role: 'button'
+			})
+		}),
+		[item, component]
+	);
 
-	if (typeof component !== 'string') {
-		itemProps = {
-			disabled: item.disabled,
-			to: item.url,
-			end: item.end,
-			role: 'button'
-		};
-	}
-
-	if (checkPermission && !item?.hasPermission) {
-		return null;
-	}
-
-	return useMemo(
+	const memoizedContent = useMemo(
 		() => (
 			<Root sx={item.sx}>
 				<ListItemButton
@@ -178,8 +173,14 @@ function FuseNavVerticalTab(props: FuseNavVerticalTabProps) {
 					))}
 			</Root>
 		),
-		[firstLevel, item, onItemClick, dense, selectedId]
+		[item, component, dense, selectedId, itemProps, firstLevel, onItemClick, checkPermission]
 	);
+
+	if (checkPermission && !item?.hasPermission) {
+		return null;
+	}
+
+	return memoizedContent;
 }
 
 const NavVerticalTab = FuseNavVerticalTab;

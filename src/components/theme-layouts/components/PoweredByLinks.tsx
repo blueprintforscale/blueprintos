@@ -1,6 +1,6 @@
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Box from '@mui/material/Box';
 
 /**
@@ -105,7 +105,6 @@ function PoweredByLinks() {
 					role="button"
 				>
 					<span
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{
 							__html: `
                                     <svg style='height: 0; width: 0; position: absolute; visibility: hidden;'>

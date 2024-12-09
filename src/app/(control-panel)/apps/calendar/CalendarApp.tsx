@@ -200,7 +200,6 @@ function CalendarApp() {
 						datesSet={handleDates}
 						select={handleDateSelect}
 						events={events}
-						// eslint-disable-next-line react/no-unstable-nested-components
 						eventContent={(eventInfo: EventContentArg & { event: Event }) => (
 							<CalendarAppEventContent eventInfo={eventInfo} />
 						)}

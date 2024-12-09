@@ -18,7 +18,5 @@ export type LayoutOptionType = {
 	description: string;
 	availableOptions: AvailableOption[];
 	selectedOption: string;
-	options: {
-		[key: string]: Option;
-	};
+	options: Record<string, Option>;
 };

@@ -46,6 +46,7 @@ const CalendarApi = api
 						const { data: labels } = await queryFulfilled;
 						dispatch(setSelectedLabels(labels.map((item) => item.id)));
 					} catch (err) {
+						console.error(err);
 						dispatch(showMessage({ message: 'Error loading Labels!' }));
 					}
 				}

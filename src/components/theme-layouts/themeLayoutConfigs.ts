@@ -23,9 +23,7 @@ export type themeLayoutProps = {
 /**
  * The type definition for the theme layout configs.
  */
-export type themeLayoutConfigsProps = {
-	[key: string]: themeLayoutProps;
-};
+export type themeLayoutConfigsProps = Record<string, themeLayoutProps>;
 
 /**
  * The theme layout configs.

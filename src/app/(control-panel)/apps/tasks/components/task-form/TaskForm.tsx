@@ -108,6 +108,7 @@ function TaskForm() {
 		} else {
 			reset({ ...task });
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [task, reset, taskId, newTaskType]);
 
 	/**

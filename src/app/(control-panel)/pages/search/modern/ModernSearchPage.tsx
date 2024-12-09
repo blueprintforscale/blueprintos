@@ -4,7 +4,7 @@ import FusePageSimple from '@fuse/core/FusePageSimple';
 import Input from '@mui/material/Input';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { blue, green } from '@mui/material/colors';
 import { Pagination } from '@mui/material';

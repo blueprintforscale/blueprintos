@@ -3,7 +3,7 @@ import Input from '@mui/material/Input';
 import List from '@mui/material/List';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useContext, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
