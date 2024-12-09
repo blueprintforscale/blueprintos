@@ -60,9 +60,7 @@ function NavLinkAdapter(props: NavLinkAdapterPropsType) {
 			passHref
 			legacyBehavior
 		>
-			{}
 			<a
-				ref={ref}
 				role={role}
 				onClick={handleClick}
 				onKeyDown={handleKeyDown}

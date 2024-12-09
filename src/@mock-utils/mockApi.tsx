@@ -30,8 +30,8 @@ const mockApi = (tableName: string) => ({
 		return { success: true };
 	},
 
-	async update(id: string, updatedData: Record<string, unknown>) {
-		const table = getTable<unknown[]>(tableName);
+	async update<T>(id: string, updatedData: Record<string, unknown>) {
+		const table = getTable<unknown[]>(tableName) as T[];
 
 		let newItem: unknown;
 
@@ -68,7 +68,7 @@ const mockApi = (tableName: string) => ({
 		return newTable;
 	},
 
-	async find<T extends { id: string }>(param: string | Record<string, unknown>) {
+	async find<T extends { id?: string }>(param: string | Record<string, unknown>) {
 		const table = getTable<T>(tableName);
 
 		if (typeof param === 'string') {

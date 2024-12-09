@@ -4,8 +4,8 @@ import { SettingsPlanBilling } from '@/app/(control-panel)/apps/settings/Setting
 /**
  * GET api/mock/app-plan-billing-settings/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('app_plan_billing_settings');
 	const item = await api.find<SettingsPlanBilling>(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * PUT api/mock/app-plan-billing-settings/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('app_plan_billing_settings');
 	const data = (await req.json()) as SettingsPlanBilling;
 	const updatedItem = await api.update<SettingsPlanBilling>(id, data);

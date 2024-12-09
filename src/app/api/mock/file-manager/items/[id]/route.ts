@@ -4,8 +4,8 @@ import { FileManagerItem } from '@/app/(control-panel)/apps/file-manager/FileMan
 /**
  * GET api/mock/file-manager/items/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('file_manager_items');
 	const item = await api.find<FileManagerItem>(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * PUT api/mock/file-manager/items/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('file_manager_items');
 	const data = (await req.json()) as FileManagerItem;
 	const updatedItem = await api.update(id, data);
@@ -35,8 +35,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 /**
  * DELETE api/mock/file-manager/items/{id}
  */
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('file_manager_items');
 
 	const result = await api.delete([id]);

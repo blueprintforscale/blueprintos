@@ -4,8 +4,8 @@ import { Tag } from '@/app/(control-panel)/apps/contacts/ContactsApi';
 /**
  * GET api/mock/contacts/tags/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('contacts_tags');
 	const item = await api.find<Tag>(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * PUT api/mock/contacts/tags/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('contacts_tags');
 	const data = (await req.json()) as Tag;
 	const updatedItem = await api.update<Tag>(id, data);
@@ -35,8 +35,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 /**
  * DELETE api/mock/contacts/tags/{id}
  */
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('contacts_tags');
 
 	const result = await api.delete([id]);

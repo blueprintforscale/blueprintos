@@ -4,8 +4,8 @@ import { Notification } from '@/app/(control-panel)/apps/notifications/Notificat
 /**
  * GET api/mock/notifications/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('notifications');
 	const item = await api.find<Notification>(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * DELETE api/mock/notifications/{id}
  */
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('notifications');
 
 	const result = await api.delete([id]);

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ForwardedRef, forwardRef, MouseEvent, useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import Button from '@mui/material/Button';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Box from '@mui/system/Box';
@@ -12,13 +12,14 @@ type CountryCodeSelectorProps = {
 	value: string;
 	onChange: (T: string) => void;
 	className?: string;
+	ref?: React.Ref<HTMLDivElement>;
 };
 
 /**
  * The country code selector.
  */
-const CountryCodeSelector = forwardRef((props: CountryCodeSelectorProps, ref: ForwardedRef<HTMLDivElement>) => {
-	const { value, onChange, className } = props;
+function CountryCodeSelector(props: CountryCodeSelectorProps) {
+	const { value, onChange, className, ref } = props;
 	const { data: countries } = useGetContactsCountriesQuery();
 	const country = _.find(countries, { iso: value });
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -89,6 +90,6 @@ const CountryCodeSelector = forwardRef((props: CountryCodeSelectorProps, ref: Fo
 			</Menu>
 		</div>
 	);
-});
+}
 
 export default CountryCodeSelector;

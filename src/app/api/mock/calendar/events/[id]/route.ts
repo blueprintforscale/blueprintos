@@ -4,8 +4,8 @@ import { Event } from '@/app/(control-panel)/apps/calendar/CalendarApi';
 /**
  * PUT api/mock/calendar/events/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('calendar_events');
 	const data = (await req.json()) as Event;
 	const updatedItem = await api.update<Event>(id, data);
@@ -20,8 +20,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 /**
  * DELETE api/mock/calendar/events/{id}
  */
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('calendar_events');
 
 	const result = await api.delete([id]);

@@ -4,8 +4,8 @@ import { Guide } from '@/app/(control-panel)/apps/help-center/HelpCenterApi';
 /**
  * GET api/mock/help-center/guides/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('help_center_guides');
 	const item = await api.find<Guide>(id);
 

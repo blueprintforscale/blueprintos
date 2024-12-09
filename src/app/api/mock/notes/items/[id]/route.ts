@@ -4,8 +4,8 @@ import { NotesNote } from '@/app/(control-panel)/apps/notes/NotesApi';
 /**
  * GET api/mock/notes/items/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('notes_items');
 	const item = await api.find<NotesNote>(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * PUT api/mock/notes/items/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('notes_items');
 	const data = (await req.json()) as NotesNote;
 	const updatedItem = await api.update<NotesNote>(id, data);
@@ -35,8 +35,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 /**
  * DELETE api/mock/notes/items/{id}
  */
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('notes_items');
 
 	const result = await api.delete([id]);

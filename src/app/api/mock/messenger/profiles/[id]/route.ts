@@ -4,8 +4,8 @@ import { Profile } from '@/app/(control-panel)/apps/messenger/MessengerApi';
 /**
  * GET api/mock/messenger/profiles/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('messenger_profiles');
 	const item = await api.find<Profile>(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * PUT api/mock/messenger/profiles/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('messenger_profiles');
 	const data = (await req.json()) as Profile;
 	const updatedItem = await api.update<Profile>(id, data);

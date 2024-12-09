@@ -4,8 +4,8 @@ import { ScrumboardLabel } from '@/app/(control-panel)/apps/scrumboard/Scrumboar
 /**
  * GET api/mock/scrumboard/labels/{id}
  */
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('scrumboard_labels');
 	const item = await api.find<ScrumboardLabel>(id);
 
@@ -19,8 +19,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 /**
  * PUT api/mock/scrumboard/labels/{id}
  */
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('scrumboard_labels');
 	const data = (await req.json()) as ScrumboardLabel;
 	const updatedItem = await api.update<ScrumboardLabel>(id, data);
@@ -35,8 +35,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 /**
  * DELETE api/mock/scrumboard/labels/{id}
  */
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
-	const { id } = params;
+export async function DELETE(req: Request, props: { params: Promise<{ id: string }> }) {
+	const { id } = await props.params;
 	const api = mockApi('scrumboard_labels');
 
 	const result = await api.delete([id]);
