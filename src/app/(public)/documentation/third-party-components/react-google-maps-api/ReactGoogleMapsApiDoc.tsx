@@ -9,19 +9,19 @@ import SimpleMapComponent from './examples/SimpleMap';
 import SimpleMapRaw from './examples/SimpleMap.tsx?raw';
 
 /**
- * GoogleMapReact Doc
- * This document provides information on how to use GoogleMapReact.
+ *  @react-google-maps/api Doc
+ * This document provides information on how to use  @react-google-maps/api
  */
-function GoogleMapReactDoc() {
+function ReactGoogleMapsApiDoc() {
 	return (
 		<>
 			<div className="flex w-full items-center justify-between mb-24">
-				<Typography variant="h4">GoogleMapReact</Typography>
+				<Typography variant="h4">@react-google-maps/api</Typography>
 				<Button
 					variant="contained"
 					color="secondary"
 					component="a"
-					href="https://github.com/google-map-react/google-map-react"
+					href="https://github.com/JustFly1984/react-google-maps-api"
 					target="_blank"
 					role="button"
 					startIcon={<FuseSvgIcon size={16}>heroicons-outline:arrow-top-right-on-square</FuseSvgIcon>}
@@ -34,7 +34,7 @@ function GoogleMapReactDoc() {
 				className="mb-16"
 				component="p"
 			>
-				<code>google-map-react</code> is a component written over a small set of the Google Maps API.
+				<code>react-google-maps-api</code> is a component written over a small set of the Google Maps API.
 			</Typography>
 
 			<hr />
@@ -67,4 +67,4 @@ function GoogleMapReactDoc() {
 	);
 }
 
-export default GoogleMapReactDoc;
+export default ReactGoogleMapsApiDoc;

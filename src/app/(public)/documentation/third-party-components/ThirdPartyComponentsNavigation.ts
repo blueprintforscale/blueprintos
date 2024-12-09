@@ -14,10 +14,10 @@ const ThirdPartyComponentsNavigation = {
 			url: '/documentation/third-party-components/react-hook-form'
 		},
 		{
-			id: 'google-map-react',
-			title: 'Google Map React',
+			id: 'react-google-maps-api',
+			title: 'React Google Maps Api',
 			type: 'item',
-			url: '/documentation/third-party-components/google-map-react'
+			url: '/documentation/third-party-components/react-google-maps-api'
 		},
 		{
 			id: 'react-apexcharts',
