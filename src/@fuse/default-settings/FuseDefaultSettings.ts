@@ -426,13 +426,12 @@ export const defaultThemeOptions = {
  */
 export const mustHaveThemeOptions = {
 	typography: {
-		htmlFontSize: 10,
 		fontSize: 13,
 		body1: {
-			fontSize: '1.3rem'
+			fontSize: '0.8125rem'
 		},
 		body2: {
-			fontSize: '1.3rem'
+			fontSize: '0.8125rem'
 		}
 	}
 };
