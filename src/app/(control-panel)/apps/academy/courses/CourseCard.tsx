@@ -31,13 +31,13 @@ function CourseCard(props: CourseCardProps) {
 	}
 
 	return (
-		<Card className="flex flex-col h-384 shadow">
-			<CardContent className="flex flex-col flex-auto p-16">
+		<Card className="flex flex-col h-96 shadow-sm">
+			<CardContent className="flex flex-col flex-auto p-4">
 				<CourseInfo course={course} />
 			</CardContent>
 			<CourseProgress course={course} />
 			<CardActions
-				className="items-center justify-end py-16 px-16"
+				className="items-center justify-end py-4 px-4"
 				sx={(theme) => ({
 					backgroundColor: lighten(theme.palette.background.default, 0.03),
 					...theme.applyStyles('light', {
@@ -48,7 +48,7 @@ function CourseCard(props: CourseCardProps) {
 				<Button
 					to={`/apps/academy/courses/${course.id}/${course.slug}`}
 					component={Link}
-					className="px-12"
+					className="px-3"
 					color="secondary"
 					variant="contained"
 					size="small"

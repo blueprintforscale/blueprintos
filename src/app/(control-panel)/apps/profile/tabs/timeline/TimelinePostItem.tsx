@@ -27,9 +27,9 @@ function TimelinePostItem(props: PostProps) {
 	const { item } = props;
 
 	return (
-		<Card className="mb-32">
+		<Card className="mb-8">
 			<CardHeader
-				className="px-32 pt-24"
+				className="px-8 pt-6"
 				avatar={
 					<Avatar
 						aria-label="Recipe"
@@ -45,7 +45,7 @@ function TimelinePostItem(props: PostProps) {
 					</IconButton>
 				}
 				title={
-					<span className="flex items-center space-x-8">
+					<span className="flex items-center space-x-2">
 						<Typography
 							className="font-normal"
 							color="secondary.main"
@@ -63,11 +63,11 @@ function TimelinePostItem(props: PostProps) {
 				}
 				subheader={item.time}
 			/>
-			<CardContent className="px-32">
+			<CardContent className="px-8">
 				{item.message && (
 					<Typography
 						component="p"
-						className="mb-16"
+						className="mb-4"
 					>
 						{item.message}
 					</Typography>
@@ -88,17 +88,17 @@ function TimelinePostItem(props: PostProps) {
 							src={item.article.media.preview}
 							alt="article"
 						/>
-						<div className="p-16">
+						<div className="p-4">
 							<Typography variant="subtitle1">{item.article.title}</Typography>
 							<Typography variant="caption">{item.article.subtitle}</Typography>
-							<Typography className="mt-16">{item.article.excerpt}</Typography>
+							<Typography className="mt-4">{item.article.excerpt}</Typography>
 						</div>
 					</div>
 				)}
 			</CardContent>
 			<CardActions
 				disableSpacing
-				className="px-32"
+				className="px-8"
 			>
 				<Button
 					size="small"
@@ -110,7 +110,7 @@ function TimelinePostItem(props: PostProps) {
 					>
 						heroicons-outline:heart
 					</FuseSvgIcon>
-					<Typography className="mx-4">Like</Typography>
+					<Typography className="mx-1">Like</Typography>
 					<Typography>({item.like})</Typography>
 				</Button>
 				<Button aria-label="Share">
@@ -120,12 +120,12 @@ function TimelinePostItem(props: PostProps) {
 					>
 						heroicons-outline:share
 					</FuseSvgIcon>
-					<Typography className="mx-4">Share</Typography>
+					<Typography className="mx-1">Share</Typography>
 					<Typography>({item.share})</Typography>
 				</Button>
 			</CardActions>
 			<Box
-				className="card-footer flex flex-col px-32 py-24 border-t-1"
+				className="card-footer flex flex-col px-8 py-6 border-t-1"
 				sx={(theme) => ({
 					backgroundColor: lighten(theme.palette.background.default, 0.02),
 					...theme.applyStyles('light', {
@@ -139,7 +139,7 @@ function TimelinePostItem(props: PostProps) {
 							<Typography>{item.comments.length} comments</Typography>
 							<FuseSvgIcon
 								size={16}
-								className="mx-4"
+								className="mx-1"
 								color="action"
 							>
 								heroicons-outline:chevron-down
@@ -148,16 +148,16 @@ function TimelinePostItem(props: PostProps) {
 						<List>
 							{item.comments.map((comment) => (
 								<div key={comment.id}>
-									<ListItem className="px-0 -mx-8">
+									<ListItem className="px-0 -mx-2">
 										<Avatar
 											alt={comment.user.name}
 											src={comment.user.avatar}
-											className="mx-8"
+											className="mx-2"
 										/>
 										<ListItemText
-											className="px-4"
+											className="px-1"
 											primary={
-												<div className="flex items-center space-x-8">
+												<div className="flex items-center space-x-2">
 													<Typography
 														className="font-normal"
 														color="secondary"
@@ -171,7 +171,7 @@ function TimelinePostItem(props: PostProps) {
 											secondary={comment.message}
 										/>
 									</ListItem>
-									<div className="flex items-center mx-52 mb-8">
+									<div className="flex items-center mx-13 mb-2">
 										<Button
 											endIcon={
 												<FuseSvgIcon size={14}>heroicons-outline:arrow-uturn-left</FuseSvgIcon>
@@ -186,15 +186,15 @@ function TimelinePostItem(props: PostProps) {
 					</div>
 				)}
 
-				<div className="flex flex-auto -mx-4">
+				<div className="flex flex-auto -mx-1">
 					<Avatar
-						className="mx-4"
+						className="mx-1"
 						src="/assets/images/avatars/profile.jpg"
 					/>
-					<div className="flex flex-col flex-1 mx-4 items-end">
-						<Paper className="w-full mb-16 shadow-0 border-1  overflow-hidden">
+					<div className="flex flex-col flex-1 mx-1 items-end">
+						<Paper className="w-full mb-4 shadow-0 border-1 overflow-hidden">
 							<Input
-								className="p-12 w-full"
+								className="p-3 w-full"
 								classes={{ root: 'text-md' }}
 								placeholder="Add a comment.."
 								multiline

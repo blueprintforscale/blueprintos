@@ -11,13 +11,13 @@ function SettingsDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Default Settings
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To set the default layout and theme settings for your app, navigate to the file:

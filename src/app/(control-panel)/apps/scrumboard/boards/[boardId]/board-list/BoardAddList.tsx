@@ -80,7 +80,7 @@ function BoardAddList() {
 	return (
 		<div>
 			<Card
-				className="w-320 mx-8 sm:mx-12 rounded-lg shadow-0"
+				className="w-80 mx-2 sm:mx-3 rounded-lg shadow-0"
 				square
 				sx={{
 					backgroundColor: (theme) =>
@@ -90,7 +90,7 @@ function BoardAddList() {
 				{formOpen ? (
 					<ClickAwayListener onClickAway={handleCloseForm}>
 						<form
-							className="p-12"
+							className="p-3"
 							onSubmit={handleSubmit(onSubmit)}
 						>
 							<Controller
@@ -99,7 +99,7 @@ function BoardAddList() {
 								render={({ field }) => (
 									<TextField
 										{...field}
-										className="mb-8"
+										className="mb-2"
 										required
 										fullWidth
 										variant="outlined"
@@ -138,7 +138,7 @@ function BoardAddList() {
 					<Button
 						onClick={handleOpenForm}
 						classes={{
-							root: 'font-medium w-full rounded-lg p-24 justify-start'
+							root: 'font-medium w-full rounded-lg p-6 justify-start'
 						}}
 						startIcon={<FuseSvgIcon>heroicons-outline:plus-circle</FuseSvgIcon>}
 						sx={{

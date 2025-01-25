@@ -37,11 +37,11 @@ function CardAttachment(props: CardAttachmentProps) {
 		case 'image': {
 			return (
 				<div
-					className="flex w-full sm:w-1/2 mb-16 px-16"
+					className="flex w-full sm:w-1/2 mb-4 px-4"
 					key={item.id}
 				>
-					<div className="flex items-center justify-center min-w-128 w-128 h-128">
-						<Paper className="overflow-hidden shadow">
+					<div className="flex items-center justify-center min-w-32 w-32 h-32">
+						<Paper className="overflow-hidden shadow-sm">
 							<img
 								className="block max-h-full"
 								src={item.src}
@@ -49,12 +49,12 @@ function CardAttachment(props: CardAttachmentProps) {
 							/>
 						</Paper>
 					</div>
-					<div className="flex flex-auto flex-col justify-center items-start min-w-0 px-16">
+					<div className="flex flex-auto flex-col justify-center items-start min-w-0 px-4">
 						<div className="flex items-center w-full">
-							<Typography className="text-15 font-semibold truncate shrink">{item.name}</Typography>
+							<Typography className="text-lg font-semibold truncate shrink">{item.name}</Typography>
 							{card.attachmentCoverId === item.id && (
 								<FuseSvgIcon
-									className="text-orange-300 mx-4"
+									className="text-orange-300 mx-1"
 									size={20}
 								>
 									heroicons-outline:start
@@ -62,7 +62,7 @@ function CardAttachment(props: CardAttachmentProps) {
 							)}
 						</div>
 						<Typography
-							className="truncate w-full mb-12"
+							className="truncate w-full mb-3"
 							color="text.secondary"
 						>
 							{format(fromUnixTime(item.time), 'Pp')}
@@ -117,16 +117,16 @@ function CardAttachment(props: CardAttachmentProps) {
 		case 'link': {
 			return (
 				<div
-					className="flex w-full sm:w-1/2 mb-16 px-16"
+					className="flex w-full sm:w-1/2 mb-4 px-4"
 					key={item.id}
 				>
-					<Paper className="min-w-128 w-128 h-128 flex items-center justify-center rounded overflow-hidden shadow">
+					<Paper className="min-w-32 w-32 h-32 flex items-center justify-center rounded-sm overflow-hidden shadow-sm">
 						<Typography className="font-semibold">LINK</Typography>
 					</Paper>
-					<div className="flex flex-auto flex-col justify-center items-start min-w-0 px-16">
-						<Typography className="text-15 font-semibold truncate w-full">{item.url}</Typography>
+					<div className="flex flex-auto flex-col justify-center items-start min-w-0 px-4">
+						<Typography className="text-lg font-semibold truncate w-full">{item.url}</Typography>
 						<Typography
-							className="truncate w-full mb-12"
+							className="truncate w-full mb-3"
 							color="text.secondary"
 						>
 							{item.time}

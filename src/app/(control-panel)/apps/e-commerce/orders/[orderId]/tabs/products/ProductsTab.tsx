@@ -17,7 +17,7 @@ function ProductsTab() {
 	});
 
 	return (
-		<div className="w-full max-w-3xl  table-responsive border rounded-md">
+		<div className="w-full max-w-5xl table-responsive border rounded-md">
 			<table className="simple dense">
 				<thead>
 					<tr>
@@ -41,8 +41,8 @@ function ProductsTab() {
 				<tbody>
 					{order?.products?.map((product) => (
 						<tr key={product.id}>
-							<td className="w-64">{product.id}</td>
-							<td className="w-80">
+							<td className="w-16">{product.id}</td>
+							<td className="w-20">
 								<img
 									className="product-image"
 									src={product.image}
@@ -62,10 +62,10 @@ function ProductsTab() {
 									{product.name}
 								</Typography>
 							</td>
-							<td className="w-64 text-right">
+							<td className="w-16 text-right">
 								<span className="truncate">${product.price}</span>
 							</td>
-							<td className="w-64 text-right">
+							<td className="w-16 text-right">
 								<span className="truncate">{product.quantity}</span>
 							</td>
 						</tr>

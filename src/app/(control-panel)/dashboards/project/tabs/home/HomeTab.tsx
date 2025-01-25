@@ -26,7 +26,7 @@ function HomeTab() {
 
 	return (
 		<motion.div
-			className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-24 w-full min-w-0 py-24 px-24 md:px-32"
+			className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0 py-6 px-6 md:px-8"
 			variants={container}
 			initial="hidden"
 			animate="show"

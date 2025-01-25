@@ -90,14 +90,14 @@ function BudgetDistributionWidget() {
 	}
 
 	return (
-		<Paper className="flex flex-col flex-auto p-24 shadow rounded-xl overflow-hidden h-full">
+		<Paper className="flex flex-col flex-auto p-6 shadow-sm rounded-xl overflow-hidden h-full">
 			<Typography className="text-lg font-medium tracking-tight leading-6 truncate">
 				Budget Distribution
 			</Typography>
 
 			<div className="flex flex-col flex-auto">
 				<ReactApexChart
-					className="flex-auto w-full h-320"
+					className="flex-auto w-full h-80"
 					options={chartOptions}
 					series={_.cloneDeep(series)}
 					type={chartOptions?.chart?.type}

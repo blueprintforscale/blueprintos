@@ -26,9 +26,9 @@ function CurrentStatementWidget() {
 	const { status, date, limit, spent, minimum } = widget;
 
 	return (
-		<Paper className="relative flex flex-col flex-auto rounded-xl shadow overflow-hidden">
-			<div className="flex items-center justify-between px-8 pt-8">
-				<div className="px-8 flex flex-col">
+		<Paper className="relative flex flex-col flex-auto rounded-xl shadow-sm overflow-hidden">
+			<div className="flex items-center justify-between px-2 pt-2">
+				<div className="px-2 flex flex-col">
 					<Typography className="text-lg font-medium tracking-tight leading-6 truncate">
 						Current Statement
 					</Typography>
@@ -45,43 +45,43 @@ function CurrentStatementWidget() {
 					</IconButton>
 				</div>
 			</div>
-			<div className="flex flex-row flex-wrap p-16 space-x-12">
-				<div className="flex flex-col my-12">
+			<div className="flex flex-row flex-wrap p-4 space-x-3">
+				<div className="flex flex-col my-3">
 					<Typography
 						color="text.secondary"
 						className="text-sm font-medium leading-none"
 					>
 						Card Limit
 					</Typography>
-					<Typography className="mt-8 font-medium text-3xl leading-none">
+					<Typography className="mt-2 font-medium text-3xl leading-none">
 						{limit.toLocaleString('en-US', {
 							style: 'currency',
 							currency: 'USD'
 						})}
 					</Typography>
 				</div>
-				<div className="flex flex-col my-12">
+				<div className="flex flex-col my-3">
 					<Typography
 						color="text.secondary"
 						className="text-sm font-medium leading-none"
 					>
 						Spent
 					</Typography>
-					<Typography className="mt-8 font-medium text-3xl leading-none">
+					<Typography className="mt-2 font-medium text-3xl leading-none">
 						{spent.toLocaleString('en-US', {
 							style: 'currency',
 							currency: 'USD'
 						})}
 					</Typography>
 				</div>
-				<div className="flex flex-col my-12">
+				<div className="flex flex-col my-3">
 					<Typography
 						color="text.secondary"
 						className="text-sm font-medium leading-none"
 					>
 						Minimum
 					</Typography>
-					<Typography className="mt-8 font-medium text-3xl leading-none">
+					<Typography className="mt-2 font-medium text-3xl leading-none">
 						{minimum.toLocaleString('en-US', {
 							style: 'currency',
 							currency: 'USD'
@@ -90,7 +90,7 @@ function CurrentStatementWidget() {
 				</div>
 			</div>
 
-			<div className="absolute bottom-0 ltr:right-0 rtl:left-0 w-96 h-96 -m-24">
+			<div className="absolute bottom-0 ltr:right-0 rtl:left-0 w-24 h-24 -m-6">
 				{status === 'paid' && (
 					<FuseSvgIcon
 						size={96}

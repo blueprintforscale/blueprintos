@@ -9,20 +9,20 @@ function GuestRoleExample() {
 	return (
 		<FusePageCarded
 			header={
-				<div className="p-24 flex items-center">
+				<div className="p-6 flex items-center">
 					<Typography className="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
 						Guest: Auth role example page
 					</Typography>
 				</div>
 			}
 			content={
-				<div className="p-24">
-					<Typography className="mb-24">
+				<div className="p-6">
+					<Typography className="mb-6">
 						You can see this page because you have not logged in. Otherwise you should be redirected to root
 						page.
 					</Typography>
 
-					<Typography className="mb-24">This is the page's config file:</Typography>
+					<Typography className="mb-6">This is the page's config file:</Typography>
 
 					<FuseHighlight
 						component="pre"
@@ -49,7 +49,7 @@ function GuestRoleExample() {
 					`}
 					</FuseHighlight>
 
-					<Typography className="my-24">
+					<Typography className="my-6">
 						You can also hide the navigation item/collapse/group with user roles by giving auth property.
 					</Typography>
 

@@ -28,7 +28,7 @@ function BottomNavigationDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Bottom Navigation
@@ -38,7 +38,7 @@ function BottomNavigationDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Bottom navigation bars display three to five destinations at the bottom of a screen. Each destination is
@@ -46,86 +46,86 @@ function BottomNavigationDoc(props) {
 				taken to the top-level navigation destination associated with that icon.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Bottom navigation
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				When there are only <strong>three</strong> actions, display both icons and text labels at all times.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimpleBottomNavigation.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SimpleBottomNavigationComponent}
 					raw={SimpleBottomNavigationRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Bottom navigation with no label
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If there are <strong>four</strong> or <strong>five</strong> actions, display inactive views as icons
 				only.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="LabelBottomNavigation.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LabelBottomNavigationComponent}
 					raw={LabelBottomNavigationRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Fixed positioning
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				This demo keeps bottom navigation fixed to the bottom, no matter the amount of content on-screen.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FixedBottomNavigation.js"
-					className="my-16"
+					className="my-4"
 					iframe
 					component={FixedBottomNavigationComponent}
 					raw={FixedBottomNavigationRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Third-party routing library
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				One frequent use case is to perform navigation on the client only, without an HTTP round-trip to the

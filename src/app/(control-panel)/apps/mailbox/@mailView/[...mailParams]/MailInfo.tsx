@@ -55,41 +55,41 @@ function MailInfo(props: MailInfoProps) {
 				MenuListProps={{
 					'aria-labelledby': 'info-button'
 				}}
-				classes={{ list: 'p-16' }}
+				classes={{ list: 'p-4' }}
 			>
 				<div className="flex">
-					<Typography className="text-md min-w-56 font-medium text-right">from:</Typography>
-					<Typography className="text-md pl-8 whitespace-pre-wrap">{mail.from.contact}</Typography>
+					<Typography className="text-md min-w-14 font-medium text-right">from:</Typography>
+					<Typography className="text-md pl-2 whitespace-pre-wrap">{mail.from.contact}</Typography>
 				</div>
 
 				<div className="flex">
-					<Typography className="text-md min-w-56 font-medium text-right">to:</Typography>
-					<Typography className="text-md pl-8 whitespace-pre-wrap">{mail.to}</Typography>
+					<Typography className="text-md min-w-14 font-medium text-right">to:</Typography>
+					<Typography className="text-md pl-2 whitespace-pre-wrap">{mail.to}</Typography>
 				</div>
 
 				{mail.cc && (
 					<div className="flex">
-						<Typography className="text-md min-w-56 font-medium text-right">cc:</Typography>
-						<Typography className="text-md pl-8 whitespace-pre-wrap">{mail.cc.join(',\n')}</Typography>
+						<Typography className="text-md min-w-14 font-medium text-right">cc:</Typography>
+						<Typography className="text-md pl-2 whitespace-pre-wrap">{mail.cc.join(',\n')}</Typography>
 					</div>
 				)}
 
 				{mail.bcc && (
 					<div className="flex">
-						<Typography className="text-md min-w-56 font-medium text-right">bcc:</Typography>
-						<Typography className="text-md pl-8 whitespace-pre-wrap">{mail.bcc.join(',\n')}</Typography>
+						<Typography className="text-md min-w-14 font-medium text-right">bcc:</Typography>
+						<Typography className="text-md pl-2 whitespace-pre-wrap">{mail.bcc.join(',\n')}</Typography>
 					</div>
 				)}
 
 				<div className="flex">
-					<Typography className="text-md min-w-56 font-medium text-right">date:</Typography>
-					<Typography className="text-md pl-8 whitespace-pre-wrap">
+					<Typography className="text-md min-w-14 font-medium text-right">date:</Typography>
+					<Typography className="text-md pl-2 whitespace-pre-wrap">
 						{format(new Date(mail.date), 'EEEE, MMMM d, y - hh:mm a')}
 					</Typography>
 				</div>
 				<div className="flex">
-					<Typography className="text-md min-w-56 font-medium text-right">subject:</Typography>
-					<Typography className="text-md pl-8 whitespace-pre-wrap">{mail.subject}</Typography>
+					<Typography className="text-md min-w-14 font-medium text-right">subject:</Typography>
+					<Typography className="text-md pl-2 whitespace-pre-wrap">{mail.subject}</Typography>
 				</div>
 			</Menu>
 		</div>

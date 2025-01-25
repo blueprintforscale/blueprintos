@@ -76,8 +76,8 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 				})}
 			/>
 			<Root className={`scroll-${selectedOption}`}>
-				<div className="flex flex-col mb-24">
-					<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-4">
+				<div className="flex flex-col mb-6">
+					<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-1">
 						{title}
 					</Typography>
 					<Typography
@@ -87,7 +87,7 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 						{description}
 					</Typography>
 
-					<div className="mt-24">
+					<div className="mt-6">
 						<FuseTabs
 							value={availableOptions.indexOf(_.find(availableOptions, { value: selectedOption }))}
 							onChange={handleTabChange}
@@ -104,7 +104,7 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 				<div className="w-full">
 					<Paper className="preview-wrapper z-20 relative h-3xl w-full rounded-xl shadow-xl flex flex-auto min-h-full overflow-hidden border">
 						<Box
-							className="preview-navbar hidden md:block sticky top-0 flex-0 min-w-224 h-768 border-r z-20"
+							className="preview-navbar hidden md:block sticky top-0 shrink-0 min-w-56 h-192 border-r z-20"
 							sx={(theme) => ({
 								backgroundColor: lighten(theme.palette.background.default, 0.02),
 								...theme.applyStyles('light', {
@@ -112,29 +112,29 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 								})
 							})}
 						>
-							<div className="h-16" />
+							<div className="h-4" />
 
 							<Box
-								className="w-2/3 h-16 m-24 rounded"
+								className="w-2/3 h-4 m-6 rounded-sm"
 								sx={{
 									backgroundColor: (theme) => darken(theme.palette.background.default, 0.1)
 								}}
 							/>
 
 							<Box
-								className="w-3/4 h-16 m-24 rounded"
+								className="w-3/4 h-4 m-6 rounded-sm"
 								sx={{
 									backgroundColor: (theme) => darken(theme.palette.background.default, 0.1)
 								}}
 							/>
 							<Box
-								className="w-1/2 h-16 m-24 rounded"
+								className="w-1/2 h-4 m-6 rounded-sm"
 								sx={{
 									backgroundColor: (theme) => darken(theme.palette.background.default, 0.1)
 								}}
 							/>
 							<Box
-								className="w-2/3 h-16 m-24 rounded"
+								className="w-2/3 h-4 m-6 rounded-sm"
 								sx={{
 									backgroundColor: (theme) => darken(theme.palette.background.default, 0.1)
 								}}
@@ -143,7 +143,7 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 
 						<div className="flex flex-col flex-auto">
 							<Box
-								className="preview-header relative z-20 flex flex-shrink-0 items-center justify-end h-64 px-24 sm:px-40 border-b"
+								className="preview-header relative z-20 flex shrink-0 items-center justify-end h-16 px-6 sm:px-10 border-b"
 								sx={(theme) => ({
 									backgroundColor: lighten(theme.palette.background.default, 0.02),
 									...theme.applyStyles('light', {
@@ -152,7 +152,7 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 								})}
 							>
 								<Box
-									className="w-24 h-24 rounded-full"
+									className="w-6 h-6 rounded-full"
 									sx={{
 										backgroundColor: (theme) => darken(theme.palette.background.default, 0.1)
 									}}
@@ -164,7 +164,7 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 							</div>
 
 							<Box
-								className="preview-footer relative z-20 flex flex-shrink-0 items-center h-56 px-24 sm:px-40 border-t"
+								className="preview-footer relative z-20 flex shrink-0 items-center h-14 px-6 sm:px-10 border-t"
 								sx={(theme) => ({
 									backgroundColor: lighten(theme.palette.background.default, 0.02),
 									...theme.applyStyles('light', {
@@ -173,7 +173,7 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 								})}
 							>
 								<Box
-									className="w-128 h-16 rounded-full"
+									className="w-32 h-4 rounded-full"
 									sx={{
 										backgroundColor: (theme) => darken(theme.palette.background.default, 0.1)
 									}}
@@ -182,12 +182,12 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 						</div>
 					</Paper>
 
-					<div className="flex items-center justify-between my-32">
+					<div className="flex items-center justify-between my-8">
 						<div>
 							<Typography>{options[selectedOption].description}</Typography>
 							<Typography
 								component="code"
-								className="mt-4 text-md"
+								className="mt-1 text-md"
 							>
 								{options[selectedOption].link}/
 							</Typography>

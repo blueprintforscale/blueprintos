@@ -32,9 +32,9 @@ function CalendarHeader(props: CalendarHeaderProps) {
 	}
 
 	return (
-		<div className="flex w-full p-12 justify-between z-10 container">
-			<div className="flex items-center justify-between space-x-8">
-				<div className="flex items-center space-x-8">
+		<div className="flex w-full p-3 justify-between z-10 container">
+			<div className="flex items-center justify-between space-x-2">
+				<div className="flex items-center space-x-2">
 					<IconButton
 						onClick={() => onToggleLeftSidebar()}
 						aria-label="open left sidebar"
@@ -49,7 +49,7 @@ function CalendarHeader(props: CalendarHeaderProps) {
 					</Typography>
 				</div>
 
-				<div className="flex items-center space-x-8">
+				<div className="flex items-center space-x-2">
 					<Tooltip title="Previous">
 						<IconButton
 							aria-label="Previous"
@@ -100,7 +100,7 @@ function CalendarHeader(props: CalendarHeaderProps) {
 			</div>
 
 			<motion.div
-				className="flex items-center justify-end md:justify-center space-x-8"
+				className="flex items-center justify-end md:justify-center space-x-2"
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1, transition: { delay: 0.3 } }}
 			>

@@ -97,7 +97,7 @@ function DataTable<TData>(props: MaterialReactTableProps<TData>) {
 				enableRowActions: true,
 				enableRowSelection: true,
 				muiBottomToolbarProps: {
-					className: 'flex items-center min-h-56 h-56'
+					className: 'flex items-center min-h-14 h-14'
 				},
 				muiTablePaperProps: {
 					elevation: 0,
@@ -136,10 +136,10 @@ function DataTable<TData>(props: MaterialReactTableProps<TData>) {
 					}
 				},
 				muiSelectAllCheckboxProps: {
-					className: 'w-48'
+					className: 'w-12'
 				},
 				muiSelectCheckboxProps: {
-					className: 'w-48'
+					className: 'w-12'
 				},
 				muiTableBodyRowProps: ({ row, table }) => {
 					const { density } = table.getState();

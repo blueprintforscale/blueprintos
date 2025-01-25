@@ -20,7 +20,7 @@ function AiImageGenPresetItem(props: AiImageGenPresetItemProps) {
 
 	return (
 		<Button
-			className="flex-col items-start border border-divider w-full overflow-hidden rounded-md hover:shadow-sm transition-shadow duration-200 space-y-8 min-h-0 h-auto max-h-none"
+			className="flex-col items-start border border-divider w-full overflow-hidden rounded-md hover:shadow-xs transition-shadow duration-200 space-y-2 min-h-0 h-auto max-h-none"
 			variant="outlined"
 			key={preset.id}
 			sx={(theme) => ({
@@ -36,7 +36,7 @@ function AiImageGenPresetItem(props: AiImageGenPresetItemProps) {
 		>
 			<div className="flex items-center justify-between w-full">
 				<Typography className="text-md font-medium">{preset.name}</Typography>
-				<div className="flex items-center gap-8">
+				<div className="flex items-center gap-2">
 					<Typography
 						color="textSecondary"
 						className="text-xs"
@@ -51,27 +51,27 @@ function AiImageGenPresetItem(props: AiImageGenPresetItemProps) {
 					</IconButton>
 				</div>
 			</div>
-			<div className="flex gap-8 mb-12">
+			<div className="flex gap-2 mb-3">
 				<Chip
-					className="text-sm rounded-sm"
+					className="text-sm rounded-xs"
 					label={preset.settings.style}
 					size="small"
 					variant="outlined"
 				/>
 				<Chip
-					className="text-sm rounded-sm"
+					className="text-sm rounded-xs"
 					label={preset.settings.mood}
 					size="small"
 					variant="outlined"
 				/>
 				<Chip
-					className="text-sm rounded-sm"
+					className="text-sm rounded-xs"
 					label={preset.settings.size}
 					size="small"
 					variant="outlined"
 				/>
 				<Chip
-					className="text-sm rounded-sm"
+					className="text-sm rounded-xs"
 					label={preset.settings.quality}
 					size="small"
 					variant="outlined"

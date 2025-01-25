@@ -65,7 +65,7 @@ function PageBreadcrumb(props: PageBreadcrumbProps) {
 					component={item.url ? Link : 'span'}
 					to={item.url}
 					key={index}
-					className="block font-medium tracking-tight capitalize max-w-128 truncate"
+					className="block font-medium tracking-tight capitalize max-w-32 truncate"
 					role="button"
 				>
 					{item.title}

@@ -46,11 +46,11 @@ function NotificationsAppHeader() {
 
 	return (
 		<div className="flex w-full container">
-			<div className="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 p-24 pb-0">
+			<div className="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 p-6 pb-0">
 				<div className="flex flex-col flex-auto">
-					<PageBreadcrumb className="mb-8" />
+					<PageBreadcrumb className="mb-2" />
 
-					<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-4">
+					<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-1">
 						Notifications
 					</Typography>
 					<Typography
@@ -60,7 +60,7 @@ function NotificationsAppHeader() {
 						Lists all notifications
 					</Typography>
 				</div>
-				<div className="flex items-center mt-24 sm:mt-0 sm:mx-8 space-x-8">
+				<div className="flex items-center mt-6 sm:mt-0 sm:mx-2 space-x-2">
 					<Button
 						className="whitespace-nowrap"
 						onClick={demoNotification}

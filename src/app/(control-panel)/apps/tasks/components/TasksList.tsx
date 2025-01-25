@@ -57,7 +57,7 @@ function TasksList() {
 	}
 
 	return (
-		<List className="w-full m-0 p-0  border-x-1">
+		<List className="w-full m-0 p-0 border-x-1">
 			<DragDropContext onDragEnd={onDragEnd}>
 				<Droppable
 					droppableId="list"

@@ -15,7 +15,7 @@ function DemoHeader(props: DemoHeaderProps) {
 	const { leftSidebarToggle, rightSidebarToggle } = props;
 
 	return (
-		<div className="flex w-full p-24 space-x-12">
+		<div className="flex w-full p-6 space-x-3">
 			{leftSidebarToggle && (
 				<IconButton
 					onClick={leftSidebarToggle}
@@ -29,7 +29,7 @@ function DemoHeader(props: DemoHeaderProps) {
 			<div className="flex flex-1 flex-col">
 				<PageBreadcrumb maxItems={3} />
 
-				<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-4">
+				<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-1">
 					Page heading
 				</Typography>
 			</div>

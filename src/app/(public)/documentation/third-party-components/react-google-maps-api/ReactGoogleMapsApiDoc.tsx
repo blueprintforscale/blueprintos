@@ -15,7 +15,7 @@ import SimpleMapRaw from './examples/SimpleMap.tsx?raw';
 function ReactGoogleMapsApiDoc() {
 	return (
 		<>
-			<div className="flex w-full items-center justify-between mb-24">
+			<div className="flex w-full items-center justify-between mb-6">
 				<Typography variant="h4">@react-google-maps/api</Typography>
 				<Button
 					variant="contained"
@@ -31,7 +31,7 @@ function ReactGoogleMapsApiDoc() {
 				</Button>
 			</div>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>react-google-maps-api</code> is a component written over a small set of the Google Maps API.
@@ -40,26 +40,26 @@ function ReactGoogleMapsApiDoc() {
 			<hr />
 
 			<Typography
-				className="text-5xl mt-32 mb-8"
+				className="text-5xl mt-8 mb-2"
 				component="h2"
 			>
 				Example Usages
 			</Typography>
 			<FuseExample
-				className="mb-64"
+				className="mb-16"
 				component={SimpleMapComponent}
 				raw={SimpleMapRaw}
 			/>
 
 			<Typography
-				className="text-5xl mt-32 mb-8"
+				className="text-5xl mt-8 mb-2"
 				component="h2"
 			>
 				Demos
 			</Typography>
 
 			<ul>
-				<li className="mb-8">
+				<li className="mb-2">
 					<Link to="/dashboards/analytics">Analytics Dashboard</Link>
 				</li>
 			</ul>

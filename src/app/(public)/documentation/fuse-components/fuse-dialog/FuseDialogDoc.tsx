@@ -21,13 +21,13 @@ function FuseDialogDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				FuseDialog
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>FuseDialog</code> is a simple dialog trigger for easily showing dialog messages via redux action.
@@ -35,14 +35,14 @@ function FuseDialogDoc() {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Usage
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can show dialog anywhere with dispatching the action openDialog, it is using Material-UI's dialog so
@@ -85,7 +85,7 @@ function FuseDialogDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Example

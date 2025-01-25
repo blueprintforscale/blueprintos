@@ -45,7 +45,7 @@ function NoteFormUploadImage(props: NoteFormUploadImageProps) {
 				onChange={handleChange}
 			/>
 			<IconButton
-				className="w-32 h-32 mx-4 p-0"
+				className="w-8 h-8 mx-1 p-0"
 				component="span"
 				size="large"
 			>

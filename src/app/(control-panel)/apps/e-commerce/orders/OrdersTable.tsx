@@ -62,7 +62,7 @@ function OrdersTable() {
 
 	return (
 		<Paper
-			className="flex flex-col flex-auto shadow-1 rounded-t-lg overflow-hidden rounded-b-0 w-full h-full"
+			className="flex flex-col flex-auto shadow-1 rounded-t-lg overflow-hidden rounded-b-none w-full h-full"
 			elevation={0}
 		>
 			<DataTable
@@ -112,11 +112,11 @@ function OrdersTable() {
 								removeOrders(selectedRows.map((row) => row.original.id));
 								table.resetRowSelection();
 							}}
-							className="flex shrink min-w-36 ltr:mr-8 rtl:ml-8"
+							className="flex shrink min-w-9 ltr:mr-2 rtl:ml-2"
 							color="secondary"
 						>
 							<FuseSvgIcon size={16}>heroicons-outline:trash</FuseSvgIcon>
-							<span className="hidden sm:flex mx-8">Delete selected items</span>
+							<span className="hidden sm:flex mx-2">Delete selected items</span>
 						</Button>
 					);
 				}}

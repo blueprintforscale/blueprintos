@@ -102,12 +102,12 @@ function TablePricingTable(props: TablePricingTableProps) {
 	const { period } = props;
 
 	return (
-		<div className="mt-40 flex justify-center sm:mt-80">
+		<div className="mt-10 flex justify-center sm:mt-20">
 			<Paper className="w-full flex-col overflow-x-auto overflow-y-hidden container lg:flex-row">
 				<div className="grid min-w-max grid-flow-col divide-x lg:min-w-0 lg:grid-flow-row lg:divide-x-0 lg:divide-y">
 					<div className="sticky left-0 grid grid-flow-row auto-rows-fr divide-y overflow-hidden rounded-l border-r shadow-lg lg:max-w-none lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0 lg:rounded-l-none lg:border-r-0 lg:shadow-none">
 						<Box
-							className="overflow-hidden px-16 py-32"
+							className="overflow-hidden px-4 py-8"
 							sx={{ backgroundColor: 'background.paper' }}
 						/>
 						{tableData.map((item, index) => (
@@ -121,13 +121,13 @@ function TablePricingTable(props: TablePricingTableProps) {
 
 					<Box
 						sx={{ backgroundColor: 'background.default' }}
-						className="col-span-full hidden p-16 lg:block"
+						className="col-span-full hidden p-4 lg:block"
 					>
 						<Typography className="text-md font-semibold">FEATURES</Typography>
 					</Box>
 
 					<div className="grid grid-flow-row auto-rows-fr divide-y lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0">
-						<Typography className="flex max-w-128 items-center p-16 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
+						<Typography className="flex max-w-32 items-center p-4 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
 							Unlimited projects
 						</Typography>
 
@@ -142,7 +142,7 @@ function TablePricingTable(props: TablePricingTableProps) {
 					</div>
 
 					<div className="grid grid-flow-row auto-rows-fr divide-y lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0">
-						<Typography className="flex max-w-128 items-center p-16 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
+						<Typography className="flex max-w-32 items-center p-4 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
 							Unlimited storage
 						</Typography>
 
@@ -157,7 +157,7 @@ function TablePricingTable(props: TablePricingTableProps) {
 					</div>
 
 					<div className="grid grid-flow-row auto-rows-fr divide-y lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0">
-						<Typography className="flex max-w-128 items-center p-16 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
+						<Typography className="flex max-w-32 items-center p-4 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
 							Custom domain support
 						</Typography>
 
@@ -172,7 +172,7 @@ function TablePricingTable(props: TablePricingTableProps) {
 					</div>
 
 					<div className="grid grid-flow-row auto-rows-fr divide-y lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0">
-						<Typography className="flex max-w-128 items-center p-16 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
+						<Typography className="flex max-w-32 items-center p-4 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
 							Dedicated hardware
 						</Typography>
 
@@ -188,13 +188,13 @@ function TablePricingTable(props: TablePricingTableProps) {
 
 					<Box
 						sx={{ backgroundColor: 'background.default' }}
-						className="col-span-full hidden p-16 lg:block"
+						className="col-span-full hidden p-4 lg:block"
 					>
 						<Typography className="text-md font-semibold">PAYMENTS</Typography>
 					</Box>
 
 					<div className="grid grid-flow-row auto-rows-fr divide-y lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0">
-						<Typography className="flex max-w-128 items-center p-16 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
+						<Typography className="flex max-w-32 items-center p-4 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
 							Fraud analysis
 						</Typography>
 
@@ -209,7 +209,7 @@ function TablePricingTable(props: TablePricingTableProps) {
 					</div>
 
 					<div className="grid grid-flow-row auto-rows-fr divide-y lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0">
-						<Typography className="flex max-w-128 items-center p-16 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
+						<Typography className="flex max-w-32 items-center p-4 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
 							Rates for in-house payment systems
 						</Typography>
 
@@ -224,7 +224,7 @@ function TablePricingTable(props: TablePricingTableProps) {
 					</div>
 
 					<div className="grid grid-flow-row auto-rows-fr divide-y lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0">
-						<Typography className="flex max-w-128 items-center p-16 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
+						<Typography className="flex max-w-32 items-center p-4 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
 							Rates for other payment systems
 						</Typography>
 
@@ -239,7 +239,7 @@ function TablePricingTable(props: TablePricingTableProps) {
 					</div>
 
 					<div className="grid grid-flow-row auto-rows-fr divide-y lg:auto-cols-fr lg:grid-flow-col lg:divide-x lg:divide-y-0">
-						<Typography className="flex max-w-128 items-center p-16 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
+						<Typography className="flex max-w-32 items-center p-4 text-center font-medium lg:max-w-none lg:items-start lg:text-left lg:font-normal">
 							Additional fees using other payment systems
 						</Typography>
 
@@ -267,14 +267,14 @@ function TableCell(props: TableCellProps) {
 
 	if (typeof value === 'string') {
 		return (
-			<div className="flex items-center justify-center p-16 lg:justify-start">
+			<div className="flex items-center justify-center p-4 lg:justify-start">
 				<Typography>{value}</Typography>
 			</div>
 		);
 	}
 
 	return (
-		<div className="flex items-center justify-center p-16 lg:justify-start">
+		<div className="flex items-center justify-center p-4 lg:justify-start">
 			{value ? (
 				<FuseSvgIcon
 					size={20}

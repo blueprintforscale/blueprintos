@@ -56,9 +56,9 @@ function QuickPanel() {
 			<FuseScrollbars>
 				<ListSubheader component="div">Today</ListSubheader>
 
-				<div className="mb-0 px-24 py-16">
+				<div className="mb-0 px-6 py-4">
 					<Typography
-						className="mb-12 text-5xl"
+						className="mb-3 text-5xl"
 						color="text.secondary"
 					>
 						{format(new Date(), 'eeee')}
@@ -71,7 +71,7 @@ function QuickPanel() {
 							{format(new Date(), 'dd')}
 						</Typography>
 						<Typography
-							className="text-15 leading-none"
+							className="text-lg leading-none"
 							color="text.secondary"
 						>
 							th
@@ -114,7 +114,7 @@ function QuickPanel() {
 				<List>
 					<ListSubheader component="div">Quick Settings</ListSubheader>
 					<ListItem>
-						<ListItemIcon className="min-w-36">
+						<ListItemIcon className="min-w-9">
 							<FuseSvgIcon>material-outline:notifications</FuseSvgIcon>
 						</ListItemIcon>
 						<ListItemText primary="Notifications" />
@@ -127,7 +127,7 @@ function QuickPanel() {
 						</ListItemSecondaryAction>
 					</ListItem>
 					<ListItem>
-						<ListItemIcon className="min-w-36">
+						<ListItemIcon className="min-w-9">
 							<FuseSvgIcon>material-outline:cloud</FuseSvgIcon>
 						</ListItemIcon>
 						<ListItemText primary="Cloud Sync" />
@@ -140,7 +140,7 @@ function QuickPanel() {
 						</ListItemSecondaryAction>
 					</ListItem>
 					<ListItem>
-						<ListItemIcon className="min-w-36">
+						<ListItemIcon className="min-w-9">
 							<FuseSvgIcon>material-outline:brightness_high</FuseSvgIcon>
 						</ListItemIcon>
 						<ListItemText primary="Retro Thrusters" />

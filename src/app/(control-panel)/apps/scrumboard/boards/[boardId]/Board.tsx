@@ -116,7 +116,7 @@ function Board() {
 									{(provided) => (
 										<div
 											ref={provided.innerRef}
-											className="flex py-16 md:py-24 px-8 md:px-12"
+											className="flex py-4 md:py-6 px-2 md:px-3"
 										>
 											{board?.lists.map((list, index) => (
 												<BoardList

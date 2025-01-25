@@ -17,13 +17,13 @@ function FuseMessageDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				FuseMessage
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>FuseMessage</code> is a simple snackbar trigger for easily showing messages via redux action. It
@@ -31,14 +31,14 @@ function FuseMessageDoc() {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Usage
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can show messages anywhere with dispatching the action showMessage, it is using Material-UI's
@@ -68,14 +68,14 @@ function FuseMessageDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Example
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Position
@@ -175,7 +175,7 @@ function FuseMessageDoc() {
 			</div>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Variants

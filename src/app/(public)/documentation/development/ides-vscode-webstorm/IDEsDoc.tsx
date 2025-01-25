@@ -11,27 +11,27 @@ function IDEsDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				IDEs
 			</Typography>
 
 			<Typography
-				className="text-2xl mb-10 font-700"
+				className="text-2xl mb-2.5 font-bold"
 				variant="h5"
 			>
 				Webstorm
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Using Prettier with ESLint
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				ESLint and Prettier are code quality tools that help ensure consistent code formatting and catch
@@ -43,21 +43,21 @@ function IDEsDoc() {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Visual Studio Code (VSCode)
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Using Prettier with ESLint
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To use ESLint and Prettier with VSCode, you need to install the necessary plugins. You can do this using
@@ -67,7 +67,7 @@ function IDEsDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-json mb-24"
+				className="language-json mb-6"
 			>
 				{`
                             "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -85,13 +85,13 @@ function IDEsDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To configure ESLint and Prettier in VSCode further, refer to the official documentation:
 			</Typography>
 
-			<ul className="space-y-12">
+			<ul className="space-y-3">
 				<li>
 					<a
 						href="https://eslint.org/docs/user-guide/getting-started"

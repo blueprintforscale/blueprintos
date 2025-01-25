@@ -11,14 +11,14 @@ function ChangelogDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Changelog
 			</Typography>
 
 			{changelogData.map((item) => (
 				<ChangelogCard
-					className="shrink-0 mb-24 w-full"
+					className="shrink-0 mb-6 w-full"
 					key={item.version}
 					{...item}
 				/>

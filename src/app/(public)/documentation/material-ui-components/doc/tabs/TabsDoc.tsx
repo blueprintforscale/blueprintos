@@ -25,7 +25,7 @@ function TabsDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Tabs
@@ -35,25 +35,25 @@ function TabsDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Tabs organize and allow navigation between groups of content that are related and at the same level of
 				hierarchy.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Introduction
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Tabs are implemented using a collection of related components:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<code>{`<Tab />`}</code> - the tab element itself. Clicking on a tab displays its corresponding
 					panel.
@@ -64,19 +64,19 @@ function TabsDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicTabs.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicTabsComponent}
 					raw={BasicTabsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basics

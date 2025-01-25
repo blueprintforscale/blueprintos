@@ -41,9 +41,9 @@ function SettingsApp(props: SettingsAppProps) {
 	return (
 		<Root
 			content={
-				<div className="flex-auto p-12 md:p-32 lg:p-48">
+				<div className="flex-auto p-3 md:p-8 lg:p-12">
 					<SettingsAppHeader
-						className="mb-24 md:mb-32"
+						className="mb-6 md:mb-8"
 						onSetSidebarOpen={setLeftSidebarOpen}
 					/>
 					{children}

@@ -43,7 +43,7 @@ function UserMenu(props: UserMenuProps) {
 		<>
 			<Button
 				className={clsx(
-					'user-menu flex justify-start shrink-0  min-h-56 h-56 rounded-lg p-8 space-x-12',
+					'user-menu flex justify-start shrink-0 min-h-14 h-14 rounded-lg p-2 space-x-3',
 					className
 				)}
 				sx={(theme) => ({
@@ -64,7 +64,7 @@ function UserMenu(props: UserMenuProps) {
 							background: theme.palette.background.default,
 							color: theme.palette.text.secondary
 						})}
-						className="avatar w-40 h-40 rounded-lg"
+						className="avatar w-10 h-10 rounded-lg"
 						alt="user photo"
 						src={user?.photoURL}
 						variant="rounded"
@@ -75,15 +75,15 @@ function UserMenu(props: UserMenuProps) {
 							background: (theme) => darken(theme.palette.background.default, 0.05),
 							color: theme.palette.text.secondary
 						})}
-						className="avatar md:mx-4"
+						className="avatar md:mx-1"
 					>
 						{user?.displayName?.[0]}
 					</Avatar>
 				)}
-				<div className="flex flex-col flex-auto space-y-8">
+				<div className="flex flex-col flex-auto space-y-2">
 					<Typography
 						component="span"
-						className="title flex font-semibold text-base capitalize truncate  tracking-tight leading-none"
+						className="title flex font-semibold text-base capitalize truncate tracking-tight leading-none"
 					>
 						{user?.displayName}
 					</Typography>
@@ -94,7 +94,7 @@ function UserMenu(props: UserMenuProps) {
 						{user?.email}
 					</Typography>
 				</div>
-				<div className="flex flex-shrink-0 items-center space-x-8">
+				<div className="flex shrink-0 items-center space-x-2">
 					<Tooltip
 						title={
 							<>
@@ -131,7 +131,7 @@ function UserMenu(props: UserMenuProps) {
 					horizontal: 'center'
 				}}
 				classes={{
-					paper: 'py-8 min-w-256'
+					paper: 'py-2 min-w-64'
 				}}
 				{...popoverProps}
 			>
@@ -142,7 +142,7 @@ function UserMenu(props: UserMenuProps) {
 							to="/sign-in"
 							role="button"
 						>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>heroicons-outline:lock-closed</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Sign In" />
@@ -152,7 +152,7 @@ function UserMenu(props: UserMenuProps) {
 							to="/sign-up"
 							role="button"
 						>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>heroicons-outline:user-plus</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Sign up" />
@@ -166,7 +166,7 @@ function UserMenu(props: UserMenuProps) {
 							onClick={userMenuClose}
 							role="button"
 						>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>heroicons-outline:user-circle</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="My Profile" />
@@ -177,7 +177,7 @@ function UserMenu(props: UserMenuProps) {
 							onClick={userMenuClose}
 							role="button"
 						>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>heroicons-outline:envelope</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Inbox" />
@@ -187,7 +187,7 @@ function UserMenu(props: UserMenuProps) {
 								signOut();
 							}}
 						>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>heroicons-outline:arrow-right-on-rectangle</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Sign out" />

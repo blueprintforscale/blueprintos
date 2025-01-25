@@ -47,17 +47,17 @@ function MailList() {
 			<motion.div
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1, transition: { delay: 0.1 } }}
-				className="flex flex-col flex-1 items-center justify-center p-24 min-h-full"
+				className="flex flex-col flex-1 items-center justify-center p-6 min-h-full"
 			>
 				<FuseSvgIcon
-					className="icon-size-128 mb-16"
+					className="icon-size-32 mb-4"
 					color="disabled"
 					size={24}
 				>
 					heroicons-outline:envelope
 				</FuseSvgIcon>
 				<Typography
-					className="mt-16 text-2xl font-semibold tracking-tight"
+					className="mt-4 text-2xl font-semibold tracking-tight"
 					color="text.secondary"
 				>
 					{t('NO_MESSAGES')}

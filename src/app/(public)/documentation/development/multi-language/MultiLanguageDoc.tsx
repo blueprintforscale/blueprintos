@@ -14,13 +14,13 @@ function MultiLanguageDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Multi Language
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React uses{' '}
@@ -35,7 +35,7 @@ function MultiLanguageDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16 p-16 border-1 bg-yellow-50 rounded-xl text-gray-800"
+				className="mb-4 p-4 border-1 bg-yellow-50 rounded-xl text-gray-800"
 				component="p"
 			>
 				Although most people don't require multi-language capabilities for their apps, we have chosen NOT to
@@ -46,14 +46,14 @@ function MultiLanguageDoc() {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Usage
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To use the translations, create a translation file called <code>i18n/en.ts</code> within the folder of
@@ -63,13 +63,13 @@ function MultiLanguageDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-jsx mb-24"
+				className="language-jsx mb-6"
 			>
 				{enLangRaw}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				And register the language file with <code>i18next.addResourceBundle()</code> at
@@ -78,13 +78,13 @@ function MultiLanguageDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-jsx mb-24"
+				className="language-jsx mb-6"
 			>
 				{mailboxLocalizationRaw}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				And use in a component with <code>useTranslation</code> hook as below:
@@ -92,7 +92,7 @@ function MultiLanguageDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-jsx mb-24"
+				className="language-jsx mb-6"
 			>
 				{`
                         import {useTranslation} from 'react-i18next';
@@ -100,7 +100,7 @@ function MultiLanguageDoc() {
                         const {t} = useTranslation('mailApp');
                     
                         return (
-                            <div className="p-24">
+                            <div className="p-6">
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -113,14 +113,14 @@ function MultiLanguageDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Default Language
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To change the default language of the Fuse React, you need to change <code>lng</code> setting in the
@@ -128,7 +128,7 @@ function MultiLanguageDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can change "eng" value to "ar" to test it out.
@@ -136,20 +136,20 @@ function MultiLanguageDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-jsx mb-24"
+				className="language-jsx mb-6"
 			>
 				{i18Raw}
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Changing Language
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You should use <code>changeLanguage</code> in the hook to change language dynamically:
@@ -157,7 +157,7 @@ function MultiLanguageDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-jsx mb-24"
+				className="language-jsx mb-6"
 			>
 				{`
 import useI18n from '@i18n/useI18n';
@@ -171,7 +171,7 @@ const handleLanguageChange = async (newLanguageId) => {
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Checkout example usage at
@@ -179,14 +179,14 @@ const handleLanguageChange = async (newLanguageId) => {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				I18n Provider
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React uses a custom I18nProvider to manage language settings and provide language-related
@@ -195,13 +195,13 @@ const handleLanguageChange = async (newLanguageId) => {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Key features of the I18nProvider:
 			</Typography>
 
-			<ul className="list-disc list-inside mb-16">
+			<ul className="list-disc list-inside mb-4">
 				<li>Manages available languages</li>
 				<li>Provides current language and language direction</li>
 				<li>Offers a function to change the current language</li>
@@ -209,7 +209,7 @@ const handleLanguageChange = async (newLanguageId) => {
 			</ul>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Here's the implementation of the I18nProvider:
@@ -217,13 +217,13 @@ const handleLanguageChange = async (newLanguageId) => {
 
 			<FuseHighlight
 				component="pre"
-				className="language-typescript mb-24"
+				className="language-typescript mb-6"
 			>
 				{i18nProviderRaw}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To use the I18nProvider in your components, you can import and use the <code>useI18n</code> hook:
@@ -231,7 +231,7 @@ const handleLanguageChange = async (newLanguageId) => {
 
 			<FuseHighlight
 				component="pre"
-				className="language-jsx mb-24"
+				className="language-jsx mb-6"
 			>
 				{`
 import useI18n from '@i18n/useI18n';

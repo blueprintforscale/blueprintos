@@ -84,8 +84,8 @@ function BoardCard(props: BoardCardProps) {
 				>
 					<StyledCard
 						className={clsx(
-							snapshot.isDragging ? 'shadow-lg' : 'shadow',
-							'w-full mb-12 rounded-lg cursor-pointer'
+							snapshot.isDragging ? 'shadow-lg' : 'shadow-sm',
+							'w-full mb-3 rounded-lg cursor-pointer'
 						)}
 						onClick={(ev) => handleCardClick(ev, card)}
 					>
@@ -97,9 +97,9 @@ function BoardCard(props: BoardCardProps) {
 							/>
 						)}
 
-						<div className="p-16 pb-0">
+						<div className="p-4 pb-0">
 							{card.labels.length > 0 && (
-								<div className="flex flex-wrap mb-8 -mx-4">
+								<div className="flex flex-wrap mb-2 -mx-1">
 									{card.labels.map((id) => (
 										<BoardCardLabel
 											boardId={boardId}
@@ -110,10 +110,10 @@ function BoardCard(props: BoardCardProps) {
 								</div>
 							)}
 
-							<Typography className="font-medium mb-12">{card?.title}</Typography>
+							<Typography className="font-medium mb-3">{card?.title}</Typography>
 
 							{(card.dueDate || card.checklists.length > 0) && (
-								<div className="flex items-center mb-12 -mx-4">
+								<div className="flex items-center mb-3 -mx-1">
 									<BoardCardDueDate dueDate={card.dueDate} />
 
 									<BoardCardCheckItems card={card} />
@@ -121,8 +121,8 @@ function BoardCard(props: BoardCardProps) {
 							)}
 						</div>
 
-						<div className="flex justify-between h-48 px-16">
-							<div className="flex items-center space-x-6">
+						<div className="flex justify-between h-12 px-4">
+							<div className="flex items-center space-x-1.5">
 								{card?.subscribed && (
 									<FuseSvgIcon
 										size={16}
@@ -142,7 +142,7 @@ function BoardCard(props: BoardCardProps) {
 								)}
 
 								{card.attachments && (
-									<span className="flex items-center space-x-2">
+									<span className="flex items-center space-x-0.5">
 										<FuseSvgIcon
 											size={16}
 											color="action"
@@ -153,7 +153,7 @@ function BoardCard(props: BoardCardProps) {
 									</span>
 								)}
 								{commentsCount > 0 && (
-									<span className="flex items-center space-x-2">
+									<span className="flex items-center space-x-0.5">
 										<FuseSvgIcon
 											size={16}
 											color="action"
@@ -166,12 +166,12 @@ function BoardCard(props: BoardCardProps) {
 								)}
 							</div>
 
-							<div className="flex items-center justify-end space-x-12">
+							<div className="flex items-center justify-end space-x-3">
 								{card.memberIds.length > 0 && (
 									<div className="flex justify-start">
 										<AvatarGroup
 											max={3}
-											classes={{ avatar: 'w-24 h-24 text-md' }}
+											classes={{ avatar: 'w-6 h-6 text-md' }}
 										>
 											{card.memberIds.map((id) => {
 												const member = _.find(members, { id });

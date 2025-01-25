@@ -28,7 +28,7 @@ function LinksDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Links
@@ -39,37 +39,37 @@ function LinksDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic links
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The Link component is built on top of the <a href="/material-ui/api/typography/">Typography</a>{' '}
 				component, meaning that you can use its props.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="Links.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LinksComponent}
 					raw={LinksRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				However, the Link component has some different default props than the Typography component:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<code>{`color="primary"`}</code> as the link needs to stand out.
 				</li>
@@ -79,38 +79,38 @@ function LinksDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Underline
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>underline</code> prop can be used to set the underline behavior. The default is{' '}
 				<code>always</code>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="UnderlineLink.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={UnderlineLinkComponent}
 					raw={UnderlineLinkRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Security
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				When you use <code>{`target="_blank"`}</code> with Links, it is{' '}
@@ -118,7 +118,7 @@ function LinksDoc(props) {
 				set <code>{`rel="noopener"`}</code> or <code>{`rel="noreferrer"`}</code> when linking to third party
 				content.
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<code>{`rel="noopener"`}</code> prevents the new page from being able to access the{' '}
 					<code>window.opener</code> property and ensures it runs in a separate process. Without this, the
@@ -130,13 +130,13 @@ function LinksDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Third-party routing library
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				One frequent use case is to perform navigation on the client only, without an HTTP round-trip to the
@@ -144,13 +144,13 @@ function LinksDoc(props) {
 				case. Here is a <a href="/material-ui/integrations/routing/#link">more detailed guide</a>.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				(WAI-ARIA:{' '}
@@ -159,7 +159,7 @@ function LinksDoc(props) {
 				</a>
 				)
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					When providing the content for the link, avoid generic descriptions like &quot;click here&quot; or
 					&quot;go to&quot;. Instead, use{' '}
@@ -181,24 +181,24 @@ function LinksDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ButtonLink.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ButtonLinkComponent}
 					raw={ButtonLinkRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Keyboard accessibility
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					Interactive elements should receive focus in a coherent order when the user presses the{' '}
 					<kbd className="key">Tab</kbd> key.
@@ -208,12 +208,12 @@ function LinksDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Screen reader accessibility
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					When a link receives focus, screen readers should announce a descriptive link name. If the link
 					opens in a new window or browser tab, add an{' '}

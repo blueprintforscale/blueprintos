@@ -16,13 +16,13 @@ function RoutingDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Routing in Fuse React with Next.js App Router
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React utilizes Next.js 13's App Router for handling routing in the application. This modern routing
@@ -31,7 +31,7 @@ function RoutingDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				For comprehensive information on Next.js App Router, refer to the{' '}
@@ -47,13 +47,13 @@ function RoutingDoc() {
 
 			<Typography
 				variant="h5"
-				className="mb-20 font-700"
+				className="mb-5 font-bold"
 			>
 				Key Concepts
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				1. <strong>File-based Routing:</strong> Routes are defined by the file structure in the <code>app</code>{' '}
@@ -61,14 +61,14 @@ function RoutingDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				2. <strong>Layouts:</strong> Shared UI for multiple pages is defined in <code>layout.tsx</code> files.
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				3. <strong>Route Groups:</strong> Organize routes without affecting the URL structure using parentheses
@@ -76,7 +76,7 @@ function RoutingDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				4. <strong>Dynamic Routes:</strong> Create routes with dynamic parameters using square brackets, e.g.,{' '}
@@ -85,13 +85,13 @@ function RoutingDoc() {
 
 			<Typography
 				variant="h5"
-				className="mt-32 mb-20 font-700"
+				className="mt-8 mb-5 font-bold"
 			>
 				Using MainLayout in layout.tsx
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React provides a <code>MainLayout</code> component that can be used in <code>layout.tsx</code>{' '}
@@ -100,7 +100,7 @@ function RoutingDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Here's an example of how to use <code>MainLayout</code> in a public layout:
@@ -108,13 +108,13 @@ function RoutingDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-typescript mb-24"
+				className="language-typescript mb-6"
 			>
 				{publicLayoutRaw}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				In this example, the navbar, toolbar, side panels, and footer are hidden for all routes under the
@@ -123,13 +123,13 @@ function RoutingDoc() {
 
 			<Typography
 				variant="h5"
-				className="mt-32 mb-20 font-700"
+				className="mt-8 mb-5 font-bold"
 			>
 				Route Access Restriction with AuthGuardRedirect
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React includes an <code>AuthGuardRedirect</code> component that can be used to restrict access to
@@ -138,13 +138,13 @@ function RoutingDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-typescript mb-24"
+				className="language-typescript mb-6"
 			>
 				{controlPanelLayoutRaw}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				In this example, access to all routes under the (control-panel) group is restricted to users with the
@@ -153,14 +153,14 @@ function RoutingDoc() {
 
 			<Typography
 				variant="h5"
-				className="mt-32 mb-20 font-700"
+				className="mt-8 mb-5 font-bold"
 			>
 				Best Practices
 			</Typography>
 
 			<Typography
 				component="ul"
-				className="list-disc list-inside mb-16"
+				className="list-disc list-inside mb-4"
 			>
 				<li>
 					Use route groups (folders with parentheses) to organize your routes logically without affecting the
@@ -181,7 +181,7 @@ function RoutingDoc() {
 			</Typography>
 
 			<Typography
-				className="mt-32 mb-16"
+				className="mt-8 mb-4"
 				component="p"
 			>
 				By leveraging Next.js App Router and Fuse React's custom components like <code>MainLayout</code> and{' '}

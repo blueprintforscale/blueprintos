@@ -20,14 +20,14 @@ function ValueSectionSmall(props: ValueSectionSmallProps) {
 	};
 
 	return (
-		<div className={clsx(className, 'p-16')}>
+		<div className={clsx(className, 'p-4')}>
 			<Typography
 				className="text-sm font-medium leading-none"
 				color="text.secondary"
 			>
 				{title}
 			</Typography>
-			<Typography className="mt-8 font-mono text-xl leading-none">
+			<Typography className="mt-2 font-mono text-xl leading-none">
 				{(value / (unitValues[unit] || 1)).toLocaleString('en-US', {
 					style: 'currency',
 					currency: 'USD'

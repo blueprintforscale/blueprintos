@@ -10,12 +10,12 @@ function PageLayoutsDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Page Layouts
 			</Typography>
 			<div className="prose prose-sm dark:prose-invert">
-				<Typography className="text-2xl font-700 mb-16">Introduction</Typography>
+				<Typography className="text-2xl font-bold mb-4">Introduction</Typography>
 				<Typography>
 					Page layouts are set of pre-made layouts that can be used as the starter on any page/app design.
 					While they provide some styling by default, it's very minimal and can be easily modified from the
@@ -51,26 +51,26 @@ function PageLayoutsDoc() {
 			</div>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				One of the strong sides of the Fuse React is its Page layout components.
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Every single app, pre-built pages uses the Fuse React's page layout components.
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Simply, page layout components are pre-built layouts which you can simply copy/paste and start building
 				your own page or app based on it.
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Because page layout components, it's very easy to replicate any page style that you can find in Fuse
@@ -78,21 +78,21 @@ function PageLayoutsDoc() {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Page Layout Components
 			</Typography>
 
 			<Typography
-				className="my-16"
+				className="my-4"
 				component="div"
 			>
 				<ul>
-					<li className="mb-8">
+					<li className="mb-2">
 						<Link to="/documentation/fuse-components/fuse-page-simple">FusePageSimple</Link>
 					</li>
-					<li className="mb-8">
+					<li className="mb-2">
 						<Link to="/documentation/fuse-components/fuse-page-carded">FusePageCarded</Link>
 					</li>
 				</ul>

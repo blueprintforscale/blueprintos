@@ -33,8 +33,8 @@ function BoardCardCheckItems(props: BoardCardCheckItemsProps) {
 		<Chip
 			size="small"
 			className={clsx(
-				'flex items-center font-semibold text-md mx-4 mb-6',
-				checkItemsChecked === checkItems ? 'bg-green text-white' : 'bg-grey-500 text-white'
+				'flex items-center font-semibold text-md mx-1 mb-1.5',
+				checkItemsChecked === checkItems ? 'bg-green-500 text-white' : 'bg-gray-500 text-white'
 			)}
 			sx={{
 				'& .MuiChip-icon': {

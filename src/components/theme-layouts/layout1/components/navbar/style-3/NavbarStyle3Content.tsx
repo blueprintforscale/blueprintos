@@ -113,7 +113,7 @@ function NavbarStyle3Content(props: NavbarStyle3ContentProps) {
 					className="flex shrink-0 flex-col items-center h-full"
 				>
 					<img
-						className="my-32 w-44"
+						className="my-8 w-11"
 						src="/assets/images/logo/logo.svg"
 						alt="logo"
 					/>
@@ -136,7 +136,7 @@ function NavbarStyle3Content(props: NavbarStyle3ContentProps) {
 						/>
 					</FuseScrollbars>
 
-					<div className="flex shrink-0 justify-center w-full py-16">
+					<div className="flex shrink-0 justify-center w-full py-4">
 						<UserMenu className="" />
 					</div>
 				</div>
@@ -145,7 +145,7 @@ function NavbarStyle3Content(props: NavbarStyle3ContentProps) {
 					<StyledPanel
 						id="fuse-navbar-panel"
 						opened={panelOpen}
-						className={clsx('overflow-y-auto overflow-x-hidden shadow pt-16')}
+						className={clsx('overflow-y-auto overflow-x-hidden shadow-sm pt-4')}
 						option={{ suppressScrollX: true, wheelPropagation: false }}
 					>
 						<FuseNavigation

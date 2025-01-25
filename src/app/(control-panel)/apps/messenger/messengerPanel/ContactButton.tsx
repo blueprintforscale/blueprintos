@@ -74,7 +74,7 @@ function ContactButton(props: ContactButtonProps) {
 			<Button
 				onClick={() => onClick(contact.id)}
 				className={clsx(
-					'contactButton rounded-0 py-4 h-auto min-h-auto max-h-none',
+					'contactButton rounded-none py-1 h-auto min-h-auto max-h-none',
 					selectedChatId === contact.id && 'active'
 				)}
 			>

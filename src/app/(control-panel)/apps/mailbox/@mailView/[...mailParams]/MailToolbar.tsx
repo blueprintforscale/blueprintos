@@ -32,11 +32,11 @@ function MailToolbar() {
 	return (
 		<Box
 			sx={{ backgroundColor: 'background.default' }}
-			className="flex items-center justify-between w-full min-h-64 px-8 border-b"
+			className="flex items-center justify-between w-full min-h-16 px-2 border-b"
 		>
 			<IconButton
 				onClick={handleGoBack}
-				className="lg:hidden md:-mx-4"
+				className="lg:hidden md:-mx-1"
 			>
 				<FuseSvgIcon>
 					{theme.direction === 'ltr'
@@ -51,12 +51,12 @@ function MailToolbar() {
 					onChange={(value) => {
 						updateMails([{ id: mail.id, labels: value }]);
 					}}
-					className="mx-2"
+					className="mx-0.5"
 				/>
 
 				<Tooltip title="Set important">
 					<IconButton
-						className="mx-2"
+						className="mx-0.5"
 						onClick={() => {
 							updateMails([{ id: mail.id, important: !mail.important }]);
 						}}
@@ -69,7 +69,7 @@ function MailToolbar() {
 
 				<Tooltip title="Set starred">
 					<IconButton
-						className="mx-2"
+						className="mx-0.5"
 						onClick={() => {
 							updateMails([{ id: mail.id, starred: !mail.starred }]);
 						}}
@@ -80,7 +80,7 @@ function MailToolbar() {
 					</IconButton>
 				</Tooltip>
 
-				<MailActionsMenu className="mx-4" />
+				<MailActionsMenu className="mx-1" />
 			</div>
 		</Box>
 	);

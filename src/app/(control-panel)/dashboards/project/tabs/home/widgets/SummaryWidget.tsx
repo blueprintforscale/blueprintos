@@ -31,8 +31,8 @@ function SummaryWidget() {
 	}
 
 	return (
-		<Paper className="flex flex-col flex-auto shadow rounded-xl overflow-hidden">
-			<div className="flex items-center justify-between px-8 pt-8">
+		<Paper className="flex flex-col flex-auto shadow-sm rounded-xl overflow-hidden">
+			<div className="flex items-center justify-between px-2 pt-2">
 				<Select
 					className=""
 					classes={{ select: 'py-0 flex items-center' }}
@@ -58,14 +58,14 @@ function SummaryWidget() {
 					<FuseSvgIcon>heroicons-outline:ellipsis-vertical</FuseSvgIcon>
 				</IconButton>
 			</div>
-			<div className="text-center mt-16">
+			<div className="text-center mt-4">
 				<Typography className="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
 					{data.count[currentRange]}
 				</Typography>
 				<Typography className="text-lg font-medium text-blue-600 dark:text-blue-500">{data.name}</Typography>
 			</div>
 			<Typography
-				className="flex items-baseline justify-center w-full mt-20 mb-24 space-x-8"
+				className="flex items-baseline justify-center w-full mt-5 mb-6 space-x-2"
 				color="text.secondary"
 			>
 				<span className="truncate">{data.extra.name}:</span>

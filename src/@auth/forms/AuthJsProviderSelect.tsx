@@ -19,17 +19,17 @@ function AuthJsProviderSelect() {
 
 	return (
 		<div className="w-full">
-			<div className="flex items-center mb-32">
+			<div className="flex items-center mb-8">
 				<div className="mt-px flex-auto border-t" />
 				<Typography
-					className="mx-8"
+					className="mx-2"
 					color="text.secondary"
 				>
 					Or continue with
 				</Typography>
 				<div className="mt-px flex-auto border-t" />
 			</div>
-			<div className="flex flex-col gap-12">
+			<div className="flex flex-col gap-3">
 				{Object.values(authJsProviderMap)
 					.filter((provider) => provider.id !== 'credentials')
 					.map((provider) => (
@@ -52,9 +52,9 @@ function AuthJsProviderSelect() {
 								}
 							})}
 							endIcon={
-								<Box className="provider-icon rounded-full flex items-center justify-center w-32 h-32">
+								<Box className="provider-icon rounded-full flex items-center justify-center w-8 h-8">
 									<img
-										className="flex w-16 h-auto"
+										className="flex w-4 h-auto"
 										src={`${providerLogoPath}/${provider.id}.svg`}
 										alt={provider.name}
 									/>

@@ -55,21 +55,21 @@ function ClassicSignInPage() {
 
 	return (
 		<div className="flex min-w-0 flex-auto flex-col items-center sm:justify-center">
-			<Paper className="min-h-full w-full rounded-0 px-16 py-32 sm:min-h-auto sm:w-auto sm:rounded-xl sm:p-48 sm:shadow">
-				<div className="mx-auto w-full max-w-320 sm:mx-0 sm:w-320">
+			<Paper className="min-h-full w-full rounded-none px-4 py-8 sm:min-h-auto sm:w-auto sm:rounded-xl sm:p-12 sm:shadow-sm">
+				<div className="mx-auto w-full max-w-80 sm:mx-0 sm:w-80">
 					<img
-						className="w-48"
+						className="w-12"
 						src="/assets/images/logo/logo.svg"
 						alt="logo"
 					/>
 
-					<Typography className="mt-32 text-4xl font-extrabold leading-tight tracking-tight">
+					<Typography className="mt-8 text-4xl font-extrabold leading-[1.25] tracking-tight">
 						Sign in
 					</Typography>
-					<div className="mt-2 flex items-baseline font-medium">
+					<div className="mt-0.5 flex items-baseline font-medium">
 						<Typography>Don't have an account?</Typography>
 						<Link
-							className="ml-4"
+							className="ml-1"
 							to="/sign-up"
 						>
 							Sign up
@@ -79,7 +79,7 @@ function ClassicSignInPage() {
 					<form
 						name="loginForm"
 						noValidate
-						className="mt-32 flex w-full flex-col justify-center"
+						className="mt-8 flex w-full flex-col justify-center"
 						onSubmit={handleSubmit(onSubmit)}
 					>
 						<Controller
@@ -88,7 +88,7 @@ function ClassicSignInPage() {
 							render={({ field }) => (
 								<TextField
 									{...field}
-									className="mb-24"
+									className="mb-6"
 									label="Email"
 									autoFocus
 									type="email"
@@ -107,7 +107,7 @@ function ClassicSignInPage() {
 							render={({ field }) => (
 								<TextField
 									{...field}
-									className="mb-24"
+									className="mb-6"
 									label="Password"
 									type="password"
 									error={!!errors.password}
@@ -149,7 +149,7 @@ function ClassicSignInPage() {
 						<Button
 							variant="contained"
 							color="secondary"
-							className=" mt-16 w-full"
+							className=" mt-4 w-full"
 							aria-label="Sign in"
 							disabled={_.isEmpty(dirtyFields) || !isValid}
 							type="submit"
@@ -158,10 +158,10 @@ function ClassicSignInPage() {
 							Sign in
 						</Button>
 
-						<div className="mt-32 flex items-center">
+						<div className="mt-8 flex items-center">
 							<div className="mt-px flex-auto border-t" />
 							<Typography
-								className="mx-8"
+								className="mx-2"
 								color="text.secondary"
 							>
 								Or continue with
@@ -169,7 +169,7 @@ function ClassicSignInPage() {
 							<div className="mt-px flex-auto border-t" />
 						</div>
 
-						<div className="mt-32 flex items-center space-x-16">
+						<div className="mt-8 flex items-center space-x-4">
 							<Button
 								variant="outlined"
 								className="flex-auto"

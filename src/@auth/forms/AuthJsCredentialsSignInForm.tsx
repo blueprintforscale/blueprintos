@@ -78,12 +78,12 @@ function AuthJsCredentialsSignInForm() {
 		<form
 			name="loginForm"
 			noValidate
-			className="mt-32 flex w-full flex-col justify-center"
+			className="mt-8 flex w-full flex-col justify-center"
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			{errors?.root?.message && (
 				<Alert
-					className="mb-32"
+					className="mb-8"
 					severity="error"
 					sx={(theme) => ({
 						backgroundColor: theme.palette.error.light,
@@ -99,7 +99,7 @@ function AuthJsCredentialsSignInForm() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mb-24"
+						className="mb-6"
 						label="Email"
 						autoFocus
 						type="email"
@@ -117,7 +117,7 @@ function AuthJsCredentialsSignInForm() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mb-24"
+						className="mb-6"
 						label="Password"
 						type="password"
 						error={!!errors.password}
@@ -157,7 +157,7 @@ function AuthJsCredentialsSignInForm() {
 			<Button
 				variant="contained"
 				color="secondary"
-				className="mt-16 w-full"
+				className="mt-4 w-full"
 				aria-label="Sign in"
 				disabled={_.isEmpty(dirtyFields) || !isValid}
 				type="submit"

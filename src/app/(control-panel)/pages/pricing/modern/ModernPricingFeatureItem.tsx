@@ -18,14 +18,14 @@ function ModernPricingFeatureItem(props: ModernPricingFeatureItemProps) {
 	return (
 		<div>
 			<Box
-				className="flex h-48 w-48 items-center justify-center rounded"
+				className="flex h-12 w-12 items-center justify-center rounded-sm"
 				sx={{ backgroundColor: 'secondary.main', color: 'secondary.contrastText' }}
 			>
 				<FuseSvgIcon>{icon}</FuseSvgIcon>
 			</Box>
-			<Typography className="mt-16 text-xl font-medium">{title}</Typography>
+			<Typography className="mt-4 text-xl font-medium">{title}</Typography>
 			<Typography
-				className="leading-24 mt-8"
+				className="leading-[2] mt-2"
 				color="text.secondary"
 			>
 				{subtitle}

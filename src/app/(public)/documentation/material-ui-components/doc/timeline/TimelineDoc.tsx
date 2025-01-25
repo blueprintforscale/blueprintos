@@ -44,7 +44,7 @@ function TimelineDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Timeline
@@ -53,9 +53,9 @@ function TimelineDoc(props) {
 				The timeline displays a list of events in chronological order.
 			</Typography>
 
-			<div className="border-1 p-16 rounded-xl my-12">
+			<div className="border-1 p-4 rounded-xl my-3">
 				<Typography
-					className="text-base mb-32"
+					className="text-base mb-8"
 					component="div"
 				>
 					This component is not documented in the{' '}
@@ -65,271 +65,271 @@ function TimelineDoc(props) {
 			</div>
 
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic timeline
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A basic timeline showing list of events.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicTimelineComponent}
 					raw={BasicTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Left-positioned timeline
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The main content of the timeline can be positioned on the left side relative to the time axis.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="LeftPositionedTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LeftPositionedTimelineComponent}
 					raw={LeftPositionedTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Alternating timeline
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The timeline can display the events on alternating sides.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="AlternateTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={AlternateTimelineComponent}
 					raw={AlternateTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Reverse Alternating timeline
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The timeline can display the events on alternating sides in reverse order.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="AlternateReverseTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={AlternateReverseTimelineComponent}
 					raw={AlternateReverseTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Color
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>TimelineDot</code> can appear in different colors from theme palette.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ColorsTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ColorsTimelineComponent}
 					raw={ColorsTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Outlined
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="OutlinedTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={OutlinedTimelineComponent}
 					raw={OutlinedTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Opposite content
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The timeline can display content on opposite sides.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="OppositeContentTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={OppositeContentTimelineComponent}
 					raw={OppositeContentTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Here is an example of customizing the component. You can learn more about this in the{' '}
 				<a href="/material-ui/customization/how-to-customize/">overrides documentation page</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomizedTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomizedTimelineComponent}
 					raw={CustomizedTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Alignment
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				There are different ways in which a Timeline can be placed within the container.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can do it by overriding the styles.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A Timeline centers itself in the container by default.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The demos below show how to adjust the relative width of the left and right sides of a Timeline:
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Left-aligned
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="LeftAlignedTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LeftAlignedTimelineComponent}
 					raw={LeftAlignedTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Right-aligned
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="RightAlignedTimeline.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={RightAlignedTimelineComponent}
 					raw={RightAlignedTimelineRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Left-aligned with no opposite content
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="NoOppositeContent.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={NoOppositeContentComponent}
 					raw={NoOppositeContentRaw}

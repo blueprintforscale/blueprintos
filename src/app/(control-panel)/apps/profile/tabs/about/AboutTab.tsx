@@ -46,31 +46,31 @@ function AboutTab() {
 			className="w-full"
 		>
 			<div className="md:flex">
-				<div className="flex flex-col flex-1 md:ltr:pr-32 md:rtl:pl-32">
+				<div className="flex flex-col flex-1 md:ltr:pr-8 md:rtl:pl-8">
 					<Card
 						component={motion.div}
 						variants={item}
-						className="w-full mb-32"
+						className="w-full mb-8"
 					>
-						<div className="px-32 pt-24">
-							<Typography className="text-2xl font-semibold leading-tight">
+						<div className="px-8 pt-6">
+							<Typography className="text-2xl font-semibold leading-[1.25]">
 								General Information
 							</Typography>
 						</div>
 
-						<CardContent className="px-32 py-24">
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Gender</Typography>
+						<CardContent className="px-8 py-6">
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Gender</Typography>
 								<Typography>{general.gender}</Typography>
 							</div>
 
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Birthday</Typography>
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Birthday</Typography>
 								<Typography>{general.birthday}</Typography>
 							</div>
 
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Locations</Typography>
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Locations</Typography>
 
 								{general.locations.map((location) => (
 									<div
@@ -79,7 +79,7 @@ function AboutTab() {
 									>
 										<Typography>{location}</Typography>
 										<FuseSvgIcon
-											className="mx-4"
+											className="mx-1"
 											size={16}
 											color="action"
 										>
@@ -89,8 +89,8 @@ function AboutTab() {
 								))}
 							</div>
 
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">About Me</Typography>
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">About Me</Typography>
 								<Typography>{general.about}</Typography>
 							</div>
 						</CardContent>
@@ -99,25 +99,25 @@ function AboutTab() {
 					<Card
 						component={motion.div}
 						variants={item}
-						className="w-full mb-32"
+						className="w-full mb-8"
 					>
-						<div className="px-32 pt-24">
-							<Typography className="text-2xl font-semibold leading-tight">Work</Typography>
+						<div className="px-8 pt-6">
+							<Typography className="text-2xl font-semibold leading-[1.25]">Work</Typography>
 						</div>
 
-						<CardContent className="px-32 py-24">
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Occupation</Typography>
+						<CardContent className="px-8 py-6">
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Occupation</Typography>
 								<Typography>{work.occupation}</Typography>
 							</div>
 
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Skills</Typography>
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Skills</Typography>
 								<Typography>{work.skills}</Typography>
 							</div>
 
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Jobs</Typography>
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Jobs</Typography>
 								<table>
 									<tbody>
 										{work.jobs.map((job) => (
@@ -125,7 +125,7 @@ function AboutTab() {
 												<td>
 													<Typography>{job.company}</Typography>
 												</td>
-												<td className="px-16">
+												<td className="px-4">
 													<Typography color="text.secondary">{job.date}</Typography>
 												</td>
 											</tr>
@@ -139,20 +139,20 @@ function AboutTab() {
 					<Card
 						component={motion.div}
 						variants={item}
-						className="w-full mb-32"
+						className="w-full mb-8"
 					>
-						<div className="px-32 pt-24">
-							<Typography className="text-2xl font-semibold leading-tight">Contact</Typography>
+						<div className="px-8 pt-6">
+							<Typography className="text-2xl font-semibold leading-[1.25]">Contact</Typography>
 						</div>
 
-						<CardContent className="px-32 py-24">
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Address</Typography>
+						<CardContent className="px-8 py-6">
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Address</Typography>
 								<Typography>{contact.address}</Typography>
 							</div>
 
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Tel.</Typography>
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Tel.</Typography>
 
 								{contact.tel.map((tel) => (
 									<div
@@ -164,8 +164,8 @@ function AboutTab() {
 								))}
 							</div>
 
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Website</Typography>
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Website</Typography>
 
 								{contact.websites.map((website) => (
 									<div
@@ -177,8 +177,8 @@ function AboutTab() {
 								))}
 							</div>
 
-							<div className="mb-24">
-								<Typography className="font-semibold mb-4 text-lg">Emails</Typography>
+							<div className="mb-6">
+								<Typography className="font-semibold mb-1 text-lg">Emails</Typography>
 
 								{contact.emails.map((email) => (
 									<div
@@ -193,30 +193,30 @@ function AboutTab() {
 					</Card>
 				</div>
 
-				<div className="flex flex-col md:w-320">
+				<div className="flex flex-col md:w-80">
 					<Card
 						component={motion.div}
 						variants={item}
-						className="w-full mb-32"
+						className="w-full mb-8"
 					>
-						<div className="flex items-center px-32 pt-24">
-							<Typography className="flex flex-1 text-2xl font-semibold leading-tight">
+						<div className="flex items-center px-8 pt-6">
+							<Typography className="flex flex-1 text-2xl font-semibold leading-[1.25]">
 								Friends
 							</Typography>
 
 							<Button
-								className="-mx-8"
+								className="-mx-2"
 								size="small"
 							>
 								See 454 more
 							</Button>
 						</div>
 
-						<CardContent className="flex flex-wrap px-32">
+						<CardContent className="flex flex-wrap px-8">
 							{friends.map((friend) => (
 								<Avatar
 									key={friend.id}
-									className="w-64 h-64 rounded-lg m-4"
+									className="w-16 h-16 rounded-lg m-1"
 									src={friend.avatar}
 									alt={friend.name}
 								/>
@@ -227,13 +227,13 @@ function AboutTab() {
 					<Card
 						component={motion.div}
 						variants={item}
-						className="w-full mb-32 rounded-xl shadow"
+						className="w-full mb-8 rounded-xl shadow-sm"
 					>
-						<div className="px-32 pt-24 flex items-center">
-							<Typography className="flex flex-1 text-2xl font-semibold leading-tight">
+						<div className="px-8 pt-6 flex items-center">
+							<Typography className="flex flex-1 text-2xl font-semibold leading-[1.25]">
 								Joined Groups
 							</Typography>
-							<div className="-mx-8">
+							<div className="-mx-2">
 								<Button
 									color="inherit"
 									size="small"
@@ -242,12 +242,12 @@ function AboutTab() {
 								</Button>
 							</div>
 						</div>
-						<CardContent className="px-32">
+						<CardContent className="px-8">
 							<List className="p-0">
 								{groups.map((group) => (
 									<ListItem
 										key={group.id}
-										className="px-0 space-x-8"
+										className="px-0 space-x-2"
 									>
 										<Avatar alt={group.name}>{group.name[0]}</Avatar>
 										<ListItemText
@@ -262,7 +262,7 @@ function AboutTab() {
 													</Typography>
 
 													<Typography
-														className="mx-4 font-normal"
+														className="mx-1 font-normal"
 														paragraph={false}
 													>
 														{group.category}

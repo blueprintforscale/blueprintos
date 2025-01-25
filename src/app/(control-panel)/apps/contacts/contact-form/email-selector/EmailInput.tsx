@@ -49,7 +49,7 @@ function EmailInput(props: EmailInputProps) {
 
 	return (
 		<form
-			className="flex space-x-16 mb-16"
+			className="flex space-x-4 mb-4"
 			onChange={handleSubmit(onSubmit)}
 		>
 			<Controller

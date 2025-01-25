@@ -20,16 +20,16 @@ function CourseStepContent(props: CourseStepContentProps) {
 	}
 
 	return (
-		<Paper className="w-full max-w-lg mx-auto sm:my-8 lg:mt-16 p-24 sm:p-40 sm:py-48 rounded-xl shadow overflow-hidden">
+		<Paper className="w-full mx-auto sm:my-2 lg:mt-4 p-6 sm:p-10 sm:py-12 rounded-xl shadow-sm overflow-hidden">
 			<Typography
 				variant="h4"
-				className="mb-16 font-500"
+				className="mb-4 font-medium"
 			>
 				{step?.title}
 			</Typography>
 
 			<Typography
-				className="text-2xl mb-32"
+				className="text-2xl mb-8"
 				variant="h5"
 			>
 				{step?.subtitle}

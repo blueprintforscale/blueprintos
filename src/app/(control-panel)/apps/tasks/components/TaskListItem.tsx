@@ -30,7 +30,7 @@ function TaskListItem(props: TaskListItemProps) {
 			{(provided, snapshot) => (
 				<>
 					<ListItemButton
-						className={clsx(snapshot.isDragging ? 'shadow-lg' : 'shadow', 'px-40 py-12 group')}
+						className={clsx(snapshot.isDragging ? 'shadow-lg' : 'shadow-sm', 'px-10 py-3 group')}
 						sx={{ bgcolor: 'background.paper' }}
 						ref={provided.innerRef}
 						{...provided.draggableProps}
@@ -39,7 +39,7 @@ function TaskListItem(props: TaskListItemProps) {
 						}}
 					>
 						<div
-							className="md:hidden absolute flex items-center justify-center inset-y-0 left-0 w-32 cursor-move md:group-hover:flex"
+							className="md:hidden absolute flex items-center justify-center inset-y-0 left-0 w-8 cursor-move md:group-hover:flex"
 							{...provided.dragHandleProps}
 						>
 							<FuseSvgIcon
@@ -49,7 +49,7 @@ function TaskListItem(props: TaskListItemProps) {
 								heroicons-solid:bars-3
 							</FuseSvgIcon>
 						</div>
-						<ListItemIcon className="min-w-36 -ml-10 mr-8">
+						<ListItemIcon className="min-w-9 -ml-2.5 mr-2">
 							<IconButton
 								sx={{ color: data.completed ? 'secondary.main' : 'text.disabled' }}
 								onClick={(ev) => {
@@ -68,12 +68,12 @@ function TaskListItem(props: TaskListItemProps) {
 						<div className="flex items-center">
 							<div>
 								{data.priority === 0 && (
-									<FuseSvgIcon className="text-green icon-size-16 mx-12">
+									<FuseSvgIcon className="text-green-500 icon-size-4 mx-3">
 										heroicons-outline:arrow-small-down
 									</FuseSvgIcon>
 								)}
 								{data.priority === 2 && (
-									<FuseSvgIcon className="text-red icon-size-16 mx-12">
+									<FuseSvgIcon className="text-red-500 icon-size-4 mx-3">
 										heroicons-outline:arrow-small-up
 									</FuseSvgIcon>
 								)}

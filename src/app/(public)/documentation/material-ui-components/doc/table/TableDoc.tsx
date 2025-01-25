@@ -47,7 +47,7 @@ function TableDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Table
@@ -55,30 +55,30 @@ function TableDoc(props) {
 			<Typography className="description">Tables display sets of data. They can be fully customized.</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Tables display information in a way that&#39;s easy to scan, so that users can look for patterns and
 				insights. They can be embedded in primary content, such as cards. They can include:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>A corresponding visualization</li>
 				<li>Navigation</li>
 				<li>Tools to query and manipulate data</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Introduction
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Tables are implemented using a collection of related components:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<code>{`<TableContainer />`}</code>: A wrapper that provides horizontally scrolling behavior for the{' '}
 					<code>{`<Table />`}</code> component.
@@ -121,44 +121,44 @@ function TableDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic table
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A simple example with no frills.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicTableComponent}
 					raw={BasicTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Data table
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>Table</code> component has a close mapping to the native <code>{`<table>`}</code> elements.
 				This constraint makes building rich data tables challenging.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The{' '}
@@ -169,49 +169,49 @@ function TableDoc(props) {
 				with a more rigid structure, in exchange, you gain more powerful features.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="DataTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={DataTableComponent}
 					raw={DataTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Dense table
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A simple example of a dense table with no frills.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="DenseTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={DenseTableComponent}
 					raw={DenseTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Sorting &amp; selecting
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				This example demonstrates the use of <code>Checkbox</code> and clickable rows for selection, with a
@@ -219,7 +219,7 @@ function TableDoc(props) {
 				headings.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The Table has been given a fixed width to demonstrate horizontal scrolling. In order to prevent the
@@ -228,59 +228,59 @@ function TableDoc(props) {
 				the pagination within the TableFooter.)
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="EnhancedTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={EnhancedTableComponent}
 					raw={EnhancedTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Here is an example of customizing the component. You can learn more about this in the{' '}
 				<a href="/material-ui/customization/how-to-customize/">overrides documentation page</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomizedTables.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomizedTablesComponent}
 					raw={CustomizedTablesRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Custom pagination options
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				It&#39;s possible to customize the options shown in the &quot;Rows per page&quot; select using the{' '}
 				<code>rowsPerPageOptions</code> prop. You should either provide an array of:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						<strong>numbers</strong>, each number will be used for the option&#39;s label and value.
@@ -297,7 +297,7 @@ function TableDoc(props) {
 				</li>
 				<li>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						<strong>objects</strong>, the <code>value</code> and <code>label</code> keys will be used
@@ -316,63 +316,63 @@ function TableDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Custom pagination actions
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>ActionsComponent</code> prop of the <code>TablePagination</code> component allows the
 				implementation of custom actions.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomPaginationActionsTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomPaginationActionsTableComponent}
 					raw={CustomPaginationActionsTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Sticky header
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Here is an example of a table with scrollable rows and fixed column headers. It leverages the{' '}
 				<code>stickyHeader</code> prop.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="StickyHeadTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={StickyHeadTableComponent}
 					raw={StickyHeadTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Column grouping
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can group column headers by rendering multiple table rows inside a table head:
@@ -390,25 +390,25 @@ function TableDoc(props) {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ColumnGroupingTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ColumnGroupingTableComponent}
 					raw={ColumnGroupingTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Collapsible table
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				An example of a table with expandable rows, revealing more information. It utilizes the{' '}
@@ -418,49 +418,49 @@ function TableDoc(props) {
 				component.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CollapsibleTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CollapsibleTableComponent}
 					raw={CollapsibleTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Spanning table
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A simple example with spanning rows &amp; columns.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SpanningTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SpanningTableComponent}
 					raw={SpanningTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Virtualized table
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				In the following example, we demonstrate how to use{' '}
@@ -468,38 +468,38 @@ function TableDoc(props) {
 				component. It renders 200 rows and can easily handle more. Virtualization helps with performance issues.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ReactVirtualizedTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ReactVirtualizedTableComponent}
 					raw={ReactVirtualizedTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				(WAI tutorial:{' '}
 				<a href="https://www.w3.org/WAI/tutorials/tables/">https://www.w3.org/WAI/tutorials/tables/</a>)
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Caption
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A caption functions like a heading for a table. Most screen readers announce the content of captions.
@@ -507,25 +507,25 @@ function TableDoc(props) {
 				it.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="AccessibleTable.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={AccessibleTableComponent}
 					raw={AccessibleTableRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Unstyled
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If you would like to use an unstyled Table, you can use the primitive HTML elements and enhance the

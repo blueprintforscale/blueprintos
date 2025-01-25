@@ -20,7 +20,7 @@ function ContactListItem(props: ContactListItemPropsType) {
 	return (
 		<>
 			<ListItemButton
-				className="px-32 py-16"
+				className="px-8 py-4"
 				sx={{ bgcolor: 'background.paper' }}
 				component={NavLinkAdapter}
 				to={`/apps/contacts/${contact.id}`}

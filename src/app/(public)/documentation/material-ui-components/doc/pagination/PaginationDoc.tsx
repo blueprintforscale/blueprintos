@@ -43,7 +43,7 @@ function PaginationDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Pagination
@@ -53,134 +53,134 @@ function PaginationDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic pagination
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicPagination.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicPaginationComponent}
 					raw={BasicPaginationRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Outlined pagination
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PaginationOutlined.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PaginationOutlinedComponent}
 					raw={PaginationOutlinedRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Rounded pagination
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PaginationRounded.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PaginationRoundedComponent}
 					raw={PaginationRoundedRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Pagination size
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PaginationSize.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PaginationSizeComponent}
 					raw={PaginationSizeRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Buttons
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can optionally enable first-page and last-page buttons, or disable the previous-page and next-page
 				buttons.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PaginationButtons.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PaginationButtonsComponent}
 					raw={PaginationButtonsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Custom icons
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				It&#39;s possible to customize the control icons.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomIcons.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomIconsComponent}
 					raw={CustomIconsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Pagination ranges
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can specify how many digits to display either side of current page with the{' '}
@@ -188,43 +188,43 @@ function PaginationDoc(props) {
 				<code>boundaryCount</code> prop.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PaginationRanges.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PaginationRangesComponent}
 					raw={PaginationRangesRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Controlled pagination
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PaginationControlled.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PaginationControlledComponent}
 					raw={PaginationControlledRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				<code>usePagination</code>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For advanced customization use cases, a headless <code>usePagination()</code> hook is exposed. It
@@ -241,51 +241,51 @@ import usePagination from '@mui/material/usePagination';
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="UsePagination.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={UsePaginationComponent}
 					raw={UsePaginationRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Table pagination
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>Pagination</code> component was designed to paginate a list of arbitrary items when infinite
 				loading isn&#39;t used. It&#39;s preferred in contexts where SEO is important, for instance, a blog.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For the pagination of a large set of tabular data, you should use the <code>TablePagination</code>{' '}
 				component.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="TablePaginationDemo.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={TablePaginationDemoComponent}
 					raw={TablePaginationDemoRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				:::warning Note that the <code>Pagination</code> page prop starts at 1 to match the requirement of
@@ -293,26 +293,26 @@ import usePagination from '@mui/material/usePagination';
 				the requirement of zero-based JavaScript arrays that come with rendering a lot of tabular data. :::
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can learn more about this use case in the{' '}
 				<a href="/material-ui/react-table/#custom-pagination-options">table section</a> of the documentation.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				ARIA
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The root node has a role of &quot;navigation&quot; and aria-label &quot;pagination navigation&quot; by
@@ -321,13 +321,13 @@ import usePagination from '@mui/material/usePagination';
 				using the <code>getItemAriaLabel</code> prop.
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Keyboard
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The pagination items are in tab order, with a tabindex of &quot;0&quot;.

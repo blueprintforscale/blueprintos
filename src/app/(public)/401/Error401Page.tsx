@@ -12,8 +12,8 @@ function Error401Page() {
 	const isAuthenticated = status === 'authenticated';
 
 	return (
-		<div className="flex flex-1 flex-col items-center justify-center p-16">
-			<div className="w-full max-w-3xl text-center">
+		<div className="flex flex-1 flex-col items-center justify-center p-4">
+			<div className="w-full max-w-5xl text-center">
 				<motion.div
 					initial={{ opacity: 0, scale: 0.6 }}
 					animate={{ opacity: 1, scale: 1, transition: { delay: 0.1 } }}
@@ -189,7 +189,7 @@ function Error401Page() {
 				>
 					<Typography
 						variant="h1"
-						className="mt-48 text-center text-4xl font-extrabold leading-tight tracking-tight sm:mt-96 md:text-7xl md:leading-none"
+						className="mt-12 text-center text-4xl font-extrabold leading-[1.25] tracking-tight sm:mt-24 md:text-7xl md:leading-none"
 					>
 						Unauthorized Access
 					</Typography>
@@ -208,21 +208,21 @@ function Error401Page() {
 					<Typography
 						variant="h5"
 						color="text.secondary"
-						className="mt-8 text-center text-lg font-medium tracking-tight md:text-xl"
+						className="mt-2 text-center text-lg font-medium tracking-tight md:text-xl"
 					>
 						You do not have permission to view this page.
 					</Typography>
 				</motion.div>
 				{isAuthenticated ? (
 					<Link
-						className="mt-48 block font-normal"
+						className="mt-12 block font-normal"
 						to="/"
 					>
 						Back to Home
 					</Link>
 				) : (
 					<Link
-						className="mt-48 block font-normal"
+						className="mt-12 block font-normal"
 						to="/sign-in"
 					>
 						Back to sign-in

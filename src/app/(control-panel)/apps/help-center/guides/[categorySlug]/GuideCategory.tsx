@@ -22,15 +22,15 @@ function GuideCategory() {
 	});
 
 	return (
-		<div className="flex flex-col items-center p-24 sm:p-40 container">
-			<div className="flex flex-col w-full max-w-4xl">
-				<div className="sm:mt-32">
+		<div className="flex flex-col items-center p-6 sm:p-10 container">
+			<div className="flex flex-col w-full max-w-6xl">
+				<div className="sm:mt-8">
 					<PageBreadcrumb />
 				</div>
-				<div className="mt-8 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight">
+				<div className="mt-2 text-4xl sm:text-7xl font-extrabold tracking-tight leading-[1.25]">
 					{category?.title}
 				</div>
-				<div className="mt-32 sm:mt-48">
+				<div className="mt-8 sm:mt-12">
 					<GuideListMenu
 						list={guides}
 						categorySlug={categorySlug}

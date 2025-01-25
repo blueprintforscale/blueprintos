@@ -70,10 +70,10 @@ function FuseCountdown(props: FuseCountdownProps) {
 
 	return (
 		<div className={clsx('flex items-center', className)}>
-			<div className="flex flex-col items-center justify-center px-12">
+			<div className="flex flex-col items-center justify-center px-3">
 				<Typography
 					variant="h4"
-					className="mb-4"
+					className="mb-1"
 				>
 					{countdown.days}
 				</Typography>
@@ -84,10 +84,10 @@ function FuseCountdown(props: FuseCountdownProps) {
 					days
 				</Typography>
 			</div>
-			<div className="flex flex-col items-center justify-center px-12">
+			<div className="flex flex-col items-center justify-center px-3">
 				<Typography
 					variant="h4"
-					className="mb-4"
+					className="mb-1"
 				>
 					{countdown.hours}
 				</Typography>
@@ -98,10 +98,10 @@ function FuseCountdown(props: FuseCountdownProps) {
 					hours
 				</Typography>
 			</div>
-			<div className="flex flex-col items-center justify-center px-12">
+			<div className="flex flex-col items-center justify-center px-3">
 				<Typography
 					variant="h4"
-					className="mb-4"
+					className="mb-1"
 				>
 					{countdown.minutes}
 				</Typography>
@@ -112,10 +112,10 @@ function FuseCountdown(props: FuseCountdownProps) {
 					minutes
 				</Typography>
 			</div>
-			<div className="flex flex-col items-center justify-center px-12">
+			<div className="flex flex-col items-center justify-center px-3">
 				<Typography
 					variant="h4"
-					className="mb-4"
+					className="mb-1"
 				>
 					{countdown.seconds}
 				</Typography>

@@ -65,8 +65,8 @@ function CardChecklist(props: CardChecklistProps) {
 	}
 
 	return (
-		<div className="mb-24">
-			<div className="flex items-center justify-between mt-16 mb-12">
+		<div className="mb-6">
+			<div className="flex items-center justify-between mt-4 mb-3">
 				<div className="flex items-center">
 					<FuseSvgIcon size={20}>heroicons-outline:check-circle</FuseSvgIcon>
 					<Controller
@@ -98,13 +98,13 @@ function CardChecklist(props: CardChecklistProps) {
 						onClose={handleMenuClose}
 					>
 						<MenuItem onClick={onRemoveCheckList}>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>heroicons-outline:trash</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Remove Checklist" />
 						</MenuItem>
 						<MenuItem onClick={handleOpenNameForm}>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>heroicons-outline:pencil</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Rename Checklist" />
@@ -114,12 +114,12 @@ function CardChecklist(props: CardChecklistProps) {
 			</div>
 
 			<div>
-				<div className="flex items-center -mx-6">
-					<Typography className="flex font-semibold mx-6">
+				<div className="flex items-center -mx-1.5">
+					<Typography className="flex font-semibold mx-1.5">
 						{`${checkItemsChecked()} / ${form.checkItems.length}`}
 					</Typography>
 					<LinearProgress
-						className="flex flex-1 mx-6"
+						className="flex flex-1 mx-1.5"
 						variant="determinate"
 						color="secondary"
 						value={(100 * checkItemsChecked()) / form.checkItems.length}

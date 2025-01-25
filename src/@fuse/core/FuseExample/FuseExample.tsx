@@ -34,7 +34,7 @@ function FuseExample(props: FuseExampleProps) {
 	}
 
 	return (
-		<Card className={clsx(className, 'shadow not-prose')}>
+		<Card className={clsx(className, 'shadow-sm not-prose')}>
 			<Box
 				sx={{
 					backgroundColor: (theme) =>
@@ -53,13 +53,13 @@ function FuseExample(props: FuseExampleProps) {
 				>
 					{Component && (
 						<Tab
-							classes={{ root: 'min-w-64' }}
+							classes={{ root: 'min-w-16' }}
 							icon={<FuseSvgIcon>heroicons-outline:eye</FuseSvgIcon>}
 						/>
 					)}
 					{raw && (
 						<Tab
-							classes={{ root: 'min-w-64' }}
+							classes={{ root: 'min-w-16' }}
 							icon={<FuseSvgIcon>heroicons-outline:code-bracket</FuseSvgIcon>}
 						/>
 					)}
@@ -73,7 +73,7 @@ function FuseExample(props: FuseExampleProps) {
 								<Component />
 							</DemoFrame>
 						) : (
-							<div className="flex max-w-full flex-1 justify-center p-24">
+							<div className="flex max-w-full flex-1 justify-center p-6">
 								<Component />
 							</div>
 						))}

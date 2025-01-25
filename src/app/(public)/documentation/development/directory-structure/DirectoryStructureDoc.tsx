@@ -10,12 +10,12 @@ function DirectoryStructureDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Directory Structure and Naming Conventions
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This document explains the directory structure and naming conventions used in the Fuse React Nextjs
@@ -25,7 +25,7 @@ function DirectoryStructureDoc() {
 			</Typography>
 			<FuseHighlight
 				component="pre"
-				className="language-jsx my-24"
+				className="language-jsx my-6"
 			>
 				{`
 				.
@@ -55,19 +55,19 @@ function DirectoryStructureDoc() {
 				└── utils`}
 			</FuseHighlight>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				The directory structure of this Fuse React Nextjs project is organized by feature and functionality,
 				with each major section having its own directory.
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<strong>Key Directories:</strong>
 			</Typography>
-			<ul className="list-disc list-inside mb-16">
+			<ul className="list-disc list-inside mb-4">
 				<li>
 					<code>app/</code>: The main application directory using Next.js 13+ App Router.
 				</li>
@@ -103,12 +103,12 @@ function DirectoryStructureDoc() {
 				</li>
 			</ul>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<strong>Naming Conventions:</strong>
 			</Typography>
-			<ul className="list-disc list-inside mb-16">
+			<ul className="list-disc list-inside mb-4">
 				<li>
 					React components use PascalCase (e.g., <code>MainLayout.tsx</code>, <code>PageTitle.tsx</code>).
 				</li>
@@ -123,7 +123,7 @@ function DirectoryStructureDoc() {
 				<li>Feature-specific components and utilities are grouped in directories named after the feature.</li>
 			</ul>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This structure supports a modular and scalable approach to building complex applications with Fuse React

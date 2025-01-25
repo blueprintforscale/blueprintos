@@ -40,14 +40,14 @@ const IconListItem = React.memo((props: IconItemProps) => {
 			arrow
 		>
 			<Paper
-				className="flex flex-col items-center  px-8 py-16 border-2 min-h-0 rounded cursor-pointer"
+				className="flex flex-col items-center px-2 py-4 border-2 min-h-0 rounded-sm cursor-pointer"
 				elevation={0}
 				onClick={handleSelect}
 				{...rest}
 			>
-				<div className="flex items-center justify-center my-16">
+				<div className="flex items-center justify-center my-4">
 					<FuseSvgIcon
-						className="text-48"
+						className="text-7xl"
 						size={size}
 						color="action"
 					>

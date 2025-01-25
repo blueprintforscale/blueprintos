@@ -54,9 +54,7 @@ type FuseNavHorizontalGroupProps = FuseNavItemComponentProps & WithRouterProps;
 function FuseNavHorizontalGroup(props: FuseNavHorizontalGroupProps) {
 	const { item, nestedLevel, dense, checkPermission } = props;
 	const [opened, setOpened] = useState(false);
-
 	const pathname = usePathname();
-
 	const theme = useTheme();
 	const component = item.url ? NavLinkAdapter : 'li';
 
@@ -123,7 +121,7 @@ function FuseNavHorizontalGroup(props: FuseNavHorizontalGroupProps) {
 								{nestedLevel > 0 && (
 									<IconButton
 										disableRipple
-										className="h-16 w-16 p-0 ltr:ml-4 rtl:mr-4"
+										className="h-4 w-4 p-0 ltr:ml-1 rtl:mr-1"
 										color="inherit"
 									>
 										<FuseSvgIcon
@@ -159,7 +157,7 @@ function FuseNavHorizontalGroup(props: FuseNavHorizontalGroupProps) {
 										style={{ transformOrigin: '0 0 0' }}
 									>
 										<Paper
-											className="rounded"
+											className="rounded-sm"
 											onMouseEnter={() => handleToggle(true)}
 											onMouseLeave={() => handleToggle(false)}
 										>

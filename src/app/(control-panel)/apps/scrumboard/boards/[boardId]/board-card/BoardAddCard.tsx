@@ -112,7 +112,7 @@ function BoardAddCard(props: BoardAddCardProps) {
 										...field,
 										endAdornment: (
 											<InputAdornment
-												className="space-x-8 px-4"
+												className="space-x-2 px-1"
 												position="end"
 											>
 												<IconButton
@@ -122,7 +122,7 @@ function BoardAddCard(props: BoardAddCardProps) {
 													<FuseSvgIcon size={16}>heroicons-outline:x-mark</FuseSvgIcon>
 												</IconButton>
 												<Button
-													className="rounded min-h-28 max-h-28 p-0"
+													className="rounded-sm min-h-7 max-h-7 p-0"
 													variant="contained"
 													color="secondary"
 													type="submit"
@@ -144,7 +144,7 @@ function BoardAddCard(props: BoardAddCardProps) {
 					variant="contained"
 					onClick={handleOpenForm}
 					classes={{
-						root: 'font-medium w-full rounded-lg p-24 justify-start'
+						root: 'font-medium w-full rounded-lg p-6 justify-start'
 					}}
 					startIcon={<FuseSvgIcon>heroicons-outline:plus-circle</FuseSvgIcon>}
 					sx={{

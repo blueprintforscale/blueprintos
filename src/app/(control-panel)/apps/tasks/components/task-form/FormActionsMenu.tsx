@@ -59,7 +59,7 @@ function FormActionsMenu(props: FormActionsMenuProps) {
 				}}
 			>
 				<MenuItem onClick={handleRemoveTask}>
-					<ListItemIcon className="min-w-36">
+					<ListItemIcon className="min-w-9">
 						<FuseSvgIcon>heroicons-outline:trash</FuseSvgIcon>
 					</ListItemIcon>
 					<ListItemText primary="Delete" />

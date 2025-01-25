@@ -22,7 +22,7 @@ function OverviewPageLayoutsUI() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Page Layouts
 			</Typography>
@@ -30,7 +30,7 @@ function OverviewPageLayoutsUI() {
 			<section className="prose prose-sm dark:prose-invert">
 				<Typography
 					variant="h5"
-					className="text-2xl font-700 mb-16"
+					className="text-2xl font-bold mb-4"
 				>
 					Introduction
 				</Typography>
@@ -42,7 +42,7 @@ function OverviewPageLayoutsUI() {
 
 				<Typography
 					variant="h6"
-					className="text-xl font-600 mt-24 mb-16"
+					className="text-xl font-semibold mt-6 mb-4"
 				>
 					Key Benefits
 				</Typography>
@@ -65,7 +65,7 @@ function OverviewPageLayoutsUI() {
 
 				<Typography
 					variant="h6"
-					className="text-xl font-600 mt-24 mb-16"
+					className="text-xl font-semibold mt-6 mb-4"
 				>
 					Using Page Layouts
 				</Typography>
@@ -76,15 +76,15 @@ function OverviewPageLayoutsUI() {
 				</Typography>
 			</section>
 
-			<section className="mt-32">
+			<section className="mt-8">
 				<Typography
 					variant="h5"
-					className="text-2xl font-700 mb-16"
+					className="text-2xl font-bold mb-4"
 				>
 					Available Page Layout Components
 				</Typography>
-				<ul className="list-disc pl-24">
-					<li className="mb-8">
+				<ul className="list-disc pl-6">
+					<li className="mb-2">
 						<Link
 							to="/documentation/user-interface/page-layouts/simple/full-width"
 							className="text-blue-500 hover:underline"
@@ -93,7 +93,7 @@ function OverviewPageLayoutsUI() {
 						</Link>
 						- A versatile layout for general-purpose pages.
 					</li>
-					<li className="mb-8">
+					<li className="mb-2">
 						<Link
 							to="/documentation/user-interface/page-layouts/carded/with-sidebars"
 							className="text-blue-500 hover:underline"
@@ -107,7 +107,7 @@ function OverviewPageLayoutsUI() {
 
 			<Typography
 				paragraph
-				className="mt-32"
+				className="mt-8"
 			>
 				Explore the documentation for each layout component to learn more about their specific features and
 				usage guidelines. By leveraging these pre-built layouts, you can significantly streamline your

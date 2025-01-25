@@ -51,7 +51,7 @@ function Grid2Doc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Grid version 2
@@ -61,25 +61,25 @@ function Grid2Doc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>Grid</code> component works well for a layout with a known number of columns. The columns can
 				be configured with multiple breakpoints to specify the column span of each child.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				How it works
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The grid system is implemented with the <code>Grid</code> component:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					It uses <a href="https://www.w3.org/TR/css-flexbox-1/">CSS Flexbox</a> (rather than CSS Grid) for
 					high flexibility.
@@ -123,7 +123,7 @@ function Grid2Doc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				:::warning The <code>Grid</code> component is a <em>layout</em> grid, not a <em>data</em> grid. If you
@@ -134,58 +134,58 @@ function Grid2Doc(props) {
 				. :::
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Fluid grids
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Fluid grids use columns that scale and resize content. A fluid grid&#39;s layout can use breakpoints to
 				determine if the layout needs to change dramatically.
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Basic grid
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				In order to create a grid layout, you need a container. Use the <code>container</code> prop to create a
 				grid container that wraps the grid items (the <code>Grid</code> is always an item).
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Column widths are integer values between 1 and 12. For example, an item with <code>{`size={6}`}</code>{' '}
 				occupies half of the grid container&#39;s width.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicGridComponent}
 					raw={BasicGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Multiple breakpoints
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Items may have multiple widths defined, causing the layout to change at the defined breakpoint. Width
@@ -193,7 +193,7 @@ function Grid2Doc(props) {
 				breakpoints.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For example, a component with <code>{`size={{ xs: 12, sm: 6 }}`}</code> occupies the entire viewport
@@ -203,25 +203,25 @@ function Grid2Doc(props) {
 				rather than 12.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FullWidthGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={FullWidthGridComponent}
 					raw={FullWidthGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Spacing
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Use the <code>spacing</code> prop to control the space between children. The spacing value can be any
@@ -232,31 +232,31 @@ function Grid2Doc(props) {
 				helper.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The following demo illustrates the use of the <code>spacing</code> prop:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SpacingGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SpacingGridComponent}
 					raw={SpacingGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Row and column spacing
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>rowSpacing</code> and <code>columnSpacing</code> props let you specify row and column gaps
@@ -264,25 +264,25 @@ function Grid2Doc(props) {
 				<code>column-gap</code> properties of <a href="/system/grid/#row-gap-amp-column-gap">CSS Grid</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="RowAndColumnSpacing.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={RowAndColumnSpacingComponent}
 					raw={RowAndColumnSpacingRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Responsive values
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can set prop values to change when a given breakpoint is active. For instance, we can implement
@@ -291,24 +291,24 @@ function Grid2Doc(props) {
 				layout grid, as seen in the following demo:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ResponsiveGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ResponsiveGridComponent}
 					raw={ResponsiveGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Responsive values are supported by:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<code>size</code>
 				</li>
@@ -332,63 +332,63 @@ function Grid2Doc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Auto-layout
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The auto-layout feature gives equal space to all items present. When you set the width of one item, the
 				others will automatically resize to match it.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="AutoGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={AutoGridComponent}
 					raw={AutoGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Variable width content
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				When a breakpoint&#39;s value is given as <code>{`"auto"`}</code>, then a column&#39;s size will
 				automatically adjust to match the width of its content. The demo below shows how this works:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="VariableWidthGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={VariableWidthGridComponent}
 					raw={VariableWidthGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Nested grid
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The grid container that renders as a <strong>direct child</strong> inside another grid container is a
@@ -403,13 +403,13 @@ function Grid2Doc(props) {
 				from the top level. It will also inherit the props of the top-level grid if it receives those props.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				:::success
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Note that a nested grid container should be a direct child of another grid container. If there are
@@ -428,99 +428,99 @@ function Grid2Doc(props) {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				:::
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Inheriting spacing
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A nested grid container inherits the row and column spacing from its parent unless the{' '}
 				<code>spacing</code> prop is specified to the instance.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="NestedGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={NestedGridComponent}
 					raw={NestedGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Inheriting columns
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A nested grid container inherits the columns from its parent unless the <code>columns</code> prop is
 				specified to the instance.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="NestedGridColumns.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={NestedGridColumnsComponent}
 					raw={NestedGridColumnsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Columns
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Use the <code>columns</code> prop to change the default number of columns (12) in the grid, as shown
 				below:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ColumnsGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ColumnsGridComponent}
 					raw={ColumnsGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Offset
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>offset</code> prop pushes an item to the right side of the grid. This props accepts:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					numbers—for example, <code>{`offset={{ md: 2 }}`}</code> pushes an item two columns to the right
 					when the viewport size is equal to or greater than the <code>md</code> breakpoint.
@@ -530,31 +530,31 @@ function Grid2Doc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The demo below illustrates how to use the offset props:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="OffsetGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={OffsetGridComponent}
 					raw={OffsetGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Custom breakpoints
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If you specify custom breakpoints in the theme, you can use those names as grid item props in responsive
@@ -594,9 +594,9 @@ function Demo() {
 }
 `}
 			</FuseHighlight>
-			<div className="border-1 p-16 rounded-xl my-12">
+			<div className="border-1 p-4 rounded-xl my-3">
 				<Typography
-					className="text-base mb-32"
+					className="text-base mb-8"
 					component="div"
 				>
 					Custom breakpoints affect all <a href="#responsive-values">responsive values</a>.
@@ -604,13 +604,13 @@ function Demo() {
 			</div>
 
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				TypeScript
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You have to set module augmentation on the theme breakpoints interface.
@@ -639,19 +639,19 @@ declare module '@mui/system' {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Centered elements
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				To center a grid item&#39;s content, specify <code>{`display="flex"`}</code> directly on the item. Then
@@ -659,81 +659,81 @@ declare module '@mui/system' {
 				shown below:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CenteredElementGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CenteredElementGridComponent}
 					raw={CenteredElementGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				:::warning Using the <code>container</code> prop does not work in this situation because the grid
 				container is designed exclusively to wrap grid items. It cannot wrap other elements. :::
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Full border
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FullBorderedGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={FullBorderedGridComponent}
 					raw={FullBorderedGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Half border
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="HalfBorderedGrid.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={HalfBorderedGridComponent}
 					raw={HalfBorderedGridRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Limitations
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Column direction and reversing
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>size</code> and <code>offset</code> props are <em>not</em> supported within containers that
 				use <code>{`direction="column"`}</code> or <code>{`direction="column-reverse"`}</code>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Size and offset props define the number of columns the component will use for a given breakpoint. They

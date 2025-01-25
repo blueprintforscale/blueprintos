@@ -12,13 +12,13 @@ function FuseThemeDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				FuseTheme
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>FuseTheme</code> is the theming component of the Fuse React. It allows us to change predefined
@@ -26,7 +26,7 @@ function FuseThemeDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>src/app/App.tsx</code>
@@ -40,19 +40,19 @@ function FuseThemeDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Configuration
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Please checkout
 				<Link
-					className="font-normal mx-4"
+					className="font-normal mx-1"
 					to="/documentation/theming/theme-schemes"
 				>
 					theming

@@ -26,19 +26,19 @@ function FusePageCardedDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				FusePageCarded
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>FusePageCarded</code> is the carded page layout component of the Fuse React.
 			</Typography>
 			<Typography
-				className="mb-24"
+				className="mb-6"
 				component="p"
 			>
 				The component has layout areas to easily enter the contents of the app.
@@ -68,7 +68,7 @@ function FusePageCardedDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Demos
@@ -78,7 +78,7 @@ function FusePageCardedDoc() {
 				{demos.map((demo) => (
 					<li
 						key={demo.url}
-						className="mb-8"
+						className="mb-2"
 					>
 						<Link to={demo.url}>{demo.title}</Link>
 					</li>

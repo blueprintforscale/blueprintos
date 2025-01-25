@@ -22,14 +22,14 @@ const Root = styled('div')(({ theme }) => ({
  */
 function Logo() {
 	return (
-		<Root className="flex flex-1 items-center space-x-12">
-			<div className="flex flex-1 items-center space-x-8 px-10">
+		<Root className="flex flex-1 items-center space-x-3">
+			<div className="flex flex-1 items-center space-x-2 px-2.5">
 				<img
-					className="logo-icon h-32 w-32"
+					className="logo-icon h-8 w-8"
 					src="/assets/images/logo/logo.svg"
 					alt="logo"
 				/>
-				<div className="logo-text flex flex-col flex-auto gap-2">
+				<div className="logo-text flex flex-col flex-auto gap-0.5">
 					<Typography className="text-2xl tracking-light font-semibold leading-none">FUSE</Typography>
 					<Typography
 						className="text-[13.6px] tracking-light font-semibold leading-none"

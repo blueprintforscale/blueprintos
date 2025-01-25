@@ -32,10 +32,10 @@ function ScheduleWidget() {
 	}
 
 	return (
-		<Paper className="flex flex-col flex-auto p-24 shadow rounded-xl overflow-hidden h-full">
+		<Paper className="flex flex-col flex-auto p-6 shadow-sm rounded-xl overflow-hidden h-full">
 			<div className="flex flex-col sm:flex-row items-start justify-between">
 				<Typography className="text-lg font-medium tracking-tight leading-6 truncate">Schedule</Typography>
-				<div className="mt-12 sm:mt-0">
+				<div className="mt-3 sm:mt-0">
 					<FuseTabs
 						value={tabValue}
 						onChange={(ev, value: number) => setTabValue(value)}
@@ -50,7 +50,7 @@ function ScheduleWidget() {
 					</FuseTabs>
 				</div>
 			</div>
-			<List className="py-0 mt-8 divide-y">
+			<List className="py-0 mt-2 divide-y">
 				{series[currentRange].map((item, index) => (
 					<ListItem
 						key={index}
@@ -60,7 +60,7 @@ function ScheduleWidget() {
 							classes={{ root: 'px-8', primary: 'font-medium' }}
 							primary={item.title}
 							secondary={
-								<span className="flex flex-col sm:flex-row sm:items-center -ml-2 mt-8 sm:mt-4 space-y-4 sm:space-y-0 sm:space-x-12">
+								<span className="flex flex-col sm:flex-row sm:items-center -ml-0.5 mt-2 sm:mt-1 space-y-1 sm:space-y-0 sm:space-x-3">
 									{item.time && (
 										<span className="flex items-center">
 											<FuseSvgIcon
@@ -71,7 +71,7 @@ function ScheduleWidget() {
 											</FuseSvgIcon>
 											<Typography
 												component="span"
-												className="mx-6 text-md"
+												className="mx-1.5 text-md"
 												color="text.secondary"
 											>
 												{item.time}
@@ -89,7 +89,7 @@ function ScheduleWidget() {
 											</FuseSvgIcon>
 											<Typography
 												component="span"
-												className="mx-6 text-md"
+												className="mx-1.5 text-md"
 												color="text.secondary"
 											>
 												{item.location}

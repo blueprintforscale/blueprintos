@@ -55,7 +55,7 @@ function DocumentationLayout(props: DocumentationLayoutProps) {
 		<Root
 			header={
 				<div>
-					<div className="flex flex-col items-start sm:items-center sm:flex-row justify-center py-4 px-12 max-w-full h-full">
+					<div className="flex flex-col items-start sm:items-center sm:flex-row justify-center py-1 px-3 max-w-full h-full">
 						<div className="flex flex-1 items-center">
 							<IconButton
 								onClick={() => setLeftSidebarOpen(!leftSidebarOpen)}
@@ -69,7 +69,7 @@ function DocumentationLayout(props: DocumentationLayoutProps) {
 								maxItems={isMobile ? 2 : 5}
 							/>
 						</div>
-						<div className="flex flex-shrink justify-end items-center space-x-4">
+						<div className="flex shrink justify-end items-center space-x-1">
 							<PurchaseButton size="small">Purchase</PurchaseButton>
 							<Button
 								className="whitespace-nowrap"
@@ -87,15 +87,15 @@ function DocumentationLayout(props: DocumentationLayoutProps) {
 				</div>
 			}
 			content={
-				<div className="p-16 md:p-24 min-h-full flex flex-auto flex-col">
-					<div className="flex flex-col flex-1 relative pb-32 prose max-w-4xl dark:prose-invert">
+				<div className="p-4 md:p-6 min-h-full flex flex-auto flex-col">
+					<div className="flex flex-col flex-1 relative pb-8 prose max-w-6xl dark:prose-invert">
 						{children}
 					</div>
 				</div>
 			}
 			leftSidebarContent={
-				<div className="px-4 py-24">
-					<DocumentationSidebarHeader className="mb-32 px-16" />
+				<div className="px-1 py-6">
+					<DocumentationSidebarHeader className="mb-8 px-4" />
 					<FuseNavigation
 						className={clsx('navigation')}
 						navigation={DocumentationNavigation.children}

@@ -17,7 +17,7 @@ function NotificationTemplate(props: NotificationTemplateProps) {
 	return (
 		<SnackbarContent
 			ref={ref}
-			className="pointer-events-auto relative mx-auto w-full max-w-320 py-4"
+			className="pointer-events-auto relative mx-auto w-full max-w-80 py-1"
 		>
 			<NotificationCard
 				item={item}

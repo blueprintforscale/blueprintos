@@ -34,7 +34,7 @@ function MembersMenu(props: MembersMenuProps) {
 	return (
 		<div>
 			<IconButton
-				className="rounded-0"
+				className="rounded-none"
 				onClick={handleMenuOpen}
 				size="large"
 			>
@@ -48,7 +48,7 @@ function MembersMenu(props: MembersMenuProps) {
 					{members.map((member) => {
 						return (
 							<MenuItem
-								className="px-8"
+								className="px-2"
 								key={member.id}
 								onClick={() => {
 									onToggleMember(member.id);
@@ -56,10 +56,10 @@ function MembersMenu(props: MembersMenuProps) {
 							>
 								<Checkbox checked={memberIds.includes(member.id)} />
 								<Avatar
-									className="w-32 h-32"
+									className="w-8 h-8"
 									src={member.avatar}
 								/>
-								<ListItemText className="mx-8">{member.name}</ListItemText>
+								<ListItemText className="mx-2">{member.name}</ListItemText>
 							</MenuItem>
 						);
 					})}

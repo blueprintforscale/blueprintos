@@ -17,7 +17,7 @@ function PricingTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						label="Tax Excluded Price"
 						id="priceTaxExcl"
 						InputProps={{
@@ -37,7 +37,7 @@ function PricingTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						label="Tax Included Price"
 						id="priceTaxIncl"
 						InputProps={{
@@ -56,7 +56,7 @@ function PricingTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						label="Tax Rate"
 						id="taxRate"
 						InputProps={{
@@ -75,7 +75,7 @@ function PricingTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						label="Compared Price"
 						id="comparedPrice"
 						InputProps={{

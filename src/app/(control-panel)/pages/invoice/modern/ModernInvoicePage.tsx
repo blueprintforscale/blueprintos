@@ -10,25 +10,25 @@ import Typography from '@mui/material/Typography';
  */
 function ModernInvoicePage() {
 	return (
-		<div className="inline-block w-full overflow-auto p-24 text-left sm:p-40 print:p-0">
+		<div className="inline-block w-full overflow-auto p-6 text-left sm:p-10 print:p-0">
 			<motion.div
 				initial={{ opacity: 0, y: 200 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ bounceDamping: 0 }}
 			>
-				<Card className="mx-auto w-xl rounded-xl p-64 shadow print:w-auto print:rounded-none print:bg-transparent print:shadow-none">
+				<Card className="mx-auto w-3xl rounded-xl p-16 shadow-sm print:w-auto print:rounded-none print:bg-transparent print:shadow-none">
 					<CardContent>
 						<div className="flex items-start">
-							<div className="grid grid-rows-2 place-items-start gap-y-48">
-								<div className="grid auto-cols-max grid-flow-col gap-x-32">
-									<div className="w-96 place-self-center">
+							<div className="grid grid-rows-2 place-items-start gap-y-12">
+								<div className="grid auto-cols-max grid-flow-col gap-x-8">
+									<div className="w-24 place-self-center">
 										<img
-											className="w-96"
+											className="w-24"
 											src="/assets/images/logo/logo.svg"
 											alt="lozgo"
 										/>
 									</div>
-									<div className="border-l pl-40 text-md">
+									<div className="border-l pl-10 text-md">
 										<Typography className="font-medium">Fuse Inc.</Typography>
 										<Typography>2810 Country Club Road</Typography>
 										<Typography>Cranford, NJ 07016</Typography>
@@ -37,14 +37,14 @@ function ModernInvoicePage() {
 										<Typography>www.fuseinc.com</Typography>
 									</div>
 								</div>
-								<div className="grid auto-cols-max grid-flow-col gap-x-32">
+								<div className="grid auto-cols-max grid-flow-col gap-x-8">
 									<Typography
-										className="w-96 place-self-center text-center text-2xl"
+										className="w-24 place-self-center text-center text-2xl"
 										color="text.secondary"
 									>
 										Bill To
 									</Typography>
-									<div className="border-l pl-40 text-md">
+									<div className="border-l pl-10 text-md">
 										<Typography className="font-medium">Brian Hughes</Typography>
 										<Typography>9301 Wood Street</Typography>
 										<Typography>Philadelphia, PA 19111</Typography>
@@ -53,7 +53,7 @@ function ModernInvoicePage() {
 									</div>
 								</div>
 							</div>
-							<div className="ml-auto grid grid-cols-2 gap-x-16 gap-y-4">
+							<div className="ml-auto grid grid-cols-2 gap-x-4 gap-y-1">
 								<Typography
 									className="justify-self-end text-4xl tracking-tight"
 									color="text.secondary"
@@ -85,7 +85,7 @@ function ModernInvoicePage() {
 							</div>
 						</div>
 
-						<div className="mt-16 grid grid-cols-12 gap-x-4">
+						<div className="mt-4 grid grid-cols-12 gap-x-1">
 							<Typography
 								className="col-span-8 text-md font-medium"
 								color="text.secondary"
@@ -111,12 +111,12 @@ function ModernInvoicePage() {
 								TOTAL
 							</Typography>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<div className="col-span-8">
 								<Typography className="text-lg font-medium">Prototype & Design</Typography>
 								<Typography
-									className="mt-8 text-md"
+									className="mt-2 text-md"
 									color="text.secondary"
 								>
 									Prototyping of the application's general workflow and the detailed design of its 72
@@ -127,12 +127,12 @@ function ModernInvoicePage() {
 							<Typography className="self-center text-right">240</Typography>
 							<Typography className="col-span-2 self-center text-right">$18,000.00</Typography>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<div className="col-span-8">
 								<Typography className="text-lg font-medium">Development</Typography>
 								<Typography
-									className="mt-8 text-md"
+									className="mt-2 text-md"
 									color="text.secondary"
 								>
 									The web and mobile development of the application using appropriate tools and
@@ -143,12 +143,12 @@ function ModernInvoicePage() {
 							<Typography className="self-center text-right">350</Typography>
 							<Typography className="col-span-2 self-center text-right">$21,175.00</Typography>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<div className="col-span-8">
 								<Typography className="text-lg font-medium">Testing</Typography>
 								<Typography
-									className="mt-8 text-md"
+									className="mt-2 text-md"
 									color="text.secondary"
 								>
 									Extensive testing of the application using various mobile and desktop devices with
@@ -159,12 +159,12 @@ function ModernInvoicePage() {
 							<Typography className="self-center text-right">50</Typography>
 							<Typography className="col-span-2 self-center text-right">$1,250.00</Typography>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<div className="col-span-8">
 								<Typography className="text-lg font-medium">Documentation & Training</Typography>
 								<Typography
-									className="mt-8 text-md"
+									className="mt-2 text-md"
 									color="text.secondary"
 								>
 									Development of the detailed documentation, preparing guides and instructional videos
@@ -175,7 +175,7 @@ function ModernInvoicePage() {
 							<Typography className="self-center text-right">260</Typography>
 							<Typography className="col-span-2 self-center text-right">$6,890.00</Typography>
 
-							<div className="col-span-12 mt-64" />
+							<div className="col-span-12 mt-16" />
 
 							<Typography
 								className="col-span-10 self-center font-medium tracking-tight"
@@ -185,7 +185,7 @@ function ModernInvoicePage() {
 							</Typography>
 							<Typography className="col-span-2 text-right text-lg">$47,315.00</Typography>
 
-							<div className="col-span-12 my-12 border-b" />
+							<div className="col-span-12 my-3 border-b" />
 
 							<Typography
 								className="col-span-10 self-center font-medium tracking-tight"
@@ -195,7 +195,7 @@ function ModernInvoicePage() {
 							</Typography>
 							<Typography className="col-span-2 text-right text-lg">$2,365.75</Typography>
 
-							<div className="col-span-12 my-12 border-b" />
+							<div className="col-span-12 my-3 border-b" />
 
 							<Typography
 								className="col-span-10 self-center font-medium tracking-tight"
@@ -205,7 +205,7 @@ function ModernInvoicePage() {
 							</Typography>
 							<Typography className="col-span-2 text-right text-lg">$180.75</Typography>
 
-							<div className="col-span-12 my-12 border-b" />
+							<div className="col-span-12 my-3 border-b" />
 
 							<Typography
 								className="col-span-10 self-center text-2xl font-medium tracking-tight"
@@ -216,18 +216,18 @@ function ModernInvoicePage() {
 							<Typography className="col-span-2 text-right text-2xl font-medium">$49,000.00</Typography>
 						</div>
 
-						<div className="mt-64">
+						<div className="mt-16">
 							<Typography className="font-medium">
 								Please pay within 15 days. Thank you for your business.
 							</Typography>
-							<div className="mt-16 flex items-start">
+							<div className="mt-4 flex items-start">
 								<img
-									className="flex-0 mt-8 w-36"
+									className="shrink-0 mt-2 w-9"
 									src="/assets/images/logo/logo.svg"
 									alt="logo"
 								/>
 								<Typography
-									className="ml-24 text-sm"
+									className="ml-6 text-sm"
 									color="text.secondary"
 								>
 									In condimentum malesuada efficitur. Mauris volutpat placerat auctor. Ut ac congue

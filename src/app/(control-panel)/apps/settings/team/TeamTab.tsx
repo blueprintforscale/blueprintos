@@ -45,7 +45,7 @@ function TeamTab() {
 	return (
 		<div>
 			<TextField
-				className="w-full mb-24"
+				className="w-full mb-6"
 				label="Add team member"
 				placeholder="Enter email"
 				InputLabelProps={{
@@ -69,7 +69,7 @@ function TeamTab() {
 			<Divider />
 			{teamMembers?.length === 0 && (
 				<Typography
-					className="text-center my-32"
+					className="text-center my-8"
 					color="textSecondary"
 				>
 					No team members found.
@@ -81,7 +81,7 @@ function TeamTab() {
 						divider
 						key={member.email}
 						disablePadding
-						className="py-12 flex flex-col items-start sm:items-center  sm:flex-row space-y-16 sm:space-y-0"
+						className="py-3 flex flex-col items-start sm:items-center sm:flex-row space-y-4 sm:space-y-0"
 					>
 						<div className="flex flex-1 items-center">
 							<ListItemAvatar>
@@ -97,7 +97,7 @@ function TeamTab() {
 							/>
 						</div>
 
-						<div className="flex items-center space-x-4">
+						<div className="flex items-center space-x-1">
 							<div>
 								<Select
 									sx={{

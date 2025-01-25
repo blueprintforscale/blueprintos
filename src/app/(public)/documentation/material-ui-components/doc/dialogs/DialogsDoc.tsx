@@ -47,7 +47,7 @@ function DialogsDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Dialog
@@ -58,7 +58,7 @@ function DialogsDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A Dialog is a type of <a href="/material-ui/react-modal/">modal</a> window that appears in front of app
@@ -66,24 +66,24 @@ function DialogsDoc(props) {
 				when they appear, and remain on screen until confirmed, dismissed, or a required action has been taken.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Dialogs are purposefully interruptive, so they should be used sparingly.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Introduction
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Dialogs are implemented using a collection of related components:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>Dialog: the parent component that renders the modal.</li>
 				<li>Dialog Title: a wrapper used for the title of a Dialog.</li>
 				<li>Dialog Actions: an optional container for a Dialog&#39;s Buttons.</li>
@@ -97,19 +97,19 @@ function DialogsDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimpleDialogDemo.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SimpleDialogDemoComponent}
 					raw={SimpleDialogDemoRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basics
@@ -125,41 +125,41 @@ import DialogTitle from '@mui/material/DialogTitle';
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Alerts
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Alerts are urgent interruptions, requiring acknowledgement, that inform the user about a situation.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Most alerts don&#39;t need titles. They summarize a decision in a sentence or two by either:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>Asking a question (for example &quot;Delete this conversation?&quot;)</li>
 				<li>Making a statement related to the action buttons</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Use title bar alerts only for high-risk situations, such as the potential loss of connectivity. Users
 				should be able to understand the choices based on the title and button text alone.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If a title is required:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					Use a clear question or statement with an explanation in the content area, such as &quot;Erase USB
 					storage?&quot;.
@@ -169,49 +169,49 @@ import DialogTitle from '@mui/material/DialogTitle';
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="AlertDialog.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={AlertDialogComponent}
 					raw={AlertDialogRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Transitions
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can also swap out the transition, the next example uses <code>Slide</code>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="AlertDialogSlide.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={AlertDialogSlideComponent}
 					raw={AlertDialogSlideRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Form dialogs
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Form dialogs allow users to fill out form fields within a dialog. For example, if your site prompts for
@@ -219,74 +219,74 @@ import DialogTitle from '@mui/material/DialogTitle';
 				&#39;Submit&#39;.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FormDialog.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={FormDialogComponent}
 					raw={FormDialogRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Here is an example of customizing the component. You can learn more about this in the{' '}
 				<a href="/material-ui/customization/how-to-customize/">overrides documentation page</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The dialog has a close button added to aid usability.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomizedDialogs.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomizedDialogsComponent}
 					raw={CustomizedDialogsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Full-screen dialogs
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FullScreenDialog.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={FullScreenDialogComponent}
 					raw={FullScreenDialogRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Optional sizes
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can set a dialog maximum width by using the <code>maxWidth</code> enumerable in combination with the{' '}
@@ -294,25 +294,25 @@ import DialogTitle from '@mui/material/DialogTitle';
 				based on the <code>maxWidth</code> value.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="MaxWidthDialog.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={MaxWidthDialogComponent}
 					raw={MaxWidthDialogRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Responsive full-screen
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You may make a dialog responsively full screen using{' '}
@@ -338,25 +338,25 @@ function MyComponent() {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ResponsiveDialog.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ResponsiveDialogComponent}
 					raw={ResponsiveDialogRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Confirmation dialogs
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Confirmation dialogs require users to explicitly confirm their choice before an option is committed. For
@@ -364,32 +364,32 @@ function MyComponent() {
 				&quot;OK&quot;.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Touching &quot;Cancel&quot; in a confirmation dialog, cancels the action, discards any changes, and
 				closes the dialog.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ConfirmationDialog.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ConfirmationDialogComponent}
 					raw={ConfirmationDialogRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Non-modal dialog
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Dialogs can also be non-modal, meaning they don&#39;t interrupt user interaction behind it. Visit{' '}
@@ -397,31 +397,31 @@ function MyComponent() {
 				for more in-depth guidance about modal vs. non-modal dialog usage.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The demo below shows a persistent cookie banner, a common non-modal dialog use case.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CookiesBanner.js"
-					className="my-16"
+					className="my-4"
 					iframe
 					component={CookiesBannerComponent}
 					raw={CookiesBannerRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Draggable dialog
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can create a draggable dialog by using{' '}
@@ -430,30 +430,30 @@ function MyComponent() {
 				<code>Dialog</code> component. This will make the entire dialog draggable.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="DraggableDialog.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={DraggableDialogComponent}
 					raw={DraggableDialogRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Scrolling long content
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				When dialogs become too long for the user&#39;s viewport or device, they scroll.
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<code>scroll=paper</code> the content of the dialog scrolls within the paper element.
 				</li>
@@ -462,67 +462,67 @@ function MyComponent() {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Try the demo below to see what we mean:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ScrollDialog.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ScrollDialogComponent}
 					raw={ScrollDialogRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Performance
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Follow the <a href="/material-ui/react-modal/#performance">Modal performance section</a>.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Limitations
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Follow the <a href="/material-ui/react-modal/#limitations">Modal limitations section</a>.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Supplementary projects
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For more advanced use cases you might be able to take advantage of:
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				material-ui-confirm
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<img
@@ -535,7 +535,7 @@ function MyComponent() {
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The package{' '}
@@ -545,13 +545,13 @@ function MyComponent() {
 				provides dialogs for confirming user actions without writing boilerplate code.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Follow the <a href="/material-ui/react-modal/#accessibility">Modal accessibility section</a>.

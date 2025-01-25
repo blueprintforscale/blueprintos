@@ -14,7 +14,7 @@ import SimpleFormExample from './examples/SimpleFormExample';
 function ReactHookFormDoc() {
 	return (
 		<>
-			<div className="flex w-full items-center justify-between mb-24">
+			<div className="flex w-full items-center justify-between mb-6">
 				<Typography variant="h4">React Hook Form</Typography>
 
 				<Button
@@ -31,7 +31,7 @@ function ReactHookFormDoc() {
 				</Button>
 			</div>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Performant, flexible and extensible forms with easy to use validation.
@@ -40,31 +40,31 @@ function ReactHookFormDoc() {
 			<hr />
 
 			<Typography
-				className="text-15 mt-32 mb-16"
+				className="text-lg mt-8 mb-4"
 				component="h4"
 			>
 				Example usage with Material-UI elements and form validation
 			</Typography>
 
 			<FuseExample
-				className="mb-64"
+				className="mb-16"
 				component={SimpleFormExample}
 				raw={SimpleFormExampleRaw}
 			/>
 
 			<Typography
-				className="text-5xl mt-32 mb-8"
+				className="text-5xl mt-8 mb-2"
 				component="h2"
 			>
 				Examples
 			</Typography>
 
 			<ul>
-				<li className="mb-8">@/app/(control-panel)/sign-in/SignInPage.tsx</li>
-				<li className="mb-8">@/app/(control-panel)/sign-up/SignUpPage.tsx</li>
-				<li className="mb-8">.</li>
-				<li className="mb-8">.</li>
-				<li className="mb-8">.</li>
+				<li className="mb-2">@/app/(control-panel)/sign-in/SignInPage.tsx</li>
+				<li className="mb-2">@/app/(control-panel)/sign-up/SignUpPage.tsx</li>
+				<li className="mb-2">.</li>
+				<li className="mb-2">.</li>
+				<li className="mb-2">.</li>
 			</ul>
 		</>
 	);

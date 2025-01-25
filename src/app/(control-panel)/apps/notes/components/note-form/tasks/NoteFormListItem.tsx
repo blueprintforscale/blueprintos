@@ -36,7 +36,7 @@ function NoteFormListItem(props: NoteFormListItemProps) {
 
 	return (
 		<ListItem
-			className="px-12"
+			className="px-3"
 			key={item.id}
 			dense
 		>

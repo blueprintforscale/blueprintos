@@ -41,7 +41,7 @@ function AlertDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Alert
@@ -51,39 +51,39 @@ function AlertDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Introduction
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Alerts give users brief and potentially time-sensitive information in an unobtrusive manner.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The Material UI Alert component includes several props for quickly customizing its styles to provide
 				immediate visual cues about its contents.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimpleAlert.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SimpleAlertComponent}
 					raw={SimpleAlertRaw}
 				/>
 			</Typography>
-			<div className="border-1 p-16 rounded-xl my-12">
+			<div className="border-1 p-4 rounded-xl my-3">
 				<Typography
-					className="text-base mb-32"
+					className="text-base mb-8"
 					component="div"
 				>
 					This component is no longer documented in the{' '}
@@ -93,13 +93,13 @@ function AlertDoc(props) {
 			</div>
 
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Usage
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A key trait of the alert pattern is that{' '}
@@ -112,7 +112,7 @@ function AlertDoc(props) {
 				<a href="/material-ui/react-dialog/">Dialog</a> component if you need this behavior.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basics
@@ -127,19 +127,19 @@ import Alert from '@mui/material/Alert';
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The Alert component wraps around its content, and stretches to fill its enclosing container.
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Severity
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>severity</code> prop accepts four values representing different states—
@@ -147,68 +147,68 @@ import Alert from '@mui/material/Alert';
 				corresponding icon and color combinations for each:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicAlerts.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicAlertsComponent}
 					raw={BasicAlertsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Variants
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The Alert component comes with two alternative style options—<code>filled</code> and{' '}
 				<code>outlined</code>—which you can set using the <code>variant</code> prop.
 			</Typography>
 			<Typography
-				className="text-base mt-12 mb-10"
+				className="text-base mt-3 mb-2.5"
 				component="h4"
 			>
 				Filled
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FilledAlerts.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={FilledAlertsComponent}
 					raw={FilledAlertsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mt-12 mb-10"
+				className="text-base mt-3 mb-2.5"
 				component="h4"
 			>
 				Outlined
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="OutlinedAlerts.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={OutlinedAlertsComponent}
 					raw={OutlinedAlertsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				:::warning When using an outlined Alert with the <a href="/material-ui/react-snackbar/">Snackbar</a>{' '}
@@ -229,20 +229,20 @@ import Alert from '@mui/material/Alert';
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Check out the <a href="/material-ui/react-snackbar/#customization">Snackbar—customization</a> doc for an
 				example of how to use these two components together. :::
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Color
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Use the <code>color</code> prop to override the default color for the specified{' '}
@@ -252,25 +252,25 @@ import Alert from '@mui/material/Alert';
 				—for instance, to apply <code>warning</code> colors to a <code>success</code> Alert:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ColorAlerts.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ColorAlertsComponent}
 					raw={ColorAlertsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Actions
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Add an action to your Alert with the <code>action</code> prop. This lets you insert any element—an HTML
@@ -278,32 +278,32 @@ import Alert from '@mui/material/Alert';
 				justified to the right.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If you provide an <code>onClose</code> callback to the Alert without setting the <code>action</code>{' '}
 				prop, the component will display a close icon (&#x2715;) by default.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ActionAlerts.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ActionAlertsComponent}
 					raw={ActionAlertsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Icons
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Use the <code>icon</code> prop to override an Alert&#39;s icon. As with the{' '}
@@ -314,7 +314,7 @@ import Alert from '@mui/material/Alert';
 				<code>false</code> to remove the icon altogether.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If you need to override all instances of an icon for a given{' '}
@@ -329,31 +329,31 @@ import Alert from '@mui/material/Alert';
 				for details.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="IconAlerts.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={IconAlertsComponent}
 					raw={IconAlertsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Titles
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				To add a title to an Alert, import the Alert Title component:
@@ -368,32 +368,32 @@ import AlertTitle from '@mui/material/AlertTitle';
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can nest this component above the message in your Alert for a neatly styled and properly aligned
 				title, as shown below:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="DescriptionAlerts.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={DescriptionAlertsComponent}
 					raw={DescriptionAlertsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Transitions
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can use <a href="/material-ui/transitions/">Transition components</a> like{' '}
@@ -401,30 +401,30 @@ import AlertTitle from '@mui/material/AlertTitle';
 				exit.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="TransitionAlerts.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={TransitionAlertsComponent}
 					raw={TransitionAlertsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Here are some factors to consider to ensure that your Alert is accessible:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					Because alerts are not intended to interfere with the use of the app, your Alert component should{' '}
 					<em>never</em> affect the keyboard focus.
@@ -458,13 +458,13 @@ import AlertTitle from '@mui/material/AlertTitle';
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Anatomy
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The Alert component is composed of a root <a href="/material-ui/react-paper/">Paper</a> component (which

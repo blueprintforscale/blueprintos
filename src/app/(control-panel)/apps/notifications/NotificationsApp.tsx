@@ -26,7 +26,7 @@ function NotificationsApp() {
 		<FusePageSimple
 			header={<NotificationsAppHeader />}
 			content={
-				<div className="flex flex-col w-full p-16 mt-0 sm:mt-8">
+				<div className="flex flex-col w-full p-4 mt-0 sm:mt-2">
 					<Masonry
 						breakpointCols={{
 							default: 4,
@@ -35,12 +35,12 @@ function NotificationsApp() {
 							480: 1
 						}}
 						className="my-masonry-grid flex w-full"
-						columnClassName="my-masonry-grid_column flex flex-col p-8"
+						columnClassName="my-masonry-grid_column flex flex-col p-2"
 					>
 						{_.orderBy(notifications, ['time'], ['desc']).map((notification) => (
 							<NotificationCard
 								key={notification.id}
-								className="mb-16"
+								className="mb-4"
 								item={notification}
 								onClose={handleDismiss}
 							/>
@@ -48,7 +48,7 @@ function NotificationsApp() {
 					</Masonry>
 
 					{notifications.length === 0 && (
-						<div className="flex flex-1 items-center justify-center p-64">
+						<div className="flex flex-1 items-center justify-center p-16">
 							<Typography
 								className="text-center text-xl"
 								color="text.secondary"

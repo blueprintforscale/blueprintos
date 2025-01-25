@@ -55,7 +55,7 @@ function AdjustFontSize(props: AdjustFontSizeProps) {
 				<FuseSvgIcon size={20}>material-outline:format_size</FuseSvgIcon>
 			</IconButton>
 			<Menu
-				classes={{ paper: 'w-320' }}
+				classes={{ paper: 'w-80' }}
 				id="font-size-menu"
 				anchorEl={anchorEl}
 				keepMounted
@@ -70,11 +70,11 @@ function AdjustFontSize(props: AdjustFontSizeProps) {
 					horizontal: 'center'
 				}}
 			>
-				<div className="px-24 py-12">
-					<Typography className="mb-8 flex items-center justify-center text-15 font-semibold">
+				<div className="px-6 py-3">
+					<Typography className="mb-2 flex items-center justify-center text-lg font-semibold">
 						<FuseSvgIcon
 							color="action"
-							className="mr-4"
+							className="mr-1"
 						>
 							material-outline:format_size
 						</FuseSvgIcon>

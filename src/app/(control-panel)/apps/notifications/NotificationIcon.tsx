@@ -14,7 +14,7 @@ function NotificationIcon(props: NotificationIconProps) {
 		case 'error': {
 			return (
 				<FuseSvgIcon
-					className="mr-8 opacity-75"
+					className="mr-2 opacity-75"
 					color="inherit"
 					size={20}
 				>
@@ -25,7 +25,7 @@ function NotificationIcon(props: NotificationIconProps) {
 		case 'success': {
 			return (
 				<FuseSvgIcon
-					className="mr-8 opacity-75"
+					className="mr-2 opacity-75"
 					color="inherit"
 					size={20}
 				>
@@ -36,7 +36,7 @@ function NotificationIcon(props: NotificationIconProps) {
 		case 'warning': {
 			return (
 				<FuseSvgIcon
-					className="mr-8 opacity-75"
+					className="mr-2 opacity-75"
 					color="inherit"
 					size={20}
 				>
@@ -47,7 +47,7 @@ function NotificationIcon(props: NotificationIconProps) {
 		case 'info': {
 			return (
 				<FuseSvgIcon
-					className="mr-8 opacity-75"
+					className="mr-2 opacity-75"
 					color="inherit"
 					size={20}
 				>

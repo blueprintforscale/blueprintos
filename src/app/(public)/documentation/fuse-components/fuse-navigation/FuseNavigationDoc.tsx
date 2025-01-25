@@ -29,13 +29,13 @@ function FuseNavigationDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				FuseNavigation
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>FuseNavigation</code> is a custom-built Fuse component that allows you to create a multi-level
@@ -43,14 +43,14 @@ function FuseNavigationDoc() {
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				[navigation]
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>FuseNavigation</code> uses an array to populate the entire navigation. It supports four different
@@ -59,28 +59,28 @@ function FuseNavigationDoc() {
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				[layout]
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				"vertical" or "horizontal" layout options.
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				[active]
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can set <b>active</b> to "square" to use square active item style instead of rounded/circle for{' '}
@@ -88,35 +88,35 @@ function FuseNavigationDoc() {
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				[dense]
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can use <b>{`dense={true}`}</b> to set dense variation of the navigation.
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				[checkPermission]
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can use <b>{`checkPermission={true}`}</b> to enable authorization for navigation.
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Usage
@@ -132,18 +132,18 @@ function FuseNavigationDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="mt-48 mb-8"
+				className="mt-12 mb-2"
 				variant="h4"
 			>
 				Navigation item types
 			</Typography>
 
-			<Typography className="mt-32 p-8 rounded bg-yellow-100 border-1 border-yellow-700 text-black mb-8">
+			<Typography className="mt-8 p-2 rounded-sm bg-yellow-100 border-1 border-yellow-700 text-black mb-2">
 				It is mandatory to give a unique id to all of your navigation items.
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Group
@@ -173,7 +173,7 @@ function FuseNavigationDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Collapse
@@ -202,7 +202,7 @@ function FuseNavigationDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Item
@@ -222,13 +222,13 @@ function FuseNavigationDoc() {
         `}
 			</FuseHighlight>
 			<Typography
-				className="text-2xl mt-24 mb-8 font-medium"
+				className="text-2xl mt-6 mb-2 font-medium"
 				component="h2"
 			>
 				end: bool
 			</Typography>
 			<Typography
-				className="text-15 mb-8"
+				className="text-lg mb-2"
 				component="h2"
 			>
 				When true, the active class/style will only be applied if the location is exactly matched.
@@ -249,7 +249,7 @@ function FuseNavigationDoc() {
                                 `}
 			</FuseHighlight>
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Link
@@ -270,7 +270,7 @@ function FuseNavigationDoc() {
          `}
 			</FuseHighlight>
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Divider
@@ -299,14 +299,14 @@ function FuseNavigationDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="mt-48 mb-8"
+				className="mt-12 mb-2"
 				variant="h4"
 			>
 				Showcase
 			</Typography>
 
-			<div className="flex sm:flex-row flex-col gap-16 my-16 justify-center">
-				<Paper className="flex py-16  max-w-sm rounded">
+			<div className="flex sm:flex-row flex-col gap-4 my-4 justify-center">
+				<Paper className="flex py-4 max-w-sm rounded-sm">
 					<FuseNavigation
 						navigation={navigationShowcase}
 						layout="vertical"
@@ -321,28 +321,28 @@ function FuseNavigationDoc() {
 			</div>
 
 			<Typography
-				className="mt-48 mb-8"
+				className="mt-12 mb-2"
 				variant="h4"
 			>
 				Actions
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				setNavigation
 			</Typography>
 			<Typography
-				className="text-15 mb-8"
+				className="text-lg mb-2"
 				component="h2"
 			>
 				Use <code>setNavigation(navigation{'<Array>'})</code> action to set/change whole navigation.
 			</Typography>
 
-			<div className="border-1 rounded-xl p-16 my-16">
+			<div className="border-1 rounded-xl p-4 my-4">
 				<Typography
-					className="text-15 mb-24"
+					className="text-lg mb-6"
 					component="h2"
 				>
 					With the button below, whole navigation is changed.
@@ -401,7 +401,7 @@ function FuseNavigationDoc() {
 
 				<FuseHighlight
 					component="pre"
-					className="language-jsx mt-24"
+					className="language-jsx mt-6"
 				>
 					{`
           <Button
@@ -459,21 +459,21 @@ function FuseNavigationDoc() {
 			</div>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				resetNavigation
 			</Typography>
 			<Typography
-				className="text-15 mb-8"
+				className="text-lg mb-2"
 				component="h2"
 			>
 				Use <code>resetNavigation()</code> action to reset navigation to initial state.
 			</Typography>
 
-			<div className="border-1 rounded-xl p-16 my-16">
+			<div className="border-1 rounded-xl p-4 my-4">
 				<Typography
-					className="text-15 mb-24"
+					className="text-lg mb-6"
 					component="h2"
 				>
 					With the button below, navigation is returned to config defaults.
@@ -491,7 +491,7 @@ function FuseNavigationDoc() {
 
 				<FuseHighlight
 					component="pre"
-					className="language-jsx mt-24"
+					className="language-jsx mt-6"
 				>
 					{`
             <Button
@@ -508,13 +508,13 @@ function FuseNavigationDoc() {
 			</div>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				updateNavigationItem
 			</Typography>
 			<Typography
-				className="text-15 mb-8"
+				className="text-lg mb-2"
 				component="h2"
 			>
 				Use
@@ -524,9 +524,9 @@ function FuseNavigationDoc() {
 				action to update a navigation item.
 			</Typography>
 
-			<div className="border-1 rounded-xl p-16 my-16">
+			<div className="border-1 rounded-xl p-4 my-4">
 				<Typography
-					className="text-15 mb-24"
+					className="text-lg mb-6"
 					component="h2"
 				>
 					With clicking the button below, a badge will be added into the 'Project' dashboard navigation item.
@@ -550,7 +550,7 @@ function FuseNavigationDoc() {
 
 				<FuseHighlight
 					component="pre"
-					className="language-jsx mt-24"
+					className="language-jsx mt-6"
 				>
 					{`
 					<Button
@@ -574,21 +574,21 @@ function FuseNavigationDoc() {
 			</div>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				removeNavigationItem
 			</Typography>
 			<Typography
-				className="text-15 mb-8"
+				className="text-lg mb-2"
 				component="h2"
 			>
 				Use <code>removeNavigationItem(id)</code> action to remove a navigation item.
 			</Typography>
 
-			<div className="border-1 rounded-xl p-16 my-16">
+			<div className="border-1 rounded-xl p-4 my-4">
 				<Typography
-					className="text-15 mb-24"
+					className="text-lg mb-6"
 					component="h2"
 				>
 					With the button below, "Calendar" navigation item is removed.
@@ -606,7 +606,7 @@ function FuseNavigationDoc() {
 
 				<FuseHighlight
 					component="pre"
-					className="language-jsx mt-24"
+					className="language-jsx mt-6"
 				>
 					{`
             <Button
@@ -623,13 +623,13 @@ function FuseNavigationDoc() {
 			</div>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				prependNavigationItem
 			</Typography>
 			<Typography
-				className="text-15 mb-8"
+				className="text-lg mb-2"
 				component="h2"
 			>
 				Use
@@ -639,9 +639,9 @@ function FuseNavigationDoc() {
 				action to prepend a navigation item into the navigation array.
 			</Typography>
 
-			<div className="border-1 rounded-xl p-16 my-16">
+			<div className="border-1 rounded-xl p-4 my-4">
 				<Typography
-					className="text-15 mb-24"
+					className="text-lg mb-6"
 					component="h2"
 				>
 					With the button below, "fusetheme.com" navigation item is added at the top of the navigation array.
@@ -668,7 +668,7 @@ function FuseNavigationDoc() {
 
 				<FuseHighlight
 					component="pre"
-					className="language-jsx mt-24"
+					className="language-jsx mt-6"
 				>
 					{`
             <Button
@@ -693,9 +693,9 @@ function FuseNavigationDoc() {
 				</FuseHighlight>
 			</div>
 
-			<div className="border-1 rounded-xl p-16 my-16">
+			<div className="border-1 rounded-xl p-4 my-4">
 				<Typography
-					className="text-15 mb-24"
+					className="text-lg mb-6"
 					component="h2"
 				>
 					With the button below, "fusetheme.com" navigation item is added into the top of the "Dashboards"
@@ -726,7 +726,7 @@ function FuseNavigationDoc() {
 
 				<FuseHighlight
 					component="pre"
-					className="language-jsx mt-24"
+					className="language-jsx mt-6"
 				>
 					{`
                                 <Button
@@ -752,13 +752,13 @@ function FuseNavigationDoc() {
 			</div>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				appendNavigationItem
 			</Typography>
 			<Typography
-				className="text-15 mb-8"
+				className="text-lg mb-2"
 				component="h2"
 			>
 				Use
@@ -768,9 +768,9 @@ function FuseNavigationDoc() {
 				action to append a navigation item into the navigation array.
 			</Typography>
 
-			<div className="border-1 rounded-xl p-16 my-16">
+			<div className="border-1 rounded-xl p-4 my-4">
 				<Typography
-					className="text-15 mb-24"
+					className="text-lg mb-6"
 					component="h2"
 				>
 					With the button below, "fusetheme.com" navigation item is added at the bottom of the array.
@@ -796,7 +796,7 @@ function FuseNavigationDoc() {
 				</Button>
 				<FuseHighlight
 					component="pre"
-					className="language-jsx mt-24"
+					className="language-jsx mt-6"
 				>
 					{`
             <Button
@@ -821,9 +821,9 @@ function FuseNavigationDoc() {
 				</FuseHighlight>
 			</div>
 
-			<div className="border-1 rounded-xl p-16 my-16">
+			<div className="border-1 rounded-xl p-4 my-4">
 				<Typography
-					className="text-15 mb-24"
+					className="text-lg mb-6"
 					component="h2"
 				>
 					With the button below, "fusetheme.com" navigation item is added into the bottom of the "Dashboards"
@@ -854,7 +854,7 @@ function FuseNavigationDoc() {
 
 				<FuseHighlight
 					component="pre"
-					className="language-jsx mt-24"
+					className="language-jsx mt-6"
 				>
 					{`
                                 <Button

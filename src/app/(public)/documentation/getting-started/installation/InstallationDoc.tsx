@@ -10,34 +10,34 @@ function InstallationDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Installation
 			</Typography>
 
 			<Typography
-				className="text-2xl mb-10 font-700"
+				className="text-2xl mb-2.5 font-bold"
 				variant="h5"
 			>
 				Prerequisites
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This section will give you some information about what tools you will need.
 			</Typography>
 
 			<Typography
-				className="text-15 mt-16 mb-10 font-700"
+				className="text-lg mt-4 mb-2.5 font-bold"
 				variant="h6"
 			>
 				Node.js
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To install and use Fuse React, you will need{' '}
@@ -53,14 +53,14 @@ function InstallationDoc() {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Installation
 			</Typography>
 
 			<Typography
-				className="text-15 mt-24 mb-10 font-700"
+				className="text-lg mt-6 mb-2.5 font-bold"
 				variant="h6"
 			>
 				A. Installing Prerequisites
@@ -79,7 +79,7 @@ function InstallationDoc() {
 			</Typography>
 
 			<Typography
-				className="text-15 mt-24 mb-10 font-700"
+				className="text-lg mt-6 mb-2.5 font-bold"
 				variant="h6"
 			>
 				B. Installing Fuse React
@@ -89,9 +89,9 @@ function InstallationDoc() {
 				Before you begin installing Fuse, prepare a folder where you can unzip the downloaded .zip file.
 			</Typography>
 
-			<div className="mx-16 my-32">
+			<div className="mx-4 my-8">
 				<Typography
-					className="flex text-lg mb-10 font-700"
+					className="flex text-lg mb-2.5 font-bold"
 					variant="h6"
 				>
 					B.1. Choose which version you want to install
@@ -103,10 +103,10 @@ function InstallationDoc() {
 					demo and skeleton options.
 				</Typography>
 
-				<ul className="list-disc mx-16">
+				<ul className="list-disc mx-4">
 					<li>
 						<Typography
-							className="mt-12 space-y-4"
+							className="mt-3 space-y-1"
 							component="div"
 						>
 							<li>
@@ -117,7 +117,7 @@ function InstallationDoc() {
 							</li>
 						</Typography>
 						<Typography
-							className="mt-12"
+							className="mt-3"
 							component="div"
 						>
 							This .zip file includes the Demo version which includes all the applications, pages and UI
@@ -125,7 +125,7 @@ function InstallationDoc() {
 							should be only used for copying code/modules from it.
 						</Typography>
 						<Typography
-							className="mt-12"
+							className="mt-3"
 							component="div"
 						>
 							<b>DO NOT</b> use the Demo version to build your app, otherwise you will have a lot of
@@ -136,7 +136,7 @@ function InstallationDoc() {
 
 					<li>
 						<Typography
-							className="mt-12 space-y-4"
+							className="mt-3 space-y-1"
 							component="div"
 						>
 							<li>
@@ -147,7 +147,7 @@ function InstallationDoc() {
 							</li>
 						</Typography>
 						<Typography
-							className="mt-12"
+							className="mt-3"
 							component="div"
 						>
 							This .zip file includes the Skeleton version which includes all the core components and
@@ -158,7 +158,7 @@ function InstallationDoc() {
 				</ul>
 
 				<Typography
-					className="flex text-lg mt-32 mb-10 font-700"
+					className="flex text-lg mt-8 mb-2.5 font-bold"
 					variant="h6"
 				>
 					B.2. Unzip
@@ -171,14 +171,14 @@ function InstallationDoc() {
 			</div>
 
 			<Typography
-				className="text-15 mt-24 mb-10 font-700"
+				className="text-lg mt-6 mb-2.5 font-bold"
 				variant="h6"
 			>
 				C. Run the installation command
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="div"
 			>
 				Open a console/terminal window and navigate into your workspace directory. You must be at the same
@@ -186,7 +186,7 @@ function InstallationDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="div"
 			>
 				To complete the installation, enter the following command:
@@ -194,13 +194,13 @@ function InstallationDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-bash mb-16"
+				className="language-bash mb-4"
 			>
 				{` npm install `}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="div"
 			>
 				This command will take some time and install all the required libraries into the node_modules directory

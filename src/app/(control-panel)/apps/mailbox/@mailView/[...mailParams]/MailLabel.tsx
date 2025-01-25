@@ -27,8 +27,8 @@ function MailLabel(props: MailLabelProps) {
 		<Chip
 			label={label.title}
 			classes={{
-				root: clsx('h-24 border-0', className, label.color && labelColorDefs[label.color].combined),
-				label: 'px-12 py-4 text-md font-medium leading-none'
+				root: clsx('h-6 border-0', className, label.color && labelColorDefs[label.color].combined),
+				label: 'px-3 py-1 text-md font-medium leading-none'
 			}}
 		/>
 	);

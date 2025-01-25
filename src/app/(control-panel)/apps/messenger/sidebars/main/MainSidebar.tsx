@@ -38,7 +38,7 @@ function MainSidebar() {
 	return (
 		<div className="flex flex-col flex-auto">
 			<Box
-				className="py-16 px-24 border-b-1 flex flex-col flex-shrink-0 sticky top-0 z-10"
+				className="py-4 px-6 border-b-1 flex flex-col shrink-0 sticky top-0 z-10"
 				sx={(theme) => ({
 					backgroundColor: lighten(theme.palette.background.default, 0.02),
 					...theme.applyStyles('light', {
@@ -46,7 +46,7 @@ function MainSidebar() {
 					})
 				})}
 			>
-				<div className="flex justify-between items-center mb-16">
+				<div className="flex justify-between items-center mb-4">
 					{user && (
 						<div
 							className="flex items-center cursor-pointer"
@@ -59,14 +59,14 @@ function MainSidebar() {
 								className="relative"
 								user={user}
 							/>
-							<Typography className="mx-16 font-medium">{user?.name}</Typography>
+							<Typography className="mx-4 font-medium">{user?.name}</Typography>
 						</div>
 					)}
-					<MainSidebarMoreMenu className="-mx-16" />
+					<MainSidebarMoreMenu className="-mx-4" />
 				</div>
 				{useMemo(
 					() => (
-						<Paper className="flex p-4 items-center w-full px-8 py-4 border-1 rounded-lg h-36 shadow-none">
+						<Paper className="flex p-1 items-center w-full px-2 py-1 border-1 rounded-lg h-9 shadow-none">
 							<FuseSvgIcon color="action">heroicons-solid:magnifying-glass</FuseSvgIcon>
 							<Input
 								placeholder="Search or start new chat"
@@ -128,7 +128,7 @@ function MainSidebar() {
 								{filteredChatList.length > 0 && (
 									<motion.div variants={item}>
 										<Typography
-											className="font-medium text-2xl px-24 pt-16"
+											className="font-medium text-2xl px-6 pt-4"
 											color="secondary.main"
 										>
 											Chats
@@ -150,7 +150,7 @@ function MainSidebar() {
 								{filteredContacts.length > 0 && (
 									<motion.div variants={item}>
 										<Typography
-											className="font-medium text-2xl px-24 pt-16"
+											className="font-medium text-2xl px-6 pt-4"
 											color="secondary.main"
 										>
 											Contacts

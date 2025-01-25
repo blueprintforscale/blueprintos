@@ -19,7 +19,7 @@ function AiImageGenList(props: AiImageGenListProps) {
 	}
 
 	return (
-		<div className="w-full mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+		<div className="w-full mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
 			{_.sortBy(items, (item) => item?.response?.created)
 				.reverse()
 				.map((image) => (

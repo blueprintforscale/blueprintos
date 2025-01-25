@@ -103,7 +103,7 @@ function BoardListHeader(props: BoardListHeaderProps) {
 
 	return (
 		<div {...handleProps}>
-			<div className={clsx('flex items-center justify-between h-48 sm:h-56 px-12', className)}>
+			<div className={clsx('flex items-center justify-between h-12 sm:h-14 px-3', className)}>
 				<div className="flex items-center min-w-0">
 					{formOpen ? (
 						<ClickAwayListener onClickAway={handleCloseForm}>
@@ -150,7 +150,7 @@ function BoardListHeader(props: BoardListHeaderProps) {
 				</div>
 				<div className="flex items-center">
 					<Box
-						className="flex items-center justify-center min-w-24 h-24 mx-4 text-sm font-semibold leading-24 rounded-full"
+						className="flex items-center justify-center min-w-6 h-6 mx-1 text-sm font-semibold leading-[2] rounded-full"
 						sx={{
 							backgroundColor: (theme) =>
 								darken(theme.palette.background.default, theme.palette.mode === 'light' ? 0.1 : 0.3),
@@ -185,13 +185,13 @@ function BoardListHeader(props: BoardListHeaderProps) {
 									});
 							}}
 						>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>heroicons-outline:trash</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Remove List" />
 						</MenuItem>
 						<MenuItem onClick={handleOpenForm}>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>heroicons-outline:pencil</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Rename List" />

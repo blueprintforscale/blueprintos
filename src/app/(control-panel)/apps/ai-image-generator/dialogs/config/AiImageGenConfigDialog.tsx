@@ -40,7 +40,7 @@ function AiImageGenConfigDialog() {
 				<DialogContent>
 					<Alert
 						severity="info"
-						className="mb-24"
+						className="mb-6"
 					>
 						Your API key is not stored, you can use your api key to test the app.
 					</Alert>

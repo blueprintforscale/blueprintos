@@ -24,11 +24,11 @@ function MockApiDoc() {
 		<Root className="w-full">
 			<Typography
 				variant="h4"
-				className="mb-32 font-700"
+				className="mb-8 font-bold"
 			>
 				Mock API Definitions (OpenAPI 3.0)
 			</Typography>
-			<Paper className="sticky top-0 w-full shadow not-prose">
+			<Paper className="sticky top-0 w-full shadow-sm not-prose">
 				<RedocStandalone
 					spec={mockApiJson as object}
 					options={

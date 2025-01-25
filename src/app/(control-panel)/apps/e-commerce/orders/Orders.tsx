@@ -17,7 +17,7 @@ function Orders() {
 					}
 				})}
 			/>
-			<div className="w-full h-full flex flex-col px-16">
+			<div className="w-full h-full flex flex-col px-4">
 				<OrdersHeader />
 				<OrdersTable />
 			</div>

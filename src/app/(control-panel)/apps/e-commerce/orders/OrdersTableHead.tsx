@@ -121,10 +121,10 @@ function OrdersTableHead(props: OrdersTableHeadProps) {
 
 	return (
 		<TableHead>
-			<TableRow className="h-48 sm:h-64">
+			<TableRow className="h-12 sm:h-16">
 				<TableCell
 					padding="none"
-					className="w-36 md:w-64 text-center z-99"
+					className="w-9 md:w-16 text-center z-99"
 					sx={{
 						backgroundColor: (theme) =>
 							darken(theme.palette.background.paper, theme.palette.mode === 'light' ? 0.02 : 0.2)
@@ -137,7 +137,7 @@ function OrdersTableHead(props: OrdersTableHeadProps) {
 					/>
 					{numSelected > 0 && (
 						<Box
-							className="flex items-center justify-center absolute w-64 top-0 ltr:left-0 rtl:right-0 mx-56 h-64 z-10 border-b-1"
+							className="flex items-center justify-center absolute w-16 top-0 ltr:left-0 rtl:right-0 mx-14 h-16 z-10 border-b-1"
 							sx={(theme) => ({
 								backgroundColor: lighten(theme.palette.background.default, 0.02),
 								...theme.applyStyles('light', {
@@ -165,7 +165,7 @@ function OrdersTableHead(props: OrdersTableHeadProps) {
 											closeSelectedOrdersMenu();
 										}}
 									>
-										<ListItemIcon className="min-w-36">
+										<ListItemIcon className="min-w-9">
 											<FuseSvgIcon>heroicons-outline:trash</FuseSvgIcon>
 										</ListItemIcon>
 										<ListItemText primary="Remove" />
@@ -184,7 +184,7 @@ function OrdersTableHead(props: OrdersTableHeadProps) {
 									backgroundColor: lighten(theme.palette.background.default, 0.4)
 								})
 							})}
-							className="p-4 md:p-16"
+							className="p-1 md:p-4"
 							key={row.id}
 							align={row.align}
 							padding={row.disablePadding ? 'none' : 'normal'}

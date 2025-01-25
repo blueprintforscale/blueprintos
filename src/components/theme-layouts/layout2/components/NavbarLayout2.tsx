@@ -21,9 +21,9 @@ function NavbarLayout2(props: NavbarLayout2Props) {
 	const { className = '' } = props;
 
 	return (
-		<Root className={clsx('h-64 max-h-64 min-h-64 w-full shadow-md', className)}>
-			<div className="container z-20 flex h-full w-full flex-auto items-center justify-between p-0 lg:px-24">
-				<div className="flex shrink-0 items-center px-8">
+		<Root className={clsx('h-16 max-h-16 min-h-16 w-full shadow-md', className)}>
+			<div className="container z-20 flex h-full w-full flex-auto items-center justify-between p-0 lg:px-6">
+				<div className="flex shrink-0 items-center px-2">
 					<Logo />
 				</div>
 

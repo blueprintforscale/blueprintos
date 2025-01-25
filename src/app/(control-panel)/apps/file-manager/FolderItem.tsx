@@ -26,10 +26,10 @@ function FolderItem(props: FolderItemProps) {
 	return (
 		<Box
 			sx={{ backgroundColor: 'background.paper' }}
-			className="relative w-full sm:w-160 h-160 m-8 p-16 shadow rounded-xl"
+			className="relative w-full sm:w-40 h-40 m-2 p-4 shadow-sm rounded-xl"
 		>
 			<IconButton
-				className="absolute z-20 top-0 right-0 m-6 w-32 h-32 min-h-32"
+				className="absolute z-20 top-0 right-0 m-1.5 w-8 h-8 min-h-8"
 				onClick={() => dispatch(setSelectedItemId(item.id))}
 			>
 				<FuseSvgIcon size={20}>heroicons-solid:information-circle</FuseSvgIcon>

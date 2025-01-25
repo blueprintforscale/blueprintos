@@ -51,7 +51,7 @@ function ProgressDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Progress
@@ -62,13 +62,13 @@ function ProgressDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Progress indicators inform users about the status of ongoing processes, such as loading an app,
 				submitting a form, or saving updates.
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<strong>Determinate</strong> indicators display how long an operation will take.
 				</li>
@@ -77,230 +77,230 @@ function ProgressDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The animations of the components rely on CSS as much as possible to work even before the JavaScript is
 				loaded.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Circular
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Circular indeterminate
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CircularIndeterminate.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CircularIndeterminateComponent}
 					raw={CircularIndeterminateRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Circular color
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CircularColor.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CircularColorComponent}
 					raw={CircularColorRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Circular size
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CircularSize.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CircularSizeComponent}
 					raw={CircularSizeRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Circular determinate
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CircularDeterminate.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CircularDeterminateComponent}
 					raw={CircularDeterminateRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Interactive integration
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CircularIntegration.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CircularIntegrationComponent}
 					raw={CircularIntegrationRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Circular with label
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CircularWithValueLabel.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CircularWithValueLabelComponent}
 					raw={CircularWithValueLabelRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Linear
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Linear indeterminate
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="LinearIndeterminate.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LinearIndeterminateComponent}
 					raw={LinearIndeterminateRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Linear color
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="LinearColor.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LinearColorComponent}
 					raw={LinearColorRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Linear determinate
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="LinearDeterminate.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LinearDeterminateComponent}
 					raw={LinearDeterminateRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Linear buffer
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="LinearBuffer.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LinearBufferComponent}
 					raw={LinearBufferRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Linear with label
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="LinearWithValueLabel.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LinearWithValueLabelComponent}
 					raw={LinearWithValueLabelRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Non-standard ranges
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The progress components accept a value in the range 0 - 100. This simplifies things for screen-reader
@@ -331,38 +331,38 @@ function Progress(props) {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Here are some examples of customizing the component. You can learn more about this in the{' '}
 				<a href="/material-ui/customization/how-to-customize/">overrides documentation page</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomizedProgressBars.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomizedProgressBarsComponent}
 					raw={CustomizedProgressBarsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Delaying appearance
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				There are{' '}
@@ -373,31 +373,31 @@ function Progress(props) {
 				user&#39;s flow of thought uninterrupted.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="DelayingAppearance.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={DelayingAppearanceComponent}
 					raw={DelayingAppearanceRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Limitations
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				High CPU load
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Under heavy load, you might lose the stroke dash animation or see random <code>CircularProgress</code>{' '}
@@ -420,32 +420,32 @@ function Progress(props) {
 			</video>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				When it&#39;s not possible, you can leverage the <code>disableShrink</code> prop to mitigate the issue.
 				See <a href="https://github.com/mui/material-ui/issues/10327">this issue</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CircularUnderLoad.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CircularUnderLoadComponent}
 					raw={CircularUnderLoadRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				High frequency updates
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>LinearProgress</code> uses a transition on the CSS transform property to provide a smooth
@@ -454,7 +454,7 @@ function Progress(props) {
 				between the re-render and the progress bar fully updated.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If you need to perform 30 re-renders per second or more, we recommend disabling the transition:

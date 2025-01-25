@@ -93,7 +93,7 @@ function FuseNavVerticalTab(props: FuseNavVerticalTabProps) {
 						`type-${item.type}`,
 						dense && 'dense',
 						selectedId === item.id && 'active',
-						'fuse-list-item flex flex-col items-center justify-center p-12'
+						'fuse-list-item flex flex-col items-center justify-center p-3'
 					)}
 					onClick={() => onItemClick && onItemClick(item)}
 					{...itemProps}
@@ -103,7 +103,7 @@ function FuseNavVerticalTab(props: FuseNavVerticalTabProps) {
 							title={item.title || ''}
 							placement="right"
 						>
-							<div className="relative flex h-32 min-h-32 w-32 items-center justify-center">
+							<div className="relative flex h-8 min-h-8 w-8 items-center justify-center">
 								{item.icon ? (
 									<FuseSvgIcon
 										className={clsx('fuse-list-item-icon', item.iconClass)}
@@ -112,19 +112,19 @@ function FuseNavVerticalTab(props: FuseNavVerticalTabProps) {
 										{item.icon}
 									</FuseSvgIcon>
 								) : (
-									item.title && <Typography className="text-15 font-bold">{item.title[0]}</Typography>
+									item.title && <Typography className="text-lg font-bold">{item.title[0]}</Typography>
 								)}
 								{item.badge && (
 									<FuseNavBadge
 										badge={item.badge}
-										className="absolute top-0 h-16 min-w-16 justify-center p-4 ltr:right-0 rtl:left-0"
+										className="absolute top-0 h-4 min-w-4 justify-center p-1 ltr:right-0 rtl:left-0"
 									/>
 								)}
 							</div>
 						</Tooltip>
 					) : (
 						<>
-							<div className="relative mb-8 flex h-32 min-h-32 w-32 items-center justify-center">
+							<div className="relative mb-2 flex h-8 min-h-8 w-8 items-center justify-center">
 								{item.icon ? (
 									<FuseSvgIcon
 										size={32}
@@ -141,13 +141,13 @@ function FuseNavVerticalTab(props: FuseNavVerticalTabProps) {
 								{item.badge && (
 									<FuseNavBadge
 										badge={item.badge}
-										className="absolute top-0 h-16 min-w-16 justify-center p-4 ltr:right-0 rtl:left-0"
+										className="absolute top-0 h-4 min-w-4 justify-center p-1 ltr:right-0 rtl:left-0"
 									/>
 								)}
 							</div>
 
 							<ListItemText
-								className="fuse-list-item-text w-full grow-0 px-8"
+								className="fuse-list-item-text w-full grow-0 px-2"
 								primary={item.title}
 								classes={{
 									primary:

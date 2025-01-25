@@ -39,7 +39,7 @@ function SwitchesDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Switch
@@ -47,129 +47,129 @@ function SwitchesDoc(props) {
 			<Typography className="description">Switches toggle the state of a single setting on or off.</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Switches are the preferred way to adjust settings on mobile. The option that the switch controls, as
 				well as the state it&#39;s in, should be made clear from the corresponding inline label.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic switches
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicSwitches.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicSwitchesComponent}
 					raw={BasicSwitchesRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Label
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can provide a label to the <code>Switch</code> thanks to the <code>FormControlLabel</code>{' '}
 				component.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SwitchLabels.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SwitchLabelsComponent}
 					raw={SwitchLabelsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Size
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Use the <code>size</code> prop to change the size of the switch.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SwitchesSize.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SwitchesSizeComponent}
 					raw={SwitchesSizeRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Color
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ColorSwitches.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ColorSwitchesComponent}
 					raw={ColorSwitchesRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Controlled
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can control the switch with the <code>checked</code> and <code>onChange</code> props:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ControlledSwitches.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ControlledSwitchesComponent}
 					raw={ControlledSwitchesRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Switches with FormGroup
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<code>FormGroup</code> is a helpful wrapper used to group selection controls components that provides an
@@ -177,44 +177,44 @@ function SwitchesDoc(props) {
 				instead if multiple related controls are required. (See: <a href="#when-to-use">When to use</a>).
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SwitchesGroup.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SwitchesGroupComponent}
 					raw={SwitchesGroupRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Here are some examples of customizing the component. You can learn more about this in the{' '}
 				<a href="/material-ui/customization/how-to-customize/">overrides documentation page</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomizedSwitches.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomizedSwitchesComponent}
 					raw={CustomizedSwitchesRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				🎨 If you are looking for inspiration, you can check{' '}
@@ -224,47 +224,47 @@ function SwitchesDoc(props) {
 				.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Label placement
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can change the placement of the label:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FormControlLabelPosition.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={FormControlLabelPositionComponent}
 					raw={FormControlLabelPositionRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				When to use
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<a href="https://uxplanet.org/checkbox-vs-toggle-switch-7fc6e83f10b8">Checkboxes vs. Switches</a>
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					It will render an element with the <code>checkbox</code> role not <code>switch</code> role since
 					this role isn&#39;t widely supported yet. Please test first if assistive technology of your target

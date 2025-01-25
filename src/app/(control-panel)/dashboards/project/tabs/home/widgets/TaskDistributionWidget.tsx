@@ -99,12 +99,12 @@ function TaskDistributionWidget() {
 	}
 
 	return (
-		<Paper className="flex flex-col flex-auto p-24 shadow rounded-xl overflow-hidden h-full">
+		<Paper className="flex flex-col flex-auto p-6 shadow-sm rounded-xl overflow-hidden h-full">
 			<div className="flex flex-col sm:flex-row items-start justify-between">
 				<Typography className="text-lg font-medium tracking-tight leading-6 truncate">
 					Task Distribution
 				</Typography>
-				<div className="mt-3 sm:mt-0">
+				<div className="mt-0.75 sm:mt-0">
 					<FuseTabs
 						value={tabValue}
 						onChange={(ev, value: number) => setTabValue(value)}
@@ -119,7 +119,7 @@ function TaskDistributionWidget() {
 					</FuseTabs>
 				</div>
 			</div>
-			<div className="flex flex-col flex-auto mt-6">
+			<div className="flex flex-col flex-auto mt-1.5">
 				<ReactApexChart
 					className="flex-auto w-full"
 					options={chartOptions}
@@ -138,19 +138,19 @@ function TaskDistributionWidget() {
 									backgroundColor: lighten(theme.palette.background.default, 0.02)
 								}
 				]}
-				className="grid grid-cols-2 border-t divide-x -m-24 mt-16"
+				className="grid grid-cols-2 border-t divide-x -m-6 mt-4"
 			>
-				<div className="flex flex-col items-center justify-center p-24 sm:p-32">
+				<div className="flex flex-col items-center justify-center p-6 sm:p-8">
 					<div className="text-5xl font-semibold leading-none tracking-tighter">
 						{overview[currentRange].new}
 					</div>
-					<Typography className="mt-4 text-center text-secondary">New tasks</Typography>
+					<Typography className="mt-1 text-center text-secondary">New tasks</Typography>
 				</div>
-				<div className="flex flex-col items-center justify-center p-6 sm:p-8">
+				<div className="flex flex-col items-center justify-center p-1.5 sm:p-2">
 					<div className="text-5xl font-semibold leading-none tracking-tighter">
 						{overview[currentRange].completed}
 					</div>
-					<Typography className="mt-4 text-center text-secondary">Completed tasks</Typography>
+					<Typography className="mt-1 text-center text-secondary">Completed tasks</Typography>
 				</div>
 			</Box>
 		</Paper>

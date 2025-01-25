@@ -19,7 +19,7 @@ function BasicInfoTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						required
 						label="Name"
 						autoFocus
@@ -38,7 +38,7 @@ function BasicInfoTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						id="description"
 						label="Description"
 						type="text"
@@ -56,7 +56,7 @@ function BasicInfoTab() {
 				defaultValue={[]}
 				render={({ field: { onChange, value } }) => (
 					<Autocomplete
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						multiple
 						freeSolo
 						options={[]}
@@ -85,7 +85,7 @@ function BasicInfoTab() {
 				defaultValue={[]}
 				render={({ field: { onChange, value } }) => (
 					<Autocomplete
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						multiple
 						freeSolo
 						options={[]}

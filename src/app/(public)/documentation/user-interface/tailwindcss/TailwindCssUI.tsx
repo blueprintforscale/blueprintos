@@ -8,29 +8,29 @@ import Typography from '@mui/material/Typography';
 function TailwindCssUI() {
 	return (
 		<>
-			<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-40">TailwindCSS</Typography>
+			<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-10">TailwindCSS</Typography>
 			<div className="flex-auto">
 				<div>
-					<Typography className="mb-16">
+					<Typography className="mb-4">
 						As per the official page of Tailwind CSS, it is a highly customizable, low-level CSS framework
 						that gives you all of the building blocks you need to build bespoke designs without any annoying
 						opinionated styles you have to fight to override.
 					</Typography>
 
-					<Typography className="mb-16">
+					<Typography className="mb-4">
 						To simply put, Tailwind provides helper classes for almost every CSS rule available. Fuse
 						includes and uses Tailwind by default and it can be used in any part of the theme.
 					</Typography>
 
-					<Typography className="text-2xl font-700 mt-32 mb-16">Styling in Material-UI</Typography>
+					<Typography className="text-2xl font-bold mt-8 mb-4">Styling in Material-UI</Typography>
 
 					<Typography
-						className="mb-16"
+						className="mb-4"
 						component="p"
 					>
 						Fuse React developed based on Material-UI as ui library.
 						<a
-							className="mx-4"
+							className="mx-1"
 							href="https://mui.com/system/basics/"
 							target="_blank"
 							rel="noopener noreferrer"
@@ -39,7 +39,7 @@ function TailwindCssUI() {
 						</a>
 						uses emotion at its core. Therefore the Fuse React supports
 						<a
-							className="mx-4"
+							className="mx-1"
 							href="http://cssinjs.org/"
 							target="_blank"
 							rel="noopener noreferrer"
@@ -52,14 +52,14 @@ function TailwindCssUI() {
 
 				<div>
 					<Typography
-						className="text-2xl font-700 mt-32 mb-16"
+						className="text-2xl font-bold mt-8 mb-4"
 						variant="h5"
 					>
 						Helper Classes with TailwindCSS
 					</Typography>
 
 					<Typography
-						className="mb-16"
+						className="mb-4"
 						component="p"
 					>
 						We are accepting JSS advantages but we can't leave <b>helper classes</b> for fast development,
@@ -67,12 +67,12 @@ function TailwindCssUI() {
 					</Typography>
 
 					<Typography
-						className="mb-16"
+						className="mb-4"
 						component="p"
 					>
 						We are using
 						<a
-							className="mx-4"
+							className="mx-1"
 							href="https://tailwindcss.com"
 							target="_blank"
 							rel="noopener noreferrer"
@@ -84,13 +84,13 @@ function TailwindCssUI() {
 					</Typography>
 				</div>
 
-				<Typography className="text-2xl font-700 mt-32 mb-16">Official docs</Typography>
+				<Typography className="text-2xl font-bold mt-8 mb-4">Official docs</Typography>
 
-				<Typography className="my-16">
+				<Typography className="my-4">
 					Official Tailwind CSS documentation:
 					<Typography
 						component="a"
-						className="link mx-4"
+						className="link mx-1"
 						href="https://tailwindcss.com/"
 						rel="noreferrer"
 						target="_blank"

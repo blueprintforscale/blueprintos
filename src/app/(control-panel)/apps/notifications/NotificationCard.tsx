@@ -64,7 +64,7 @@ function NotificationCard(props: NotificationCardProps) {
 		<ThemeProvider theme={contrastTheme}>
 			<Card
 				className={clsx(
-					'relative flex min-h-64 w-full items-center space-x-8 rounded-xl p-20 shadow',
+					'relative flex min-h-16 w-full items-center space-x-2 rounded-xl p-5 shadow-sm',
 					className
 				)}
 				sx={[
@@ -82,7 +82,7 @@ function NotificationCard(props: NotificationCardProps) {
 				{item.icon && !item.image && (
 					<Box
 						sx={{ backgroundColor: darken(bgColor, contrastTheme.palette.mode === 'dark' ? 0.3 : 0.1) }}
-						className="mr-12 flex h-32 w-32 shrink-0 items-center justify-center rounded-full"
+						className="mr-3 flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
 					>
 						<FuseSvgIcon
 							className="opacity-75"
@@ -96,7 +96,7 @@ function NotificationCard(props: NotificationCardProps) {
 
 				{item.image && (
 					<img
-						className="mr-12 h-32 w-32 shrink-0 overflow-hidden rounded-full object-cover object-center"
+						className="mr-3 h-8 w-8 shrink-0 overflow-hidden rounded-full object-cover object-center"
 						src={item.image}
 						alt="Notification"
 					/>
@@ -113,7 +113,7 @@ function NotificationCard(props: NotificationCardProps) {
 					)}
 
 					{item.time && (
-						<Typography className="mt-8 text-sm leading-none opacity-60">
+						<Typography className="mt-2 text-sm leading-none opacity-60">
 							{formatDistanceToNow(new Date(item.time), { addSuffix: true })}
 						</Typography>
 					)}
@@ -121,7 +121,7 @@ function NotificationCard(props: NotificationCardProps) {
 
 				<IconButton
 					disableRipple
-					className="absolute right-0 top-0 p-8"
+					className="absolute right-0 top-0 p-2"
 					color="inherit"
 					size="small"
 					onClick={handleClose}

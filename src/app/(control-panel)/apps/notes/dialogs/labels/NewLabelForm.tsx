@@ -59,7 +59,7 @@ function NewLabelForm() {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<ListItem
-				className="p-0 mb-12"
+				className="p-0 mb-3"
 				dense
 			>
 				<Controller

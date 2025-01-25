@@ -9,8 +9,8 @@ import Box from '@mui/material/Box';
  */
 function MaintenancePage() {
 	return (
-		<div className="flex flex-1 flex-col items-center justify-center p-16">
-			<div className="w-full max-w-3xl text-center">
+		<div className="flex flex-1 flex-col items-center justify-center p-4">
+			<div className="w-full max-w-5xl text-center">
 				<motion.div
 					initial={{ opacity: 0, scale: 0.6 }}
 					animate={{ opacity: 1, scale: 1, transition: { delay: 0.1 } }}
@@ -174,7 +174,7 @@ function MaintenancePage() {
 			>
 				<Typography
 					variant="h1"
-					className="mt-48 text-center text-4xl font-extrabold leading-tight tracking-tight sm:mt-96 md:text-7xl md:leading-none"
+					className="mt-12 text-center text-4xl font-extrabold leading-[1.25] tracking-tight sm:mt-24 md:text-7xl md:leading-none"
 				>
 					We are under scheduled maintenance.
 				</Typography>
@@ -187,7 +187,7 @@ function MaintenancePage() {
 				<Typography
 					variant="h5"
 					color="text.secondary"
-					className="mt-8 text-center text-lg font-medium tracking-tight md:text-xl"
+					className="mt-2 text-center text-lg font-medium tracking-tight md:text-xl"
 				>
 					Sorry for the inconvenience, we will be back shortly!
 				</Typography>

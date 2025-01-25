@@ -13,7 +13,7 @@ function BoardCardDialog() {
 	return (
 		<Dialog
 			classes={{
-				paper: 'max-w-lg w-full m-8 sm:m-24'
+				paper: 'max-w-2xl w-full m-2 sm:m-6'
 			}}
 			onClose={() => dispatch(closeCardDialog())}
 			open={cardDialogOpen}

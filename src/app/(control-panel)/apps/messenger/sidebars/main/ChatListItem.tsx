@@ -38,7 +38,7 @@ function ChatListItem(props: ChatListItemProps) {
 	return (
 		<StyledListItem
 			component={NavLinkAdapter}
-			className="px-24 py-12 min-h-80"
+			className="px-6 py-3 min-h-20"
 			to={`/apps/messenger/${item.id}`}
 			activeClassName="active"
 		>
@@ -46,7 +46,7 @@ function ChatListItem(props: ChatListItemProps) {
 
 			<ListItemText
 				classes={{
-					root: 'min-w-px px-16',
+					root: 'min-w-px px-4',
 					primary: 'font-medium text-base',
 					secondary: 'truncate'
 				}}
@@ -58,7 +58,7 @@ function ChatListItem(props: ChatListItemProps) {
 				<div className="flex flex-col justify-center items-end">
 					{item?.lastMessageAt && (
 						<Typography
-							className="whitespace-nowrap mb-8 font-medium text-md"
+							className="whitespace-nowrap mb-2 font-medium text-md"
 							color="text.secondary"
 						>
 							{format(new Date(item.lastMessageAt), 'PP')}
@@ -79,7 +79,7 @@ function ChatListItem(props: ChatListItemProps) {
 									backgroundColor: 'secondary.main',
 									color: 'secondary.contrastText'
 								}}
-								className="flex items-center justify-center min-w-20 h-20 rounded-full font-medium text-10 text-center"
+								className="flex items-center justify-center min-w-5 h-5 rounded-full font-medium text-xs text-center"
 							>
 								{item.unreadCount}
 							</Box>

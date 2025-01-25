@@ -43,7 +43,7 @@ function NewNote() {
 	}
 
 	return (
-		<Paper className="flex items-center w-full max-w-512 min-h-40 shadow shrink-0 cursor-text rounded-lg">
+		<Paper className="flex items-center w-full max-w-128 min-h-10 shadow-sm shrink-0 cursor-text rounded-lg">
 			{formOpen ? (
 				<ClickAwayListener onClickAway={handleClickAway}>
 					<div className="w-full">
@@ -55,7 +55,7 @@ function NewNote() {
 				</ClickAwayListener>
 			) : (
 				<Typography
-					className="px-12 text-15 w-full"
+					className="px-3 text-lg w-full"
 					color="text.secondary"
 					onClick={handleFormOpen}
 				>

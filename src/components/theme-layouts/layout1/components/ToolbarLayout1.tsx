@@ -53,31 +53,31 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 				position="static"
 				elevation={0}
 			>
-				<Toolbar className="min-h-48 p-0 md:min-h-64">
-					<div className="flex flex-1 px-8 md:px-16 space-x-8 ">
+				<Toolbar className="min-h-12 p-0 md:min-h-16">
+					<div className="flex flex-1 px-2 md:px-4 space-x-2 ">
 						{config.navbar.display && config.navbar.position === 'left' && (
 							<>
 								{!isMobile && (
 									<>
 										{(config.navbar.style === 'style-3' ||
 											config.navbar.style === 'style-3-dense') && (
-											<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
+											<NavbarToggleButton className="h-10 w-10 p-0" />
 										)}
 
 										{config.navbar.style === 'style-1' && !navbar.open && (
-											<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
+											<NavbarToggleButton className="h-10 w-10 p-0" />
 										)}
 									</>
 								)}
 
-								{isMobile && <NavbarToggleButton className="mx-0 h-40 w-40 p-0 sm:mx-8" />}
+								{isMobile && <NavbarToggleButton className="h-10 w-10 p-0 sm:mx-2" />}
 							</>
 						)}
 
 						{!isMobile && <NavigationShortcuts />}
 					</div>
 
-					<div className="flex items-center overflow-x-auto px-8 md:px-16 space-x-6">
+					<div className="flex items-center overflow-x-auto px-2 md:px-4 space-x-1.5">
 						<LanguageSwitcher />
 						<AdjustFontSize />
 						<FullScreenToggle />
@@ -95,16 +95,16 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 							{!isMobile && (
 								<>
 									{(config.navbar.style === 'style-3' || config.navbar.style === 'style-3-dense') && (
-										<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
+										<NavbarToggleButton className="h-10 w-10 p-0" />
 									)}
 
 									{config.navbar.style === 'style-1' && !navbar.open && (
-										<NavbarToggleButton className="mx-0 h-40 w-40 p-0" />
+										<NavbarToggleButton className="h-10 w-10 p-0" />
 									)}
 								</>
 							)}
 
-							{isMobile && <NavbarToggleButton className="mx-0 h-40 w-40 p-0 sm:mx-8" />}
+							{isMobile && <NavbarToggleButton className="h-10 w-10 p-0 sm:mx-2" />}
 						</>
 					)}
 				</Toolbar>

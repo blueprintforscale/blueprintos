@@ -54,23 +54,23 @@ function InvoiceTab(props: InvoiceTabProps) {
 	});
 
 	return (
-		<Root className="w-full max-w-5xl  grow shrink-0 p-0 border-1 rounded-lg">
+		<Root className="w-full max-w-7xl grow shrink-0 p-0 border-1 rounded-lg">
 			{order && (
-				<Card className="w-xl mx-auto shadow-0">
-					<CardContent className="p-88 print:p-0">
+				<Card className="w-3xl mx-auto shadow-0">
+					<CardContent className="p-22 print:p-0">
 						<Typography
 							color="text.secondary"
-							className="mb-32"
+							className="mb-8"
 						>
 							{order.date}
 						</Typography>
 
 						<div className="flex justify-between">
 							<div>
-								<table className="mb-16">
+								<table className="mb-4">
 									<tbody>
 										<tr>
-											<td className="pb-4">
+											<td className="pb-1">
 												<Typography
 													className="font-light"
 													variant="h6"
@@ -79,7 +79,7 @@ function InvoiceTab(props: InvoiceTabProps) {
 													INVOICE
 												</Typography>
 											</td>
-											<td className="pb-4 px-8">
+											<td className="pb-1 px-2">
 												<Typography
 													className="font-light"
 													variant="h6"
@@ -109,16 +109,16 @@ function InvoiceTab(props: InvoiceTabProps) {
 								)}
 							</div>
 
-							<div className="seller flex items-center p-16">
+							<div className="seller flex items-center p-4">
 								<img
-									className="w-80"
+									className="w-20"
 									src="/assets/images/logo/logo.svg"
 									alt="logo"
 								/>
 
-								<div className="divider mx-8 h-96" />
+								<div className="divider mx-2 h-24" />
 
-								<div className="px-8">
+								<div className="px-2">
 									<Typography color="inherit">FUSE INC.</Typography>
 
 									<Typography color="inherit">2810 Country Club Road Cranford, NJ 07016</Typography>
@@ -129,7 +129,7 @@ function InvoiceTab(props: InvoiceTabProps) {
 							</div>
 						</div>
 
-						<div className="mt-64">
+						<div className="mt-16">
 							<Table className="simple">
 								<TableHead>
 									<TableRow>
@@ -159,7 +159,7 @@ function InvoiceTab(props: InvoiceTabProps) {
 								</TableBody>
 							</Table>
 
-							<Table className="simple mt-32">
+							<Table className="simple mt-8">
 								<TableBody>
 									<TableRow>
 										<TableCell>
@@ -245,9 +245,9 @@ function InvoiceTab(props: InvoiceTabProps) {
 							</Table>
 						</div>
 
-						<div className="mt-96">
+						<div className="mt-24">
 							<Typography
-								className="mb-24 print:mb-12"
+								className="mb-6 print:mb-3"
 								variant="body1"
 							>
 								Please pay within 15 days. Thank you for your business.
@@ -256,14 +256,14 @@ function InvoiceTab(props: InvoiceTabProps) {
 							<div className="flex">
 								<div className="shrink-0">
 									<img
-										className="w-32"
+										className="w-8"
 										src="/assets/images/logo/logo.svg"
 										alt="logo"
 									/>
 								</div>
 
 								<Typography
-									className="font-normal mb-64 px-24"
+									className="font-normal mb-16 px-6"
 									variant="caption"
 									color="text.secondary"
 								>

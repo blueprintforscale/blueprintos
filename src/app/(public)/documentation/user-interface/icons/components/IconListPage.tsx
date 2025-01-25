@@ -62,14 +62,14 @@ const IconListPage = React.memo((props: IconListPageProps) => {
 
 	return (
 		<div>
-			<div className="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between mb-32">
+			<div className="flex flex-col sm:flex-row shrink-0 sm:items-center sm:justify-between mb-8">
 				<div className="flex-1 min-w-0">
 					<Typography className="text-4xl font-extrabold leading-none tracking-tight">{pageTitle}</Typography>
 				</div>
 				<div>
 					{referenceUrl && (
 						<Button
-							className="mt-12 sm:mt-0"
+							className="mt-3 sm:mt-0"
 							variant="contained"
 							color="secondary"
 							component="a"
@@ -84,21 +84,21 @@ const IconListPage = React.memo((props: IconListPageProps) => {
 				</div>
 			</div>
 			<div className="flex-auto">
-				<Typography className="text-2xl font-700 mb-16">Usage</Typography>
+				<Typography className="text-2xl font-bold mb-4">Usage</Typography>
 
 				<FuseHighlight
 					component="pre"
-					className="language-jsx my-24"
+					className="language-jsx my-6"
 					copy
 				>
 					{`
-              <FuseSvgIcon className="text-48" size={${form.size}} color="action">${iconSet}:${selectedIcon}</FuseSvgIcon>
+              <FuseSvgIcon className="text-7xl" size={${form.size}} color="action">${iconSet}:${selectedIcon}</FuseSvgIcon>
             `}
 				</FuseHighlight>
 
-				<Typography className="text-2xl font-700 mt-32 mb-16">Icons</Typography>
+				<Typography className="text-2xl font-bold mt-8 mb-4">Icons</Typography>
 
-				<div className="flex flex-col md:flex-row justify-center md:items-end my-24 xs:flex-col md:space-x-16">
+				<div className="flex flex-col md:flex-row justify-center md:items-end my-6 xs:flex-col md:space-x-4">
 					<div className="flex flex-1">
 						<Controller
 							name="searchText"
@@ -146,7 +146,7 @@ const IconListPage = React.memo((props: IconListPageProps) => {
 					/>
 				</div>
 
-				<div className="grid grid-cols-2  sm:grid-cols-4 gap-8">
+				<div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
 					{filteredData?.map((icon) => (
 						<IconListItem
 							key={icon}
@@ -159,7 +159,7 @@ const IconListPage = React.memo((props: IconListPageProps) => {
 					))}
 
 					{filteredData?.length === 0 && (
-						<div className="col-span-6 flex flex-auto items-center justify-center w-full h-full p-32 md:p-128">
+						<div className="col-span-6 flex flex-auto items-center justify-center w-full h-full p-8 md:p-32">
 							<Typography
 								color="text.secondary"
 								variant="h5"

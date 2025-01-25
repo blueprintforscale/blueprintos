@@ -27,7 +27,7 @@ function ContainerDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Container
@@ -37,30 +37,30 @@ function ContainerDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				While containers can be nested, most layouts do not require a nested container.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Fluid
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A fluid container width is bounded by the <code>maxWidth</code> prop value.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimpleContainer.js"
-					className="my-16"
+					className="my-4"
 					iframe
 					component={SimpleContainerComponent}
 					raw={SimpleContainerRaw}
@@ -76,13 +76,13 @@ function ContainerDoc(props) {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Fixed
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If you prefer to design for a fixed set of sizes instead of trying to accommodate a fully fluid
@@ -90,12 +90,12 @@ function ContainerDoc(props) {
 				breakpoint.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FixedContainer.js"
-					className="my-16"
+					className="my-4"
 					iframe
 					component={FixedContainerComponent}
 					raw={FixedContainerRaw}

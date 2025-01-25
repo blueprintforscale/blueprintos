@@ -152,7 +152,7 @@ function ImageGeneratorForm() {
 			className="flex flex-col min-h-0"
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<div className="flex justify-between items-center px-16 py-12">
+			<div className="flex justify-between items-center px-4 py-3">
 				<Typography className="flex justify-between items-center text-md font-semibold">
 					Generate New Image
 				</Typography>
@@ -162,10 +162,10 @@ function ImageGeneratorForm() {
 					onSavePreset={handleOnSavePreset}
 				/>
 			</div>
-			<div className="flex flex-col gap-16 overflow-y-auto px-16 py-8 min-h-0">
+			<div className="flex flex-col gap-4 overflow-y-auto px-4 py-2 min-h-0">
 				<FormSection>
-					<div className="flex flex-col gap-16">
-						<div className="flex flex-col gap-8">
+					<div className="flex flex-col gap-4">
+						<div className="flex flex-col gap-2">
 							<div className="flex justify-between items-center">
 								<Typography
 									className="text-sm font-semibold"
@@ -190,7 +190,7 @@ function ImageGeneratorForm() {
 								control={control}
 								render={({ field }) => (
 									<OutlinedInput
-										className="px-0 py-8 text-sm"
+										className="px-0 py-2 text-sm"
 										fullWidth
 										multiline
 										rows={4}
@@ -201,7 +201,7 @@ function ImageGeneratorForm() {
 							/>
 						</div>
 
-						<div className="flex flex-col gap-8">
+						<div className="flex flex-col gap-2">
 							<Typography
 								className="text-sm font-semibold"
 								color="text.secondary"
@@ -214,7 +214,7 @@ function ImageGeneratorForm() {
 								control={control}
 								render={({ field }) => (
 									<OutlinedInput
-										className="px-0 py-8 text-sm"
+										className="px-0 py-2 text-sm"
 										fullWidth
 										multiline
 										rows={2}
@@ -228,7 +228,7 @@ function ImageGeneratorForm() {
 				</FormSection>
 
 				<FormSection>
-					<div className="space-y-24">
+					<div className="space-y-6">
 						<Controller
 							name="style"
 							control={control}
@@ -280,7 +280,7 @@ function ImageGeneratorForm() {
 				</FormSection>
 
 				<FormSection>
-					<div className="flex justify-center mb-32">
+					<div className="flex justify-center mb-8">
 						<Box
 							sx={{
 								backgroundColor: (theme) => alpha(theme.palette.background.default, 0.7),
@@ -289,7 +289,7 @@ function ImageGeneratorForm() {
 								width: '150px',
 								aspectRatio: formData.size.replace('x', '/')
 							}}
-							className="rounded flex items-center justify-center"
+							className="rounded-sm flex items-center justify-center"
 						>
 							<Typography
 								variant="caption"
@@ -300,7 +300,7 @@ function ImageGeneratorForm() {
 						</Box>
 					</div>
 
-					<div className="space-y-24">
+					<div className="space-y-6">
 						<Controller
 							name="size"
 							control={control}
@@ -310,7 +310,7 @@ function ImageGeneratorForm() {
 							control={control}
 							name="quality"
 							render={({ field }) => (
-								<div className="flex space-x-12 items-center justify-between">
+								<div className="flex space-x-3 items-center justify-between">
 									<Typography
 										className="text-md font-medium"
 										color="text.secondary"
@@ -345,7 +345,7 @@ function ImageGeneratorForm() {
 					</div>
 				</FormSection>
 			</div>
-			<div className="flex justify-end p-16">
+			<div className="flex justify-end p-4">
 				<Button
 					fullWidth
 					variant="contained"

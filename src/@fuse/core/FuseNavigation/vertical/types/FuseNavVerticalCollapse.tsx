@@ -99,20 +99,20 @@ function FuseNavVerticalCollapse(props: FuseNavItemComponentProps) {
 						secondary={item.subtitle}
 						classes={{
 							primary: 'text-md font-medium fuse-list-item-text-primary truncate',
-							secondary: 'text-sm font-medium fuse-list-item-text-secondary leading-normal truncate'
+							secondary: 'text-sm font-medium fuse-list-item-text-secondary leading-[1.5] truncate'
 						}}
 					/>
 
 					{item.badge && (
 						<FuseNavBadge
-							className="mx-4"
+							className="mx-1"
 							badge={item.badge}
 						/>
 					)}
 
 					<IconButton
 						disableRipple
-						className="-mx-12 h-20 w-20 p-0 hover:bg-transparent focus:bg-transparent"
+						className="-mx-3 h-5 w-5 p-0 hover:bg-transparent focus:bg-transparent"
 						onClick={(ev) => {
 							ev.preventDefault();
 							ev.stopPropagation();

@@ -24,7 +24,7 @@ function FileItem(props: FileItemProps) {
 	return (
 		<Box
 			sx={{ backgroundColor: 'background.paper' }}
-			className="flex flex-col relative w-full sm:w-160 h-160 m-8 p-16 shadow rounded-xl cursor-pointer"
+			className="flex flex-col relative w-full sm:w-40 h-40 m-2 p-4 shadow-sm rounded-xl cursor-pointer"
 			onClick={() => dispatch(setSelectedItemId(item.id))}
 		>
 			<div className="flex flex-auto w-full items-center justify-center">

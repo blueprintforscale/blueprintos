@@ -43,16 +43,16 @@ function NoteListItem(props: NoteListItemProps) {
 				)}
 
 				{note.title && note.title !== '' && (
-					<Typography className="px-16 my-12 text-base font-semibold">{note.title}</Typography>
+					<Typography className="px-4 my-3 text-base font-semibold">{note.title}</Typography>
 				)}
 
 				{note.content && note.content !== '' && (
 					<Typography
-						className="px-16 my-12 "
+						className="px-4 my-3 "
 						component="div"
 					>
 						<div
-							className={clsx('w-full break-words', variateDescSize ? 'font-500' : 'text-base')}
+							className={clsx('w-full break-words', variateDescSize ? 'font-medium' : 'text-base')}
 							ref={(el) => {
 								setTimeout(() => setDescriptionStyle(note.content, el, Boolean(variateDescSize)));
 							}}
@@ -63,7 +63,7 @@ function NoteListItem(props: NoteListItemProps) {
 				)}
 
 				{note.tasks && note.tasks.length > 0 && (
-					<ul className="px-16 my-12 flex flex-wrap">
+					<ul className="px-4 my-3 flex flex-wrap">
 						{note.tasks.map((item) => (
 							<li
 								key={item.id}
@@ -76,7 +76,7 @@ function NoteListItem(props: NoteListItemProps) {
 									heroicons-solid:check-circle
 								</FuseSvgIcon>
 								<Typography
-									className={clsx('truncate text-md mx-8', item.completed && 'line-through')}
+									className={clsx('truncate text-md mx-2', item.completed && 'line-through')}
 									color={item.completed ? 'text.secondary' : 'inherit'}
 								>
 									{item.content}
@@ -87,10 +87,10 @@ function NoteListItem(props: NoteListItemProps) {
 				)}
 
 				{(note.labels.length > 0 || note.reminder) && (
-					<div className="px-16 my-12 flex flex-wrap w-full -mx-2">
+					<div className="px-4 my-3 flex flex-wrap w-full -mx-0.5">
 						{note.reminder && (
 							<NoteReminderLabel
-								className="mt-4 mx-2 max-w-full"
+								className="mt-1 mx-0.5 max-w-full"
 								date={note.reminder}
 							/>
 						)}
@@ -98,7 +98,7 @@ function NoteListItem(props: NoteListItemProps) {
 							<NoteLabel
 								id={id}
 								key={id}
-								className="mt-4 mx-2 max-w-full"
+								className="mt-1 mx-0.5 max-w-full"
 								linkable
 							/>
 						))}

@@ -19,25 +19,25 @@ export default function Error({ error, reset }: ErrorProps) {
 		<Container maxWidth="sm">
 			<div className="flex flex-col items-center justify-center min-h-screen text-center">
 				<FuseSvgIcon
-					className="mb-16"
+					className="mb-4"
 					color="error"
 					size={64}
 				>
 					heroicons-outline:information-circle
 				</FuseSvgIcon>
 				<Typography
-					className="text-xl lg:text-3xl mb-16"
+					className="text-xl lg:text-3xl mb-4"
 					color="error.main"
 				>
 					Oops! Something went wrong
 				</Typography>
 				<Typography
-					className="mb-32"
+					className="mb-8"
 					color="text.secondary"
 				>
 					{error.message || 'An unexpected error occurred'}
 				</Typography>
-				<div className="flex gap-8">
+				<div className="flex gap-2">
 					<Button
 						component={Link}
 						to="/"

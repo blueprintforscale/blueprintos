@@ -36,18 +36,18 @@ function TimelineTab() {
 			className="w-full"
 		>
 			<div className="md:flex">
-				<div className="flex flex-col w-full md:w-320 md:ltr:mr-32 md:rtl:ml-32">
+				<div className="flex flex-col w-full md:w-80 md:ltr:mr-8 md:rtl:ml-8">
 					<Card
 						component={motion.div}
 						variants={item}
-						className="flex flex-col w-full px-32 pt-24"
+						className="flex flex-col w-full px-8 pt-6"
 					>
-						<div className="flex justify-between items-center pb-16">
-							<Typography className="text-2xl font-semibold leading-tight">Latest Activity</Typography>
+						<div className="flex justify-between items-center pb-4">
+							<Typography className="text-2xl font-semibold leading-[1.25]">Latest Activity</Typography>
 							<Button
 								color="inherit"
 								size="small"
-								className="font-medium -mx-8"
+								className="font-medium -mx-2"
 							>
 								See All
 							</Button>
@@ -63,10 +63,10 @@ function TimelineTab() {
 					<Card
 						component={motion.div}
 						variants={item}
-						className="w-full overflow-hidden w-full mb-32"
+						className="w-full overflow-hidden w-full mb-8"
 					>
 						<Input
-							className="p-24 w-full"
+							className="p-6 w-full"
 							classes={{ root: 'text-base' }}
 							placeholder="Write something.."
 							multiline
@@ -75,7 +75,7 @@ function TimelineTab() {
 							disableUnderline
 						/>
 						<Box
-							className="card-footer flex items-center flex-row border-t-1 px-24 py-12"
+							className="card-footer flex items-center flex-row border-t-1 px-6 py-3"
 							sx={(theme) => ({
 								backgroundColor: lighten(theme.palette.background.default, 0.02),
 								...theme.applyStyles('light', {

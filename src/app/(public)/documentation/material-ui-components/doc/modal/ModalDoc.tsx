@@ -35,7 +35,7 @@ function ModalDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Modal
@@ -46,13 +46,13 @@ function ModalDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The component renders its <code>children</code> node in front of a backdrop component. The{' '}
 				<code>Modal</code> offers important features:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>💄 Manages modal stacking when one-at-a-time just isn&#39;t enough.</li>
 				<li>🔐 Creates a backdrop, for disabling interaction below the modal.</li>
 				<li>🔐 It disables scrolling of the page content while open.</li>
@@ -62,9 +62,9 @@ function ModalDoc(props) {
 				</li>
 				<li>♿️ Adds the appropriate ARIA roles automatically.</li>
 			</ul>
-			<div className="border-1 p-16 rounded-xl my-12">
+			<div className="border-1 p-4 rounded-xl my-3">
 				<Typography
-					className="text-base mb-32"
+					className="text-base mb-8"
 					component="div"
 				>
 					The term &quot;modal&quot; is sometimes used to mean &quot;dialog&quot;, but this is a misnomer. A
@@ -77,14 +77,14 @@ function ModalDoc(props) {
 			</div>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If you are creating a modal dialog, you probably want to use the{' '}
 				<a href="/material-ui/react-dialog/">Dialog</a> component rather than directly using Modal. Modal is a
 				lower-level construct that is leveraged by the following components:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<a href="/material-ui/react-dialog/">Dialog</a>
 				</li>
@@ -99,69 +99,69 @@ function ModalDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic modal
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicModal.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicModalComponent}
 					raw={BasicModalRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Notice that you can disable the outline (often blue or gold) with the <code>outline: 0</code> CSS
 				property.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Nested modal
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Modals can be nested, for example a select within a dialog, but stacking of more than two modals, or any
 				two modals with a backdrop is discouraged.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="NestedModal.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={NestedModalComponent}
 					raw={NestedModalRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Transitions
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The open/close state of the modal can be animated with a transition component. This component should
 				respect the following conditions:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>Be a direct child descendent of the modal.</li>
 				<li>
 					Have an <code>in</code> prop. This corresponds to the open/close state.
@@ -175,50 +175,50 @@ function ModalDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Modal has built-in support for{' '}
 				<a href="https://github.com/reactjs/react-transition-group">react-transition-group</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="TransitionsModal.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={TransitionsModalComponent}
 					raw={TransitionsModalRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Alternatively, you can use <a href="https://github.com/pmndrs/react-spring">react-spring</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SpringModal.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SpringModalComponent}
 					raw={SpringModalRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Performance
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The content of modal is unmounted when closed. If you need to make the content available to search
@@ -236,32 +236,32 @@ function ModalDoc(props) {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="KeepMountedModal.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={KeepMountedModalComponent}
 					raw={KeepMountedModalRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				As with any performance optimization, this is not a silver bullet. Be sure to identify bottlenecks
 				first, and then try out these optimization strategies.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Server-side modal
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				React <a href="https://github.com/facebook/react/issues/13097">doesn&#39;t support</a> the{' '}
@@ -272,37 +272,37 @@ function ModalDoc(props) {
 				<code>disablePortal</code> prop:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ServerModal.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ServerModalComponent}
 					raw={ServerModalRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Limitations
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Focus trap
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The modal moves the focus back to the body of the component if the focus tries to escape it.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				This is done for accessibility purposes. However, it might create issues. In the event the users need to
@@ -318,13 +318,13 @@ function ModalDoc(props) {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				(WAI-ARIA:{' '}
@@ -333,10 +333,10 @@ function ModalDoc(props) {
 				</a>
 				)
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						Be sure to add <code>{`aria-labelledby="id..."`}</code>, referencing the modal title, to the{' '}
@@ -358,7 +358,7 @@ function ModalDoc(props) {
 				</li>
 				<li>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						The{' '}
@@ -370,7 +370,7 @@ function ModalDoc(props) {
 				</li>
 				<li>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						Keep in mind that a &quot;modal window&quot; overlays on either the primary window or another

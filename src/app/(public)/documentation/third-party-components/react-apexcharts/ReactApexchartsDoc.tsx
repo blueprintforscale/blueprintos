@@ -31,7 +31,7 @@ import RadialBarRaw from './examples/RadialBar.tsx?raw';
 function ReactApexchartsDoc() {
 	return (
 		<>
-			<div className="flex w-full items-center justify-between mb-24">
+			<div className="flex w-full items-center justify-between mb-6">
 				<Typography variant="h4">react-apexcharts</Typography>
 				<Button
 					variant="contained"
@@ -48,7 +48,7 @@ function ReactApexchartsDoc() {
 			</div>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				React.js wrapper for ApexCharts to build interactive visualizations in react.
@@ -57,60 +57,60 @@ function ReactApexchartsDoc() {
 			<hr />
 
 			<Typography
-				className="text-5xl mt-32 mb-8"
+				className="text-5xl mt-8 mb-2"
 				component="h2"
 			>
 				Example Usages
 			</Typography>
 
 			<FuseExample
-				className="mb-64"
+				className="mb-16"
 				component={AreaComponent}
 				raw={AreaRaw}
 			/>
 
 			<FuseExample
-				className="mb-64"
+				className="mb-16"
 				component={BarComponent}
 				raw={BarRaw}
 			/>
 
 			<FuseExample
-				className="mb-64"
+				className="mb-16"
 				component={ColumnComponent}
 				raw={ColumnRaw}
 			/>
 
 			<FuseExample
-				className="mb-64"
+				className="mb-16"
 				component={DonutComponent}
 				raw={DonutRaw}
 			/>
 
 			<FuseExample
-				className="mb-64"
+				className="mb-16"
 				component={LineComponent}
 				raw={LineRaw}
 			/>
 
 			<FuseExample
-				className="mb-64"
+				className="mb-16"
 				component={RadialBarComponent}
 				raw={RadialBarRaw}
 			/>
 
 			<Typography
-				className="text-5xl mt-32 mb-8"
+				className="text-5xl mt-8 mb-2"
 				component="h2"
 			>
 				Demos
 			</Typography>
 
 			<ul>
-				<li className="mb-8">
+				<li className="mb-2">
 					<Link to="/dashboards/analytics">Analytics Dashboard</Link>
 				</li>
-				<li className="mb-8">
+				<li className="mb-2">
 					<Link to="/dashboards/project">Project Dashboard</Link>
 				</li>
 			</ul>

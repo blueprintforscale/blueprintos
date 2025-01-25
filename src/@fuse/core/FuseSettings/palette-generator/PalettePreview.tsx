@@ -19,7 +19,7 @@ function PalettePreview(props: PalettePreviewProps) {
 
 	return (
 		<Box
-			className={clsx('relative w-200 overflow-hidden rounded-md text-left font-bold shadow', className)}
+			className={clsx('relative w-50 overflow-hidden rounded-md text-left font-bold shadow-sm', className)}
 			sx={{
 				backgroundColor: palette.background.default,
 				color: palette.text.primary
@@ -28,7 +28,7 @@ function PalettePreview(props: PalettePreviewProps) {
 			component="button"
 		>
 			<Box
-				className="relative h-56 w-full px-8 pt-8"
+				className="relative h-14 w-full px-2 pt-2"
 				sx={{
 					backgroundColor: palette.primary.main,
 					color: () => palette.primary.contrastText || palette.getContrastText(palette.primary.main)
@@ -37,7 +37,7 @@ function PalettePreview(props: PalettePreviewProps) {
 				<span className="text-md">Header (Primary)</span>
 
 				<Box
-					className="absolute bottom-0 right-0 -mb-10 mr-4 flex h-20 w-20 items-center justify-center rounded-full text-10 shadow"
+					className="absolute bottom-0 right-0 -mb-2.5 mr-1 flex h-5 w-5 items-center justify-center rounded-full text-xs shadow-sm"
 					sx={{
 						backgroundColor: palette.secondary.main,
 						color: () => palette.secondary.contrastText || palette.getContrastText(palette.secondary.main)
@@ -46,9 +46,9 @@ function PalettePreview(props: PalettePreviewProps) {
 					<span>S</span>
 				</Box>
 			</Box>
-			<div className="-mt-24 w-full pl-8 pr-28">
+			<div className="-mt-6 w-full pl-2 pr-7">
 				<Box
-					className="relative h-96 w-full rounded p-8 shadow"
+					className="relative h-24 w-full rounded-sm p-2 shadow-sm"
 					sx={{
 						backgroundColor: palette.background.paper,
 						color: palette.text.primary
@@ -58,11 +58,11 @@ function PalettePreview(props: PalettePreviewProps) {
 				</Box>
 			</div>
 
-			<div className="w-full p-8">
+			<div className="w-full p-2">
 				<span className="text-md opacity-75">Background</span>
 			</div>
 
-			{/* <pre className="language-js p-24 w-400">{JSON.stringify(palette, null, 2)}</pre> */}
+			{/* <pre className="language-js p-6 w-100">{JSON.stringify(palette, null, 2)}</pre> */}
 		</Box>
 	);
 }

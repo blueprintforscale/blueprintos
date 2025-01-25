@@ -86,7 +86,7 @@ function NewLabelForm(props: LabelFormProps) {
 
 	return (
 		<ListItem
-			className="p-0 mb-12"
+			className="p-0 mb-3"
 			dense
 		>
 			<Controller

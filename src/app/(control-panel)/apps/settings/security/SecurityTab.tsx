@@ -82,7 +82,7 @@ function SecurityTab() {
 	}
 
 	return (
-		<div className="w-full max-w-3xl">
+		<div className="w-full max-w-5xl">
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className="w-full">
 					<Typography className="text-xl">Change your password</Typography>
@@ -90,7 +90,7 @@ function SecurityTab() {
 						You can only change your password twice within 24 hours!
 					</Typography>
 				</div>
-				<div className="mt-32 grid w-full gap-6 sm:grid-cols-4 space-y-32">
+				<div className="mt-8 grid w-full gap-1.5 sm:grid-cols-4 space-y-8">
 					<div className="sm:col-span-4">
 						<Controller
 							name="currentPassword"
@@ -141,14 +141,14 @@ function SecurityTab() {
 					</div>
 				</div>
 
-				<div className="my-40 border-t" />
+				<div className="my-10 border-t" />
 				<div className="w-full">
 					<Typography className="text-xl">Security preferences</Typography>
 					<Typography color="text.secondary">
 						Keep your account more secure with following preferences.
 					</Typography>
 				</div>
-				<div className="mt-32 grid w-full gap-6 sm:grid-cols-4 space-y-32">
+				<div className="mt-8 grid w-full gap-1.5 sm:grid-cols-4 space-y-8">
 					<div className="flex items-center justify-between sm:col-span-4">
 						<Controller
 							name="twoStepVerification"
@@ -210,8 +210,8 @@ function SecurityTab() {
 					</div>
 				</div>
 
-				<Divider className="mb-40 mt-44 border-t" />
-				<div className="flex items-center justify-end space-x-8">
+				<Divider className="mb-10 mt-11 border-t" />
+				<div className="flex items-center justify-end space-x-2">
 					<Button
 						variant="outlined"
 						disabled={_.isEmpty(dirtyFields)}

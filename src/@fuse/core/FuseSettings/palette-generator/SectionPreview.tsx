@@ -16,7 +16,7 @@ type SectionPreviewProps = {
 function SectionPreview(props: SectionPreviewProps) {
 	const { section, className } = props;
 	return (
-		<div className={clsx('flex h-80 w-128 overflow-hidden rounded-md border-1 hover:opacity-80', className)}>
+		<div className={clsx('flex h-20 w-32 overflow-hidden rounded-md border-1 hover:opacity-80', className)}>
 			<Box
 				sx={[
 					section === 'navbar'
@@ -42,13 +42,13 @@ function SectionPreview(props: SectionPreviewProps) {
 								}
 							}
 				]}
-				className="w-32 space-y-1 px-6 pt-12"
+				className="w-8 space-y-0.25 px-1.5 pt-3"
 			>
-				<div className="h-4 rounded-sm" />
-				<div className="h-4 rounded-sm" />
-				<div className="h-4 rounded-sm" />
-				<div className="h-4 rounded-sm" />
-				<div className="h-4 rounded-sm" />
+				<div className="h-1 rounded-xs" />
+				<div className="h-1 rounded-xs" />
+				<div className="h-1 rounded-xs" />
+				<div className="h-1 rounded-xs" />
+				<div className="h-1 rounded-xs" />
 			</Box>
 			<div className="flex flex-auto flex-col border-l">
 				<Box
@@ -76,11 +76,11 @@ function SectionPreview(props: SectionPreviewProps) {
 									}
 								}
 					]}
-					className={clsx('flex h-12 items-center justify-end pr-6')}
+					className={clsx('flex h-3 items-center justify-end pr-1.5')}
 				>
-					<div className="ml-4 h-4 w-4 rounded-full" />
-					<div className="ml-4 h-4 w-4 rounded-full" />
-					<div className="ml-4 h-4 w-4 rounded-full" />
+					<div className="ml-1 h-1 w-1 rounded-full" />
+					<div className="ml-1 h-1 w-1 rounded-full" />
+					<div className="ml-1 h-1 w-1 rounded-full" />
 				</Box>
 				<Box
 					sx={[
@@ -123,11 +123,11 @@ function SectionPreview(props: SectionPreviewProps) {
 									}
 								}
 					]}
-					className={clsx('flex h-12 items-center pr-6')}
+					className={clsx('flex h-3 items-center pr-1.5')}
 				>
-					<div className="ml-4 h-4 w-4 rounded-full" />
-					<div className="ml-4 h-4 w-4 rounded-full" />
-					<div className="ml-4 h-4 w-4 rounded-full" />
+					<div className="ml-1 h-1 w-1 rounded-full" />
+					<div className="ml-1 h-1 w-1 rounded-full" />
+					<div className="ml-1 h-1 w-1 rounded-full" />
 				</Box>
 			</div>
 		</div>

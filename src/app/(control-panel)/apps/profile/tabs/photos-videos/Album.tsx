@@ -28,13 +28,13 @@ function Album(props: AlbumProps) {
 
 	return mediaItems?.map((media) => (
 		<div
-			className="w-full sm:w-1/2 md:w-1/4 p-8"
+			className="w-full sm:w-1/2 md:w-1/4 p-2"
 			key={media.preview}
 		>
 			<ImageListItem
 				component={motion.div}
 				variants={item}
-				className="w-full rounded-xl shadow overflow-hidden"
+				className="w-full rounded-xl shadow-sm overflow-hidden"
 			>
 				<img
 					src={media.preview}

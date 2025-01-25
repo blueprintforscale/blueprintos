@@ -17,10 +17,10 @@ function MailAttachment(props: MailAttachmentProps) {
 	}
 
 	return (
-		<div className="flex items-center m-12">
+		<div className="flex items-center m-3">
 			{attachment?.type.startsWith('image/') && (
 				<img
-					className="w-36 h-36 rounded-md overflow-hidden"
+					className="w-9 h-9 rounded-md overflow-hidden"
 					src={`/assets/images/apps/mailbox/${attachment.preview}`}
 					alt="attachment"
 				/>
@@ -29,7 +29,7 @@ function MailAttachment(props: MailAttachmentProps) {
 			{attachment.type.startsWith('application/') && (
 				<Box
 					sx={{ backgroundColor: 'background.default' }}
-					className="flex items-center justify-center w-36 h-36 rounded-md overflow-hidden"
+					className="flex items-center justify-center w-9 h-9 rounded-md overflow-hidden"
 				>
 					<Typography className="flex items-center justify-center text-sm font-semibold">
 						{attachment.type.split('/')[1].trim().toUpperCase()}
@@ -37,7 +37,7 @@ function MailAttachment(props: MailAttachmentProps) {
 				</Box>
 			)}
 
-			<div className="mx-12">
+			<div className="mx-3">
 				<Typography className="text-md font-medium truncate">{attachment.name}</Typography>
 				<Typography
 					className="text-sm font-medium truncate"

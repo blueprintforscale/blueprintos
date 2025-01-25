@@ -21,7 +21,7 @@ function TablePricingTableHead(props: TablePricingTableHeadProps) {
 			className="flex flex-col"
 			sx={{ backgroundColor: 'background.paper' }}
 		>
-			<div className="flex flex-col justify-center p-16 pt-12 lg:py-32">
+			<div className="flex flex-col justify-center p-4 pt-3 lg:py-8">
 				<div className="flex items-center">
 					<div className="text-xl font-medium lg:text-2xl">{title}</div>
 
@@ -29,20 +29,20 @@ function TablePricingTableHead(props: TablePricingTableHeadProps) {
 						<Chip
 							label="POPULAR"
 							color="secondary"
-							className="mx-12 hidden h-24 rounded-full px-4 text-center text-sm font-semibold leading-none tracking-wide md:flex"
+							className="mx-3 hidden h-6 rounded-full px-1 text-center text-sm font-semibold leading-none tracking-wide md:flex"
 							size="small"
 						/>
 					)}
 				</div>
 
-				<div className="flex items-baseline whitespace-nowrap lg:mt-16">
+				<div className="flex items-baseline whitespace-nowrap lg:mt-4">
 					<Typography
 						className="text-lg"
 						color="text.secondary"
 					>
 						USD
 					</Typography>
-					<Typography className="text-2xl font-bold tracking-tight lg:mx-8 lg:text-4xl">
+					<Typography className="text-2xl font-bold tracking-tight lg:mx-2 lg:text-4xl">
 						{period === 'month' && monthlyPrice}
 						{period === 'year' && yearlyPrice}
 					</Typography>
@@ -54,7 +54,7 @@ function TablePricingTableHead(props: TablePricingTableHeadProps) {
 					</Typography>
 				</div>
 				<Typography
-					className="mt-4 text-sm lg:mt-12 lg:text-base"
+					className="mt-1 text-sm lg:mt-3 lg:text-base"
 					color="text.secondary"
 				>
 					{period === 'month' && (
@@ -74,7 +74,7 @@ function TablePricingTableHead(props: TablePricingTableHeadProps) {
 				</Typography>
 
 				<Button
-					className="mt-12 h-32 min-h-32 w-full lg:mt-24 lg:h-36 lg:min-h-36"
+					className="mt-3 h-8 min-h-8 w-full lg:mt-6 lg:h-9 lg:min-h-9"
 					variant={isPopular ? 'contained' : 'outlined'}
 					color={isPopular ? 'secondary' : 'inherit'}
 				>

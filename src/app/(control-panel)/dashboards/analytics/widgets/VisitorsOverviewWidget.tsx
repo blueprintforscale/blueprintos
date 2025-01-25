@@ -129,19 +129,19 @@ function VisitorsOverviewWidget() {
 	return (
 		<ThemeProvider theme={contrastTheme}>
 			<Box
-				className="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto shadow rounded-xl overflow-hidden"
+				className="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto shadow-sm rounded-xl overflow-hidden"
 				sx={{
 					background: private_safeDarken(contrastTheme.palette.primary.main, 0.1),
 					color: contrastTheme.palette.primary.contrastText
 				}}
 			>
-				<div className="flex justify-between mt-12 mx-12 md:mt-24 md:mx-24">
+				<div className="flex justify-between mt-3 mx-3 md:mt-6 md:mx-6">
 					<div className="flex flex-col">
 						<Typography
 							sx={{
 								color: contrastTheme.palette.primary.contrastText
 							}}
-							className="mr-16 text-2xl md:text-3xl font-semibold tracking-tight leading-7"
+							className="mr-4 text-2xl md:text-3xl font-semibold tracking-tight leading-7"
 						>
 							Visitors Overview
 						</Typography>
@@ -169,7 +169,7 @@ function VisitorsOverviewWidget() {
 					</div>
 				</div>
 
-				<div className="flex flex-col flex-auto h-320">
+				<div className="flex flex-col flex-auto h-80">
 					<ReactApexChart
 						options={chartOptions}
 						series={_.cloneDeep(series[currentRange])}

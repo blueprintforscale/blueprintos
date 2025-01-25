@@ -109,7 +109,7 @@ function CardChecklistName(props: CardChecklistNameProps) {
 		</ClickAwayListener>
 	) : (
 		<Typography
-			className="text-15 font-semibold cursor-pointer mx-8"
+			className="text-lg font-semibold cursor-pointer mx-2"
 			onClick={handleOpenForm}
 		>
 			{name}

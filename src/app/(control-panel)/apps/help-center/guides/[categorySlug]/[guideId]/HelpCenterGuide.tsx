@@ -23,40 +23,40 @@ function HelpCenterGuide() {
 	}
 
 	return (
-		<div className="flex flex-col items-center p-24 sm:p-40 container">
-			<div className="flex flex-col w-full max-w-4xl">
-				<div className="sm:mt-32">
+		<div className="flex flex-col items-center p-6 sm:p-10 container">
+			<div className="flex flex-col w-full max-w-6xl">
+				<div className="sm:mt-8">
 					<PageBreadcrumb />
 				</div>
 
-				<Typography className="mt-8 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight">
+				<Typography className="mt-2 text-4xl sm:text-7xl font-extrabold tracking-tight leading-[1.25]">
 					{guide.title}
 				</Typography>
 
 				<Typography
-					className="mt-8 sm:text-2xl tracking-tight"
+					className="mt-2 sm:text-2xl tracking-tight"
 					color="text.secondary"
 				>
 					{guide.subtitle}
 				</Typography>
 
 				<div
-					className="mt-32 sm:mt-48 max-w-none prose dark:prose-invert"
+					className="mt-8 sm:mt-12 max-w-none prose dark:prose-invert"
 					dangerouslySetInnerHTML={{ __html: guide.content }}
 				/>
 
 				<DemoContent />
 
-				<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-40 pt-32 border-t">
+				<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-10 pt-8 border-t">
 					<Typography
 						className="text-sm font-medium"
 						color="text.secondary"
 					>
 						Last updated 2 months ago
 					</Typography>
-					<div className="flex items-center mt-8 sm:mt-0">
+					<div className="flex items-center mt-2 sm:mt-0">
 						<Typography
-							className="font-medium mx-8"
+							className="font-medium mx-2"
 							color="text.secondary"
 						>
 							Was this page helpful?
@@ -70,12 +70,12 @@ function HelpCenterGuide() {
 					</div>
 				</div>
 
-				<Card className="mt-32 flex items-center justify-between p-24 sm:px-40 rounded-xl shadow hover:shadow-lg transition-shadow ease-in-out duration-150">
+				<Card className="mt-8 flex items-center justify-between p-6 sm:px-10 rounded-xl shadow-sm hover:shadow-lg transition-shadow ease-in-out duration-150">
 					<div>
 						<Typography color="text.secondary">Next</Typography>
 						<Typography className="text-lg font-semibold">Removing a media from a project</Typography>
 					</div>
-					<FuseSvgIcon className="ml-12">heroicons-outline:arrow-right</FuseSvgIcon>
+					<FuseSvgIcon className="ml-3">heroicons-outline:arrow-right</FuseSvgIcon>
 				</Card>
 			</div>
 		</div>

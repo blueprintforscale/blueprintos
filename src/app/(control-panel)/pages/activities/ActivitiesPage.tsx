@@ -17,9 +17,9 @@ function ActivitiesPage() {
 	return (
 		<FusePageSimple
 			content={
-				<div className="flex flex-col w-full p-24">
-					<PageBreadcrumb className="mb-8" />
-					<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-4">
+				<div className="flex flex-col w-full p-6">
+					<PageBreadcrumb className="mb-2" />
+					<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-1">
 						All Activities
 					</Typography>
 					<Typography
@@ -29,7 +29,7 @@ function ActivitiesPage() {
 						Application wide activities are listed here as individual items, starting with the most recent.
 					</Typography>
 					<Timeline
-						className="py-48 px-0"
+						className="py-12 px-0"
 						position="right"
 						sx={{
 							'& .MuiTimelineItem-root:before': {

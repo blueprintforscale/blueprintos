@@ -11,27 +11,27 @@ function RTLSupportDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				RTL Support
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React supports Right-to-left languages such as Arabic, Persian or Hebrew, etc.
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Development
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				We used{' '}
@@ -54,7 +54,7 @@ function RTLSupportDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<a
@@ -70,7 +70,7 @@ function RTLSupportDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<a
@@ -86,30 +86,30 @@ function RTLSupportDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-jsx mb-24"
+				className="language-jsx mb-6"
 			>
 				{`
-            <div class="text-green text-2xl ltr:pl-4 rtl:pr-4">
+            <div class="text-green-500 text-2xl ltr:pl-4 rtl:pr-4">
                 Hello, world.
             </div>
         `}
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Configuration
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				The theme's language direction depends on the theme language. So There is no need to define direction
 				value. Checkout{' '}
 				<Link
-					className="link mx-8"
+					className="link mx-2"
 					to="/documentation/development/multi-language"
 				>
 					Multi Language configuration

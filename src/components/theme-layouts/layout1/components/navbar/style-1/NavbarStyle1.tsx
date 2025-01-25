@@ -101,7 +101,7 @@ function NavbarStyle1() {
 		<>
 			{!isMobile && (
 				<StyledNavBar
-					className="sticky top-0 z-20 h-screen flex-auto shrink-0 flex-col overflow-hidden shadow"
+					className="sticky top-0 z-20 h-screen flex-auto shrink-0 flex-col overflow-hidden shadow-sm"
 					open={navbar.open}
 					position={config.navbar.position}
 				>

@@ -28,7 +28,7 @@ function BoardSettingsPopover() {
 				onClick={handleClick}
 			>
 				<FuseSvgIcon size={20}>heroicons-outline:cog-6-tooth</FuseSvgIcon>
-				<span className="hidden sm:flex mx-8">Settings</span>
+				<span className="hidden sm:flex mx-2">Settings</span>
 			</Button>
 
 			<Popover

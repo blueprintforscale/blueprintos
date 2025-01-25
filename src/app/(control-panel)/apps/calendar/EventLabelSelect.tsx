@@ -36,16 +36,16 @@ function EventLabelSelect(props: EventLabelSelectProps) {
 				label="Label"
 				onChange={handleChange}
 				ref={ref}
-				classes={{ select: 'flex items-center space-x-12' }}
+				classes={{ select: 'flex items-center space-x-3' }}
 			>
 				{labels?.map((label) => (
 					<MenuItem
 						value={label.id}
 						key={label.id}
-						className="space-x-12"
+						className="space-x-3"
 					>
 						<Box
-							className="w-12 h-12 shrink-0 rounded-full"
+							className="w-3 h-3 shrink-0 rounded-full"
 							sx={{ backgroundColor: label.color }}
 						/>
 						<span>{label.title}</span>

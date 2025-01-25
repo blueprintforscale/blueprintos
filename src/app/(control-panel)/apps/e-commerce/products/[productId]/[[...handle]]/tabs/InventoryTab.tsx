@@ -16,7 +16,7 @@ function InventoryTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						required
 						label="SKU"
 						autoFocus
@@ -33,7 +33,7 @@ function InventoryTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						label="Quantity"
 						id="quantity"
 						variant="outlined"

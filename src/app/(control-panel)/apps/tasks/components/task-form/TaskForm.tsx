@@ -144,8 +144,8 @@ function TaskForm() {
 
 	return (
 		<>
-			<div className="relative flex flex-col flex-auto items-center px-24 sm:px-48">
-				<div className="flex items-center justify-between border-b-1 w-full py-24 mt-16 mb-32">
+			<div className="relative flex flex-col flex-auto items-center px-6 sm:px-12">
+				<div className="flex items-center justify-between border-b-1 w-full py-6 mt-4 mb-8">
 					<Controller
 						control={control}
 						name="completed"
@@ -167,7 +167,7 @@ function TaskForm() {
 								>
 									<FuseSvgIcon>heroicons-outline:check-circle</FuseSvgIcon>
 								</Box>
-								<span className="mx-8">
+								<span className="mx-2">
 									{task?.completed ? 'MARK AS INCOMPLETE' : 'MARK AS COMPLETE'}
 								</span>
 							</Button>
@@ -189,7 +189,7 @@ function TaskForm() {
 					name="title"
 					render={({ field }) => (
 						<TextField
-							className="mt-32 max-h-auto"
+							className="mt-8 max-h-auto"
 							{...field}
 							label={`${_.upperFirst(form.type)} title`}
 							placeholder="Job title"
@@ -211,7 +211,7 @@ function TaskForm() {
 						<Autocomplete
 							multiple
 							id="tags"
-							className="mt-32"
+							className="mt-8"
 							options={tags || []}
 							disableCloseOnSelect
 							getOptionLabel={(option: Tag) => option?.title}
@@ -239,7 +239,7 @@ function TaskForm() {
 						/>
 					)}
 				/>
-				<div className="flex w-full space-x-16 mt-32 mb-16 items-center">
+				<div className="flex w-full space-x-4 mt-8 mb-4 items-center">
 					<Controller
 						control={control}
 						name="priority"
@@ -279,7 +279,7 @@ function TaskForm() {
 					name="notes"
 					render={({ field }) => (
 						<TextField
-							className="mt-32"
+							className="mt-8"
 							{...field}
 							label="Notes"
 							placeholder="Notes"
@@ -295,7 +295,7 @@ function TaskForm() {
 								className: 'max-h-min h-min items-start',
 								startAdornment: (
 									<InputAdornment
-										className="mt-16"
+										className="mt-4"
 										position="start"
 									>
 										<FuseSvgIcon size={20}>heroicons-solid:bars-3-bottom-left</FuseSvgIcon>
@@ -308,7 +308,7 @@ function TaskForm() {
 			</div>
 			{isNew && (
 				<Box
-					className="flex items-center mt-40 py-14 pr-16 pl-4 sm:pr-48 sm:pl-36 border-t"
+					className="flex items-center mt-10 py-3.5 pr-4 pl-1 sm:pr-12 sm:pl-9 border-t"
 					sx={{ backgroundColor: 'background.default' }}
 				>
 					<Button
@@ -320,7 +320,7 @@ function TaskForm() {
 						Cancel
 					</Button>
 					<Button
-						className="ml-8"
+						className="ml-2"
 						variant="contained"
 						color="secondary"
 						disabled={_.isEmpty(dirtyFields) || !isValid}

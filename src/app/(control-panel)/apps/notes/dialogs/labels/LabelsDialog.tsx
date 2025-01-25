@@ -18,12 +18,12 @@ function LabelsDialog() {
 	return (
 		<Dialog
 			classes={{
-				paper: 'w-full max-w-320 p-16 md:p-24 m-24'
+				paper: 'w-full max-w-80 p-4 md:p-6 m-6'
 			}}
 			onClose={() => dispatch(closeLabelsDialog())}
 			open={Boolean(labelsDialogOpen)}
 		>
-			<Typography className="text-2xl mb-16 font-semibold">Edit Labels</Typography>
+			<Typography className="text-2xl mb-4 font-semibold">Edit Labels</Typography>
 
 			<List dense>
 				<NewLabelForm />

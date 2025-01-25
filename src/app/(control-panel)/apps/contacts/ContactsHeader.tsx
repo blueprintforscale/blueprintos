@@ -32,10 +32,10 @@ function ContactsHeader() {
 	}
 
 	return (
-		<div className="p-24 sm:p-32 w-full">
-			<PageBreadcrumb className="mb-8" />
+		<div className="p-6 sm:p-8 w-full">
+			<PageBreadcrumb className="mb-2" />
 
-			<div className="flex flex-col space-y-4">
+			<div className="flex flex-col space-y-1">
 				<motion.span
 					initial={{ x: -20 }}
 					animate={{ x: 0, transition: { delay: 0.2 } }}
@@ -48,19 +48,19 @@ function ContactsHeader() {
 				>
 					<Typography
 						component={motion.span}
-						className="text-base font-medium ml-2"
+						className="text-base font-medium ml-0.5"
 						color="text.secondary"
 					>
 						{`${filteredData?.length} contacts`}
 					</Typography>
 				</motion.span>
 			</div>
-			<div className="flex flex-1 items-center mt-16 space-x-8">
+			<div className="flex flex-1 items-center mt-4 space-x-2">
 				<Box
 					component={motion.div}
 					initial={{ y: -20, opacity: 0 }}
 					animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-					className="flex flex-1 w-full sm:w-auto items-center px-12 border-1 rounded-lg h-36"
+					className="flex flex-1 w-full sm:w-auto items-center px-3 border-1 rounded-lg h-9"
 				>
 					<FuseSvgIcon color="action">heroicons-outline:magnifying-glass</FuseSvgIcon>
 
@@ -84,7 +84,7 @@ function ContactsHeader() {
 					to="/apps/contacts/new"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
-					<span className="hidden sm:flex mx-8">Add</span>
+					<span className="hidden sm:flex mx-2">Add</span>
 				</Button>
 			</div>
 		</div>

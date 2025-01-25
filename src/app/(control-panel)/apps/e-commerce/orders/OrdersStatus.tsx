@@ -18,7 +18,7 @@ function OrdersStatus(props: OrdersStatusProps) {
 	return (
 		<div
 			className={clsx(
-				'inline text-md font-semibold py-4 px-12 rounded-full truncate',
+				'inline text-md font-semibold py-1 px-3 rounded-full truncate',
 				_.find(orderStatuses, { name })?.color
 			)}
 		>

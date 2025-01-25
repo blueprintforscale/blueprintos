@@ -49,7 +49,7 @@ function AppBarDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				App Bar
@@ -59,206 +59,206 @@ function AppBarDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The top App bar provides content and actions related to the current screen. It&#39;s used for branding,
 				screen titles, navigation, and actions.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				It can transform into a contextual action bar or be used as a navbar.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic App bar
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ButtonAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ButtonAppBarComponent}
 					raw={ButtonAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				App bar with menu
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="MenuAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={MenuAppBarComponent}
 					raw={MenuAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				App bar with responsive menu
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ResponsiveAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ResponsiveAppBarComponent}
 					raw={ResponsiveAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				App bar with search field
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A side searchbar.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SearchAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SearchAppBarComponent}
 					raw={SearchAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Responsive App bar with Drawer
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="DrawerAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe
 					component={DrawerAppBarComponent}
 					raw={DrawerAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				App bar with a primary search field
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A primary searchbar.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PrimarySearchAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PrimarySearchAppBarComponent}
 					raw={PrimarySearchAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Dense (desktop only)
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="DenseAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={DenseAppBarComponent}
 					raw={DenseAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Prominent
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A prominent app bar.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ProminentAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ProminentAppBarComponent}
 					raw={ProminentAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Bottom App bar
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BottomAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe
 					component={BottomAppBarComponent}
 					raw={BottomAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Fixed placement
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				When you render the app bar position fixed, the dimension of the element doesn&#39;t impact the rest of
@@ -317,97 +317,97 @@ function App() {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Scrolling
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can use the <code>useScrollTrigger()</code> hook to respond to user scroll actions.
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Hide App bar
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The app bar hides on scroll down to leave more space for reading.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="HideAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe
 					component={HideAppBarComponent}
 					raw={HideAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Elevate App bar
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The app bar elevates on scroll to communicate that the user is not at the top of the page.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ElevateAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe
 					component={ElevateAppBarComponent}
 					raw={ElevateAppBarRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Back to top
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				A floating action button appears on scroll to make it easy to get back to the top of the page.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BackToTop.js"
-					className="my-16"
+					className="my-4"
 					iframe
 					component={BackToTopComponent}
 					raw={BackToTopRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				<code>{`useScrollTrigger([options]) => trigger`}</code>
 			</Typography>
 			<Typography
-				className="text-base mt-12 mb-10"
+				className="text-base mt-3 mb-2.5"
 				component="h4"
 			>
 				Arguments
@@ -415,12 +415,12 @@ function App() {
 			<ol>
 				<li>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						<code>options</code> (<em>object</em> [optional]):
 					</Typography>
-					<ul className="space-y-16">
+					<ul className="space-y-4">
 						<li>
 							<code>options.disableHysteresis</code> (<em>bool</em> [optional]): Defaults to{' '}
 							<code>false</code>. Disable the hysteresis. Ignore the scroll direction when determining the{' '}
@@ -438,19 +438,19 @@ function App() {
 				</li>
 			</ol>
 			<Typography
-				className="text-base mt-12 mb-10"
+				className="text-base mt-3 mb-2.5"
 				component="h4"
 			>
 				Returns
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<code>trigger</code>: Does the scroll position match the criteria?
 			</Typography>
 			<Typography
-				className="text-base mt-12 mb-10"
+				className="text-base mt-3 mb-2.5"
 				component="h4"
 			>
 				Examples
@@ -474,13 +474,13 @@ function HideOnScroll(props) {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Enable color on dark
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Following the{' '}
@@ -489,12 +489,12 @@ function HideOnScroll(props) {
 				this behavior by setting the <code>enableColorOnDark</code> prop to <code>true</code>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="EnableColorOnDarkAppBar.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={EnableColorOnDarkAppBarComponent}
 					raw={EnableColorOnDarkAppBarRaw}

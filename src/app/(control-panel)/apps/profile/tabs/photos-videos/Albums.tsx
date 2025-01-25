@@ -35,23 +35,23 @@ function Albums() {
 			{albums.map((album) => (
 				<div
 					key={album.id}
-					className="mb-48"
+					className="mb-12"
 				>
 					<ListSubheader
 						component={motion.div}
 						variants={item}
-						className="flex items-center px-0 mb-24 bg-transparent"
+						className="flex items-center px-0 mb-6 bg-transparent"
 					>
-						<Typography className="text-2xl font-semibold leading-tight">{album.name}</Typography>
+						<Typography className="text-2xl font-semibold leading-[1.25]">{album.name}</Typography>
 						<Typography
-							className="mx-12 font-medium leading-tight"
+							className="mx-3 font-medium leading-[1.25]"
 							color="text.secondary"
 						>
 							{album.info}
 						</Typography>
 					</ListSubheader>
 
-					<div className="overflow-hidden flex flex-wrap -m-8">
+					<div className="overflow-hidden flex flex-wrap -m-2">
 						<Album album={album} />
 					</div>
 				</div>

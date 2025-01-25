@@ -42,12 +42,12 @@ function PhoneNumberSelector(props: PhoneNumberSelectorProps) {
 				/>
 			))}
 			<Button
-				className="group inline-flex items-center mt-2 -ml-4 py-2 px-4 rounded cursor-pointer"
+				className="group inline-flex items-center mt-0.5 -ml-1 py-0.5 px-1 rounded-sm cursor-pointer"
 				onClick={() => onChange([...value, ContactPhoneModel({})])}
 			>
 				<FuseSvgIcon size={20}>heroicons-solid:plus-circle</FuseSvgIcon>
 
-				<span className="ml-8 font-medium text-secondary group-hover:underline">Add a phone number</span>
+				<span className="ml-2 font-medium text-secondary group-hover:underline">Add a phone number</span>
 			</Button>
 		</div>
 	);

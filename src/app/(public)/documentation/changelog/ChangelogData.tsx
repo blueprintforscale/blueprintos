@@ -22,6 +22,55 @@ export type ChangelogItemType = {
  */
 const changelogData: ChangelogItemType[] = [
 	{
+		version: '14.0.0',
+		date: '2025-01-26',
+		newChanges: ['🚀 Tailwindcss updated to v4'],
+		notes: (
+			<div className="text-base p-6 border-2 rounded-xl w-full max-w-2xl mt-10 mb-6">
+				<Typography component="div">
+					<ul className="list-disc leading-[2]">
+						<li>
+							This major version upgrades <b>Tailwind CSS to version 4</b>, bringing significant
+							improvements and new features
+						</li>
+						<li>
+							We have adopted Tailwind CSS v4's default spacing and configuration values for better
+							consistency and maintainability
+						</li>
+						<li>
+							<b>
+								<code>tailwindcss.config.js</code>
+							</b>{' '}
+							is no longer in use.
+						</li>
+						<li>
+							The base font size has been updated to 16px to align with modern web standards and improve
+							readability
+						</li>
+
+						<Alert
+							severity="warning"
+							className="mt-2 leading-[2]"
+						>
+							We provide a migration script at <code>src/utils/node-scripts/migrate-tw-classes.js</code>{' '}
+							to help you update your project's Tailwind CSS classes for only this version.
+							<br />
+							Run{' '}
+							<code className="bg-orange-100 text-orange-800 px-1 py-0.5 rounded-md">
+								node src/utils/node-scripts/migrate-tw-classes.js ./src
+							</code>{' '}
+							to update your project's classes.
+							<br />
+							Be careful with this script, it will replace all your Tailwind CSS classes with the new
+							ones.
+						</Alert>
+					</ul>
+				</Typography>
+			</div>
+		)
+	},
+
+	{
 		version: '13.0.0',
 		date: '2024-12-09',
 		newChanges: [
@@ -47,18 +96,18 @@ const changelogData: ChangelogItemType[] = [
 			'React v19 compatibility issues resolved'
 		],
 		notes: (
-			<div className="text-base p-24 border-2 rounded-xl w-full max-w-lg mt-40 mb-24">
+			<div className="text-base p-6 border-2 rounded-xl w-full max-w-2xl mt-10 mb-6">
 				<Typography component="div">
 					<ul className="list-disc">
-						<li className="leading-loose">
+						<li className="leading-[2]">
 							This major version includes significant updates to core dependencies and requires React 19
 							compatibility.
 						</li>
-						<li className="leading-loose">
+						<li className="leading-[2]">
 							The Google Maps integration has been completely revamped with the new @react-google-maps/api
 							library.
 						</li>
-						<li className="leading-loose">
+						<li className="leading-[2]">
 							ESLint now uses the new flat config system which may require updates to your custom
 							configurations.
 						</li>
@@ -113,7 +162,7 @@ const changelogData: ChangelogItemType[] = [
 					action: 'flex sm:items-center justify-center w-full sm:w-auto'
 				}}
 				severity="info"
-				className="mb-6"
+				className="mb-1.5"
 				icon={<>🚀</>}
 				action={
 					<Button
@@ -129,12 +178,12 @@ const changelogData: ChangelogItemType[] = [
 								<img
 									src="/assets/images/logo/nextjs.svg"
 									alt="Nextjs Logo"
-									className="h-24 dark:hidden"
+									className="h-6 dark:hidden"
 								/>
 								<img
 									src="/assets/images/logo/nextjs-dark.svg"
 									alt="Nextjs Logo"
-									className="h-24 hidden dark:block"
+									className="h-6 hidden dark:block"
 								/>
 							</div>
 						}
@@ -152,7 +201,7 @@ const changelogData: ChangelogItemType[] = [
 				</Typography>
 				<Typography
 					variant="body1"
-					className="font-medium text-center mt-1"
+					className="font-medium text-center mt-0.25"
 				>
 					Bringing server-side rendering capabilities with Nextjs.
 				</Typography>
@@ -202,30 +251,30 @@ const changelogData: ChangelogItemType[] = [
 			'Re-configured the router to support React Router v6’s new data APIs.'
 		],
 		notes: (
-			<div className="text-base p-24 border-2 border-red rounded-xl w-full max-w-lg mt-40 mb-24">
+			<div className="text-base p-6 border-2 border-red-500 rounded-xl w-full max-w-2xl mt-10 mb-6">
 				<ul className="list-disc">
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						The routing system has been updated to support React Router v6’s new data APIs.
 					</Typography>
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						With the new routing system, all *Config.tsx files have been renamed to *Route.tsx.
 					</Typography>
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						You don’t need to manually import routes anymore. The new routing system automatically populates
 						all routes in routesConfig.tsx.
 					</Typography>
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						Checkout the documentation at <Link to="/documentation/configuration/routing">Routing</Link> for
 						more.
@@ -322,18 +371,18 @@ const changelogData: ChangelogItemType[] = [
 			'fuse, auth, navigation, settings slices lazy loaded from its own components with HOC'
 		],
 		notes: (
-			<div className="text-base p-24 border-2 rounded-xl w-full max-w-lg mt-40 mb-24">
+			<div className="text-base p-6 border-2 rounded-xl w-full max-w-2xl mt-10 mb-6">
 				<ul className="list-disc">
 					<Typography
 						component="li"
-						className="leading-loose mb-16"
+						className="leading-[2] mb-4"
 					>
 						Transitioning to the new major release (v10.0.0) may present challenges, because of the RTK
 						Query integration.
 					</Typography>
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						You may find this page helpful:{' '}
 						<a
@@ -346,7 +395,7 @@ const changelogData: ChangelogItemType[] = [
 					</Typography>
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						Starting with the latest skeleton version of Fuse React offers a pristine base, facilitating a
 						smoother transition of your codebase to the new version. This approach streamlines the process,
@@ -370,18 +419,18 @@ const changelogData: ChangelogItemType[] = [
 			'Some APIs and interfaces have changed due to the conversion to TypeScript'
 		],
 		notes: (
-			<div className="text-base p-24 border-2 rounded-xl w-full max-w-lg mt-40 mb-24">
+			<div className="text-base p-6 border-2 rounded-xl w-full max-w-2xl mt-10 mb-6">
 				<ul className="list-disc">
 					<Typography
 						component="li"
-						className="leading-loose mb-16"
+						className="leading-[2] mb-4"
 					>
 						Transitioning to the new major release (v9.0.0) may present challenges due to the shift to
 						TypeScript.
 					</Typography>
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						You may find this page helpful:{' '}
 						<a
@@ -394,7 +443,7 @@ const changelogData: ChangelogItemType[] = [
 					</Typography>
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						You may also want to consider starting with the latest skeleton version of Fuse React, which is
 						a clean slate, and then move your codebase to the new version. This can make the migration
@@ -451,7 +500,7 @@ const changelogData: ChangelogItemType[] = [
 			'Chat App, custom scrollbars of messages are disabled due to scroll Bottom not works.'
 		],
 		breakingChanges: [
-			<span className="flex flex-col space-y-8">
+			<span className="flex flex-col space-y-2">
 				<Typography component="span">DateTimePicker migrated to v6</Typography>
 				<Typography component="span">
 					Please follow the migration guide at{' '}
@@ -539,18 +588,18 @@ const changelogData: ChangelogItemType[] = [
 		breakingChanges: ['craco replaced with react-app-rewired.', 'firebase, auth0 service examples deprecated.'],
 		fixedChanges: [],
 		notes: (
-			<div className="text-base p-24 border-2 border-red rounded-xl w-full max-w-lg mt-40 mb-24">
+			<div className="text-base p-6 border-2 border-red-500 rounded-xl w-full max-w-2xl mt-10 mb-6">
 				<ul className="list-disc">
 					<Typography
 						component="li"
-						className="leading-loose mb-16"
+						className="leading-[2] mb-4"
 					>
 						This is the new major version of the Fuse React and it's completely different from previous
 						versions with no upgrade path.
 					</Typography>
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						This version requires a clean installation.
 					</Typography>
@@ -616,18 +665,18 @@ const changelogData: ChangelogItemType[] = [
 			'FuseAnimate, FuseGroupAnimate, FuseChipSelect Components are deprecated.'
 		],
 		notes: (
-			<div className="text-base p-24 border-2 rounded-xl w-full max-w-lg mt-40 mb-24">
+			<div className="text-base p-6 border-2 rounded-xl w-full max-w-2xl mt-10 mb-6">
 				<ul className="list-disc">
 					<Typography
 						component="li"
-						className="leading-loose mb-16"
+						className="leading-[2] mb-4"
 					>
 						Migrating to the new major version (v7.0.0) can be difficult because of latest material-ui (v5)
 						integration.
 					</Typography>
 					<Typography
 						component="li"
-						className="leading-loose"
+						className="leading-[2]"
 					>
 						You should migrate to material v5 to get the benefits of bug fixes and a lot of improvements
 						such as the new styling engine. Checkout material-ui migration guide at{' '}
@@ -824,20 +873,20 @@ const changelogData: ChangelogItemType[] = [
 		notes: (
 			<>
 				<Typography
-					className="text-base p-12 border-2 rounded-xl w-full max-w-lg mt-16"
+					className="text-base p-3 border-2 rounded-xl w-full max-w-2xl mt-4"
 					component="div"
 				>
 					Migrating to the new major version (v5.0.0) can be difficult because of redux-toolkit integration.
 				</Typography>
 				<Typography
-					className="text-base p-12 border-2 rounded-xl w-full max-w-lg mt-16 leading-loose"
+					className="text-base p-3 border-2 rounded-xl w-full max-w-2xl mt-4 leading-[2]"
 					component="div"
 				>
 					Some of the benefits of the redux-toolkit,
-					<ul className="list-disc ml-16">
+					<ul className="list-disc ml-4">
 						<li>redux-toolkit is an official redux library.</li>
 						<li>The common redux dependencies included in the library</li>
-						<ul className="ml-8">
+						<ul className="ml-2">
 							<li>"immer": "^7.0.3",</li>
 							<li>"redux": "^4.0.0",</li>
 							<li>"redux-thunk": "^2.3.0",</li>
@@ -846,7 +895,7 @@ const changelogData: ChangelogItemType[] = [
 						<li>
 							RTK resolves many of the arguments related to boilerplate and unnecessary code.
 							<br />
-							<ul className="ml-8">
+							<ul className="ml-2">
 								As mentioned in its official docs, it helps to solve three major problems people had
 								with Redux:
 								<li>“Configuring a Redux store is too complicated.”</li>
@@ -1167,7 +1216,7 @@ const changelogData: ChangelogItemType[] = [
 		],
 		notes: (
 			<Typography
-				className="text-base p-12 border-2 rounded-xl w-full max-w-lg mt-16"
+				className="text-base p-3 border-2 rounded-xl w-full max-w-2xl mt-4"
 				component="div"
 			>
 				Migrating to the new major version (<b>v3.0.0</b>) can be difficult because of the hooks support and
@@ -1283,7 +1332,7 @@ const changelogData: ChangelogItemType[] = [
 		],
 		notes: (
 			<Typography
-				className="text-base p-12 border-2 rounded-xl w-full max-w-lg mt-16"
+				className="text-base p-3 border-2 rounded-xl w-full max-w-2xl mt-4"
 				component="div"
 			>
 				Migrating to the new major version (v2.0.0) can be difficult because of the project structure and layout
@@ -1574,7 +1623,7 @@ const changelogData: ChangelogItemType[] = [
 		version: '1.0.0',
 		date: '2018-04-21',
 		notes: (
-			<ul className="mt-24 pl-24">
+			<ul className="mt-6 pl-6">
 				<li>
 					<Typography>Initial Release</Typography>
 				</li>

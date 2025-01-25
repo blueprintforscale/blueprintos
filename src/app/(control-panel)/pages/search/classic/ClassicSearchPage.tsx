@@ -41,10 +41,10 @@ function ClassicSearchPage() {
 	return (
 		<FusePageSimple
 			header={
-				<div className="flex flex-col w-full max-w-md flex-1 px-24 pt-24 sm:pt-32 sm:px-32">
-					<PageBreadcrumb className="mb-12" />
+				<div className="flex flex-col w-full max-w-xl flex-1 px-6 pt-6 sm:pt-8 sm:px-8">
+					<PageBreadcrumb className="mb-3" />
 
-					<Paper className="flex h-44 w-full items-center rounded-lg shadow">
+					<Paper className="flex h-11 w-full items-center rounded-lg shadow-sm">
 						<Input
 							placeholder="Search..."
 							disableUnderline
@@ -54,7 +54,7 @@ function ClassicSearchPage() {
 							}}
 						/>
 						<FuseSvgIcon
-							className="mx-12"
+							className="mx-3"
 							color="action"
 						>
 							heroicons-outline:magnifying-glass
@@ -63,7 +63,7 @@ function ClassicSearchPage() {
 				</div>
 			}
 			content={
-				<div className="flex h-full w-full max-w-md flex-auto flex-col p-24 pt-0 sm:p-32 sm:pt-0">
+				<div className="flex h-full w-full max-w-xl flex-auto flex-col p-6 pt-0 sm:p-8 sm:pt-0">
 					<div className="flex flex-1 flex-col">
 						{data.length > 0 && (
 							<motion.div
@@ -74,7 +74,7 @@ function ClassicSearchPage() {
 								<motion.div variants={item}>
 									<Typography
 										color="text.secondary"
-										className="mx-12 my-12 text-md"
+										className="mx-3 my-3 text-md"
 									>
 										{data.length} results
 									</Typography>
@@ -83,11 +83,11 @@ function ClassicSearchPage() {
 								{data.map((_item) => (
 									<motion.div
 										variants={item}
-										className="mb-28"
+										className="mb-7"
 										key={_item.id}
 									>
 										<Typography
-											className="cursor-pointer text-17"
+											className="cursor-pointer text-xl"
 											sx={{
 												color: blue[800]
 											}}
@@ -108,7 +108,7 @@ function ClassicSearchPage() {
 						)}
 					</div>
 
-					<div className="mt-48 flex justify-center">
+					<div className="mt-12 flex justify-center">
 						<Pagination
 							count={10}
 							color="secondary"

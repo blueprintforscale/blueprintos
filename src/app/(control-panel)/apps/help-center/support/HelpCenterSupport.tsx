@@ -44,27 +44,27 @@ function HelpCenterSupport() {
 	}
 
 	return (
-		<div className="flex flex-col items-center p-24 sm:p-40 container">
-			<div className="flex flex-col w-full max-w-4xl">
-				<div className="sm:mt-32">
+		<div className="flex flex-col items-center p-6 sm:p-10 container">
+			<div className="flex flex-col w-full max-w-6xl">
+				<div className="sm:mt-8">
 					<PageBreadcrumb />
 				</div>
-				<div className="mt-8 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight">
+				<div className="mt-2 text-4xl sm:text-7xl font-extrabold tracking-tight leading-[1.25]">
 					Contact support
 				</div>
 
-				<Paper className="mt-32 sm:mt-48 p-24 pb-28 sm:p-40 sm:pb-28 rounded-xl">
+				<Paper className="mt-8 sm:mt-12 p-6 pb-7 sm:p-10 sm:pb-7 rounded-xl">
 					<form
 						onSubmit={handleSubmit(onSubmit)}
-						className="px-0 sm:px-24"
+						className="px-0 sm:px-6"
 					>
-						<div className="mb-24">
+						<div className="mb-6">
 							<Typography className="text-2xl font-bold tracking-tight">Submit your request</Typography>
 							<Typography color="text.secondary">
 								Your request will be processed and our support staff will get back to you in 24 hours.
 							</Typography>
 						</div>
-						<div className="space-y-32">
+						<div className="space-y-8">
 							<Controller
 								control={control}
 								name="name"
@@ -90,7 +90,7 @@ function HelpCenterSupport() {
 								render={({ field }) => (
 									<TextField
 										{...field}
-										className="mt-16 w-full"
+										className="w-full"
 										label="Email"
 										placeholder="Email"
 										variant="outlined"
@@ -108,7 +108,7 @@ function HelpCenterSupport() {
 								render={({ field }) => (
 									<TextField
 										{...field}
-										className="mt-16 w-full"
+										className="w-full"
 										label="Subject"
 										placeholder="Subject"
 										variant="outlined"
@@ -127,7 +127,7 @@ function HelpCenterSupport() {
 									<TextField
 										{...field}
 										label="Message"
-										className="mt-16 w-full"
+										className="w-full m-0"
 										margin="normal"
 										multiline
 										minRows={4}
@@ -139,10 +139,10 @@ function HelpCenterSupport() {
 								)}
 							/>
 						</div>
-						<div className="flex items-center justify-end mt-32">
-							<Button className="mx-8">Cancel</Button>
+						<div className="flex items-center justify-end mt-8">
+							<Button className="mx-2">Cancel</Button>
 							<Button
-								className="mx-8"
+								className="mx-2"
 								variant="contained"
 								color="secondary"
 								disabled={_.isEmpty(dirtyFields) || !isValid}

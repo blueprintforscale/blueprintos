@@ -91,7 +91,7 @@ function BuySellForm() {
 
 	return (
 		<form
-			className="w-full p-24 space-y-24"
+			className="w-full p-6 space-y-6"
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			<div>
@@ -165,7 +165,7 @@ function BuySellForm() {
 									</MenuItem>
 								))}
 							</Select>
-							<FormHelperText className="flex items-center space-x-4">
+							<FormHelperText className="flex items-center space-x-1">
 								<Typography
 									component="span"
 									className="text-md"
@@ -217,7 +217,7 @@ function BuySellForm() {
 												</Typography>
 												<Typography
 													component="span"
-													className="font-mono font-medium text-md mx-4"
+													className="font-mono font-medium text-md mx-1"
 												>
 													{(value / prices[walletValue as CoinTypes]).toLocaleString(
 														'en-US',
@@ -241,7 +241,7 @@ function BuySellForm() {
 												</Typography>
 												<Typography
 													component="span"
-													className="font-mono font-medium text-md mx-4"
+													className="font-mono font-medium text-md mx-1"
 												>
 													{(value * prices[walletValue as CoinTypes]).toLocaleString(
 														'en-US',
@@ -264,7 +264,7 @@ function BuySellForm() {
 												</Typography>
 												<Typography
 													component="span"
-													className="font-mono font-medium text-md mx-4"
+													className="font-mono font-medium text-md mx-1"
 												>
 													{(value / prices[walletValue as CoinTypes]).toLocaleString(
 														'en-US',
@@ -288,7 +288,7 @@ function BuySellForm() {
 												</Typography>
 												<Typography
 													component="span"
-													className="font-mono font-medium text-md mx-4"
+													className="font-mono font-medium text-md mx-1"
 												>
 													{(value * prices[walletValue as CoinTypes]).toLocaleString(
 														'en-US',
@@ -312,7 +312,7 @@ function BuySellForm() {
 										control={control}
 										name="amountType"
 										render={({ field: _field }) => (
-											<FormControl className="min-w-80">
+											<FormControl className="min-w-20">
 												<Select
 													{..._field}
 													variant="outlined"
@@ -349,7 +349,7 @@ function BuySellForm() {
 					)}
 				/>
 			</div>
-			<div className="flex my-48 items-center">
+			<div className="flex my-12 items-center">
 				<Button
 					className="uppercase"
 					variant="contained"
