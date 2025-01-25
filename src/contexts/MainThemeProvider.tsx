@@ -5,23 +5,41 @@ import { useMemo } from 'react';
 import rtlPlugin from 'stylis-plugin-rtl';
 import FuseTheme from '@fuse/core/FuseTheme';
 import { useMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
-import createCache, { Options } from '@emotion/cache';
+import createCache, { Options, StylisPlugin } from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 
 type MainThemeProviderProps = {
 	children: React.ReactNode;
 };
+const wrapInLayer: (layerName: string) => StylisPlugin = (layerName) => (node) => {
+	if (node.root) {
+		return;
+	}
+
+	// if we're at the root, replace node with `@layer layerName { node }`
+	const child = { ...node, parent: node, root: node };
+	Object.assign(node, {
+		children: [child],
+		length: 6,
+		parent: null,
+		props: [layerName],
+		return: '',
+		root: null,
+		type: '@layer',
+		value: `@layer ${layerName}`
+	});
+};
 
 const emotionCacheOptions: Record<string, Options> = {
 	rtl: {
 		key: 'muirtl',
-		stylisPlugins: [rtlPlugin],
-		prepend: true
+		stylisPlugins: [rtlPlugin, wrapInLayer('mui')],
+		prepend: false
 	},
 	ltr: {
 		key: 'muiltr',
-		stylisPlugins: [],
-		prepend: true
+		stylisPlugins: [wrapInLayer('mui')],
+		prepend: false
 	}
 };
 

@@ -1,19 +1,6 @@
-@import url('preflight.css');
-
 /**
  * Custom base styles
  */
-
-*:not([class^="Mui"]), *:not([class*=" Mui"]),
-::before:not([class^="Mui"]), ::before:not([class*=" Mui"]),
-::after:not([class^="Mui"]), ::after:not([class*=" Mui"])
-{
-    border-style: solid;
-}
-
-#root [class^="border"], #root [class*="border"]{
-    border-style: solid!important;
-}
 
 * {
     /* Text rendering */
@@ -30,14 +17,13 @@
 }
 
 html {
-    font-size: 62.5%;
     font-family: 'Inter var', Roboto, Helvetica Neue, Arial, sans-serif;
     background-color: #121212;
 }
 
 body {
-    font-size: 13px;
     line-height: 1.3;
+    font-size: 0.8125rem;
     overflow-x: hidden;
     font-feature-settings: "salt";
 }
@@ -57,35 +43,11 @@ html, body {
     flex: 1 1 auto;
 }
 
-#root {
+#root, #app {
     display: flex;
     flex: 1 1 auto;
     width: 100%;
     height: 100%;
-}
-
-h1, .h1 {
-    font-size: 24px;
-}
-
-h2, .h2 {
-    font-size: 20px;
-}
-
-h3, .h3 {
-    font-size: 16px;
-}
-
-h4, .h4 {
-    font-size: 15px;
-}
-
-h5, .h5 {
-    font-size: 13px;
-}
-
-h6, .h6 {
-    font-size: 12px;
 }
 
 .ps > .ps__rail-y,
