@@ -158,7 +158,7 @@ function ContactForm(props: ContactFormProps) {
 	return (
 		<>
 			<Box
-				className="relative w-full h-160 sm:h-192 px-32 sm:px-48"
+				className="relative w-full h-40 sm:h-48 px-8 sm:px-12"
 				sx={{
 					backgroundColor: 'background.default'
 				}}
@@ -172,9 +172,9 @@ function ContactForm(props: ContactFormProps) {
 				)}
 			</Box>
 
-			<div className="relative flex flex-col flex-auto items-center px-24 sm:px-48">
+			<div className="relative flex flex-col flex-auto items-center px-6 sm:px-12">
 				<div className="w-full">
-					<div className="flex flex-auto items-end -mt-64">
+					<div className="flex flex-auto items-end -mt-16">
 						<Controller
 							control={control}
 							name="avatar"
@@ -185,14 +185,14 @@ function ContactForm(props: ContactFormProps) {
 										borderStyle: 'solid',
 										borderColor: 'background.paper'
 									}}
-									className="relative flex items-center justify-center w-128 h-128 rounded-full overflow-hidden"
+									className="relative flex items-center justify-center w-32 h-32 rounded-full overflow-hidden"
 								>
-									<div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
+									<div className="absolute inset-0 bg-black/50 z-10" />
 									<div className="absolute inset-0 flex items-center justify-center z-20">
 										<div>
 											<label
 												htmlFor="button-avatar"
-												className="flex p-8 cursor-pointer"
+												className="flex p-2 cursor-pointer"
 											>
 												<input
 													accept="image/*"
@@ -257,7 +257,7 @@ function ContactForm(props: ContactFormProps) {
 											backgroundColor: 'background.default',
 											color: 'text.secondary'
 										}}
-										className="object-cover w-full h-full text-64 font-bold"
+										className="object-cover w-full h-full text-16 font-bold"
 										src={value}
 										alt={name}
 									>
@@ -273,7 +273,7 @@ function ContactForm(props: ContactFormProps) {
 					name="name"
 					render={({ field }) => (
 						<TextField
-							className="mt-32"
+							className="mt-8"
 							{...field}
 							label="Name"
 							placeholder="Name"
@@ -300,7 +300,7 @@ function ContactForm(props: ContactFormProps) {
 						<Autocomplete
 							multiple
 							id="tags"
-							className="mt-32"
+							className="mt-8"
 							options={tags || []}
 							disableCloseOnSelect
 							getOptionLabel={(option) => option?.title}
@@ -334,7 +334,7 @@ function ContactForm(props: ContactFormProps) {
 					name="title"
 					render={({ field }) => (
 						<TextField
-							className="mt-32"
+							className="mt-8"
 							{...field}
 							label="Title"
 							placeholder="Job title"
@@ -359,7 +359,7 @@ function ContactForm(props: ContactFormProps) {
 					name="company"
 					render={({ field }) => (
 						<TextField
-							className="mt-32"
+							className="mt-8"
 							{...field}
 							label="Company"
 							placeholder="Company"
@@ -383,7 +383,7 @@ function ContactForm(props: ContactFormProps) {
 					name="emails"
 					render={({ field }) => (
 						<ContactEmailSelector
-							className="mt-32"
+							className="mt-8"
 							{...field}
 							value={field?.value}
 							onChange={(val) => field.onChange(val)}
@@ -396,7 +396,7 @@ function ContactForm(props: ContactFormProps) {
 					name="phoneNumbers"
 					render={({ field }) => (
 						<PhoneNumberSelector
-							className="mt-32"
+							className="mt-8"
 							{...field}
 							error={!!errors.phoneNumbers}
 							helperText={errors?.phoneNumbers?.message}
@@ -411,7 +411,7 @@ function ContactForm(props: ContactFormProps) {
 					name="address"
 					render={({ field }) => (
 						<TextField
-							className="mt-32"
+							className="mt-8"
 							{...field}
 							label="Address"
 							placeholder="Address"
@@ -439,7 +439,7 @@ function ContactForm(props: ContactFormProps) {
 							onChange={(val) => {
 								onChange(val?.toISOString());
 							}}
-							className="mt-32 mb-16 w-full"
+							className="mt-8 mb-4 w-full"
 							slotProps={{
 								textField: {
 									id: 'birthday',
@@ -467,7 +467,7 @@ function ContactForm(props: ContactFormProps) {
 					name="notes"
 					render={({ field }) => (
 						<TextField
-							className="mt-32"
+							className="mt-8"
 							{...field}
 							label="Notes"
 							placeholder="Notes"
@@ -483,7 +483,7 @@ function ContactForm(props: ContactFormProps) {
 								className: 'max-h-min h-min items-start',
 								startAdornment: (
 									<InputAdornment
-										className="mt-16"
+										className="mt-4"
 										position="start"
 									>
 										<FuseSvgIcon size={20}>heroicons-solid:bars-3-bottom-left</FuseSvgIcon>
@@ -495,7 +495,7 @@ function ContactForm(props: ContactFormProps) {
 				/>
 			</div>
 			<Box
-				className="flex items-center mt-40 py-14 pr-16 pl-4 sm:pr-48 sm:pl-36 border-t"
+				className="flex items-center mt-10 py-3.5 pr-4 pl-1 sm:pr-12 sm:pl-9 border-t"
 				sx={{ backgroundColor: 'background.default' }}
 			>
 				{!isNew && (
@@ -514,7 +514,7 @@ function ContactForm(props: ContactFormProps) {
 					Cancel
 				</Button>
 				<Button
-					className="ml-8"
+					className="ml-2"
 					variant="contained"
 					color="secondary"
 					disabled={_.isEmpty(dirtyFields) || !isValid}

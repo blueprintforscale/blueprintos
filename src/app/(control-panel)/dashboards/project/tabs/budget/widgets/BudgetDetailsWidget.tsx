@@ -30,10 +30,10 @@ function BudgetDetailsWidget() {
 	const { columns, rows } = widget;
 
 	return (
-		<Paper className="flex flex-col flex-auto p-24 shadow rounded-xl overflow-hidden">
+		<Paper className="flex flex-col flex-auto p-6 shadow-sm rounded-xl overflow-hidden">
 			<Typography className="text-lg font-medium tracking-tight leading-6 truncate">Budget Details</Typography>
 
-			<div className="table-responsive mt-24">
+			<div className="table-responsive mt-6">
 				<Table className="table simple w-full min-w-full">
 					<TableHead>
 						<TableRow>

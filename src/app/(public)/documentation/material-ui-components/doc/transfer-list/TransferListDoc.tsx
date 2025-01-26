@@ -26,7 +26,7 @@ function TransferListDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Transfer List
@@ -36,68 +36,68 @@ function TransferListDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic transfer list
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For completeness, this example includes buttons for &quot;move all&quot;, but not every transfer list
 				needs these.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="TransferList.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={TransferListComponent}
 					raw={TransferListRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Enhanced transfer list
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				This example exchanges the &quot;move all&quot; buttons for a &quot;select all / select none&quot;
 				checkbox and adds a counter.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SelectAllTransferList.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SelectAllTransferListComponent}
 					raw={SelectAllTransferListRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Limitations
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The component comes with a couple of limitations:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					It only works on desktop. If you have a limited amount of options to select, prefer the{' '}
 					<a href="/material-ui/react-autocomplete/#multiple-values">Autocomplete</a> component. If mobile

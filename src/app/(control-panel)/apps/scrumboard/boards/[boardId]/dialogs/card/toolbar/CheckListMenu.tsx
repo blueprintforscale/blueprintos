@@ -69,7 +69,7 @@ function CheckListMenu(props: CheckListMenuProps) {
 	return (
 		<div>
 			<IconButton
-				className="rounded-0"
+				className="rounded-none"
 				onClick={handleMenuOpen}
 				size="large"
 			>
@@ -81,7 +81,7 @@ function CheckListMenu(props: CheckListMenuProps) {
 			>
 				<form
 					onSubmit={handleSubmit(onSubmit)}
-					className="p-16 flex flex-col items-end"
+					className="p-4 flex flex-col items-end"
 				>
 					<Controller
 						name="name"
@@ -93,7 +93,7 @@ function CheckListMenu(props: CheckListMenuProps) {
 								error={!!errors.name}
 								helperText={errors?.name?.message}
 								fullWidth
-								className="mb-12"
+								className="mb-3"
 								variant="outlined"
 								required
 								autoFocus

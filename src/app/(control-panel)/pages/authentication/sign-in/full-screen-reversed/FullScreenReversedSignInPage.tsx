@@ -59,7 +59,7 @@ function FullScreenReversedSignInPage() {
 	return (
 		<div className="flex min-w-0 flex-auto flex-col items-center sm:flex-row sm:justify-center md:items-start md:justify-start">
 			<Box
-				className="relative hidden h-full flex-auto items-center justify-center overflow-hidden p-64 md:flex lg:px-112 "
+				className="relative hidden h-full flex-auto items-center justify-center overflow-hidden p-16 md:flex lg:px-28 "
 				sx={{ backgroundColor: 'primary.dark', color: 'primary.contrastText' }}
 			>
 				<svg
@@ -91,7 +91,7 @@ function FullScreenReversedSignInPage() {
 				</svg>
 				<Box
 					component="svg"
-					className="absolute -right-64 -top-64 opacity-20"
+					className="absolute -right-16 -top-16 opacity-20"
 					sx={{ color: 'primary.light' }}
 					viewBox="0 0 220 192"
 					width="220px"
@@ -123,16 +123,16 @@ function FullScreenReversedSignInPage() {
 					/>
 				</Box>
 
-				<div className="relative z-10 w-full max-w-2xl">
+				<div className="relative z-10 w-full max-w-4xl">
 					<div className="text-7xl font-bold leading-none text-gray-100">
 						<div>Welcome to</div>
 						<div>our community</div>
 					</div>
-					<div className="mt-24 text-lg leading-6 tracking-tight text-gray-400">
+					<div className="mt-6 text-lg leading-6 tracking-tight text-gray-400">
 						Fuse helps developers to build organized and well coded dashboards full of beautiful and rich
 						modules. Join us and start building your application today.
 					</div>
-					<div className="mt-32 flex items-center">
+					<div className="mt-8 flex items-center">
 						<AvatarGroup
 							sx={{
 								'& .MuiAvatar-root': {
@@ -146,28 +146,28 @@ function FullScreenReversedSignInPage() {
 							<Avatar src="/assets/images/avatars/male-16.jpg" />
 						</AvatarGroup>
 
-						<div className="ml-16 font-medium tracking-tight text-gray-400">
+						<div className="ml-4 font-medium tracking-tight text-gray-400">
 							More than 17k people joined us, it's your turn
 						</div>
 					</div>
 				</div>
 			</Box>
 
-			<Paper className="h-full w-full px-16 py-32 ltr:border-l-1 rtl:border-r-1 sm:h-auto sm:w-auto sm:rounded-xl sm:p-48 sm:shadow md:flex md:h-full md:rounded-none md:p-64 md:pt-96 md:shadow-none">
-				<div className="mx-auto w-full max-w-320 sm:mx-0 sm:w-320">
+			<Paper className="h-full w-full px-4 py-8 ltr:border-l-1 rtl:border-r-1 sm:h-auto sm:w-auto sm:rounded-xl sm:p-12 sm:shadow-sm md:flex md:h-full md:rounded-none md:p-16 md:pt-24 md:shadow-none">
+				<div className="mx-auto w-full max-w-80 sm:mx-0 sm:w-80">
 					<img
-						className="w-48"
+						className="w-12"
 						src="/assets/images/logo/logo.svg"
 						alt="logo"
 					/>
 
-					<Typography className="mt-32 text-4xl font-extrabold leading-tight tracking-tight">
+					<Typography className="mt-8 text-4xl font-extrabold leading-[1.25] tracking-tight">
 						Sign in
 					</Typography>
-					<div className="mt-2 flex items-baseline font-medium">
+					<div className="mt-0.5 flex items-baseline font-medium">
 						<Typography>Don't have an account?</Typography>
 						<Link
-							className="ml-4"
+							className="ml-1"
 							to="/sign-up"
 						>
 							Sign up
@@ -177,7 +177,7 @@ function FullScreenReversedSignInPage() {
 					<form
 						name="loginForm"
 						noValidate
-						className="mt-32 flex w-full flex-col justify-center"
+						className="mt-8 flex w-full flex-col justify-center"
 						onSubmit={handleSubmit(onSubmit)}
 					>
 						<Controller
@@ -186,7 +186,7 @@ function FullScreenReversedSignInPage() {
 							render={({ field }) => (
 								<TextField
 									{...field}
-									className="mb-24"
+									className="mb-6"
 									label="Email"
 									autoFocus
 									type="email"
@@ -205,7 +205,7 @@ function FullScreenReversedSignInPage() {
 							render={({ field }) => (
 								<TextField
 									{...field}
-									className="mb-24"
+									className="mb-6"
 									label="Password"
 									type="password"
 									error={!!errors.password}
@@ -247,7 +247,7 @@ function FullScreenReversedSignInPage() {
 						<Button
 							variant="contained"
 							color="secondary"
-							className=" mt-16 w-full"
+							className=" mt-4 w-full"
 							aria-label="Sign in"
 							disabled={_.isEmpty(dirtyFields) || !isValid}
 							type="submit"
@@ -256,10 +256,10 @@ function FullScreenReversedSignInPage() {
 							Sign in
 						</Button>
 
-						<div className="mt-32 flex items-center">
+						<div className="mt-8 flex items-center">
 							<div className="mt-px flex-auto border-t" />
 							<Typography
-								className="mx-8"
+								className="mx-2"
 								color="text.secondary"
 							>
 								Or continue with
@@ -267,7 +267,7 @@ function FullScreenReversedSignInPage() {
 							<div className="mt-px flex-auto border-t" />
 						</div>
 
-						<div className="mt-32 flex items-center space-x-16">
+						<div className="mt-8 flex items-center space-x-4">
 							<Button
 								variant="outlined"
 								className="flex-auto"

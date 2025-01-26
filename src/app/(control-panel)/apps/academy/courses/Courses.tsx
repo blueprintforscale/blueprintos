@@ -99,8 +99,8 @@ function Courses() {
 	return (
 		<Root
 			header={
-				<Box className="relative overflow-hidden flex shrink-0 items-center justify-center px-16 py-32 md:p-64">
-					<div className="flex flex-col items-center justify-center  mx-auto w-full">
+				<Box className="relative overflow-hidden flex shrink-0 items-center justify-center px-4 py-8 md:p-16">
+					<div className="flex flex-col items-center justify-center mx-auto w-full">
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1, transition: { delay: 0 } }}
@@ -113,7 +113,7 @@ function Courses() {
 						>
 							<Typography
 								color="inherit"
-								className="text-center text-5xl sm:text-48 font-extrabold tracking-tight mt-4"
+								className="text-center text-5xl sm:text-7xl font-extrabold tracking-tight mt-1"
 							>
 								What do you want to learn today?
 							</Typography>
@@ -124,7 +124,7 @@ function Courses() {
 						>
 							<Typography
 								color="inherit"
-								className="text-15 sm:text-2xl mt-16 sm:mt-24 opacity-75 tracking-tight max-w-md text-center"
+								className="text-lg sm:text-2xl mt-4 sm:mt-6 opacity-75 tracking-tight max-w-xl text-center"
 							>
 								Our courses will step you through the process of a building small applications, or
 								adding new features to existing applications.
@@ -161,11 +161,11 @@ function Courses() {
 				</Box>
 			}
 			content={
-				<div className="flex flex-col flex-1 w-full mx-auto px-24 pt-24 sm:p-40">
-					<div className="flex flex-col shrink-0 sm:flex-row items-center justify-between space-y-16 sm:space-y-0">
-						<div className="flex flex-col sm:flex-row w-full sm:w-auto items-center space-y-16 sm:space-y-0 sm:space-x-16">
+				<div className="flex flex-col flex-1 w-full mx-auto px-6 pt-6 sm:p-10">
+					<div className="flex flex-col shrink-0 sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+						<div className="flex flex-col sm:flex-row w-full sm:w-auto items-center space-y-4 sm:space-y-0 sm:space-x-4">
 							<FormControl
-								className="flex w-full sm:w-136"
+								className="flex w-full sm:w-34"
 								variant="outlined"
 							>
 								<InputLabel id="category-select-label">Category</InputLabel>
@@ -192,7 +192,7 @@ function Courses() {
 							<TextField
 								label="Search for a course"
 								placeholder="Enter a keyword..."
-								className="flex w-full sm:w-256 mx-8"
+								className="flex w-full sm:w-64 mx-2"
 								value={searchText}
 								inputProps={{
 									'aria-label': 'Search'
@@ -221,7 +221,7 @@ function Courses() {
 					{filteredData &&
 						(filteredData.length > 0 ? (
 							<motion.div
-								className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-32 mt-32 sm:mt-40"
+								className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 sm:mt-10"
 								variants={container}
 								initial="hidden"
 								animate="show"
@@ -241,7 +241,7 @@ function Courses() {
 							<div className="flex flex-1 items-center justify-center">
 								<Typography
 									color="text.secondary"
-									className="text-3xl my-24"
+									className="text-3xl my-6"
 								>
 									No courses found!
 								</Typography>

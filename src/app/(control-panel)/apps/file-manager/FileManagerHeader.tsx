@@ -17,9 +17,9 @@ function FileManagerHeader() {
 	const { folders, files, path } = useFileManagerData();
 
 	return (
-		<div className="py-24 sm:py-32 w-full flex  space-y-8 sm:space-y-0 items-center justify-between">
-			<div className="flex flex-col space-y-8 sm:space-y-0">
-				<PageBreadcrumb className="mb-8" />
+		<div className="py-6 sm:py-8 w-full flex space-y-2 sm:space-y-0 items-center justify-between">
+			<div className="flex flex-col space-y-2 sm:space-y-0">
+				<PageBreadcrumb className="mb-2" />
 
 				<motion.span
 					className="flex items-end"
@@ -38,7 +38,7 @@ function FileManagerHeader() {
 					{path && path?.length > 0 && (
 						<Breadcrumbs
 							aria-label="breadcrumb"
-							className="mx-12"
+							className="mx-3"
 							separator={<NavigateNextIcon fontSize="small" />}
 						>
 							<div />
@@ -48,7 +48,6 @@ function FileManagerHeader() {
 								) : (
 									<Link
 										key={index}
-										color="text.primary"
 										to={`/apps/file-manager/${item?.id}`}
 									>
 										{item?.name}
@@ -63,7 +62,7 @@ function FileManagerHeader() {
 					animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
 				>
 					<Typography
-						className="text-base font-medium mx-2"
+						className="text-base font-medium mx-0.5"
 						color="text.secondary"
 					>
 						{`${folders.length} folders, ${files.length} files`}
@@ -78,7 +77,7 @@ function FileManagerHeader() {
 					color="secondary"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
-					<span className="hidden sm:flex mx-8">Upload file</span>
+					<span className="hidden sm:flex mx-2">Upload file</span>
 				</Button>
 			</div>
 		</div>

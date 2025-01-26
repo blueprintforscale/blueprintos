@@ -31,7 +31,7 @@ function PopoverDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Popover
@@ -41,12 +41,12 @@ function PopoverDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Things to know when using the <code>Popover</code> component:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					The component is built on top of the{' '}
 					<a href="/material-ui/react-modal/">
@@ -63,31 +63,31 @@ function PopoverDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic Popover
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicPopover.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicPopoverComponent}
 					raw={BasicPopoverRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Anchor playground
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Use the radio buttons to adjust the <code>anchorOrigin</code> and <code>transformOrigin</code>{' '}
@@ -97,38 +97,38 @@ function PopoverDoc(props) {
 				position of the popover.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Mouse hover interaction
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				This demo demonstrates how to use the <code>Popover</code> component with <code>mouseenter</code> and{' '}
 				<code>mouseleave</code> events to achieve popover behavior.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="MouseHoverPopover.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={MouseHoverPopoverComponent}
 					raw={MouseHoverPopoverRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Virtual element
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The value of the <code>anchorEl</code> prop can be a reference to a fake DOM element. You need to
@@ -147,30 +147,30 @@ interface PopoverVirtualElement {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Highlight part of the text to see the popover:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="VirtualElementPopover.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={VirtualElementPopoverComponent}
 					raw={VirtualElementPopoverRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For more information on the virtual element&#39;s properties, see the following resources:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect">
 						getBoundingClientRect
@@ -184,7 +184,7 @@ interface PopoverVirtualElement {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				:::warning The usage of a virtual element for the Popover component requires the <code>nodeType</code>{' '}
@@ -199,25 +199,25 @@ interface PopoverVirtualElement {
 				components, both of which don&#39;t require the property. :::
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Supplementary projects
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For more advanced use cases, you might be able to take advantage of:
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				material-ui-popup-state
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<img
@@ -230,7 +230,7 @@ interface PopoverVirtualElement {
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The package{' '}
@@ -240,12 +240,12 @@ interface PopoverVirtualElement {
 				that takes care of popover state for you in most cases.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PopoverPopupState.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PopoverPopupStateComponent}
 					raw={PopoverPopupStateRaw}

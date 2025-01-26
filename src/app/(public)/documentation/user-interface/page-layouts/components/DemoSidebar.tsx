@@ -151,8 +151,8 @@ const navigationData: FuseNavItemType[] = [
  */
 function DemoSidebar() {
 	return (
-		<div className="py-24 min-h-6xl">
-			<div className="px-24 pb-16">
+		<div className="py-6 min-h-6xl">
+			<div className="px-6 pb-4">
 				<Typography className="text-3xl font-bold tracking-tighter">Demo Sidebar</Typography>
 			</div>
 			<FuseNavigation

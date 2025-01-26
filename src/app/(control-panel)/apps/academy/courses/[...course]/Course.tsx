@@ -124,7 +124,7 @@ function Course() {
 
 					{isMobile && (
 						<Paper
-							className="flex sticky top-0 z-10 items-center w-full px-16 py-8 border-b-1 shadow-0"
+							className="flex sticky top-0 z-10 items-center w-full px-4 py-2 border-b-1 shadow-0"
 							square
 						>
 							<IconButton
@@ -138,7 +138,9 @@ function Course() {
 								</FuseSvgIcon>
 							</IconButton>
 
-							<Typography className="text-md font-medium tracking-tight mx-10">{course.title}</Typography>
+							<Typography className="text-md font-medium tracking-tight mx-2.5">
+								{course.title}
+							</Typography>
 						</Paper>
 					)}
 
@@ -151,7 +153,7 @@ function Course() {
 					>
 						{courseSteps?.map((step, index: number) => (
 							<div
-								className="flex justify-center p-16 pb-64 sm:p-24 sm:pb-64 md:p-48 md:pb-96 min-h-full"
+								className="flex justify-center p-4 pb-16 sm:p-6 sm:pb-16 md:p-12 md:pb-24 min-h-full"
 								key={index}
 							>
 								<CourseStepContent step={step} />
@@ -160,7 +162,7 @@ function Course() {
 					</SwipeableViews>
 
 					{!isMobile && (
-						<div className="flex justify-center w-full absolute bottom-0 left-0 right-0 p-16 pb-32 z-10">
+						<div className="flex justify-center w-full absolute bottom-0 left-0 right-0 p-4 pb-8 z-10">
 							<ButtonGroup
 								variant="contained"
 								aria-label=""
@@ -187,7 +189,7 @@ function Course() {
 					{isMobile && (
 						<Box
 							sx={{ backgroundColor: 'background.paper' }}
-							className="flex sticky bottom-0 z-10 items-center w-full p-16 border-t-1"
+							className="flex sticky bottom-0 z-10 items-center w-full p-4 border-t-1"
 						>
 							<IconButton
 								onClick={() => setLeftSidebarOpen(true)}
@@ -197,10 +199,10 @@ function Course() {
 								<FuseSvgIcon>heroicons-outline:bars-3</FuseSvgIcon>
 							</IconButton>
 
-							<Typography className="mx-8">{`${activeStep}/${course.totalSteps}`}</Typography>
+							<Typography className="mx-2">{`${activeStep}/${course.totalSteps}`}</Typography>
 
 							<CourseProgress
-								className="flex flex-1 mx-8"
+								className="flex flex-1 mx-2"
 								course={course}
 							/>
 
@@ -222,11 +224,11 @@ function Course() {
 			leftSidebarWidth={300}
 			leftSidebarContent={
 				<>
-					<div className="p-32">
+					<div className="p-8">
 						<Button
 							to="/apps/academy/courses"
 							component={Link}
-							className="mb-24"
+							className="mb-6"
 							color="secondary"
 							variant="text"
 							startIcon={
@@ -244,7 +246,7 @@ function Course() {
 					</div>
 					<Divider />
 					<Stepper
-						classes={{ root: 'p-32' }}
+						classes={{ root: 'p-8' }}
 						activeStep={activeStep - 1}
 						orientation="vertical"
 					>

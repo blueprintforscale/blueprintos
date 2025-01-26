@@ -11,13 +11,13 @@ function DevelopmentServerDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Starting the Development Server
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				While in your working directory, execute the following command in the console application:
@@ -25,20 +25,20 @@ function DevelopmentServerDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-bash my-16"
+				className="language-bash my-4"
 			>
 				{` npm run dev `}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				And that's it. The generator will take care of everything and will initiate the Fuse React server.
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can check your console application for further information about the server. By default, it will be
@@ -46,7 +46,7 @@ function DevelopmentServerDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				For more information on the Next.js App Router and development server, please refer to the{' '}
@@ -60,8 +60,8 @@ function DevelopmentServerDoc() {
 				.
 			</Typography>
 
-			<div className="my-24 px-24 py-16 border-1 border-red rounded-xl">
-				<Typography className="mb-8 font-500 text-15 text-red">Important:</Typography>
+			<div className="my-6 px-6 py-4 border-1 border-red-500 rounded-xl">
+				<Typography className="mb-2 font-medium text-lg text-red-500">Important:</Typography>
 				<Typography component="div">
 					In case of runtime errors on first run, make sure you are running an LTS release of Node.js and that
 					all dependencies are correctly installed. If issues persist, try deleting the node_modules folder

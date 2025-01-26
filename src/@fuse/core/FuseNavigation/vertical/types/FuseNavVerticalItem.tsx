@@ -93,7 +93,7 @@ function FuseNavVerticalItem(props: FuseNavItemComponentProps) {
 					secondary={item.subtitle}
 					classes={{
 						primary: 'text-md font-medium fuse-list-item-text-primary truncate',
-						secondary: 'text-sm font-medium fuse-list-item-text-secondary leading-normal truncate'
+						secondary: 'text-sm font-medium fuse-list-item-text-secondary leading-[1.5] truncate'
 					}}
 				/>
 				{item.badge && <FuseNavBadge badge={item.badge} />}

@@ -76,12 +76,12 @@ function AuthJsCredentialsSignUpForm() {
 		<form
 			name="registerForm"
 			noValidate
-			className="mt-32 flex w-full flex-col justify-center"
+			className="mt-8 flex w-full flex-col justify-center"
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			{errors?.root?.message && (
 				<Alert
-					className="mb-32"
+					className="mb-8"
 					severity="error"
 					sx={(theme) => ({
 						backgroundColor: theme.palette.error.light,
@@ -97,7 +97,7 @@ function AuthJsCredentialsSignUpForm() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mb-24"
+						className="mb-6"
 						label="Display name"
 						autoFocus
 						type="name"
@@ -115,7 +115,7 @@ function AuthJsCredentialsSignUpForm() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mb-24"
+						className="mb-6"
 						label="Email"
 						type="email"
 						error={!!errors.email}
@@ -132,7 +132,7 @@ function AuthJsCredentialsSignUpForm() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mb-24"
+						className="mb-6"
 						label="Password"
 						type="password"
 						error={!!errors.password}
@@ -149,7 +149,7 @@ function AuthJsCredentialsSignUpForm() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mb-24"
+						className="mb-6"
 						label="Password (Confirm)"
 						type="password"
 						error={!!errors.passwordConfirm}
@@ -181,7 +181,7 @@ function AuthJsCredentialsSignUpForm() {
 			<Button
 				variant="contained"
 				color="secondary"
-				className="mt-24 w-full"
+				className="mt-6 w-full"
 				aria-label="Register"
 				disabled={_.isEmpty(dirtyFields) || !isValid}
 				type="submit"

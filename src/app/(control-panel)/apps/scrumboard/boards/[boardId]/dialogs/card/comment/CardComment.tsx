@@ -56,14 +56,14 @@ function CardComment(props: CardCommentProps) {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className="flex -mx-8"
+			className="flex -mx-2"
 		>
 			<Avatar
-				className="w-32 h-32 mx-8"
+				className="w-8 h-8 mx-2"
 				alt={user.name}
 				src={user.avatar}
 			/>
-			<div className="flex flex-col items-start flex-1 mx-8">
+			<div className="flex flex-col items-start flex-1 mx-2">
 				<Controller
 					name="message"
 					control={control}
@@ -83,7 +83,7 @@ function CardComment(props: CardCommentProps) {
 				/>
 
 				<Button
-					className="mt-16"
+					className="mt-4"
 					aria-label="save"
 					variant="contained"
 					color="secondary"

@@ -7,22 +7,22 @@ const orderStatuses: EcommerceOrder['status'] = [
 	{
 		id: '1',
 		name: 'Awaiting check payment',
-		color: 'bg-blue text-white'
+		color: 'bg-blue-500 text-white'
 	},
 	{
 		id: '2',
 		name: 'Payment accepted',
-		color: 'bg-green text-white'
+		color: 'bg-green-500 text-white'
 	},
 	{
 		id: '3',
 		name: 'Preparing the order',
-		color: 'bg-orange text-black'
+		color: 'bg-orange-500 text-black'
 	},
 	{
 		id: '4',
 		name: 'Shipped',
-		color: 'bg-purple text-white'
+		color: 'bg-purple-500 text-white'
 	},
 	{
 		id: '5',
@@ -32,12 +32,12 @@ const orderStatuses: EcommerceOrder['status'] = [
 	{
 		id: '6',
 		name: 'Canceled',
-		color: 'bg-pink text-white'
+		color: 'bg-pink-500 text-white'
 	},
 	{
 		id: '7',
 		name: 'Refunded',
-		color: 'bg-red text-white'
+		color: 'bg-red-500 text-white'
 	},
 	{
 		id: '8',
@@ -52,7 +52,7 @@ const orderStatuses: EcommerceOrder['status'] = [
 	{
 		id: '10',
 		name: 'Awaiting bank wire payment',
-		color: 'bg-blue text-white'
+		color: 'bg-blue-500 text-white'
 	},
 	{
 		id: '11',

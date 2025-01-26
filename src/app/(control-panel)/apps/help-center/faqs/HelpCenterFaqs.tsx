@@ -20,22 +20,22 @@ function HelpCenterFaqs() {
 	}, [faqs, categories]);
 
 	return (
-		<div className="flex flex-col items-center p-24 sm:p-40">
-			<div className="flex flex-col w-full max-w-4xl">
-				<div className="sm:mt-32">
+		<div className="flex flex-col items-center p-6 sm:p-10">
+			<div className="flex flex-col w-full max-w-6xl">
+				<div className="sm:mt-8">
 					<PageBreadcrumb />
 				</div>
-				<div className="mt-8 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight">
+				<div className="mt-2 text-4xl sm:text-7xl font-extrabold tracking-tight leading-[1.25]">
 					Frequently Asked Questions
 				</div>
 
 				{groupedFaqs?.map((category) => (
 					<div key={category.id}>
-						<Typography className="mt-48 sm:mt-64 text-3xl font-bold leading-tight tracking-tight">
+						<Typography className="mt-12 sm:mt-16 text-3xl font-bold leading-[1.25] tracking-tight">
 							{category.title}
 						</Typography>
 						<FaqList
-							className="w-full mt-32"
+							className="w-full mt-8"
 							list={category.faqs}
 						/>
 					</div>

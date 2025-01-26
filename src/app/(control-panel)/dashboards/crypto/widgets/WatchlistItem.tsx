@@ -47,9 +47,9 @@ function WatchlistItem(props: WatchlistItemProps) {
 	};
 
 	return (
-		<div className="flex flex-0 items-center p-20 border-b space-x-24">
+		<div className="flex shrink-0 items-center p-5 border-b space-x-6">
 			<div className="flex flex-col flex-auto">
-				<div className="flex items-baseline space-x-4">
+				<div className="flex items-baseline space-x-1">
 					<Typography
 						className=" font-medium text-md"
 						color="text.secondary"
@@ -63,8 +63,8 @@ function WatchlistItem(props: WatchlistItemProps) {
 						({item.iso})
 					</Typography>
 				</div>
-				<div className="flex items-end mt-8">
-					<Typography className="min-w-80 font-mono text-2xl tracking-tighter leading-none">
+				<div className="flex items-end mt-2">
+					<Typography className="min-w-20 font-mono text-2xl tracking-tighter leading-none">
 						{item.amount.toLocaleString('en-US', {
 							style: 'currency',
 							currency: 'USD'
@@ -73,7 +73,7 @@ function WatchlistItem(props: WatchlistItemProps) {
 
 					<FuseSvgIcon
 						className={clsx(
-							'icon-size-14 mx-2 mb-px',
+							'icon-size-3.5 mx-0.5 mb-px',
 							item.trend.dir === 'up' && 'text-green-500',
 							item.trend.dir === 'down' && 'text-red-500'
 						)}
@@ -95,7 +95,7 @@ function WatchlistItem(props: WatchlistItemProps) {
 				</div>
 			</div>
 			<ReactApexChart
-				className="flex-auto w-full h-36"
+				className="flex-auto w-full h-9 min-w-0"
 				options={chartOptions}
 				series={_.cloneDeep(item.series)}
 				type={chartOptions?.chart?.type}

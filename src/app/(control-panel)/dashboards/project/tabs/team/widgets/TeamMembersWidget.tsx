@@ -41,29 +41,29 @@ function TeamMembersWidget() {
 			variants={container}
 			initial="hidden"
 			animate="show"
-			className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-24 w-full min-w-0"
+			className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full min-w-0"
 		>
 			{members.map((member) => (
 				<Paper
 					component={motion.div}
 					variants={item}
-					className="flex flex-col flex-auto items-center shadow rounded-xl overflow-hidden"
+					className="flex flex-col flex-auto items-center shadow-sm rounded-xl overflow-hidden"
 					key={member.id}
 				>
-					<div className="flex flex-col flex-auto w-full p-32 text-center">
-						<div className="w-128 h-128 mx-auto rounded-full overflow-hidden">
+					<div className="flex flex-col flex-auto w-full p-8 text-center">
+						<div className="w-32 h-32 mx-auto rounded-full overflow-hidden">
 							<img
 								className="w-full h-full object-cover"
 								src={member.avatar}
 								alt="member"
 							/>
 						</div>
-						<Typography className="mt-24 font-medium">{member.name}</Typography>
+						<Typography className="mt-6 font-medium">{member.name}</Typography>
 						<Typography color="text.secondary">{member.title}</Typography>
 					</div>
 					<div className="flex items-center w-full border-t divide-x">
 						<a
-							className="flex flex-auto items-center justify-center py-16 hover:bg-hover"
+							className="flex flex-auto items-center justify-center py-4 hover:bg-hover"
 							href={`mailto:${member.email}`}
 							role="button"
 						>
@@ -73,10 +73,10 @@ function TeamMembersWidget() {
 							>
 								heroicons-solid:envelope
 							</FuseSvgIcon>
-							<Typography className="ml-8">Email</Typography>
+							<Typography className="ml-2">Email</Typography>
 						</a>
 						<a
-							className="flex flex-auto items-center justify-center py-16 hover:bg-hover"
+							className="flex flex-auto items-center justify-center py-4 hover:bg-hover"
 							href={`tel${member.phone}`}
 							role="button"
 						>
@@ -86,7 +86,7 @@ function TeamMembersWidget() {
 							>
 								heroicons-solid:phone
 							</FuseSvgIcon>
-							<Typography className="ml-8">Call</Typography>
+							<Typography className="ml-2">Call</Typography>
 						</a>
 					</div>
 				</Paper>

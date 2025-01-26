@@ -10,26 +10,26 @@ function ChangingDefaultFontDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Changing default font
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				There is two way to inject font-family.
 			</Typography>
 
-			<ul className="list-decimal ml-16">
+			<ul className="list-decimal ml-4">
 				<li>
-					<Typography className="mb-24">
+					<Typography className="mb-6">
 						You can add the font link inside head of the public/index.html.
 					</Typography>
 					<FuseHighlight
 						component="pre"
-						className="language-html mb-24"
+						className="language-html mb-6"
 					>
 						{`
                           <link href="https://fonts.googleapis.com/css?family=Roboto&amp;subset=vietnamese" rel="stylesheet">
@@ -37,12 +37,12 @@ function ChangingDefaultFontDoc() {
 					</FuseHighlight>
 				</li>
 				<li>
-					<Typography className="mb-24">
+					<Typography className="mb-6">
 						You can install typeface font package and import like we do at src/index.tsx
 					</Typography>
 					<FuseHighlight
 						component="pre"
-						className="language-jsx mb-24"
+						className="language-jsx mb-6"
 					>
 						{`
                             import 'typeface-roboto';
@@ -52,7 +52,7 @@ function ChangingDefaultFontDoc() {
 			</ul>
 
 			<Typography
-				className="mt-16 mb-8"
+				className="mt-4 mb-2"
 				component="p"
 			>
 				You need to add <code>typography.fontFamily</code> values into the desired theme config at{' '}
@@ -60,7 +60,7 @@ function ChangingDefaultFontDoc() {
 			</Typography>
 			<FuseHighlight
 				component="pre"
-				className="language-jsx mb-24"
+				className="language-jsx mb-6"
 			>
 				{`
 					default    : {
@@ -75,7 +75,7 @@ function ChangingDefaultFontDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="mt-16 mb-8"
+				className="mt-4 mb-2"
 				component="p"
 			>
 				There is also font-family assignment at <code>src/styles/app-base.css </code>
@@ -83,7 +83,7 @@ function ChangingDefaultFontDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-css mb-24"
+				className="language-css mb-6"
 			>
 				{`
 					html {

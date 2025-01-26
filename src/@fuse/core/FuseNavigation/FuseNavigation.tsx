@@ -52,9 +52,9 @@ registerComponent('horizontal-group', FuseNavHorizontalGroup);
 registerComponent('horizontal-collapse', FuseNavHorizontalCollapse);
 registerComponent('horizontal-item', FuseNavHorizontalItem);
 registerComponent('horizontal-link', FuseNavHorizontalLink);
-registerComponent('divider', () => <Divider className="my-16" />);
-registerComponent('vertical-divider', () => <Divider className="my-16" />);
-registerComponent('horizontal-divider', () => <Divider className="my-16" />);
+registerComponent('divider', () => <Divider className="my-4" />);
+registerComponent('vertical-divider', () => <Divider className="my-4" />);
+registerComponent('horizontal-divider', () => <Divider className="my-4" />);
 
 export type FuseNavigationProps = {
 	className?: string;

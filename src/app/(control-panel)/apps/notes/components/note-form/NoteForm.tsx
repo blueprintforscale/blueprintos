@@ -171,7 +171,7 @@ function NoteForm(props: NoteFormProps) {
 
 	return (
 		<div className="flex flex-col w-full">
-			<FuseScrollbars className="flex flex-auto w-full max-h-640">
+			<FuseScrollbars className="flex flex-auto w-full max-h-160">
 				<div className="w-full">
 					<Controller
 						name="image"
@@ -190,7 +190,7 @@ function NoteForm(props: NoteFormProps) {
 										alt="note"
 									/>
 									<Fab
-										className="absolute right-0 bottom-0 m-8"
+										className="absolute right-0 bottom-0 m-2"
 										variant="extended"
 										size="small"
 										color="secondary"
@@ -205,7 +205,7 @@ function NoteForm(props: NoteFormProps) {
 						}}
 					/>
 
-					<div className="px-4 my-6">
+					<div className="px-1 my-1.5">
 						<Controller
 							name="title"
 							control={control}
@@ -221,7 +221,7 @@ function NoteForm(props: NoteFormProps) {
 							)}
 						/>
 					</div>
-					<div className="px-4 my-6">
+					<div className="px-1 my-1.5">
 						<Controller
 							name="content"
 							control={control}
@@ -248,7 +248,7 @@ function NoteForm(props: NoteFormProps) {
 							}
 
 							return (
-								<div className="px-4">
+								<div className="px-1">
 									<NoteFormList
 										tasks={value || []}
 										onCheckListChange={(val) => onChange(val)}
@@ -259,10 +259,10 @@ function NoteForm(props: NoteFormProps) {
 					/>
 
 					{(watchedNoteForm.labels || watchedNoteForm.reminder || watchedNoteForm.createdAt) && (
-						<div className="flex flex-wrap w-full px-16 mb-12 -mx-4">
+						<div className="flex flex-wrap w-full px-4 mb-3 -mx-1">
 							{watchedNoteForm.reminder && (
 								<NoteReminderLabel
-									className="mt-4 mx-4"
+									className="mt-1 mx-1"
 									date={watchedNoteForm.reminder}
 									onDelete={() => {
 										setValue('reminder', undefined);
@@ -285,7 +285,7 @@ function NoteForm(props: NoteFormProps) {
 												<NoteLabel
 													id={id}
 													key={id}
-													className="mt-4 mx-4"
+													className="mt-1 mx-1"
 													onDelete={() => onChange(value.filter((_id) => _id !== id))}
 												/>
 											))}
@@ -297,7 +297,7 @@ function NoteForm(props: NoteFormProps) {
 							{watchedNoteForm.createdAt && (
 								<Typography
 									color="text.secondary"
-									className="text-md mt-8 mx-4"
+									className="text-md mt-2 mx-1"
 								>
 									Edited: {format(new Date(watchedNoteForm.createdAt), 'MMM dd yy, h:mm')}
 								</Typography>
@@ -307,8 +307,8 @@ function NoteForm(props: NoteFormProps) {
 				</div>
 			</FuseScrollbars>
 
-			<div className="flex flex-auto justify-between items-center px-16 pb-12">
-				<div className="flex items-center  space-x-4">
+			<div className="flex flex-auto justify-between items-center px-4 pb-3">
+				<div className="flex items-center space-x-1">
 					<Controller
 						name="reminder"
 						control={control}
@@ -387,7 +387,7 @@ function NoteForm(props: NoteFormProps) {
 					/>
 				</div>
 
-				<div className="flex items-center space-x-4">
+				<div className="flex items-center space-x-1">
 					{variant === 'new' ? (
 						<Button
 							className=""

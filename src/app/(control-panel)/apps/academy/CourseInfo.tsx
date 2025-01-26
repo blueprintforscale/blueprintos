@@ -22,7 +22,7 @@ function CourseInfo(props: CourseInfoProps) {
 
 	return (
 		<div className={clsx('w-full', className)}>
-			<div className="flex items-center justify-between mb-16">
+			<div className="flex items-center justify-between mb-4">
 				<CourseCategory slug={course.category} />
 
 				{course.progress.completed > 0 && (
@@ -35,22 +35,22 @@ function CourseInfo(props: CourseInfoProps) {
 				)}
 			</div>
 
-			<Typography className="text-15 font-medium">{course.title}</Typography>
+			<Typography className="text-lg font-medium">{course.title}</Typography>
 
 			<Typography
-				className="text-md mt-2 line-clamp-2"
+				className="text-md mt-0.5 line-clamp-2"
 				color="text.secondary"
 			>
 				{course.description}
 			</Typography>
 
 			<Divider
-				className="w-48 my-24 border-1"
+				className="w-12 my-6 border-1"
 				light
 			/>
 
 			<Typography
-				className="flex items-center space-x-6 text-md"
+				className="flex items-center space-x-1.5 text-md"
 				color="text.secondary"
 			>
 				<FuseSvgIcon
@@ -62,7 +62,7 @@ function CourseInfo(props: CourseInfoProps) {
 				<span className="whitespace-nowrap leading-none">{`${course.duration} minutes`}</span>
 			</Typography>
 			<Typography
-				className="flex items-center space-x-6 text-md mt-8"
+				className="flex items-center space-x-1.5 text-md mt-2"
 				color="text.secondary"
 			>
 				<FuseSvgIcon

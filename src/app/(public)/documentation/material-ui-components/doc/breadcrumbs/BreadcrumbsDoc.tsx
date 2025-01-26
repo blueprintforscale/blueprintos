@@ -36,7 +36,7 @@ function BreadcrumbsDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Breadcrumbs
@@ -47,164 +47,164 @@ function BreadcrumbsDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic breadcrumbs
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicBreadcrumbs.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicBreadcrumbsComponent}
 					raw={BasicBreadcrumbsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Active last breadcrumb
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Keep the last breadcrumb interactive.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ActiveLastBreadcrumb.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ActiveLastBreadcrumbComponent}
 					raw={ActiveLastBreadcrumbRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Custom separator
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				In the following examples, we are using two string separators and an SVG icon.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomSeparator.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomSeparatorComponent}
 					raw={CustomSeparatorRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Breadcrumbs with icons
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="IconBreadcrumbs.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={IconBreadcrumbsComponent}
 					raw={IconBreadcrumbsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Collapsed breadcrumbs
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CollapsedBreadcrumbs.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CollapsedBreadcrumbsComponent}
 					raw={CollapsedBreadcrumbsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Condensed with menu
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				As an alternative, consider adding a Menu component to display the condensed links in a dropdown list:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CondensedWithMenu.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CondensedWithMenuComponent}
 					raw={CondensedWithMenuRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Here is an example of customizing the component. You can learn more about this in the{' '}
 				<a href="/material-ui/customization/how-to-customize/">overrides documentation page</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomizedBreadcrumbs.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomizedBreadcrumbsComponent}
 					raw={CustomizedBreadcrumbsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				(WAI-ARIA:{' '}
@@ -214,18 +214,18 @@ function BreadcrumbsDoc(props) {
 				)
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Be sure to add a <code>aria-label</code> description on the <code>Breadcrumbs</code> component.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The accessibility of this component relies on:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					The set of links is structured using an ordered list (<code>{`<ol>`}</code> element).
 				</li>

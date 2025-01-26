@@ -101,7 +101,7 @@ function Product() {
 					There is no such product!
 				</Typography>
 				<Button
-					className="mt-24"
+					className="mt-6"
 					component={Link}
 					variant="outlined"
 					to="/apps/e-commerce/products"
@@ -125,7 +125,7 @@ function Product() {
 			<FusePageCarded
 				header={<ProductHeader />}
 				content={
-					<div className="p-16 sm:p-24 max-w-3xl space-y-24">
+					<div className="p-4 sm:p-6 max-w-5xl space-y-6">
 						<FuseTabs
 							value={tabValue}
 							onChange={handleTabChange}

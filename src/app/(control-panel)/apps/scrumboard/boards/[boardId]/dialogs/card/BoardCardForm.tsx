@@ -113,10 +113,10 @@ function BoardCardForm() {
 	}
 
 	return (
-		<DialogContent className="flex flex-col sm:flex-row p-8">
-			<div className="flex flex-auto flex-col py-16 px-0 sm:px-16">
-				<div className="flex flex-col sm:flex-row sm:justify-between justify-center items-center mb-24">
-					<div className="mb-16 sm:mb-0 flex items-center">
+		<DialogContent className="flex flex-col sm:flex-row p-2">
+			<div className="flex flex-auto flex-col py-4 px-0 sm:px-4">
+				<div className="flex flex-col sm:flex-row sm:justify-between justify-center items-center mb-6">
+					<div className="mb-4 sm:mb-0 flex items-center">
 						<Typography>{board.title}</Typography>
 
 						<FuseSvgIcon size={20}>heroicons-outline:chevron-right</FuseSvgIcon>
@@ -145,7 +145,7 @@ function BoardCardForm() {
 					)}
 				</div>
 
-				<div className="flex items-center mb-24">
+				<div className="flex items-center mb-6">
 					<Controller
 						name="title"
 						control={control}
@@ -176,7 +176,7 @@ function BoardCardForm() {
 					/>
 				</div>
 
-				<div className="w-full mb-24">
+				<div className="w-full mb-6">
 					<Controller
 						name="description"
 						control={control}
@@ -194,13 +194,13 @@ function BoardCardForm() {
 				</div>
 
 				{cardForm.labels && cardForm.labels.length > 0 && (
-					<div className="flex-1 mb-24 mx-8">
-						<div className="flex items-center mt-16 mb-12">
+					<div className="flex-1 mb-6 mx-2">
+						<div className="flex items-center mt-4 mb-3">
 							<FuseSvgIcon size={20}>heroicons-outline:tag</FuseSvgIcon>
-							<Typography className="font-semibold text-15 mx-8">Labels</Typography>
+							<Typography className="font-semibold text-lg mx-2">Labels</Typography>
 						</div>
 						<Autocomplete
-							className="mt-8 mb-16"
+							className="mt-2 mb-4"
 							multiple
 							freeSolo
 							options={labels}
@@ -225,7 +225,7 @@ function BoardCardForm() {
 										<Chip
 											key={key}
 											label={typeof option === 'string' ? option : option?.title}
-											className="m-3"
+											className="m-0.75"
 											{...rest}
 										/>
 									);
@@ -247,13 +247,13 @@ function BoardCardForm() {
 				)}
 
 				{cardForm.memberIds && cardForm.memberIds.length > 0 && (
-					<div className="flex-1 mb-24 mx-8">
-						<div className="flex items-center mt-16 mb-12">
+					<div className="flex-1 mb-6 mx-2">
+						<div className="flex items-center mt-4 mb-3">
 							<FuseSvgIcon size={20}>heroicons-outline:users</FuseSvgIcon>
-							<Typography className="font-semibold text-15 mx-8">Members</Typography>
+							<Typography className="font-semibold text-lg mx-2">Members</Typography>
 						</div>
 						<Autocomplete
-							className="mt-8 mb-16"
+							className="mt-2 mb-4"
 							multiple
 							freeSolo
 							options={members}
@@ -282,7 +282,7 @@ function BoardCardForm() {
 										<Chip
 											key={key}
 											label={option.name}
-											className={clsx('m-3', option?.class)}
+											className={clsx('m-0.75', option?.class)}
 											{...rest}
 											avatar={
 												<Tooltip title={option.name}>
@@ -309,12 +309,12 @@ function BoardCardForm() {
 				)}
 
 				{cardForm.attachments && cardForm.attachments.length > 0 && (
-					<div className="mb-24">
-						<div className="flex items-center mt-16 mb-12">
+					<div className="mb-6">
+						<div className="flex items-center mt-4 mb-3">
 							<FuseSvgIcon size={20}>heroicons-outline:paper-clip</FuseSvgIcon>
-							<Typography className="font-semibold text-15 mx-8">Attachments</Typography>
+							<Typography className="font-semibold text-lg mx-2">Attachments</Typography>
 						</div>
-						<div className="flex flex-col sm:flex-row flex-wrap -mx-16">
+						<div className="flex flex-col sm:flex-row flex-wrap -mx-4">
 							{cardForm.attachments.map((item) => (
 								<CardAttachment
 									item={item}
@@ -353,10 +353,10 @@ function BoardCardForm() {
 						/>
 					))}
 
-				<div className="mb-24">
-					<div className="flex items-center mt-16 mb-12">
+				<div className="mb-6">
+					<div className="flex items-center mt-4 mb-3">
 						<FuseSvgIcon size={20}>heroicons-outline:chat-bubble-left-right</FuseSvgIcon>
-						<Typography className="font-semibold text-15 mx-8">Comment</Typography>
+						<Typography className="font-semibold text-lg mx-2">Comment</Typography>
 					</div>
 					<div>
 						<CardComment
@@ -374,10 +374,10 @@ function BoardCardForm() {
 					render={({ field: { value } }) => (
 						<div>
 							{value.length > 0 && (
-								<div className="mb-24">
-									<div className="flex items-center mt-16">
+								<div className="mb-6">
+									<div className="flex items-center mt-4">
 										<FuseSvgIcon size={20}>heroicons-outline:clipboard-document-list</FuseSvgIcon>
-										<Typography className="font-semibold text-15 mx-8">Activity</Typography>
+										<Typography className="font-semibold text-lg mx-2">Activity</Typography>
 									</div>
 									<List>
 										{value.map((item) => (
@@ -400,7 +400,7 @@ function BoardCardForm() {
 					sx={{ backgroundColor: 'background.default' }}
 				>
 					<IconButton
-						className="order-last sm:order-first rounded-0"
+						className="order-last sm:order-first rounded-none"
 						color="inherit"
 						onClick={() => dispatch(closeCardDialog())}
 						size="large"
@@ -451,7 +451,7 @@ function BoardCardForm() {
 							render={() => (
 								<IconButton
 									size="large"
-									className="rounded-0"
+									className="rounded-none"
 								>
 									<FuseSvgIcon>heroicons-outline:paper-clip</FuseSvgIcon>
 								</IconButton>

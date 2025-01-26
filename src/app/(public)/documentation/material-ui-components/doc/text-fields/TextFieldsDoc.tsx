@@ -67,7 +67,7 @@ function TextFieldsDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Text Field
@@ -75,39 +75,39 @@ function TextFieldsDoc(props) {
 			<Typography className="description">Text Fields let users enter and edit text.</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Text fields allow users to enter text into a UI. They typically appear in forms and dialogs.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic TextField
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>TextField</code> wrapper component is a complete form control including a label, input, and
 				help text. It comes with three variants: outlined (default), filled, and standard.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicTextFields.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicTextFieldsComponent}
 					raw={BasicTextFieldsRaw}
 				/>
 			</Typography>
-			<div className="border-1 p-16 rounded-xl my-12">
+			<div className="border-1 p-4 rounded-xl my-3">
 				<Typography
-					className="text-base mb-32"
+					className="text-base mb-8"
 					component="div"
 				>
 					The standard variant of the Text Field is no longer documented in the{' '}
@@ -120,13 +120,13 @@ function TextFieldsDoc(props) {
 			</div>
 
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Form props
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Standard form attributes are supported, for example <code>required</code>, <code>disabled</code>,{' '}
@@ -134,50 +134,50 @@ function TextFieldsDoc(props) {
 				field&#39;s input, such as how the input will be used.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FormPropsTextFields.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={FormPropsTextFieldsComponent}
 					raw={FormPropsTextFieldsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Validation
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>error</code> prop toggles the error state. The <code>helperText</code> prop can then be used
 				to provide feedback to the user about the error.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ValidationTextFields.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ValidationTextFieldsComponent}
 					raw={ValidationTextFieldsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Multiline
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>multiline</code> prop transforms the Text Field into a{' '}
@@ -186,142 +186,142 @@ function TextFieldsDoc(props) {
 				the <code>minRows</code> and <code>maxRows</code> props to bound it.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="MultilineTextFields.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={MultilineTextFieldsComponent}
 					raw={MultilineTextFieldsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Select
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>select</code> prop makes the text field use the{' '}
 				<a href="/material-ui/react-select/">Select</a> component internally.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SelectTextFields.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SelectTextFieldsComponent}
 					raw={SelectTextFieldsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Icons
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				There are multiple ways to display an icon with a text field.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="InputWithIcon.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={InputWithIconComponent}
 					raw={InputWithIconRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Input Adornments
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The main way is with an <code>InputAdornment</code>. This can be used to add a prefix, a suffix, or an
 				action to an input. For instance, you can use an icon button to hide or reveal the password.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="InputAdornments.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={InputAdornmentsComponent}
 					raw={InputAdornmentsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Sizes
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Fancy smaller inputs? Use the <code>size</code> prop.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="TextFieldSizes.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={TextFieldSizesComponent}
 					raw={TextFieldSizesRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>filled</code> variant input height can be further reduced by rendering the label outside of
 				it.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="TextFieldHiddenLabel.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={TextFieldHiddenLabelComponent}
 					raw={TextFieldHiddenLabelRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Margin
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>margin</code> prop can be used to alter the vertical spacing of the text field. Using{' '}
@@ -329,55 +329,55 @@ function TextFieldsDoc(props) {
 				<code>dense</code> and <code>normal</code> do.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="LayoutTextFields.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={LayoutTextFieldsComponent}
 					raw={LayoutTextFieldsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Full width
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<code>fullWidth</code> can be used to make the input take up the full width of its container.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FullWidthTextField.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={FullWidthTextFieldComponent}
 					raw={FullWidthTextFieldRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Uncontrolled vs. Controlled
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The component can be controlled or uncontrolled.
 			</Typography>
-			<div className="border-1 p-16 rounded-xl my-12">
-				<ul className="space-y-16">
+			<div className="border-1 p-4 rounded-xl my-3">
+				<ul className="space-y-4">
 					<li>
 						A component is <strong>controlled</strong> when it&#39;s managed by its parent using props.
 					</li>
@@ -386,7 +386,7 @@ function TextFieldsDoc(props) {
 					</li>
 				</ul>
 				<Typography
-					className="text-base mb-32"
+					className="text-base mb-8"
 					component="div"
 				>
 					Learn more about controlled and uncontrolled components in the{' '}
@@ -398,25 +398,25 @@ function TextFieldsDoc(props) {
 			</div>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="StateTextFields.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={StateTextFieldsComponent}
 					raw={StateTextFieldsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Components
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<code>TextField</code> is composed of smaller components (
@@ -446,7 +446,7 @@ function TextFieldsDoc(props) {
 				) that you can leverage directly to significantly customize your form inputs.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You might also have noticed that some native HTML input properties are missing from the{' '}
@@ -456,98 +456,98 @@ function TextFieldsDoc(props) {
 				properties) if you want to avoid some boilerplate.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ComposedTextField.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ComposedTextFieldComponent}
 					raw={ComposedTextFieldRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Inputs
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="Inputs.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={InputsComponent}
 					raw={InputsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Color
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>color</code> prop changes the highlight color of the text field when focused.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ColorTextFields.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ColorTextFieldsComponent}
 					raw={ColorTextFieldsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Here are some examples of customizing the component. You can learn more about this in the{' '}
 				<a href="/material-ui/customization/how-to-customize/">overrides documentation page</a>.
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Using the styled API
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomizedInputsStyled.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomizedInputsStyledComponent}
 					raw={CustomizedInputsStyledRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Using the theme style overrides API
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Use the <code>styleOverrides</code> key to change any style injected by Material UI into the DOM. See
@@ -556,19 +556,19 @@ function TextFieldsDoc(props) {
 				documentation for further details.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomizedInputsStyleOverrides.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomizedInputsStyleOverridesComponent}
 					raw={CustomizedInputsStyleOverridesRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Customization does not stop at CSS. You can use composition to build custom components and give your app
@@ -579,19 +579,19 @@ function TextFieldsDoc(props) {
 				component, inspired by Google Maps.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="CustomizedInputBase.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={CustomizedInputBaseComponent}
 					raw={CustomizedInputBaseRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				🎨 If you are looking for inspiration, you can check{' '}
@@ -601,20 +601,20 @@ function TextFieldsDoc(props) {
 				.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				<code>useFormControl</code>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For advanced customization use cases, a <code>useFormControl()</code> hook is exposed. This hook returns
 				the context value of the parent <code>FormControl</code> component.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<strong>API</strong>
@@ -629,18 +629,18 @@ import { useFormControl } from '@mui/material/FormControl';
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<strong>Returns</strong>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<code>value</code> (<em>object</em>):
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<code>value.adornedStart</code> (<em>bool</em>): Indicate whether the child <code>Input</code> or{' '}
 					<code>Select</code> component has a start adornment.
@@ -703,31 +703,31 @@ import { useFormControl } from '@mui/material/FormControl';
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<strong>Example</strong>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="UseFormControl.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={UseFormControlComponent}
 					raw={UseFormControlRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Performance
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Global styles for the auto-fill keyframes are injected and removed on each mount and unmount,
@@ -773,19 +773,19 @@ export default function App() {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Limitations
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Shrink
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The input label &quot;shrink&quot; state isn&#39;t always correct. The input label is supposed to shrink
@@ -793,7 +793,7 @@ export default function App() {
 				&quot;shrink&quot; state (number input, datetime input, Stripe input). You might notice an overlap.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<img
@@ -802,7 +802,7 @@ export default function App() {
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				To workaround the issue, you can force the &quot;shrink&quot; state of the label.
@@ -817,7 +817,7 @@ export default function App() {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				or
@@ -832,35 +832,35 @@ export default function App() {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Floating label
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The floating label is absolutely positioned. It won&#39;t impact the layout of the page. Make sure that
 				the input is larger than the label to display correctly.
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				type=&quot;number&quot;
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				:::warning We do not recommend using <code>{`type="number"`}</code> with a Text Field due to potential
 				usability issues:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						it allows certain non-numeric characters (&#39;e&#39;, &#39;+&#39;, &#39;-&#39;, &#39;.&#39;)
@@ -869,7 +869,7 @@ export default function App() {
 				</li>
 				<li>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						the functionality of scrolling to increment/decrement the number can cause accidental and
@@ -878,7 +878,7 @@ export default function App() {
 				</li>
 				<li>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						and more—see{' '}
@@ -888,7 +888,7 @@ export default function App() {
 						for a more detailed explanation of the limitations of <code>{`<input type="number">`}</code>
 					</Typography>
 					<Typography
-						className="text-base mb-32"
+						className="text-base mb-8"
 						component="div"
 					>
 						:::
@@ -896,77 +896,77 @@ export default function App() {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If you need a text field with number validation, you can use Base UI&#39;s{' '}
 				<a href="/base-ui/react-number-input/">Number Input</a> instead.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can follow <a href="https://github.com/mui/material-ui/issues/19154">this GitHub issue</a> to track
 				the progress of introducing the Number Input component to Material UI.
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Helper text
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The helper text prop affects the height of the text field. If two text fields are placed side by side,
 				one with a helper text and one without, they will have different heights. For example:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="HelperTextMisaligned.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={HelperTextMisalignedComponent}
 					raw={HelperTextMisalignedRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				This can be fixed by passing a space character to the <code>helperText</code> prop:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="HelperTextAligned.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={HelperTextAlignedComponent}
 					raw={HelperTextAlignedRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Integration with 3rd party input libraries
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can use third-party libraries to format an input. You have to provide a custom implementation of the{' '}
 				<code>{`<input>`}</code> element with the <code>inputComponent</code> property.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The following demo uses the <a href="https://github.com/uNmAnNeR/imaskjs">react-imask</a> and{' '}
@@ -975,19 +975,19 @@ export default function App() {
 				<a href="https://github.com/mui/material-ui/issues/16037">react-stripe-element</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="FormattedInputs.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={FormattedInputsComponent}
 					raw={FormattedInputsRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The provided input component should expose a ref with a value that implements the following interface:
@@ -1039,13 +1039,13 @@ const MyInputComponent = React.forwardRef((props, ref) => {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				In order for the text field to be accessible,{' '}
@@ -1065,7 +1065,7 @@ const MyInputComponent = React.forwardRef((props, ref) => {
 </div>
 `}
 			</FuseHighlight>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					If you are using the <code>TextField</code> component, you just have to provide a unique{' '}
 					<code>id</code> unless you&#39;re using the <code>TextField</code> only client-side. Until the UI is
@@ -1087,19 +1087,19 @@ const MyInputComponent = React.forwardRef((props, ref) => {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Supplementary projects
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For more advanced use cases, you might be able to take advantage of:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<a href="https://github.com/dohomi/react-hook-form-mui">react-hook-form-mui</a>: Material UI and{' '}
 					<a href="https://react-hook-form.com/">react-hook-form</a> combined.

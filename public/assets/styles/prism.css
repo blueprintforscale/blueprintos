@@ -7,7 +7,7 @@ pre[class*="language-"] {
     color: #c3cee3;
     background: #263238;
     font-family: Roboto Mono,"Liberation Mono",Menlo,Courier,monospace;
-    font-size: .9em;
+    font-size: .75rem;
     line-height: 1.5;
     -moz-tab-size: 4;
     -o-tab-size: 4;

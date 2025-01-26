@@ -13,20 +13,20 @@ function ProductsHeader() {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	return (
-		<div className="flex grow-0  flex-1 w-full items-center justify-between  space-y-8 sm:space-y-0 py-24 sm:py-32">
+		<div className="flex grow-0 flex-1 w-full items-center justify-between space-y-2 sm:space-y-0 py-6 sm:py-8">
 			<motion.span
 				initial={{ x: -20 }}
 				animate={{ x: 0, transition: { delay: 0.2 } }}
 			>
 				<div>
-					<PageBreadcrumb className="mb-8" />
+					<PageBreadcrumb className="mb-2" />
 					<Typography className="text-4xl font-extrabold leading-none tracking-tight">Products</Typography>
 				</div>
 			</motion.span>
 
-			<div className="flex flex-1 items-center justify-end space-x-8">
+			<div className="flex flex-1 items-center justify-end space-x-2">
 				<motion.div
-					className="flex flex-grow-0"
+					className="flex grow-0"
 					initial={{ opacity: 0, x: 20 }}
 					animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}
 				>
@@ -39,7 +39,7 @@ function ProductsHeader() {
 						size={isMobile ? 'small' : 'medium'}
 					>
 						<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
-						<span className="mx-4 sm:mx-8">Add</span>
+						<span className="mx-1 sm:mx-2">Add</span>
 					</Button>
 				</motion.div>
 			</div>

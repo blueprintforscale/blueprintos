@@ -32,8 +32,8 @@ function AiImageGenContent() {
 	}
 
 	return (
-		<div className="h-full w-full px-24 py-24">
-			<div className="w-full mb-24">
+		<div className="h-full w-full px-6 py-6">
+			<div className="w-full mb-6">
 				<FuseTabs
 					value={tabValue}
 					onChange={(_ev, value: number) => setTabValue(value)}

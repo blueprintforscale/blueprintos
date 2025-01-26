@@ -68,7 +68,7 @@ function MailListItem(props: MailListItemProps) {
 			dense
 			selected={checked}
 			unread={mail.unread ? 1 : 0}
-			className="items-start py-20 px-0 md:px-8 relative w-full"
+			className="items-start py-5 px-0 md:px-2 relative w-full"
 		>
 			<Checkbox
 				tabIndex={-1}
@@ -82,7 +82,7 @@ function MailListItem(props: MailListItemProps) {
 				size="small"
 			/>
 			<div className="flex flex-col flex-auto min-w-0">
-				<div className="flex w-full space-x-6 items-center">
+				<div className="flex w-full space-x-1.5 items-center">
 					<Avatar
 						sx={{
 							backgroundColor: (_theme) => _theme.palette.primary.main
@@ -94,13 +94,13 @@ function MailListItem(props: MailListItemProps) {
 					</Avatar>
 					<div className="flex flex-col w-full min-w-0">
 						<div className="flex items-center w-full">
-							<Typography className="mr-8 font-semibold truncate">
+							<Typography className="mr-2 font-semibold truncate">
 								{mail.from.contact.split('<')[0].trim()}
 							</Typography>
 
 							{mail.important && (
 								<FuseSvgIcon
-									className="mr-12 text-red-500 dark:text-red-600"
+									className="mr-3 text-red-500 dark:text-red-600"
 									size={16}
 								>
 									heroicons-solid:exclamation-circle
@@ -114,15 +114,15 @@ function MailListItem(props: MailListItemProps) {
 								{format(new Date(mail.date), 'LLL dd')}
 							</Typography>
 						</div>
-						<div className="flex items-center w-full mt-4">
+						<div className="flex items-center w-full mt-1">
 							<span className="leading-4 truncate">{mail.subject}</span>
 							{((mail.attachments && mail.attachments.length > 0) || mail.starred) && (
-								<div className="flex ml-auto pl-8">
+								<div className="flex ml-auto pl-2">
 									<FuseSvgIcon size={16}>heroicons-solid:paper-clip</FuseSvgIcon>
 
 									{mail.starred && (
 										<FuseSvgIcon
-											className="flex justify-center ml-4 text-orange-500 dark:text-orange-400"
+											className="flex justify-center ml-1 text-orange-500 dark:text-orange-400"
 											size={16}
 										>
 											heroicons-solid:star
@@ -135,7 +135,7 @@ function MailListItem(props: MailListItemProps) {
 				</div>
 				<Typography
 					color="text.secondary"
-					className="mt-8 leading-normal line-clamp-2"
+					className="mt-2 leading-[1.5] line-clamp-2"
 				>
 					{_.truncate(mail.content.replace(/<(?:.|\n)*?>/gm, ''), { length: 180 })}
 				</Typography>

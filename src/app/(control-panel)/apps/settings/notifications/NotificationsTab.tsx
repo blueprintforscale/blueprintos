@@ -67,10 +67,10 @@ function NotificationsTab() {
 	}
 
 	return (
-		<div className="w-full max-w-3xl">
+		<div className="w-full max-w-5xl">
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Typography className="w-full text-xl">Alerts</Typography>
-				<div className="mt-8 grid w-full grid-cols-1 gap-6">
+				<div className="mt-2 grid w-full grid-cols-1 gap-1.5">
 					<div className="flex items-center justify-between">
 						<Controller
 							name="communication"
@@ -160,10 +160,10 @@ function NotificationsTab() {
 						/>
 					</div>
 				</div>
-				<div className="my-40 border-t" />
+				<div className="my-10 border-t" />
 				<Typography className="w-full text-xl">Account Activity</Typography>
-				<Typography className="mt-24 w-full font-medium">Email me when:</Typography>
-				<div className="mt-12 grid w-full grid-cols-1 gap-4">
+				<Typography className="mt-6 w-full font-medium">Email me when:</Typography>
+				<div className="mt-3 grid w-full grid-cols-1 gap-1">
 					<div className="flex items-center justify-between">
 						<Controller
 							name="comments"
@@ -273,8 +273,8 @@ function NotificationsTab() {
 						/>
 					</div>
 				</div>
-				<Divider className="mb-40 mt-44 border-t" />
-				<div className="flex items-center justify-end space-x-8">
+				<Divider className="mb-10 mt-11 border-t" />
+				<div className="flex items-center justify-end space-x-2">
 					<Button
 						variant="outlined"
 						disabled={_.isEmpty(dirtyFields)}

@@ -35,7 +35,7 @@ function DueMenu(props: DueMenuProps) {
 	return (
 		<div>
 			<IconButton
-				className="rounded-0"
+				className="rounded-none"
 				onClick={handleMenuOpen}
 				size="large"
 			>
@@ -45,7 +45,7 @@ function DueMenu(props: DueMenuProps) {
 				state={anchorEl}
 				onClose={handleMenuClose}
 			>
-				<div className="p-16 max-w-192">
+				<div className="p-4 max-w-48">
 					{dueDate ? (
 						<MenuItem
 							onClick={() => {

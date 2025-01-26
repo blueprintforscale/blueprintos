@@ -15,7 +15,7 @@ function PurchaseButton(props: PurchaseButtonProps) {
 		children = (
 			<>
 				<span>Purchase</span>
-				<span className="flex items-center space-x-4">
+				<span className="flex items-center space-x-1">
 					<span>FUSE React</span>
 				</span>
 			</>
@@ -30,7 +30,7 @@ function PurchaseButton(props: PurchaseButtonProps) {
 			target="_blank"
 			rel="noreferrer noopener"
 			role="button"
-			className={clsx('space-x-4 whitespace-nowrap', className)}
+			className={clsx('space-x-1 whitespace-nowrap', className)}
 			variant="contained"
 			color="secondary"
 			startIcon={<FuseSvgIcon size={16}>heroicons-outline:shopping-cart</FuseSvgIcon>}

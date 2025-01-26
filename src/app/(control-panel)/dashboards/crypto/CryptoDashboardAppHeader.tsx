@@ -34,8 +34,8 @@ function CryptoDashboardAppHeader(props: CryptoDashboardAppHeaderProps) {
 	}
 
 	return (
-		<div className="flex flex-wrap w-full items-center px-8 py-16 md:px-16">
-			<div className="w-full flex items-center space-x-8 mb-4">
+		<div className="flex flex-wrap w-full items-center px-2 py-4 md:px-4">
+			<div className="w-full flex items-center space-x-2 mb-1">
 				{isMobile && (
 					<IconButton
 						onClick={(ev) => onToggleLeftSidebar(ev)}
@@ -50,8 +50,8 @@ function CryptoDashboardAppHeader(props: CryptoDashboardAppHeaderProps) {
 				<PageBreadcrumb />
 			</div>
 
-			<div className="flex flex-col flex-auto mb-12">
-				<div className="flex items-center space-x-8">
+			<div className="flex flex-col flex-auto mb-3">
+				<div className="flex items-center space-x-2">
 					<Typography
 						className="font-medium text-2xl"
 						color="text.secondary"
@@ -65,7 +65,7 @@ function CryptoDashboardAppHeader(props: CryptoDashboardAppHeaderProps) {
 						(BTC)
 					</Typography>
 				</div>
-				<div className="flex items-end mt-4 space-x-6">
+				<div className="flex items-end mt-1 space-x-1.5">
 					<Typography className="font-mono text-3xl leading-none tracking-tight">
 						{btc.amount.toLocaleString('en-US', {
 							style: 'currency',
@@ -76,7 +76,7 @@ function CryptoDashboardAppHeader(props: CryptoDashboardAppHeaderProps) {
 						<FuseSvgIcon
 							size={20}
 							className={clsx(
-								'text-green-500 mx-2 mb-px',
+								'text-green-500 mx-0.5 mb-px',
 								btc.trend.dir === 'up' && 'text-green-500',
 								btc.trend.dir === 'down' && 'text-red-500'
 							)}
@@ -103,7 +103,7 @@ function CryptoDashboardAppHeader(props: CryptoDashboardAppHeaderProps) {
 				</div>
 			</div>
 
-			<div className="hidden sm:flex items-center mx-8 rounded-lg border">
+			<div className="hidden sm:flex items-center mx-2 rounded-lg border">
 				<ValueSectionSmall
 					title="Market Cap"
 					unit="B"

@@ -78,7 +78,7 @@ function renderInputComponent(props: RenderInputComponentProps) {
 								inputRef(node);
 							},
 							classes: {
-								input: 'FuseSearch-input py-0 px-16 h-36 md:h-36 ltr:pr-36 rtl:pl-36',
+								input: 'FuseSearch-input py-0 px-4 h-9 md:h-9 ltr:pr-9 rtl:pl-9',
 								notchedOutline: 'rounded-lg'
 							}
 						}}
@@ -86,7 +86,7 @@ function renderInputComponent(props: RenderInputComponentProps) {
 						{...other}
 					/>
 					<FuseSvgIcon
-						className="pointer-events-none absolute top-0 h-36 w-36 p-8 ltr:right-0 rtl:left-0"
+						className="pointer-events-none absolute top-0 h-9 w-9 p-2 ltr:right-0 rtl:left-0"
 						color="action"
 						size={20}
 					>
@@ -104,7 +104,7 @@ function renderInputComponent(props: RenderInputComponentProps) {
 							inputRef(node);
 						},
 						classes: {
-							input: 'FuseSearch-input py-0 px-16 h-36'
+							input: 'FuseSearch-input py-0 px-4 h-9'
 						}
 					}}
 					variant="standard"
@@ -124,11 +124,11 @@ function renderSuggestion(suggestion: FuseFlatNavItemType, { query, isHighlighte
 			selected={Boolean(isHighlighted)}
 			component="div"
 		>
-			<ListItemIcon className="min-w-36">
+			<ListItemIcon className="min-w-9">
 				{suggestion.icon ? (
 					<FuseSvgIcon>{suggestion.icon}</FuseSvgIcon>
 				) : (
-					<span className="w-24 text-center text-2xl font-semibold uppercase">{suggestion.title[0]}</span>
+					<span className="w-6 text-center text-2xl font-semibold uppercase">{suggestion.title[0]}</span>
 				)}
 			</ListItemIcon>
 			<ListItemText
@@ -416,7 +416,7 @@ function FuseSearch(props: FuseSearchProps) {
 										>
 											{options.children}
 											{state.noSuggestions && (
-												<Typography className="px-16 py-12">{noResults}</Typography>
+												<Typography className="px-4 py-3">{noResults}</Typography>
 											)}
 										</Paper>
 									</div>
@@ -504,7 +504,7 @@ function FuseSearch(props: FuseSearchProps) {
 														>
 															{options.children}
 															{state.noSuggestions && (
-																<Typography className="px-16 py-12">
+																<Typography className="px-4 py-3">
 																	{noResults}
 																</Typography>
 															)}
@@ -516,7 +516,7 @@ function FuseSearch(props: FuseSearchProps) {
 									/>
 									<IconButton
 										onClick={hideSearch}
-										className="mx-8"
+										className="mx-2"
 										size="large"
 									>
 										<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>

@@ -49,7 +49,7 @@ function CardAddChecklistItem(props: CardAddChecklistItemProps) {
 				className="px-0"
 				dense
 			>
-				<span className="w-36" />
+				<span className="w-9" />
 				<Controller
 					name="name"
 					control={control}
@@ -57,7 +57,7 @@ function CardAddChecklistItem(props: CardAddChecklistItemProps) {
 					render={({ field }) => (
 						<TextField
 							{...field}
-							className="flex flex-1 mx-8"
+							className="flex flex-1 mx-2"
 							name="name"
 							variant="outlined"
 							placeholder="Add an item"
@@ -65,7 +65,7 @@ function CardAddChecklistItem(props: CardAddChecklistItemProps) {
 					)}
 				/>
 				<Fab
-					className="mx-4"
+					className="mx-1"
 					aria-label="Add"
 					size="small"
 					color="secondary"

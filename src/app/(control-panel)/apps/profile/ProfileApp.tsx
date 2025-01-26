@@ -20,7 +20,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 		borderStyle: 'solid',
 		borderColor: theme.palette.divider,
 		'& > .container': {
-			maxWidth: '100%'
+			maxWidth: '100% !important'
 		}
 	}
 }));
@@ -41,34 +41,34 @@ function ProfileApp() {
 			header={
 				<div className="flex flex-col w-full">
 					<img
-						className="h-160 lg:h-320 object-cover w-full"
+						className="h-40 lg:h-80 object-cover w-full"
 						src="/assets/images/pages/profile/cover.jpg"
 						alt="Profile Cover"
 					/>
 
-					<div className="flex flex-col flex-0 lg:flex-row items-center max-w-5xl w-full mx-auto px-32 lg:h-72">
-						<div className="-mt-96 lg:-mt-88 rounded-full">
+					<div className="flex flex-col shrink-0 lg:flex-row items-center max-w-7xl w-full mx-auto px-8 lg:h-18">
+						<div className="-mt-24 lg:-mt-22 rounded-full">
 							<motion.div
 								initial={{ scale: 0 }}
 								animate={{ scale: 1, transition: { delay: 0.1 } }}
 							>
 								<Avatar
 									sx={{ borderColor: 'background.paper' }}
-									className="w-128 h-128 border-4"
+									className="w-32 h-32 border-4"
 									src="/assets/images/avatars/male-04.jpg"
 									alt="User avatar"
 								/>
 							</motion.div>
 						</div>
 
-						<div className="flex flex-col items-center lg:items-start mt-16 lg:mt-0 lg:ml-32">
+						<div className="flex flex-col items-center lg:items-start mt-4 lg:mt-0 lg:ml-8">
 							<Typography className="text-lg font-bold leading-none">Brian Hughes</Typography>
 							<Typography color="text.secondary">London, UK</Typography>
 						</div>
 
-						<div className="hidden lg:flex h-32 mx-32 border-l-2" />
+						<div className="hidden lg:flex h-8 mx-8 border-l-2" />
 
-						<div className="flex items-center mt-24 lg:mt-0 space-x-24">
+						<div className="flex items-center mt-6 lg:mt-0 space-x-6">
 							<div className="flex flex-col items-center">
 								<Typography className="font-bold">200k</Typography>
 								<Typography
@@ -89,7 +89,7 @@ function ProfileApp() {
 							</div>
 						</div>
 
-						<div className="flex flex-1 justify-end my-16 lg:my-0">
+						<div className="flex flex-1 justify-end my-4 lg:my-0">
 							<FuseTabs
 								value={selectedTab}
 								onChange={handleTabChange}
@@ -112,7 +112,7 @@ function ProfileApp() {
 				</div>
 			}
 			content={
-				<div className="flex flex-auto justify-center w-full max-w-5xl mx-auto p-24 sm:p-32">
+				<div className="flex flex-auto justify-center w-full max-w-7xl mx-auto p-6 sm:p-8">
 					{selectedTab === 'timeline' && <TimelineTab />}
 					{selectedTab === 'about' && <AboutTab />}
 					{selectedTab === 'photos-videos' && <PhotosVideosTab />}

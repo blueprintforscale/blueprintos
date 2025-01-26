@@ -56,7 +56,7 @@ function CardChecklistItem(props: CardChecklistItemProps) {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="flex flex-1 mx-8"
+						className="flex flex-1 mx-2"
 						variant="outlined"
 					/>
 				)}

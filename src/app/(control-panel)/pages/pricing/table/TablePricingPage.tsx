@@ -20,7 +20,7 @@ function TablePricingPage() {
 
 	return (
 		<div className="relative flex min-w-0 flex-auto flex-col overflow-hidden">
-			<div className="relative overflow-hidden px-24 pb-48 pt-32 sm:px-64 sm:pb-96 sm:pt-80">
+			<div className="relative overflow-hidden px-6 pb-12 pt-8 sm:px-16 sm:pb-24 sm:pt-20">
 				<svg
 					className="pointer-events-none absolute inset-0 -z-1"
 					viewBox="0 0 960 540"
@@ -62,7 +62,7 @@ function TablePricingPage() {
 						initial={{ opacity: 0, y: 40 }}
 						animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
 					>
-						<div className="mt-4 text-center text-4xl font-extrabold leading-tight tracking-tight sm:text-7xl">
+						<div className="mt-1 text-center text-4xl font-extrabold leading-[1.25] tracking-tight sm:text-7xl">
 							Take control of your productivity
 						</div>
 					</motion.div>
@@ -72,7 +72,7 @@ function TablePricingPage() {
 						animate={{ opacity: 1, transition: { delay: 0.15 } }}
 					>
 						<Typography
-							className="mt-12 text-center tracking-tight sm:text-2xl"
+							className="mt-3 text-center tracking-tight sm:text-2xl"
 							color="text.secondary"
 						>
 							Start small and free, upgrade as you go.
@@ -86,14 +86,14 @@ function TablePricingPage() {
 						animate={{ opacity: 1, transition: { delay: 0.2 } }}
 					>
 						<Box
-							className="mt-32 flex items-center overflow-hidden rounded-full p-2 sm:mt-64"
+							className="mt-8 flex items-center overflow-hidden rounded-full p-0.5 sm:mt-16"
 							sx={{ backgroundColor: (theme) => darken(theme.palette.background.default, 0.05) }}
 						>
 							<Box
 								component="button"
 								className={clsx(
-									'h-36 cursor-pointer items-center rounded-full px-16 font-medium',
-									period === 'year' && 'shadow'
+									'h-9 cursor-pointer items-center rounded-full px-4 font-medium',
+									period === 'year' && 'shadow-sm'
 								)}
 								onClick={() => setPeriod('year')}
 								sx={[
@@ -112,8 +112,8 @@ function TablePricingPage() {
 							<Box
 								component="button"
 								className={clsx(
-									'h-36 cursor-pointer items-center rounded-full px-16 font-medium',
-									period === 'month' && 'shadow'
+									'h-9 cursor-pointer items-center rounded-full px-4 font-medium',
+									period === 'month' && 'shadow-sm'
 								)}
 								onClick={() => setPeriod('month')}
 								sx={[
@@ -134,21 +134,21 @@ function TablePricingPage() {
 				</div>
 				<TablePricingTable period={period} />
 			</div>
-			<Paper className="flex flex-col items-center px-24 py-40 sm:px-64 sm:pb-80 sm:pt-72">
+			<Paper className="flex flex-col items-center px-6 py-10 sm:px-16 sm:pb-20 sm:pt-18">
 				<div className="container">
 					<div>
-						<Typography className="text-4xl font-extrabold leading-tight tracking-tight">
+						<Typography className="text-4xl font-extrabold leading-[1.25] tracking-tight">
 							Everything you need to build efficiently
 						</Typography>
 						<Typography
-							className="mt-2 max-w-xl text-xl"
+							className="mt-0.5 max-w-3xl text-xl"
 							color="text.secondary"
 						>
 							Start building your app using our tools, be efficient, spend less time with details more
 							time with your business
 						</Typography>
 					</div>
-					<div className="mt-48 grid w-full grid-cols-1 gap-x-24 gap-y-48 sm:mt-64 sm:grid-cols-2 lg:grid-cols-3 lg:gap-64">
+					<div className="mt-12 grid w-full grid-cols-1 gap-x-6 gap-y-12 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
 						<TablePricingFeatureItem
 							icon="heroicons-outline:pencil-square"
 							title="Create and Edit Projects"
@@ -189,20 +189,20 @@ function TablePricingPage() {
 			</Paper>
 			<Box
 				sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}
-				className="px-24 py-40 sm:px-64 sm:py-48"
+				className="px-6 py-10 sm:px-16 sm:py-12"
 			>
 				<div className="mx-auto flex container flex-col items-center text-center">
 					<Typography className="text-3xl font-extrabold leading-6 sm:text-5xl sm:leading-10">
 						Boost your productivity.
 					</Typography>
 					<Typography
-						className="mt-8 text-3xl font-extrabold leading-6 sm:text-5xl sm:leading-10 opacity-75"
+						className="mt-2 text-3xl font-extrabold leading-6 sm:text-5xl sm:leading-10 opacity-75"
 						color="primary.dark"
 					>
 						Start using Fuse today.
 					</Typography>
 					<Button
-						className="mt-32 px-48 text-lg"
+						className="mt-8 px-12 text-lg"
 						size="large"
 						color="secondary"
 						variant="contained"
@@ -211,26 +211,26 @@ function TablePricingPage() {
 					</Button>
 				</div>
 			</Box>
-			<div className="flex flex-col items-center px-24 pb-32 pt-12 sm:px-64 sm:pb-80 sm:pt-72">
+			<div className="flex flex-col items-center px-6 pb-8 pt-3 sm:px-16 sm:pb-20 sm:pt-18">
 				<div className="container">
 					<div>
-						<Typography className="text-4xl font-extrabold leading-tight tracking-tight">
+						<Typography className="text-4xl font-extrabold leading-[1.25] tracking-tight">
 							Frequently asked questions
 						</Typography>
 						<Typography
-							className="mt-8 max-w-xl text-xl"
+							className="mt-2 max-w-3xl text-xl"
 							color="text.secondary"
 						>
 							Here are the most frequently asked questions you may check before getting started
 						</Typography>
 					</div>
-					<div className="mt-48 grid w-full grid-cols-1 gap-x-24 gap-y-48 sm:mt-64 sm:grid-cols-2 lg:gap-x-64">
+					<div className="mt-12 grid w-full grid-cols-1 gap-x-6 gap-y-12 sm:mt-16 sm:grid-cols-2 lg:gap-x-16">
 						<div>
 							<Typography className="text-xl font-semibold">
 								What is the duration of the free trial?
 							</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								Our app is free to try for 14 days, if you want more, you can provide payment details
@@ -243,7 +243,7 @@ function TablePricingPage() {
 								Are there discounts for non-profits or educational use?
 							</Typography>
 							<Typography
-								className="mt-2 leading-6"
+								className="mt-0.5 leading-6"
 								color="text.secondary"
 							>
 								Yes, our Personal and Premium packages are free for non-profits and educational use.
@@ -254,7 +254,7 @@ function TablePricingPage() {
 						<div>
 							<Typography className="text-xl font-semibold">What is the storage is for?</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								Since we provide an extremely detailed reporting and analytics tool, they require quite
@@ -262,7 +262,7 @@ function TablePricingPage() {
 								since the Personal package limits the projects you can have.
 							</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								For some reason if you run out of space, contact us and we will see what can be done
@@ -274,7 +274,7 @@ function TablePricingPage() {
 								What happens if I’m not satisfied?
 							</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								If you are still in your free trial period, you can cancel your account at anytime with
@@ -282,7 +282,7 @@ function TablePricingPage() {
 								30-day money-back guarantee with no questions asked.
 							</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								After first month, you can still cancel your account at any time but we will calculate

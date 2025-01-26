@@ -124,17 +124,17 @@ function NotificationPanel() {
 			disableSwipeToOpen
 		>
 			<IconButton
-				className="absolute right-0 top-0 z-999 m-4"
+				className="absolute right-0 top-0 z-999 m-1"
 				onClick={handleClose}
 				size="large"
 			>
 				<FuseSvgIcon color="action">heroicons-outline:x-mark</FuseSvgIcon>
 			</IconButton>
 
-			<FuseScrollbars className="flex flex-col p-16 h-full">
+			<FuseScrollbars className="flex flex-col p-4 h-full">
 				{notifications && notifications?.length > 0 ? (
 					<div className="flex flex-auto flex-col">
-						<div className="mb-36 flex items-end justify-between pt-136">
+						<div className="mb-9 flex items-end justify-between pt-34">
 							<Typography className="text-4xl font-semibold leading-none">Notifications</Typography>
 							<Typography
 								className="cursor-pointer text-md underline"
@@ -147,14 +147,14 @@ function NotificationPanel() {
 						{_.orderBy(notifications, ['time'], ['desc']).map((item) => (
 							<NotificationCard
 								key={item.id}
-								className="mb-16"
+								className="mb-4"
 								item={item}
 								onClose={handleDismiss}
 							/>
 						))}
 					</div>
 				) : (
-					<div className="flex flex-1 items-center justify-center p-16">
+					<div className="flex flex-1 items-center justify-center p-4">
 						<Typography
 							className="text-center text-xl"
 							color="text.secondary"
@@ -163,7 +163,7 @@ function NotificationPanel() {
 						</Typography>
 					</div>
 				)}
-				<div className="flex items-center justify-center py-16">
+				<div className="flex items-center justify-center py-4">
 					<Button
 						size="small"
 						variant="outlined"

@@ -79,9 +79,9 @@ function BoardSettingsForm(props: BoardSettingsFormProps) {
 				<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
 			</IconButton>
 
-			<List className="pt-32">
+			<List className="pt-8">
 				<ListItem>
-					<ListItemIcon className="min-w-36">
+					<ListItemIcon className="min-w-9">
 						<FuseSvgIcon>heroicons-outline:photo</FuseSvgIcon>
 					</ListItemIcon>
 					<ListItemText primary="Card Cover Images" />
@@ -106,7 +106,7 @@ function BoardSettingsForm(props: BoardSettingsFormProps) {
 					control={control}
 					render={({ field: { onChange, value } }) => (
 						<ListItem>
-							<ListItemIcon className="min-w-36">
+							<ListItemIcon className="min-w-9">
 								<FuseSvgIcon>
 									{value ? 'heroicons-outline:eye' : 'heroicons-outline:eye-slash'}
 								</FuseSvgIcon>
@@ -133,7 +133,7 @@ function BoardSettingsForm(props: BoardSettingsFormProps) {
 							});
 					}}
 				>
-					<ListItemIcon className="min-w-36">
+					<ListItemIcon className="min-w-9">
 						<FuseSvgIcon>heroicons-outline:trash</FuseSvgIcon>
 					</ListItemIcon>
 					<ListItemText primary="Delete Board" />

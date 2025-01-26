@@ -98,7 +98,7 @@ function SettingsPanel(props: SettingsPanelProps) {
 			}}
 			{...settingsHandlers}
 		>
-			<FuseScrollbars className="p-16 sm:p-24 space-y-32">
+			<FuseScrollbars className="p-4 sm:p-6 space-y-8">
 				<IconButton
 					className="fixed top-0 z-10 ltr:right-0 rtl:left-0"
 					onClick={onClose}
@@ -119,7 +119,7 @@ function SettingsPanel(props: SettingsPanelProps) {
 					onChange={handleSettingsChange}
 				/>
 
-				<div className="py-32">
+				<div className="py-8">
 					<FuseSettingsViewerDialog />
 				</div>
 			</FuseScrollbars>

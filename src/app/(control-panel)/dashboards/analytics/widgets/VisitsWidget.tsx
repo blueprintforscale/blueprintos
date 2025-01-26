@@ -56,10 +56,10 @@ function Impressions() {
 	};
 
 	return (
-		<Paper className="flex flex-col flex-auto shadow rounded-xl overflow-hidden">
-			<div className="flex items-start justify-between m-16 mb-0">
+		<Paper className="flex flex-col flex-auto shadow-sm rounded-xl overflow-hidden">
+			<div className="flex items-start justify-between m-4 mb-0">
 				<Typography className="text-lg font-medium tracking-tight leading-6 truncate">Visits</Typography>
-				<div className="ml-8">
+				<div className="ml-2">
 					<Chip
 						size="small"
 						className="font-medium text-sm"
@@ -67,11 +67,11 @@ function Impressions() {
 					/>
 				</div>
 			</div>
-			<div className="flex flex-col lg:flex-row lg:items-center mx-24 mt-12">
-				<Typography className="text-7xl font-bold tracking-tighter leading-tight">
+			<div className="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
+				<Typography className="text-7xl font-bold tracking-tighter leading-[1.25]">
 					{amount.toLocaleString('en-US')}
 				</Typography>
-				<div className="flex lg:flex-col lg:ml-12">
+				<div className="flex lg:flex-col lg:ml-3">
 					<FuseSvgIcon
 						size={20}
 						className="text-red-500"
@@ -79,15 +79,15 @@ function Impressions() {
 						heroicons-solid:trending-down
 					</FuseSvgIcon>
 					<Typography
-						className="flex items-center ml-4 lg:ml-0 lg:mt-2 text-md leading-none whitespace-nowrap"
+						className="flex items-center ml-1 lg:ml-0 lg:mt-0.5 text-md leading-none whitespace-nowrap"
 						color="text.secondary"
 					>
 						<span className="font-medium text-red-500">4%</span>
-						<span className="ml-4">below target</span>
+						<span className="ml-1">below target</span>
 					</Typography>
 				</div>
 			</div>
-			<div className="flex flex-col flex-auto h-80">
+			<div className="flex flex-col flex-auto h-20">
 				<ReactApexChart
 					options={chartOptions}
 					series={_.cloneDeep(series)}

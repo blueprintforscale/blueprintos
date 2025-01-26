@@ -47,7 +47,7 @@ function NavbarMobileLayout2(props: NavbarMobileLayout2Props) {
 
 	return (
 		<Root className={clsx('flex h-full flex-col overflow-hidden', className)}>
-			<div className="flex h-48 shrink-0 flex-row items-center px-12 md:h-72">
+			<div className="flex h-12 shrink-0 flex-row items-center px-3 md:h-18">
 				<Logo />
 			</div>
 
@@ -57,20 +57,20 @@ function NavbarMobileLayout2(props: NavbarMobileLayout2Props) {
 			>
 				<Navigation layout="vertical" />
 
-				<div className="flex-0 flex items-center justify-center py-48 opacity-10">
+				<div className="shrink-0 flex items-center justify-center py-12 opacity-10">
 					<img
-						className="w-full max-w-64"
+						className="w-full max-w-16"
 						src="/assets/images/logo/logo.svg"
 						alt="footer logo"
 					/>
 				</div>
 			</StyledContent>
 
-			<GoToDocBox className="mx-12 my-16" />
+			<GoToDocBox className="mx-3 my-4" />
 
 			<Divider />
 
-			<div className="p-4 md:p-16 w-full">
+			<div className="p-1 md:p-4 w-full">
 				<UserMenu className="w-full" />
 			</div>
 		</Root>

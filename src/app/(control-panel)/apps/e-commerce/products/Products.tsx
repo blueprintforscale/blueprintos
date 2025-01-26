@@ -17,7 +17,7 @@ function Products() {
 					}
 				})}
 			/>
-			<div className="w-full h-full flex flex-col px-16">
+			<div className="w-full h-full flex flex-col px-4">
 				<ProductsHeader />
 				<ProductsTable />
 			</div>

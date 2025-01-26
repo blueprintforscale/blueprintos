@@ -10,9 +10,9 @@ function DocumentationSidebarHeader(props: DocumentationSidebarHeaderProps) {
 	const { className = '' } = props;
 
 	return (
-		<div className={clsx('flex items-center space-x-8', className)}>
+		<div className={clsx('flex items-center space-x-2', className)}>
 			<img
-				className="logo-icon h-32 w-32"
+				className="logo-icon h-8 w-8"
 				src="/assets/images/logo/logo.svg"
 				alt="logo"
 			/>

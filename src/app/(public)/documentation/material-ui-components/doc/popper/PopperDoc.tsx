@@ -34,7 +34,7 @@ function PopperDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Popper
@@ -44,12 +44,12 @@ function PopperDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Some important features of the Popper component:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					🕷 Popper relies on the 3rd party library (<a href="https://popper.js.org/">Popper.js</a>) for
 					perfect positioning.
@@ -74,37 +74,37 @@ function PopperDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic Popper
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimplePopper.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SimplePopperComponent}
 					raw={SimplePopperRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Transitions
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The open/close state of the popper can be animated with a render prop child and a transition component.
 				This component should respect the following conditions:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>Be a direct child descendent of the popper.</li>
 				<li>
 					Call the <code>onEnter</code> callback prop when the enter transition starts.
@@ -115,74 +115,74 @@ function PopperDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Popper has built-in support for{' '}
 				<a href="https://github.com/reactjs/react-transition-group">react-transition-group</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="TransitionsPopper.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={TransitionsPopperComponent}
 					raw={TransitionsPopperRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Alternatively, you can use <a href="https://github.com/pmndrs/react-spring">react-spring</a>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SpringPopper.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SpringPopperComponent}
 					raw={SpringPopperRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Positioned popper
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PositionedPopper.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PositionedPopperComponent}
 					raw={PositionedPopperRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Scroll playground
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Virtual element
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The value of the <code>anchorEl</code> prop can be a reference to a fake DOM element. You need to create
@@ -193,43 +193,43 @@ function PopperDoc(props) {
 				.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Highlight part of the text to see the popper:
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="VirtualElementPopper.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={VirtualElementPopperComponent}
 					raw={VirtualElementPopperRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Supplementary projects
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For more advanced use cases you might be able to take advantage of:
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				material-ui-popup-state
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<img
@@ -242,7 +242,7 @@ function PopperDoc(props) {
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The package{' '}
@@ -252,12 +252,12 @@ function PopperDoc(props) {
 				that takes care of popper state for you in most cases.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PopperPopupState.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PopperPopupStateComponent}
 					raw={PopperPopupStateRaw}

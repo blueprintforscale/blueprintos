@@ -47,7 +47,7 @@ function StyleSelectFormController(props: StyleSelectFormControllerProps) {
 
 	return (
 		<div
-			className="flex flex-col gap-8"
+			className="flex flex-col gap-2"
 			ref={ref}
 		>
 			<Typography
@@ -58,7 +58,7 @@ function StyleSelectFormController(props: StyleSelectFormControllerProps) {
 			</Typography>
 
 			<Paper
-				className="cursor-pointer rounded-md border shadow-none h-64 flex items-end relative overflow-hidden"
+				className="cursor-pointer rounded-md border shadow-none h-16 flex items-end relative overflow-hidden"
 				onClick={handleClick}
 				style={{
 					backgroundImage: selectedOption ? `url(${selectedOption.image})` : 'none',
@@ -77,7 +77,7 @@ function StyleSelectFormController(props: StyleSelectFormControllerProps) {
 					<div className="flex flex-1">
 						{selectedOption && (
 							<Typography
-								className="text-md font-medium px-8 pb-4"
+								className="text-md font-medium px-2 pb-1"
 								color={selectedContrastTextColor}
 							>
 								{selectedOption.label}
@@ -86,7 +86,7 @@ function StyleSelectFormController(props: StyleSelectFormControllerProps) {
 					</div>
 
 					<div
-						className="flex items-center px-8 py-4"
+						className="flex items-center px-2 py-1"
 						style={{ color: selectedContrastTextColor }}
 					>
 						<FuseSvgIcon size={16}>heroicons-solid:chevron-down</FuseSvgIcon>
@@ -102,7 +102,7 @@ function StyleSelectFormController(props: StyleSelectFormControllerProps) {
 					paper: { sx: { width: '400px', maxHeight: '80vh' } }
 				}}
 				classes={{
-					list: 'flex flex-col space-y-12 p-8'
+					list: 'flex flex-col space-y-3 p-2'
 				}}
 			>
 				{options.map((option) => {
@@ -114,7 +114,7 @@ function StyleSelectFormController(props: StyleSelectFormControllerProps) {
 							key={option.value}
 							onClick={() => handleSelect(option.value)}
 							selected={value === option.value}
-							className="flex flex-col items-end h-96 rounded-md overflow-hidden shadow hover:shadow-md"
+							className="flex flex-col items-end h-24 rounded-md overflow-hidden shadow-sm hover:shadow-md"
 							sx={{
 								padding: 0,
 								backgroundImage: `url(${option.image})`,
@@ -123,7 +123,7 @@ function StyleSelectFormController(props: StyleSelectFormControllerProps) {
 							}}
 						>
 							<Box
-								className="flex flex-col flex-1 justify-end h-full w-full px-6 py-4"
+								className="flex flex-col flex-1 justify-end h-full w-full px-1.5 py-1"
 								sx={{
 									background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, ${alpha(color, 0.4)} 60%, ${alpha(color, 0.5)}  70%, ${alpha(color, 0.95)} 100%)`,
 									backgroundBlendMode: 'multiply'

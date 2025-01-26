@@ -26,7 +26,7 @@ function SectionListItem(props: SectionListItemProps) {
 			{(provided) => (
 				<>
 					<ListItemButton
-						className="px-40 py-12 group"
+						className="px-10 py-3 group"
 						sx={{ bgcolor: 'background.default' }}
 						ref={provided.innerRef}
 						{...provided.draggableProps}
@@ -35,7 +35,7 @@ function SectionListItem(props: SectionListItemProps) {
 						}}
 					>
 						<div
-							className="md:hidden absolute flex items-center justify-center inset-y-0 left-0 w-32 cursor-move md:group-hover:flex"
+							className="md:hidden absolute flex items-center justify-center inset-y-0 left-0 w-8 cursor-move md:group-hover:flex"
 							{...provided.dragHandleProps}
 						>
 							<FuseSvgIcon
@@ -48,7 +48,7 @@ function SectionListItem(props: SectionListItemProps) {
 						<ListItemText
 							classes={{
 								root: 'm-0',
-								primary: clsx('font-semibold text-15 truncate', data.completed && 'line-through')
+								primary: clsx('font-semibold text-lg truncate', data.completed && 'line-through')
 							}}
 							primary={data.title}
 						/>

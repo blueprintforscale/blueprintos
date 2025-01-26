@@ -87,7 +87,7 @@ function ContactList(props: ContactListProps) {
 	if (isContactsLoading || isChatsLoading) {
 		return (
 			<Box
-				className="flex justify-center py-12"
+				className="flex justify-center py-3"
 				sx={{
 					width: 70,
 					minWidth: 70
@@ -100,7 +100,7 @@ function ContactList(props: ContactListProps) {
 
 	return (
 		<Root
-			className={clsx('flex shrink-0 flex-col overflow-y-auto py-8 overscroll-contain', className)}
+			className={clsx('flex shrink-0 flex-col overflow-y-auto py-2 overscroll-contain', className)}
 			ref={contactListScroll}
 			option={{ suppressScrollX: true, wheelPropagation: false }}
 		>
@@ -126,7 +126,7 @@ function ContactList(props: ContactListProps) {
 								</motion.div>
 							);
 						})}
-					<Divider className="mx-24 my-8" />
+					<Divider className="mx-6 my-2" />
 					{contacts.map((contact) => {
 						const chatContact = chats.find((_chat) => _chat.contactIds.includes(contact.id));
 

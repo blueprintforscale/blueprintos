@@ -9,13 +9,13 @@ function CodeSplittingDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Code Splitting
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				By code-splitting your app, you can "lazy-load" only the content that's needed by users at any given
@@ -24,14 +24,14 @@ function CodeSplittingDoc() {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Comprehensive Guide
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				For comprehensive guidance, please refer to our documentation on usage guidelines. Discover the
@@ -46,7 +46,7 @@ function CodeSplittingDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Additionally, delve into the specifics of code splitting for RTK-Query at{' '}
@@ -60,7 +60,7 @@ function CodeSplittingDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				In all Fuse React applications, we employ lazy-loaded slices and RTK-Query to enhance performance and

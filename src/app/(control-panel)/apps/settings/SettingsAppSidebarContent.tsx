@@ -50,7 +50,7 @@ function SettingsAppSidebarContent(props: SettingsAppSidebarContentProps) {
 
 	return (
 		<Root>
-			<div className={clsx('m-32 mr-24 flex items-center justify-between sm:my-40', className)}>
+			<div className={clsx('m-8 mr-6 flex items-center justify-between sm:my-10', className)}>
 				<Typography className="text-4xl font-extrabold leading-none tracking-tight"> Settings</Typography>
 				{isMobile && (
 					<IconButton

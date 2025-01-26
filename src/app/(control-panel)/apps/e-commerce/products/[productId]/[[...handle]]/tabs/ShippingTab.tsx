@@ -11,14 +11,14 @@ function ShippingTab() {
 
 	return (
 		<div>
-			<div className="flex -mx-4">
+			<div className="flex -mx-1">
 				<Controller
 					name="width"
 					control={control}
 					render={({ field }) => (
 						<TextField
 							{...field}
-							className="mt-8 mb-16 mx-4"
+							className="mt-2 mb-4 mx-1"
 							label="Width"
 							autoFocus
 							id="width"
@@ -34,7 +34,7 @@ function ShippingTab() {
 					render={({ field }) => (
 						<TextField
 							{...field}
-							className="mt-8 mb-16 mx-4"
+							className="mt-2 mb-4 mx-1"
 							label="Height"
 							id="height"
 							variant="outlined"
@@ -49,7 +49,7 @@ function ShippingTab() {
 					render={({ field }) => (
 						<TextField
 							{...field}
-							className="mt-8 mb-16 mx-4"
+							className="mt-2 mb-4 mx-1"
 							label="Depth"
 							id="depth"
 							variant="outlined"
@@ -65,7 +65,7 @@ function ShippingTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						label="Weight"
 						id="weight"
 						variant="outlined"
@@ -79,7 +79,7 @@ function ShippingTab() {
 				render={({ field }) => (
 					<TextField
 						{...field}
-						className="mt-8 mb-16"
+						className="mt-2 mb-4"
 						label="Extra Shipping Fee"
 						id="extraShippingFee"
 						variant="outlined"

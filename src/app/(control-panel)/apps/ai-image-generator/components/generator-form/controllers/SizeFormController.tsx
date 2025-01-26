@@ -31,7 +31,7 @@ function SizeFormController(props: SizeFormControllerProps) {
 						<div className="flex items-center space-between w-full">
 							<Typography className="flex-1">{size.label}</Typography>
 							<div
-								className="h-20 mr-12 rounded border border-gray-300"
+								className="h-5 mr-3 rounded-sm border border-gray-300"
 								style={{
 									aspectRatio: size.label.replace('x', '/'),
 									backgroundColor: 'rgba(0,0,0,0.1)'

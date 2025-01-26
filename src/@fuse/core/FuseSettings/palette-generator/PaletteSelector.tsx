@@ -38,9 +38,9 @@ function PaletteSelector(props: PaletteSelectorProps) {
 		value,
 		onChange,
 		triggerElement = (
-			<div className="m-8 flex w-128 flex-col items-center space-y-8">
+			<div className="m-2 flex w-32 flex-col items-center space-y-2">
 				<SectionPreview />
-				<Typography className="mb-24 flex-1 text-15 font-bold">Edit Palette</Typography>
+				<Typography className="mb-6 flex-1 text-lg font-bold">Edit Palette</Typography>
 			</div>
 		)
 	} = props;
@@ -130,7 +130,7 @@ function PaletteSelector(props: PaletteSelectorProps) {
 					position="static"
 				>
 					<Toolbar className="flex w-full">
-						<Icon className="mr-12">palette</Icon>
+						<Icon className="mr-3">palette</Icon>
 						<Typography
 							variant="subtitle1"
 							color="inherit"
@@ -142,7 +142,7 @@ function PaletteSelector(props: PaletteSelectorProps) {
 
 				<DialogContent>
 					<div className="flex w-full">
-						<div className="flex flex-1 flex-col items-center justify-center p-24">
+						<div className="flex flex-1 flex-col items-center justify-center p-6">
 							<Controller
 								name="palette.mode"
 								control={control}
@@ -151,7 +151,7 @@ function PaletteSelector(props: PaletteSelectorProps) {
 										disableElevation
 										variant="contained"
 										color="secondary"
-										className="mb-32"
+										className="mb-8"
 									>
 										<Button
 											onClick={() => {
@@ -198,9 +198,9 @@ function PaletteSelector(props: PaletteSelectorProps) {
 										}}
 										type="color"
 										variant="outlined"
-										className="mb-32"
+										className="mb-8"
 										label="Primary color"
-										InputProps={{ className: 'w-200  h-32' }}
+										InputProps={{ className: 'w-50  h-8' }}
 									/>
 								)}
 							/>
@@ -227,9 +227,9 @@ function PaletteSelector(props: PaletteSelectorProps) {
 										}}
 										type="color"
 										variant="outlined"
-										className="mb-32"
+										className="mb-8"
 										label="Secondary color"
-										InputProps={{ className: 'w-200 h-32' }}
+										InputProps={{ className: 'w-50 h-8' }}
 									/>
 								)}
 							/>
@@ -247,9 +247,9 @@ function PaletteSelector(props: PaletteSelectorProps) {
 										{...field}
 										type="color"
 										variant="outlined"
-										className="mb-32"
+										className="mb-8"
 										label="Background paper"
-										InputProps={{ className: 'w-200 h-32' }}
+										InputProps={{ className: 'w-50 h-8' }}
 										error={!!errors?.palette?.background?.paper}
 										helperText={errors?.palette?.background?.paper?.message}
 									/>
@@ -270,7 +270,7 @@ function PaletteSelector(props: PaletteSelectorProps) {
 										type="color"
 										variant="outlined"
 										label="Background default"
-										InputProps={{ className: 'w-200 h-32' }}
+										InputProps={{ className: 'w-50 h-8' }}
 										error={!!errors?.palette?.background?.default}
 										helperText={errors?.palette?.background?.default?.message}
 									/>
@@ -278,9 +278,9 @@ function PaletteSelector(props: PaletteSelectorProps) {
 							/>
 						</div>
 
-						<div className="flex flex-col items-center justify-center p-48">
+						<div className="flex flex-col items-center justify-center p-12">
 							<Typography
-								className="-mt-48 mb-16 text-15 font-semibold"
+								className="-mt-12 mb-4 text-lg font-semibold"
 								color="text.secondary"
 							>
 								Preview
@@ -289,7 +289,7 @@ function PaletteSelector(props: PaletteSelectorProps) {
 						</div>
 					</div>
 				</DialogContent>
-				<DialogActions className="flex justify-between p-16">
+				<DialogActions className="flex justify-between p-4">
 					<Button
 						onClick={handleCloseDialog}
 						color="primary"

@@ -89,18 +89,18 @@ function SimpleFormExample() {
 				// eslint-disable-next-line no-console
 				onSubmit={handleSubmit((_data) => console.info(_data))}
 			>
-				<div className="mt-48 mb-16">
-					<Typography className="mb-24 font-medium text-base">Native Input:</Typography>
+				<div className="mt-12 mb-4">
+					<Typography className="mb-6 font-medium text-base">Native Input:</Typography>
 
 					<input
-						className={clsx('border-1 outline-none rounded-lg p-8', !!errors.Native && 'border-red')}
+						className={clsx('border-1 outline-hidden rounded-lg p-2', !!errors.Native && 'border-red')}
 						{...register('Native')}
 						required
 					/>
 
 					{!!errors.Native && (
 						<Typography
-							className="px-4 py-8 font-medium text-base"
+							className="px-1 py-2 font-medium text-base"
 							color="error"
 						>
 							{errors?.Native?.message}
@@ -108,7 +108,7 @@ function SimpleFormExample() {
 					)}
 				</div>
 
-				<div className="mt-48 mb-16">
+				<div className="mt-12 mb-4">
 					<Controller
 						name="Checkbox"
 						control={control}
@@ -141,7 +141,7 @@ function SimpleFormExample() {
 					/>
 				</div>
 
-				<div className="mt-48 mb-16">
+				<div className="mt-12 mb-4">
 					<Controller
 						render={({ field }) => (
 							<FormControl
@@ -178,7 +178,7 @@ function SimpleFormExample() {
 					/>
 				</div>
 
-				<div className="mt-48 mb-16">
+				<div className="mt-12 mb-4">
 					<Controller
 						render={({ field }) => (
 							<TextField
@@ -196,7 +196,7 @@ function SimpleFormExample() {
 					/>
 				</div>
 
-				<div className="mt-48 mb-16">
+				<div className="mt-12 mb-4">
 					<Controller
 						render={({ field }) => (
 							<FormControl
@@ -227,7 +227,7 @@ function SimpleFormExample() {
 					/>
 				</div>
 
-				<div className="mt-48 mb-16">
+				<div className="mt-12 mb-4">
 					<Controller
 						name="Switch"
 						control={control}
@@ -255,15 +255,15 @@ function SimpleFormExample() {
 					/>
 				</div>
 
-				<div className="mt-48 mb-16">
-					<Typography className="mb-24 font-medium text-base">Autocomplete</Typography>
+				<div className="mt-12 mb-4">
+					<Typography className="mb-6 font-medium text-base">Autocomplete</Typography>
 					<Controller
 						name="Autocomplete"
 						control={control}
 						defaultValue={[]}
 						render={({ field: { onChange, value, onBlur, ref } }) => (
 							<Autocomplete
-								className="mt-8 mb-16"
+								className="mt-2 mb-4"
 								multiple
 								freeSolo
 								options={options}
@@ -291,8 +291,8 @@ function SimpleFormExample() {
 					/>
 				</div>
 
-				<div className="mt-48 mb-16">
-					<Typography className="mb-24 font-medium text-base">DateTimePicker</Typography>
+				<div className="mt-12 mb-4">
+					<Typography className="mb-6 font-medium text-base">DateTimePicker</Typography>
 
 					<Controller
 						name="DateTimePicker"
@@ -325,9 +325,9 @@ function SimpleFormExample() {
 					/>
 				</div>
 
-				<div className="flex my-48 items-center">
+				<div className="flex my-12 items-center">
 					<Button
-						className="mx-8"
+						className="mx-2"
 						variant="contained"
 						color="secondary"
 						type="submit"
@@ -337,7 +337,7 @@ function SimpleFormExample() {
 					</Button>
 
 					<Button
-						className="mx-8"
+						className="mx-2"
 						type="button"
 						onClick={() => {
 							reset(defaultValues);
@@ -348,28 +348,28 @@ function SimpleFormExample() {
 				</div>
 			</form>
 
-			<div className="w-1/2 my-48 p-24">
-				<div className="mb-12">
+			<div className="w-1/2 my-12 p-6">
+				<div className="mb-3">
 					<Typography>Is Valid: {isValid ? 'true' : 'false'}</Typography>
 				</div>
 
-				<div className="mb-12">
+				<div className="mb-3">
 					<Typography>Form data</Typography>
 				</div>
 
-				<div className="mb-12">
-					<pre className="language-js p-24 w-400">{JSON.stringify(data, null, 2)}</pre>
+				<div className="mb-3">
+					<pre className="language-js p-6 w-100">{JSON.stringify(data, null, 2)}</pre>
 				</div>
 
-				<div className="mb-12">
+				<div className="mb-3">
 					<Typography>Touched fields</Typography>
 
-					<pre className="language-js p-24 w-400">{JSON.stringify(touchedFields, null, 2)}</pre>
+					<pre className="language-js p-6 w-100">{JSON.stringify(touchedFields, null, 2)}</pre>
 				</div>
 
-				<div className="mb-12">
+				<div className="mb-3">
 					<Typography
-						className="mt-16 font-medium text-md italic"
+						className="mt-4 font-medium text-md italic"
 						color="text.secondary"
 					>
 						Render Count: {renderCount}

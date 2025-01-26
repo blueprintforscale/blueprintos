@@ -10,20 +10,20 @@ function NavigationDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Navigation
 			</Typography>
 
 			<Typography
-				className="mb-24"
+				className="mb-6"
 				variant="h5"
 			>
 				Default Navigation Configuration
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				The theme navigation is located in the file <code>src/configs/navigationConfig.ts</code>, which serves
@@ -31,14 +31,14 @@ function NavigationDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This configuration is the initial state of the Fuse.navigation redux state.
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Navigation items can be modified, removed, and added using various redux actions from anywhere within
@@ -46,7 +46,7 @@ function NavigationDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				For more information on FuseNavigation components, redux actions, and item types, check out the section{' '}

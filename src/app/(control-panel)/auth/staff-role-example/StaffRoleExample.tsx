@@ -12,7 +12,7 @@ function StaffRoleExample() {
 	return (
 		<FusePageCarded
 			header={
-				<div className="flex flex-1 items-center justify-between p-24">
+				<div className="flex flex-1 items-center justify-between p-6">
 					<Typography className="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
 						Staff: Auth role example page
 					</Typography>
@@ -28,13 +28,13 @@ function StaffRoleExample() {
 				</div>
 			}
 			content={
-				<div className="p-24">
-					<Typography className="mb-24">
+				<div className="p-6">
+					<Typography className="mb-6">
 						You can see this page because you have logged in and have permission. Otherwise you should be
 						redirected to login page.
 					</Typography>
 
-					<Typography className="mb-24">This is the page's config file:</Typography>
+					<Typography className="mb-6">This is the page's config file:</Typography>
 
 					<FuseHighlight
 						component="pre"
@@ -61,7 +61,7 @@ function StaffRoleExample() {
               `}
 					</FuseHighlight>
 
-					<Typography className="my-24">
+					<Typography className="my-6">
 						You can also hide the navigation item/collapse/group with user roles by giving auth property.
 					</Typography>
 

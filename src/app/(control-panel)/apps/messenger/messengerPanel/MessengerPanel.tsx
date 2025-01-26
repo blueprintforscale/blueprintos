@@ -203,11 +203,11 @@ function MessengerPanel() {
 					position="static"
 					className="shadow-md"
 				>
-					<Toolbar className="px-4">
+					<Toolbar className="px-1">
 						{(!open || selectedChatId === '') && (
-							<div className="flex flex-1 items-center px-3 space-x-12">
+							<div className="flex flex-1 items-center px-0.75 space-x-3">
 								<IconButton
-									className="w-56 h-56"
+									className="w-14 h-14"
 									color="inherit"
 									onClick={() => dispatch(openChatPanel())}
 									size="large"
@@ -216,7 +216,7 @@ function MessengerPanel() {
 								</IconButton>
 								{selectedChatId === '' && (
 									<Typography
-										className="text-15"
+										className="text-lg"
 										color="inherit"
 									>
 										Team Chat
@@ -225,17 +225,17 @@ function MessengerPanel() {
 							</div>
 						)}
 						{open && selectedContact && (
-							<div className="flex flex-1 items-center px-12">
+							<div className="flex flex-1 items-center px-3">
 								<Avatar src={selectedContact.avatar} />
 								<Typography
-									className="mx-16 text-15"
+									className="mx-4 text-lg"
 									color="inherit"
 								>
 									{selectedContact.name}
 								</Typography>
 							</div>
 						)}
-						<div className="flex px-4">
+						<div className="flex px-1">
 							<IconButton
 								onClick={() => dispatch(closeChatPanel())}
 								color="inherit"
@@ -252,7 +252,7 @@ function MessengerPanel() {
 					{open && selectedChatId ? (
 						<Chat className="flex flex-1 z-10" />
 					) : (
-						<div className="flex flex-col flex-1 items-center justify-center p-24">
+						<div className="flex flex-col flex-1 items-center justify-center p-6">
 							<FuseSvgIcon
 								size={128}
 								color="disabled"
@@ -260,7 +260,7 @@ function MessengerPanel() {
 								heroicons-outline:chat-bubble-left-right
 							</FuseSvgIcon>
 							<Typography
-								className="px-16 pb-24 mt-24 text-center"
+								className="px-4 pb-6 mt-6 text-center"
 								color="text.secondary"
 							>
 								Select a contact to start a conversation.

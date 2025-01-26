@@ -34,7 +34,7 @@ function NoteDialog() {
 	return (
 		<Dialog
 			classes={{
-				paper: 'w-full m-24'
+				paper: 'w-full m-6'
 			}}
 			TransitionComponent={Transition}
 			onClose={() => dispatch(closeNoteDialog())}

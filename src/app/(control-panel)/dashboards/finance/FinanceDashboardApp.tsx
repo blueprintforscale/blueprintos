@@ -42,15 +42,15 @@ function FinanceDashboardApp() {
 		<FusePageSimple
 			header={<FinanceDashboardAppHeader />}
 			content={
-				<div className="w-full px-24 md:px-32 pb-24">
+				<div className="w-full px-6 md:px-8 pb-6">
 					<motion.div
 						className="w-full"
 						variants={container}
 						initial="hidden"
 						animate="show"
 					>
-						<div className="grid grid-cols-1 xl:grid-cols-2 gap-32 w-full mt-32">
-							<div className="grid gap-32 sm:grid-flow-col xl:grid-flow-row">
+						<div className="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full mt-8">
+							<div className="grid gap-8 sm:grid-flow-col xl:grid-flow-row">
 								<motion.div
 									variants={item}
 									className="flex flex-col flex-auto"
@@ -72,7 +72,7 @@ function FinanceDashboardApp() {
 								<AccountBalanceWidget />
 							</motion.div>
 						</div>
-						<div className="grid grid-cols-1 xl:grid-cols-3 gap-32 w-full mt-32">
+						<div className="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8">
 							<motion.div
 								variants={item}
 								className="xl:col-span-2 flex flex-col flex-auto"

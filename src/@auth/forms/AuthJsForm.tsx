@@ -17,10 +17,10 @@ function AuthJsForm(props: AuthJsFormProps) {
 	const error = errorType && (signinErrors[errorType] ?? signinErrors.default);
 
 	return (
-		<div className="flex flex-col space-y-32">
+		<div className="flex flex-col space-y-8">
 			{error && (
 				<Alert
-					className="mt-16"
+					className="mt-4"
 					severity="error"
 					sx={(theme) => ({
 						backgroundColor: theme.palette.error.light,

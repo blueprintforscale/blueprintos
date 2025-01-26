@@ -67,7 +67,7 @@ function BoardList(props: BoardListProps) {
 						})}
 						className={clsx(
 							snapshot.isDragging ? 'shadow-lg' : 'shadow-0',
-							'w-256 sm:w-320 mx-8 max-h-full flex flex-col rounded-lg border'
+							'w-64 sm:w-80 mx-2 max-h-full flex flex-col rounded-lg border'
 						)}
 						square
 					>
@@ -91,7 +91,7 @@ function BoardList(props: BoardListProps) {
 								{(_provided) => (
 									<div
 										ref={_provided.innerRef}
-										className="flex flex-col w-full h-full p-12 min-h-1"
+										className="flex flex-col w-full h-full p-3 min-h-0.25"
 									>
 										{cardIds.map((cardId, index) => (
 											<BoardCard
@@ -107,7 +107,7 @@ function BoardList(props: BoardListProps) {
 							</Droppable>
 						</CardContent>
 
-						<div className="p-12">
+						<div className="p-3">
 							<BoardAddCard
 								boardId={boardId}
 								listId={listId}

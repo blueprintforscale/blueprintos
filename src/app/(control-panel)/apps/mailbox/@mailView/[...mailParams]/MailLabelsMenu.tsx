@@ -63,15 +63,15 @@ function MailLabelsMenu(props: MailLabelsMenuProps) {
 					{labelsAll.map((label) => {
 						return (
 							<MenuItem
-								className="px-8"
+								className="px-2"
 								key={label.id}
 								onClick={() => {
 									onChange(_.xor(selectedLabels, [label.id]));
 								}}
 							>
 								<Checkbox checked={selectedLabels.includes(label.id)} />
-								<ListItemText className="mx-8">{label.title}</ListItemText>
-								<ListItemIcon className="min-w-24">
+								<ListItemText className="mx-2">{label.title}</ListItemText>
+								<ListItemIcon className="min-w-6">
 									<FuseSvgIcon className={labelColorDefs[label.color].text}>
 										heroicons-outline:tag
 									</FuseSvgIcon>

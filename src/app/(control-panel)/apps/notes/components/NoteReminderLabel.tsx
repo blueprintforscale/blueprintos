@@ -30,9 +30,9 @@ function NoteLabel(props: NoteLabelProps) {
 			icon={<FuseSvgIcon size={16}>heroicons-outline:clock</FuseSvgIcon>}
 			label={format(new Date(date), 'MMM dd yy, h:mm')}
 			classes={{
-				root: clsx('h-24 border-0', className),
-				label: 'px-12 py-4 text-sm font-medium leading-none',
-				deleteIcon: 'w-16',
+				root: clsx('h-6 border-0', className),
+				label: 'px-3 py-1 text-sm font-medium leading-none',
+				deleteIcon: 'w-4',
 				...classes
 			}}
 			sx={{

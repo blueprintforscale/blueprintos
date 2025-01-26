@@ -23,8 +23,8 @@ function BoardCardDueDate(props: BoardCardDueDateProps) {
 		<Chip
 			size="small"
 			className={clsx(
-				'flex items-center font-semibold text-md mx-4 mb-6',
-				getUnixTime(new Date()) > dueDate ? 'bg-red text-white' : 'bg-green text-white'
+				'flex items-center font-semibold text-md mx-1 mb-1.5',
+				getUnixTime(new Date()) > dueDate ? 'bg-red-500 text-white' : 'bg-green-500 text-white'
 			)}
 			sx={{
 				'& .MuiChip-icon': {

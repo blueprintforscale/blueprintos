@@ -17,7 +17,7 @@ function TimelineActivityItem(props: ActivityItemProps) {
 	return (
 		<ListItem
 			key={item.id}
-			className="px-0 space-x-12"
+			className="px-0 space-x-3"
 		>
 			<Avatar
 				alt={item.user.name}
@@ -36,7 +36,7 @@ function TimelineActivityItem(props: ActivityItemProps) {
 						</Typography>
 
 						<Typography
-							className="px-4 truncate"
+							className="px-1 truncate"
 							paragraph={false}
 						>
 							{item.message}

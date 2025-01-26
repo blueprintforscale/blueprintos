@@ -12,16 +12,16 @@ import { alpha } from '@mui/material/styles';
  */
 function CompactInvoicePage() {
 	return (
-		<div className="inline-block w-full overflow-auto p-24 text-left sm:p-40 print:p-0">
+		<div className="inline-block w-full overflow-auto p-6 text-left sm:p-10 print:p-0">
 			<motion.div
 				initial={{ opacity: 0, y: 200 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ bounceDamping: 0 }}
 			>
-				<Card className="mx-auto w-xl rounded-xl p-64 shadow print:w-auto print:rounded-none print:bg-transparent print:shadow-none">
+				<Card className="mx-auto w-3xl rounded-xl p-16 shadow-sm print:w-auto print:rounded-none print:bg-transparent print:shadow-none">
 					<CardContent>
 						<div className="flex items-start justify-between">
-							<div className="grid grid-cols-2 gap-x-16 gap-y-1">
+							<div className="grid grid-cols-2 gap-x-4 gap-y-0.25">
 								<Typography
 									className="text-4xl tracking-tight"
 									color="text.secondary"
@@ -57,17 +57,17 @@ function CompactInvoicePage() {
 									backgroundColor: theme.palette.primary.dark,
 									color: theme.palette.getContrastText(theme.palette.primary.dark)
 								})}
-								className="-mr-64 grid auto-cols-max grid-flow-col gap-x-32 rounded-l-2xl px-32 py-24"
+								className="-mr-16 grid auto-cols-max grid-flow-col gap-x-8 rounded-l-2xl px-8 py-6"
 							>
-								<div className="w-96 place-self-center">
+								<div className="w-24 place-self-center">
 									<img
-										className="w-96"
+										className="w-24"
 										src="/assets/images/logo/logo.svg"
 										alt="logo"
 									/>
 								</div>
 								<Box
-									className="border-l pl-40 text-md"
+									className="border-l pl-10 text-md"
 									sx={{
 										borderColor: (theme) =>
 											alpha(theme.palette.getContrastText(theme.palette.primary.dark), 0.25)
@@ -90,7 +90,7 @@ function CompactInvoicePage() {
 							<Typography>+55 552 455 87</Typography>
 						</div>
 
-						<div className="mt-48 grid grid-cols-12 gap-x-4">
+						<div className="mt-12 grid grid-cols-12 gap-x-1">
 							<div
 								className="col-span-8 text-md font-medium"
 								color="text.secondary"
@@ -116,42 +116,42 @@ function CompactInvoicePage() {
 								TOTAL
 							</div>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<Typography className="col-span-8 text-lg font-medium">Prototype & Design</Typography>
 							<Typography className="self-center text-right">$75.00</Typography>
 							<Typography className="self-center text-right">240</Typography>
 							<Typography className="col-span-2 self-center text-right">$18,000.00</Typography>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<Typography className="col-span-8 text-lg font-medium">Development</Typography>
 							<Typography className="self-center text-right">$60.50</Typography>
 							<Typography className="self-center text-right">350</Typography>
 							<Typography className="col-span-2 self-center text-right">$21,175.00</Typography>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<Typography className="col-span-8 text-lg font-medium">Testing</Typography>
 							<Typography className="self-center text-right">$25.00</Typography>
 							<Typography className="self-center text-right">50</Typography>
 							<Typography className="col-span-2 self-center text-right">$1,250.00</Typography>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<Typography className="col-span-8 text-lg font-medium">Documentation & Training</Typography>
 							<Typography className="self-center text-right">$26.50</Typography>
 							<Typography className="self-center text-right">260</Typography>
 							<Typography className="col-span-2 self-center text-right">$6,890.00</Typography>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<div className="col-span-8 text-lg font-medium">Critical bug fixes for a year</div>
 							<div className="self-center text-right">$25,000</div>
 							<div className="self-center text-right">2</div>
 							<div className="col-span-2 self-center text-right">$50,000.00</div>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<Typography className="col-span-8 text-lg font-medium">
 								Extended security updates for a year
@@ -160,7 +160,7 @@ function CompactInvoicePage() {
 							<Typography className="self-center text-right">2</Typography>
 							<Typography className="col-span-2 self-center text-right">$30,000.00</Typography>
 
-							<div className="col-span-12 my-16 border-b" />
+							<div className="col-span-12 my-4 border-b" />
 
 							<Typography className="col-span-8 text-lg font-medium">
 								Extended updates for a year
@@ -169,7 +169,7 @@ function CompactInvoicePage() {
 							<Typography className="self-center text-right">2</Typography>
 							<Typography className="col-span-2 self-center text-right">$100,000.00</Typography>
 
-							<div className="col-span-12 mt-64" />
+							<div className="col-span-12 mt-16" />
 
 							<Typography
 								className="col-span-10 self-center font-medium tracking-tight"
@@ -179,7 +179,7 @@ function CompactInvoicePage() {
 							</Typography>
 							<Typography className="col-span-2 text-right text-lg">$227,315.00</Typography>
 
-							<div className="col-span-12 my-12 border-b" />
+							<div className="col-span-12 my-3 border-b" />
 
 							<Typography
 								className="col-span-10 self-center font-medium tracking-tight"
@@ -189,7 +189,7 @@ function CompactInvoicePage() {
 							</Typography>
 							<Typography className="col-span-2 text-right text-lg">$11,365.75</Typography>
 
-							<div className="col-span-12 my-12 border-b" />
+							<div className="col-span-12 my-3 border-b" />
 
 							<Typography
 								className="col-span-10 self-center font-medium tracking-tight"
@@ -199,7 +199,7 @@ function CompactInvoicePage() {
 							</Typography>
 							<Typography className="col-span-2 text-right text-lg">$3,680.75</Typography>
 
-							<div className="col-span-12 my-12 border-b" />
+							<div className="col-span-12 my-3 border-b" />
 
 							<Typography
 								className="col-span-10 self-center text-2xl font-medium tracking-tight"
@@ -210,18 +210,18 @@ function CompactInvoicePage() {
 							<div className="col-span-2 text-right text-2xl font-medium">$235,000.00</div>
 						</div>
 
-						<div className="mt-64">
+						<div className="mt-16">
 							<Typography className="font-medium">
 								Please pay within 15 days. Thank you for your business.
 							</Typography>
-							<div className="mt-16 flex items-start">
+							<div className="mt-4 flex items-start">
 								<img
-									className="flex-0 mt-8 w-36"
+									className="shrink-0 mt-2 w-9"
 									src="/assets/images/logo/logo.svg"
 									alt="logo"
 								/>
 								<Typography
-									className="ml-24 text-sm"
+									className="ml-6 text-sm"
 									color="text.secondary"
 								>
 									In condimentum malesuada efficitur. Mauris volutpat placerat auctor. Ut ac congue

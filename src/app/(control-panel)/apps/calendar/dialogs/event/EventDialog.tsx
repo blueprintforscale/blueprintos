@@ -151,10 +151,10 @@ function EventDialog() {
 			onClose={closeComposeDialog}
 			component="form"
 		>
-			<div className="flex flex-col max-w-full p-24 pt-32 sm:pt-40 sm:p-32 w-480">
-				<div className="flex sm:space-x-24 mb-16">
+			<div className="flex flex-col max-w-full p-6 pt-8 sm:pt-10 sm:p-8 w-120">
+				<div className="flex sm:space-x-6 mb-4">
 					<FuseSvgIcon
-						className="hidden sm:inline-flex mt-16"
+						className="hidden sm:inline-flex mt-4"
 						color="action"
 					>
 						heroicons-outline:pencil-square
@@ -182,21 +182,21 @@ function EventDialog() {
 					/>
 				</div>
 
-				<div className="flex sm:space-x-24 mb-16">
+				<div className="flex sm:space-x-6 mb-4">
 					<FuseSvgIcon
-						className="hidden sm:inline-flex mt-16"
+						className="hidden sm:inline-flex mt-4"
 						color="action"
 					>
 						heroicons-outline:calendar
 					</FuseSvgIcon>
 					<div className="w-full">
-						<div className="flex flex-column sm:flex-row w-full items-center space-x-16">
+						<div className="flex flex-column sm:flex-row w-full items-center space-x-4">
 							<Controller
 								name="start"
 								control={control}
 								render={({ field: { onChange, value } }) => (
 									<DateTimePicker
-										className="mt-8 mb-16 w-full"
+										className="mt-2 mb-4 w-full"
 										value={new Date(value)}
 										onChange={(val) => {
 											onChange(val.toISOString());
@@ -217,7 +217,7 @@ function EventDialog() {
 								control={control}
 								render={({ field: { onChange, value } }) => (
 									<DateTimePicker
-										className="mt-8 mb-16 w-full"
+										className="mt-2 mb-4 w-full"
 										value={new Date(value)}
 										onChange={(val) => {
 											onChange(val.toISOString());
@@ -239,7 +239,7 @@ function EventDialog() {
 							control={control}
 							render={({ field: { onChange, value } }) => (
 								<FormControlLabel
-									className="mt-8"
+									className="mt-2"
 									label="All Day"
 									control={
 										<Switch
@@ -256,9 +256,9 @@ function EventDialog() {
 					</div>
 				</div>
 
-				<div className="flex sm:space-x-24 mb-16">
+				<div className="flex sm:space-x-6 mb-4">
 					<FuseSvgIcon
-						className="hidden sm:inline-flex mt-16"
+						className="hidden sm:inline-flex mt-4"
 						color="action"
 					>
 						heroicons-outline:tag
@@ -269,16 +269,16 @@ function EventDialog() {
 						control={control}
 						render={({ field }) => (
 							<EventLabelSelect
-								className="mt-8 mb-16"
+								className="mt-2 mb-4"
 								{...(field as unknown as EventLabelSelectProps)}
 							/>
 						)}
 					/>
 				</div>
 
-				<div className="flex sm:space-x-24 mb-16">
+				<div className="flex sm:space-x-6 mb-4">
 					<FuseSvgIcon
-						className="hidden sm:inline-flex mt-16"
+						className="hidden sm:inline-flex mt-4"
 						color="action"
 					>
 						heroicons-outline:bars-3-bottom-left
@@ -290,7 +290,7 @@ function EventDialog() {
 						render={({ field }) => (
 							<TextField
 								{...field}
-								className="mt-8 mb-16"
+								className="mt-2 mb-4"
 								id="desc"
 								label="Description"
 								type="text"
@@ -304,7 +304,7 @@ function EventDialog() {
 				</div>
 
 				{eventDialog.type === 'new' ? (
-					<div className="flex items-center space-x-8">
+					<div className="flex items-center space-x-2">
 						<div className="flex flex-1" />
 						<Button
 							variant="contained"
@@ -316,7 +316,7 @@ function EventDialog() {
 						</Button>
 					</div>
 				) : (
-					<div className="flex items-center space-x-8">
+					<div className="flex items-center space-x-2">
 						<div className="flex flex-1" />
 						<IconButton onClick={handleRemove}>
 							<FuseSvgIcon>heroicons-outline:trash</FuseSvgIcon>

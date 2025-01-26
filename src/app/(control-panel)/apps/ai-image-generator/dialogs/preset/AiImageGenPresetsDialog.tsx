@@ -31,7 +31,7 @@ function AiImageGenPresetsDialog(props: AiImageGenPresetsDialogProps) {
 			<DialogTitle className="text-lg">Saved Presets</DialogTitle>
 			<DialogContent>
 				{presets?.length > 0 && (
-					<div className="space-y-16">
+					<div className="space-y-4">
 						{presets?.map((preset) => (
 							<PresetItem
 								preset={preset}
@@ -45,7 +45,7 @@ function AiImageGenPresetsDialog(props: AiImageGenPresetsDialogProps) {
 				{presets?.length === 0 && (
 					<Typography
 						color="textSecondary"
-						className="text-center p-24"
+						className="text-center p-6"
 					>
 						No presets saved yet
 					</Typography>

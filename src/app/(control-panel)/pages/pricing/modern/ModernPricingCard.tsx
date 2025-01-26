@@ -29,7 +29,7 @@ function ModernPricingCard(props: ModernPricingCardProps) {
 	return (
 		<Paper
 			className={clsx(
-				'relative max-w-sm flex-col p-24 sm:px-40 sm:py-48 md:max-w-none',
+				'relative max-w-sm flex-col p-6 sm:px-10 sm:py-12 md:max-w-none',
 				isPopular && '',
 				className
 			)}
@@ -41,31 +41,31 @@ function ModernPricingCard(props: ModernPricingCardProps) {
 			]}
 		>
 			{isPopular && (
-				<div className="absolute inset-x-0 -top-16 flex items-center justify-center">
+				<div className="absolute inset-x-0 -top-4 flex items-center justify-center">
 					<Chip
 						label="POPULAR"
 						color="secondary"
-						className="flex h-32 items-center rounded-full px-32 text-center font-medium leading-none"
+						className="flex h-8 items-center rounded-full px-8 text-center font-medium leading-none"
 					/>
 				</div>
 			)}
-			<Typography className="text-4xl font-bold leading-tight tracking-tight">{title}</Typography>
+			<Typography className="text-4xl font-bold leading-[1.25] tracking-tight">{title}</Typography>
 			<Typography
-				className="mt-8 text-lg font-medium tracking-tight"
+				className="mt-2 text-lg font-medium tracking-tight"
 				color="text.secondary"
 			>
 				{subtitle}
 			</Typography>
-			<Divider className="bg-accent my-40 h-4 w-32 rounded" />
+			<Divider className="bg-accent my-10 h-1 w-8 rounded-sm" />
 			<div className="flex items-baseline whitespace-nowrap">
-				<Typography className="mr-8 text-2xl">USD</Typography>
-				<Typography className="text-6xl font-semibold leading-tight tracking-tight">
+				<Typography className="mr-2 text-2xl">USD</Typography>
+				<Typography className="text-6xl font-semibold leading-[1.25] tracking-tight">
 					{period === 'month' && monthlyPrice}
 					{period === 'year' && yearlyPrice}
 				</Typography>
 			</div>
 			<Typography
-				className="mt-8 flex flex-col"
+				className="mt-2 flex flex-col"
 				color="text.secondary"
 			>
 				{period === 'month' && (
@@ -86,7 +86,7 @@ function ModernPricingCard(props: ModernPricingCardProps) {
 				)}
 			</Typography>
 			<Button
-				className="mt-40 w-full"
+				className="mt-10 w-full"
 				size="large"
 				variant={isPopular ? 'contained' : 'outlined'}
 				color={isPopular ? 'secondary' : 'inherit'}

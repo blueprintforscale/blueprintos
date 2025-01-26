@@ -28,10 +28,10 @@ function CardActivity(props: CardActivityProps) {
 					<Avatar
 						alt={user?.name}
 						src={user?.avatar}
-						className="w-32 h-32"
+						className="w-8 h-8"
 					/>
 					<Box
-						className="flex flex-col mx-16 p-12"
+						className="flex flex-col mx-4 p-3"
 						sx={(theme) => ({
 							borderRadius: '5px 20px 20px 5px',
 							border: `1px solid ${theme.palette.divider}`
@@ -40,7 +40,7 @@ function CardActivity(props: CardActivityProps) {
 						<div className="flex items-center">
 							<Typography>{user?.name}</Typography>
 							<Typography
-								className="mx-8 text-md"
+								className="mx-2 text-md"
 								color="text.secondary"
 							>
 								{formatDistanceToNow(fromUnixTime(item.time), { addSuffix: true })}
@@ -60,11 +60,11 @@ function CardActivity(props: CardActivityProps) {
 					<Avatar
 						alt={user?.name}
 						src={user?.avatar}
-						className="w-32 h-32"
+						className="w-8 h-8"
 					/>
-					<div className="flex items-center mx-16">
+					<div className="flex items-center mx-4">
 						<Typography>{user?.name},</Typography>
-						<Typography className="mx-8">{item.message}</Typography>
+						<Typography className="mx-2">{item.message}</Typography>
 						<Typography
 							className="text-md"
 							color="text.secondary"

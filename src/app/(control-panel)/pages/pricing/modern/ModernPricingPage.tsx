@@ -35,7 +35,7 @@ function ModernPricingPage() {
 
 	return (
 		<div className="relative flex min-w-0 flex-auto flex-col overflow-hidden">
-			<div className="relative overflow-hidden px-24 pb-48 pt-32 sm:px-64 sm:pb-96 sm:pt-80">
+			<div className="relative overflow-hidden px-6 pb-12 pt-8 sm:px-16 sm:pb-24 sm:pt-20">
 				<svg
 					className="pointer-events-none absolute inset-0 -z-1"
 					viewBox="0 0 960 540"
@@ -76,7 +76,7 @@ function ModernPricingPage() {
 						initial={{ opacity: 0, y: 40 }}
 						animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
 					>
-						<div className="mt-4 text-center text-4xl font-extrabold leading-tight tracking-tight sm:text-7xl">
+						<div className="mt-1 text-center text-4xl font-extrabold leading-[1.25] tracking-tight sm:text-7xl">
 							Take control of your productivity
 						</div>
 					</motion.div>
@@ -86,7 +86,7 @@ function ModernPricingPage() {
 						animate={{ opacity: 1, transition: { delay: 0.15 } }}
 					>
 						<Typography
-							className="mt-12 text-center tracking-tight sm:text-2xl"
+							className="mt-3 text-center tracking-tight sm:text-2xl"
 							color="text.secondary"
 						>
 							Start small and free, upgrade as you go.
@@ -100,14 +100,14 @@ function ModernPricingPage() {
 						animate={{ opacity: 1, transition: { delay: 0.2 } }}
 					>
 						<Box
-							className="mt-32 flex items-center overflow-hidden rounded-full p-2 sm:mt-64"
+							className="mt-8 flex items-center overflow-hidden rounded-full p-0.5 sm:mt-16"
 							sx={{ backgroundColor: (theme) => darken(theme.palette.background.default, 0.05) }}
 						>
 							<Box
 								component="button"
 								className={clsx(
-									'h-36 cursor-pointer items-center rounded-full px-16 font-medium',
-									period === 'year' && 'shadow'
+									'h-9 cursor-pointer items-center rounded-full px-4 font-medium',
+									period === 'year' && 'shadow-sm'
 								)}
 								onClick={() => setPeriod('year')}
 								sx={[
@@ -126,8 +126,8 @@ function ModernPricingPage() {
 							<Box
 								component="button"
 								className={clsx(
-									'h-36 cursor-pointer items-center rounded-full px-16 font-medium',
-									period === 'month' && 'shadow'
+									'h-9 cursor-pointer items-center rounded-full px-4 font-medium',
+									period === 'month' && 'shadow-sm'
 								)}
 								onClick={() => setPeriod('month')}
 								sx={[
@@ -146,13 +146,13 @@ function ModernPricingPage() {
 						</Box>
 					</motion.div>
 				</div>
-				<div className="mt-40 flex justify-center sm:mt-80">
+				<div className="mt-10 flex justify-center sm:mt-20">
 					<div className="container">
 						<motion.div
 							variants={container}
 							initial="hidden"
 							animate="show"
-							className="grid grid-cols-1 gap-y-6 md:grid-cols-2 md:gap-x-24 lg:grid-cols-3 lg:gap-y-0"
+							className="grid grid-cols-1 gap-y-1.5 md:grid-cols-2 md:gap-x-6 lg:grid-cols-3 lg:gap-y-0"
 						>
 							<motion.div variants={item}>
 								<ModernPricingCard
@@ -163,9 +163,9 @@ function ModernPricingPage() {
 									monthlyPrice="$6.00"
 									buttonTitle="Get Started"
 									details={
-										<div className="mt-48 flex flex-col">
+										<div className="mt-12 flex flex-col">
 											<Typography className="font-semibold">Core features, including:</Typography>
-											<div className="mt-16 space-y-8">
+											<div className="mt-4 space-y-2">
 												<div className="flex">
 													<FuseSvgIcon
 														className="text-green-600"
@@ -173,7 +173,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">
+													<Typography className="ml-0.5 leading-5">
 														<b>10</b> projects
 													</Typography>
 												</div>
@@ -184,7 +184,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">
+													<Typography className="ml-0.5 leading-5">
 														<b>5GB</b> storage
 													</Typography>
 												</div>
@@ -195,7 +195,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">Analytics</Typography>
+													<Typography className="ml-0.5 leading-5">Analytics</Typography>
 												</div>
 												<div className="flex">
 													<FuseSvgIcon
@@ -204,7 +204,9 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">Free mobile app</Typography>
+													<Typography className="ml-0.5 leading-5">
+														Free mobile app
+													</Typography>
 												</div>
 												<div className="flex">
 													<FuseSvgIcon
@@ -213,7 +215,9 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">Access to forums</Typography>
+													<Typography className="ml-0.5 leading-5">
+														Access to forums
+													</Typography>
 												</div>
 											</div>
 										</div>
@@ -229,9 +233,9 @@ function ModernPricingPage() {
 									monthlyPrice="$15.00"
 									buttonTitle="Start a free 14-day trial"
 									details={
-										<div className="mt-48 flex flex-col">
+										<div className="mt-12 flex flex-col">
 											<Typography className="font-semibold">Personal features, plus:</Typography>
-											<div className="mt-16 space-y-8">
+											<div className="mt-4 space-y-2">
 												<div className="flex">
 													<FuseSvgIcon
 														className="text-green-600"
@@ -239,7 +243,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">
+													<Typography className="ml-0.5 leading-5">
 														<b>Unlimited</b> projects
 													</Typography>
 												</div>
@@ -250,7 +254,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">
+													<Typography className="ml-0.5 leading-5">
 														<b>Unlimited</b> storage
 													</Typography>
 												</div>
@@ -261,7 +265,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">Custom domains</Typography>
+													<Typography className="ml-0.5 leading-5">Custom domains</Typography>
 												</div>
 												<div className="flex">
 													<FuseSvgIcon
@@ -270,7 +274,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">Bulk editing</Typography>
+													<Typography className="ml-0.5 leading-5">Bulk editing</Typography>
 												</div>
 												<div className="flex">
 													<FuseSvgIcon
@@ -279,7 +283,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">12 / 5 support</Typography>
+													<Typography className="ml-0.5 leading-5">12 / 5 support</Typography>
 												</div>
 											</div>
 										</div>
@@ -296,9 +300,9 @@ function ModernPricingPage() {
 									monthlyPrice="$69.00"
 									buttonTitle="Start a free 7-day trial"
 									details={
-										<div className="mt-48 flex flex-col">
+										<div className="mt-12 flex flex-col">
 											<Typography className="font-semibold">Premium features, plus:</Typography>
-											<div className="mt-16 space-y-8">
+											<div className="mt-4 space-y-2">
 												<div className="flex">
 													<FuseSvgIcon
 														className="text-green-600"
@@ -306,7 +310,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">
+													<Typography className="ml-0.5 leading-5">
 														<b>Dedicated</b> hardware
 													</Typography>
 												</div>
@@ -317,7 +321,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">
+													<Typography className="ml-0.5 leading-5">
 														<b>%99.9</b> uptime
 													</Typography>
 												</div>
@@ -328,7 +332,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">
+													<Typography className="ml-0.5 leading-5">
 														Advanced analytics
 													</Typography>
 												</div>
@@ -339,7 +343,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">
+													<Typography className="ml-0.5 leading-5">
 														3rd party integrations
 													</Typography>
 												</div>
@@ -350,7 +354,7 @@ function ModernPricingPage() {
 													>
 														heroicons-solid:check
 													</FuseSvgIcon>
-													<Typography className="ml-2 leading-5">24 / 7 support</Typography>
+													<Typography className="ml-0.5 leading-5">24 / 7 support</Typography>
 												</div>
 											</div>
 										</div>
@@ -361,21 +365,21 @@ function ModernPricingPage() {
 					</div>
 				</div>
 			</div>
-			<Paper className="flex flex-col items-center px-24 py-40 sm:px-64 sm:pb-80 sm:pt-72">
+			<Paper className="flex flex-col items-center px-6 py-10 sm:px-16 sm:pb-20 sm:pt-18">
 				<div className="container">
 					<div>
-						<Typography className="text-4xl font-extrabold leading-tight tracking-tight">
+						<Typography className="text-4xl font-extrabold leading-[1.25] tracking-tight">
 							Everything you need to build efficiently
 						</Typography>
 						<Typography
-							className="mt-2 max-w-xl text-xl"
+							className="mt-0.5 max-w-3xl text-xl"
 							color="text.secondary"
 						>
 							Start building your app using our tools, be efficient, spend less time with details more
 							time with your business
 						</Typography>
 					</div>
-					<div className="mt-48 grid w-full grid-cols-1 gap-x-24 gap-y-48 sm:mt-64 sm:grid-cols-2 lg:grid-cols-3 lg:gap-64">
+					<div className="mt-12 grid w-full grid-cols-1 gap-x-6 gap-y-12 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
 						<ModernPricingFeatureItem
 							icon="heroicons-outline:pencil-square"
 							title="Create and Edit Projects"
@@ -416,20 +420,20 @@ function ModernPricingPage() {
 			</Paper>
 			<Box
 				sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}
-				className="px-24 py-40 sm:px-64 sm:py-48"
+				className="px-6 py-10 sm:px-16 sm:py-12"
 			>
 				<div className="mx-auto flex container flex-col items-center text-center">
 					<Typography className="text-3xl font-extrabold leading-6 sm:text-5xl sm:leading-10">
 						Boost your productivity.
 					</Typography>
 					<Typography
-						className="mt-8 text-3xl font-extrabold leading-6 sm:text-5xl sm:leading-10 opacity-75"
+						className="mt-2 text-3xl font-extrabold leading-6 sm:text-5xl sm:leading-10 opacity-75"
 						color="primary.dark"
 					>
 						Start using Fuse today.
 					</Typography>
 					<Button
-						className="mt-32 px-48 text-lg"
+						className="mt-8 px-12 text-lg"
 						size="large"
 						color="secondary"
 						variant="contained"
@@ -438,26 +442,26 @@ function ModernPricingPage() {
 					</Button>
 				</div>
 			</Box>
-			<div className="flex flex-col items-center px-24 pb-32 pt-12 sm:px-64 sm:pb-80 sm:pt-72">
+			<div className="flex flex-col items-center px-6 pb-8 pt-3 sm:px-16 sm:pb-20 sm:pt-18">
 				<div className="container">
 					<div>
-						<Typography className="text-4xl font-extrabold leading-tight tracking-tight">
+						<Typography className="text-4xl font-extrabold leading-[1.25] tracking-tight">
 							Frequently asked questions
 						</Typography>
 						<Typography
-							className="mt-8 max-w-xl text-xl"
+							className="mt-2 max-w-3xl text-xl"
 							color="text.secondary"
 						>
 							Here are the most frequently asked questions you may check before getting started
 						</Typography>
 					</div>
-					<div className="mt-48 grid w-full grid-cols-1 gap-x-24 gap-y-48 sm:mt-64 sm:grid-cols-2 lg:gap-x-64">
+					<div className="mt-12 grid w-full grid-cols-1 gap-x-6 gap-y-12 sm:mt-16 sm:grid-cols-2 lg:gap-x-16">
 						<div>
 							<Typography className="text-xl font-semibold">
 								What is the duration of the free trial?
 							</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								Our app is free to try for 14 days, if you want more, you can provide payment details
@@ -470,7 +474,7 @@ function ModernPricingPage() {
 								Are there discounts for non-profits or educational use?
 							</Typography>
 							<Typography
-								className="mt-2 leading-6"
+								className="mt-0.5 leading-6"
 								color="text.secondary"
 							>
 								Yes, our Personal and Premium packages are free for non-profits and educational use.
@@ -481,7 +485,7 @@ function ModernPricingPage() {
 						<div>
 							<Typography className="text-xl font-semibold">What is the storage is for?</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								Since we provide an extremely detailed reporting and analytics tool, they require quite
@@ -489,7 +493,7 @@ function ModernPricingPage() {
 								since the Personal package limits the projects you can have.
 							</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								For some reason if you run out of space, contact us and we will see what can be done
@@ -501,7 +505,7 @@ function ModernPricingPage() {
 								What happens if I’m not satisfied?
 							</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								If you are still in your free trial period, you can cancel your account at anytime with
@@ -509,7 +513,7 @@ function ModernPricingPage() {
 								30-day money-back guarantee with no questions asked.
 							</Typography>
 							<Typography
-								className="mt-8 leading-6"
+								className="mt-2 leading-6"
 								color="text.secondary"
 							>
 								After first month, you can still cancel your account at any time but we will calculate

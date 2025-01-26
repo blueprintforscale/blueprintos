@@ -10,13 +10,13 @@ function FuseScrollbarsDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				FuseScrollbars
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>FuseScrollbars</code> is a simple{' '}
@@ -31,7 +31,7 @@ function FuseScrollbarsDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				It can be disabled globally by Fuse Settings (<code>app/configs/settingsConfig.tsx</code>).
@@ -49,7 +49,7 @@ function FuseScrollbarsDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Props

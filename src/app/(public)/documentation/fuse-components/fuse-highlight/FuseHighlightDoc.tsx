@@ -10,13 +10,13 @@ function FuseHighlightDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				FuseHighlight
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>FuseHighlight</code> is a custom-built Fuse component allows us to show syntax highlighted codes
@@ -25,7 +25,7 @@ function FuseHighlightDoc() {
 					href="http://prismjs.com/"
 					target="_blank"
 					rel="noopener noreferrer"
-					className="ml-8"
+					className="ml-2"
 				>
 					PrismJS
 				</a>
@@ -33,7 +33,7 @@ function FuseHighlightDoc() {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Usage
@@ -53,7 +53,7 @@ function FuseHighlightDoc() {
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Preview

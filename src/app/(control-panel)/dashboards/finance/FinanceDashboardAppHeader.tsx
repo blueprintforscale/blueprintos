@@ -9,9 +9,9 @@ import PageBreadcrumb from 'src/components/PageBreadcrumb';
 function FinanceDashboardAppHeader() {
 	return (
 		<div className="flex w-full container">
-			<div className="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 p-24 md:p-32 pb-0 md:pb-0">
+			<div className="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 p-6 md:p-8 pb-0 md:pb-0">
 				<div className="flex flex-col flex-auto">
-					<PageBreadcrumb className="mb-8" />
+					<PageBreadcrumb className="mb-2" />
 					<Typography className="text-3xl font-semibold tracking-tight leading-8">
 						Finance dashboard
 					</Typography>
@@ -22,7 +22,7 @@ function FinanceDashboardAppHeader() {
 						Keep track of your financial status
 					</Typography>
 				</div>
-				<div className="flex items-center mt-24 sm:mt-0 sm:mx-8 space-x-8">
+				<div className="flex items-center mt-6 sm:mt-0 sm:mx-2 space-x-2">
 					<Button
 						className="whitespace-nowrap"
 						startIcon={<FuseSvgIcon size={20}>heroicons-solid:document-chart-bar</FuseSvgIcon>}

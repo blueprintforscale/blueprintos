@@ -50,7 +50,7 @@ function WYSIWYGEditor(props: WYSIWYGEditorProps) {
 
 	return (
 		<Root
-			className={clsx('w-full overflow-hidden rounded border-1', className)}
+			className={clsx('w-full overflow-hidden rounded-sm border-1', className)}
 			ref={ref}
 		>
 			<Editor

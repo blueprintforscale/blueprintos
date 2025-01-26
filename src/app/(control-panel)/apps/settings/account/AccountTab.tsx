@@ -67,7 +67,7 @@ function AccountTab() {
 	}
 
 	return (
-		<div className="w-full max-w-3xl">
+		<div className="w-full max-w-5xl">
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className="w-full">
 					<Typography className="text-xl">Profile</Typography>
@@ -75,7 +75,7 @@ function AccountTab() {
 						Following information is publicly displayed, be careful!
 					</Typography>
 				</div>
-				<div className="mt-32 grid w-full gap-24 sm:grid-cols-4">
+				<div className="mt-8 grid w-full gap-6 sm:grid-cols-4">
 					<div className="sm:col-span-4">
 						<Controller
 							control={control}
@@ -206,7 +206,7 @@ function AccountTab() {
 										className: 'max-h-min h-min items-start',
 										startAdornment: (
 											<InputAdornment
-												className="mt-16"
+												className="mt-4"
 												position="start"
 											>
 												<FuseSvgIcon size={20}>heroicons-solid:bars-3-bottom-left</FuseSvgIcon>
@@ -227,14 +227,14 @@ function AccountTab() {
 					</div>
 				</div>
 
-				<div className="my-40 border-t" />
+				<div className="my-10 border-t" />
 				<div className="w-full">
 					<Typography className="text-xl">Personal Information</Typography>
 					<Typography color="text.secondary">
 						Communication details in case we want to connect with you. These will be kept private.
 					</Typography>
 				</div>
-				<div className="grid w-full gap-24 sm:grid-cols-4 mt-32">
+				<div className="grid w-full gap-6 sm:grid-cols-4 mt-8">
 					<div className="sm:col-span-2">
 						<Controller
 							control={control}
@@ -333,8 +333,8 @@ function AccountTab() {
 					</div>
 				</div>
 
-				<Divider className="mb-40 mt-44 border-t" />
-				<div className="flex items-center justify-end space-x-8">
+				<Divider className="mb-10 mt-11 border-t" />
+				<div className="flex items-center justify-end space-x-2">
 					<Button
 						variant="outlined"
 						disabled={_.isEmpty(dirtyFields)}

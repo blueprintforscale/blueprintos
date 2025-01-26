@@ -45,6 +45,7 @@ function WeeklyExpensesWidget() {
 			categories: labels
 		},
 		yaxis: {
+			show: false,
 			labels: {
 				formatter: (val) => `$${val}`
 			}
@@ -60,18 +61,18 @@ function WeeklyExpensesWidget() {
 	}
 
 	return (
-		<Paper className="flex flex-col flex-auto shadow rounded-xl overflow-hidden">
-			<div className="flex items-center justify-between pt-8 px-8">
-				<div className="px-8 text-lg font-medium tracking-tight leading-6 truncate">Weekly Expenses</div>
+		<Paper className="flex flex-col flex-auto shadow-sm rounded-xl overflow-hidden">
+			<div className="flex items-center justify-between pt-2 px-2">
+				<div className="px-2 text-lg font-medium tracking-tight leading-6 truncate">Weekly Expenses</div>
 				<div className="">
 					<IconButton>
 						<FuseSvgIcon size={20}>heroicons-solid:ellipsis-vertical</FuseSvgIcon>
 					</IconButton>
 				</div>
 			</div>
-			<div className="flex items-center p-16">
+			<div className="flex items-center p-4">
 				<div className="flex flex-col">
-					<div className="text-3xl font-semibold tracking-tight leading-tight">
+					<div className="text-3xl font-semibold tracking-tight leading-[1.25]">
 						{amount.toLocaleString('en-US', {
 							style: 'currency',
 							currency: 'USD'
@@ -79,7 +80,7 @@ function WeeklyExpensesWidget() {
 					</div>
 					<div className="flex items-center">
 						<FuseSvgIcon
-							className="mr-4 text-green-500"
+							className="mr-1 text-green-500"
 							size={20}
 						>
 							heroicons-solid:trending-down
@@ -90,9 +91,9 @@ function WeeklyExpensesWidget() {
 						</Typography>
 					</div>
 				</div>
-				<div className="flex flex-col flex-auto ml-32">
+				<div className="flex flex-col flex-auto ml-8 min-w-0">
 					<ReactApexChart
-						className="flex-auto w-full h-64"
+						className="w-full h-16"
 						options={chartOptions}
 						series={_.cloneDeep(series)}
 						type={chartOptions?.chart?.type}

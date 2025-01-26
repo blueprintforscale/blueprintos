@@ -22,7 +22,7 @@ function CssBaselineDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				CSS Baseline
@@ -32,13 +32,13 @@ function CssBaselineDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Global reset
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You might be familiar with <a href="https://github.com/necolas/normalize.css">normalize.css</a>, a
@@ -64,13 +64,13 @@ export default function MyApp() {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Scoping on children
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				However, you might be progressively migrating a website to Material UI, using a global reset might not
@@ -98,32 +98,32 @@ export default function MyApp() {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				⚠️ Make sure you import <code>ScopedCssBaseline</code> first to avoid box-sizing conflicts as in the
 				above example.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Approach
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Page
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The <code>{`<html>`}</code> and <code>{`<body>`}</code> elements are updated to provide better page-wide
 				defaults. More specifically:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>The margin in all browsers is removed.</li>
 				<li>
 					The default Material Design background color is applied. It&#39;s using{' '}
@@ -143,12 +143,12 @@ export default function MyApp() {
 				</li>
 			</ul>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Layout
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<code>box-sizing</code> is set globally on the <code>{`<html>`}</code> element to{' '}
 					<code>border-box</code>. Every element—including <code>*::before</code> and <code>*::after</code>{' '}
@@ -157,19 +157,19 @@ export default function MyApp() {
 				</li>
 			</ul>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Scrollbars
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				:::error This API is deprecated. Consider using <a href="#color-scheme">color-scheme</a> instead. :::
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The colors of the scrollbars can be customized to improve the contrast (especially on Windows). Add this
@@ -195,20 +195,20 @@ const theme = createTheme({
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Be aware, however, that using this utility (and customizing <code>-webkit-scrollbar</code>) forces macOS
 				to always show the scrollbar.
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Color scheme
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				This API is introduced in @mui/material (v5.1.0) for switching between <code>{`"light"`}</code> and{' '}
@@ -232,12 +232,12 @@ const theme = createTheme({
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Typography
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					No base font-size is declared on the <code>{`<html>`}</code>, but 16px is assumed (the browser
 					default). You can learn more about the implications of changing the <code>{`<html>`}</code> default
@@ -254,13 +254,13 @@ const theme = createTheme({
 				<li>Custom font-smoothing is enabled for better display of the Roboto font.</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Customization
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Head to the{' '}

@@ -9,13 +9,13 @@ function UpdatingFuseReactDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Updating Fuse React
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React isn’t an end product or an extension so there is no easy way to update the project. Due to
@@ -25,20 +25,20 @@ function UpdatingFuseReactDoc() {
 			</Typography>
 
 			<Typography
-				className="my-16"
+				className="my-4"
 				component="div"
 			>
 				<ol>
-					<li className="mb-16">
+					<li className="mb-4">
 						The most important one is not to touch the /@fuse directory but sometimes that is going to be
 						inevitable and in those cases, try to keep the modifications minimal.
 					</li>
-					<li className="mb-16">
+					<li className="mb-4">
 						Usually React and Material UI libraries do some breaking changes and force our hands to change
 						things. In those cases, it's always good to check their official Changelogs to see what they
 						did. Usually they provide clear instructions and even helper tools to update your code.
 					</li>
-					<li className="mb-16">
+					<li className="mb-4">
 						Before starting your new project,{' '}
 						<a
 							href="http://support.withinpixels.com/github"

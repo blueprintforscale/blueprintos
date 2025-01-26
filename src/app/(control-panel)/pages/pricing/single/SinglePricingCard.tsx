@@ -10,29 +10,29 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
  */
 function SinglePricingCard() {
 	return (
-		<Paper className="flex max-w-sm flex-col overflow-hidden lg:max-w-xl lg:flex-row">
-			<div className="p-24 sm:p-32 lg:p-40">
+		<Paper className="flex max-w-sm flex-col overflow-hidden lg:max-w-5xl lg:flex-row">
+			<div className="p-6 sm:p-8 lg:p-10">
 				<Typography className="text-3xl font-bold">Lifetime Membership</Typography>
 
 				<Typography
-					className="mt-8 leading-relaxed"
+					className="mt-2 leading-[1.625]"
 					color="text.secondary"
 				>
 					Learn from like-minded individuals which are eager to make a living building stuff on the web. Pay
 					once and get lifetime access to the community.
 				</Typography>
 
-				<div className="mt-40 flex items-center">
+				<div className="mt-10 flex items-center">
 					<Typography
 						className="font-medium"
 						color="text.secondary"
 					>
 						INCLUDED FEATURES
 					</Typography>
-					<Divider className="ml-8 flex-auto" />
+					<Divider className="ml-2 flex-auto" />
 				</div>
 
-				<div className="mt-24 grid grid-cols-1 gap-y-16 lg:grid-cols-2">
+				<div className="mt-6 grid grid-cols-1 gap-y-4 lg:grid-cols-2">
 					<div className="flex items-center">
 						<FuseSvgIcon
 							size={20}
@@ -40,7 +40,7 @@ function SinglePricingCard() {
 						>
 							heroicons-solid:check-circle
 						</FuseSvgIcon>
-						<div className="ml-8">Private forum access</div>
+						<div className="ml-2">Private forum access</div>
 					</div>
 					<div className="flex items-center">
 						<FuseSvgIcon
@@ -49,7 +49,7 @@ function SinglePricingCard() {
 						>
 							heroicons-solid:check-circle
 						</FuseSvgIcon>
-						<div className="ml-8">Access to annual online conference</div>
+						<div className="ml-2">Access to annual online conference</div>
 					</div>
 					<div className="flex items-center">
 						<FuseSvgIcon
@@ -58,7 +58,7 @@ function SinglePricingCard() {
 						>
 							heroicons-solid:check-circle
 						</FuseSvgIcon>
-						<div className="ml-8">Member resources</div>
+						<div className="ml-2">Member resources</div>
 					</div>
 					<div className="flex items-center">
 						<FuseSvgIcon
@@ -67,24 +67,24 @@ function SinglePricingCard() {
 						>
 							heroicons-solid:check-circle
 						</FuseSvgIcon>
-						<div className="ml-8">Official member T-Shirt</div>
+						<div className="ml-2">Official member T-Shirt</div>
 					</div>
 				</div>
 			</div>
 
 			<Box
 				sx={{ backgroundColor: 'primary.dark', color: 'primary.contrastText' }}
-				className="flex flex-col items-center p-8 lg:min-w-320 lg:px-40 lg:py-48"
+				className="flex flex-col items-center p-2 lg:min-w-80 lg:px-10 lg:py-12"
 			>
 				<div className="flex items-center whitespace-nowrap">
 					<Typography
-						className="text-8xl font-extrabold tracking-tight"
+						className="text-10xl font-extrabold tracking-tight"
 						color="primary.contrastText"
 					>
 						$599
 					</Typography>
 					<Typography
-						className="ml-2 text-2xl font-semibold"
+						className="ml-0.5 text-2xl font-semibold"
 						color="primary.contrastText"
 					>
 						USD
@@ -101,7 +101,7 @@ function SinglePricingCard() {
 				<Button
 					variant="contained"
 					color="secondary"
-					className="mt-32 w-full lg:mt-auto"
+					className="mt-8 w-full lg:mt-auto"
 				>
 					Get Started
 				</Button>

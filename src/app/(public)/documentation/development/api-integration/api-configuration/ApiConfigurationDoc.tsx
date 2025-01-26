@@ -12,27 +12,27 @@ function ApiConfigurationDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				API Configuration
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This document explains how to configure and use API routes in the Fuse React Next.js project.
 			</Typography>
 
 			<Typography
-				className="mt-24 mb-10"
+				className="mt-6 mb-2.5"
 				variant="h6"
 			>
 				API Routes Structure <TitleReferenceLink id="api-routes-structure" />
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Our API routes are structured using Next.js server-side API routing mechanism. They are located in the
@@ -40,7 +40,7 @@ function ApiConfigurationDoc() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Example of an API route structure:
@@ -71,14 +71,14 @@ app/
 			</FuseHighlight>
 
 			<Typography
-				className="mt-24 mb-10"
+				className="mt-6 mb-2.5"
 				variant="h6"
 			>
 				Mock API and Database <TitleReferenceLink id="mock-api-database" />
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				We use our custom mock API utility (`mockApi`) and JSON files to simulate database connections and
@@ -86,7 +86,7 @@ app/
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				The mock database data is defined in `mockDb.json`, and the `mockApi` utility provides methods for CRUD
@@ -94,7 +94,7 @@ app/
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Mock API endpoints are created using OpenAPI specifications. You can find these specifications in the
@@ -102,7 +102,7 @@ app/
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				For detailed documentation on the mock API, please visit the{' '}
@@ -110,14 +110,14 @@ app/
 			</Typography>
 
 			<Typography
-				className="mt-24 mb-10"
+				className="mt-6 mb-2.5"
 				variant="h6"
 			>
 				API Route Example <TitleReferenceLink id="api-route-example" />
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Here's an example of how an API route is implemented:
@@ -150,14 +150,14 @@ export async function POST(req: Request) {
 			</FuseHighlight>
 
 			<Typography
-				className="mt-24 mb-10"
+				className="mt-6 mb-2.5"
 				variant="h6"
 			>
 				Connecting to a Real Database <TitleReferenceLink id="real-database-connection" />
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To connect these API routes to a real database, you would replace the `mockApi` calls with your actual
@@ -165,7 +165,7 @@ export async function POST(req: Request) {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Remember to handle errors and edge cases appropriately when connecting to a real database.

@@ -50,7 +50,7 @@ function NotesSidebarContent() {
 	}
 
 	return (
-		<div className="px-16 py-24 w-240 slg:w-auto max-w-full ">
+		<div className="px-4 py-6 w-60 slg:w-auto max-w-full ">
 			<motion.div
 				initial={{ y: 20, opacity: 0 }}
 				animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}

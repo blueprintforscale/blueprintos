@@ -43,17 +43,17 @@ function ChangelogCard(props: ChangelogCardProps) {
 	const { className, version, date, newChanges, fixedChanges, breakingChanges, notes } = props;
 
 	return (
-		<Card className={clsx('py-24 px-32 shadow not-prose', className)}>
+		<Card className={clsx('py-6 px-8 shadow-sm not-prose', className)}>
 			<div className="flex items-center">
 				{version && (
 					<Typography
-						className="text-3xl font-700"
+						className="text-3xl font-bold"
 						component="h2"
 					>{`v${version}`}</Typography>
 				)}
 				{date && (
 					<Typography
-						className="text-xl mx-8 font-600"
+						className="text-xl mx-2 font-semibold"
 						color="text.secondary"
 						component="h3"
 					>
@@ -62,13 +62,13 @@ function ChangelogCard(props: ChangelogCardProps) {
 				)}
 			</div>
 			{newChanges?.length > 0 && (
-				<div className="mt-40">
+				<div className="mt-10">
 					<StyledBadge value="new">New</StyledBadge>
-					<ul className="my-16 px-24 list-disc">
+					<ul className="my-4 px-6 list-disc">
 						{newChanges.map((change, index: number) => (
 							<li
 								key={index}
-								className="mb-6"
+								className="mb-1.5"
 							>
 								<Typography>{change}</Typography>
 							</li>
@@ -77,13 +77,13 @@ function ChangelogCard(props: ChangelogCardProps) {
 				</div>
 			)}
 			{fixedChanges?.length > 0 && (
-				<div className="mt-40">
+				<div className="mt-10">
 					<StyledBadge value="fix">Fixed</StyledBadge>
-					<ul className="my-16 px-24 list-disc">
+					<ul className="my-4 px-6 list-disc">
 						{fixedChanges.map((change, index: number) => (
 							<li
 								key={index}
-								className="mb-6"
+								className="mb-1.5"
 							>
 								<Typography>{change}</Typography>
 							</li>
@@ -92,13 +92,13 @@ function ChangelogCard(props: ChangelogCardProps) {
 				</div>
 			)}
 			{breakingChanges?.length > 0 && (
-				<div className="mt-40">
+				<div className="mt-10">
 					<StyledBadge value="breaking">Breaking Changes</StyledBadge>
-					<ul className="my-16 px-24 list-disc">
+					<ul className="my-4 px-6 list-disc">
 						{breakingChanges.map((change, index: number) => (
 							<li
 								key={index}
-								className="mb-6"
+								className="mb-1.5"
 							>
 								<Typography>{change}</Typography>
 							</li>

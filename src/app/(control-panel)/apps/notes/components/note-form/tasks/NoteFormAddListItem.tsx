@@ -48,7 +48,7 @@ function NoteFormAddListItem(props: NoteFormAddListItemProps) {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<ListItem
-				className="px-12"
+				className="px-3"
 				dense
 			>
 				<IconButton

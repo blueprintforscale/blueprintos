@@ -112,7 +112,7 @@ function MailToolbar(props: MailToolbarProps) {
 		<div className="sticky top-0 z-10">
 			<Box
 				sx={{ backgroundColor: 'background.default' }}
-				className="flex items-center w-full min-h-64 py-12 sm:py-0 space-x-8 px-8 border-b "
+				className="flex items-center w-full min-h-16 py-3 sm:py-0 space-x-2 px-2 border-b "
 			>
 				<div className="flex items-center">
 					{isMobile && (
@@ -148,7 +148,7 @@ function MailToolbar(props: MailToolbarProps) {
 			</Box>
 
 			<Box
-				className="flex items-center w-full min-h-56 px-8 border-b space-x-8"
+				className="flex items-center w-full min-h-14 px-2 border-b space-x-2"
 				sx={{ backgroundColor: 'background.paper' }}
 			>
 				<Checkbox
@@ -221,7 +221,7 @@ function MailToolbar(props: MailToolbarProps) {
 
 				{selectedMailIds.length > 0 && (
 					<>
-						<div className="border-r-1 h-32 w-1 mx-12 my-0" />
+						<div className="border-r-1 h-8 w-0.25 mx-3 my-0" />
 
 						<Tooltip title="Delete">
 							<IconButton

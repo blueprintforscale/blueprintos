@@ -39,14 +39,14 @@ function ContactListItem(props: ContactListItemProps) {
 
 	return (
 		<ListItemButton
-			className="px-24 py-12 min-h-80"
+			className="px-6 py-3 min-h-20"
 			onClick={handleClick}
 		>
 			<UserAvatar user={item} />
 
 			<ListItemText
 				classes={{
-					root: 'min-w-px px-16',
+					root: 'min-w-px px-4',
 					primary: 'font-medium text-base',
 					secondary: 'truncate'
 				}}

@@ -29,13 +29,13 @@ function ProductsTable() {
 					<div className="flex items-center justify-center">
 						{row.original?.images?.length > 0 && row.original.featuredImageId ? (
 							<img
-								className="w-full max-h-36 max-w-36 block rounded"
+								className="w-full max-h-9 max-w-9 block rounded-sm"
 								src={_.find(row.original.images, { id: row.original.featuredImageId })?.url}
 								alt={row.original.name}
 							/>
 						) : (
 							<img
-								className="w-full max-h-36 max-w-36 block rounded"
+								className="w-full max-h-9 max-w-9 block rounded-sm"
 								src="/assets/images/apps/ecommerce/product-image-placeholder.png"
 								alt={row.original.name}
 							/>
@@ -60,7 +60,7 @@ function ProductsTable() {
 				accessorKey: 'categories',
 				header: 'Category',
 				accessorFn: (row) => (
-					<div className="flex flex-wrap space-x-2">
+					<div className="flex flex-wrap space-x-0.5">
 						{row.categories.map((item) => (
 							<Chip
 								key={item}
@@ -82,11 +82,11 @@ function ProductsTable() {
 				accessorKey: 'quantity',
 				header: 'Quantity',
 				accessorFn: (row) => (
-					<div className="flex items-center space-x-8">
+					<div className="flex items-center space-x-2">
 						<span>{row.quantity}</span>
 						<i
 							className={clsx(
-								'inline-block w-8 h-8 rounded',
+								'inline-block w-2 h-2 rounded-sm',
 								row.quantity <= 5 && 'bg-red',
 								row.quantity > 5 && row.quantity <= 25 && 'bg-orange',
 								row.quantity > 25 && 'bg-green'
@@ -102,14 +102,14 @@ function ProductsTable() {
 					<div className="flex items-center">
 						{row.active ? (
 							<FuseSvgIcon
-								className="text-green"
+								className="text-green-500"
 								size={20}
 							>
 								heroicons-outline:check-circle
 							</FuseSvgIcon>
 						) : (
 							<FuseSvgIcon
-								className="text-red"
+								className="text-red-500"
 								size={20}
 							>
 								heroicons-outline:minus-circle
@@ -128,7 +128,7 @@ function ProductsTable() {
 
 	return (
 		<Paper
-			className="flex flex-col flex-auto shadow-1 rounded-t-lg overflow-hidden rounded-b-0 w-full h-full"
+			className="flex flex-col flex-auto shadow-1 rounded-t-lg overflow-hidden rounded-b-none w-full h-full"
 			elevation={0}
 		>
 			<DataTable
@@ -165,11 +165,11 @@ function ProductsTable() {
 								removeProducts(selectedRows.map((row) => row.original.id));
 								table.resetRowSelection();
 							}}
-							className="flex shrink min-w-36 ltr:mr-8 rtl:ml-8"
+							className="flex shrink min-w-9 ltr:mr-2 rtl:ml-2"
 							color="secondary"
 						>
 							<FuseSvgIcon size={16}>heroicons-outline:trash</FuseSvgIcon>
-							<span className="hidden sm:flex mx-8">Delete selected items</span>
+							<span className="hidden sm:flex mx-2">Delete selected items</span>
 						</Button>
 					);
 				}}

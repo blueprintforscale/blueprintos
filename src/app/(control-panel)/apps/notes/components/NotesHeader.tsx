@@ -24,7 +24,7 @@ function NotesHeader(props: NotesHeaderProps) {
 	const variateDescSize = useAppSelector(selectVariateDescSize);
 
 	return (
-		<div className="flex  flex-1 flex-col sm:flex-row sm:items-center justify-between py-8 sm:py-24 relative">
+		<div className="flex flex-1 flex-col sm:flex-row sm:items-center justify-between py-2 sm:py-6 relative">
 			<motion.span
 				initial={{ x: -20 }}
 				animate={{
@@ -32,13 +32,13 @@ function NotesHeader(props: NotesHeaderProps) {
 					transition: { delay: 0.2 }
 				}}
 			>
-				<div className="flex flex-col mb-12 sm:mb-0">
-					<PageBreadcrumb className="mb-4" />
+				<div className="flex flex-col mb-3 sm:mb-0">
+					<PageBreadcrumb className="mb-1" />
 					<Typography className="text-4xl font-extrabold leading-none tracking-tight">Notes</Typography>
 				</div>
 			</motion.span>
 
-			<div className="flex flex-1 w-full sm:w-auto items-center justify-end space-x-8">
+			<div className="flex flex-1 w-full sm:w-auto items-center justify-end space-x-2">
 				{isMobile && (
 					<IconButton
 						onClick={() => onSetSidebarOpen(true)}

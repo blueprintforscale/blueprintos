@@ -51,8 +51,8 @@ function ProductHeader() {
 	}
 
 	return (
-		<div className="flex flex-col sm:flex-row flex-1 w-full items-center justify-between space-y-8 sm:space-y-0 py-24 sm:py-32">
-			<div className="flex flex-col items-start space-y-8 sm:space-y-0 w-full sm:max-w-full min-w-0">
+		<div className="flex flex-col sm:flex-row flex-1 w-full items-center justify-between space-y-2 sm:space-y-0 py-6 sm:py-8">
+			<div className="flex flex-col items-start space-y-2 sm:space-y-0 w-full sm:max-w-full min-w-0">
 				<motion.div
 					initial={{
 						x: 20,
@@ -64,10 +64,10 @@ function ProductHeader() {
 						transition: { delay: 0.3 }
 					}}
 				>
-					<PageBreadcrumb className="mb-8" />
+					<PageBreadcrumb className="mb-2" />
 				</motion.div>
 
-				<div className="flex items-center max-w-full space-x-12">
+				<div className="flex items-center max-w-full space-x-3">
 					<motion.div
 						className="hidden sm:flex"
 						initial={{ scale: 0 }}
@@ -75,13 +75,13 @@ function ProductHeader() {
 					>
 						{images && images.length > 0 && featuredImageId ? (
 							<img
-								className="w-32 sm:w-48 rounded"
+								className="w-8 sm:w-12 rounded-sm"
 								src={_.find(images, { id: featuredImageId })?.url}
 								alt={name}
 							/>
 						) : (
 							<img
-								className="w-32 sm:w-48 rounded"
+								className="w-8 sm:w-12 rounded-sm"
 								src="/assets/images/apps/ecommerce/product-image-placeholder.png"
 								alt={name}
 							/>
@@ -92,7 +92,7 @@ function ProductHeader() {
 						initial={{ x: -20 }}
 						animate={{ x: 0, transition: { delay: 0.3 } }}
 					>
-						<Typography className="text-15 sm:text-2xl truncate font-semibold">
+						<Typography className="text-lg sm:text-2xl truncate font-semibold">
 							{name || 'New Product'}
 						</Typography>
 						<Typography
@@ -112,7 +112,7 @@ function ProductHeader() {
 				{productId !== 'new' ? (
 					<>
 						<Button
-							className="whitespace-nowrap mx-4"
+							className="whitespace-nowrap mx-1"
 							variant="contained"
 							color="secondary"
 							onClick={handleRemoveProduct}
@@ -121,7 +121,7 @@ function ProductHeader() {
 							Remove
 						</Button>
 						<Button
-							className="whitespace-nowrap mx-4"
+							className="whitespace-nowrap mx-1"
 							variant="contained"
 							color="secondary"
 							disabled={_.isEmpty(dirtyFields) || !isValid}
@@ -132,7 +132,7 @@ function ProductHeader() {
 					</>
 				) : (
 					<Button
-						className="whitespace-nowrap mx-4"
+						className="whitespace-nowrap mx-1"
 						variant="contained"
 						color="secondary"
 						disabled={_.isEmpty(dirtyFields) || !isValid}

@@ -48,14 +48,14 @@ function CountryCodeSelector(props: CountryCodeSelectorProps) {
 			>
 				<Box
 					component="span"
-					className="w-24 h-16 overflow-hidden"
+					className="w-6 h-4 overflow-hidden"
 					sx={{
 						background: "url('/assets/images/apps/contacts/flags.png') no-repeat 0 0",
 						backgroundSize: '24px 3876px',
 						backgroundPosition: country?.flagImagePos
 					}}
 				/>
-				<span className="ml-8 font-medium">{country?.code}</span>
+				<span className="ml-2 font-medium">{country?.code}</span>
 			</Button>
 			<Menu
 				id="country-menu"
@@ -77,14 +77,14 @@ function CountryCodeSelector(props: CountryCodeSelectorProps) {
 					>
 						<Box
 							component="span"
-							className="w-24 h-16 overflow-hidden"
+							className="w-6 h-4 overflow-hidden"
 							sx={{
 								background: "url('/assets/images/apps/contacts/flags.png') no-repeat 0 0",
 								backgroundSize: '24px 3876px',
 								backgroundPosition: item.flagImagePos
 							}}
 						/>
-						<span className="ml-8 font-medium">{item.code}</span>
+						<span className="ml-2 font-medium">{item.code}</span>
 					</MenuItem>
 				))}
 			</Menu>

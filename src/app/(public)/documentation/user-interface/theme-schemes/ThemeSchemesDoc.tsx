@@ -9,13 +9,13 @@ function ThemeSchemesDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Theme Schemes
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				The Fuse React uses material-ui's theming by default. You can create theme color schemes with defining
@@ -23,14 +23,14 @@ function ThemeSchemesDoc() {
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Configuration
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				For the configuration options checkout{' '}
@@ -43,7 +43,7 @@ function ThemeSchemesDoc() {
 				</a>
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Theme configurations are located at <code>src/configs/themesConfig.ts</code> file.

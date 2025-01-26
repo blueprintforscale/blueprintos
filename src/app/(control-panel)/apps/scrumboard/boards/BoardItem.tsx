@@ -30,7 +30,7 @@ function BoardItem(props: BoardItemProps) {
 			component={NavLinkAdapter}
 			to={`/apps/scrumboard/boards/${board.id}`}
 			role="button"
-			className="flex flex-col items-start w-full h-full p-24 shadow rounded-lg hover:shadow-xl transition-shadow duration-150 ease-in-out"
+			className="flex flex-col items-start w-full h-full p-6 shadow-sm rounded-lg hover:shadow-xl transition-shadow duration-150 ease-in-out"
 		>
 			<div className="flex flex-col flex-auto justify-start items-start w-full">
 				<Box
@@ -38,21 +38,21 @@ function BoardItem(props: BoardItemProps) {
 						backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.08),
 						color: 'secondary.main'
 					}}
-					className="flex items-center justify-center p-16 rounded-full"
+					className="flex items-center justify-center p-4 rounded-full"
 				>
 					<FuseSvgIcon>{board.icon}</FuseSvgIcon>
 				</Box>
 
-				<Typography className="mt-20 text-lg font-medium leading-5">{board.title}</Typography>
+				<Typography className="mt-5 text-lg font-medium leading-5">{board.title}</Typography>
 
-				<Typography className="mt-2 line-clamp-2 text-secondary">{board.description}</Typography>
+				<Typography className="mt-0.5 line-clamp-2 text-secondary">{board.description}</Typography>
 
-				<Divider className="w-48 mt-24 h-2" />
+				<Divider className="w-12 mt-6 h-0.5" />
 			</div>
 
 			<div className="flex flex-col flex-auto justify-end w-full">
 				{Boolean(boardMembers?.length) && (
-					<div className="flex items-center mt-24 -space-x-6">
+					<div className="flex items-center mt-6 -space-x-1.5">
 						<AvatarGroup max={4}>
 							{boardMembers.map((member, index) => (
 								<Avatar
@@ -65,9 +65,9 @@ function BoardItem(props: BoardItemProps) {
 					</div>
 				)}
 
-				<div className="flex items-center mt-24 text-md font-md">
+				<div className="flex items-center mt-6 text-md font-md">
 					<Typography color="text.secondary">Edited:</Typography>
-					<Typography className="mx-4 truncate">
+					<Typography className="mx-1 truncate">
 						{formatDistance(new Date(board.lastActivity), new Date(), { addSuffix: true })}
 					</Typography>
 				</div>

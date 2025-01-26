@@ -32,7 +32,7 @@ function SpeedDialDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Speed Dial
@@ -43,154 +43,154 @@ function SpeedDialDoc(props) {
 			</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				If more than six actions are needed, something other than a FAB should be used to present them.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Basic speed dial
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The floating action button can display related actions.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="BasicSpeedDial.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={BasicSpeedDialComponent}
 					raw={BasicSpeedDialRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Playground
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="PlaygroundSpeedDial.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={PlaygroundSpeedDialComponent}
 					raw={PlaygroundSpeedDialRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Controlled speed dial
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The open state of the component can be controlled with the <code>open</code>/<code>onOpen</code>/
 				<code>onClose</code> props.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="ControlledOpenSpeedDial.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={ControlledOpenSpeedDialComponent}
 					raw={ControlledOpenSpeedDialRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Custom close icon
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				You can provide an alternate icon for the closed and open states using the <code>icon</code> and{' '}
 				<code>openIcon</code> props of the <code>SpeedDialIcon</code> component.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="OpenIconSpeedDial.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={OpenIconSpeedDialComponent}
 					raw={OpenIconSpeedDialRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Persistent action tooltips
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The SpeedDialActions tooltips can be displayed persistently so that users don&#39;t have to long-press
 				to see the tooltip on touch devices.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				It is enabled here across all devices for demo purposes, but in production it could use the{' '}
 				<code>isTouch</code> logic to conditionally set the prop.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SpeedDialTooltipOpen.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SpeedDialTooltipOpenComponent}
 					raw={SpeedDialTooltipOpenRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Accessibility
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				ARIA
 			</Typography>
 			<Typography
-				className="text-base mt-12 mb-10"
+				className="text-base mt-3 mb-2.5"
 				component="h4"
 			>
 				Required
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					You should provide an <code>ariaLabel</code> for the speed dial component.
 				</li>
@@ -199,12 +199,12 @@ function SpeedDialDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mt-12 mb-10"
+				className="text-base mt-3 mb-2.5"
 				component="h4"
 			>
 				Provided
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					The Fab has <code>aria-haspopup</code>, <code>aria-expanded</code> and <code>aria-controls</code>{' '}
 					attributes.
@@ -219,12 +219,12 @@ function SpeedDialDoc(props) {
 				</li>
 			</ul>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Keyboard
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>The speed dial opens on focus.</li>
 				<li>
 					The Space and Enter keys trigger the selected speed dial action, and toggle the speed dial open

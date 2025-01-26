@@ -6,7 +6,7 @@ import Albums from './Albums';
 function PhotosVideosTab() {
 	return (
 		<div className="md:flex w-full">
-			<div className="flex flex-col flex-1 md:ltr:pr-32 md:rtl:pl-32">
+			<div className="flex flex-col flex-1 md:ltr:pr-8 md:rtl:pl-8">
 				<Albums />
 			</div>
 		</div>

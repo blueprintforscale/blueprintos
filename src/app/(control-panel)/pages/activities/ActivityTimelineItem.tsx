@@ -24,7 +24,7 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 			<TimelineSeparator>
 				<TimelineDot
 					color="primary"
-					className="mt-0 flex h-36  w-36 items-center justify-center p-0"
+					className="mt-0 flex h-9 w-9 items-center justify-center p-0"
 				>
 					{item.image && <Avatar src={item.image} />}
 					{!item.image && (
@@ -34,10 +34,10 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 
 				{!last && <TimelineConnector />}
 			</TimelineSeparator>
-			<TimelineContent className="flex flex-col items-start pb-48 pt-0">
+			<TimelineContent className="flex flex-col items-start pb-12 pt-0">
 				{item.description && <div dangerouslySetInnerHTML={{ __html: item.description }} />}
 
-				<div className="mt-8 flex flex-col text-md leading-5 sm:mt-4 sm:flex-row sm:items-center sm:space-x-8">
+				<div className="mt-2 flex flex-col text-md leading-5 sm:mt-1 sm:flex-row sm:items-center sm:space-x-2">
 					<Typography
 						className="text-md"
 						color="text.secondary"
@@ -69,7 +69,7 @@ function ActivityTimelineItem(props: ActivityTimelineItemProps) {
 
 				{item.extraContent && (
 					<Box
-						className="mt-16 rounded-lg border px-20 py-16"
+						className="mt-4 rounded-lg border px-5 py-4"
 						sx={(theme) => ({
 							backgroundColor: lighten(theme.palette.background.default, 0.02),
 							...theme.applyStyles('light', {

@@ -17,20 +17,20 @@ function CalendarAppSidebar() {
 	const { data: labels } = useGetCalendarLabelsQuery();
 
 	return (
-		<div className="flex flex-col flex-auto min-h-full py-24 px-16">
-			<PageBreadcrumb className="mb-8" />
+		<div className="flex flex-col flex-auto min-h-full py-6 px-4">
+			<PageBreadcrumb className="mb-2" />
 
 			<motion.span
 				initial={{ x: -20 }}
 				animate={{ x: 0, transition: { delay: 0.2 } }}
-				className="pb-24 text-4xl font-extrabold tracking-tight"
+				className="pb-6 text-4xl font-extrabold tracking-tight"
 			>
 				Calendar
 			</motion.span>
 
-			<div className="group flex items-center justify-between mb-12">
+			<div className="group flex items-center justify-between mb-3">
 				<Typography
-					className="text-lg font-600 leading-none"
+					className="text-lg font-semibold leading-none"
 					color="secondary.main"
 				>
 					LABELS
@@ -43,7 +43,7 @@ function CalendarAppSidebar() {
 				<FormLabel
 					htmlFor={label.id}
 					key={label.id}
-					className="group flex items-center mt-8 space-x-8 h-24 w-full cursor-pointer"
+					className="group flex items-center mt-2 space-x-2 h-6 w-full cursor-pointer"
 				>
 					<Checkbox
 						id={label.id}
@@ -56,7 +56,7 @@ function CalendarAppSidebar() {
 					/>
 
 					<Box
-						className="w-12 h-12 shrink-0 rounded-full"
+						className="w-3 h-3 shrink-0 rounded-full"
 						sx={{ backgroundColor: label.color }}
 					/>
 

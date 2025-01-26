@@ -38,7 +38,7 @@ function LabelsMenu(props: LabelsMenuProps) {
 	return (
 		<div>
 			<IconButton
-				className="rounded-0"
+				className="rounded-none"
 				onClick={handleMenuOpen}
 				size="large"
 			>
@@ -52,15 +52,15 @@ function LabelsMenu(props: LabelsMenuProps) {
 					{labelsArr.map((label) => {
 						return (
 							<MenuItem
-								className="px-8"
+								className="px-2"
 								key={label.id}
 								onClick={() => {
 									onToggleLabel(label.id);
 								}}
 							>
 								<Checkbox checked={labels.includes(label.id)} />
-								<ListItemText className="mx-8">{label.title}</ListItemText>
-								<ListItemIcon className="min-w-24">
+								<ListItemText className="mx-2">{label.title}</ListItemText>
+								<ListItemIcon className="min-w-6">
 									<FuseSvgIcon>heroicons-outline:tag</FuseSvgIcon>
 								</ListItemIcon>
 							</MenuItem>

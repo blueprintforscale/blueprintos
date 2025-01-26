@@ -37,12 +37,12 @@ function ContactEmailSelector(props: ContactEmailSelectorProps) {
 				/>
 			))}
 			<Button
-				className="group inline-flex items-center mt-2 -ml-4 py-2 px-4 rounded cursor-pointer"
+				className="group inline-flex items-center mt-0.5 -ml-1 py-0.5 px-1 rounded-sm cursor-pointer"
 				onClick={() => value && onChange([...value, ContactEmailModel({})])}
 			>
 				<FuseSvgIcon size={20}>heroicons-solid:plus-circle</FuseSvgIcon>
 
-				<span className="ml-8 font-medium text-secondary group-hover:underline">Add an email address</span>
+				<span className="ml-2 font-medium text-secondary group-hover:underline">Add an email address</span>
 			</Button>
 		</div>
 	);

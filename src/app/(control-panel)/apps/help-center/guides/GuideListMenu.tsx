@@ -28,7 +28,7 @@ function GuideListMenu(props: GuideListMenuProps) {
 			{list.slice(0, maxItems).map((item) => (
 				<Typography
 					component={Link}
-					className="flex mt-12 font-medium no-underline hover:underline"
+					className="flex mt-3 font-medium no-underline hover:underline"
 					key={item.id}
 					to={`/apps/help-center/guides/${categorySlug}/${item.id}`}
 					color="secondary"
@@ -41,7 +41,7 @@ function GuideListMenu(props: GuideListMenuProps) {
 				<Button
 					component={Link}
 					to={`/apps/help-center/guides/${categorySlug}`}
-					className="text-md font-medium py-2 px-12 min-h-0 h-24 mt-20"
+					className="text-md font-medium py-0.5 px-3 min-h-0 h-6 mt-5"
 					endIcon={<FuseSvgIcon size={20}>heroicons-outline:arrow-small-right</FuseSvgIcon>}
 					variant="contained"
 					sx={{

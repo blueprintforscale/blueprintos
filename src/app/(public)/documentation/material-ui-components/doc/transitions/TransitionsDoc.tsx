@@ -37,7 +37,7 @@ function TransitionsDoc(props) {
 				Reference
 			</Button>
 			<Typography
-				className="text-5xl my-16 font-700"
+				className="text-5xl my-4 font-bold"
 				component="h1"
 			>
 				Transitions
@@ -45,20 +45,20 @@ function TransitionsDoc(props) {
 			<Typography className="description">Transitions help to make a UI expressive and easy to use.</Typography>
 
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Material UI provides transitions that can be used to introduce some basic{' '}
 				<a href="https://m2.material.io/design/motion/">motion</a> to your applications.
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Collapse
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Expand from the start edge of the child element. Use the <code>orientation</code> prop if you need a
@@ -66,87 +66,87 @@ function TransitionsDoc(props) {
 				when not expanded.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimpleCollapse.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SimpleCollapseComponent}
 					raw={SimpleCollapseRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Fade
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Fade in from transparent to opaque.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimpleFade.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SimpleFadeComponent}
 					raw={SimpleFadeRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Grow
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Expands outwards from the center of the child element, while also fading in from transparent to opaque.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The second example demonstrates how to change the <code>transform-origin</code>, and conditionally
 				applies the <code>timeout</code> prop to change the entry speed.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimpleGrow.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SimpleGrowComponent}
 					raw={SimpleGrowRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Slide
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Slide in from the edge of the screen. The <code>direction</code> prop controls which edge of the screen
 				the transition starts from.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The Transition component&#39;s <code>mountOnEnter</code> prop prevents the child component from being
@@ -155,79 +155,79 @@ function TransitionsDoc(props) {
 				removes the component from the DOM after it has been transition off-screen.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimpleSlide.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SimpleSlideComponent}
 					raw={SimpleSlideRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-15 mt-20 mb-10 font-700"
+				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
 				Slide relative to a container
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The Slide component also accepts <code>container</code> prop, which is a reference to a DOM node. If
 				this prop is set, the Slide component will slide from the edge of that DOM node.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SlideFromContainer.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SlideFromContainerComponent}
 					raw={SlideFromContainerRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Zoom
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Expand outwards from the center of the child element.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				This example also demonstrates how to delay the enter transition.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="SimpleZoom.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={SimpleZoomComponent}
 					raw={SimpleZoomRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Child requirement
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<strong>Forward the style</strong>: To better support server rendering, Material UI provides a{' '}
 					<code>style</code> prop to the children of some transition components (Fade, Grow, Zoom, Slide). The{' '}
@@ -270,13 +270,13 @@ export default function Main() {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				TransitionGroup
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				To animate a component when it is mounted or unmounted, you can use the{' '}
@@ -287,32 +287,32 @@ export default function Main() {
 				prop is toggled automatically by <code>TransitionGroup</code>.
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
 					name="TransitionGroupExample.js"
-					className="my-16"
+					className="my-4"
 					iframe={false}
 					component={TransitionGroupExampleComponent}
 					raw={TransitionGroupExampleRaw}
 				/>
 			</Typography>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				TransitionComponent prop
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				Some Material UI components use these transitions internally. These accept a{' '}
 				<code>TransitionComponent</code> prop to customize the default transition. You can use any of the above
 				components or your own. It should respect the following conditions:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					Accepts an <code>in</code> prop. This corresponds to the open/close state.
 				</li>
@@ -325,7 +325,7 @@ export default function Main() {
 				</li>
 			</ul>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				For more information on creating a custom transition, visit the <em>react-transition-group</em>{' '}
@@ -334,7 +334,7 @@ export default function Main() {
 				</a>
 				. You can also visit the dedicated sections of some of the components:
 			</Typography>
-			<ul className="space-y-16">
+			<ul className="space-y-4">
 				<li>
 					<a href="/material-ui/react-modal/#transitions">Modal</a>
 				</li>
@@ -352,13 +352,13 @@ export default function Main() {
 				</li>
 			</ul>
 			<Typography
-				className="text-3xl mt-24 mb-10 font-700"
+				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
 				Performance &amp; SEO
 			</Typography>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				The content of transition component is mounted by default even if <code>{`in={false}`}</code>. This
@@ -376,7 +376,7 @@ export default function Main() {
 `}
 			</FuseHighlight>
 			<Typography
-				className="text-base mb-32"
+				className="text-base mb-8"
 				component="div"
 			>
 				As with any performance optimization this is not a silver bullet. Be sure to identify bottlenecks first

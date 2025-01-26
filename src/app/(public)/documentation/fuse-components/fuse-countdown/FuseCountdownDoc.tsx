@@ -12,20 +12,20 @@ function FuseCountdownDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				FuseCountdown
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				<code>FuseCountdown</code> is a custom-built Fuse component that allows you to create countdowns.
 			</Typography>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Usage
@@ -36,12 +36,12 @@ function FuseCountdownDoc() {
 				className="language-jsx"
 			>
 				{`
-          <FuseCountdown endDate="2071-10-29" className="my-48"/>
+          <FuseCountdown endDate="2071-10-29" className="my-12"/>
         `}
 			</FuseHighlight>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Preview
@@ -49,18 +49,18 @@ function FuseCountdownDoc() {
 
 			<FuseCountdown
 				endDate="2071-10-29"
-				className="my-48"
+				className="my-12"
 			/>
 
 			<Typography
-				className="text-2xl mt-20 mb-10 font-700"
+				className="text-2xl mt-5 mb-2.5 font-bold"
 				variant="h5"
 			>
 				Demos
 			</Typography>
 
 			<ul>
-				<li className="mb-8">
+				<li className="mb-2">
 					<Link to="/pages/coming-soon/classic">Coming Soon</Link>
 				</li>
 			</ul>

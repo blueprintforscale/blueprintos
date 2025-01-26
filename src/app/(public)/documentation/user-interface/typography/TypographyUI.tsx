@@ -11,18 +11,18 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 function TypographyUI() {
 	return (
 		<>
-			<div className="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between mb-40">
+			<div className="flex flex-col sm:flex-row shrink-0 sm:items-center sm:justify-between mb-10">
 				<div className="flex-1 min-w-0">
 					<Typography
 						variant="h4"
-						className="font-700"
+						className="font-bold"
 					>
 						Typography
 					</Typography>
 				</div>
 				<div>
 					<Button
-						className="mt-12 sm:mt-0"
+						className="mt-3 sm:mt-0"
 						variant="contained"
 						color="secondary"
 						component="a"
@@ -35,7 +35,7 @@ function TypographyUI() {
 					</Button>
 				</div>
 			</div>
-			<div className="flex-auto w-full space-y-48">
+			<div className="flex-auto w-full space-y-12">
 				<div className="flex flex-wrap">
 					<div className="flex w-full sm:w-1/2">
 						<Typography variant="h1">Display 4</Typography>

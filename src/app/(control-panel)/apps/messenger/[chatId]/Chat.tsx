@@ -189,7 +189,7 @@ function Chat(props: ChatProps) {
 					})
 				})}
 			>
-				<Toolbar className="flex items-center justify-between px-16 w-full">
+				<Toolbar className="flex items-center justify-between px-4 w-full">
 					<div className="flex items-center">
 						<IconButton
 							aria-label="Open drawer"
@@ -208,18 +208,18 @@ function Chat(props: ChatProps) {
 							tabIndex={0}
 						>
 							<UserAvatar
-								className="relative mx-8"
+								className="relative mx-2"
 								user={selectedContact}
 							/>
 							<Typography
 								color="inherit"
-								className="text-15 font-semibold px-4"
+								className="text-lg font-semibold px-1"
 							>
 								{selectedContact?.name}
 							</Typography>
 						</div>
 					</div>
-					<ChatMoreMenu className="-mx-8" />
+					<ChatMoreMenu className="-mx-2" />
 				</Toolbar>
 			</Box>
 			<div className="flex flex-auto h-full min-h-0 w-full">
@@ -229,25 +229,25 @@ function Chat(props: ChatProps) {
 						className="flex flex-1 flex-col overflow-y-auto"
 					>
 						{messages?.length > 0 && (
-							<div className="flex flex-col pt-16 px-16 pb-40">
+							<div className="flex flex-col pt-4 px-4 pb-10">
 								{messages.map((item, i) => {
 									return (
 										<StyledMessageRow
 											key={i}
 											className={clsx(
-												'flex flex-col grow-0 shrink-0 items-start justify-end relative px-16 pb-4',
+												'flex flex-col grow-0 shrink-0 items-start justify-end relative px-4 pb-1',
 												item.contactId === user.id ? 'me' : 'contact',
 												{ 'first-of-group': isFirstMessageOfGroup(item, i) },
 												{ 'last-of-group': isLastMessageOfGroup(item, i) },
-												i + 1 === messages.length && 'pb-72'
+												i + 1 === messages.length && 'pb-18'
 											)}
 										>
-											<div className="bubble flex relative items-center justify-center px-12 py-8 max-w-full">
+											<div className="bubble flex relative items-center justify-center px-3 py-2 max-w-full">
 												<Typography className=" whitespace-pre-wrap text-md">
 													{item.value}
 												</Typography>
 												<Typography
-													className="time absolute hidden w-full text-sm -mb-20 ltr:left-0 rtl:right-0 bottom-0 whitespace-nowrap"
+													className="time absolute hidden w-full text-sm -mb-5 ltr:left-0 rtl:right-0 bottom-0 whitespace-nowrap"
 													color="text.secondary"
 												>
 													{formatDistanceToNow(new Date(item.createdAt), {
@@ -266,7 +266,7 @@ function Chat(props: ChatProps) {
 							square
 							component="form"
 							onSubmit={onMessageSubmit}
-							className="absolute border-t-1 bottom-0 right-0 left-0 py-16 px-16"
+							className="absolute border-t-1 bottom-0 right-0 left-0 py-4 px-4"
 							sx={(theme) => ({
 								backgroundColor: lighten(theme.palette.background.default, 0.02),
 								...theme.applyStyles('light', {
@@ -296,7 +296,7 @@ function Chat(props: ChatProps) {
 								<InputBase
 									autoFocus={false}
 									id="message-input"
-									className="flex-1 flex grow shrink-0 mx-8 border-2"
+									className="flex-1 flex grow shrink-0 mx-2 border-2"
 									placeholder="Type your message"
 									onChange={onInputChange}
 									value={message}

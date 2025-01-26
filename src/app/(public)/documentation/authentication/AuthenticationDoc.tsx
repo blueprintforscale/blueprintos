@@ -7,12 +7,12 @@ function AuthenticationDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Authentication in Fuse React with Next.js App Router
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React uses Auth.js (formerly NextAuth.js) for authentication management, integrated with Next.js
@@ -21,11 +21,11 @@ function AuthenticationDoc() {
 			</Typography>
 			<Typography
 				variant="h5"
-				className="mt-32 mb-8 font-700"
+				className="mt-8 mb-2 font-bold"
 			>
 				Key Features of Auth.js with App Router
 			</Typography>
-			<ul className="list-disc list-inside mb-16">
+			<ul className="list-disc list-inside mb-4">
 				<li>Seamless integration with Next.js 13 App Router</li>
 				<li>Support for OAuth providers and custom credentials</li>
 				<li>Server-side session management</li>
@@ -34,32 +34,32 @@ function AuthenticationDoc() {
 			</ul>
 			<Typography
 				variant="h5"
-				className="mt-32 mb-8 font-700"
+				className="mt-8 mb-2 font-bold"
 			>
 				Configuration
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can findout the auth.js config file at @auth/authjs.ts.
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can add your own providers like facebook, github, twitter, etc. Checkout the authjs documentation to
 				know more about it.
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This is an example configuration for adding google login provider:
 			</Typography>
 			<FuseHighlight
 				component="pre"
-				className="language-typescript mb-24"
+				className="language-typescript mb-6"
 			>
 				{`
 // app/api/auth/[...nextauth]/route.ts
@@ -82,12 +82,12 @@ export { handler as GET, handler as POST }
 			</FuseHighlight>
 			<Typography
 				variant="h5"
-				className="mt-32 mb-8 font-700"
+				className="mt-8 mb-2 font-bold"
 			>
 				Custom Session Handling
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				In Fuse React, we've extended the default Auth.js session handling to include additional user data. When
@@ -95,14 +95,14 @@ export { handler as GET, handler as POST }
 				us to store and access more detailed user information throughout the application.
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Here's how it's implemented in the <code>authJs.ts</code> file:
 			</Typography>
 			<FuseHighlight
 				component="pre"
-				className="language-typescript mb-24"
+				className="language-typescript mb-6"
 			>
 				{`
 // src/@auth/authJs.ts
@@ -143,7 +143,7 @@ declare module 'next-auth' {
 				`}
 			</FuseHighlight>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This custom session handling allows us to store additional user information, such as roles, settings, or
@@ -151,12 +151,12 @@ declare module 'next-auth' {
 			</Typography>
 			<Typography
 				variant="h5"
-				className="mt-32 mb-8 font-700"
+				className="mt-8 mb-2 font-bold"
 			>
 				useUser Hook
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React provides a custom <code>useUser</code> hook that simplifies access to user data and provides
@@ -164,14 +164,14 @@ declare module 'next-auth' {
 				hook and provides additional functionality.
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Here's an overview of the <code>useUser</code> hook:
 			</Typography>
 			<FuseHighlight
 				component="pre"
-				className="language-typescript mb-24"
+				className="language-typescript mb-6"
 			>
 				{`
 // src/@auth/useUser.tsx
@@ -207,26 +207,26 @@ export default useUser;
 				`}
 			</FuseHighlight>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				The <code>useUser</code> hook provides the following:
 			</Typography>
-			<ul className="list-disc list-inside mb-16">
+			<ul className="list-disc list-inside mb-4">
 				<li>Access to the current user's data</li>
 				<li>A flag indicating if the current user is a guest</li>
 				<li>Functions to update user data and settings</li>
 				<li>A wrapper for the signOut function</li>
 			</ul>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can use this hook in your components to easily access and manage user data:
 			</Typography>
 			<FuseHighlight
 				component="pre"
-				className="language-tsx mb-24"
+				className="language-tsx mb-6"
 			>
 				{`
 import useUser from '@auth/useUser';
@@ -248,7 +248,7 @@ function UserProfile() {
 				`}
 			</FuseHighlight>
 			<Typography
-				className="mt-32 mb-16"
+				className="mt-8 mb-4"
 				component="p"
 			>
 				By leveraging the custom session handling and the <code>useUser</code> hook, Fuse React provides a
@@ -256,17 +256,17 @@ function UserProfile() {
 			</Typography>
 			<Typography
 				variant="h5"
-				className="mt-32 mb-8 font-700"
+				className="mt-8 mb-2 font-bold"
 			>
 				Further Resources
 			</Typography>
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				For more detailed information and advanced usage, refer to the following resources:
 			</Typography>
-			<ul className="list-disc list-inside mb-16">
+			<ul className="list-disc list-inside mb-4">
 				<li>
 					<Link
 						href="https://authjs.dev"
@@ -278,7 +278,7 @@ function UserProfile() {
 				</li>
 			</ul>
 			<Typography
-				className="mt-32 mb-16"
+				className="mt-8 mb-4"
 				component="p"
 			>
 				By leveraging Auth.js with Next.js App Router, Fuse React provides a robust, flexible, and secure

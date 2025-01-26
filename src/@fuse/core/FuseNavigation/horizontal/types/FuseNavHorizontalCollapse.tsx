@@ -113,13 +113,13 @@ function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 
 									{item.badge && (
 										<FuseNavBadge
-											className="mx-4"
+											className="mx-1"
 											badge={item.badge}
 										/>
 									)}
 									<IconButton
 										disableRipple
-										className="h-12 w-12 p-0 ltr:ml-4 rtl:mr-4"
+										className="h-3 w-3 p-0 ltr:ml-1 rtl:mr-1"
 										color="inherit"
 									>
 										<FuseSvgIcon
@@ -155,7 +155,7 @@ function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 												style={{ transformOrigin: '0 0 0' }}
 											>
 												<Paper
-													className="rounded"
+													className="rounded-sm"
 													onMouseEnter={() => handleToggle(true)}
 													onMouseLeave={() => handleToggle(false)}
 												>

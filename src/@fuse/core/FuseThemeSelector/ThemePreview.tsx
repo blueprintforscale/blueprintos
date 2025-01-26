@@ -28,7 +28,7 @@ function ThemePreview(props: ThemePreviewProps) {
 		<div className={clsx(className, 'w-full min-h-full ')}>
 			<button
 				className={clsx(
-					'flex p-0  h-160 relative w-full cursor-pointer overflow-hidden rounded text-left font-500 shadow transition-all hover:shadow-lg items-stretch hover:scale-105 duration-200 ease-in-out',
+					'flex p-0 h-40 relative w-full cursor-pointer overflow-hidden rounded-sm text-left font-medium shadow-sm transition-all hover:shadow-lg items-stretch hover:scale-105 duration-200 ease-in-out',
 					{
 						'bg-white': id === 'default',
 						'bg-gray-700': id !== 'default'
@@ -44,7 +44,7 @@ function ThemePreview(props: ThemePreviewProps) {
 				type="button"
 			>
 				<div
-					className="flex flex-col w-1/3 min-h-full p-4 border-r-1 border-gray-700"
+					className="flex flex-col w-1/3 min-h-full p-1 border-r-1 border-gray-700"
 					style={{
 						backgroundColor: navbar.palette.background.default,
 						color: navbar.palette.text.primary
@@ -55,7 +55,7 @@ function ThemePreview(props: ThemePreviewProps) {
 
 				<div className="flex flex-col w-2/3">
 					<div
-						className="w-full px-4 py-4 border-b-1 border-gray-700"
+						className="w-full px-1 py-1 border-b-1 border-gray-700"
 						style={{
 							backgroundColor: toolbar.palette.background.default,
 							color: toolbar.palette.text.primary
@@ -64,9 +64,9 @@ function ThemePreview(props: ThemePreviewProps) {
 						<span className="text-sm">Toolbar</span>
 					</div>
 
-					<div className="flex flex-1  flex-col w-full">
+					<div className="flex flex-1 flex-col w-full">
 						<div
-							className="relative h-44 w-full px-4"
+							className="relative h-11 w-full px-1"
 							style={{
 								backgroundColor: main.palette.primary.main,
 								color: main.palette.primary.contrastText
@@ -75,7 +75,7 @@ function ThemePreview(props: ThemePreviewProps) {
 							<span className="text-sm">Header</span>
 
 							<div
-								className="absolute bottom-0 right-0 mb-10 mr-8 flex h-24 w-24 items-center justify-center rounded-full text-10 shadow-1 z-10"
+								className="absolute bottom-0 right-0 mb-2.5 mr-2 flex h-6 w-6 items-center justify-center rounded-full text-xs shadow-1 z-10"
 								style={{
 									backgroundColor: main.palette.secondary.main,
 									color: main.palette.secondary.contrastText
@@ -85,9 +85,9 @@ function ThemePreview(props: ThemePreviewProps) {
 							</div>
 						</div>
 
-						<div className="-mt-24 flex-1 w-full pl-4 pr-4">
+						<div className="-mt-6 flex-1 w-full pl-1 pr-1">
 							<div
-								className="relative w-full h-full rounded p-4 shadow-1"
+								className="relative w-full h-full rounded-sm p-1 shadow-1"
 								style={{
 									backgroundColor: main.palette.background.paper,
 									color: main.palette.text.primary
@@ -97,13 +97,13 @@ function ThemePreview(props: ThemePreviewProps) {
 							</div>
 						</div>
 
-						<div className="w-full p-4">
+						<div className="w-full p-1">
 							<span className="text-sm">Background</span>
 						</div>
 					</div>
 
 					<div
-						className="w-full px-8 py-4 border-t-1 border-gray-700"
+						className="w-full px-2 py-1 border-t-1 border-gray-700"
 						style={{
 							backgroundColor: footer.palette.background.default,
 							color: footer.palette.text.primary
@@ -113,7 +113,7 @@ function ThemePreview(props: ThemePreviewProps) {
 					</div>
 				</div>
 			</button>
-			<Typography className="mt-4 w-full text-center font-semibold">{id}</Typography>
+			<Typography className="mt-1 w-full text-center font-semibold">{id}</Typography>
 		</div>
 	);
 }

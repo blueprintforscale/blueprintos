@@ -20,8 +20,8 @@ function NavbarLayout3(props: NavbarLayout3Props) {
 	const { className = '' } = props;
 
 	return (
-		<Root className={clsx('h-64 max-h-64 min-h-64 w-full shadow-md', className)}>
-			<div className="container flex h-full w-full flex-auto items-center px-16 lg:px-24">
+		<Root className={clsx('h-16 max-h-16 min-h-16 w-full shadow-md', className)}>
+			<div className="container flex h-full w-full flex-auto items-center px-4 lg:px-6">
 				<FuseScrollbars className="flex h-full items-center">
 					<Navigation
 						className="w-full"

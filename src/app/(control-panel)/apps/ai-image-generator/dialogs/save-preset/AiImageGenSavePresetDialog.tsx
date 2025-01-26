@@ -37,12 +37,12 @@ function AiImageGenSavePresetDialog(props: AiImageGenSavePresetDialogProps) {
 					variant="outlined"
 					value={newPresetName}
 					onChange={(e) => setNewPresetName(e.target.value)}
-					className="mt-16"
+					className="mt-4"
 				/>
 				<Typography
 					variant="caption"
 					color="textSecondary"
-					className="mt-16 block"
+					className="mt-4 block"
 				>
 					This will save all current settings as a new preset
 				</Typography>

@@ -115,12 +115,12 @@ function GithubIssuesWidget() {
 	}
 
 	return (
-		<Paper className="flex flex-col flex-auto p-24 shadow rounded-xl overflow-hidden">
+		<Paper className="flex flex-col flex-auto p-6 shadow-sm rounded-xl overflow-hidden">
 			<div className="flex flex-col sm:flex-row items-start justify-between">
 				<Typography className="text-xl font-medium tracking-tight leading-6 truncate">
 					Github Issues Summary
 				</Typography>
-				<div className="mt-12 sm:mt-0">
+				<div className="mt-3 sm:mt-0">
 					<FuseTabs
 						value={tabValue}
 						onChange={(_ev, value: number) => setTabValue(value)}
@@ -135,7 +135,7 @@ function GithubIssuesWidget() {
 					</FuseTabs>
 				</div>
 			</div>
-			<div className="grid grid-cols-1 lg:grid-cols-2 grid-flow-row gap-24 w-full mt-32 sm:mt-16">
+			<div className="grid grid-cols-1 lg:grid-cols-2 grid-flow-row gap-6 w-full mt-8 sm:mt-4">
 				<div className="flex flex-col flex-auto">
 					<Typography
 						className="font-medium"
@@ -159,18 +159,18 @@ function GithubIssuesWidget() {
 					>
 						Overview
 					</Typography>
-					<div className="flex-auto grid grid-cols-4 gap-16 mt-24">
-						<div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-xl bg-indigo-50 text-indigo-800">
+					<div className="flex-auto grid grid-cols-4 gap-4 mt-6">
+						<div className="col-span-2 flex flex-col items-center justify-center py-8 px-1 rounded-xl bg-indigo-50 text-indigo-800">
 							<Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
 								{overview[currentRange]['new-issues']}
 							</Typography>
-							<Typography className="mt-4 text-sm sm:text-lg font-medium">New Issues</Typography>
+							<Typography className="mt-1 text-sm sm:text-lg font-medium">New Issues</Typography>
 						</div>
-						<div className="col-span-2 flex flex-col items-center justify-center py-32 px-4 rounded-xl bg-green-50 text-green-800">
+						<div className="col-span-2 flex flex-col items-center justify-center py-8 px-1 rounded-xl bg-green-50 text-green-800">
 							<Typography className="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
 								{overview[currentRange]['closed-issues']}
 							</Typography>
-							<Typography className="mt-4 text-sm sm:text-lg font-medium">Closed</Typography>
+							<Typography className="mt-1 text-sm sm:text-lg font-medium">Closed</Typography>
 						</div>
 						<Box
 							sx={[
@@ -183,12 +183,12 @@ function GithubIssuesWidget() {
 												backgroundColor: lighten(_theme.palette.background.default, 0.02)
 											}
 							]}
-							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-xl"
+							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-8 px-1 rounded-xl"
 						>
 							<Typography className="text-5xl font-semibold leading-none tracking-tight">
 								{overview[currentRange].fixed}
 							</Typography>
-							<Typography className="mt-4 text-sm font-medium text-center">Fixed</Typography>
+							<Typography className="mt-1 text-sm font-medium text-center">Fixed</Typography>
 						</Box>
 						<Box
 							sx={[
@@ -201,12 +201,12 @@ function GithubIssuesWidget() {
 												backgroundColor: lighten(theme.palette.background.default, 0.02)
 											}
 							]}
-							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-xl"
+							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-8 px-1 rounded-xl"
 						>
 							<Typography className="text-5xl font-semibold leading-none tracking-tight">
 								{overview[currentRange]['wont-fix']}
 							</Typography>
-							<Typography className="mt-4 text-sm font-medium text-center">Won't Fix</Typography>
+							<Typography className="mt-1 text-sm font-medium text-center">Won't Fix</Typography>
 						</Box>
 						<Box
 							sx={[
@@ -219,12 +219,12 @@ function GithubIssuesWidget() {
 												backgroundColor: lighten(_theme.palette.background.default, 0.02)
 											}
 							]}
-							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-xl"
+							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-8 px-1 rounded-xl"
 						>
 							<Typography className="text-5xl font-semibold leading-none tracking-tight">
 								{overview[currentRange]['re-opened']}
 							</Typography>
-							<Typography className="mt-4 text-sm font-medium text-center">Re-opened</Typography>
+							<Typography className="mt-1 text-sm font-medium text-center">Re-opened</Typography>
 						</Box>
 						<Box
 							sx={[
@@ -237,12 +237,12 @@ function GithubIssuesWidget() {
 												backgroundColor: lighten(_theme.palette.background.default, 0.02)
 											}
 							]}
-							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-32 px-4 rounded-xl"
+							className="col-span-2 sm:col-span-1 flex flex-col items-center justify-center py-8 px-1 rounded-xl"
 						>
 							<Typography className="text-5xl font-semibold leading-none tracking-tight">
 								{overview[currentRange]['needs-triage']}
 							</Typography>
-							<Typography className="mt-4 text-sm font-medium text-center">Needs Triage</Typography>
+							<Typography className="mt-1 text-sm font-medium text-center">Needs Triage</Typography>
 						</Box>
 					</div>
 				</div>

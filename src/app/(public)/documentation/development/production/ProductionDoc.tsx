@@ -10,13 +10,13 @@ function ProductionDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Production Build
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				The following command builds the application into an output directory:
@@ -24,13 +24,13 @@ function ProductionDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-bash my-16"
+				className="language-bash my-4"
 			>
 				{` npm run build `}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This command compiles the application into the <code>.next</code> directory.
@@ -38,13 +38,13 @@ function ProductionDoc() {
 
 			<Typography
 				variant="h6"
-				className="mt-32 mb-16"
+				className="mt-8 mb-4"
 			>
 				Build Output
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				The production build creates optimized assets in the <code>.next</code> folder:
@@ -58,13 +58,13 @@ function ProductionDoc() {
 
 			<Typography
 				variant="h6"
-				className="mt-32 mb-16"
+				className="mt-8 mb-4"
 			>
 				Running the Production Build
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To start the application in production mode, run:
@@ -72,13 +72,13 @@ function ProductionDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-bash my-16"
+				className="language-bash my-4"
 			>
 				{` npm run start `}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This command starts the Next.js production server.
@@ -86,13 +86,13 @@ function ProductionDoc() {
 
 			<Typography
 				variant="h6"
-				className="mt-32 mb-16"
+				className="mt-8 mb-4"
 			>
 				Environment Variables
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Ensure that all necessary environment variables are set for the production environment. You can use{' '}
@@ -101,13 +101,13 @@ function ProductionDoc() {
 
 			<Typography
 				variant="h6"
-				className="mt-32 mb-16"
+				className="mt-8 mb-4"
 			>
 				Analyzing the Bundle
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To analyze the production bundle size, you can use:
@@ -115,13 +115,13 @@ function ProductionDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-bash my-16"
+				className="language-bash my-4"
 			>
 				{` ANALYZE=true npm run build `}
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				This will generate a report to help you optimize your application's bundle size.

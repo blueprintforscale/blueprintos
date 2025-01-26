@@ -35,9 +35,9 @@ function DetailsTab() {
 	}
 
 	return (
-		<div className="w-full max-w-3xl  space-y-48">
-			<div className="space-y-16">
-				<div className="flex items-center border-b-1 space-x-8 pb-8">
+		<div className="w-full max-w-5xl space-y-12">
+			<div className="space-y-4">
+				<div className="flex items-center border-b-1 space-x-2 pb-2">
 					<FuseSvgIcon
 						color="action"
 						size={24}
@@ -52,7 +52,7 @@ function DetailsTab() {
 					</Typography>
 				</div>
 
-				<div className="space-y-16">
+				<div className="space-y-4">
 					<div className="table-responsive border rounded-md">
 						<table className="table dense simple">
 							<thead>
@@ -76,7 +76,7 @@ function DetailsTab() {
 									<td>
 										<div className="flex items-center">
 											<Avatar src={order.customer.avatar} />
-											<Typography className="truncate mx-8">
+											<Typography className="truncate mx-2">
 												{`${order.customer.firstName} ${order.customer.lastName}`}
 											</Typography>
 										</div>
@@ -95,7 +95,7 @@ function DetailsTab() {
 						</table>
 					</div>
 
-					<div className="space-y-16">
+					<div className="space-y-4">
 						<Accordion
 							className="border-0 shadow-0 overflow-hidden"
 							expanded={map === 'shipping'}
@@ -106,10 +106,10 @@ function DetailsTab() {
 								<Typography className="font-semibold">Shipping Address</Typography>
 							</AccordionSummary>
 							<AccordionDetails className="flex flex-col md:flex-row">
-								<Typography className="w-full md:max-w-256 mb-16 md:mb-0 mx-8 text-15">
+								<Typography className="w-full md:max-w-64 mb-4 md:mb-0 mx-2 text-lg">
 									{order.customer.shippingAddress.address}
 								</Typography>
-								<div className="w-full h-320 rounded-xl overflow-hidden mx-8">
+								<div className="w-full h-80 rounded-xl overflow-hidden mx-2">
 									<GoogleAddressMap
 										center={{
 											lng: order.customer.shippingAddress.lng,
@@ -129,11 +129,11 @@ function DetailsTab() {
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 								<Typography className="font-semibold">Invoice Address</Typography>
 							</AccordionSummary>
-							<AccordionDetails className="flex flex-col md:flex-row -mx-8">
-								<Typography className="w-full md:max-w-256 mb-16 md:mb-0 mx-8 text-15">
+							<AccordionDetails className="flex flex-col md:flex-row -mx-2">
+								<Typography className="w-full md:max-w-64 mb-4 md:mb-0 mx-2 text-lg">
 									{order.customer.invoiceAddress.address}
 								</Typography>
-								<div className="w-full h-320 rounded-xl overflow-hidden mx-8">
+								<div className="w-full h-80 rounded-xl overflow-hidden mx-2">
 									<GoogleAddressMap
 										center={{
 											lng: order.customer.invoiceAddress.lng,
@@ -147,8 +147,8 @@ function DetailsTab() {
 				</div>
 			</div>
 
-			<div className="space-y-16">
-				<div className="flex items-center border-b-1 space-x-8 pb-8">
+			<div className="space-y-4">
+				<div className="flex items-center border-b-1 space-x-2 pb-2">
 					<FuseSvgIcon
 						color="action"
 						size={24}
@@ -189,8 +189,8 @@ function DetailsTab() {
 				</div>
 			</div>
 
-			<div className="space-y-16">
-				<div className="flex items-center border-b-1 space-x-8 pb-8">
+			<div className="space-y-4">
+				<div className="flex items-center border-b-1 space-x-2 pb-2">
 					<FuseSvgIcon
 						color="action"
 						size={24}
@@ -243,8 +243,8 @@ function DetailsTab() {
 				</div>
 			</div>
 
-			<div className="space-y-16">
-				<div className="flex items-center border-b-1 space-x-8 pb-8">
+			<div className="space-y-4">
+				<div className="flex items-center border-b-1 space-x-2 pb-2">
 					<FuseSvgIcon
 						color="action"
 						size={24}

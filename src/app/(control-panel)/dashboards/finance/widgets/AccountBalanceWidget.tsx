@@ -73,8 +73,8 @@ function AccountBalanceWidget() {
 	};
 
 	return (
-		<Paper className="flex flex-col flex-auto shadow rounded-xl overflow-hidden">
-			<div className="flex flex-col p-24 pb-16">
+		<Paper className="flex flex-col flex-auto shadow-sm rounded-xl overflow-hidden">
+			<div className="flex flex-col p-6 pb-4">
 				<div className="flex items-start justify-between">
 					<div className="flex flex-col">
 						<Typography className="text-lg font-medium tracking-tight leading-6 truncate">
@@ -96,7 +96,7 @@ function AccountBalanceWidget() {
 						/>
 					</div>
 				</div>
-				<div className="flex items-start mt-24 mr-8">
+				<div className="flex items-start mt-6 mr-2">
 					<div className="flex flex-col">
 						<Typography className="font-semibold text-3xl md:text-5xl tracking-tighter">
 							{growRate}%
@@ -108,7 +108,7 @@ function AccountBalanceWidget() {
 							Average Monthly Growth
 						</Typography>
 					</div>
-					<div className="flex flex-col ml-32 md:ml-64">
+					<div className="flex flex-col ml-8 md:ml-16">
 						<Typography className="font-semibold text-3xl md:text-5xl tracking-tighter">
 							{ami.toLocaleString('en-US', {
 								style: 'currency',

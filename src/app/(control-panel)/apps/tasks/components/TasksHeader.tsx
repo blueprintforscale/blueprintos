@@ -16,10 +16,10 @@ function TasksHeader() {
 	const remainingTasks = _.filter(tasks, (item) => item.type === 'task' && !item.completed).length;
 
 	return (
-		<div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 p-24 sm:p-32 w-full justify-between">
-			<div className="flex flex-col sm:flex-row sm:items-center sm:space-x-12">
+		<div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 p-6 sm:p-8 w-full justify-between">
+			<div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3">
 				<div>
-					<PageBreadcrumb className="mb-8" />
+					<PageBreadcrumb className="mb-2" />
 
 					<motion.span
 						initial={{ x: -20 }}
@@ -28,7 +28,7 @@ function TasksHeader() {
 							transition: { delay: 0.2 }
 						}}
 					>
-						<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-4">
+						<Typography className="text-4xl font-extrabold leading-none tracking-tight mb-1">
 							Tasks
 						</Typography>
 					</motion.span>
@@ -45,7 +45,7 @@ function TasksHeader() {
 						}}
 					>
 						<Typography
-							className="text-base font-medium ml-2"
+							className="text-base font-medium ml-0.5"
 							color="text.secondary"
 						>
 							{`${remainingTasks} remaining tasks`}
@@ -54,7 +54,7 @@ function TasksHeader() {
 				</div>
 			</div>
 
-			<div className="flex items-center space-x-8">
+			<div className="flex items-center space-x-2">
 				<Button
 					className="whitespace-nowrap"
 					component={NavLinkAdapter}
@@ -63,7 +63,7 @@ function TasksHeader() {
 					variant="contained"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
-					<span className="mx-8">Add Section</span>
+					<span className="mx-2">Add Section</span>
 				</Button>
 				<Button
 					className="whitespace-nowrap"
@@ -73,7 +73,7 @@ function TasksHeader() {
 					to="/apps/tasks/new/task"
 				>
 					<FuseSvgIcon size={20}>heroicons-outline:plus</FuseSvgIcon>
-					<span className="mx-8">Add Task</span>
+					<span className="mx-2">Add Task</span>
 				</Button>
 			</div>
 		</div>

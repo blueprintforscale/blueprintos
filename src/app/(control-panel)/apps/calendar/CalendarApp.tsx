@@ -91,6 +91,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 		}
 	},
 	'& .fc-h-event': {
+		border: '0!important',
 		background: 'initial'
 	},
 	'& .fc-event': {

@@ -22,7 +22,7 @@ function AiImageGenItemInfoDialog() {
 			fullWidth
 		>
 			<IconButton
-				className="absolute top-4 right-4"
+				className="absolute top-1 right-1"
 				onClick={() => setSelectedItem(null)}
 			>
 				<FuseSvgIcon>heroicons-solid:x-mark</FuseSvgIcon>
@@ -31,7 +31,7 @@ function AiImageGenItemInfoDialog() {
 			<DialogTitle className="text-lg">Image Details</DialogTitle>
 
 			<DialogContent>
-				<div className="grid md:grid-cols-3 gap-24 min-h-[70vh]">
+				<div className="grid md:grid-cols-3 gap-6 min-h-[70vh]">
 					<div className="grid col-span-2 items-start">
 						{imageUrl && (
 							<Card>
@@ -45,8 +45,8 @@ function AiImageGenItemInfoDialog() {
 					</div>
 
 					<div className="flex flex-col col-span-1">
-						<div className="flex flex-col gap-24">
-							<div className="flex flex-col gap-8">
+						<div className="flex flex-col gap-6">
+							<div className="flex flex-col gap-2">
 								{prompt && (
 									<Typography>
 										<strong>Prompt:</strong> {prompt}
@@ -64,7 +64,7 @@ function AiImageGenItemInfoDialog() {
 								)}
 							</div>
 
-							<div className="flex flex-col gap-8">
+							<div className="flex flex-col gap-2">
 								<Typography className="text-lg font-bold">Image Settings</Typography>
 								{size && (
 									<Typography>

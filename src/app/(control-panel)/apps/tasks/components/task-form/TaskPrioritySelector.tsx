@@ -83,11 +83,11 @@ function TaskPrioritySelector(props: TaskPrioritySelectorProps) {
 				aria-haspopup="true"
 				aria-expanded={open ? 'true' : undefined}
 				onClick={handleClick}
-				className={clsx('min-w-96 px-12', className)}
+				className={clsx('min-w-24 px-3', className)}
 				sx={{ color: selectedOption.textColor, backgroundColor: selectedOption.bgColor }}
 			>
 				<FuseSvgIcon
-					className="mx-4"
+					className="mx-1"
 					size={16}
 				>
 					{selectedOption.icon}
@@ -110,7 +110,7 @@ function TaskPrioritySelector(props: TaskPrioritySelectorProps) {
 					>
 						<ListItemText primary={item.title} />
 						<ListItemIcon
-							className="min-w-36 justify-end"
+							className="min-w-9 justify-end"
 							sx={{ color: item.textColor }}
 						>
 							<FuseSvgIcon size={16}>{item.icon}</FuseSvgIcon>

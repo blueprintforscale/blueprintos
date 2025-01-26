@@ -53,8 +53,8 @@ function MailboxAppSidebarContent() {
 
 	return (
 		<div className="flex-auto border-l-1">
-			<div className="mb-24 mt-40 mx-24">
-				<div className="h-24">
+			<div className="mb-6 mt-10 mx-6">
+				<div className="h-6">
 					<PageBreadcrumb
 						maxItems={3}
 						className=""
@@ -62,19 +62,19 @@ function MailboxAppSidebarContent() {
 				</div>
 
 				<Typography className="text-4xl font-extrabold tracking-tight leading-none">Mailbox</Typography>
-				<MailCompose className="mt-24" />
+				<MailCompose className="mt-6" />
 			</div>
 
 			{['FOLDERS', 'FILTERS', 'LABELS'].map((section, index) => (
 				<motion.div
 					key={section}
-					className="mb-24"
+					className="mb-6"
 					initial={false}
 					animate={{ y: 0, opacity: 1 }}
 					transition={{ delay: 0.1 * (index + 1) }}
 				>
 					<Typography
-						className="px-28 py-10 uppercase text-md font-600"
+						className="px-7 py-2.5 uppercase text-md font-semibold"
 						color="secondary.main"
 					>
 						{t(section)}
@@ -82,7 +82,7 @@ function MailboxAppSidebarContent() {
 
 					<FuseNavigation
 						navigation={navigationItems[section.toLowerCase()] as FuseNavItemType[]}
-						className="px-12"
+						className="px-3"
 					/>
 				</motion.div>
 			))}

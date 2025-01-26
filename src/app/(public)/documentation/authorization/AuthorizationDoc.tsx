@@ -17,13 +17,13 @@ function AuthorizationDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Authorization in Fuse React
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React implements a robust authorization system using Auth.js (formerly NextAuth.js) with custom
@@ -33,19 +33,19 @@ function AuthorizationDoc() {
 
 			<Typography
 				variant="h5"
-				className="mt-32 mb-8 font-700"
+				className="mt-8 mb-2 font-bold"
 			>
 				Implementing Authorization
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				To implement authorization in your components:
 			</Typography>
 
-			<ol className="list-decimal list-inside mb-16">
+			<ol className="list-decimal list-inside mb-4">
 				<li>
 					Use the <code>useUser</code> hook to access user data and roles
 				</li>
@@ -85,7 +85,7 @@ function AuthorizationDoc() {
 			</Table>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Example usage in a component:
@@ -93,7 +93,7 @@ function AuthorizationDoc() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-tsx mb-24"
+				className="language-tsx mb-6"
 			>
 				{`
 import useUser from '@auth/useUser';
@@ -116,13 +116,13 @@ function ProtectedComponent() {
 
 			<Typography
 				variant="h5"
-				className="mt-32 mb-8 font-700"
+				className="mt-8 mb-2 font-bold"
 			>
 				Route-level Authorization with AuthGuardRedirect
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Fuse React provides an <code>AuthGuardRedirect</code> component that allows you to implement route-level
@@ -131,7 +131,7 @@ function ProtectedComponent() {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				Here's a basic example of how to use <code>AuthGuardRedirect</code>:
@@ -139,7 +139,7 @@ function ProtectedComponent() {
 
 			<FuseHighlight
 				component="pre"
-				className="language-tsx mb-24"
+				className="language-tsx mb-6"
 			>
 				{`
 import AuthGuardRedirect from '@auth/AuthGuardRedirect';
@@ -155,7 +155,7 @@ function Layout({ children }) {
 			</FuseHighlight>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				In this example, only users with the 'admin' role will be able to access the routes wrapped by this
@@ -164,7 +164,7 @@ function Layout({ children }) {
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				For more detailed information on how to use <code>AuthGuardRedirect</code> in your routing
@@ -174,13 +174,13 @@ function Layout({ children }) {
 
 			<Typography
 				variant="h6"
-				className="mt-32 mb-8 font-700"
+				className="mt-8 mb-2 font-bold"
 			>
 				Navigation Item Configuration:
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can control the navigation <b>item/group/collapse</b> visibility by adding <b>auth</b>
@@ -188,20 +188,20 @@ function Layout({ children }) {
 			</Typography>
 
 			<Typography
-				className="mt-32 mb-8"
+				className="mt-8 mb-2"
 				variant="subtitle2"
 			>
 				Example Usage:
 			</Typography>
 
-			<div className="flex lg:grid-cols-2 gap-12">
+			<div className="flex lg:grid-cols-2 gap-3">
 				<div className="flex flex-1">
 					<FuseNavigation navigation={authProtectedNavigationExamples} />
 				</div>
 				<div className="flex flex-1 ">
 					<FuseHighlight
 						component="pre"
-						className="language-js mb-32 max-h-sm overflow-y-auto"
+						className="language-js mb-8 max-h-sm overflow-y-auto"
 					>
 						{authProtectedNavigationExamplesRaw}
 					</FuseHighlight>
@@ -210,12 +210,12 @@ function Layout({ children }) {
 
 			<Typography
 				variant="h5"
-				className="mt-32 mb-8 font-700"
+				className="mt-8 mb-2 font-bold"
 			>
 				Best Practices
 			</Typography>
 
-			<ul className="list-disc list-inside mb-16">
+			<ul className="list-disc list-inside mb-4">
 				<li>
 					Always use the <code>useUser</code> hook to access user data and perform authorization checks
 				</li>
@@ -238,7 +238,7 @@ function Layout({ children }) {
 			</ul>
 
 			<Typography
-				className="mt-32 mb-16"
+				className="mt-8 mb-4"
 				component="p"
 			>
 				By leveraging the custom Auth.js configuration and the <code>useUser</code> hook, Fuse React provides a

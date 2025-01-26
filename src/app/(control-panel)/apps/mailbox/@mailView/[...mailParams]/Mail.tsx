@@ -34,16 +34,16 @@ function Mail() {
 
 	return (
 		<>
-			<div className="z-10 relative flex flex-col flex-0 w-full border-b">
+			<div className="z-10 relative flex flex-col shrink-0 w-full border-b">
 				<MailToolbar />
 
-				<div className="flex flex-wrap items-center py-20 px-24">
-					<div className="flex flex-auto my-4 mr-16 text-2xl">{mail.subject}</div>
+				<div className="flex flex-wrap items-center py-5 px-6">
+					<div className="flex flex-auto my-1 mr-4 text-2xl">{mail.subject}</div>
 					{mail.labels && mail.labels.length > 0 && (
-						<div className="flex flex-wrap items-center justify-start -mx-4">
+						<div className="flex flex-wrap items-center justify-start -mx-1">
 							{mail.labels.map((labelId) => (
 								<MailLabel
-									className="m-4"
+									className="m-1"
 									key={labelId}
 									labelId={labelId}
 								/>
@@ -55,28 +55,28 @@ function Mail() {
 
 			<Box
 				sx={{ backgroundColor: 'background.default' }}
-				className="flex flex-col flex-auto shrink-0 lg:shrink p-12 lg:overflow-y-auto"
+				className="flex flex-col flex-auto shrink-0 lg:shrink p-3 lg:overflow-y-auto"
 			>
-				<Paper className="flex flex-col flex-0 w-full shadow rounded-xl overflow-hidden">
-					<div className="flex flex-col py-32 px-24">
+				<Paper className="flex flex-col shrink-0 w-full shadow-sm rounded-xl overflow-hidden">
+					<div className="flex flex-col py-8 px-6">
 						<div className="flex items-start w-full">
 							<Avatar src={mail?.from?.avatar} />
 
-							<div className="ml-16 min-w-0">
+							<div className="ml-4 min-w-0">
 								<Typography className="font-semibold truncate">
 									{mail.from.contact.split('<')[0].trim()}
 								</Typography>
 
-								<div className="flex items-center mt-2 leading-5">
+								<div className="flex items-center mt-0.5 leading-5">
 									<div>to</div>
-									<div className="mx-4 font-semibold">me</div>
+									<div className="mx-1 font-semibold">me</div>
 									{(mail.cc?.length ?? 0) + (mail.bcc?.length ?? 0) > 0 && (
 										<div>
-											<span className="mx-4">and</span>
-											<span className="mx-4 font-semibold">
+											<span className="mx-1">and</span>
+											<span className="mx-1 font-semibold">
 												{(mail.cc?.length ?? 0) + (mail.bcc?.length ?? 0)}
 											</span>
-											<span className="mx-4 font-semibold">
+											<span className="mx-1 font-semibold">
 												{(mail.cc?.length ?? 0) + (mail.bcc?.length ?? 0) === 1
 													? 'other'
 													: 'others'}
@@ -88,19 +88,19 @@ function Mail() {
 							</div>
 						</div>
 						<Typography
-							className="flex mt-32 whitespace-pre-line leading-relaxed"
+							className="flex mt-8 whitespace-pre-line leading-[1.625]"
 							variant="body2"
 							dangerouslySetInnerHTML={{ __html: mail.content }}
 						/>
 
 						{mail.attachments && mail.attachments?.length > 0 && (
 							<div className="flex flex-col w-full">
-								<div className="flex items-center mt-48">
+								<div className="flex items-center mt-12">
 									<FuseSvgIcon size={20}>heroicons-solid:paper-clip</FuseSvgIcon>
-									<div className="mx-8 font-semibold">{mail.attachments.length} Attachments</div>
+									<div className="mx-2 font-semibold">{mail.attachments.length} Attachments</div>
 								</div>
 
-								<div className="flex flex-wrap -m-12 mt-12">
+								<div className="flex flex-wrap -m-3 mt-3">
 									{mail.attachments.map((attachment, index) => (
 										<MailAttachment
 											key={index}
@@ -113,12 +113,12 @@ function Mail() {
 					</div>
 
 					<Box
-						className="flex w-full p-24 border-t"
+						className="flex w-full p-6 border-t"
 						sx={{ backgroundColor: 'background.default' }}
 					>
-						<div className="flex flex-wrap w-full -m-4">
+						<div className="flex flex-wrap w-full -m-1">
 							<Button
-								className="m-4"
+								className="m-1"
 								color="secondary"
 								startIcon={<FuseSvgIcon size={18}>heroicons-solid:arrow-uturn-left</FuseSvgIcon>}
 								variant="outlined"
@@ -127,7 +127,7 @@ function Mail() {
 								Reply
 							</Button>
 							<Button
-								className="m-4"
+								className="m-1"
 								color="secondary"
 								startIcon={<FuseSvgIcon size={18}>heroicons-solid:arrow-uturn-left</FuseSvgIcon>}
 								variant="outlined"
@@ -137,7 +137,7 @@ function Mail() {
 							</Button>
 
 							<Button
-								className="m-4"
+								className="m-1"
 								color="secondary"
 								startIcon={<FuseSvgIcon size={18}>heroicons-solid:chevron-double-right</FuseSvgIcon>}
 								variant="outlined"

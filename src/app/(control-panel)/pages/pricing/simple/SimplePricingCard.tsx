@@ -27,7 +27,7 @@ function SimplePricingCard(props: SimplePricingCardProps) {
 	return (
 		<Paper
 			className={clsx(
-				'max-w-sm flex-col items-center p-32  text-center sm:px-40 sm:py-48 md:max-w-none lg:rounded-xl',
+				'max-w-sm flex-col items-center p-8 text-center sm:px-10 sm:py-12 md:max-w-none lg:rounded-xl',
 				className
 			)}
 		>
@@ -36,20 +36,20 @@ function SimplePricingCard(props: SimplePricingCardProps) {
 					<Chip
 						label="POPULAR"
 						color="secondary"
-						className="mb-32 h-32 rounded-full px-32 text-center font-semibold leading-none"
+						className="mb-8 h-8 rounded-full px-8 text-center font-semibold leading-none"
 					/>
 				</div>
 			)}
 
-			<div className="text-4xl font-extrabold leading-tight tracking-tight">{title}</div>
+			<div className="text-4xl font-extrabold leading-[1.25] tracking-tight">{title}</div>
 
-			<div className="mt-32 flex items-baseline justify-center whitespace-nowrap">
-				<Typography className="text-6xl font-semibold leading-tight tracking-tight">
+			<div className="mt-8 flex items-baseline justify-center whitespace-nowrap">
+				<Typography className="text-6xl font-semibold leading-[1.25] tracking-tight">
 					{period === 'month' && monthlyPrice}
 					{period === 'year' && yearlyPrice}
 				</Typography>
 				<Typography
-					className="ml-8 text-2xl"
+					className="ml-2 text-2xl"
 					color="text.secondary"
 				>
 					/ month
@@ -57,7 +57,7 @@ function SimplePricingCard(props: SimplePricingCardProps) {
 			</div>
 
 			<Typography
-				className="mt-8 flex flex-col"
+				className="mt-2 flex flex-col"
 				color="text.secondary"
 			>
 				{period === 'month' && (
@@ -81,7 +81,7 @@ function SimplePricingCard(props: SimplePricingCardProps) {
 			{details}
 
 			<Button
-				className="mt-40 w-full"
+				className="mt-10 w-full"
 				size="large"
 				variant={isPopular ? 'contained' : 'outlined'}
 				color={isPopular ? 'secondary' : 'inherit'}

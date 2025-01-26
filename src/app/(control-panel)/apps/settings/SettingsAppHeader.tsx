@@ -20,7 +20,7 @@ function SettingsAppHeader(props: SettingsAppHeaderProps) {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	return (
-		<div className={clsx('flex space-x-12', className)}>
+		<div className={clsx('flex space-x-3', className)}>
 			{isMobile && (
 				<IconButton
 					className="border border-divider"
@@ -32,7 +32,7 @@ function SettingsAppHeader(props: SettingsAppHeaderProps) {
 			)}
 
 			<div>
-				<PageBreadcrumb className="mb-8" />
+				<PageBreadcrumb className="mb-2" />
 
 				<Typography className=" text-3xl font-bold leading-none tracking-tight lg:ml-0">
 					{currentNavigation?.title}

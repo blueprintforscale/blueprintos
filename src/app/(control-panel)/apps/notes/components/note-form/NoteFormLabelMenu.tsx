@@ -60,7 +60,7 @@ function NoteFormLabelMenu(props: NoteFormLabelMenuProps) {
 				}}
 				className="pointer-events-none"
 				classes={{
-					paper: 'pointer-events-auto py-8 prevent-add-close'
+					paper: 'pointer-events-auto py-2 prevent-add-close'
 				}}
 			>
 				<ClickAwayListener onClickAway={handleMenuClose}>
@@ -81,7 +81,7 @@ function NoteFormLabelMenu(props: NoteFormLabelMenuProps) {
 										: 'heroicons-outline:minus-circle'}
 								</FuseSvgIcon>
 								<ListItemText
-									className="truncate px-8"
+									className="truncate px-2"
 									primary={label.title}
 									disableTypography
 								/>

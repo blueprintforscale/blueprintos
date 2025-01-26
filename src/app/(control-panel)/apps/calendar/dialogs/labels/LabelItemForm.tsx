@@ -104,7 +104,7 @@ function NewLabelForm(props: NewLabelFormProps) {
 
 	return (
 		<ListItem
-			className="p-0 mb-16"
+			className="p-0 mb-4"
 			dense
 		>
 			<Controller
@@ -126,7 +126,7 @@ function NewLabelForm(props: NewLabelFormProps) {
 										control={control}
 										render={({ field: { onChange: _onChange, value: _value } }) => (
 											<FormLabel
-												className="w-16 h-16 shrink-0 rounded-full"
+												className="w-4 h-4 shrink-0 rounded-full"
 												sx={{ backgroundColor: _value }}
 											>
 												<Input

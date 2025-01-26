@@ -51,10 +51,10 @@ function ModernReversedResetPasswordPage() {
 	}
 
 	return (
-		<div className="flex min-w-0 flex-auto flex-col items-center sm:justify-center md:p-32">
-			<Paper className="flex min-h-full w-full overflow-hidden rounded-0 sm:min-h-auto sm:w-auto sm:rounded-xl sm:shadow md:w-full md:max-w-6xl">
+		<div className="flex min-w-0 flex-auto flex-col items-center sm:justify-center md:p-8">
+			<Paper className="flex min-h-full w-full overflow-hidden rounded-none sm:min-h-auto sm:w-auto sm:rounded-xl sm:shadow-sm md:w-full md:max-w-6xl">
 				<Box
-					className="relative hidden h-full flex-auto items-center justify-center overflow-hidden p-64 md:flex lg:px-112"
+					className="relative hidden h-full flex-auto items-center justify-center overflow-hidden p-16 md:flex lg:px-28"
 					sx={{ backgroundColor: 'primary.dark', color: 'primary.contrastText' }}
 				>
 					<svg
@@ -86,7 +86,7 @@ function ModernReversedResetPasswordPage() {
 					</svg>
 					<Box
 						component="svg"
-						className="absolute -right-64 -top-64 opacity-20"
+						className="absolute -right-16 -top-16 opacity-20"
 						sx={{ color: 'primary.light' }}
 						viewBox="0 0 220 192"
 						width="220px"
@@ -118,16 +118,16 @@ function ModernReversedResetPasswordPage() {
 						/>
 					</Box>
 
-					<div className="relative z-10 w-full max-w-2xl">
+					<div className="relative z-10 w-full max-w-4xl">
 						<div className="text-7xl font-bold leading-none text-gray-100">
 							<div>Welcome to</div>
 							<div>our community</div>
 						</div>
-						<div className="mt-24 text-lg leading-6 tracking-tight text-gray-400">
+						<div className="mt-6 text-lg leading-6 tracking-tight text-gray-400">
 							Fuse helps developers to build organized and well coded dashboards full of beautiful and
 							rich modules. Join us and start building your application today.
 						</div>
-						<div className="mt-32 flex items-center">
+						<div className="mt-8 flex items-center">
 							<AvatarGroup
 								sx={{
 									'& .MuiAvatar-root': {
@@ -141,22 +141,22 @@ function ModernReversedResetPasswordPage() {
 								<Avatar src="/assets/images/avatars/male-16.jpg" />
 							</AvatarGroup>
 
-							<div className="ml-16 font-medium tracking-tight text-gray-400">
+							<div className="ml-4 font-medium tracking-tight text-gray-400">
 								More than 17k people joined us, it's your turn
 							</div>
 						</div>
 					</div>
 				</Box>
 
-				<div className="w-full px-16 py-32 ltr:border-l-1 rtl:border-r-1 sm:w-auto sm:p-48 md:p-64">
-					<div className="mx-auto w-full max-w-320 sm:mx-0 sm:w-320">
+				<div className="w-full px-4 py-8 ltr:border-l-1 rtl:border-r-1 sm:w-auto sm:p-12 md:p-16">
+					<div className="mx-auto w-full max-w-80 sm:mx-0 sm:w-80">
 						<img
-							className="w-48"
+							className="w-12"
 							src="/assets/images/logo/logo.svg"
 							alt="logo"
 						/>
 
-						<Typography className="mt-32 text-4xl font-extrabold leading-tight tracking-tight">
+						<Typography className="mt-8 text-4xl font-extrabold leading-[1.25] tracking-tight">
 							Reset your password
 						</Typography>
 						<Typography className="font-medium">Create a new password for your account</Typography>
@@ -164,7 +164,7 @@ function ModernReversedResetPasswordPage() {
 						<form
 							name="registerForm"
 							noValidate
-							className="mt-32 flex w-full flex-col justify-center"
+							className="mt-8 flex w-full flex-col justify-center"
 							onSubmit={handleSubmit(onSubmit)}
 						>
 							<Controller
@@ -173,7 +173,7 @@ function ModernReversedResetPasswordPage() {
 								render={({ field }) => (
 									<TextField
 										{...field}
-										className="mb-24"
+										className="mb-6"
 										label="Password"
 										type="password"
 										error={!!errors.password}
@@ -191,7 +191,7 @@ function ModernReversedResetPasswordPage() {
 								render={({ field }) => (
 									<TextField
 										{...field}
-										className="mb-24"
+										className="mb-6"
 										label="Password (Confirm)"
 										type="password"
 										error={!!errors.passwordConfirm}
@@ -206,7 +206,7 @@ function ModernReversedResetPasswordPage() {
 							<Button
 								variant="contained"
 								color="secondary"
-								className=" mt-4 w-full"
+								className=" mt-1 w-full"
 								aria-label="Register"
 								disabled={_.isEmpty(dirtyFields) || !isValid}
 								type="submit"
@@ -216,12 +216,12 @@ function ModernReversedResetPasswordPage() {
 							</Button>
 
 							<Typography
-								className="mt-32 text-md font-medium"
+								className="mt-8 text-md font-medium"
 								color="text.secondary"
 							>
 								<span>Return to</span>
 								<Link
-									className="ml-4"
+									className="ml-1"
 									to="/sign-in"
 								>
 									sign in

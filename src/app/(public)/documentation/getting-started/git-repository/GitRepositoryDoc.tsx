@@ -9,13 +9,13 @@ function GitRepositoryDoc() {
 		<>
 			<Typography
 				variant="h4"
-				className="mb-40 font-700"
+				className="mb-10 font-bold"
 			>
 				Github Repository
 			</Typography>
 
 			<Typography
-				className="mb-16"
+				className="mb-4"
 				component="p"
 			>
 				You can also check out Fuse React from the Github repository. Fuse React's Github repository is private,

@@ -127,14 +127,14 @@ function MailCompose(props: MailComposeProps) {
 					onSubmit={handleSubmit(onSubmit)}
 					className="flex flex-col"
 				>
-					<DialogContent classes={{ root: 'p-16 pb-0 sm:p-32 sm:pb-0' }}>
+					<DialogContent classes={{ root: 'p-4 pb-0 sm:p-8 sm:pb-0' }}>
 						<Controller
 							name="from.email"
 							control={control}
 							render={({ field }) => (
 								<TextField
 									{...field}
-									className="mt-8 mb-16"
+									className="mt-2 mb-4"
 									label="From"
 									id="from"
 									variant="outlined"
@@ -150,7 +150,7 @@ function MailCompose(props: MailComposeProps) {
 							render={({ field }) => (
 								<TextField
 									{...field}
-									className="mt-8 mb-16"
+									className="mt-2 mb-4"
 									label="To"
 									autoFocus
 									id="to"
@@ -169,7 +169,7 @@ function MailCompose(props: MailComposeProps) {
 							render={({ field }) => (
 								<TextField
 									{...field}
-									className="mt-8 mb-16"
+									className="mt-2 mb-4"
 									label="Cc"
 									id="cc"
 									variant="outlined"
@@ -184,7 +184,7 @@ function MailCompose(props: MailComposeProps) {
 							render={({ field }) => (
 								<TextField
 									{...field}
-									className="mt-8 mb-16"
+									className="mt-2 mb-4"
 									label="Bcc"
 									id="bcc"
 									name="bcc"
@@ -200,7 +200,7 @@ function MailCompose(props: MailComposeProps) {
 							render={({ field }) => (
 								<TextField
 									{...field}
-									className="mt-8 mb-16"
+									className="mt-2 mb-4"
 									label="Subject"
 									id="subject"
 									name="subject"
@@ -213,7 +213,7 @@ function MailCompose(props: MailComposeProps) {
 						<Controller
 							render={({ field }) => (
 								<WYSIWYGEditor
-									className="mt-8 mb-16"
+									className="mt-2 mb-4"
 									{...field}
 								/>
 							)}
@@ -221,14 +221,14 @@ function MailCompose(props: MailComposeProps) {
 							control={control}
 						/>
 
-						<div className="pt-8">
+						<div className="pt-2">
 							<MailAttachment attachment={{ name: 'attachment-1.jpg', size: 350, type: 'jpg' }} />
 							<MailAttachment attachment={{ name: 'attachment-2.jpg', size: 350, type: 'jpg' }} />
 						</div>
 					</DialogContent>
 
-					<DialogActions className="flex flex-col sm:flex-row sm:items-center justify-between py-16 sm:py-24 px-24">
-						<div className="-mx-8">
+					<DialogActions className="flex flex-col sm:flex-row sm:items-center justify-between py-4 sm:py-6 px-6">
+						<div className="-mx-2">
 							<IconButton>
 								<FuseSvgIcon size={20}>heroicons-solid:paper-clip</FuseSvgIcon>
 							</IconButton>
@@ -246,7 +246,7 @@ function MailCompose(props: MailComposeProps) {
 							</IconButton>
 						</div>
 
-						<div className="flex items-center space-x-8 mt-16 sm:mt-0">
+						<div className="flex items-center space-x-2 mt-4 sm:mt-0">
 							<Button
 								variant="outlined"
 								color="secondary"

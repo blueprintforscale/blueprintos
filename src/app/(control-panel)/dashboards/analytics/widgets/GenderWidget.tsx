@@ -95,10 +95,10 @@ function GenderWidget() {
 	}
 
 	return (
-		<Paper className="flex flex-col flex-auto shadow rounded-xl overflow-hidden p-16">
+		<Paper className="flex flex-col flex-auto shadow-sm rounded-xl overflow-hidden p-4">
 			<div className="flex flex-col sm:flex-row items-start justify-between">
 				<Typography className="text-lg font-medium tracking-tight leading-6 truncate">Gender</Typography>
-				<div className="ml-8">
+				<div className="ml-2">
 					<Chip
 						size="small"
 						className="font-medium text-sm"
@@ -107,7 +107,7 @@ function GenderWidget() {
 				</div>
 			</div>
 
-			<div className="flex flex-col flex-auto mt-24 h-192">
+			<div className="flex flex-col flex-auto mt-6 h-48">
 				<ReactApexChart
 					className="flex flex-auto items-center justify-center w-full h-full"
 					options={chartOptions}
@@ -116,19 +116,19 @@ function GenderWidget() {
 					height={chartOptions?.chart?.height}
 				/>
 			</div>
-			<div className="mt-32">
-				<div className="-my-12 divide-y">
+			<div className="mt-8">
+				<div className="-my-3 divide-y">
 					{series.map((dataset, i) => (
 						<div
-							className="grid grid-cols-3 py-12"
+							className="grid grid-cols-3 py-3"
 							key={i}
 						>
 							<div className="flex items-center">
 								<Box
-									className="flex-0 w-8 h-8 rounded-full"
+									className="shrink-0 w-2 h-2 rounded-full"
 									sx={{ backgroundColor: chartOptions?.colors?.[i] as string }}
 								/>
-								<Typography className="ml-12 truncate">{labels[i]}</Typography>
+								<Typography className="ml-3 truncate">{labels[i]}</Typography>
 							</div>
 							<Typography className="font-medium text-right">
 								{((uniqueVisitors * dataset) / 100).toLocaleString('en-US')}

@@ -1,44 +1,41 @@
 /* eslint-disable */
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 import plugin from 'tailwindcss/plugin';
 
 /**
  * The iconSize function is a Tailwind CSS plugin that generates utility classes for setting the size of icons.
- * It takes in an object with addUtilities, theme, e, and variants properties as parameters.
- * It returns nothing.
  */
 const iconSize = plugin(
-	({ addUtilities, theme, e, variants }) => {
-		const values = theme('iconSize');
+	({ addUtilities, theme, matchUtilities }) => {
+		const spacingScale = theme('spacing');
 
+		const createIconStyles = (value) => ({
+			width: value,
+			height: value,
+			minWidth: value,
+			minHeight: value,
+			fontSize: value,
+			lineHeight: value,
+			'svg': {
+				width: value,
+				height: value
+			}
+		});
+
+		// Standard spacing scale utilities
 		addUtilities(
-			Object.entries(values).map(([key, value]) => ({
-				[`.${e(`icon-size-${key}`)}`]: {
-					width: value,
-					height: value,
-					minWidth: value,
-					minHeight: value,
-					fontSize: value,
-					lineHeight: value,
-					[`svg`]: {
-						width: value,
-						height: value
-					}
-				}
-			})),
-			variants('iconSize')
+			Object.entries(spacingScale).map(([key, value]) => ({
+				[`.icon-size-${key}`]: createIconStyles(value)
+			}))
 		);
-	},
-	{
-		theme: {
-			iconSize: (theme) => ({
-				...theme('spacing')
-			})
-		},
-		variants: {
-			iconSize: ['responsive']
-		}
+
+		// Arbitrary value support
+		matchUtilities(
+			{
+				'icon-size': (value) => createIconStyles(value)
+			},
+			{ values: spacingScale }
+		);
 	}
 );
 

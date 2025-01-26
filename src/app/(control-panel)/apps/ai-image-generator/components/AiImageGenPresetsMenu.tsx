@@ -24,7 +24,7 @@ function AiImageGenPresetsMenu(props: AiImageGenPresetsMenuProps) {
 	return (
 		<>
 			<Button
-				className="border border-divider text-sm px-4 min-h-0 max-h-24 rounded gap-4"
+				className="border border-divider text-sm px-1 min-h-0 max-h-6 rounded-sm gap-1"
 				variant="outlined"
 				size="small"
 				onClick={(e) => setPresetMenuAnchor(e.currentTarget)}

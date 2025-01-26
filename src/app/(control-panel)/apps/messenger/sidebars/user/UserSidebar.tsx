@@ -59,22 +59,22 @@ function UserSidebar() {
 					})
 				})}
 			>
-				<Toolbar className="flex items-center px-24 border-b-1">
+				<Toolbar className="flex items-center px-6 border-b-1">
 					<IconButton onClick={() => setUserSidebarOpen(false)}>
 						<FuseSvgIcon>heroicons-outline:arrow-small-left</FuseSvgIcon>
 					</IconButton>
-					<Typography className="px-8 font-semibold text-2xl">Profile</Typography>
+					<Typography className="px-2 font-semibold text-2xl">Profile</Typography>
 				</Toolbar>
 			</Box>
-			<div className="flex flex-col justify-center items-center py-32">
+			<div className="flex flex-col justify-center items-center py-8">
 				<UserAvatar
-					className="w-160 h-160 text-64"
+					className="w-40 h-40 text-16"
 					user={user}
 				/>
 			</div>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="px-24"
+				className="px-6"
 			>
 				<Controller
 					control={control}
@@ -108,7 +108,7 @@ function UserSidebar() {
 					render={({ field }) => (
 						<TextField
 							{...field}
-							className="mt-16 w-full"
+							className="mt-4 w-full"
 							label="Email"
 							placeholder="Email"
 							variant="outlined"
@@ -133,7 +133,7 @@ function UserSidebar() {
 						<TextField
 							{...field}
 							label="About"
-							className="mt-16 w-full"
+							className="mt-4 w-full"
 							margin="normal"
 							multiline
 							variant="outlined"
@@ -150,7 +150,7 @@ function UserSidebar() {
 
 				<FormControl
 					component="fieldset"
-					className="w-full mt-16"
+					className="w-full mt-4"
 				>
 					<FormLabel component="legend">Status</FormLabel>
 					<Controller
@@ -170,10 +170,10 @@ function UserSidebar() {
 										label={
 											<div className="flex items-center">
 												<Box
-													className="w-8 h-8 rounded-full"
+													className="w-2 h-2 rounded-full"
 													sx={{ backgroundColor: status.color }}
 												/>
-												<span className="mx-8">{status.title}</span>
+												<span className="mx-2">{status.title}</span>
 											</div>
 										}
 									/>
@@ -182,10 +182,10 @@ function UserSidebar() {
 						)}
 					/>
 				</FormControl>
-				<div className="flex items-center justify-end mt-32">
-					<Button className="mx-8">Cancel</Button>
+				<div className="flex items-center justify-end mt-8">
+					<Button className="mx-2">Cancel</Button>
 					<Button
-						className="mx-8"
+						className="mx-2"
 						variant="contained"
 						color="secondary"
 						disabled={_.isEmpty(dirtyFields) || !isValid}

@@ -25,7 +25,7 @@ function FooterLayout2(props: FooterLayout2Props) {
 				color="default"
 				sx={{ backgroundColor: footerTheme.palette.background.paper }}
 			>
-				<Toolbar className="container flex min-h-48 items-center overflow-x-auto px-8 py-0 sm:px-12 md:min-h-64">
+				<Toolbar className="container flex min-h-12 items-center overflow-x-auto px-2 py-0 sm:px-3 md:min-h-16">
 					<DemoLayoutFooterContent />
 				</Toolbar>
 			</AppBar>

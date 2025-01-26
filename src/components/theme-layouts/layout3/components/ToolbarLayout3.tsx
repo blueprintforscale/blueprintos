@@ -37,10 +37,10 @@ function ToolbarLayout3(props: ToolbarLayout3Props) {
 				color="default"
 				style={{ backgroundColor: toolbarTheme.palette.background.paper }}
 			>
-				<Toolbar className="container min-h-48 p-0 md:min-h-64 lg:px-24">
-					<div className={clsx('flex shrink px-8 md:px-0 space-x-8')}>
+				<Toolbar className="container min-h-12 p-0 md:min-h-16 lg:px-6">
+					<div className={clsx('flex shrink px-2 md:px-0 space-x-2')}>
 						{config.navbar.display && isMobile && (
-							<NavbarToggleButton className="mx-0 h-36 w-36 p-0 sm:mx-8" />
+							<NavbarToggleButton className="mx-0 h-9 w-9 p-0 sm:mx-2" />
 						)}
 
 						{!isMobile && <Logo />}
@@ -49,13 +49,13 @@ function ToolbarLayout3(props: ToolbarLayout3Props) {
 					<div className="flex flex-1">
 						{!isMobile && (
 							<NavigationSearch
-								className="mx-16 lg:mx-24"
+								className="mx-4 lg:mx-6"
 								variant="basic"
 							/>
 						)}
 					</div>
 
-					<div className="flex items-center overflow-x-auto px-8 md:px-16 space-x-6">
+					<div className="flex items-center overflow-x-auto px-2 md:px-4 space-x-1.5">
 						{isMobile && <NavigationSearch />}
 						<LanguageSwitcher />
 						<AdjustFontSize />

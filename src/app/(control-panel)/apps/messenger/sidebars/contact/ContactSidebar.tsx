@@ -37,7 +37,7 @@ function ContactSidebar() {
 					})
 				})}
 			>
-				<Toolbar className="flex items-center px-4">
+				<Toolbar className="flex items-center px-1">
 					<IconButton
 						onClick={() => setContactSidebarOpen(null)}
 						color="inherit"
@@ -45,7 +45,7 @@ function ContactSidebar() {
 						<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
 					</IconButton>
 					<Typography
-						className="px-4 font-medium text-15"
+						className="px-1 font-medium text-lg"
 						color="inherit"
 						variant="subtitle1"
 					>
@@ -53,28 +53,28 @@ function ContactSidebar() {
 					</Typography>
 				</Toolbar>
 			</Box>
-			<div className="flex flex-col justify-center items-center mt-32">
+			<div className="flex flex-col justify-center items-center mt-8">
 				<UserAvatar
-					className="w-160 h-160 text-64"
+					className="w-40 h-40 text-16"
 					user={contact}
 				/>
-				<Typography className="mt-16 text-15 font-medium">{contact.name}</Typography>
+				<Typography className="mt-4 text-lg font-medium">{contact.name}</Typography>
 				<Typography
 					color="text.secondary"
-					className="mt-2 text-md"
+					className="mt-0.5 text-md"
 				>
 					{contact.about}
 				</Typography>
 			</div>
-			<div className="w-full p-24">
+			<div className="w-full p-6">
 				{contact.attachments?.media && (
 					<>
-						<Typography className="mt-16 text-15 font-medium">Media</Typography>
-						<div className="grid grid-cols-4 gap-4 mt-16">
+						<Typography className="mt-4 text-lg font-medium">Media</Typography>
+						<div className="grid grid-cols-4 gap-1 mt-4">
 							{contact.attachments?.media.map((url, index) => (
 								<img
 									key={index}
-									className="h-80 rounded object-cover"
+									className="h-20 rounded-sm object-cover"
 									src={url}
 									alt=""
 								/>
@@ -83,9 +83,9 @@ function ContactSidebar() {
 					</>
 				)}
 
-				<Typography className="mt-40 text-15 font-medium">Details</Typography>
+				<Typography className="mt-10 text-lg font-medium">Details</Typography>
 
-				<div className="mt-16">
+				<div className="mt-4">
 					<Typography
 						className="text-base font-medium"
 						color="text.secondary"
@@ -104,7 +104,7 @@ function ContactSidebar() {
 									className="text-md truncate"
 									color="text.secondary"
 								>
-									<span className="mx-8">&bull;</span>
+									<span className="mx-2">&bull;</span>
 									<span className="font-medium">{item.label}</span>
 								</Typography>
 							)}
@@ -112,7 +112,7 @@ function ContactSidebar() {
 					))}
 				</div>
 
-				<div className="mt-16">
+				<div className="mt-4">
 					<Typography
 						className="text-base font-medium"
 						color="text.secondary"
@@ -131,7 +131,7 @@ function ContactSidebar() {
 									className="text-md truncate"
 									color="text.secondary"
 								>
-									<span className="mx-8">&bull;</span>
+									<span className="mx-2">&bull;</span>
 									<span className="font-medium">{item.label}</span>
 								</Typography>
 							)}
@@ -139,7 +139,7 @@ function ContactSidebar() {
 					))}
 				</div>
 
-				<div className="mt-16">
+				<div className="mt-4">
 					<Typography
 						className="text-base font-medium"
 						color="text.secondary"
@@ -150,7 +150,7 @@ function ContactSidebar() {
 					<Typography>{contact.details.title}</Typography>
 				</div>
 
-				<div className="mt-16">
+				<div className="mt-4">
 					<Typography
 						className="text-base font-medium"
 						color="text.secondary"
@@ -161,7 +161,7 @@ function ContactSidebar() {
 					<Typography>{contact.details.company}</Typography>
 				</div>
 
-				<div className="mt-16">
+				<div className="mt-4">
 					<Typography
 						className="text-base font-medium"
 						color="text.secondary"
@@ -172,7 +172,7 @@ function ContactSidebar() {
 					<Typography>{format(new Date(contact.details.birthday), 'P')}</Typography>
 				</div>
 
-				<div className="mt-16">
+				<div className="mt-4">
 					<Typography
 						className="text-base font-medium"
 						color="text.secondary"

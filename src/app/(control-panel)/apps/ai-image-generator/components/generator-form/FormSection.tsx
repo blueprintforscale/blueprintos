@@ -11,7 +11,7 @@ function FormSection(props: FormSectionProps) {
 
 	return (
 		<Box
-			className="p-12 w-full rounded-sm border space-y-8"
+			className="p-3 w-full rounded-xs border space-y-2"
 			sx={(theme) => ({
 				backgroundColor: lighten(theme.palette.background.default, 0.02),
 				...theme.applyStyles('light', {

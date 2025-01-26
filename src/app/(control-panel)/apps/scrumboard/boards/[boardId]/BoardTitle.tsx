@@ -98,9 +98,9 @@ function BoardTitle() {
 					</form>
 				</ClickAwayListener>
 			) : (
-				<div className="flex items-center justify-center space-x-12">
+				<div className="flex items-center justify-center space-x-3">
 					<Typography
-						className="text-17  sm:text-4xl font-extrabold leading-none tracking-tight cursor-pointer"
+						className="text-xl sm:text-4xl font-extrabold leading-none tracking-tight cursor-pointer"
 						onClick={handleOpenForm}
 						color="inherit"
 					>

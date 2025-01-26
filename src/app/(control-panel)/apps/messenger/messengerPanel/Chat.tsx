@@ -131,7 +131,7 @@ function Chat(props: ChatProps) {
 
 	return (
 		<Paper
-			className={clsx('flex flex-col relative pb-64 shadow', className)}
+			className={clsx('flex flex-col relative pb-16 shadow-sm', className)}
 			sx={(theme) => ({
 				background: theme.palette.background.default
 			})}
@@ -140,7 +140,7 @@ function Chat(props: ChatProps) {
 				ref={chatScroll}
 				className="flex flex-1 flex-col overflow-y-auto overscroll-contain"
 			>
-				<div className="flex flex-col pt-16">
+				<div className="flex flex-col pt-4">
 					{useMemo(() => {
 						function isFirstMessageOfGroup(item: Message, i: number) {
 							return i === 0 || (chat[i - 1] && chat[i - 1].contactId !== item.contactId);
@@ -156,19 +156,19 @@ function Chat(props: ChatProps) {
 										<StyledMessageRow
 											key={i}
 											className={clsx(
-												'flex flex-col grow-0 shrink-0 items-start justify-end relative px-16 pb-4',
+												'flex flex-col grow-0 shrink-0 items-start justify-end relative px-4 pb-1',
 												item.contactId === user.id ? 'me' : 'contact',
 												{ 'first-of-group': isFirstMessageOfGroup(item, i) },
 												{ 'last-of-group': isLastMessageOfGroup(item, i) },
-												i + 1 === chat.length && 'pb-40'
+												i + 1 === chat.length && 'pb-10'
 											)}
 										>
-											<div className="bubble flex relative items-center justify-center px-12 py-8 max-w-full">
+											<div className="bubble flex relative items-center justify-center px-3 py-2 max-w-full">
 												<Typography className=" whitespace-pre-wrap text-md">
 													{item.value}
 												</Typography>
 												<Typography
-													className="time absolute hidden w-full text-sm -mb-20 ltr:left-0 rtl:right-0 bottom-0 whitespace-nowrap"
+													className="time absolute hidden w-full text-sm -mb-5 ltr:left-0 rtl:right-0 bottom-0 whitespace-nowrap"
 													color="text.secondary"
 												>
 													{formatDistanceToNow(new Date(item.createdAt), {
@@ -194,7 +194,7 @@ function Chat(props: ChatProps) {
 							</FuseSvgIcon>
 						</div>
 						<Typography
-							className="px-16 pb-24 text-center"
+							className="px-4 pb-6 text-center"
 							color="text.secondary"
 						>
 							Start a conversation by typing your message below.
@@ -220,13 +220,13 @@ function Chat(props: ChatProps) {
 					chat && (
 						<form
 							onSubmit={onMessageSubmit}
-							className="pb-16 px-8 absolute bottom-0 left-0 right-0"
+							className="pb-4 px-2 absolute bottom-0 left-0 right-0"
 						>
-							<Paper className="flex items-center relative shadow">
+							<Paper className="flex items-center relative shadow-sm">
 								<InputBase
 									autoFocus={false}
 									id="message-input"
-									className="flex flex-1 grow shrink-0 ltr:mr-48 rtl:ml-48"
+									className="flex flex-1 grow shrink-0 ltr:mr-12 rtl:ml-12"
 									placeholder="Type your message"
 									onChange={onInputChange}
 									value={messageText}
