@@ -22,6 +22,11 @@ export type ChangelogItemType = {
  */
 const changelogData: ChangelogItemType[] = [
 	{
+		version: '14.0.1',
+		date: '2025-02-17',
+		fixedChanges: ['The sidebar width cannot be applied on FusePageSimple/FusePageCarded page layout components.']
+	},
+	{
 		version: '14.0.0',
 		date: '2025-01-26',
 		newChanges: ['🚀 Tailwindcss updated to v4'],
