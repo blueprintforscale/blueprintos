@@ -16,6 +16,7 @@ type FusePageCardedSidebarProps = {
 	onClose?: () => void;
 	children?: ReactNode;
 	ref?: React.RefObject<{ toggleSidebar: (T: boolean) => void }>;
+	width?: number;
 };
 
 /**
@@ -66,7 +67,7 @@ function FusePageCardedSidebar(props: FusePageCardedSidebarProps) {
 							root: 'FusePageCarded-backdrop'
 						}
 					}}
-					style={{ position: 'absolute' }}
+					sx={{ position: 'absolute', '& .MuiPaper-root': { width: `${props.width}px` } }}
 				>
 					<FusePageCardedSidebarContent {...props} />
 				</SwipeableDrawer>
@@ -86,6 +87,7 @@ function FusePageCardedSidebar(props: FusePageCardedSidebarProps) {
 					classes={{
 						paper: clsx('FusePageCarded-sidebar', variant)
 					}}
+					sx={{ '& .MuiPaper-root': { width: `${props.width}px` } }}
 				>
 					<FusePageCardedSidebarContent {...props} />
 				</Drawer>

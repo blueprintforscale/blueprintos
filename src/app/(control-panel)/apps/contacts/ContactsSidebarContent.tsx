@@ -11,7 +11,7 @@ type ContactsSidebarContentProps = {
  */
 function ContactsSidebarContent({ children }: ContactsSidebarContentProps) {
 	return (
-		<div className="flex flex-col flex-auto max-w-full w-xl">
+		<div className="flex flex-col flex-auto max-w-full">
 			<IconButton
 				className="absolute top-0 right-0 my-4 mx-8 z-10"
 				sx={{
