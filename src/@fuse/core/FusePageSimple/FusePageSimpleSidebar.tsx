@@ -16,6 +16,7 @@ type FusePageSimpleSidebarProps = {
 	onClose?: () => void;
 	children?: ReactNode;
 	ref?: React.RefObject<{ toggleSidebar: (T: boolean) => void }>;
+	width?: number;
 };
 
 /**
@@ -68,7 +69,7 @@ function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
 							root: 'FusePageSimple-backdrop'
 						}
 					}}
-					style={{ position: 'absolute' }}
+					sx={{ position: 'absolute', '& .MuiPaper-root': { width: `${props.width}px` } }}
 				>
 					<FusePageSimpleSidebarContent {...props} />
 				</SwipeableDrawer>
@@ -88,6 +89,7 @@ function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
 					classes={{
 						paper: clsx('FusePageSimple-sidebar border-0', variant)
 					}}
+					sx={{ '& .MuiPaper-root': { width: `${props.width}px` } }}
 				>
 					<FusePageSimpleSidebarContent {...props} />
 				</Drawer>

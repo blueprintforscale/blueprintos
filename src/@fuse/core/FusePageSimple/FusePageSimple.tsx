@@ -284,6 +284,7 @@ function FusePageSimple(props: FusePageSimpleProps) {
 								ref={leftSidebarRef}
 								open={leftSidebarOpen}
 								onClose={leftSidebarOnClose}
+								width={leftSidebarWidth}
 							>
 								{leftSidebarContent}
 							</FusePageSimpleSidebar>
@@ -313,6 +314,7 @@ function FusePageSimple(props: FusePageSimpleProps) {
 								ref={rightSidebarRef}
 								open={rightSidebarOpen}
 								onClose={rightSidebarOnClose}
+								width={rightSidebarWidth}
 							>
 								{rightSidebarContent}
 							</FusePageSimpleSidebar>

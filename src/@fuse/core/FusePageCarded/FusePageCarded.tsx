@@ -260,6 +260,7 @@ function FusePageCarded(props: FusePageCardedProps) {
 								ref={leftSidebarRef}
 								open={leftSidebarOpen}
 								onClose={leftSidebarOnClose}
+								width={leftSidebarWidth}
 							>
 								{leftSidebarContent}
 							</FusePageCardedSidebar>
@@ -278,6 +279,7 @@ function FusePageCarded(props: FusePageCardedProps) {
 								ref={rightSidebarRef}
 								open={rightSidebarOpen}
 								onClose={rightSidebarOnClose}
+								width={rightSidebarWidth}
 							>
 								{rightSidebarContent}
 							</FusePageCardedSidebar>
