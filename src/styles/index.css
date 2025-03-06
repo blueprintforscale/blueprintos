@@ -44,7 +44,7 @@ Theme variables
     --breakpoint-xs: 0px;
     --breakpoint-sm: 37.5rem; /* 600px */
     --breakpoint-md: 60rem; /* 960px */
-    --breakpoint-lg: 75rem; /* 1280px */
+    --breakpoint-lg: 80rem; /* 1280px */
     --breakpoint-xl: 120rem; /* 1920px */
 
     --container-3xs: 16rem;
