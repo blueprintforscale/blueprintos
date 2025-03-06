@@ -60,7 +60,7 @@ function CountryCodeSelector(props: CountryCodeSelectorProps) {
 			<Menu
 				id="country-menu"
 				MenuListProps={{
-					'aria-labelledby': 'demo-customized-button'
+					'aria-labelledby': 'country-button'
 				}}
 				anchorEl={anchorEl}
 				open={open}

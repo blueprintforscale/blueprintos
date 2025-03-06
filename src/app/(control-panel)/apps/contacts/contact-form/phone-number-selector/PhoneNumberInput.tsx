@@ -69,18 +69,26 @@ function PhoneNumberInput(props: PhoneNumberInputProps) {
 						fullWidth
 						error={!!errors.phoneNumber}
 						helperText={errors?.phoneNumber?.message}
-						InputProps={{
-							startAdornment: (
-								<Controller
-									control={control}
-									name="country"
-									render={({ field: _field }) => (
-										<InputAdornment position="start">
-											<CountryCodeSelector {..._field} />
-										</InputAdornment>
-									)}
-								/>
-							)
+						slotProps={{
+							input: {
+								startAdornment: (
+									<Controller
+										control={control}
+										name="country"
+										render={({ field: _field }) => (
+											<InputAdornment position="start">
+												<CountryCodeSelector
+													{..._field}
+													onChange={(val) => {
+														_field.onChange(val);
+														handleSubmit(onSubmit)();
+													}}
+												/>
+											</InputAdornment>
+										)}
+									/>
+								)
+							}
 						}}
 					/>
 				)}
@@ -97,12 +105,14 @@ function PhoneNumberInput(props: PhoneNumberInputProps) {
 						fullWidth
 						error={!!errors.label}
 						helperText={errors?.label?.message}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<FuseSvgIcon size={20}>heroicons-solid:tag</FuseSvgIcon>
-								</InputAdornment>
-							)
+						slotProps={{
+							input: {
+								startAdornment: (
+									<InputAdornment position="start">
+										<FuseSvgIcon size={20}>heroicons-solid:tag</FuseSvgIcon>
+									</InputAdornment>
+								)
+							}
 						}}
 					/>
 				)}
