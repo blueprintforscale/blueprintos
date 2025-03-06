@@ -22,6 +22,15 @@ export type ChangelogItemType = {
  */
 const changelogData: ChangelogItemType[] = [
 	{
+		version: '14.0.2',
+		date: '2025-03-06',
+		fixedChanges: [
+			'Tailwindcss media query breakpoints.',
+			'Contacts App: Contact Form, on CountryCodeSelector change not updates the form.',
+			'CountryCodeSelector aria-labelledby attribute update.'
+		]
+	},
+	{
 		version: '14.0.1',
 		date: '2025-02-17',
 		fixedChanges: ['The sidebar width cannot be applied on FusePageSimple/FusePageCarded page layout components.']
