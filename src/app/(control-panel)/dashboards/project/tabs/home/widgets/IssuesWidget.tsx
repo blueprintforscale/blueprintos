@@ -12,7 +12,6 @@ import WidgetDataType from './types/WidgetDataType';
  */
 function IssuesWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
-
 	const widget = widgets?.issues as WidgetDataType;
 
 	if (isLoading) {

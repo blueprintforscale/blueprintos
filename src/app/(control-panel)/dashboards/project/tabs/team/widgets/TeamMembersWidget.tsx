@@ -12,12 +12,11 @@ import TeamMemberType from './types/TeamMemberType';
  */
 function TeamMembersWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
+	const members = widgets?.teamMembers as TeamMemberType[];
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
-
-	const members = widgets?.teamMembers as TeamMemberType[];
 
 	if (!members) {
 		return null;

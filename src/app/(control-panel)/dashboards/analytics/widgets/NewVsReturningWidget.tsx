@@ -15,10 +15,12 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  * New vs. returning widget.
  */
 function NewVsReturningWidget() {
-	const widget = useAppSelector(selectWidget<NewVsReturningWidgetType>('newVsReturning'));
-	const { series, labels, uniqueVisitors } = widget;
-	const [awaitRender, setAwaitRender] = useState(true);
 	const theme = useTheme();
+	const widget = useAppSelector(selectWidget<NewVsReturningWidgetType>('newVsReturning'));
+	const series = widget?.series;
+	const labels = widget?.labels;
+	const uniqueVisitors = widget?.uniqueVisitors;
+	const [awaitRender, setAwaitRender] = useState(true);
 
 	const chartOptions: ApexOptions = {
 		chart: {

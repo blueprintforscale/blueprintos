@@ -22,9 +22,10 @@ function VisitorsOverviewWidget() {
 	const theme = useTheme();
 	const contrastTheme = useContrastMainTheme(theme.palette.primary.dark);
 	const widget = useAppSelector(selectWidget<VisitorsOverviewWidgetType>('visitors'));
-	const { series, ranges } = widget;
+	const series = widget?.series;
+	const ranges = widget?.ranges;
 	const [tabValue, setTabValue] = useState(0);
-	const currentRange = Object.keys(ranges)[tabValue];
+	const currentRange = Object.keys(ranges || {})[tabValue];
 
 	if (!widget) {
 		return null;

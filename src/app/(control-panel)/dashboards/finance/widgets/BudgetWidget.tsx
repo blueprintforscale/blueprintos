@@ -14,18 +14,21 @@ import { useGetFinanceDashboardWidgetsQuery } from '../FinanceDashboardApi';
  */
 function BudgetWidget() {
 	const { data: widgets, isLoading } = useGetFinanceDashboardWidgetsQuery();
+	const widget = widgets?.budget as BudgetWidgetType;
+	const expenses = widget?.expenses;
+	const expensesLimit = widget?.expensesLimit;
+	const savings = widget?.savings;
+	const savingsGoal = widget?.savingsGoal;
+	const bills = widget?.bills;
+	const billsLimit = widget?.billsLimit;
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
 
-	const widget = widgets?.budget as BudgetWidgetType;
-
 	if (!widget) {
 		return null;
 	}
-
-	const { expenses, expensesLimit, savings, savingsGoal, bills, billsLimit } = widget;
 
 	function calcProgressVal(val: number, limit: number) {
 		const percentage = (val * 100) / limit;

@@ -9,13 +9,13 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
 
 const marks = [
-	{ value: 0.7, label: '70%' },
-	{ value: 0.8, label: '80%' },
-	{ value: 0.9, label: '90%' },
-	{ value: 1, label: '100%' },
-	{ value: 1.1, label: '110%' },
-	{ value: 1.2, label: '120%' },
-	{ value: 1.3, label: '130%' }
+	{ value: 16 * 0.7, label: '70%' },
+	{ value: 16 * 0.8, label: '80%' },
+	{ value: 16 * 0.9, label: '90%' },
+	{ value: 16, label: '100%' },
+	{ value: 16 * 1.1, label: '110%' },
+	{ value: 16 * 1.2, label: '120%' },
+	{ value: 16 * 1.3, label: '130%' }
 ];
 
 type AdjustFontSizeProps = {
@@ -29,11 +29,11 @@ function AdjustFontSize(props: AdjustFontSizeProps) {
 	const { className = '' } = props;
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-	const [fontSize, setFontSize] = useState(1);
+	const [fontSize, setFontSize] = useState(16);
 
 	function changeHtmlFontSize() {
 		const html = document.getElementsByTagName('html')[0];
-		html.style.fontSize = `${fontSize * 62.5}%`;
+		html.style.fontSize = `${fontSize}px`;
 	}
 
 	const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -85,10 +85,10 @@ function AdjustFontSize(props: AdjustFontSizeProps) {
 						value={fontSize}
 						track={false}
 						aria-labelledby="discrete-slider-small-steps"
-						step={0.1}
 						marks={marks}
-						min={0.7}
-						max={1.3}
+						min={16 * 0.7}
+						max={16 * 1.3}
+						step={null}
 						valueLabelDisplay="off"
 						onChange={(ev, value) => setFontSize(value as number)}
 						onChangeCommitted={changeHtmlFontSize}

@@ -17,14 +17,11 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  */
 function VisitorsVsPageViewsWidget() {
 	const theme = useTheme();
-
 	const widget = useAppSelector(selectWidget<VisitorsVsPageViewsType>('visitorsVsPageViews'));
-
-	if (!widget) {
-		return null;
-	}
-
-	const { series, averageRatio, predictedRatio, overallScore } = widget;
+	const series = widget?.series;
+	const averageRatio = widget?.averageRatio;
+	const predictedRatio = widget?.predictedRatio;
+	const overallScore = widget?.overallScore;
 
 	const chartOptions: ApexOptions = {
 		chart: {
@@ -101,6 +98,10 @@ function VisitorsVsPageViewsWidget() {
 			tickAmount: 5
 		}
 	};
+
+	if (!widget) {
+		return null;
+	}
 
 	return (
 		<Paper className="flex flex-col flex-auto shadow-sm rounded-xl overflow-hidden">

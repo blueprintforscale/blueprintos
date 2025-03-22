@@ -12,18 +12,17 @@ import { useGetProjectDashboardWidgetsQuery } from '../../../ProjectDashboardApi
  */
 function FeaturesWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
+	const widget = widgets?.features as WidgetDataType;
+	const data = widget?.data;
+	const title = widget?.title;
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
 
-	const widget = widgets?.features as WidgetDataType;
-
 	if (!widget) {
 		return null;
 	}
-
-	const { data, title } = widget;
 
 	return (
 		<Paper className="flex flex-col flex-auto shadow-sm rounded-xl overflow-hidden">

@@ -14,21 +14,21 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  * The AccountBalanceWidget widget.
  */
 function AccountBalanceWidget() {
-	const theme = useTheme();
-
 	const { data: widgets, isLoading } = useGetFinanceDashboardWidgetsQuery();
+	const widget = widgets?.accountBalance as AccountBalanceWidgetType;
+	const series = widget?.series;
+	const growRate = widget?.growRate;
+	const ami = widget?.ami;
+
+	const theme = useTheme();
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
 
-	const widget = widgets?.accountBalance as AccountBalanceWidgetType;
-
 	if (!widget) {
 		return null;
 	}
-
-	const { series, growRate, ami } = widget;
 
 	const chartOptions: ApexOptions = {
 		chart: {

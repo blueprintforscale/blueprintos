@@ -1,34 +1,30 @@
 import { darken, useTheme } from '@mui/material/styles';
-import dynamic from 'next/dynamic';
 import { sub } from 'date-fns/sub';
 import { format } from 'date-fns/format';
 import { ApexOptions } from 'apexcharts';
 import FuseLoading from '@fuse/core/FuseLoading';
 import _ from 'lodash';
+import dynamic from 'next/dynamic';
+const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 import BTCWidgetType from '../types/BTCWidgetType';
 import { useGetCryptoDashboardWidgetsQuery } from '../CryptoDashboardApi';
-
-const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 /**
  * The BTC main chart.
  */
 function BtcMainChart() {
-	const theme = useTheme();
-
 	const { data: widgets, isLoading } = useGetCryptoDashboardWidgetsQuery();
+	const btc = widgets?.btc as BTCWidgetType;
+	const series = _.cloneDeep(btc?.price?.series) || [];
+	const theme = useTheme();
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
 
-	const btc = widgets?.btc as BTCWidgetType;
-
 	if (!btc) {
 		return null;
 	}
-
-	const series = _.cloneDeep(btc?.price?.series) || [];
 
 	const chartOptions: ApexOptions = {
 		chart: {

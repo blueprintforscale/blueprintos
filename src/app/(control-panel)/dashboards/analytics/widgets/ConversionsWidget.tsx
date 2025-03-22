@@ -17,12 +17,9 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 function ConversionsWidget() {
 	const theme = useTheme();
 	const widget = useAppSelector(selectWidget<ConversionsWidgetType>('conversions'));
-
-	if (!widget) {
-		return null;
-	}
-
-	const { series, amount, labels } = widget;
+	const series = widget?.series;
+	const amount = widget?.amount;
+	const labels = widget?.labels;
 
 	const chartOptions: ApexOptions = {
 		chart: {
@@ -54,6 +51,10 @@ function ConversionsWidget() {
 			categories: labels
 		}
 	};
+
+	if (!widget) {
+		return null;
+	}
 
 	return (
 		<Paper className="flex flex-col flex-auto shadow-sm rounded-xl overflow-hidden">

@@ -23,7 +23,16 @@ const Root = styled('div')(({ config }: { config: Layout3ConfigDefaultsType }) =
 		'& .container': {
 			maxWidth: `${config.containerWidth}px`,
 			width: '100%',
-			margin: '0 auto'
+			margin: '0 auto',
+			'@media (min-width: 96rem)': {
+				maxWidth: `${config.containerWidth}px!important`
+			}
+		}
+	}),
+	...(config.mode === 'fullwidth' && {
+		'& .container': {
+			maxWidth: '100%!important',
+			width: '100%!important'
 		}
 	})
 }));
