@@ -17,7 +17,6 @@ type WatchlistItemProps = {
  */
 function WatchlistItem(props: WatchlistItemProps) {
 	const { item } = props;
-
 	const theme = useTheme();
 
 	const chartOptions: ApexOptions = {

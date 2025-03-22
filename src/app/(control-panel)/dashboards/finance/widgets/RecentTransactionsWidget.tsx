@@ -18,18 +18,17 @@ import { useGetFinanceDashboardWidgetsQuery } from '../FinanceDashboardApi';
  */
 function RecentTransactionsWidget() {
 	const { data: widgets, isLoading } = useGetFinanceDashboardWidgetsQuery();
+	const widget = widgets?.recentTransactions as RecentTransactionsWidgetType;
+	const columns = widget?.columns;
+	const rows = widget?.rows;
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
 
-	const widget = widgets?.recentTransactions as RecentTransactionsWidgetType;
-
 	if (!widget) {
 		return null;
 	}
-
-	const { columns, rows } = widget;
 
 	return (
 		<Paper className="flex flex-col flex-auto p-6 shadow-sm rounded-xl overflow-hidden">

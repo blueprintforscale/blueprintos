@@ -16,12 +16,11 @@ import BudgetDetailsDataType from './types/BudgetDetailsDataType';
  */
 function BudgetDetailsWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
+	const widget = widgets?.budgetDetails as BudgetDetailsDataType;
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
-
-	const widget = widgets?.budgetDetails as BudgetDetailsDataType;
 
 	if (!widget) {
 		return null;

@@ -19,7 +19,8 @@ import ScheduleDataType from './types/ScheduleDataType';
 function ScheduleWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
 	const widget = widgets?.schedule as ScheduleDataType;
-	const { series, ranges } = widget;
+	const series = widget?.series;
+	const ranges = widget?.ranges;
 	const [tabValue, setTabValue] = useState(0);
 	const currentRange = Object.keys(ranges)[tabValue];
 

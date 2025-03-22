@@ -18,9 +18,13 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 function TaskDistributionWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
 	const widget = widgets?.taskDistribution as TaskDistributionDataType;
-	const { overview, series, labels, ranges } = widget;
+	const overview = widget?.overview;
+	const series = widget?.series;
+	const labels = widget?.labels;
+	const ranges = widget?.ranges;
+
 	const [tabValue, setTabValue] = useState(0);
-	const currentRange = Object.keys(ranges)[tabValue];
+	const currentRange = Object.keys(ranges || {})[tabValue];
 	const [awaitRender, setAwaitRender] = useState(true);
 	const theme = useTheme();
 

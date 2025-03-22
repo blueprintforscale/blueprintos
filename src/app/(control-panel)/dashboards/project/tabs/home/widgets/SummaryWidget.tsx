@@ -15,7 +15,10 @@ import WidgetDataType, { RangeType } from './types/WidgetDataType';
 function SummaryWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
 	const widget = widgets?.summary as WidgetDataType;
-	const { data, ranges, currentRange: currentRangeDefault } = widget;
+	const data = widget?.data;
+	const ranges = widget?.ranges;
+	const currentRangeDefault = widget?.currentRange;
+
 	const [currentRange, setCurrentRange] = useState<RangeType>(currentRangeDefault as RangeType);
 
 	function handleChangeRange(event: SelectChangeEvent<string>) {

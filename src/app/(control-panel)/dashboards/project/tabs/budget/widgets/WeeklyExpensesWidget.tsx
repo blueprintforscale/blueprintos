@@ -17,7 +17,9 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 function WeeklyExpensesWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
 	const widget = widgets?.weeklyExpenses as ExpensesDataType;
-	const { amount, series, labels } = widget;
+	const amount = widget?.amount;
+	const series = widget?.series;
+	const labels = widget?.labels;
 	const theme = useTheme();
 
 	const chartOptions: ApexOptions = {

@@ -15,10 +15,12 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  * The age widget.
  */
 function AgeWidget() {
-	const widget = useAppSelector(selectWidget<AgeWidgetModelType>('age'));
-	const { series, labels, uniqueVisitors } = widget;
-	const [awaitRender, setAwaitRender] = useState(true);
 	const theme = useTheme();
+	const widget = useAppSelector(selectWidget<AgeWidgetModelType>('age'));
+	const series = widget?.series;
+	const labels = widget?.labels;
+	const uniqueVisitors = widget?.uniqueVisitors;
+	const [awaitRender, setAwaitRender] = useState(true);
 
 	const chartOptions: ApexOptions = {
 		chart: {

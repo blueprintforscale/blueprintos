@@ -22,6 +22,15 @@ export type ChangelogItemType = {
  */
 const changelogData: ChangelogItemType[] = [
 	{
+		version: '14.0.3',
+		date: '2025-03-22',
+		newChanges: ["refactor: update Dashboard's widget data extraction to use optional chaining for safer access"],
+		fixedChanges: [
+			'Update layout components to enhance container responsiveness with media queries and fullwidth mode support',
+			'AdjustFontSize component logic to use pixel values instead of percentage'
+		]
+	},
+	{
 		version: '14.0.2',
 		date: '2025-03-06',
 		fixedChanges: [

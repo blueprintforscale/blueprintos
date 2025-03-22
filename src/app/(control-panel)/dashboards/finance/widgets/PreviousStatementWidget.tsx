@@ -12,18 +12,20 @@ import { useGetFinanceDashboardWidgetsQuery } from '../FinanceDashboardApi';
  */
 function PreviousStatementWidget() {
 	const { data: widgets, isLoading } = useGetFinanceDashboardWidgetsQuery();
+	const widget = widgets?.previousStatement as PreviousStatementWidgetType;
+	const status = widget?.status;
+	const date = widget?.date;
+	const limit = widget?.limit;
+	const spent = widget?.spent;
+	const minimum = widget?.minimum;
 
 	if (isLoading) {
 		return <FuseLoading />;
 	}
 
-	const widget = widgets?.previousStatement as PreviousStatementWidgetType;
-
 	if (!widget) {
 		return null;
 	}
-
-	const { status, date, limit, spent, minimum } = widget;
 
 	return (
 		<Paper className="relative flex flex-col flex-auto rounded-xl shadow-sm overflow-hidden">

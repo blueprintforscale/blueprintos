@@ -15,10 +15,12 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
  * Gender widget.
  */
 function GenderWidget() {
-	const widget = useAppSelector(selectWidget<GenderWidgetType>('gender'));
-	const { series, labels, uniqueVisitors } = widget;
-	const [awaitRender, setAwaitRender] = useState(true);
 	const theme = useTheme();
+	const widget = useAppSelector(selectWidget<GenderWidgetType>('gender'));
+	const series = widget?.series;
+	const labels = widget?.labels;
+	const uniqueVisitors = widget?.uniqueVisitors;
+	const [awaitRender, setAwaitRender] = useState(true);
 
 	const chartOptions: ApexOptions = {
 		chart: {

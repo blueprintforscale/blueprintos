@@ -16,7 +16,8 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 function BudgetDistributionWidget() {
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
 	const widget = widgets?.budgetDistribution as BudgetDistributionDataType;
-	const { categories, series } = widget;
+	const categories = widget?.categories;
+	const series = widget?.series;
 	const theme = useTheme();
 
 	const chartOptions: ApexOptions = {

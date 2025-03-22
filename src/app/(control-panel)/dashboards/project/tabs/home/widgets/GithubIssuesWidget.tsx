@@ -22,8 +22,11 @@ function GithubIssuesWidget() {
 	const [tabValue, setTabValue] = useState(0);
 	const { data: widgets, isLoading } = useGetProjectDashboardWidgetsQuery();
 	const widget = widgets?.githubIssues as GithubIssuesDataType;
-	const { overview, series, ranges, labels } = widget;
-	const currentRange = Object.keys(ranges)[tabValue];
+	const overview = widget?.overview;
+	const series = widget?.series;
+	const ranges = widget?.ranges;
+	const labels = widget?.labels;
+	const currentRange = Object.keys(ranges || {})[tabValue];
 
 	const chartOptions: ApexOptions = {
 		chart: {
