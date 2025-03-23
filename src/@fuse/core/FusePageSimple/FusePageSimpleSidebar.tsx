@@ -87,7 +87,7 @@ function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
 					open={isOpen}
 					onClose={onClose}
 					classes={{
-						paper: clsx('FusePageSimple-sidebar border-0', variant)
+						paper: clsx('FusePageSimple-sidebar border-0 w-full', variant)
 					}}
 					sx={{ '& .MuiPaper-root': { width: `${props.width}px` } }}
 				>

@@ -16,6 +16,9 @@ import { LayoutOptionType } from '../types/OverviewsType';
 
 const Root = styled('div')(() => ({
 	'& .FusePageSimple-header': {},
+	'& .FusePageSimple-wrapper': {
+		position: 'relative'
+	},
 
 	'&.scroll-normalScroll': {
 		'& .preview-wrapper': {
@@ -102,7 +105,7 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 					</div>
 				</div>
 				<div className="w-full">
-					<Paper className="preview-wrapper z-20 relative h-3xl w-full rounded-xl shadow-xl flex flex-auto min-h-full overflow-hidden border">
+					<Paper className="preview-wrapper z-20 relative h-192 w-full rounded-xl shadow-xl flex flex-auto min-h-full border">
 						<Box
 							className="preview-navbar hidden md:block sticky top-0 shrink-0 min-w-56 h-192 border-r z-20"
 							sx={(theme) => ({
