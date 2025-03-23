@@ -17,17 +17,11 @@ import DocumentationNavigation from '../DocumentationNavigation';
 import DocumentationSidebarHeader from './DocumentationSidebarHeader';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
-	'& .FusePageCarded-header': {},
-	'& .FusePageCarded-content': {
-		backgroundColor: theme.palette.background.default
-	},
-	'& .FusePageCarded-wrapper': {},
-	'& .FusePageCarded-leftSidebar': {},
-	'& .description': {},
 	'& [class^="language-"]': {
 		margin: 0
 	}
 }));
+
 type DocumentationLayoutProps = {
 	children: React.ReactNode;
 };

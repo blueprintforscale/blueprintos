@@ -181,26 +181,6 @@ const Root = styled('div')<FusePageSimpleProps>(({ theme, ...props }) => ({
 		}
 	},
 
-	'& .FusePageSimple-sidebarHeader': {
-		height: headerHeight,
-		minHeight: headerHeight,
-		backgroundColor: theme.palette.primary.dark,
-		color: theme.palette.primary.contrastText
-	},
-
-	'& .FusePageSimple-sidebarHeaderInnerSidebar': {
-		backgroundColor: 'transparent',
-		color: 'inherit',
-		height: 'auto',
-		minHeight: 'auto'
-	},
-
-	'& .FusePageSimple-sidebarContent': {
-		display: 'flex',
-		flexDirection: 'column',
-		minHeight: '100%'
-	},
-
 	'& .FusePageSimple-backdrop': {
 		position: 'absolute'
 	}
@@ -250,10 +230,10 @@ function FusePageSimple(props: FusePageSimpleProps) {
 				styles={() => ({
 					...(scroll !== 'page' && {
 						'#fuse-toolbar': {
-							position: 'static'
+							position: 'static!important'
 						},
 						'#fuse-footer': {
-							position: 'static'
+							position: 'static!important'
 						}
 					}),
 					...(scroll === 'page' && {

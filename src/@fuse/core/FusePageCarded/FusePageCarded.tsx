@@ -224,10 +224,10 @@ function FusePageCarded(props: FusePageCardedProps) {
 				styles={() => ({
 					...(scroll !== 'page' && {
 						'#fuse-toolbar': {
-							position: 'static'
+							position: 'static!important'
 						},
 						'#fuse-footer': {
-							position: 'static'
+							position: 'static!important'
 						}
 					}),
 					...(scroll === 'page' && {
