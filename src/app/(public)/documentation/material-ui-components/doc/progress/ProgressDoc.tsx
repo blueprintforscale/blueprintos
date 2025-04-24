@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -410,10 +408,10 @@ function Progress(props) {
 				autoPlay
 				muted
 				loop
-				playsinline
+				playsInline
 				width="1082"
 				height="158"
-				style="width: 541px;"
+				style={{ width: '541px' }}
 			>
 				<source
 					src="/material-ui-static/material-ui/react-components/progress-heavy-load.mp4"
