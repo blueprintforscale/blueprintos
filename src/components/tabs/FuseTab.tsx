@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
-import { TabProps } from '@mui/material/Tab/Tab';
+import { TabProps } from '@mui/material/Tab';
 
 type StyledTabProps = TabProps;
 

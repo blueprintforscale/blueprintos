@@ -83,8 +83,10 @@ function ShippingTab() {
 						label="Extra Shipping Fee"
 						id="extraShippingFee"
 						variant="outlined"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
+						slotProps={{
+							input: {
+								startAdornment: <InputAdornment position="start">$</InputAdornment>
+							}
 						}}
 						fullWidth
 					/>

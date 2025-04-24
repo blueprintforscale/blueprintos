@@ -79,18 +79,20 @@ function BoardTitle() {
 									margin="none"
 									autoFocus
 									hiddenLabel
-									InputProps={{
-										endAdornment: (
-											<InputAdornment position="end">
-												<IconButton
-													type="submit"
-													disabled={_.isEmpty(dirtyFields) || !isValid}
-													size="large"
-												>
-													<FuseSvgIcon>heroicons-outline:check</FuseSvgIcon>
-												</IconButton>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											endAdornment: (
+												<InputAdornment position="end">
+													<IconButton
+														type="submit"
+														disabled={_.isEmpty(dirtyFields) || !isValid}
+														size="large"
+													>
+														<FuseSvgIcon>heroicons-outline:check</FuseSvgIcon>
+													</IconButton>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}

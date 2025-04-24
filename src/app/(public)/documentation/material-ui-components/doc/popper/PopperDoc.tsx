@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -51,12 +53,12 @@ function PopperDoc(props) {
 			</Typography>
 			<ul className="space-y-4">
 				<li>
-					🕷 Popper relies on the 3rd party library (<a href="https://popper.js.org/">Popper.js</a>) for
-					perfect positioning.
+					🕷 Popper relies on the 3rd party library (<a href="https://popper.js.org/docs/v2/">Popper.js</a>)
+					for perfect positioning.
 				</li>
 				<li>💄 It&#39;s an alternative API to react-popper. It aims for simplicity.</li>
 				<li>
-					Its child element is a <a href="/base-ui/react-portal/">Base UI Portal</a> on the body of the
+					Its child element is a <a href="/base-ui/react-portal/">MUI Base Portal</a> on the body of the
 					document to avoid rendering problems. You can disable this behavior with <code>disablePortal</code>.
 				</li>
 				<li>
@@ -65,8 +67,8 @@ function PopperDoc(props) {
 				</li>
 				<li>
 					Clicking away does not hide the Popper component. If you need this behavior, you can use the{' '}
-					<a href="/base-ui/react-click-away-listener/">Base UI Click-Away Listener</a> - see the example in
-					the <a href="/material-ui/react-menu/#menulist-composition">menu documentation section</a>.
+					<a href="/base-ui/react-click-away-listener/">MUI Base Click-Away Listener</a> - see the example in
+					the <a href="/material-ui/react-menu/#composition-with-menu-list">menu documentation section</a>.
 				</li>
 				<li>
 					The <code>anchorEl</code> is passed as the reference object to create a new <code>Popper.js</code>{' '}

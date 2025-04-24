@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -16,6 +18,8 @@ import SplitButtonComponent from '../../components/button-group/SplitButton';
 import SplitButtonRaw from '../../components/button-group/SplitButton.tsx?raw';
 import DisableElevationComponent from '../../components/button-group/DisableElevation';
 import DisableElevationRaw from '../../components/button-group/DisableElevation.tsx?raw';
+import LoadingButtonGroupComponent from '../../components/button-group/LoadingButtonGroup';
+import LoadingButtonGroupRaw from '../../components/button-group/LoadingButtonGroup.tsx?raw';
 
 function ButtonGroupDoc(props) {
 	return (
@@ -188,6 +192,31 @@ function ButtonGroupDoc(props) {
 					iframe={false}
 					component={DisableElevationComponent}
 					raw={DisableElevationRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
+				Loading
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				Use the <code>loading</code> prop from <code>Button</code> to set buttons in a loading state and disable
+				interactions.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="LoadingButtonGroup.js"
+					className="my-4"
+					iframe={false}
+					component={LoadingButtonGroupComponent}
+					raw={LoadingButtonGroupRaw}
 				/>
 			</Typography>
 		</>

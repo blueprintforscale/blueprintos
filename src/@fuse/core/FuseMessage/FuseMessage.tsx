@@ -35,7 +35,7 @@ const StyledSnackbar = styled(Snackbar)<StyledSnackbarProps>(({ theme }) => ({
 			},
 			style: {
 				'& .FuseMessage-content': {
-					backgroundColor: theme.palette.error.dark,
+					backgroundColor: theme.vars.palette.error.dark,
 					color: theme.palette.getContrastText(theme.palette.error.dark)
 				}
 			}

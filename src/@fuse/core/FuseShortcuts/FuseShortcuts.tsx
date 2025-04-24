@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
-import { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from '@fuse/core/Link';
 import _ from 'lodash';
 import Box from '@mui/material/Box';
@@ -44,7 +44,7 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 			: ([] as FuseFlatNavItemType[]);
 
 		setShortcutItems(_shortcutItems);
-	}, [shortcuts]);
+	}, [navigation, shortcuts]);
 
 	function addMenuClick(event: React.MouseEvent<HTMLElement>) {
 		setAddMenu(event.currentTarget);
@@ -69,13 +69,16 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 		setSearchResults([]);
 	}
 
-	function toggleInShortcuts(id: string) {
-		let newShortcuts = [...shortcuts];
+	const toggleInShortcuts = useCallback(
+		(id: string) => {
+			let newShortcuts = [...shortcuts];
 
-		newShortcuts = _.xor(newShortcuts, [id]);
+			newShortcuts = _.xor(newShortcuts, [id]);
 
-		onChange(newShortcuts);
-	}
+			onChange(newShortcuts);
+		},
+		[onChange, shortcuts]
+	);
 
 	return (
 		<Box className={clsx('flex shrink overflow-hidden', variant === 'vertical' ? 'flex-col' : '', className)}>
@@ -132,7 +135,7 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 						</Tooltip>
 					</Box>
 				);
-			}, [addMenu, variant, shortcutItems])}
+			}, [variant, shortcutItems])}
 
 			<Menu
 				id="add-menu"
@@ -158,8 +161,10 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 						onChange={search}
 						placeholder="Search for an app or page"
 						fullWidth
-						inputProps={{
-							'aria-label': 'Search'
+						slotProps={{
+							input: {
+								'aria-label': 'Search'
+							}
 						}}
 						disableUnderline
 					/>
@@ -180,7 +185,7 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 							onToggle={() => toggleInShortcuts(_item.id)}
 						/>
 					));
-				}, [searchResults, shortcuts, searchText])}
+				}, [searchText.length, searchResults, shortcuts, toggleInShortcuts])}
 
 				{searchText.length !== 0 && searchResults.length === 0 && (
 					<Typography
@@ -207,7 +212,7 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 								/>
 							)
 					);
-				}, [shortcutItems, shortcuts, searchText])}
+				}, [searchText.length, shortcutItems, shortcuts, toggleInShortcuts])}
 			</Menu>
 		</Box>
 	);

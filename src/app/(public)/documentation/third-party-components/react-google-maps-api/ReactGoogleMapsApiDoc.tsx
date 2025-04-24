@@ -37,7 +37,7 @@ function ReactGoogleMapsApiDoc() {
 				<code>react-google-maps-api</code> is a component written over a small set of the Google Maps API.
 			</Typography>
 
-			<hr />
+			<hr className="not-prose" />
 
 			<Typography
 				className="text-5xl mt-8 mb-2"

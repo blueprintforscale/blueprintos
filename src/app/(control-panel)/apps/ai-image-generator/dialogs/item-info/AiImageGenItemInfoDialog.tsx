@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, DialogContent, Typography, Card, CardMedia, IconButton } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Typography, Card, CardMedia, IconButton, Divider } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import useAiImageGenAppContext from '../../contexts/useAiImageGenAppContext';
 
@@ -7,8 +7,11 @@ function AiImageGenItemInfoDialog() {
 
 	if (!selectedItem) return null;
 
-	const { response, formData: { prompt, negativePrompt, size, artStyle, style, mood, lighting, quality } = {} } =
-		selectedItem;
+	const {
+		response,
+		formData: { prompt, negativePrompt, size, artStyle, style, mood, lighting, quality } = {},
+		sourceImageUrl
+	} = selectedItem;
 
 	const imageUrl = response?.data?.[0]?.url;
 	const revisedPrompt = response?.data?.[0]?.revised_prompt;
@@ -33,14 +36,43 @@ function AiImageGenItemInfoDialog() {
 			<DialogContent>
 				<div className="grid md:grid-cols-3 gap-6 min-h-[70vh]">
 					<div className="grid col-span-2 items-start">
+						{/* Generated Image */}
 						{imageUrl && (
-							<Card>
-								<CardMedia
-									component="img"
-									image={imageUrl}
-									alt={prompt}
-								/>
-							</Card>
+							<>
+								<Typography
+									variant="subtitle1"
+									className="font-medium mb-2"
+								>
+									{sourceImageUrl ? 'Generated Image (Result)' : 'Generated Image'}
+								</Typography>
+								<Card className="mb-4">
+									<CardMedia
+										component="img"
+										image={imageUrl}
+										alt={prompt}
+									/>
+								</Card>
+							</>
+						)}
+
+						{/* Source Image - Only show if available */}
+						{sourceImageUrl && (
+							<>
+								<Divider className="my-4" />
+								<Typography
+									variant="subtitle1"
+									className="font-medium mb-2"
+								>
+									Source Image
+								</Typography>
+								<Card>
+									<CardMedia
+										component="img"
+										image={sourceImageUrl}
+										alt="Source Image"
+									/>
+								</Card>
+							</>
 						)}
 					</div>
 
@@ -49,7 +81,8 @@ function AiImageGenItemInfoDialog() {
 							<div className="flex flex-col gap-2">
 								{prompt && (
 									<Typography>
-										<strong>Prompt:</strong> {prompt}
+										<strong>{sourceImageUrl ? 'Modification Instructions:' : 'Prompt:'}</strong>{' '}
+										{prompt}
 									</Typography>
 								)}
 								{revisedPrompt && (

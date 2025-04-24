@@ -1,6 +1,6 @@
 import { useParams } from 'next/navigation';
-import { PartialObjectDeep } from 'type-fest/source/partial-deep';
 import { ScrumboardBoard, useGetScrumboardBoardQuery, useUpdateScrumboardBoardMutation } from '../ScrumboardApi';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 
 function useUpdateScrumboardBoard() {
 	const routeParams = useParams<{ boardId?: string }>();
@@ -8,7 +8,7 @@ function useUpdateScrumboardBoard() {
 	const { data: board } = useGetScrumboardBoardQuery(boardId, { skip: !boardId });
 	const [updateBoard] = useUpdateScrumboardBoardMutation();
 
-	const handleUpdateBoard = (updateFn: (board: ScrumboardBoard) => PartialObjectDeep<ScrumboardBoard, object>) => {
+	const handleUpdateBoard = (updateFn: (board: ScrumboardBoard) => PartialDeep<ScrumboardBoard>) => {
 		updateBoard({ ...board, ...updateFn(board) });
 	};
 

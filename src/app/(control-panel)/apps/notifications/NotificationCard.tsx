@@ -8,11 +8,7 @@ import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { formatDistanceToNow } from 'date-fns/formatDistanceToNow';
 import { MouseEvent } from 'react';
 import { darken, ThemeProvider, useTheme } from '@mui/material/styles';
-import green from '@mui/material/colors/green';
-import blue from '@mui/material/colors/blue';
-import red from '@mui/material/colors/red';
-import orange from '@mui/material/colors/orange';
-import yellow from '@mui/material/colors/yellow';
+import { green, blue, red, orange, yellow } from '@mui/material/colors';
 import { useContrastMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 import { Notification } from '@/app/(control-panel)/apps/notifications/NotificationApi';
 
@@ -63,10 +59,7 @@ function NotificationCard(props: NotificationCardProps) {
 	return (
 		<ThemeProvider theme={contrastTheme}>
 			<Card
-				className={clsx(
-					'relative flex min-h-16 w-full items-center space-x-2 rounded-xl p-5 shadow-sm',
-					className
-				)}
+				className={clsx('relative flex min-h-16 items-center space-x-2 rounded-xl p-5 shadow-sm', className)}
 				sx={[
 					{
 						backgroundColor: bgColor,

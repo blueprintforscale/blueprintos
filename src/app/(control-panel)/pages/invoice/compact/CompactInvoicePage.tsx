@@ -54,7 +54,7 @@ function CompactInvoicePage() {
 
 							<Box
 								sx={(theme) => ({
-									backgroundColor: theme.palette.primary.dark,
+									backgroundColor: theme.vars.palette.primary.dark,
 									color: theme.palette.getContrastText(theme.palette.primary.dark)
 								})}
 								className="-mr-16 grid auto-cols-max grid-flow-col gap-x-8 rounded-l-2xl px-8 py-6"

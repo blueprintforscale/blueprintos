@@ -2,7 +2,7 @@ import { MaterialReactTable, useMaterialReactTable, MaterialReactTableProps, MRT
 import _ from 'lodash';
 import { useMemo } from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { Theme } from '@mui/material/styles/createTheme';
+import { Theme } from '@mui/material/styles';
 import DataTableTopToolbar from './DataTableTopToolbar';
 
 const tableIcons: Partial<MRT_Icons> = {
@@ -179,10 +179,11 @@ function DataTable<TData>(props: MaterialReactTableProps<TData>) {
 						'& .MuiFormHelperText-root': {
 							textAlign: 'center',
 							marginX: 0,
-							color: (theme: Theme) => theme.palette.text.disabled,
+							color: (theme: Theme) => theme.vars.palette.text.disabled,
 							fontSize: 11
 						},
-						backgroundColor: (theme) => (column.getIsPinned() ? theme.palette.background.paper : 'inherit')
+						backgroundColor: (theme) =>
+							column.getIsPinned() ? theme.vars.palette.background.paper : 'inherit'
 					}
 				}),
 				mrtTheme: (theme) => ({

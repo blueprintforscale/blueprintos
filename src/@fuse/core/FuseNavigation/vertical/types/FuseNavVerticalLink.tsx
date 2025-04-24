@@ -22,8 +22,8 @@ const Root = styled(ListItemButton)<ListItemButtonStyleProps>(({ theme, ...props
 	paddingTop: 10,
 	paddingBottom: 10,
 	'&.active': {
-		backgroundColor: `${theme.palette.secondary.main}!important`,
-		color: `${theme.palette.secondary.contrastText}!important`,
+		backgroundColor: `${theme.vars.palette.secondary.main}!important`,
+		color: `${theme.vars.palette.secondary.contrastText}!important`,
 		transition: 'border-radius .15s cubic-bezier(0.4,0.0,0.2,1)',
 		'& > .fuse-list-item-text-primary': {
 			color: 'inherit'
@@ -36,7 +36,7 @@ const Root = styled(ListItemButton)<ListItemButtonStyleProps>(({ theme, ...props
 		marginRight: 16
 	},
 	'& > .fuse-list-item-text': {},
-	color: theme.palette.text.primary,
+	color: theme.vars.palette.text.primary,
 	textDecoration: 'none!important'
 }));
 

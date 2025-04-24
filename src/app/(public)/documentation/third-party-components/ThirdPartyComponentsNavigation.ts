@@ -14,6 +14,12 @@ const ThirdPartyComponentsNavigation = {
 			url: '/documentation/third-party-components/react-hook-form'
 		},
 		{
+			id: 'tiptap-editor',
+			title: 'Tiptap Editor',
+			type: 'item',
+			url: '/documentation/third-party-components/tiptap-editor'
+		},
+		{
 			id: 'react-google-maps-api',
 			title: 'React Google Maps Api',
 			type: 'item',

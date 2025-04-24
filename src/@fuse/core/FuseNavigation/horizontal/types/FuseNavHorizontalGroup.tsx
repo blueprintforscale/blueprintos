@@ -20,11 +20,11 @@ import FuseNavItem, { FuseNavItemComponentProps } from '../../FuseNavItem';
 import FuseSvgIcon from '../../../FuseSvgIcon';
 
 const Root = styled(ListItemButton)<ListItemButtonProps>(({ theme }) => ({
-	color: theme.palette.text.primary,
+	color: theme.vars.palette.text.primary,
 	cursor: 'pointer',
 	'&.active, &.active:hover, &.active:focus': {
-		backgroundColor: `${theme.palette.secondary.main}!important`,
-		color: `${theme.palette.secondary.contrastText}!important`,
+		backgroundColor: `${theme.vars.palette.secondary.main}!important`,
+		color: `${theme.vars.palette.secondary.contrastText}!important`,
 		'& .fuse-list-item-text-primary': {
 			color: 'inherit'
 		},

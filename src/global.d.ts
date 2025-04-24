@@ -35,3 +35,5 @@ declare module '*?raw' {
 	const content: string;
 	export default content;
 }
+
+import type {} from '@mui/material/themeCssVarsAugmentation';

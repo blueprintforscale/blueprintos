@@ -6,8 +6,8 @@ import Navigation from 'src/components/theme-layouts/components/navigation/Navig
 import Logo from '../../components/Logo';
 
 const Root = styled('div')(({ theme }) => ({
-	backgroundColor: theme.palette.background.default,
-	color: theme.palette.text.primary
+	backgroundColor: theme.vars.palette.background.default,
+	color: theme.vars.palette.text.primary
 }));
 
 type NavbarLayout2Props = {

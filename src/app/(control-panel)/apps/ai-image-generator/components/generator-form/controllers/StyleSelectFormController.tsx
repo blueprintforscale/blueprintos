@@ -58,7 +58,7 @@ function StyleSelectFormController(props: StyleSelectFormControllerProps) {
 			</Typography>
 
 			<Paper
-				className="cursor-pointer rounded-md border shadow-none h-16 flex items-end relative overflow-hidden"
+				className="cursor-pointer rounded-md border shadow-none h-16 flex items-end relative overflow-hidden w-full"
 				onClick={handleClick}
 				style={{
 					backgroundImage: selectedOption ? `url(${selectedOption.image})` : 'none',

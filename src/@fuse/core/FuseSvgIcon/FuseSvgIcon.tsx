@@ -25,14 +25,14 @@ const Root = styled(Box)<FuseSvgIconProps>(({ theme, size = 20, color = 'inherit
 	fontSize: size,
 	lineHeight: size,
 	color: {
-		primary: theme.palette.primary.main,
-		secondary: theme.palette.secondary.main,
-		info: theme.palette.info.main,
-		success: theme.palette.success.main,
-		warning: theme.palette.warning.main,
-		action: theme.palette.action.active,
-		error: theme.palette.error.main,
-		disabled: theme.palette.action.disabled,
+		primary: theme.vars.palette.primary.main,
+		secondary: theme.vars.palette.secondary.main,
+		info: theme.vars.palette.info.main,
+		success: theme.vars.palette.success.main,
+		warning: theme.vars.palette.warning.main,
+		action: theme.vars.palette.action.active,
+		error: theme.vars.palette.error.main,
+		disabled: theme.vars.palette.action.disabled,
 		inherit: 'currentColor'
 	}[color] as string
 }));

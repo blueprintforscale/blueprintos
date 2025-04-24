@@ -11,22 +11,27 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import _ from 'lodash';
-import WYSIWYGEditor from 'src/components/WYSIWYGEditor';
 import clsx from 'clsx';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import MailAttachment from '../../components/MailAttachment';
-import { MailboxMail } from '../../MailboxApi';
+import { SimpleEditor } from '@/components/tiptap/tiptap-templates/simple/simple-editor';
 
-type FormType = {
-	from: { email?: MailboxMail['from']['email'] };
-	to: MailboxMail['to'];
-	cc: MailboxMail['cc'];
-	bcc: MailboxMail['bcc'];
-	subject: MailboxMail['subject'];
-	message: string;
-};
+const schema = z
+	.object({
+		from: z.object({
+			email: z.string().email('You must enter a valid e-mail')
+		}),
+		to: z.string().email('You must enter a valid e-mail.'),
+		cc: z.array(z.string().email('Must be a valid email')),
+		bcc: z.array(z.string().email('Must be a valid email')),
+		subject: z.string(),
+		message: z.string()
+	})
+	.required();
+
+type FormType = z.infer<typeof schema>;
 
 const defaultValues: FormType = {
 	from: { email: 'johndoe@creapond.com' },
@@ -36,20 +41,6 @@ const defaultValues: FormType = {
 	subject: '',
 	message: ''
 };
-
-/**
- * Form Validation Schema
- */
-const schema = z.object({
-	from: z.object({
-		email: z.union([z.string().email('You must enter a valid e-mail.'), z.null()])
-	}),
-	to: z.string().email('You must enter a valid e-mail.'),
-	cc: z.array(z.string().email('Must be a valid email')),
-	bcc: z.array(z.string().email('Must be a valid email')),
-	subject: z.string(),
-	message: z.string()
-});
 
 type MailComposeProps = {
 	className?: string;
@@ -106,6 +97,7 @@ function MailCompose(props: MailComposeProps) {
 				onClose={handleCloseDialog}
 				aria-labelledby="form-dialog-title"
 				scroll="body"
+				disableRestoreFocus
 			>
 				<AppBar
 					position="static"
@@ -139,7 +131,11 @@ function MailCompose(props: MailComposeProps) {
 									id="from"
 									variant="outlined"
 									fullWidth
-									inputProps={{ readOnly: true }}
+									slotProps={{
+										input: {
+											readOnly: true
+										}
+									}}
 								/>
 							)}
 						/>
@@ -211,17 +207,18 @@ function MailCompose(props: MailComposeProps) {
 						/>
 
 						<Controller
+							name="message"
+							control={control}
+							rules={{ required: 'Content is required' }}
 							render={({ field }) => (
-								<WYSIWYGEditor
+								<SimpleEditor
 									className="mt-2 mb-4"
 									{...field}
 								/>
 							)}
-							name="message"
-							control={control}
 						/>
 
-						<div className="pt-2">
+						<div className="flex flex-wrap gap-2 pt-2">
 							<MailAttachment attachment={{ name: 'attachment-1.jpg', size: 350, type: 'jpg' }} />
 							<MailAttachment attachment={{ name: 'attachment-2.jpg', size: 350, type: 'jpg' }} />
 						</div>

@@ -4,8 +4,7 @@ import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import { memo, ReactNode, RefObject, useImperativeHandle, useRef } from 'react';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import { SystemStyleObject } from '@mui/system/styleFunctionSx/styleFunctionSx';
-import { Theme } from '@mui/system';
+import { SystemStyleObject, Theme } from '@mui/system';
 import FusePageSimpleHeader from './FusePageSimpleHeader';
 import FusePageSimpleSidebar from './FusePageSimpleSidebar';
 import { FuseScrollbarsProps } from '../FuseScrollbars/FuseScrollbars';
@@ -47,7 +46,7 @@ const Root = styled('div')<FusePageSimpleProps>(({ theme, ...props }) => ({
 	flex: '1 1 auto',
 	width: '100%',
 	height: 'auto',
-	backgroundColor: theme.palette.background.default,
+	backgroundColor: theme.vars.palette.background.default,
 
 	'&.FusePageSimple-scroll-content': {
 		height: '100%'
@@ -60,7 +59,7 @@ const Root = styled('div')<FusePageSimpleProps>(({ theme, ...props }) => ({
 		zIndex: 2,
 		minWidth: 0,
 		height: '100%',
-		backgroundColor: theme.palette.background.default,
+		backgroundColor: theme.vars.palette.background.default,
 
 		...(props.scroll === 'content' && {
 			position: 'absolute',
@@ -167,7 +166,7 @@ const Root = styled('div')<FusePageSimpleProps>(({ theme, ...props }) => ({
 		width: props.leftSidebarWidth,
 
 		[theme.breakpoints.up('lg')]: {
-			borderRight: `1px solid ${theme.palette.divider}`,
+			borderRight: `1px solid ${theme.vars.palette.divider}`,
 			borderLeft: 0
 		}
 	},
@@ -176,7 +175,7 @@ const Root = styled('div')<FusePageSimpleProps>(({ theme, ...props }) => ({
 		width: props.rightSidebarWidth,
 
 		[theme.breakpoints.up('lg')]: {
-			borderLeft: `1px solid ${theme.palette.divider}`,
+			borderLeft: `1px solid ${theme.vars.palette.divider}`,
 			borderRight: 0
 		}
 	},

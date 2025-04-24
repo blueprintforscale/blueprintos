@@ -16,8 +16,8 @@ import { MailboxMail } from '../MailboxApi';
 
 const StyledListItem = styled(ListItemButton)<ListItemButtonProps & NavLinkAdapterPropsType & { unread: number }>(
 	({ theme }) => ({
-		background: theme.palette.background.default,
-		borderBottom: `1px solid ${theme.palette.divider}`,
+		background: theme.vars.palette.background.default,
+		borderBottom: `1px solid ${theme.vars.palette.divider}`,
 		'&.selected': {
 			'&::after': {
 				content: '""',
@@ -27,14 +27,14 @@ const StyledListItem = styled(ListItemButton)<ListItemButtonProps & NavLinkAdapt
 				display: 'block',
 				height: '100%',
 				width: 3,
-				backgroundColor: theme.palette.primary.main
+				backgroundColor: theme.vars.palette.primary.main
 			}
 		},
 		variants: [
 			{
 				props: ({ unread }) => unread,
 				style: {
-					background: theme.palette.background.paper
+					background: theme.vars.palette.background.paper
 				}
 			}
 		]
@@ -85,7 +85,7 @@ function MailListItem(props: MailListItemProps) {
 				<div className="flex w-full space-x-1.5 items-center">
 					<Avatar
 						sx={{
-							backgroundColor: (_theme) => _theme.palette.primary.main
+							backgroundColor: (_theme) => _theme.vars.palette.primary.main
 						}}
 						alt={mail.from.email}
 						src={mail.from?.avatar}

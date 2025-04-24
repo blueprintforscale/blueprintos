@@ -20,7 +20,7 @@ const StyledMessageRow = styled('div')(({ theme }) => ({
 	'&.contact': {
 		'& .bubble': {
 			backgroundColor: lighten(theme.palette.secondary.main, 0.1),
-			color: theme.palette.secondary.contrastText,
+			color: theme.vars.palette.secondary.contrastText,
 			borderTopLeftRadius: 5,
 			borderBottomLeftRadius: 5,
 			borderTopRightRadius: 8,
@@ -45,7 +45,7 @@ const StyledMessageRow = styled('div')(({ theme }) => ({
 		'& .bubble': {
 			marginLeft: 'auto',
 			backgroundColor: lighten(theme.palette.primary.main, 0.1),
-			color: theme.palette.primary.contrastText,
+			color: theme.vars.palette.primary.contrastText,
 			borderTopLeftRadius: 12,
 			borderBottomLeftRadius: 12,
 			borderTopRightRadius: 4,
@@ -133,7 +133,7 @@ function Chat(props: ChatProps) {
 		<Paper
 			className={clsx('flex flex-col relative pb-16 shadow-sm', className)}
 			sx={(theme) => ({
-				background: theme.palette.background.default
+				background: theme.vars.palette.background.default
 			})}
 		>
 			<div

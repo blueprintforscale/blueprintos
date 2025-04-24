@@ -8,6 +8,7 @@ import {
 	useUpdateAiImageGenItemMutation
 } from '@/app/(control-panel)/apps/ai-image-generator/AiImageGenApi';
 import useAiImageGenAppContext from '../contexts/useAiImageGenAppContext';
+import Tooltip from '@mui/material/Tooltip';
 
 type AiImageGenListItemProps = {
 	className?: string;
@@ -52,12 +53,21 @@ function AiImageGenListItem(props: AiImageGenListItemProps) {
 			{item.favorite && (
 				<FuseSvgIcon className="absolute top-2 right-2 text-red-500">heroicons-solid:heart</FuseSvgIcon>
 			)}
+
+			{item.sourceImageUrl && (
+				<Tooltip title="Modified from source image">
+					<FuseSvgIcon className="absolute top-2 left-2 text-blue-500 bg-white/30 rounded-full p-1">
+						heroicons-solid:photograph
+					</FuseSvgIcon>
+				</Tooltip>
+			)}
+
 			<div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-200 rounded-lg flex items-end sm:items-center pb-3 sm:pb-0 justify-center sm:opacity-0 group-hover:opacity-100">
 				<ButtonGroup
 					variant="contained"
 					sx={{
-						backgroundColor: (theme) => theme.palette.background.paper,
-						color: (theme) => theme.palette.text.primary
+						backgroundColor: (theme) => theme.vars.palette.background.paper,
+						color: (theme) => theme.vars.palette.text.primary
 					}}
 				>
 					<IconButton onClick={handleInfo}>

@@ -29,7 +29,7 @@ const StyledMessageRow = styled('div')(({ theme }) => ({
 	'&.contact': {
 		'& .bubble': {
 			backgroundColor: lighten(theme.palette.secondary.main, 0.1),
-			color: theme.palette.secondary.contrastText,
+			color: theme.vars.palette.secondary.contrastText,
 			borderTopLeftRadius: 4,
 			borderBottomLeftRadius: 4,
 			borderTopRightRadius: 12,
@@ -54,7 +54,7 @@ const StyledMessageRow = styled('div')(({ theme }) => ({
 		'& .bubble': {
 			marginLeft: 'auto',
 			backgroundColor: lighten(theme.palette.primary.main, 0.1),
-			color: theme.palette.primary.contrastText,
+			color: theme.vars.palette.primary.contrastText,
 			borderTopLeftRadius: 12,
 			borderBottomLeftRadius: 12,
 			borderTopRightRadius: 4,
@@ -219,7 +219,10 @@ function Chat(props: ChatProps) {
 							</Typography>
 						</div>
 					</div>
-					<ChatMoreMenu className="-mx-2" />
+					<ChatMoreMenu
+						className="-mx-2"
+						contactId={contactId}
+					/>
 				</Toolbar>
 			</Box>
 			<div className="flex flex-auto h-full min-h-0 w-full">

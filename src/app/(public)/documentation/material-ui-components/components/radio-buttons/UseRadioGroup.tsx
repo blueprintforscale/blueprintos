@@ -18,7 +18,7 @@ const StyledFormControlLabel = styled((props: StyledFormControlLabelProps) => (
       props: { checked: true },
       style: {
         '.MuiFormControlLabel-label': {
-          color: theme.palette.primary.main,
+          color: theme.vars.palette.primary.main,
         },
       },
     },

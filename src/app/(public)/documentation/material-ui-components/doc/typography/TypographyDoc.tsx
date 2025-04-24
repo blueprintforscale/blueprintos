@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -117,7 +119,7 @@ import '@fontsource/roboto/700.css';
 				component="div"
 			>
 				To install Roboto through the Google Web Fonts CDN, add the following code inside your project&#39;s{' '}
-				{`<head />`} tag:
+				<code>{`<head />`}</code> tag:
 			</Typography>
 
 			<FuseHighlight

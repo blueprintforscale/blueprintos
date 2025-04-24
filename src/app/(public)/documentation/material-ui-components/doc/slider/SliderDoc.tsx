@@ -1,6 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
+import FuseHighlight from '@fuse/core/FuseHighlight';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -32,8 +35,6 @@ import MusicPlayerSliderComponent from '../../components/slider/MusicPlayerSlide
 import MusicPlayerSliderRaw from '../../components/slider/MusicPlayerSlider.tsx?raw';
 import VerticalSliderComponent from '../../components/slider/VerticalSlider';
 import VerticalSliderRaw from '../../components/slider/VerticalSlider.tsx?raw';
-import VerticalAccessibleSliderComponent from '../../components/slider/VerticalAccessibleSlider';
-import VerticalAccessibleSliderRaw from '../../components/slider/VerticalAccessibleSlider.tsx?raw';
 import CustomMarksComponent from '../../components/slider/CustomMarks';
 import CustomMarksRaw from '../../components/slider/CustomMarks.tsx?raw';
 import TrackFalseSliderComponent from '../../components/slider/TrackFalseSlider';
@@ -161,7 +162,7 @@ function SliderDoc(props) {
 			>
 				You can change the default step increment. Make sure to adjust the <code>shiftStep</code> prop (the
 				granularity with which the slider can step when using Page Up/Down or Shift + Arrow Up/Down) to a value
-				divadable with the <code>step</code>.
+				divisible by the <code>step</code>.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -396,6 +397,13 @@ function SliderDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
+				Set the <code>orientation</code> prop to <code>{`"vertical"`}</code> to create vertical sliders. The
+				thumb will track vertical movement instead of horizontal movement.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
 				<FuseExample
 					name="VerticalSlider.js"
 					className="my-4"
@@ -408,33 +416,33 @@ function SliderDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
-				<strong>WARNING</strong>: Chrome, Safari and newer Edge versions that is any browser based on WebKit
-				exposes <code>{`<Slider orientation="vertical" />`}</code> as horizontal (
-				<a href="https://issues.chromium.org/issues/40736841">chromium issue #40736841</a>). By applying{' '}
-				<code>-webkit-appearance: slider-vertical;</code> the slider is exposed as vertical.
+				:::warning Chrome versions below 124 implement <code>aria-orientation</code> incorrectly for vertical
+				sliders and expose them as <code>{`'horizontal'`}</code> in the accessibility tree. (
+				<a href="https://issues.chromium.org/issues/40736841">Chromium issue #40736841</a>)
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				However, by applying <code>-webkit-appearance: slider-vertical;</code> keyboard navigation for
-				horizontal keys (<kbd className="key">Arrow Left</kbd>, <kbd className="key">Arrow Right</kbd>) is
-				reversed (<a href="https://issues.chromium.org/issues/40739626">chromium issue #40739626</a>). Usually,
-				up and right should increase and left and down should decrease the value. If you apply{' '}
-				<code>-webkit-appearance</code> you could prevent keyboard navigation for horizontal arrow keys for a
-				truly vertical slider. This might be less confusing to users compared to a change in direction.
+				The <code>-webkit-appearance: slider-vertical</code> CSS property can be used to correct this for these
+				older versions, with the trade-off of causing a console warning in newer Chrome versions:
 			</Typography>
+
+			<FuseHighlight
+				component="pre"
+				className="language-css"
+			>
+				{` 
+.MuiSlider-thumb input {
+  -webkit-appearance: slider-vertical;
+}
+`}
+			</FuseHighlight>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				<FuseExample
-					name="VerticalAccessibleSlider.js"
-					className="my-4"
-					iframe={false}
-					component={VerticalAccessibleSliderComponent}
-					raw={VerticalAccessibleSliderRaw}
-				/>
+				:::
 			</Typography>
 			<Typography
 				className="text-3xl mt-6 mb-2.5 font-bold"

@@ -1,6 +1,5 @@
-import { alpha, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, Theme } from '@mui/material/styles';
 import { memo, ReactNode, useEffect, useLayoutEffect } from 'react';
-import { Theme } from '@mui/material/styles/createTheme';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -20,15 +19,15 @@ const inputGlobalStyles = (
 	<GlobalStyles
 		styles={(theme) => ({
 			html: {
-				backgroundColor: `${theme.palette.background.default}!important`,
-				color: `${theme.palette.text.primary}!important`
+				backgroundColor: `${theme.vars.palette.background.default}!important`,
+				color: `${theme.vars.palette.text.primary}!important`
 			},
 			body: {
-				backgroundColor: theme.palette.background.default,
-				color: theme.palette.text.primary
+				backgroundColor: theme.vars.palette.background.default,
+				color: theme.vars.palette.text.primary
 			},
 			/*  'code:not([class*="language-"])': {
-        color: theme.palette.secondary.dark,
+        color: theme.vars.palette.secondary.dark,
         backgroundColor:
           theme.palette.mode === 'light' ? 'rgba(255, 255, 255, .9)' : 'rgba(0, 0, 0, .9)',
         padding: '2px 3px',
@@ -36,43 +35,43 @@ const inputGlobalStyles = (
         lineHeight: 1.7,
       }, */
 			'& .MuiOutlinedInput-root': {
-				backgroundColor: theme.palette.background.paper
+				backgroundColor: theme.vars.palette.common.background
 			},
 			'& .border-divider ': {
-				borderColor: `${theme.palette.divider}!important`
+				borderColor: `${theme.vars.palette.divider}!important`
 			},
 			'table.simple tbody tr th': {
-				borderColor: theme.palette.divider
+				borderColor: theme.vars.palette.divider
 			},
 			'table.simple thead tr th': {
-				borderColor: theme.palette.divider
+				borderColor: theme.vars.palette.divider
 			},
 			'a:not([role=button]):not(.MuiButtonBase-root)': {
-				color: theme.palette.secondary.main,
+				color: theme.vars.palette.secondary.main,
 				textDecoration: 'underline',
 				'&:hover': {}
 			},
 			'a.link, a:not([role=button])[target=_blank]': {
-				background: alpha(theme.palette.secondary.main, 0.2),
+				backgroundColor: `rgba(${theme.vars.palette.secondary.mainChannel} / 0.2)`,
 				color: 'inherit',
-				borderBottom: `1px solid ${theme.palette.divider}`,
+				borderBottom: `1px solid ${theme.vars.palette.divider}`,
 				textDecoration: 'none',
 				'&:hover': {
-					background: alpha(theme.palette.secondary.main, 0.3),
+					backgroundColor: `rgba(${theme.vars.palette.secondary.mainChannel} / 0.3)`,
 					textDecoration: 'none'
 				}
 			},
 			'[class^="border"]': {
-				borderColor: theme.palette.divider
+				borderColor: theme.vars.palette.divider
 			},
 			'[class*="border"]': {
-				borderColor: theme.palette.divider
+				borderColor: theme.vars.palette.divider
 			},
 			'[class*="divide-"] > :not([hidden])': {
-				borderColor: theme.palette.divider
+				borderColor: theme.vars.palette.divider
 			},
 			hr: {
-				borderColor: theme.palette.divider
+				borderColor: theme.vars.palette.divider
 			},
 			'::-webkit-scrollbar-thumb': {
 				boxShadow: `inset 0 0 0 20px ${

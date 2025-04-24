@@ -52,7 +52,7 @@ function ProjectDashboardAppHeader() {
 					<Avatar
 						sx={(theme) => ({
 							background: (theme) => darken(theme.palette.background.default, 0.05),
-							color: theme.palette.text.secondary
+							color: theme.vars.palette.text.secondary
 						})}
 						className="shrink-0 w-16 h-16 mt-1"
 						alt="user photo"
@@ -106,8 +106,8 @@ function ProjectDashboardAppHeader() {
 					onClick={handleOpenProjectMenu}
 					className="flex items-center border border-solid border-b-0 rounded-b-none h-9 px-4 text-md sm:text-base"
 					sx={(theme) => ({
-						backgroundColor: `${theme.palette.background.default}!important`,
-						borderColor: theme.palette.divider
+						backgroundColor: `${theme.vars.palette.background.default}!important`,
+						borderColor: theme.vars.palette.divider
 					})}
 					endIcon={
 						<FuseSvgIcon

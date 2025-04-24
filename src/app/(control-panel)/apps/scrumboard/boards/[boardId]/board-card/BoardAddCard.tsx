@@ -9,12 +9,8 @@ import _ from 'lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PartialDeep } from 'type-fest';
-import { alpha } from '@mui/system/colorManipulator';
-import { ScrumboardCard, useCreateScrumboardBoardCardMutation } from '../../../ScrumboardApi';
+import { useCreateScrumboardBoardCardMutation } from '../../../ScrumboardApi';
 import useUpdateScrumboardBoard from '../../../hooks/useUpdateScrumboardBoard';
-
-type FormType = PartialDeep<ScrumboardCard>;
 
 const defaultValues = {
 	title: ''
@@ -26,6 +22,8 @@ const defaultValues = {
 const schema = z.object({
 	title: z.string().nonempty('You must enter a title')
 });
+
+type FormType = z.infer<typeof schema>;
 
 type BoardAddCardProps = {
 	boardId: string;
@@ -108,31 +106,33 @@ function BoardAddCard(props: BoardAddCardProps) {
 									variant="outlined"
 									placeholder="Card title*"
 									autoFocus
-									InputProps={{
-										...field,
-										endAdornment: (
-											<InputAdornment
-												className="space-x-2 px-1"
-												position="end"
-											>
-												<IconButton
-													onClick={handleCloseForm}
-													size="small"
+									slotProps={{
+										input: {
+											...field,
+											endAdornment: (
+												<InputAdornment
+													className="space-x-2 px-1"
+													position="end"
 												>
-													<FuseSvgIcon size={16}>heroicons-outline:x-mark</FuseSvgIcon>
-												</IconButton>
-												<Button
-													className="rounded-sm min-h-7 max-h-7 p-0"
-													variant="contained"
-													color="secondary"
-													type="submit"
-													disabled={_.isEmpty(dirtyFields) || !isValid}
-													size="small"
-												>
-													Add
-												</Button>
-											</InputAdornment>
-										)
+													<IconButton
+														onClick={handleCloseForm}
+														size="small"
+													>
+														<FuseSvgIcon size={16}>heroicons-outline:x-mark</FuseSvgIcon>
+													</IconButton>
+													<Button
+														className="rounded-sm min-h-7 max-h-7 p-0"
+														variant="contained"
+														color="secondary"
+														type="submit"
+														disabled={_.isEmpty(dirtyFields) || !isValid}
+														size="small"
+													>
+														Add
+													</Button>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -150,7 +150,7 @@ function BoardAddCard(props: BoardAddCardProps) {
 					sx={{
 						backgroundColor: 'divider',
 						'&:hover, &:focus': {
-							backgroundColor: (theme) => alpha(theme.palette.divider, 0.8)
+							backgroundColor: (theme) => `rgba(${theme.vars.palette.dividerChannel} / 0.8)`
 						},
 						color: 'text.secondary'
 					}}

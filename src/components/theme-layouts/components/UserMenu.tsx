@@ -8,10 +8,9 @@ import { useState } from 'react';
 import Link from '@fuse/core/Link';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { darken } from '@mui/material/styles';
-import { alpha } from '@mui/system/colorManipulator';
 import Tooltip from '@mui/material/Tooltip';
 import clsx from 'clsx';
-import Popover, { PopoverProps } from '@mui/material/Popover/Popover';
+import Popover, { PopoverProps } from '@mui/material/Popover';
 import useUser from '@auth/useUser';
 
 type UserMenuProps = {
@@ -47,11 +46,11 @@ function UserMenu(props: UserMenuProps) {
 					className
 				)}
 				sx={(theme) => ({
-					borderColor: theme.palette.divider,
+					borderColor: theme.vars.palette.divider,
 					'&:hover, &:focus': {
-						backgroundColor: alpha(theme.palette.divider, 0.6),
+						backgroundColor: `rgba(${theme.vars.palette.dividerChannel} / 0.6)`,
 						...theme.applyStyles('dark', {
-							backgroundColor: alpha(theme.palette.divider, 0.1)
+							backgroundColor: `rgba(${theme.vars.palette.dividerChannel} / 0.1)`
 						})
 					}
 				})}
@@ -61,8 +60,8 @@ function UserMenu(props: UserMenuProps) {
 				{user?.photoURL ? (
 					<Avatar
 						sx={(theme) => ({
-							background: theme.palette.background.default,
-							color: theme.palette.text.secondary
+							background: theme.vars.palette.background.default,
+							color: theme.vars.palette.text.secondary
 						})}
 						className="avatar w-10 h-10 rounded-lg"
 						alt="user photo"
@@ -73,7 +72,7 @@ function UserMenu(props: UserMenuProps) {
 					<Avatar
 						sx={(theme) => ({
 							background: (theme) => darken(theme.palette.background.default, 0.05),
-							color: theme.palette.text.secondary
+							color: theme.vars.palette.text.secondary
 						})}
 						className="avatar md:mx-1"
 					>

@@ -29,7 +29,7 @@ const Root = styled('div')<{ opened: number }>(({ theme }) => ({
 	minWidth: 70,
 	height: '100vh',
 	zIndex: 1000,
-	borderLeft: `1px solid ${theme.palette.divider}`,
+	borderLeft: `1px solid ${theme.vars.palette.divider}`,
 	[theme.breakpoints.down('lg')]: {
 		position: 'fixed',
 		height: '100%',
@@ -49,7 +49,7 @@ const Root = styled('div')<{ opened: number }>(({ theme }) => ({
 		margin: 0,
 		overflow: 'hidden',
 		zIndex: 1000,
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.vars.palette.background.paper,
 		boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
 		transform: 'translate3d(0,0,0)',
 		transition: theme.transitions.create(['transform'], {

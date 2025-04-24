@@ -22,7 +22,7 @@ import { Course, useGetAcademyCategoriesQuery, useGetAcademyCoursesQuery } from 
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-header': {
-		backgroundColor: theme.palette.primary.dark,
+		backgroundColor: theme.vars.palette.primary.dark,
 		color: theme.palette.getContrastText(theme.palette.primary.main)
 	}
 }));
@@ -194,14 +194,16 @@ function Courses() {
 								placeholder="Enter a keyword..."
 								className="flex w-full sm:w-64 mx-2"
 								value={searchText}
-								inputProps={{
-									'aria-label': 'Search'
+								slotProps={{
+									input: {
+										'aria-label': 'Search'
+									},
+									inputLabel: {
+										shrink: true
+									}
 								}}
 								onChange={handleSearchText}
 								variant="outlined"
-								InputLabelProps={{
-									shrink: true
-								}}
 							/>
 						</div>
 

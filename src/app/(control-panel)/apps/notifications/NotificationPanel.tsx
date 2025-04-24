@@ -27,7 +27,7 @@ import NotificationTemplate from './NotificationTemplate';
 
 const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
 	'& .MuiDrawer-paper': {
-		backgroundColor: theme.palette.background.default,
+		backgroundColor: theme.vars.palette.background.default,
 		width: 320
 	}
 }));

@@ -3,7 +3,7 @@
 import FuseUtils from '@fuse/utils';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
-import Masonry from 'react-masonry-css';
+import Masonry from '@mui/lab/Masonry';
 import { useParams } from 'next/navigation';
 import { useAppSelector } from 'src/store/hooks';
 import FuseLoading from '@fuse/core/FuseLoading';
@@ -60,24 +60,22 @@ function NoteList() {
 	return (
 		<div className="flex flex-wrap w-full">
 			<Masonry
-				breakpointCols={{
-					default: 6,
-					1920: 5,
-					1600: 4,
-					1366: 3,
-					1280: 4,
-					960: 3,
-					600: 2,
-					480: 1
+				columns={{
+					xs: 1,
+					sm: 2,
+					md: 3,
+					lg: 4,
+					xl: 5,
+					xxl: 6
 				}}
+				spacing={2}
 				className="my-masonry-grid flex w-full"
-				columnClassName="my-masonry-grid_column flex flex-col p-2"
 			>
 				{filteredData.map((note) => (
 					<NoteListItem
 						key={note.id}
 						note={note}
-						className="w-full rounded-lg shadow-sm mb-4"
+						className="w-full rounded-lg shadow-sm"
 					/>
 				))}
 			</Masonry>

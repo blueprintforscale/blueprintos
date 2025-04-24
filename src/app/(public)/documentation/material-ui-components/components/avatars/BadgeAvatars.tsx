@@ -8,7 +8,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#44b700',
     color: '#44b700',
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    boxShadow: `0 0 0 2px ${theme.vars.palette.background.paper}`,
     '&::after': {
       position: 'absolute',
       top: 0,
@@ -36,7 +36,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 22,
   height: 22,
-  border: `2px solid ${theme.palette.background.paper}`,
+  border: `2px solid ${theme.vars.palette.background.paper}`,
 }));
 
 export default function BadgeAvatars() {

@@ -15,7 +15,7 @@ export const ContactPhoneModel = (data: PartialDeep<ContactPhoneNumber> | null):
 /**
  * The contact email model.
  */
-export const ContactEmailModel = (data: Partial<ContactEmail> | null): ContactEmail =>
+export const ContactEmailModel = (data: PartialDeep<ContactEmail> | null): ContactEmail =>
 	_.defaults(data || {}, {
 		email: '',
 		label: ''
@@ -30,8 +30,8 @@ const ContactModel = (data: PartialDeep<Contact>): Contact =>
 		avatar: '',
 		background: '',
 		name: '',
-		emails: [ContactEmailModel(null)],
-		phoneNumbers: [ContactPhoneModel(null)],
+		emails: [],
+		phoneNumbers: [],
 		title: '',
 		company: '',
 		birthday: '',

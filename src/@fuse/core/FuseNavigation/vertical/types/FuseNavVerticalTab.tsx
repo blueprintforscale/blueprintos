@@ -1,6 +1,6 @@
 'use client';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
 import ListItemText from '@mui/material/ListItemText';
 import clsx from 'clsx';
@@ -23,7 +23,7 @@ const Root = styled(Box)(({ theme }) => ({
 		cursor: 'pointer',
 		textDecoration: 'none!important',
 		padding: 0,
-		color: alpha(theme.palette.text.primary, 0.7),
+		color: (theme) => `rgba(${theme.vars.palette.text.primaryChannel} / 0.7)`,
 		'&.dense': {
 			minHeight: 52,
 			height: 52,
@@ -34,14 +34,14 @@ const Root = styled(Box)(({ theme }) => ({
 			height: 2,
 			minHeight: 2,
 			margin: '12px 0',
-			backgroundColor: theme.palette.divider,
+			backgroundColor: theme.vars.palette.divider,
 			pointerEvents: 'none'
 		},
 		'&:hover': {
-			color: theme.palette.text.primary
+			color: theme.vars.palette.text.primary
 		},
 		'&.active': {
-			color: theme.palette.text.primary,
+			color: theme.vars.palette.text.primary,
 			backgroundColor: 'rgba(255, 255, 255, .1)!important',
 			transition: 'border-radius .15s cubic-bezier(0.4,0.0,0.2,1)',
 			'& .fuse-list-item-text-primary': {

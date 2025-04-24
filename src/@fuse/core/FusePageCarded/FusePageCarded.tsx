@@ -5,8 +5,7 @@ import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import { memo, ReactNode, useImperativeHandle, useRef, RefObject } from 'react';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import { SystemStyleObject } from '@mui/system/styleFunctionSx/styleFunctionSx';
-import { Theme } from '@mui/system';
+import { SystemStyleObject, Theme } from '@mui/system';
 import FusePageCardedSidebar from './FusePageCardedSidebar';
 import FusePageCardedHeader from './FusePageCardedHeader';
 import { FuseScrollbarsProps } from '../FuseScrollbars/FuseScrollbars';
@@ -43,7 +42,7 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 	width: '100%',
 	height: 'auto',
 	padding: '0 16px',
-	backgroundColor: theme.palette.background.default,
+	backgroundColor: theme.vars.palette.background.default,
 
 	'& .FusePageCarded-scroll-content': {
 		height: '100%'
@@ -57,7 +56,7 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 		maxWidth: '100%',
 		minWidth: 0,
 		height: '100%',
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.vars.palette.background.paper,
 
 		...(props.scroll === 'content' && {
 			position: 'absolute',
@@ -126,8 +125,8 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 
 	'& .FusePageCarded-sidebar': {
 		position: 'absolute',
-		backgroundColor: theme.palette.background.paper,
-		color: theme.palette.text.primary,
+		backgroundColor: theme.vars.palette.background.paper,
+		color: theme.vars.palette.text.primary,
 
 		'&.permanent': {
 			[theme.breakpoints.up('lg')]: {
@@ -142,7 +141,7 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 		width: props.leftSidebarWidth,
 
 		[theme.breakpoints.up('lg')]: {
-			// borderRight: `1px solid ${theme.palette.divider}`,
+			// borderRight: `1px solid ${theme.vars.palette.divider}`,
 			// borderLeft: 0,
 		}
 	},
@@ -151,7 +150,7 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 		width: props.rightSidebarWidth,
 
 		[theme.breakpoints.up('lg')]: {
-			// borderLeft: `1px solid ${theme.palette.divider}`,
+			// borderLeft: `1px solid ${theme.vars.palette.divider}`,
 			// borderRight: 0,
 		}
 	},
@@ -159,8 +158,8 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 	'& .FusePageCarded-sidebarHeader': {
 		height: headerHeight,
 		minHeight: headerHeight,
-		backgroundColor: theme.palette.primary.dark,
-		color: theme.palette.primary.contrastText
+		backgroundColor: theme.vars.palette.primary.dark,
+		color: theme.vars.palette.primary.contrastText
 	},
 
 	'& .FusePageCarded-sidebarHeaderInnerSidebar': {

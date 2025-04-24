@@ -157,19 +157,21 @@ function BoardCardForm() {
 								variant="outlined"
 								fullWidth
 								required
-								InputProps={{
-									endAdornment: (
-										<InputAdornment position="end">
-											{card?.subscribed && (
-												<FuseSvgIcon
-													size={20}
-													color="action"
-												>
-													heroicons-outline:eye
-												</FuseSvgIcon>
-											)}
-										</InputAdornment>
-									)
+								slotProps={{
+									input: {
+										endAdornment: (
+											<InputAdornment position="end">
+												{card?.subscribed && (
+													<FuseSvgIcon
+														size={20}
+														color="action"
+													>
+														heroicons-outline:eye
+													</FuseSvgIcon>
+												)}
+											</InputAdornment>
+										)
+									}
 								}}
 							/>
 						)}

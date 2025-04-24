@@ -1,5 +1,4 @@
-import { Theme } from '@mui/system/createTheme';
-import { styled } from '@mui/material/styles';
+import { styled, Theme } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import {
@@ -59,13 +58,13 @@ const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme }) => ({
 		{
 			props: ({ open, position }) => open && position === 'left',
 			style: {
-				borderRight: `1px solid ${theme.palette.divider}`
+				borderRight: `1px solid ${theme.vars.palette.divider}`
 			}
 		},
 		{
 			props: ({ open, position }) => open && position === 'right',
 			style: {
-				borderLeft: `1px solid ${theme.palette.divider}`
+				borderLeft: `1px solid ${theme.vars.palette.divider}`
 			}
 		}
 	]

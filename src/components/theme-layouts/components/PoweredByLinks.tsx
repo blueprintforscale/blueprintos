@@ -28,7 +28,7 @@ function PoweredByLinks() {
 			animate="show"
 			className="flex items-center rounded-lg overflow-hidden"
 			sx={(theme) => ({
-				border: `1px solid ${theme.palette.divider}!important`
+				border: `1px solid ${theme.vars.palette.divider}!important`
 			})}
 		>
 			<Tooltip

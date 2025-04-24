@@ -15,7 +15,7 @@ import _ from 'lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import InputAdornment from '@mui/material/InputAdornment';
 import { lighten } from '@mui/material/styles';
-import { PartialObjectDeep } from 'type-fest/source/partial-deep';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 import Statuses from '../../components/Statuses';
 import UserAvatar from '../../components/UserAvatar';
 import { Profile, useGetMessengerUserProfileQuery, useUpdateMessengerUserProfileMutation } from '../../MessengerApi';
@@ -39,7 +39,7 @@ function UserSidebar() {
 		}
 	}, [reset, user]);
 
-	function onSubmit(data: PartialObjectDeep<Profile, object>) {
+	function onSubmit(data: PartialDeep<Profile, object>) {
 		updateUserData(data);
 	}
 
@@ -91,12 +91,14 @@ function UserSidebar() {
 							variant="outlined"
 							required
 							fullWidth
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">
+											<FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}
@@ -115,12 +117,14 @@ function UserSidebar() {
 							fullWidth
 							error={!!errors.email}
 							helperText={errors?.email?.message as string}
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:envelope</FuseSvgIcon>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">
+											<FuseSvgIcon size={20}>heroicons-solid:envelope</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}
@@ -137,12 +141,14 @@ function UserSidebar() {
 							margin="normal"
 							multiline
 							variant="outlined"
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:identification</FuseSvgIcon>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">
+											<FuseSvgIcon size={20}>heroicons-solid:identification</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}

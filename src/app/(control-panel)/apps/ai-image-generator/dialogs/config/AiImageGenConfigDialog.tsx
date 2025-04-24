@@ -32,9 +32,10 @@ function AiImageGenConfigDialog() {
 			</Button>
 			<Dialog
 				open={configDialogOpen}
-				onClose={() => setConfigDialogOpen(false)}
+				onClose={handleClose}
 				maxWidth="sm"
 				fullWidth
+				disableRestoreFocus
 			>
 				<DialogTitle className="text-lg">Configuration</DialogTitle>
 				<DialogContent>

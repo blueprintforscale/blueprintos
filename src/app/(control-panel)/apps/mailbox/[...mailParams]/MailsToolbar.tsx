@@ -140,8 +140,10 @@ function MailToolbar(props: MailToolbarProps) {
 							<FuseSvgIcon color="disabled">heroicons-solid:magnifying-glass</FuseSvgIcon>
 						</InputAdornment>
 					}
-					inputProps={{
-						'aria-label': 'Search'
+					slotProps={{
+						input: {
+							'aria-label': 'Search'
+						}
 					}}
 					size="small"
 				/>

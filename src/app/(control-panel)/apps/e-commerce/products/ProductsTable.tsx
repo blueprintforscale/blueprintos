@@ -87,9 +87,9 @@ function ProductsTable() {
 						<i
 							className={clsx(
 								'inline-block w-2 h-2 rounded-sm',
-								row.quantity <= 5 && 'bg-red',
-								row.quantity > 5 && row.quantity <= 25 && 'bg-orange',
-								row.quantity > 25 && 'bg-green'
+								row.quantity <= 5 && 'bg-red-500',
+								row.quantity > 5 && row.quantity <= 25 && 'bg-orange-500',
+								row.quantity > 25 && 'bg-green-500'
 							)}
 						/>
 					</div>

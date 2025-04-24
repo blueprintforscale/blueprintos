@@ -1,18 +1,6 @@
 'use client';
-
-import FusePageSimple from '@fuse/core/FusePageSimple';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import Link from '@fuse/core/Link';
-
-const Root = styled(FusePageSimple)(({ theme }) => ({
-	'& .FusePageSimple-header': {
-		backgroundColor: theme.palette.background.paper,
-		borderBottomWidth: 1,
-		borderStyle: 'solid',
-		borderColor: theme.palette.divider
-	}
-}));
 
 /**
  * The OverviewPageLayoutsUI component provides an overview of Fuse React's page layouts.

@@ -12,8 +12,8 @@ const Root = styled('div')(({ theme }) => ({
 	borderRadius: 20,
 	display: 'flex',
 	alignItems: 'center',
-	backgroundColor: theme.palette.secondary.main,
-	color: theme.palette.secondary.contrastText
+	backgroundColor: theme.vars.palette.secondary.main,
+	color: theme.vars.palette.secondary.contrastText
 }));
 
 type FuseNavBadgeProps = {

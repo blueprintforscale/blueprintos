@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -27,8 +29,16 @@ import IconButtonSizesComponent from '../../components/buttons/IconButtonSizes';
 import IconButtonSizesRaw from '../../components/buttons/IconButtonSizes.tsx?raw';
 import IconButtonColorsComponent from '../../components/buttons/IconButtonColors';
 import IconButtonColorsRaw from '../../components/buttons/IconButtonColors.tsx?raw';
+import LoadingIconButtonComponent from '../../components/buttons/LoadingIconButton';
+import LoadingIconButtonRaw from '../../components/buttons/LoadingIconButton.tsx?raw';
+import IconButtonWithBadgeComponent from '../../components/buttons/IconButtonWithBadge';
+import IconButtonWithBadgeRaw from '../../components/buttons/IconButtonWithBadge.tsx?raw';
 import InputFileUploadComponent from '../../components/buttons/InputFileUpload';
 import InputFileUploadRaw from '../../components/buttons/InputFileUpload.tsx?raw';
+import LoadingButtonsComponent from '../../components/buttons/LoadingButtons';
+import LoadingButtonsRaw from '../../components/buttons/LoadingButtons.tsx?raw';
+import LoadingButtonsTransitionComponent from '../../components/buttons/LoadingButtonsTransition';
+import LoadingButtonsTransitionRaw from '../../components/buttons/LoadingButtonsTransition.tsx?raw';
 import CustomizedButtonsComponent from '../../components/buttons/CustomizedButtons';
 import CustomizedButtonsRaw from '../../components/buttons/CustomizedButtons.tsx?raw';
 import ButtonBaseDemoComponent from '../../components/buttons/ButtonBaseDemo';
@@ -390,6 +400,59 @@ function ButtonsDoc(props) {
 				/>
 			</Typography>
 			<Typography
+				className="text-lg mt-5 mb-2.5 font-bold"
+				component="h3"
+			>
+				Loading
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				Starting from v6.4.0, use <code>loading</code> prop to set icon buttons in a loading state and disable
+				interactions.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="LoadingIconButton.js"
+					className="my-4"
+					iframe={false}
+					component={LoadingIconButtonComponent}
+					raw={LoadingIconButtonRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-lg mt-5 mb-2.5 font-bold"
+				component="h3"
+			>
+				Badge
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				You can use the{' '}
+				<a href="/material-ui/react-badge/">
+					<code>Badge</code>
+				</a>{' '}
+				component to add a badge to an <code>IconButton</code>.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="IconButtonWithBadge.js"
+					className="my-4"
+					iframe={false}
+					component={IconButtonWithBadgeComponent}
+					raw={IconButtonWithBadgeRaw}
+				/>
+			</Typography>
+			<Typography
 				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
@@ -413,6 +476,79 @@ function ButtonsDoc(props) {
 					component={InputFileUploadComponent}
 					raw={InputFileUploadRaw}
 				/>
+			</Typography>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
+				Loading
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				Starting from v6.4.0, use the <code>loading</code> prop to set buttons in a loading state and disable
+				interactions.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="LoadingButtons.js"
+					className="my-4"
+					iframe={false}
+					component={LoadingButtonsComponent}
+					raw={LoadingButtonsRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				Toggle the loading switch to see the transition between the different states.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="LoadingButtonsTransition.js"
+					className="my-4"
+					iframe={false}
+					component={LoadingButtonsTransitionComponent}
+					raw={LoadingButtonsTransitionRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				:::warning When the <code>loading</code> prop is set to <code>boolean</code>, the loading wrapper is
+				always present in the DOM to prevent a{' '}
+				<a href="https://github.com/mui/material-ui/issues/27853">Google Translation Crash</a>.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				The <code>loading</code> value should always be <code>null</code> or <code>boolean</code>. The pattern
+				below is not recommended as it can cause the Google Translation crash:
+			</Typography>
+
+			<FuseHighlight
+				component="pre"
+				className="language-jsx"
+			>
+				{` 
+<Button {...(isFetching && { loading: true })}> // ❌ Don't do this
+`}
+			</FuseHighlight>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				:::
 			</Typography>
 			<Typography
 				className="text-3xl mt-6 mb-2.5 font-bold"

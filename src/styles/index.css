@@ -129,3 +129,5 @@ Print styles
 Tables styles
 */
 @import './tables.css';
+
+@import './tiptap.css';

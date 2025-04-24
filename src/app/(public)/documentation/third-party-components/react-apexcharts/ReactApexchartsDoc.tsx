@@ -54,7 +54,7 @@ function ReactApexchartsDoc() {
 				React.js wrapper for ApexCharts to build interactive visualizations in react.
 			</Typography>
 
-			<hr />
+			<hr className="not-prose" />
 
 			<Typography
 				className="text-5xl mt-8 mb-2"

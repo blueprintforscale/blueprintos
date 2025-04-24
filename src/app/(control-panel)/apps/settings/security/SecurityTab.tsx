@@ -14,9 +14,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import _ from 'lodash';
 import { useEffect } from 'react';
-import { SettingsSecurity, useGetSecuritySettingsQuery, useUpdateSecuritySettingsMutation } from '../SettingsApi';
-
-type FormType = SettingsSecurity;
+import { useGetSecuritySettingsQuery, useUpdateSecuritySettingsMutation } from '../SettingsApi';
 
 const defaultValues: FormType = {
 	id: '',
@@ -30,11 +28,14 @@ const defaultValues: FormType = {
  * Form Validation Schema
  */
 const schema = z.object({
+	id: z.string(),
 	currentPassword: z.string(),
 	newPassword: z.string().min(6, 'Password must be at least 6 characters').or(z.literal('')).optional(),
 	twoStepVerification: z.boolean(),
 	askPasswordChange: z.boolean()
 });
+
+type FormType = z.infer<typeof schema>;
 
 type ErrorRecord = {
 	name: keyof FormType;
@@ -78,7 +79,7 @@ function SecurityTab() {
 	 * Form Submit
 	 */
 	function onSubmit(formData: FormType) {
-		updateSecuritySettings(formData);
+		updateSecuritySettings({ ...formData, id: formData.id });
 	}
 
 	return (
@@ -104,12 +105,14 @@ function SecurityTab() {
 									helperText={errors?.currentPassword?.message}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:key</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:key</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -127,12 +130,14 @@ function SecurityTab() {
 									error={!!errors.newPassword}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:key</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:key</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 									helperText={errors?.newPassword?.message}
 								/>

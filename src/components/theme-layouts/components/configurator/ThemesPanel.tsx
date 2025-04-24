@@ -20,7 +20,7 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
 		position: 'fixed',
 		width: 380,
 		maxWidth: '90vw',
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.vars.palette.background.paper,
 		top: 0,
 		height: '100%',
 		minHeight: '100%',
@@ -93,7 +93,11 @@ function ThemesPanel(props: ThemesPanelProps) {
 			aria-describedby="schemes"
 			open={open}
 			onClose={onClose}
-			BackdropProps={{ invisible: true }}
+			slotProps={{
+				backdrop: {
+					invisible: true
+				}
+			}}
 			classes={{
 				paper: 'shadow-lg'
 			}}

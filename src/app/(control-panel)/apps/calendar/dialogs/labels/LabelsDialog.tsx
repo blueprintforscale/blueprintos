@@ -42,6 +42,7 @@ function LabelsDialog() {
 				}}
 				onClose={handleCloseDialog}
 				open={openDialog}
+				disableRestoreFocus
 			>
 				<Typography className="text-2xl mb-4 font-semibold">Edit Labels</Typography>
 

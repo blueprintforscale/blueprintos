@@ -9,11 +9,6 @@ import _ from 'lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { ScrumboardChecklist } from '../../../../../ScrumboardApi';
-
-type FormType = {
-	name: ScrumboardChecklist['name'];
-};
 
 /**
  * Form Validation Schema
@@ -21,6 +16,8 @@ type FormType = {
 const schema = z.object({
 	name: z.string().nonempty('You must enter a title')
 });
+
+type FormType = z.infer<typeof schema>;
 
 export type CardChecklistHandle = {
 	openForm: (ev: React.MouseEvent<HTMLElement>) => void;
@@ -89,18 +86,20 @@ function CardChecklistName(props: CardChecklistNameProps) {
 							variant="outlined"
 							margin="dense"
 							autoFocus
-							InputProps={{
-								endAdornment: (
-									<InputAdornment position="end">
-										<IconButton
-											type="submit"
-											disabled={_.isEmpty(dirtyFields) || !isValid}
-											size="large"
-										>
-											<FuseSvgIcon>heroicons-outline:check</FuseSvgIcon>
-										</IconButton>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									endAdornment: (
+										<InputAdornment position="end">
+											<IconButton
+												type="submit"
+												disabled={_.isEmpty(dirtyFields) || !isValid}
+												size="large"
+											>
+												<FuseSvgIcon>heroicons-outline:check</FuseSvgIcon>
+											</IconButton>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}

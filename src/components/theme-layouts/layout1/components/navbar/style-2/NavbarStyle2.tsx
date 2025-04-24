@@ -9,7 +9,7 @@ import {
 } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 
-import { Theme } from '@mui/system/createTheme';
+import { Theme } from '@mui/system';
 import { useEffect } from 'react';
 import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
@@ -70,7 +70,7 @@ const StyledNavbar = styled('div')<StyledNavBarProps>(({ theme }) => ({
 				position: 'left'
 			},
 			style: {
-				borderRight: `1px solid ${theme.palette.divider}`,
+				borderRight: `1px solid ${theme.vars.palette.divider}`,
 				left: 0
 			}
 		},
@@ -79,7 +79,7 @@ const StyledNavbar = styled('div')<StyledNavBarProps>(({ theme }) => ({
 				position: 'right'
 			},
 			style: {
-				borderLight: `1px solid ${theme.palette.divider}`,
+				borderLight: `1px solid ${theme.vars.palette.divider}`,
 				right: 0
 			}
 		},

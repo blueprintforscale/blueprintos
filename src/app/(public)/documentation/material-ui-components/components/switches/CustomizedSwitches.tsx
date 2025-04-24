@@ -125,9 +125,9 @@ const IOSSwitch = styled((props: SwitchProps) => (
       border: '6px solid #fff',
     },
     '&.Mui-disabled .MuiSwitch-thumb': {
-      color: theme.palette.grey[100],
+      color: theme.vars.palette.grey[100],
       ...theme.applyStyles('dark', {
-        color: theme.palette.grey[600],
+        color: theme.vars.palette.grey[600],
       }),
     },
     '&.Mui-disabled + .MuiSwitch-track': {

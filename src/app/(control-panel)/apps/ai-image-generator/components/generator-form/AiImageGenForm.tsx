@@ -6,8 +6,7 @@ import {
 	OutlinedInput,
 	ToggleButton,
 	ToggleButtonGroup,
-	Box,
-	alpha
+	Box
 } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Controller, useForm } from 'react-hook-form';
@@ -283,7 +282,8 @@ function ImageGeneratorForm() {
 					<div className="flex justify-center mb-8">
 						<Box
 							sx={{
-								backgroundColor: (theme) => alpha(theme.palette.background.default, 0.7),
+								backgroundColor: (theme) =>
+									`rgba(${theme.vars.palette.background.defaultChannel} / 0.7)`,
 								color: (theme) => theme.palette.text.secondary,
 								border: (theme) => `1px dashed ${theme.palette.divider}`,
 								width: '150px',

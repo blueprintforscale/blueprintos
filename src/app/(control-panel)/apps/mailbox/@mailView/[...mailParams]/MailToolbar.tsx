@@ -14,7 +14,7 @@ import useGetMail from '../../hooks/useGetMail';
  * The mail toolbar.
  */
 function MailToolbar() {
-	const { data: mail, isLoading } = useGetMail();
+	const { data: mail } = useGetMail();
 
 	const [updateMails] = useUpdateMailboxMailsMutation();
 

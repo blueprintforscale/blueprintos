@@ -2,10 +2,10 @@
 
 import { fuseDark } from '@fuse/colors';
 import { lightBlue, red } from '@mui/material/colors';
-import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeOptions } from '@mui/material/styles';
 import qs from 'qs';
-import { ThemeOptions } from '@mui/material/styles/createTheme';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
+import type {} from '@mui/material/themeCssVarsAugmentation';
 
 /**
  * The defaultTheme object defines the default color palette for the application.
@@ -91,6 +91,7 @@ export function getParsedQuerySettings(): FuseSettingsConfigType | object {
  * The defaultThemeOptions object defines the default options for the MUI theme.
  */
 export const defaultThemeOptions = {
+	cssVariables: true,
 	typography: {
 		fontFamily: ['Inter var', 'Roboto', '"Helvetica"', 'Arial', 'sans-serif'].join(','),
 		fontWeightLight: 300,
@@ -481,27 +482,27 @@ export function extendThemeWithMixins(obj: ThemeOptions) {
 		border: (width = 1) => ({
 			borderWidth: width,
 			borderStyle: 'solid',
-			borderColor: theme.palette.divider
+			borderColor: theme.vars.palette.divider
 		}),
 		borderLeft: (width = 1) => ({
 			borderLeftWidth: width,
 			borderStyle: 'solid',
-			borderColor: theme.palette.divider
+			borderColor: theme.vars.palette.divider
 		}),
 		borderRight: (width = 1) => ({
 			borderRightWidth: width,
 			borderStyle: 'solid',
-			borderColor: theme.palette.divider
+			borderColor: theme.vars.palette.divider
 		}),
 		borderTop: (width = 1) => ({
 			borderTopWidth: width,
 			borderStyle: 'solid',
-			borderColor: theme.palette.divider
+			borderColor: theme.vars.palette.divider
 		}),
 		borderBottom: (width = 1) => ({
 			borderBottomWidth: width,
 			borderStyle: 'solid',
-			borderColor: theme.palette.divider
+			borderColor: theme.vars.palette.divider
 		})
 	};
 }

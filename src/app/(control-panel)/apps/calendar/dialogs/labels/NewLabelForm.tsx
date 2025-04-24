@@ -63,48 +63,50 @@ function NewLabelForm() {
 							helperText={errors?.title?.message}
 							placeholder="Create new label"
 							variant="outlined"
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<Controller
-											name="color"
-											control={control}
-											render={({ field: { onChange: _onChange, value: _value } }) => (
-												<FormLabel
-													className="w-4 h-4 shrink-0 rounded-full"
-													sx={{ backgroundColor: _value }}
-												>
-													<Input
-														value={_value}
-														onChange={(ev) => {
-															_onChange(ev.target.value);
-														}}
-														type="color"
-														className="opacity-0"
-													/>
-												</FormLabel>
-											)}
-										/>
-									</InputAdornment>
-								),
-								endAdornment: (
-									<InputAdornment position="end">
-										<IconButton
-											className="p-0"
-											aria-label="Delete"
-											disabled={_.isEmpty(dirtyFields) || !isValid}
-											type="submit"
-											size="small"
-										>
-											<FuseSvgIcon
-												color="action"
-												size={20}
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">
+											<Controller
+												name="color"
+												control={control}
+												render={({ field: { onChange: _onChange, value: _value } }) => (
+													<FormLabel
+														className="w-4 h-4 shrink-0 rounded-full"
+														sx={{ backgroundColor: _value }}
+													>
+														<Input
+															value={_value}
+															onChange={(ev) => {
+																_onChange(ev.target.value);
+															}}
+															type="color"
+															className="opacity-0"
+														/>
+													</FormLabel>
+												)}
+											/>
+										</InputAdornment>
+									),
+									endAdornment: (
+										<InputAdornment position="end">
+											<IconButton
+												className="p-0"
+												aria-label="Delete"
+												disabled={_.isEmpty(dirtyFields) || !isValid}
+												type="submit"
+												size="small"
 											>
-												heroicons-outline:check
-											</FuseSvgIcon>
-										</IconButton>
-									</InputAdornment>
-								)
+												<FuseSvgIcon
+													color="action"
+													size={20}
+												>
+													heroicons-outline:check
+												</FuseSvgIcon>
+											</IconButton>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}

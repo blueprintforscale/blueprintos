@@ -26,7 +26,8 @@ interface LinkTabProps {
 }
 
 function LinkTab(props: LinkTabProps) {
-  return (
+    return (
+  // @ts-ignore
     <Tab
       component="a"
       onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {

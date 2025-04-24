@@ -1,5 +1,5 @@
 import { apiService as api } from 'src/store/apiService';
-import { PartialObjectDeep } from 'type-fest/source/partial-deep';
+import { PartialDeep } from 'type-fest/source/partial-deep';
 import ChatMessageModel from './models/ChatMessageModel';
 
 const demoUserId = 'cfaad35d-07a3-4447-a6c3-d8c3d54fd5df';
@@ -118,7 +118,7 @@ export type GetMessengerChatsApiResponse = /** status 200 OK */ Chat[];
 export type GetMessengerChatsApiArg = void;
 
 export type CreateMessengerChatApiResponse = /** status 200 OK */ Chat;
-export type CreateMessengerChatApiArg = PartialObjectDeep<Chat, object>;
+export type CreateMessengerChatApiArg = PartialDeep<Chat>;
 
 export type GetMessengerChatApiResponse = /** status 200 OK */ Message[];
 export type GetMessengerChatApiArg = string;
@@ -136,7 +136,7 @@ export type GetMessengerUserProfileApiResponse = Profile;
 export type GetMessengerUserProfileApiArg = void;
 
 export type UpdateMessengerUserProfileApiResponse = Profile;
-export type UpdateMessengerUserProfileApiArg = PartialObjectDeep<Profile, object>;
+export type UpdateMessengerUserProfileApiArg = PartialDeep<Profile>;
 
 export type ContactStatusType = 'online' | 'do-not-disturb' | 'away' | 'offline';
 

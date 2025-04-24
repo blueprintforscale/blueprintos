@@ -32,7 +32,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 		maxWidth: '100%!important'
 	},
 	'& a': {
-		color: `${theme.palette.text.primary}!important`,
+		color: `${theme.vars.palette.text.primary}!important`,
 		textDecoration: 'none!important'
 	},
 	'&  .fc-media-screen': {
@@ -40,7 +40,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 		width: '100%'
 	},
 	'& .fc-scrollgrid, & .fc-theme-standard td, & .fc-theme-standard th': {
-		borderColor: `${theme.palette.divider}!important`
+		borderColor: `${theme.vars.palette.divider}!important`
 	},
 	'&  .fc-scrollgrid-section > td': {
 		border: 0
@@ -54,7 +54,7 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 		borderWidth: '0 1px 0 1px',
 		padding: '8px 0 0 0',
 		'& .fc-col-header-cell-cushion': {
-			color: theme.palette.text.secondary,
+			color: theme.vars.palette.text.secondary,
 			fontWeight: 500,
 			fontSize: 12,
 			textTransform: 'uppercase'
@@ -69,14 +69,14 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 		backgroundColor: 'transparent!important',
 		'& .fc-daygrid-day-number': {
 			borderRadius: '100%',
-			backgroundColor: `${theme.palette.secondary.main}!important`,
-			color: `${theme.palette.secondary.contrastText}!important`
+			backgroundColor: `${theme.vars.palette.secondary.main}!important`,
+			color: `${theme.vars.palette.secondary.contrastText}!important`
 		}
 	},
 	'& .fc-daygrid-day-top': {
 		justifyContent: 'center',
 		'& .fc-daygrid-day-number': {
-			color: theme.palette.text.secondary,
+			color: theme.vars.palette.text.secondary,
 			fontWeight: 500,
 			fontSize: 12,
 			display: 'inline-flex',

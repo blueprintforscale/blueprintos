@@ -5,8 +5,8 @@ import { memo } from 'react';
 import Navigation from '../../components/navigation/Navigation';
 
 const Root = styled('div')(({ theme }) => ({
-	backgroundColor: theme.palette.background.default,
-	color: theme.palette.text.primary
+	backgroundColor: theme.vars.palette.background.default,
+	color: theme.vars.palette.text.primary
 }));
 
 type NavbarLayout3Props = {

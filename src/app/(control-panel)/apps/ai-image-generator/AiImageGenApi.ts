@@ -112,6 +112,7 @@ export type AiImageGenItem = {
 	favorite?: boolean;
 	formData?: AiImageGenSettings;
 	response?: AiImageGenApiResponse;
+	sourceImageUrl?: string;
 };
 export const {
 	useGetAiImageGenPresetsQuery,

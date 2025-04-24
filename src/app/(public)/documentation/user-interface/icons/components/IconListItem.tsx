@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback, memo } from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Typography from '@mui/material/Typography';
 import Paper, { PaperProps } from '@mui/material/Paper';
@@ -11,7 +11,7 @@ type IconItemProps = PaperProps & {
 	size: number;
 };
 
-const IconListItem = React.memo((props: IconItemProps) => {
+function IconListItem(props: IconItemProps) {
 	const { icon, iconSet, onIconSelect, size, ...rest } = props;
 	const [open, setOpen] = useState(false);
 
@@ -63,6 +63,6 @@ const IconListItem = React.memo((props: IconItemProps) => {
 			</Paper>
 		</Tooltip>
 	);
-});
+}
 
-export default IconListItem;
+export default memo(IconListItem);

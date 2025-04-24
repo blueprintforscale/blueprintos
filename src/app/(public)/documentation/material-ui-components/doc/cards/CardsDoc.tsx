@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -21,6 +23,8 @@ import MultiActionAreaCardComponent from '../../components/cards/MultiActionArea
 import MultiActionAreaCardRaw from '../../components/cards/MultiActionAreaCard.tsx?raw';
 import MediaControlCardComponent from '../../components/cards/MediaControlCard';
 import MediaControlCardRaw from '../../components/cards/MediaControlCard.tsx?raw';
+import SelectActionCardComponent from '../../components/cards/SelectActionCard';
+import SelectActionCardRaw from '../../components/cards/SelectActionCard.tsx?raw';
 
 function CardsDoc(props) {
 	return (
@@ -271,6 +275,32 @@ import CardContent from '@mui/material/CardContent';
 					iframe={false}
 					component={MediaControlCardComponent}
 					raw={MediaControlCardRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
+				Active state styles
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				To customize a Card&#39;s styles when it&#39;s in an active state, you can attach a{' '}
+				<code>data-active</code> attribute to the Card Action Area component and apply styles with the{' '}
+				<code>&[data-active]</code> selector, as shown below:
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="SelectActionCard.js"
+					className="my-4"
+					iframe={false}
+					component={SelectActionCardComponent}
+					raw={SelectActionCardRaw}
 				/>
 			</Typography>
 			<Typography

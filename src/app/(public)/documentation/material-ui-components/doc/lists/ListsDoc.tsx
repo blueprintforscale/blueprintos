@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -86,8 +88,7 @@ function ListsDoc(props) {
 			</Typography>
 			<ul className="space-y-4">
 				<li>
-					List: a wrapper for list items. Renders as a <code>{`<ul className="space-y-4">`}</code> by
-					default.
+					List: a wrapper for list items. Renders as a <code>{`<ul className="space-y-4">`}</code> by default.
 				</li>
 				<li>
 					List Item: a common list item. Renders as an <code>{`<li>`}</code> by default.

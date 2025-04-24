@@ -48,7 +48,7 @@ export default function CustomizedDialogs() {
             position: 'absolute',
             right: 8,
             top: 8,
-            color: theme.palette.grey[500],
+            color: theme.vars.palette.grey[500],
           })}
         >
           <CloseIcon />

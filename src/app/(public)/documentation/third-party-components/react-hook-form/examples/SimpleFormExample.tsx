@@ -38,17 +38,6 @@ const options = [
 	}
 ];
 
-const defaultValues = {
-	Native: '',
-	TextField: '',
-	Select: '',
-	Autocomplete: [],
-	Checkbox: false,
-	Switch: false,
-	RadioGroup: '',
-	DateTimePicker: ''
-};
-
 /**
  * Form Validation Schema
  */
@@ -61,16 +50,36 @@ const schema = z.object({
 		.refine((val) => ['20', '30'].includes(val), 'Select 20 or 30.'),
 	Checkbox: z.boolean().refine((val) => val === true, 'You must check.'),
 	Switch: z.boolean().refine((val) => val === true, 'You must turn it on.'),
-	RadioGroup: z.string().refine((val) => val === 'female', 'You must select female.'),
+	RadioGroup: z.string().superRefine((val, ctx) => {
+		if (val !== 'female') {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: 'You must select female.'
+			});
+		}
+	}),
 	Autocomplete: z.array(z.string()).min(2, 'Select at least two.'),
 	DateTimePicker: z.string().refine((val) => val === null || val.trim().length > 0, 'You must select a date')
 });
+
+type FormType = z.infer<typeof schema>;
+
+const defaultValues: FormType = {
+	Native: '',
+	TextField: '',
+	Select: '',
+	Autocomplete: [],
+	Checkbox: false,
+	Switch: false,
+	RadioGroup: 'male',
+	DateTimePicker: ''
+};
 
 /**
  * Simple Form Example
  */
 function SimpleFormExample() {
-	const { handleSubmit, register, reset, control, watch, formState } = useForm({
+	const { handleSubmit, register, reset, control, watch, formState } = useForm<FormType>({
 		defaultValues,
 		mode: 'all',
 		resolver: zodResolver(schema)
@@ -260,25 +269,22 @@ function SimpleFormExample() {
 					<Controller
 						name="Autocomplete"
 						control={control}
-						defaultValue={[]}
 						render={({ field: { onChange, value, onBlur, ref } }) => (
 							<Autocomplete
 								className="mt-2 mb-4"
 								multiple
-								freeSolo
-								options={options}
-								value={value}
-								onChange={(_event, newValue) => {
-									onChange(newValue);
-								}}
+								options={options.map((option) => option.value)}
+								getOptionLabel={(option) => options.find((o) => o.value === option)?.label || ''}
 								renderInput={(params) => (
 									<TextField
 										{...params}
 										placeholder="Select multiple tags"
 										label="Tags"
 										variant="outlined"
-										InputLabelProps={{
-											shrink: true
+										slotProps={{
+											inputLabel: {
+												shrink: true
+											}
 										}}
 										error={!!errors.Autocomplete}
 										helperText={errors?.Autocomplete?.message}
@@ -286,6 +292,11 @@ function SimpleFormExample() {
 										inputRef={ref}
 									/>
 								)}
+								filterSelectedOptions
+								value={value || []}
+								onChange={(_event, newValue) => {
+									onChange(newValue);
+								}}
 							/>
 						)}
 					/>

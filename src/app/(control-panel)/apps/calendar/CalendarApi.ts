@@ -107,11 +107,11 @@ export type DeleteCalendarLabelApiResponse = unknown;
 export type DeleteCalendarLabelApiArg = string;
 
 export type Event = {
-	id: string;
-	title: string;
-	allDay: boolean;
-	start: string;
-	end: string;
+	id?: string;
+	title?: string;
+	allDay?: boolean;
+	start?: string;
+	end?: string;
 	extendedProps?: Dictionary;
 };
 

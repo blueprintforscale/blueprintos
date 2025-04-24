@@ -14,7 +14,7 @@ const Root = styled(Tooltip)<{ position: 'left' | 'right' }>(({ theme }) => ({
 		width: 24,
 		borderRadius: 38,
 		padding: 8,
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.vars.palette.background.paper,
 		transition: theme.transitions.create(['background-color', 'border-radius', 'width', 'min-width', 'padding'], {
 			easing: theme.transitions.easing.easeInOut,
 			duration: theme.transitions.duration.shorter

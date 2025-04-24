@@ -1,6 +1,6 @@
 'use client';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import { useMemo } from 'react';
 import { ListItem, ListItemButtonProps, ListItemText } from '@mui/material';
@@ -22,7 +22,7 @@ const Root = styled(ListItem)<ListItemButtonComponentProps>(({ theme, ...props }
 	paddingLeft: props.itempadding > 80 ? 80 : props.itempadding,
 	paddingTop: 10,
 	paddingBottom: 10,
-	color: alpha(theme.palette.text.primary, 0.7),
+	color: `rgba(${theme.vars.palette.text.primaryChannel} / 0.7)`,
 	fontWeight: 600,
 	letterSpacing: '0.025em'
 }));

@@ -7,7 +7,7 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
     color: pink[600],
     '&:hover': {
-      backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
+      backgroundColor: alpha(pink[600], theme.vars.palette.action.hoverOpacity),
     },
   },
   '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
