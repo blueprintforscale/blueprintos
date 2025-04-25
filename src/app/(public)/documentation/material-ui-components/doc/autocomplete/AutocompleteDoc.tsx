@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -31,6 +33,8 @@ import AsynchronousComponent from '../../components/autocomplete/Asynchronous';
 import AsynchronousRaw from '../../components/autocomplete/Asynchronous.tsx?raw';
 import GoogleMapsComponent from '../../components/autocomplete/GoogleMaps';
 import GoogleMapsRaw from '../../components/autocomplete/GoogleMaps.tsx?raw';
+import CustomSingleValueRenderingComponent from '../../components/autocomplete/CustomSingleValueRendering';
+import CustomSingleValueRenderingRaw from '../../components/autocomplete/CustomSingleValueRendering.tsx?raw';
 import TagsComponent from '../../components/autocomplete/Tags';
 import TagsRaw from '../../components/autocomplete/Tags.tsx?raw';
 import FixedTagsComponent from '../../components/autocomplete/FixedTags';
@@ -684,17 +688,6 @@ import useAutocomplete from '@mui/material/useAutocomplete';
 				<a href="https://developers.google.com/maps/documentation/places/web-service/overview">Google Places</a>{' '}
 				API.
 			</Typography>
-			<div className="border-1 p-4 rounded-xl my-3">
-				<Typography
-					className="text-base mb-8"
-					component="div"
-				>
-					The following demo relies on{' '}
-					<a href="https://github.com/moroshko/autosuggest-highlight">autosuggest-highlight</a>, a small (1
-					kB) utility for highlighting text in autosuggest and autocomplete components.
-				</Typography>
-			</div>
-
 			<Typography
 				className="text-base mb-8"
 				component="div"
@@ -711,8 +704,60 @@ import useAutocomplete from '@mui/material/useAutocomplete';
 				className="text-base mb-8"
 				component="div"
 			>
+				The demo relies on <a href="https://github.com/moroshko/autosuggest-highlight">autosuggest-highlight</a>
+				, a small (1 kB) utility for highlighting text in autosuggest and autocomplete components.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
 				:::error Before you can start using the Google Maps JavaScript API and Places API, you need to get your
-				own <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">API key</a>. :::
+				own <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">API key</a>.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				This demo has limited quotas to make API requests. When your quota exceeds, you will see the response
+				for &quot;Paris&quot;. :::
+			</Typography>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
+				Custom Single Value Rendering
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				By default, when <code>{`multiple={false}`}</code>, the selected option is displayed as plain text
+				inside the input. The <code>renderValue</code> prop allows you to customize how the selected value is
+				rendered. This can be useful for adding custom styles, displaying additional information, or formatting
+				the value differently.
+			</Typography>
+			<ul className="space-y-4">
+				<li>
+					The <code>getItemProps</code> callback provides props like <code>data-item-index</code>,{' '}
+					<code>disabled</code>, <code>tabIndex</code> and others. These props should be spread onto the
+					rendered component for proper accessibility.
+				</li>
+				<li>
+					If using a custom component other than a Material UI Chip, destructure the <code>onDelete</code>{' '}
+					prop as it&#39;s specific to the Material UI Chip.
+				</li>
+			</ul>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="CustomSingleValueRendering.js"
+					className="my-4"
+					iframe={false}
+					component={CustomSingleValueRenderingComponent}
+					raw={CustomSingleValueRenderingRaw}
+				/>
 			</Typography>
 			<Typography
 				className="text-3xl mt-6 mb-2.5 font-bold"
@@ -724,8 +769,20 @@ import useAutocomplete from '@mui/material/useAutocomplete';
 				className="text-base mb-8"
 				component="div"
 			>
-				Also known as tags, the user is allowed to enter more than one value.
+				When <code>{`multiple={true}`}</code>, the user can select multiple values. These selected values,
+				referred to as &quot;items&quot; can be customized using the <code>renderValue</code> prop.
 			</Typography>
+			<ul className="space-y-4">
+				<li>
+					The <code>getItemProps</code> callback supplies essential props like <code>data-item-index</code>,{' '}
+					<code>disabled</code>, <code>tabIndex</code> and others. Make sure to spread them on each rendered
+					item.
+				</li>
+				<li>
+					If using a custom component other than a Material UI Chip, destructure the <code>onDelete</code>{' '}
+					prop as it&#39;s specific to the Material UI Chip.
+				</li>
+			</ul>
 			<Typography
 				className="text-base mb-8"
 				component="div"

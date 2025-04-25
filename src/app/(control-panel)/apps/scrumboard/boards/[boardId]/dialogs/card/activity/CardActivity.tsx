@@ -34,7 +34,7 @@ function CardActivity(props: CardActivityProps) {
 						className="flex flex-col mx-4 p-3"
 						sx={(theme) => ({
 							borderRadius: '5px 20px 20px 5px',
-							border: `1px solid ${theme.palette.divider}`
+							border: `1px solid ${theme.vars.palette.divider}`
 						})}
 					>
 						<div className="flex items-center">

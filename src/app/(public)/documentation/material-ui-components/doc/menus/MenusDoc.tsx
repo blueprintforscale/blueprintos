@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -28,6 +30,8 @@ import FadeMenuComponent from '../../components/menus/FadeMenu';
 import FadeMenuRaw from '../../components/menus/FadeMenu.tsx?raw';
 import ContextMenuComponent from '../../components/menus/ContextMenu';
 import ContextMenuRaw from '../../components/menus/ContextMenu.tsx?raw';
+import GroupedMenuComponent from '../../components/menus/GroupedMenu';
+import GroupedMenuRaw from '../../components/menus/GroupedMenu.tsx?raw';
 import MenuPopupStateComponent from '../../components/menus/MenuPopupState';
 import MenuPopupStateRaw from '../../components/menus/MenuPopupState.tsx?raw';
 
@@ -66,6 +70,26 @@ function MenusDoc(props) {
 				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
+				Introduction
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				Menus are implemented using a collection of related components:
+			</Typography>
+			<ul className="space-y-4">
+				<li>Menu: The container/surface of the menu.</li>
+				<li>Menu Item: An option for users to select from the menu.</li>
+				<li>
+					Menu List (optional): Alternative composable container for Menu Items—see{' '}
+					<a href="#composition-with-menu-list">Composition with Menu List</a> for details.
+				</li>
+			</ul>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
 				Basic menu
 			</Typography>
 			<Typography
@@ -80,16 +104,8 @@ function MenusDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
-				Choosing an option should immediately ideally commit the option and close the menu.
-			</Typography>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				<strong>Disambiguation</strong>: In contrast to simple menus, simple dialogs can present additional
-				detail related to the options available for a list item or provide navigational or orthogonal actions
-				related to the primary task. Although they can display the same content, simple menus are preferred over
-				simple dialogs because simple menus are less disruptive to the user&#39;s current context.
+				You should configure the component so that selecting an option immediately confirms it and closes the
+				menu, as shown in the demo below.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -209,21 +225,22 @@ function MenusDoc(props) {
 				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
-				MenuList composition
+				Composition with Menu List
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				The <code>Menu</code> component uses the <code>Popover</code> component internally. However, you might
-				want to use a different positioning strategy, or not blocking the scroll. For answering those needs, we
-				expose a <code>MenuList</code> component that you can compose, with <code>Popper</code> in this example.
+				The Menu component uses the Popover component internally. But you might want to use a different
+				positioning strategy, or prefer not to block scrolling, for example.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				The primary responsibility of the <code>MenuList</code> component is to handle the focus.
+				The Menu List component lets you compose your own menu for these kinds of use cases—its primary purpose
+				is to handle focus. See the demo below for an example of composition that uses Menu List and replaces
+				the Menu&#39;s default Popover with a Popper component instead:
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -399,6 +416,30 @@ function MenusDoc(props) {
 					iframe={false}
 					component={ContextMenuComponent}
 					raw={ContextMenuRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
+				Grouped Menu
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				Display categories with the <code>ListSubheader</code> component.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="GroupedMenu.js"
+					className="my-4"
+					iframe={false}
+					component={GroupedMenuComponent}
+					raw={GroupedMenuRaw}
 				/>
 			</Typography>
 			<Typography

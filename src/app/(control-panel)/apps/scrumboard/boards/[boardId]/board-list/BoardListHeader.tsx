@@ -24,15 +24,14 @@ import {
 } from '../../../ScrumboardApi';
 import useUpdateScrumboardBoard from '../../../hooks/useUpdateScrumboardBoard';
 
-type FormType = {
-	title: ScrumboardList['title'];
-};
 /**
  * Form Validation Schema
  */
 const schema = z.object({
 	title: z.string().nonempty('You must enter a title')
 });
+
+type FormType = z.infer<typeof schema>;
 
 type BoardListHeaderProps = {
 	list: ScrumboardList;
@@ -121,18 +120,20 @@ function BoardListHeader(props: BoardListHeaderProps) {
 											margin="none"
 											autoFocus
 											size="small"
-											InputProps={{
-												endAdornment: (
-													<InputAdornment position="end">
-														<IconButton
-															type="submit"
-															disabled={_.isEmpty(dirtyFields) || !isValid}
-															size="large"
-														>
-															<FuseSvgIcon>heroicons-outline:check</FuseSvgIcon>
-														</IconButton>
-													</InputAdornment>
-												)
+											slotProps={{
+												input: {
+													endAdornment: (
+														<InputAdornment position="end">
+															<IconButton
+																type="submit"
+																disabled={_.isEmpty(dirtyFields) || !isValid}
+																size="large"
+															>
+																<FuseSvgIcon>heroicons-outline:check</FuseSvgIcon>
+															</IconButton>
+														</InputAdornment>
+													)
+												}
 											}}
 										/>
 									)}

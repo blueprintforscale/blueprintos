@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import _ from 'lodash';
 import { darkPaletteText, lightPaletteText } from 'src/configs/themesConfig';
 import { Theme, darken, getContrastRatio, lighten } from '@mui/material/styles';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/system';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { Dialog, DialogActions, DialogContent, Icon, TextField } from '@mui/material';
@@ -200,7 +200,9 @@ function PaletteSelector(props: PaletteSelectorProps) {
 										variant="outlined"
 										className="mb-8"
 										label="Primary color"
-										InputProps={{ className: 'w-50  h-8' }}
+										slotProps={{
+											input: { className: 'w-50  h-8' }
+										}}
 									/>
 								)}
 							/>
@@ -229,7 +231,9 @@ function PaletteSelector(props: PaletteSelectorProps) {
 										variant="outlined"
 										className="mb-8"
 										label="Secondary color"
-										InputProps={{ className: 'w-50 h-8' }}
+										slotProps={{
+											input: { className: 'w-50 h-8' }
+										}}
 									/>
 								)}
 							/>
@@ -249,7 +253,9 @@ function PaletteSelector(props: PaletteSelectorProps) {
 										variant="outlined"
 										className="mb-8"
 										label="Background paper"
-										InputProps={{ className: 'w-50 h-8' }}
+										slotProps={{
+											input: { className: 'w-50 h-8' }
+										}}
 										error={!!errors?.palette?.background?.paper}
 										helperText={errors?.palette?.background?.paper?.message}
 									/>
@@ -270,7 +276,9 @@ function PaletteSelector(props: PaletteSelectorProps) {
 										type="color"
 										variant="outlined"
 										label="Background default"
-										InputProps={{ className: 'w-50 h-8' }}
+										slotProps={{
+											input: { className: 'w-50 h-8' }
+										}}
 										error={!!errors?.palette?.background?.default}
 										helperText={errors?.palette?.background?.default?.message}
 									/>

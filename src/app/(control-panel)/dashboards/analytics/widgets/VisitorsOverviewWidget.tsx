@@ -149,7 +149,7 @@ function VisitorsOverviewWidget() {
 						<Typography
 							className="font-medium"
 							sx={{
-								color: alpha(contrastTheme.palette.primary.contrastText, 0.7)
+								color: `rgba(${contrastTheme.palette.primary.contrastTextChannel} / 0.7)`
 							}}
 						>
 							Number of unique visitors

@@ -9,13 +9,11 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import LabelModel from '../../models/LabelModel';
-import { NotesLabel, useCreateNotesLabelMutation, useGetNotesLabelsQuery } from '../../NotesApi';
+import { useCreateNotesLabelMutation, useGetNotesLabelsQuery } from '../../NotesApi';
 
 const defaultValues = {
 	title: ''
 };
-
-type FormType = { title: NotesLabel['title'] };
 
 /**
  * The new label form.
@@ -41,6 +39,8 @@ function NewLabelForm() {
 				}
 			)
 	});
+
+	type FormType = z.infer<typeof schema>;
 
 	const { control, formState, handleSubmit, reset } = useForm<FormType>({
 		mode: 'onChange',
@@ -73,30 +73,32 @@ function NewLabelForm() {
 							helperText={errors?.title?.message}
 							placeholder="Create new label"
 							variant="outlined"
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<FuseSvgIcon
-											color="action"
-											size={16}
-										>
-											heroicons-outline:tag
-										</FuseSvgIcon>
-									</InputAdornment>
-								),
-								endAdornment: (
-									<InputAdornment position="end">
-										<IconButton
-											className="p-0"
-											aria-label="Delete"
-											disabled={_.isEmpty(dirtyFields) || !isValid}
-											type="submit"
-											size="small"
-										>
-											<FuseSvgIcon color="action">heroicons-outline:check</FuseSvgIcon>
-										</IconButton>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">
+											<FuseSvgIcon
+												color="action"
+												size={16}
+											>
+												heroicons-outline:tag
+											</FuseSvgIcon>
+										</InputAdornment>
+									),
+									endAdornment: (
+										<InputAdornment position="end">
+											<IconButton
+												className="p-0"
+												aria-label="Delete"
+												disabled={_.isEmpty(dirtyFields) || !isValid}
+												type="submit"
+												size="small"
+											>
+												<FuseSvgIcon color="action">heroicons-outline:check</FuseSvgIcon>
+											</IconButton>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}

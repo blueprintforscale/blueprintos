@@ -11,9 +11,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import _ from 'lodash';
 import { useEffect } from 'react';
-import { SettingsAccount, useGetAccountSettingsQuery, useUpdateAccountSettingsMutation } from '../SettingsApi';
-
-type FormType = SettingsAccount;
+import { useGetAccountSettingsQuery, useUpdateAccountSettingsMutation } from '../SettingsApi';
 
 const defaultValues: FormType = {
 	id: '',
@@ -32,16 +30,19 @@ const defaultValues: FormType = {
  * Form Validation Schema
  */
 const schema = z.object({
-	name: z.string().nonempty('Name is required'),
-	username: z.string().nonempty('Username is required'),
-	title: z.string().nonempty('Title is required'),
-	company: z.string().nonempty('Company is required'),
-	about: z.string().nonempty('About is required'),
-	email: z.string().email('Invalid email').nonempty('Email is required'),
-	phone: z.string().nonempty('Phone is required'),
-	country: z.string().nonempty('Country is required'),
-	language: z.string().nonempty('Language is required')
+	id: z.string().min(1, 'ID is required'),
+	name: z.string().min(1, 'Name is required'),
+	username: z.string().min(1, 'Username is required'),
+	title: z.string().min(1, 'Title is required'),
+	company: z.string().min(1, 'Company is required'),
+	about: z.string().min(1, 'About is required'),
+	email: z.string().email('Invalid email').min(1, 'Email is required'),
+	phone: z.string().min(1, 'Phone is required'),
+	country: z.string().min(1, 'Country is required'),
+	language: z.string().min(1, 'Language is required')
 });
+
+type FormType = z.infer<typeof schema>;
 
 function AccountTab() {
 	const { data: accountSettings } = useGetAccountSettingsQuery();
@@ -91,12 +92,14 @@ function AccountTab() {
 									variant="outlined"
 									required
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -117,17 +120,19 @@ function AccountTab() {
 									variant="outlined"
 									required
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<Typography
-													color="text.secondary"
-													className="italic"
-												>
-													fusetheme.com/
-												</Typography>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<Typography
+														color="text.secondary"
+														className="italic"
+													>
+														fusetheme.com/
+													</Typography>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -148,12 +153,14 @@ function AccountTab() {
 									helperText={errors?.title?.message}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:briefcase</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:briefcase</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -174,12 +181,16 @@ function AccountTab() {
 									helperText={errors?.company?.message}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:building-office-2</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>
+														heroicons-solid:building-office-2
+													</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -202,16 +213,20 @@ function AccountTab() {
 									multiline
 									minRows={5}
 									maxRows={10}
-									InputProps={{
-										className: 'max-h-min h-min items-start',
-										startAdornment: (
-											<InputAdornment
-												className="mt-4"
-												position="start"
-											>
-												<FuseSvgIcon size={20}>heroicons-solid:bars-3-bottom-left</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											className: 'max-h-min h-min items-start',
+											startAdornment: (
+												<InputAdornment
+													className="mt-4"
+													position="start"
+												>
+													<FuseSvgIcon size={20}>
+														heroicons-solid:bars-3-bottom-left
+													</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 									helperText={
 										<span className="flex flex-col">
@@ -248,12 +263,14 @@ function AccountTab() {
 									fullWidth
 									error={!!errors.email}
 									helperText={errors?.email?.message}
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:envelope</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:envelope</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -272,12 +289,14 @@ function AccountTab() {
 									fullWidth
 									error={!!errors.phone}
 									helperText={errors?.phone?.message}
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:phone</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:phone</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -296,12 +315,14 @@ function AccountTab() {
 									fullWidth
 									error={!!errors.country}
 									helperText={errors?.country?.message}
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:flag</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:flag</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -320,12 +341,14 @@ function AccountTab() {
 									fullWidth
 									error={!!errors.language}
 									helperText={errors?.language?.message}
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:globe-alt</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:globe-alt</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}

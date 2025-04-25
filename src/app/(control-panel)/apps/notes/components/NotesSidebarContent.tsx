@@ -26,7 +26,7 @@ const StyledListItemButton = styled(ListItemButton)<ListItemButtonProps & Partia
 			backgroundColor: 'rgba(255, 255, 255, .1)!important',
 			pointerEvents: 'none',
 			'& .list-item-icon': {
-				color: theme.palette.secondary.main
+				color: theme.vars.palette.secondary.main
 			},
 			...theme.applyStyles('light', {
 				backgroundColor: 'rgba(0, 0, 0, .05)!important'

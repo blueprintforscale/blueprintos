@@ -136,7 +136,7 @@ export type UpdateTeamMemberSettingsApiResponse = unknown;
 export type UpdateTeamMemberSettingsApiArg = SettingsTeamMember[];
 
 export type SettingsAccount = {
-	id: string;
+	id?: string;
 	name?: string;
 	username?: string;
 	title?: string;

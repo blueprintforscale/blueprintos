@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -388,8 +390,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 				className="text-base mb-8"
 				component="div"
 			>
-				The Accordion component is composed of a root <code>{`<div>`}</code> that houses interior elements like
-				the Accordion Summary and other optional components (such as buttons or decorators).
+				The Accordion component consists of a root <code>{`<div>`}</code> that contains the Accordion Summary,
+				Accordion Details, and optional Accordion Actions for action buttons.
 			</Typography>
 
 			<FuseHighlight
@@ -398,9 +400,11 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 			>
 				{` 
 <div className="MuiAccordion-root">
-  <div className="MuiButtonBase-root MuiAccordionSummary-root" role="button" aria-expanded="">
+  <h3 className="MuiAccordion-heading">
+    <button className="MuiButtonBase-root MuiAccordionSummary-root" aria-expanded="">
       
-  </div>
+    </button>
+  </h3>
   <div className="MuiAccordion-region" role="region">
     <div className="MuiAccordionDetails-root">
       

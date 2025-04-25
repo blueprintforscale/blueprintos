@@ -60,7 +60,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     ].join(','),
     '&:focus': {
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
+      borderColor: theme.vars.palette.primary.main,
     },
     ...theme.applyStyles('dark', {
       backgroundColor: '#1A2027',
@@ -94,7 +94,7 @@ const RedditTextField = styled((props: TextFieldProps) => (
     '&.Mui-focused': {
       backgroundColor: 'transparent',
       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 2px`,
-      borderColor: theme.palette.primary.main,
+      borderColor: theme.vars.palette.primary.main,
     },
     ...theme.applyStyles('dark', {
       backgroundColor: '#1A2027',

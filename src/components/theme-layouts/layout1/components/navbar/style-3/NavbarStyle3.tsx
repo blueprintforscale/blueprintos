@@ -7,7 +7,7 @@ import {
 	selectFuseNavbar
 } from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import GlobalStyles from '@mui/material/GlobalStyles';
-import { Theme } from '@mui/system/createTheme';
+import { Theme } from '@mui/system';
 import clsx from 'clsx';
 import { useEffect } from 'react';
 import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
@@ -55,7 +55,7 @@ const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme, dense }) => ({
 				position: 'left'
 			},
 			style: {
-				borderRight: `1px solid ${theme.palette.divider}`
+				borderRight: `1px solid ${theme.vars.palette.divider}`
 			}
 		},
 		{
@@ -63,7 +63,7 @@ const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme, dense }) => ({
 				position: 'right'
 			},
 			style: {
-				borderLight: `1px solid ${theme.palette.divider}`
+				borderLight: `1px solid ${theme.vars.palette.divider}`
 			}
 		},
 		{
@@ -119,13 +119,13 @@ const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme, dense }) => ({
 		{
 			props: ({ folded, open, position }) => !folded && !open && position === 'left',
 			style: {
-				marginLeft: -(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)
+				marginLeft: `${-(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)}px!important`
 			}
 		},
 		{
 			props: ({ folded, open, position }) => !folded && !open && position === 'right',
 			style: {
-				marginRight: -(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)
+				marginRight: `${-(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)}px!important`
 			}
 		},
 		{
@@ -228,8 +228,8 @@ function NavbarStyle3(props: NavbarStyle3Props) {
 					'& #fuse-navbar-panel': {
 						maxWidth: '100%',
 						width: panelWidth,
-						borderRight: `1px solid ${theme.palette.divider}!important`,
-						borderLeft: `1px solid ${theme.palette.divider}!important`,
+						borderRight: `1px solid ${theme.vars.palette.divider}!important`,
+						borderLeft: `1px solid ${theme.vars.palette.divider}!important`,
 						[theme.breakpoints.up('lg')]: {
 							minWidth: panelWidth,
 							maxWidth: 'initial'

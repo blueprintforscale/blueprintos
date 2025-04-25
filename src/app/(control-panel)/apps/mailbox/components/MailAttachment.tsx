@@ -17,7 +17,7 @@ function MailAttachment(props: MailAttachmentProps) {
 	}
 
 	return (
-		<div className="flex items-center m-3">
+		<div className="flex items-center p-3 border-1">
 			{attachment?.type.startsWith('image/') && (
 				<img
 					className="w-9 h-9 rounded-md overflow-hidden"

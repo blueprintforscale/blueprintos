@@ -9,16 +9,14 @@ import CommentModel from '../../../../../models/CommentModel';
 import { ScrumboardComment } from '../../../../../ScrumboardApi';
 import useSelectMember from '../../../../../hooks/useSelectMember';
 
-type FormType = {
-	message: ScrumboardComment['message'];
-};
-
 /**
  * Form Validation Schema
  */
 const schema = z.object({
 	message: z.string().nonempty('You must enter a comment')
 });
+
+type FormType = z.infer<typeof schema>;
 
 const defaultValues = {
 	idMember: 'baa88231-0ee6-4028-96d5-7f187e0f4cd5',

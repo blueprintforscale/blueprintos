@@ -1,4 +1,4 @@
-import { Typography, IconButton, Chip, lighten, Button } from '@mui/material';
+import { Typography, IconButton, Chip, lighten, Box } from '@mui/material';
 import { format } from 'date-fns';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { MouseEventHandler, MouseEvent } from 'react';
@@ -6,7 +6,7 @@ import { AiImageGenPreset, useDeleteAiImageGenPresetMutation } from '../../AiIma
 
 type AiImageGenPresetItemProps = {
 	preset: AiImageGenPreset;
-	onClick: MouseEventHandler<HTMLButtonElement>;
+	onClick: MouseEventHandler<HTMLDivElement>;
 };
 
 function AiImageGenPresetItem(props: AiImageGenPresetItemProps) {
@@ -19,10 +19,8 @@ function AiImageGenPresetItem(props: AiImageGenPresetItemProps) {
 	}
 
 	return (
-		<Button
-			className="flex-col items-start border border-divider w-full overflow-hidden rounded-md hover:shadow-xs transition-shadow duration-200 space-y-2 min-h-0 h-auto max-h-none"
-			variant="outlined"
-			key={preset.id}
+		<Box
+			className="flex flex-col items-start border border-divider w-full overflow-hidden rounded-md hover:shadow-xs transition-shadow duration-200 space-y-2 min-h-0 h-auto max-h-none p-4 cursor-pointer"
 			sx={(theme) => ({
 				backgroundColor: lighten(theme.palette.background.default, 0.02),
 				...theme.applyStyles('light', {
@@ -91,7 +89,7 @@ function AiImageGenPresetItem(props: AiImageGenPresetItemProps) {
 			>
 				{preset.settings.negativePrompt} (Negative Prompt)
 			</Typography>
-		</Button>
+		</Box>
 	);
 }
 

@@ -44,7 +44,7 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
     fontWeight: 'normal',
     top: -6,
     backgroundColor: 'unset',
-    color: theme.palette.text.primary,
+    color: theme.vars.palette.text.primary,
     '&::before': {
       display: 'none',
     },

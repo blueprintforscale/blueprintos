@@ -2,7 +2,7 @@ import Drawer from '@mui/material/Drawer';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import clsx from 'clsx';
 import { useCallback, useEffect, useImperativeHandle, useState, ReactNode } from 'react';
-import { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer/SwipeableDrawer';
+import { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer';
 import FusePageCardedSidebarContent from './FusePageCardedSidebarContent';
 import useThemeMediaQuery from '../../hooks/useThemeMediaQuery';
 
@@ -62,9 +62,11 @@ function FusePageCardedSidebar(props: FusePageCardedSidebarProps) {
 					ModalProps={{
 						keepMounted: true // Better open performance on mobile.
 					}}
-					BackdropProps={{
-						classes: {
-							root: 'FusePageCarded-backdrop'
+					slotProps={{
+						backdrop: {
+							classes: {
+								root: 'FusePageCarded-backdrop'
+							}
 						}
 					}}
 					sx={{ position: 'absolute', '& .MuiPaper-root': { width: `${props.width}px` } }}

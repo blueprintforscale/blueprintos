@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, memo } from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
@@ -22,7 +22,7 @@ type IconListPageProps = {
 	iconSet: string;
 };
 
-const IconListPage = React.memo((props: IconListPageProps) => {
+function IconListPage(props: IconListPageProps) {
 	const { pageTitle, referenceUrl, apiUrl, iconSet } = props;
 	const { data: listData, isLoading } = useGetIconsListQuery(apiUrl);
 
@@ -172,6 +172,6 @@ const IconListPage = React.memo((props: IconListPageProps) => {
 			</div>
 		</div>
 	);
-});
+}
 
-export default IconListPage;
+export default memo(IconListPage);

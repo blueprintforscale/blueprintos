@@ -16,7 +16,9 @@ const schema = z.object({
 	label: z.string().optional()
 });
 
-const defaultValues = {
+type FormType = z.infer<typeof schema>;
+
+const defaultValues: FormType = {
 	country: '',
 	phoneNumber: '',
 	label: ''
@@ -36,7 +38,7 @@ type PhoneNumberInputProps = {
 function PhoneNumberInput(props: PhoneNumberInputProps) {
 	const { value, hideRemove = false, onChange, onRemove } = props;
 
-	const { control, formState, handleSubmit, reset } = useForm<ContactPhoneNumber>({
+	const { control, formState, handleSubmit, reset } = useForm<FormType>({
 		mode: 'all',
 		defaultValues,
 		resolver: zodResolver(schema)
@@ -48,8 +50,13 @@ function PhoneNumberInput(props: PhoneNumberInputProps) {
 		reset(value);
 	}, [reset, value]);
 
-	function onSubmit(data: ContactPhoneNumber) {
-		onChange(data);
+	function onSubmit(data: FormType) {
+		const { country, phoneNumber, label } = data;
+		onChange({
+			country,
+			phoneNumber,
+			label
+		});
 	}
 
 	return (

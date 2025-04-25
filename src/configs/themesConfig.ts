@@ -27,7 +27,7 @@ export const themesConfig: FuseThemesType = {
 	default: {
 		palette: {
 			mode: 'light',
-			divider: 'rgba(214,214,214,0.7)',
+			divider: 'rgba(0, 0, 0, 0.12)',
 			text: {
 				primary: '#212121',
 				secondary: '#5F6368'
@@ -63,7 +63,7 @@ export const themesConfig: FuseThemesType = {
 	defaultDark: {
 		palette: {
 			mode: 'dark',
-			divider: 'rgba(79,79,79,0.5)',
+			divider: 'rgba(255, 255, 255, 0.12)',
 			text: {
 				primary: '#E0E0E0',
 				secondary: '#B0BEC5'

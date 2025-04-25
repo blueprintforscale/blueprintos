@@ -7,6 +7,7 @@ import MessengerAppContext from '@/app/(control-panel)/apps/messenger/contexts/M
 
 type MainSidebarMoreMenuProps = {
 	className?: string;
+	contactId?: string;
 };
 
 /**
@@ -15,7 +16,7 @@ type MainSidebarMoreMenuProps = {
 function MainSidebarMoreMenu(props: MainSidebarMoreMenuProps) {
 	const { setContactSidebarOpen } = useContext(MessengerAppContext);
 
-	const { className } = props;
+	const { className, contactId } = props;
 
 	const [moreMenuEl, setMoreMenuEl] = useState<HTMLElement | null>(null);
 
@@ -43,7 +44,7 @@ function MainSidebarMoreMenu(props: MainSidebarMoreMenuProps) {
 			>
 				<MenuItem
 					onClick={() => {
-						setContactSidebarOpen(null);
+						setContactSidebarOpen(contactId);
 						handleMoreMenuClose();
 					}}
 				>

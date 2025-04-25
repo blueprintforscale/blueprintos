@@ -1,6 +1,6 @@
 import FuseNavigation from '@fuse/core/FuseNavigation/FuseNavigation';
 import Typography from '@mui/material/Typography';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
@@ -10,21 +10,21 @@ import SettingsAppNavigation from './SettingsAppNavigation';
 const Root = styled('div')(({ theme }) => ({
 	'&  .navigation': {
 		padding: `${0}!important`,
-		borderTop: `1px solid ${theme.palette.divider}`
+		borderTop: `1px solid ${theme.vars.palette.divider}`
 	},
 	'&  .fuse-list-item': {
 		padding: '20px 32px',
 		margin: 0,
 		borderRadius: 0,
 		alignItems: 'start',
-		borderBottom: `1px solid ${theme.palette.divider}`,
+		borderBottom: `1px solid ${theme.vars.palette.divider}`,
 		'&.active': {
-			backgroundColor: `${alpha(theme.palette.primary.main, 0.1)}!important`,
+			backgroundColor: `rgba(${theme.vars.palette.primary.mainChannel} / 0.1)`,
 			'&  .fuse-list-item-icon': {
-				color: `${theme.palette.primary.main}!important`
+				color: `${theme.vars.palette.primary.main}!important`
 			},
 			'&  .fuse-list-item-text-primary': {
-				color: `${theme.palette.primary.main}!important`
+				color: `${theme.vars.palette.primary.main}!important`
 			}
 		}
 	},

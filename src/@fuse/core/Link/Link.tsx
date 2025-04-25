@@ -10,6 +10,8 @@ type CustomLinkProps = Omit<NextLinkProps, 'href'> & {
 	className?: string;
 	role?: string;
 	ref?: React.RefObject<HTMLAnchorElement>;
+	style?: React.CSSProperties;
+	onKeyDown?: (event: React.KeyboardEvent<HTMLAnchorElement>) => void;
 };
 
 function Link(props: CustomLinkProps) {

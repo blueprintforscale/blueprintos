@@ -2,7 +2,7 @@ import Drawer from '@mui/material/Drawer';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import clsx from 'clsx';
 import { ReactNode, useCallback, useEffect, useImperativeHandle, useState } from 'react';
-import { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer/SwipeableDrawer';
+import { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer';
 import FusePageSimpleSidebarContent from './FusePageSimpleSidebarContent';
 import useThemeMediaQuery from '../../hooks/useThemeMediaQuery';
 
@@ -64,9 +64,11 @@ function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
 						keepMounted: true // Better open performance on mobile.
 					}}
 					// container={rootRef.current}
-					BackdropProps={{
-						classes: {
-							root: 'FusePageSimple-backdrop'
+					slotProps={{
+						backdrop: {
+							classes: {
+								root: 'FusePageSimple-backdrop'
+							}
 						}
 					}}
 					sx={{ position: 'absolute', '& .MuiPaper-root': { width: `${props.width}px` } }}

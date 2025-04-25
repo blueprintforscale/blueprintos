@@ -45,7 +45,7 @@ const Root = styled('div')(({ theme }) => ({
 			duration: theme.transitions.duration.short
 		}),
 		'&:focus': {
-			backgroundColor: theme.palette.background.paper
+			backgroundColor: theme.vars.palette.background.paper
 		}
 	}
 }));
@@ -70,16 +70,18 @@ function renderInputComponent(props: RenderInputComponentProps) {
 					<TextField
 						fullWidth
 						autoComplete="off"
-						InputProps={{
-							name: 'auto-complete-search',
-							role: 'search',
-							inputRef: (node: HTMLInputElement) => {
-								ref?.(node);
-								inputRef(node);
-							},
-							classes: {
-								input: 'FuseSearch-input py-0 px-4 h-9 md:h-9 ltr:pr-9 rtl:pl-9',
-								notchedOutline: 'rounded-lg'
+						slotProps={{
+							input: {
+								name: 'auto-complete-search',
+								role: 'search',
+								inputRef: (node: HTMLInputElement) => {
+									ref?.(node);
+									inputRef(node);
+								},
+								classes: {
+									input: 'FuseSearch-input py-0 px-4 h-9 md:h-9 ltr:pr-9 rtl:pl-9',
+									notchedOutline: 'rounded-lg'
+								}
 							}
 						}}
 						variant="outlined"
@@ -97,14 +99,16 @@ function renderInputComponent(props: RenderInputComponentProps) {
 				// Standard
 				<TextField
 					fullWidth
-					InputProps={{
-						disableUnderline: true,
-						inputRef: (node: HTMLInputElement) => {
-							ref?.(node);
-							inputRef(node);
-						},
-						classes: {
-							input: 'FuseSearch-input py-0 px-4 h-9'
+					slotProps={{
+						input: {
+							disableUnderline: true,
+							inputRef: (node: HTMLInputElement) => {
+								ref?.(node);
+								inputRef(node);
+							},
+							classes: {
+								input: 'FuseSearch-input py-0 px-4 h-9'
+							}
 						}
 					}}
 					variant="standard"

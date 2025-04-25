@@ -16,7 +16,7 @@ type ExtendedListItemProps = NavLinkAdapterPropsType & {
 
 const StyledListItem = styled(ListItemButton)<ExtendedListItemProps>(({ theme }) => ({
 	'&.active': {
-		backgroundColor: theme.palette.background.default
+		backgroundColor: theme.vars.palette.background.default
 	}
 }));
 

@@ -14,13 +14,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Alert from '@mui/material/Alert';
 import { useEffect } from 'react';
-import {
-	SettingsPlanBilling,
-	useGetPlanBillingSettingsQuery,
-	useUpdatePlanBillingSettingsMutation
-} from '../SettingsApi';
-
-type FormType = SettingsPlanBilling;
+import { useGetPlanBillingSettingsQuery, useUpdatePlanBillingSettingsMutation } from '../SettingsApi';
 
 const plans = [
 	{
@@ -43,6 +37,22 @@ const plans = [
 	}
 ];
 
+/**
+ * Form Validation Schema
+ */
+const schema = z.object({
+	id: z.string(),
+	plan: z.string(),
+	cardHolder: z.string(),
+	cardNumber: z.string(),
+	cardExpiration: z.string(),
+	cardCVC: z.string(),
+	country: z.string(),
+	zip: z.string()
+});
+
+type FormType = z.infer<typeof schema>;
+
 const defaultValues: FormType = {
 	id: '',
 	plan: 'team',
@@ -53,19 +63,6 @@ const defaultValues: FormType = {
 	country: '',
 	zip: ''
 };
-
-/**
- * Form Validation Schema
- */
-const schema = z.object({
-	plan: z.enum(['basic', 'team', 'enterprise']),
-	cardHolder: z.string(),
-	cardNumber: z.string(),
-	cardExpiration: z.string(),
-	cardCVC: z.string(),
-	country: z.string(),
-	zip: z.string()
-});
 
 function PlanBillingTab() {
 	const { data: planBillingSettings } = useGetPlanBillingSettingsQuery();
@@ -87,7 +84,7 @@ function PlanBillingTab() {
 	 * Form Submit
 	 */
 	function onSubmit(formData: FormType) {
-		updatePlanBillingSettings(formData);
+		updatePlanBillingSettings({ ...formData, id: formData.id });
 	}
 
 	return (
@@ -113,7 +110,7 @@ function PlanBillingTab() {
 									<Paper
 										sx={(theme) => ({
 											'&.selected': {
-												border: `3px solid ${theme.palette.secondary.main}`
+												border: `3px solid ${theme.vars.palette.secondary.main}`
 											}
 										})}
 										className={clsx(
@@ -179,12 +176,14 @@ function PlanBillingTab() {
 									helperText={errors?.cardHolder?.message}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -204,12 +203,14 @@ function PlanBillingTab() {
 									helperText={errors?.cardNumber?.message}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:credit-card</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:credit-card</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -229,12 +230,14 @@ function PlanBillingTab() {
 									helperText={errors?.cardExpiration?.message}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:credit-card</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:credit-card</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -254,12 +257,14 @@ function PlanBillingTab() {
 									helperText={errors?.cardCVC?.message}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:lock-closed</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:lock-closed</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -279,12 +284,14 @@ function PlanBillingTab() {
 									helperText={errors?.country?.message}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:map</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:map</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}
@@ -304,12 +311,14 @@ function PlanBillingTab() {
 									helperText={errors?.zip?.message}
 									variant="outlined"
 									fullWidth
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position="start">
-												<FuseSvgIcon size={20}>heroicons-solid:hashtag</FuseSvgIcon>
-											</InputAdornment>
-										)
+									slotProps={{
+										input: {
+											startAdornment: (
+												<InputAdornment position="start">
+													<FuseSvgIcon size={20}>heroicons-solid:hashtag</FuseSvgIcon>
+												</InputAdornment>
+											)
+										}
 									}}
 								/>
 							)}

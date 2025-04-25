@@ -13,8 +13,8 @@ import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import Autocomplete from '@mui/material/Autocomplete/Autocomplete';
-import Checkbox from '@mui/material/Checkbox/Checkbox';
+import Autocomplete from '@mui/material/Autocomplete';
+import Checkbox from '@mui/material/Checkbox';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -29,16 +29,14 @@ import {
 	useGetContactsItemQuery,
 	useGetContactsTagsQuery,
 	useUpdateContactsItemMutation,
-	Contact,
 	Tag
 } from '../ContactsApi';
 import ContactModel from '../models/ContactModel';
+import { ContactEmailModel, ContactPhoneModel } from '../models/ContactModel';
 
 function BirtdayIcon() {
 	return <FuseSvgIcon size={20}>heroicons-solid:cake</FuseSvgIcon>;
 }
-
-type FormType = Contact;
 
 /**
  * Form Validation Schema
@@ -46,21 +44,22 @@ type FormType = Contact;
 
 // Zod schema for ContactEmail
 const ContactEmailSchema = z.object({
-	email: z.string().optional(),
-	type: z.string().optional()
+	email: z.string().min(1, { message: 'Email is required' }),
+	label: z.string().optional()
 });
 
 // Zod schema for ContactPhoneNumber
 const ContactPhoneNumberSchema = z.object({
-	number: z.string().optional(),
-	type: z.string().optional()
+	country: z.string().optional(),
+	phoneNumber: z.string().optional(),
+	label: z.string().optional()
 });
 
 const schema = z.object({
 	avatar: z.string().optional(),
 	background: z.string().optional(),
 	name: z.string().min(1, { message: 'Name is required' }),
-	emails: z.array(ContactEmailSchema).optional(),
+	emails: z.array(ContactEmailSchema),
 	phoneNumbers: z.array(ContactPhoneNumberSchema).optional(),
 	title: z.string().optional(),
 	company: z.string().optional(),
@@ -69,6 +68,8 @@ const schema = z.object({
 	notes: z.string().optional(),
 	tags: z.array(z.string()).optional()
 });
+
+type FormType = z.infer<typeof schema>;
 
 type ContactFormProps = {
 	isNew?: boolean;
@@ -117,14 +118,22 @@ function ContactForm(props: ContactFormProps) {
 	 * Form Submit
 	 */
 	const onSubmit = useCallback(() => {
+		// Prepare form data with properly transformed fields
+		const formData = {
+			...form,
+			emails: form.emails?.map((email) => ContactEmailModel(email)) || [],
+			phoneNumbers: form.phoneNumbers?.map((phone) => ContactPhoneModel(phone)) || []
+		};
+
 		if (isNew) {
-			createContact({ contact: form })
+			const contact = ContactModel(formData);
+			createContact({ contact })
 				.unwrap()
 				.then((action) => {
 					navigate(`/apps/contacts/${action.id}`);
 				});
 		} else {
-			updateContact({ id: contact.id, ...form });
+			updateContact({ id: contact.id, name: formData.name, ...formData });
 		}
 		// eslint-disable-next-line
 	}, [form]);
@@ -283,12 +292,14 @@ function ContactForm(props: ContactFormProps) {
 							variant="outlined"
 							required
 							fullWidth
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">
+											<FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}
@@ -343,12 +354,14 @@ function ContactForm(props: ContactFormProps) {
 							helperText={errors?.title?.message}
 							variant="outlined"
 							fullWidth
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:briefcase</FuseSvgIcon>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">
+											<FuseSvgIcon size={20}>heroicons-solid:briefcase</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}
@@ -368,12 +381,14 @@ function ContactForm(props: ContactFormProps) {
 							helperText={errors?.company?.message}
 							variant="outlined"
 							fullWidth
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:building-office-2</FuseSvgIcon>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">
+											<FuseSvgIcon size={20}>heroicons-solid:building-office-2</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}
@@ -385,7 +400,7 @@ function ContactForm(props: ContactFormProps) {
 						<ContactEmailSelector
 							className="mt-8"
 							{...field}
-							value={field?.value}
+							value={field.value.map((email) => ContactEmailModel(email))}
 							onChange={(val) => field.onChange(val)}
 						/>
 					)}
@@ -400,7 +415,7 @@ function ContactForm(props: ContactFormProps) {
 							{...field}
 							error={!!errors.phoneNumbers}
 							helperText={errors?.phoneNumbers?.message}
-							value={field.value}
+							value={field.value.map((phone) => ContactPhoneModel(phone))}
 							onChange={(val) => field.onChange(val)}
 						/>
 					)}
@@ -420,12 +435,14 @@ function ContactForm(props: ContactFormProps) {
 							helperText={errors?.address?.message}
 							variant="outlined"
 							fullWidth
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position="start">
-										<FuseSvgIcon size={20}>heroicons-solid:map-pin</FuseSvgIcon>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									startAdornment: (
+										<InputAdornment position="start">
+											<FuseSvgIcon size={20}>heroicons-solid:map-pin</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}
@@ -479,16 +496,18 @@ function ContactForm(props: ContactFormProps) {
 							multiline
 							minRows={5}
 							maxRows={10}
-							InputProps={{
-								className: 'max-h-min h-min items-start',
-								startAdornment: (
-									<InputAdornment
-										className="mt-4"
-										position="start"
-									>
-										<FuseSvgIcon size={20}>heroicons-solid:bars-3-bottom-left</FuseSvgIcon>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									className: 'max-h-min h-min items-start',
+									startAdornment: (
+										<InputAdornment
+											className="mt-4"
+											position="start"
+										>
+											<FuseSvgIcon size={20}>heroicons-solid:bars-3-bottom-left</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}

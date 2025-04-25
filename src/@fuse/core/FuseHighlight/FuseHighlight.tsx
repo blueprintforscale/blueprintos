@@ -3,7 +3,7 @@
 import * as Prism from 'prismjs';
 import { ElementType, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import './prism-languages';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
@@ -71,9 +71,9 @@ function FuseHighlight(props: FuseHighlightProps) {
 						className="absolute top-0 right-0 m-1.5 z-10 rounded-sm p-0 text-md min-h-0 h-auto w-auto min-w-0 px-2 py-1"
 						classes={{ startIcon: 'mr-1' }}
 						sx={{
-							backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.6),
+							backgroundColor: (theme) => `rgba(${theme.vars.palette.secondary.mainChannel} / 0.6)`,
 							'&:hover, &:focus': {
-								backgroundColor: (theme) => alpha(theme.palette.secondary.main, 1)
+								backgroundColor: (theme) => `rgba(${theme.vars.palette.secondary.mainChannel} / 1)`
 							}
 						}}
 						startIcon={<FuseSvgIcon size={16}>heroicons-outline:clipboard</FuseSvgIcon>}

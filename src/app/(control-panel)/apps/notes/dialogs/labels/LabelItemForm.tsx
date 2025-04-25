@@ -16,6 +16,7 @@ import {
 	useGetNotesLabelsQuery,
 	useUpdateNotesLabelMutation
 } from '../../NotesApi';
+import LabelModel from '../../models/LabelModel';
 
 type LabelFormProps = {
 	label: NotesLabel;
@@ -50,7 +51,9 @@ function NewLabelForm(props: LabelFormProps) {
 			)
 	});
 
-	const { control, formState, reset, watch } = useForm<NotesLabel>({
+	type FormType = z.infer<typeof schema>;
+
+	const { control, formState, reset, watch } = useForm<FormType>({
 		mode: 'onChange',
 		defaultValues: label,
 		resolver: zodResolver(schema)
@@ -66,8 +69,8 @@ function NewLabelForm(props: LabelFormProps) {
 	/**
 	 * On Change Handler
 	 */
-	const handleOnChange = useDebounce((_label: NotesLabel) => {
-		updateLabel(_label);
+	const handleOnChange = useDebounce((_label: FormType) => {
+		updateLabel(LabelModel({ ..._label, id: label.id }));
 	}, 600);
 
 	/**
@@ -100,29 +103,31 @@ function NewLabelForm(props: LabelFormProps) {
 						helperText={errors?.title?.message}
 						placeholder="Create new label"
 						variant="outlined"
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<FuseSvgIcon
-										color="action"
-										size={16}
-									>
-										heroicons-outline:tag
-									</FuseSvgIcon>
-								</InputAdornment>
-							),
-							endAdornment: (
-								<InputAdornment position="end">
-									<IconButton
-										onClick={handleOnRemove}
-										className="p-0"
-										aria-label="Delete"
-										size="small"
-									>
-										<FuseSvgIcon color="action">heroicons-outline:trash</FuseSvgIcon>
-									</IconButton>
-								</InputAdornment>
-							)
+						slotProps={{
+							input: {
+								startAdornment: (
+									<InputAdornment position="start">
+										<FuseSvgIcon
+											color="action"
+											size={16}
+										>
+											heroicons-outline:tag
+										</FuseSvgIcon>
+									</InputAdornment>
+								),
+								endAdornment: (
+									<InputAdornment position="end">
+										<IconButton
+											onClick={handleOnRemove}
+											className="p-0"
+											aria-label="Delete"
+											size="small"
+										>
+											<FuseSvgIcon color="action">heroicons-outline:trash</FuseSvgIcon>
+										</IconButton>
+									</InputAdornment>
+								)
+							}
 						}}
 					/>
 				)}

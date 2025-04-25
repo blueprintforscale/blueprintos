@@ -13,7 +13,7 @@ const center = {
 function SimpleMap() {
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
-		googleMapsApiKey: import.meta.env.VITE_MAP_KEY
+		googleMapsApiKey: process.env.NEXT_PUBLIC_MAP_KEY
 	});
 
 	return isLoaded ? (

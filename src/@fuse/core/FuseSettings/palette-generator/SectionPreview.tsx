@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Box from '@mui/material/Box';
-import { alpha, lighten } from '@mui/material/styles';
+import { lighten } from '@mui/material/styles';
 
 /**
  * Props for SectionPreview component
@@ -21,7 +21,7 @@ function SectionPreview(props: SectionPreviewProps) {
 				sx={[
 					section === 'navbar'
 						? {
-								backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.3)
+								backgroundColor: (theme) => `rgba(${theme.vars.palette.secondary.mainChannel} / 0.3)`
 							}
 						: {
 								backgroundColor: (theme) =>
@@ -33,12 +33,13 @@ function SectionPreview(props: SectionPreviewProps) {
 					section === 'navbar'
 						? {
 								'& > div': {
-									backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.3)
+									backgroundColor: (theme) =>
+										`rgba(${theme.vars.palette.secondary.mainChannel} / 0.3)`
 								}
 							}
 						: {
 								'& > div': {
-									backgroundColor: (theme) => theme.palette.divider
+									backgroundColor: (theme) => theme.vars.palette.divider
 								}
 							}
 				]}
@@ -55,7 +56,8 @@ function SectionPreview(props: SectionPreviewProps) {
 					sx={[
 						section === 'toolbar'
 							? {
-									backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.3)
+									backgroundColor: (theme) =>
+										`rgba(${theme.vars.palette.secondary.mainChannel} / 0.3)`
 								}
 							: {
 									backgroundColor: (theme) =>
@@ -67,12 +69,13 @@ function SectionPreview(props: SectionPreviewProps) {
 						section === 'toolbar'
 							? {
 									'& > div': {
-										backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.3)
+										backgroundColor: (theme) =>
+											`rgba(${theme.vars.palette.secondary.mainChannel} / 0.3)`
 									}
 								}
 							: {
 									'& > div': {
-										backgroundColor: (theme) => theme.palette.divider
+										backgroundColor: (theme) => theme.vars.palette.divider
 									}
 								}
 					]}
@@ -86,7 +89,8 @@ function SectionPreview(props: SectionPreviewProps) {
 					sx={[
 						section === 'main'
 							? {
-									backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.3)
+									backgroundColor: (theme) =>
+										`rgba(${theme.vars.palette.secondary.mainChannel} / 0.3)`
 								}
 							: {
 									backgroundColor: (theme) =>
@@ -102,7 +106,8 @@ function SectionPreview(props: SectionPreviewProps) {
 					sx={[
 						section === 'footer'
 							? {
-									backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.3)
+									backgroundColor: (theme) =>
+										`rgba(${theme.vars.palette.secondary.mainChannel} / 0.3)`
 								}
 							: {
 									backgroundColor: (theme) =>
@@ -114,12 +119,12 @@ function SectionPreview(props: SectionPreviewProps) {
 						section === 'footer'
 							? {
 									'& > div': {
-										backgroundColor: (theme) => alpha(theme.palette.secondary.main, 0.3)
+										backgroundColor: (theme) => `rgba(${theme.palette.secondary.mainChannel} / 0.3)`
 									}
 								}
 							: {
 									'& > div': {
-										backgroundColor: (theme) => theme.palette.divider
+										backgroundColor: (theme) => theme.vars.palette.divider
 									}
 								}
 					]}

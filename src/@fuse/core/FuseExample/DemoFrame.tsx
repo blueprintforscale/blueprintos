@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import FramedDemo from './FramedDemo';
 
 const Frame = styled('iframe')(({ theme }) => ({
-	backgroundColor: theme.palette.background.default,
+	backgroundColor: theme.vars.palette.background.default,
 	flexGrow: 1,
 	height: 400,
 	border: 0,

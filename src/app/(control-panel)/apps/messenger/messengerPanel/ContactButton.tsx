@@ -23,7 +23,7 @@ const Root = styled(Tooltip)<{ active: number }>(({ theme }) => ({
 					width: 4,
 					borderTopLeftRadius: 4,
 					borderBottomLeftRadius: 4,
-					backgroundColor: theme.palette.primary.main
+					backgroundColor: theme.vars.palette.primary.main
 				}
 			}
 		}
@@ -43,8 +43,8 @@ const StyledUreadBadge = styled('div')(({ theme }) => ({
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'center',
-	backgroundColor: theme.palette.secondary.main,
-	color: theme.palette.secondary.contrastText,
+	backgroundColor: theme.vars.palette.secondary.main,
+	color: theme.vars.palette.secondary.contrastText,
 	boxShadow: '0 2px 2px 0 rgba(0, 0, 0, 0.35)',
 	zIndex: 10
 }));

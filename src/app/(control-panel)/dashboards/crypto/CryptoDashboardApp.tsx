@@ -12,15 +12,15 @@ import { useGetCryptoDashboardWidgetsQuery } from './CryptoDashboardApi';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-header': {
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.vars.palette.background.paper,
 		borderBottomWidth: 1,
-		borderBottomColor: theme.palette.divider
+		borderBottomColor: theme.vars.palette.divider
 	},
 	'& .FusePageSimple-toolbar': {},
 	'& .FusePageSimple-content': {},
 	'& .FusePageSimple-sidebarHeader': {},
 	'& .FusePageSimple-sidebarContent': {
-		backgroundColor: theme.palette.background.default
+		backgroundColor: theme.vars.palette.background.default
 	}
 }));
 

@@ -22,6 +22,28 @@ export type ChangelogItemType = {
  */
 const changelogData: ChangelogItemType[] = [
 	{
+		version: '15.0.0',
+		date: '2025-04-25',
+		newChanges: [
+			'React updated to v19.1.0',
+			'MUI updated to v7.0.2',
+			'Tailwindcss updated to v4.1.4',
+			'Redux Toolkit updated to v2.7.0',
+			'NextJs updated to v15.3.1',
+			'React Hook Form updated to v7.56.0',
+			'Material React Table updated to v3.2.1',
+			'React Hook Form Validation types refactored',
+			'All dependency packages updated.'
+		],
+		breakingChanges: [
+			'Rich text editor react-draft-wysiwyg removed, replaced with @tiptap/react.',
+			"react-masonry-css removed, replaced with mui's masonry component.",
+			'react-swipeable-views removed.',
+			'draft-js removed.',
+			'convert next.config.mjs to next.config.ts'
+		]
+	},
+	{
 		version: '14.0.4',
 		date: '2025-03-23',
 		fixedChanges: ['Page layout components and demos updated']

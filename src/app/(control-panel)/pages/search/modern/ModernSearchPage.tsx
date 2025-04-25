@@ -49,8 +49,10 @@ function ModernSearchPage() {
 							placeholder="Search..."
 							disableUnderline
 							fullWidth
-							inputProps={{
-								'aria-label': 'Search'
+							slotProps={{
+								input: {
+									'aria-label': 'Search'
+								}
 							}}
 						/>
 						<FuseSvgIcon

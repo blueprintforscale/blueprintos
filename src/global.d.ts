@@ -31,7 +31,12 @@ interface HotModule {
 // eslint-disable-next-line @next/next/no-assign-module-variable
 declare const module: HotModule;
 
-declare module '*?raw' {
-	const content: string;
-	export default content;
+import type {} from '@mui/material/themeCssVarsAugmentation';
+
+// Raw import declarations
+declare global {
+	declare module '*?raw' {
+		const content: string;
+		export default content;
+	}
 }

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -19,6 +21,8 @@ import InputWithIconComponent from '../../components/text-fields/InputWithIcon';
 import InputWithIconRaw from '../../components/text-fields/InputWithIcon.tsx?raw';
 import InputAdornmentsComponent from '../../components/text-fields/InputAdornments';
 import InputAdornmentsRaw from '../../components/text-fields/InputAdornments.tsx?raw';
+import InputSuffixShrinkComponent from '../../components/text-fields/InputSuffixShrink';
+import InputSuffixShrinkRaw from '../../components/text-fields/InputSuffixShrink.tsx?raw';
 import TextFieldSizesComponent from '../../components/text-fields/TextFieldSizes';
 import TextFieldSizesRaw from '../../components/text-fields/TextFieldSizes.tsx?raw';
 import TextFieldHiddenLabelComponent from '../../components/text-fields/TextFieldHiddenLabel';
@@ -149,6 +153,59 @@ function TextFieldsDoc(props) {
 				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
+				Controlling the HTML input
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				Use <code>slotProps.htmlInput</code> to pass attributes to the underlying <code>{`<input>`}</code>{' '}
+				element.
+			</Typography>
+
+			<FuseHighlight
+				component="pre"
+				className="language-jsx"
+			>
+				{` 
+<TextField slotProps={{ htmlInput: { 'data-testid': '…' } }} />
+`}
+			</FuseHighlight>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				The rendered HTML input will look like this:
+			</Typography>
+
+			<FuseHighlight
+				component="pre"
+				className="language-html"
+			>
+				{` 
+<input
+  aria-invalid="false"
+  className="MuiInputBase-input MuiOutlinedInput-input"
+  type="text"
+  data-testid="…"
+/>
+`}
+			</FuseHighlight>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				:::warning
+				<code>slotProps.htmlInput</code> is not the same as <code>slotProps.input</code>.
+				<code>slotProps.input</code> refers to the React <code>{`<Input />`}</code> component that&#39;s
+				rendered based on the specified variant prop.
+				<code>slotProps.htmlInput</code> refers to the HTML <code>{`<input>`}</code> element rendered within
+				that Input component, regardless of the variant. :::
+			</Typography>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
 				Validation
 			</Typography>
 			<Typography
@@ -181,7 +238,7 @@ function TextFieldsDoc(props) {
 				component="div"
 			>
 				The <code>multiline</code> prop transforms the Text Field into a{' '}
-				<a href="/base-ui/react-textarea-autosize/">Base UI Textarea Autosize</a> element. Unless the{' '}
+				<a href="/base-ui/react-textarea-autosize/">MUI Base Textarea Autosize</a> element. Unless the{' '}
 				<code>rows</code> prop is set, the height of the text field dynamically matches its content. You can use
 				the <code>minRows</code> and <code>maxRows</code> props to bound it.
 			</Typography>
@@ -269,6 +326,32 @@ function TextFieldsDoc(props) {
 					iframe={false}
 					component={InputAdornmentsComponent}
 					raw={InputAdornmentsRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-base mt-3 mb-2.5"
+				component="h4"
+			>
+				Customizing adornments
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				You can apply custom styles to adornments, and trigger changes to one based on attributes from another.
+				For example, the demo below uses the label&#39;s <code>[data-shrink=true]</code> attribute to make the
+				suffix visible (via opacity) when the label is in its shrunken state.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="InputSuffixShrink.js"
+					className="my-4"
+					iframe={false}
+					component={InputSuffixShrinkComponent}
+					raw={InputSuffixShrinkRaw}
 				/>
 			</Typography>
 			<Typography
@@ -452,8 +535,8 @@ function TextFieldsDoc(props) {
 				You might also have noticed that some native HTML input properties are missing from the{' '}
 				<code>TextField</code> component. This is on purpose. The component takes care of the most used
 				properties. Then, it&#39;s up to the user to use the underlying component shown in the following demo.
-				Still, you can use <code>inputProps</code> (and <code>InputProps</code>, <code>InputLabelProps</code>{' '}
-				properties) if you want to avoid some boilerplate.
+				Still, you can use <code>slotProps.htmlInput</code> (and <code>slotProps.input</code>,{' '}
+				<code>slotProps.inputLabel</code> properties) if you want to avoid some boilerplate.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -899,7 +982,7 @@ export default function App() {
 				className="text-base mb-8"
 				component="div"
 			>
-				If you need a text field with number validation, you can use Base UI&#39;s{' '}
+				If you need a text field with number validation, you can use MUI Base&#39;s{' '}
 				<a href="/base-ui/react-number-input/">Number Input</a> instead.
 			</Typography>
 			<Typography

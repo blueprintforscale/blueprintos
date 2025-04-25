@@ -5,7 +5,7 @@ import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText/ListItemText';
+import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -48,22 +48,24 @@ function TeamTab() {
 				className="w-full mb-6"
 				label="Add team member"
 				placeholder="Enter email"
-				InputLabelProps={{
-					shrink: true
-				}}
-				InputProps={{
-					startAdornment: (
-						<InputAdornment position="start">
-							<FuseSvgIcon size={20}>heroicons-outline:user</FuseSvgIcon>
-						</InputAdornment>
-					),
-					endAdornment: (
-						<InputAdornment position="end">
-							<IconButton>
-								<FuseSvgIcon size={20}>heroicons-outline:plus-circle</FuseSvgIcon>
-							</IconButton>
-						</InputAdornment>
-					)
+				slotProps={{
+					input: {
+						startAdornment: (
+							<InputAdornment position="start">
+								<FuseSvgIcon size={20}>heroicons-outline:user</FuseSvgIcon>
+							</InputAdornment>
+						),
+						endAdornment: (
+							<InputAdornment position="end">
+								<IconButton>
+									<FuseSvgIcon size={20}>heroicons-outline:plus-circle</FuseSvgIcon>
+								</IconButton>
+							</InputAdornment>
+						)
+					},
+					inputLabel: {
+						shrink: true
+					}
 				}}
 			/>
 			<Divider />

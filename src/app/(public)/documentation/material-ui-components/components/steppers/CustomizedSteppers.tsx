@@ -32,7 +32,7 @@ const QontoConnector = styled(StepConnector)(({ theme }) => ({
     borderTopWidth: 3,
     borderRadius: 1,
     ...theme.applyStyles('dark', {
-      borderColor: theme.palette.grey[800],
+      borderColor: theme.vars.palette.grey[800],
     }),
   },
 }));
@@ -55,7 +55,7 @@ const QontoStepIconRoot = styled('div')<{ ownerState: { active?: boolean } }>(
       backgroundColor: 'currentColor',
     },
     ...theme.applyStyles('dark', {
-      color: theme.palette.grey[700],
+      color: theme.vars.palette.grey[700],
     }),
     variants: [
       {
@@ -104,7 +104,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     backgroundColor: '#eaeaf0',
     borderRadius: 1,
     ...theme.applyStyles('dark', {
-      backgroundColor: theme.palette.grey[800],
+      backgroundColor: theme.vars.palette.grey[800],
     }),
   },
 }));
@@ -122,7 +122,7 @@ const ColorlibStepIconRoot = styled('div')<{
   justifyContent: 'center',
   alignItems: 'center',
   ...theme.applyStyles('dark', {
-    backgroundColor: theme.palette.grey[700],
+    backgroundColor: theme.vars.palette.grey[700],
   }),
   variants: [
     {

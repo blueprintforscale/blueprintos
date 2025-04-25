@@ -36,7 +36,7 @@ function ModernPricingCard(props: ModernPricingCardProps) {
 			sx={[
 				isPopular &&
 					((theme) => ({
-						border: `1px solid ${theme.palette.secondary.main}!important`
+						border: `1px solid ${theme.vars.palette.secondary.main}!important`
 					}))
 			]}
 		>

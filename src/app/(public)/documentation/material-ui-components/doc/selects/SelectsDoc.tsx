@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -129,6 +131,13 @@ function SelectsDoc(props) {
 				<a href="/material-ui/api/input/">Input</a>, or <a href="/material-ui/api/filled-input/">FilledInput</a>
 				, depending on the variant selected. It shares the same styles and many of the same props. Refer to the
 				respective component&#39;s API page for details.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				:::warning Unlike input components, the <code>placeholder</code> prop is not available in Select. To add
+				a placeholder, refer to the <a href="#placeholder">placeholder</a> section below. :::
 			</Typography>
 			<Typography
 				className="text-lg mt-5 mb-2.5 font-bold"

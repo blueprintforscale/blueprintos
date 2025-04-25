@@ -12,7 +12,7 @@ export { lightTheme, darkTheme };
 
 let styleNode: HTMLStyleElement | undefined;
 
-if (process.browser) {
+if (typeof window !== 'undefined') {
 	styleNode = document.createElement('style');
 	styleNode.setAttribute('data-prism', 'true');
 

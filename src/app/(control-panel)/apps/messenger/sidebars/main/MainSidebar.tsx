@@ -74,8 +74,10 @@ function MainSidebar() {
 								disableUnderline
 								fullWidth
 								value={searchText}
-								inputProps={{
-									'aria-label': 'Search'
+								slotProps={{
+									input: {
+										'aria-label': 'Search'
+									}
 								}}
 								onChange={handleSearchText}
 							/>

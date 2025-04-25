@@ -32,6 +32,7 @@ import {
 	useUpdateNotesItemMutation
 } from '../../NotesApi';
 import { selectNoteDialogId } from '../../notesAppSlice';
+import NoteListItemModel from '../../models/NoteListItemModel';
 
 /**
  * Form Validation Schema
@@ -77,6 +78,8 @@ const schema = z.object({
 		)
 });
 
+type FormType = z.infer<typeof schema>;
+
 type NoteFormProps = WithRouterProps & {
 	variant?: 'new' | 'edit';
 	note?: NotesNote;
@@ -100,7 +103,7 @@ function NoteForm(props: NoteFormProps) {
 
 	const note = useMemo(() => _.find(notes, { id: noteId }), [noteId, notes]);
 
-	const { formState, handleSubmit, getValues, watch, reset, setValue, control } = useForm<NotesNote>({
+	const { formState, handleSubmit, getValues, watch, reset, setValue, control } = useForm<FormType>({
 		mode: 'onChange',
 		resolver: zodResolver(schema)
 	});
@@ -134,16 +137,16 @@ function NoteForm(props: NoteFormProps) {
 	/**
 	 * Create New Note
 	 */
-	function handleNewNote(data: NotesNote) {
-		createNote(data);
+	function handleNewNote(data: FormType) {
+		createNote(NoteModel({ ...data, tasks: data.tasks?.map((task) => NoteListItemModel(task)) }));
 		resetForm();
 	}
 
 	/**
 	 * On Change Handler
 	 */
-	const handleOnChange = useDebounce((_note: NotesNote) => {
-		updateNote(_note);
+	const handleOnChange = useDebounce((_note: FormType) => {
+		updateNote(NoteModel({ ..._note, tasks: _note.tasks?.map((task) => NoteListItemModel(task)) }));
 	}, 600);
 
 	/**
@@ -152,7 +155,10 @@ function NoteForm(props: NoteFormProps) {
 	useEffect(() => {
 		if (variant === 'edit' && !_.isEmpty(dirtyFields)) {
 			if (!_.isEqual(note, watchedNoteForm)) {
-				handleOnChange(watchedNoteForm);
+				handleOnChange({
+					...watchedNoteForm,
+					tasks: watchedNoteForm.tasks?.map((task) => NoteListItemModel(task))
+				});
 			}
 		}
 	}, [watchedNoteForm, note, variant, handleOnChange, dirtyFields]);
@@ -250,7 +256,7 @@ function NoteForm(props: NoteFormProps) {
 							return (
 								<div className="px-1">
 									<NoteFormList
-										tasks={value || []}
+										tasks={value?.map((task) => NoteListItemModel(task)) || []}
 										onCheckListChange={(val) => onChange(val)}
 									/>
 								</div>
@@ -352,7 +358,10 @@ function NoteForm(props: NoteFormProps) {
 					>
 						<div>
 							<NoteFormLabelMenu
-								note={watchedNoteForm}
+								note={NoteModel({
+									...watchedNoteForm,
+									tasks: watchedNoteForm.tasks?.map((task) => NoteListItemModel(task))
+								})}
 								onChange={(labels: string[]) => setValue('labels', labels)}
 							/>
 						</div>

@@ -17,7 +17,6 @@ import { closeEditEventDialog, closeNewEventDialog, selectEventDialog } from '..
 import EventLabelSelect, { EventLabelSelectProps } from '../../EventLabelSelect';
 import EventModel from '../../models/EventModel';
 import {
-	Event,
 	useCreateCalendarEventMutation,
 	useDeleteCalendarEventMutation,
 	useGetCalendarLabelsQuery,
@@ -43,6 +42,8 @@ const schema = z.object({
 		.optional()
 });
 
+type FormType = z.infer<typeof schema>;
+
 /**
  * The event dialog.
  */
@@ -55,7 +56,7 @@ function EventDialog() {
 	const [updateEvent] = useUpdateCalendarEventMutation();
 	const [deleteEvent] = useDeleteCalendarEventMutation();
 
-	const { reset, formState, watch, control, getValues } = useForm<Event>({
+	const { reset, formState, watch, control, getValues } = useForm<FormType>({
 		defaultValues,
 		mode: 'onChange',
 		resolver: zodResolver(schema)
@@ -121,7 +122,12 @@ function EventDialog() {
 		if (eventDialog.type === 'new') {
 			createEvent({ Event: data });
 		} else {
-			updateEvent({ ...eventDialog.data, ...data });
+			// Ensure eventDialog.data exists for update
+			if (eventDialog?.data) {
+				updateEvent({ ...eventDialog.data, ...data });
+			} else {
+				console.error('Attempted to update event without existing data');
+			}
 		}
 
 		closeComposeDialog();

@@ -37,8 +37,14 @@ function ReactHookFormDoc() {
 				Performant, flexible and extensible forms with easy to use validation.
 			</Typography>
 
-			<hr />
+			<hr className="not-prose" />
 
+			<Typography
+				className="text-5xl mt-8 mb-2"
+				component="h2"
+			>
+				Example Usages
+			</Typography>
 			<Typography
 				className="text-lg mt-8 mb-4"
 				component="h4"
@@ -56,7 +62,7 @@ function ReactHookFormDoc() {
 				className="text-5xl mt-8 mb-2"
 				component="h2"
 			>
-				Examples
+				Demos
 			</Typography>
 
 			<ul>

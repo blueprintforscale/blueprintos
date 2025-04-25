@@ -9,18 +9,16 @@ import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
 import themeOptions from 'src/configs/themeOptions';
 import { FuseThemeOption } from '@fuse/core/FuseThemeSelector/ThemePreview';
-import useUser from '@auth/useUser';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
-import { useAppDispatch } from '@/store/hooks';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
 		position: 'fixed',
 		width: 380,
 		maxWidth: '90vw',
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.vars.palette.background.paper,
 		top: 0,
 		height: '100%',
 		minHeight: '100%',
@@ -66,8 +64,8 @@ type ThemesPanelProps = {
 function ThemesPanel(props: ThemesPanelProps) {
 	const { schemesHandlers, onClose, open } = props;
 	const { setSettings } = useFuseSettings();
-	const { isGuest, updateUserSettings } = useUser();
-	const dispatch = useAppDispatch();
+	// const { isGuest, updateUserSettings } = useUser();
+	// const dispatch = useAppDispatch();
 
 	async function handleThemeSelect(_theme: FuseThemeOption) {
 		const _newSettings = setSettings({ theme: { ..._theme?.section } } as Partial<FuseSettingsConfigType>);
@@ -93,7 +91,11 @@ function ThemesPanel(props: ThemesPanelProps) {
 			aria-describedby="schemes"
 			open={open}
 			onClose={onClose}
-			BackdropProps={{ invisible: true }}
+			slotProps={{
+				backdrop: {
+					invisible: true
+				}
+			}}
 			classes={{
 				paper: 'shadow-lg'
 			}}

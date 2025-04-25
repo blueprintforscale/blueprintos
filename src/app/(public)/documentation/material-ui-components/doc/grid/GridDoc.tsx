@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
@@ -21,16 +23,22 @@ import AutoGridComponent from '../../components/grid/AutoGrid';
 import AutoGridRaw from '../../components/grid/AutoGrid.tsx?raw';
 import VariableWidthGridComponent from '../../components/grid/VariableWidthGrid';
 import VariableWidthGridRaw from '../../components/grid/VariableWidthGrid.tsx?raw';
-import ComplexGridComponent from '../../components/grid/ComplexGrid';
-import ComplexGridRaw from '../../components/grid/ComplexGrid.tsx?raw';
 import NestedGridComponent from '../../components/grid/NestedGrid';
 import NestedGridRaw from '../../components/grid/NestedGrid.tsx?raw';
+import NestedGridColumnsComponent from '../../components/grid/NestedGridColumns';
+import NestedGridColumnsRaw from '../../components/grid/NestedGridColumns.tsx?raw';
 import ColumnsGridComponent from '../../components/grid/ColumnsGrid';
 import ColumnsGridRaw from '../../components/grid/ColumnsGrid.tsx?raw';
-import AutoGridNoWrapComponent from '../../components/grid/AutoGridNoWrap';
-import AutoGridNoWrapRaw from '../../components/grid/AutoGridNoWrap.tsx?raw';
-import CSSGridComponent from '../../components/grid/CSSGrid';
-import CSSGridRaw from '../../components/grid/CSSGrid.tsx?raw';
+import OffsetGridComponent from '../../components/grid/OffsetGrid';
+import OffsetGridRaw from '../../components/grid/OffsetGrid.tsx?raw';
+import CenteredElementGridComponent from '../../components/grid/CenteredElementGrid';
+import CenteredElementGridRaw from '../../components/grid/CenteredElementGrid.tsx?raw';
+import FullBorderedGridComponent from '../../components/grid/FullBorderedGrid';
+import FullBorderedGridRaw from '../../components/grid/FullBorderedGrid.tsx?raw';
+import HalfBorderedGridComponent from '../../components/grid/HalfBorderedGrid';
+import HalfBorderedGridRaw from '../../components/grid/HalfBorderedGrid.tsx?raw';
+import ColumnLayoutInsideGridComponent from '../../components/grid/ColumnLayoutInsideGrid';
+import ColumnLayoutInsideGridRaw from '../../components/grid/ColumnLayoutInsideGrid.tsx?raw';
 
 function GridDoc(props) {
 	return (
@@ -55,37 +63,15 @@ function GridDoc(props) {
 				Grid
 			</Typography>
 			<Typography className="description">
-				The Material Design responsive layout grid adapts to screen size and orientation, ensuring consistency
-				across layouts.
+				The responsive layout grid adapts to screen size and orientation, ensuring consistency across layouts.
 			</Typography>
 
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				The <a href="https://m2.material.io/design/layout/responsive-layout-grid.html">grid</a> creates visual
-				consistency between layouts while allowing flexibility across a wide variety of designs. Material
-				Design&#39;s responsive UI is based on a 12-column grid layout.
-			</Typography>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				:::warning The <code>Grid</code> component shouldn&#39;t be confused with a data grid; it is closer to a
-				layout grid. For a data grid head to{' '}
-				<a href="/x/react-data-grid/">
-					the <code>DataGrid</code> component
-				</a>
-				. :::
-			</Typography>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				:::warning The <code>Grid</code> component has been deprecated. Please use{' '}
-				<a href="/material-ui/react-grid2/">Grid v2</a> instead. See how to migrate in the{' '}
-				<a href="/material-ui/migration/migration-grid-v2/">Grid v2 migration guide</a> and{' '}
-				<a href="/material-ui/migration/upgrade-to-v6/">Material UI v6 upgrade guide</a>. :::
+				The <code>Grid</code> component works well for a layout with a known number of columns. The columns can
+				be configured with multiple breakpoints to specify the column span of each child.
 			</Typography>
 			<Typography
 				className="text-3xl mt-6 mb-2.5 font-bold"
@@ -101,30 +87,57 @@ function GridDoc(props) {
 			</Typography>
 			<ul className="space-y-4">
 				<li>
-					It uses <a href="https://www.w3.org/TR/css-flexbox-1/">CSS&#39;s Flexible Box module</a> for high
-					flexibility.
+					It uses <a href="https://www.w3.org/TR/css-flexbox-1/">CSS Flexbox</a> (rather than CSS Grid) for
+					high flexibility.
 				</li>
 				<li>
-					There are two types of layout: <em>containers</em> and <em>items</em>.
+					The grid is always a flex item. Use the <code>container</code> prop to add a flex container.
 				</li>
 				<li>
 					Item widths are set in percentages, so they&#39;re always fluid and sized relative to their parent
 					element.
 				</li>
-				<li>Items have padding to create the spacing between individual items.</li>
-				<li>There are five grid breakpoints: xs, sm, md, lg, and xl.</li>
 				<li>
-					Integer values can be given to each breakpoint, indicating how many of the 12 available columns are
-					occupied by the component when the viewport width satisfies the{' '}
+					There are five default grid breakpoints: xs, sm, md, lg, and xl. If you need custom breakpoints,
+					check out <a href="#custom-breakpoints">custom breakpoints grid</a>.
+				</li>
+				<li>
+					You can give integer values for each breakpoint, to indicate how many of the 12 available columns
+					are occupied by the component when the viewport width satisfies the{' '}
 					<a href="/material-ui/customization/breakpoints/#default-breakpoints">breakpoint constraints</a>.
+				</li>
+				<li>
+					It uses{' '}
+					<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">
+						the <code>gap</code> CSS property
+					</a>{' '}
+					to add spacing between items.
+				</li>
+				<li>
+					It does <em>not</em> support row spanning. Children elements cannot span multiple rows. We recommend
+					using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout">CSS Grid</a> if you
+					need this functionality.
+				</li>
+				<li>
+					It does <em>not</em> automatically place children. It will try to fit the children one by one, and
+					if there is not enough space, the rest of the children will start on the next line, and so on. If
+					you need auto-placement, we recommend using{' '}
+					<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Auto-placement_in_grid_layout">
+						CSS Grid
+					</a>{' '}
+					instead.
 				</li>
 			</ul>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				If you are <strong>new to or unfamiliar with flexbox</strong>, we encourage you to read this{' '}
-				<a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS-Tricks flexbox</a> guide.
+				:::warning The <code>Grid</code> component is a <em>layout</em> grid, not a <em>data</em> grid. If you
+				need a data grid, check out{' '}
+				<a href="/x/react-data-grid/">
+					the MUI X <code>DataGrid</code> component
+				</a>
+				. :::
 			</Typography>
 			<Typography
 				className="text-3xl mt-6 mb-2.5 font-bold"
@@ -149,16 +162,15 @@ function GridDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
-				Column widths are integer values between 1 and 12; they apply at any breakpoint and indicate how many
-				columns are occupied by the component.
+				In order to create a grid layout, you need a container. Use the <code>container</code> prop to create a
+				grid container that wraps the grid items (the <code>Grid</code> is always an item).
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				A value passed to any given breakpoint also applies to all wider breakpoints (if they have no values
-				explicitly defined). For example, <code>{`xs={12}`}</code> sizes a component to occupy the full width of
-				its parent container, regardless of the viewport size.
+				Column widths are integer values between 1 and 12. For example, an item with <code>{`size={6}`}</code>{' '}
+				occupies half of the grid container&#39;s width.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -176,23 +188,25 @@ function GridDoc(props) {
 				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
-				Grid with multiple breakpoints
+				Multiple breakpoints
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				Components may have multiple widths defined, causing the layout to change at the defined breakpoint.
-				Width values given to larger breakpoints override those given to smaller breakpoints.
+				Items may have multiple widths defined, causing the layout to change at the defined breakpoint. Width
+				values apply to all wider breakpoints, and larger breakpoints override those given to smaller
+				breakpoints.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				For example, <code>{`xs={12} sm={6}`}</code> sizes a component to occupy half of the viewport width (6
-				columns) when viewport width is{' '}
-				<a href="/material-ui/customization/breakpoints/#default-breakpoints">600 or more pixels</a>. For
-				smaller viewports, the component fills all 12 available columns.
+				For example, a component with <code>{`size={{ xs: 12, sm: 6 }}`}</code> occupies the entire viewport
+				width when the viewport is{' '}
+				<a href="/material-ui/customization/breakpoints/#default-breakpoints">less than 600 pixels wide</a>.
+				When the viewport grows beyond this size, the component occupies half of the total width—six columns
+				rather than 12.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -216,12 +230,18 @@ function GridDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
-				To control space between children, use the <code>spacing</code> prop. The spacing value can be any
-				positive number, including decimals and any string. The prop is converted into a CSS property using the{' '}
+				Use the <code>spacing</code> prop to control the space between children. The spacing value can be any
+				positive number (including decimals) or a string. The prop is converted into a CSS property using the{' '}
 				<a href="/material-ui/customization/spacing/">
 					<code>theme.spacing()</code>
 				</a>{' '}
 				helper.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				The following demo illustrates the use of the <code>spacing</code> prop:
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -239,15 +259,15 @@ function GridDoc(props) {
 				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
-				Row &amp; column spacing
+				Row and column spacing
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				The <code>rowSpacing</code> and <code>columnSpacing</code> props allow for specifying the row and column
-				gaps independently. It&#39;s similar to the <code>row-gap</code> and <code>column-gap</code> properties
-				of <a href="/system/grid/#row-gap-amp-column-gap">CSS Grid</a>.
+				The <code>rowSpacing</code> and <code>columnSpacing</code> props let you specify row and column gaps
+				independently of one another. They behave similarly to the <code>row-gap</code> and{' '}
+				<code>column-gap</code> properties of <a href="/system/grid/#row-gap-amp-column-gap">CSS Grid</a>.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -271,9 +291,10 @@ function GridDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
-				You can switch the props&#39; value based on the active breakpoint. For instance, we can implement the{' '}
-				<a href="https://m2.material.io/design/layout/responsive-layout-grid.html">&quot;recommended&quot;</a>{' '}
-				responsive layout grid of Material Design.
+				You can set prop values to change when a given breakpoint is active. For instance, we can implement
+				Material Design&#39;s{' '}
+				<a href="https://m2.material.io/design/layout/responsive-layout-grid.html">recommended</a> responsive
+				layout grid, as seen in the following demo:
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -291,9 +312,12 @@ function GridDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
-				Responsive values is supported by:
+				Responsive values are supported by:
 			</Typography>
 			<ul className="space-y-4">
+				<li>
+					<code>size</code>
+				</li>
 				<li>
 					<code>columns</code>
 				</li>
@@ -310,33 +334,9 @@ function GridDoc(props) {
 					<code>spacing</code>
 				</li>
 				<li>
-					all the <a href="#system-props">other props</a> of MUI System
+					<code>offset</code>
 				</li>
 			</ul>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				:::warning When using a responsive <code>columns</code> prop, each grid item needs its corresponding
-				breakpoint. For instance, this is not working. The grid item misses the value for <code>md</code>:
-			</Typography>
-
-			<FuseHighlight
-				component="pre"
-				className="language-jsx"
-			>
-				{` 
-<Grid container columns={{ xs: 4, md: 12 }}>
-  <Grid item xs={2} />
-</Grid>
-`}
-			</FuseHighlight>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				:::
-			</Typography>
 			<Typography
 				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
@@ -371,8 +371,8 @@ function GridDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
-				The Auto-layout makes the <em>items</em> equitably share the available space. That also means you can
-				set the width of one <em>item</em> and the others will automatically resize around it.
+				The auto-layout feature gives equal space to all items present. When you set the width of one item, the
+				others will automatically resize to match it.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -396,8 +396,8 @@ function GridDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
-				Set one of the size breakpoint props to <code>{`"auto"`}</code> instead of <code>true</code> / a{' '}
-				<code>number</code> to size a column based on the natural width of its content.
+				When a breakpoint&#39;s value is given as <code>{`"auto"`}</code>, then a column&#39;s size will
+				automatically adjust to match the width of its content. The demo below shows how this works:
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -415,58 +415,66 @@ function GridDoc(props) {
 				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
-				Complex Grid
+				Nested grid
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				The following demo doesn&#39;t follow the Material Design guidelines, but illustrates how the grid can
-				be used to build complex layouts.
+				The grid container that renders as a <strong>direct child</strong> inside another grid container is a
+				nested grid that inherits its{' '}
+				<a href="#columns">
+					<code>columns</code>
+				</a>{' '}
+				and{' '}
+				<a href="#spacing">
+					<code>spacing</code>
+				</a>{' '}
+				from the top level. It will also inherit the props of the top-level grid if it receives those props.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				<FuseExample
-					name="ComplexGrid.js"
-					className="my-4"
-					iframe={false}
-					component={ComplexGridComponent}
-					raw={ComplexGridRaw}
-				/>
-			</Typography>
-			<Typography
-				className="text-3xl mt-6 mb-2.5 font-bold"
-				component="h2"
-			>
-				Nested Grid
+				:::success
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				The <code>container</code> and <code>item</code> props are two independent booleans; they can be
-				combined to allow a Grid component to be both a flex container and child.
+				Note that a nested grid container should be a direct child of another grid container. If there are
+				non-grid elements in between, the grid container will start as the new root container.
 			</Typography>
-			<div className="border-1 p-4 rounded-xl my-3">
-				<Typography
-					className="text-base mb-8"
-					component="div"
-				>
-					A flex <strong>container</strong> is the box generated by an element with a computed display of{' '}
-					<code>flex</code> or <code>inline-flex</code>. In-flow children of a flex container are called flex{' '}
-					<strong>items</strong> and are laid out using the flex layout model.
-				</Typography>
-			</div>
 
+			<FuseHighlight
+				component="pre"
+				className="language-js"
+			>
+				{` 
+<Grid container>
+  <Grid container> // A nested grid container that inherits columns and spacing from above.
+    <div>
+      <Grid container> // A new root grid container with its own variables scope.
+`}
+			</FuseHighlight>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				<a href="https://www.w3.org/TR/css-flexbox-1/#box-model">
-					https://www.w3.org/TR/css-flexbox-1/#box-model
-				</a>
+				:::
+			</Typography>
+			<Typography
+				className="text-lg mt-5 mb-2.5 font-bold"
+				component="h3"
+			>
+				Inheriting spacing
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				A nested grid container inherits the row and column spacing from its parent unless the{' '}
+				<code>spacing</code> prop is specified to the instance.
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -481,26 +489,29 @@ function GridDoc(props) {
 				/>
 			</Typography>
 			<Typography
-				className="text-base mb-8"
-				component="div"
+				className="text-lg mt-5 mb-2.5 font-bold"
+				component="h3"
 			>
-				⚠️ Defining an explicit width to a Grid element that is flex container, flex item, and has spacing at
-				the same time leads to unexpected behavior, avoid doing it:
+				Inheriting columns
 			</Typography>
-
-			<FuseHighlight
-				component="pre"
-				className="language-jsx"
-			>
-				{` 
-<Grid spacing={1} container item xs={12}>
-`}
-			</FuseHighlight>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				If you need to do such, remove one of the props.
+				A nested grid container inherits the columns from its parent unless the <code>columns</code> prop is
+				specified to the instance.
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="NestedGridColumns.js"
+					className="my-4"
+					iframe={false}
+					component={NestedGridColumnsComponent}
+					raw={NestedGridColumnsRaw}
+				/>
 			</Typography>
 			<Typography
 				className="text-3xl mt-6 mb-2.5 font-bold"
@@ -512,7 +523,8 @@ function GridDoc(props) {
 				className="text-base mb-8"
 				component="div"
 			>
-				You can change the default number of columns (12) with the <code>columns</code> prop.
+				Use the <code>columns</code> prop to change the default number of columns (12) in the grid, as shown
+				below:
 			</Typography>
 			<Typography
 				className="text-base mb-8"
@@ -530,147 +542,241 @@ function GridDoc(props) {
 				className="text-3xl mt-6 mb-2.5 font-bold"
 				component="h2"
 			>
+				Offset
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				The <code>offset</code> prop pushes an item to the right side of the grid. This props accepts:
+			</Typography>
+			<ul className="space-y-4">
+				<li>
+					numbers—for example, <code>{`offset={{ md: 2 }}`}</code> pushes an item two columns to the right
+					when the viewport size is equal to or greater than the <code>md</code> breakpoint.
+				</li>
+				<li>
+					<code>{`"auto"`}</code>—this pushes the item to the far right side of the grid container.
+				</li>
+			</ul>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				The demo below illustrates how to use the offset props:
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="OffsetGrid.js"
+					className="my-4"
+					iframe={false}
+					component={OffsetGridComponent}
+					raw={OffsetGridRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
+				Custom breakpoints
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				If you specify custom breakpoints in the theme, you can use those names as grid item props in responsive
+				values:
+			</Typography>
+
+			<FuseHighlight
+				component="pre"
+				className="language-js"
+			>
+				{` 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+function Demo() {
+  return (
+    <ThemeProvider
+      theme={createTheme({
+        breakpoints: {
+          values: {
+            laptop: 1024,
+            tablet: 640,
+            mobile: 0,
+            desktop: 1280,
+          },
+        },
+      })}
+    >
+      <Grid container spacing={{ mobile: 1, tablet: 2, laptop: 3 }}>
+        {Array.from(Array(4)).map((_, index) => (
+          <Grid key={index} size={{ mobile: 6, tablet: 4, laptop: 3 }}>
+            <div>{index + 1}</div>
+          </Grid>
+        ))}
+      </Grid>
+    </ThemeProvider>
+  );
+}
+`}
+			</FuseHighlight>
+			<div className="border-1 p-4 rounded-xl my-3">
+				<Typography
+					className="text-base mb-8"
+					component="div"
+				>
+					Custom breakpoints affect all <a href="#responsive-values">responsive values</a>.
+				</Typography>
+			</div>
+
+			<Typography
+				className="text-lg mt-5 mb-2.5 font-bold"
+				component="h3"
+			>
+				TypeScript
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				You have to set module augmentation on the theme breakpoints interface.
+			</Typography>
+
+			<FuseHighlight
+				component="pre"
+				className="language-ts"
+			>
+				{` 
+declare module '@mui/system' {
+  interface BreakpointOverrides {
+    // Your custom breakpoints
+    laptop: true;
+    tablet: true;
+    mobile: true;
+    desktop: true;
+    // Remove default breakpoints
+    xs: false;
+    sm: false;
+    md: false;
+    lg: false;
+    xl: false;
+  }
+}
+`}
+			</FuseHighlight>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
+				Customization
+			</Typography>
+			<Typography
+				className="text-lg mt-5 mb-2.5 font-bold"
+				component="h3"
+			>
+				Centered elements
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				To center a grid item&#39;s content, specify <code>{`display="flex"`}</code> directly on the item. Then
+				use <code>justifyContent</code> and/or <code>alignItems</code> to adjust the position of the content, as
+				shown below:
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="CenteredElementGrid.js"
+					className="my-4"
+					iframe={false}
+					component={CenteredElementGridComponent}
+					raw={CenteredElementGridRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				:::warning Using the <code>container</code> prop does not work in this situation because the grid
+				container is designed exclusively to wrap grid items. It cannot wrap other elements. :::
+			</Typography>
+			<Typography
+				className="text-lg mt-5 mb-2.5 font-bold"
+				component="h3"
+			>
+				Full border
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="FullBorderedGrid.js"
+					className="my-4"
+					iframe={false}
+					component={FullBorderedGridComponent}
+					raw={FullBorderedGridRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-lg mt-5 mb-2.5 font-bold"
+				component="h3"
+			>
+				Half border
+			</Typography>
+			<Typography
+				className="text-base mb-8"
+				component="div"
+			>
+				<FuseExample
+					name="HalfBorderedGrid.js"
+					className="my-4"
+					iframe={false}
+					component={HalfBorderedGridComponent}
+					raw={HalfBorderedGridRaw}
+				/>
+			</Typography>
+			<Typography
+				className="text-3xl mt-6 mb-2.5 font-bold"
+				component="h2"
+			>
 				Limitations
 			</Typography>
 			<Typography
 				className="text-lg mt-5 mb-2.5 font-bold"
 				component="h3"
 			>
-				Negative margin
+				Column direction
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
-				The spacing between items is implemented with a negative margin. This might lead to unexpected
-				behaviors. For instance, to apply a background color, you need to apply <code>display: flex;</code> to
-				the parent.
-			</Typography>
-			<Typography
-				className="text-lg mt-5 mb-2.5 font-bold"
-				component="h3"
-			>
-				white-space: nowrap
-			</Typography>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				The initial setting on flex items is <code>min-width: auto</code>. This causes a positioning conflict
-				when children use <code>white-space: nowrap;</code>. You can reproduce the issue with:
-			</Typography>
-
-			<FuseHighlight
-				component="pre"
-				className="language-jsx"
-			>
-				{` 
-<Grid item xs>
-  <Typography noWrap>
-`}
-			</FuseHighlight>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				In order for the item to stay within the container you need to set <code>min-width: 0</code>. In
-				practice, you can set the <code>zeroMinWidth</code> prop:
-			</Typography>
-
-			<FuseHighlight
-				component="pre"
-				className="language-jsx"
-			>
-				{` 
-<Grid item xs zeroMinWidth>
-  <Typography noWrap>
-`}
-			</FuseHighlight>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				<FuseExample
-					name="AutoGridNoWrap.js"
-					className="my-4"
-					iframe={false}
-					component={AutoGridNoWrapComponent}
-					raw={AutoGridNoWrapRaw}
-				/>
-			</Typography>
-			<Typography
-				className="text-lg mt-5 mb-2.5 font-bold"
-				component="h3"
-			>
-				direction: column | column-reverse
-			</Typography>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				The <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, and <code>xl</code> props are{' '}
-				<strong>not supported</strong> within <code>{`direction="column"`}</code> and{' '}
-				<code>{`direction="column-reverse"`}</code> containers.
-			</Typography>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				They define the number of grids the component will use for a given breakpoint. They are intended to
-				control <strong>width</strong> using <code>flex-basis</code> in <code>row</code> containers but they
-				will impact height in <code>column</code> containers. If used, these props may have undesirable effects
-				on the height of the <code>Grid</code> item elements.
-			</Typography>
-			<Typography
-				className="text-3xl mt-6 mb-2.5 font-bold"
-				component="h2"
-			>
-				CSS Grid Layout
-			</Typography>
-			<Typography
-				className="text-base mb-8"
-				component="div"
-			>
-				The <code>Grid</code> component is using CSS flexbox internally. But as seen below, you can easily use{' '}
-				<a href="/system/grid/">MUI System</a> and CSS Grid to layout your pages.
+				Using <code>{`direction="column"`}</code> or <code>{`direction="column-reverse"`}</code> is not
+				supported. The Grid component is specifically designed to subdivide a layout into columns, not rows. You
+				should not use the Grid component on its own to stack layout elements vertically. Instead, you should
+				use the <a href="/material-ui/react-stack/">Stack component</a> inside of a Grid to create vertical
+				layouts as shown below:
 			</Typography>
 			<Typography
 				className="text-base mb-8"
 				component="div"
 			>
 				<FuseExample
-					name="CSSGrid.js"
+					name="ColumnLayoutInsideGrid.js"
 					className="my-4"
 					iframe={false}
-					component={CSSGridComponent}
-					raw={CSSGridRaw}
+					component={ColumnLayoutInsideGridComponent}
+					raw={ColumnLayoutInsideGridRaw}
 				/>
 			</Typography>
-			<Typography
-				className="text-3xl mt-6 mb-2.5 font-bold"
-				component="h2"
-			>
-				System props
-			</Typography>
-			<div className="border-1 p-4 rounded-xl my-3">
-				<Typography
-					className="text-base mb-8"
-					component="div"
-				>
-					System props are deprecated and will be removed in the next major release. Please use the{' '}
-					<code>sx</code> prop instead.
-				</Typography>
-
-				<FuseHighlight
-					component="pre"
-					className="language-diff"
-				>
-					{` 
-- <Grid item p={2} />
-+ <Grid item sx={{ p: 2 }} />
-`}
-				</FuseHighlight>
-			</div>
 		</>
 	);
 }

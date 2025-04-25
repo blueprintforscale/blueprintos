@@ -46,9 +46,9 @@ function LanguageSwitcher() {
 				<Typography
 					className="mx-1 font-semibold text-md uppercase"
 					sx={(theme) => ({
-						color: theme.palette.text.secondary,
+						color: theme.vars.palette.text.secondary,
 						...theme.applyStyles('dark', {
-							color: theme.palette.text.primary
+							color: theme.vars.palette.text.primary
 						})
 					})}
 				>

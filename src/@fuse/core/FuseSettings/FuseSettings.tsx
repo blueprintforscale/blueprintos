@@ -1,10 +1,9 @@
-import { styled } from '@mui/material/styles';
+import { styled, Palette } from '@mui/material/styles';
 import { Controller, useForm } from 'react-hook-form';
 import themeLayoutConfigs, { themeLayoutDefaultsProps } from 'src/components/theme-layouts/themeLayoutConfigs';
 import _ from 'lodash';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Switch, Typography } from '@mui/material';
 import { memo, useEffect, useMemo } from 'react';
-import { Palette } from '@mui/material/styles/createPalette';
 import { PartialDeep } from 'type-fest';
 import FuseLayoutConfigs from '@fuse/core/FuseSettings/FuseLayoutConfigs';
 import usePrevious from '@fuse/hooks/usePrevious';
@@ -27,11 +26,11 @@ const Root = styled('div')(({ theme }) => ({
 		left: 8,
 		fontWeight: 600,
 		padding: '0 4px',
-		backgroundColor: theme.palette.background.paper
+		backgroundColor: theme.vars.palette.background.paper
 	},
 	'& .FuseSettings-formGroup': {
 		position: 'relative',
-		border: `1px solid ${theme.palette.divider}`,
+		border: `1px solid ${theme.vars.palette.divider}`,
 		borderRadius: 2,
 		padding: '12px 12px 0 12px',
 		margin: '24px 0 16px 0',

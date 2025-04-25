@@ -1,6 +1,6 @@
 'use client';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import ListItemText from '@mui/material/ListItemText';
 import clsx from 'clsx';
 import { useMemo } from 'react';
@@ -22,14 +22,14 @@ const Root = styled(ListItemButton)<ListItemButtonStyleProps>(({ theme, ...props
 	paddingLeft: props.itempadding > 80 ? 80 : props.itempadding,
 	paddingTop: 10,
 	paddingBottom: 10,
-	color: alpha(theme.palette.text.primary, 0.7),
+	color: `rgba(${theme.vars.palette.text.primaryChannel} / 0.7)`,
 	cursor: 'pointer',
 	textDecoration: 'none!important',
 	'&:hover': {
-		color: theme.palette.text.primary
+		color: theme.vars.palette.text.primary
 	},
 	'&.active': {
-		color: theme.palette.text.primary,
+		color: theme.vars.palette.text.primary,
 		backgroundColor:
 			theme.palette.mode === 'light' ? 'rgba(0, 0, 0, .05)!important' : 'rgba(255, 255, 255, .1)!important',
 		transition: 'border-radius .15s cubic-bezier(0.4,0.0,0.2,1)',

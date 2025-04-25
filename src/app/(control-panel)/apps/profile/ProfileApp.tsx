@@ -15,10 +15,10 @@ import TimelineTab from './tabs/timeline/TimelineTab';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-header': {
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.vars.palette.background.paper,
 		borderBottomWidth: 1,
 		borderStyle: 'solid',
-		borderColor: theme.palette.divider,
+		borderColor: theme.vars.palette.divider,
 		'& > .container': {
 			maxWidth: '100% !important'
 		}

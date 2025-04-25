@@ -14,6 +14,7 @@ export type NavLinkAdapterPropsType = {
 	style?: CSSProperties;
 	role?: string;
 	exact?: boolean;
+	end?: boolean;
 	ref?: React.RefObject<HTMLAnchorElement>;
 };
 
@@ -25,13 +26,16 @@ export type NavLinkAdapterPropsType = {
 function NavLinkAdapter(props: NavLinkAdapterPropsType) {
 	const {
 		children,
+		className = '',
 		activeClassName = 'active',
 		activeStyle,
 		role = 'button',
 		to,
 		href,
+		end,
 		exact,
-		ref,
+		style = {},
+		ref = null,
 		..._props
 	} = props;
 
@@ -52,27 +56,24 @@ function NavLinkAdapter(props: NavLinkAdapterPropsType) {
 		}
 	};
 
-	const isActive = exact ? pathname === targetUrl : pathname.startsWith(targetUrl);
+	const isActive = exact || end ? pathname === targetUrl : pathname.startsWith(targetUrl);
 
 	return (
 		<Link
 			to={targetUrl}
-			passHref
-			legacyBehavior
+			role={role}
+			onClick={handleClick}
+			onKeyDown={handleKeyDown}
+			className={clsx(
+				className,
+				isActive ? activeClassName : '',
+				pathname === targetUrl && 'pointer-events-none'
+			)}
+			style={isActive ? { ...style, ...activeStyle } : style}
+			ref={ref}
+			{..._props}
 		>
-			<a
-				role={role}
-				onClick={handleClick}
-				onKeyDown={handleKeyDown}
-				className={clsx(
-					_props.className,
-					isActive ? activeClassName : '',
-					pathname === targetUrl && 'pointer-events-none'
-				)}
-				style={isActive ? { ..._props.style, ...activeStyle } : _props.style}
-			>
-				{children}
-			</a>
+			{children}
 		</Link>
 	);
 }

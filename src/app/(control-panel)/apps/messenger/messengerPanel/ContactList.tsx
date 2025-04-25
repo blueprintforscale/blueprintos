@@ -16,7 +16,7 @@ import {
 } from '../MessengerApi';
 
 const Root = styled(FuseScrollbars)(({ theme }) => ({
-	background: theme.palette.background.paper
+	background: theme.vars.palette.background.paper
 }));
 
 const container = {

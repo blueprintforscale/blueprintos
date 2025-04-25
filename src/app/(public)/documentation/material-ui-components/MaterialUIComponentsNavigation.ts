@@ -137,10 +137,10 @@ const MaterialUIComponentsNavigation = {
 			url: '/documentation/material-ui-components/doc/grid'
 		},
 		{
-			id: 'grid2',
-			title: 'Grid 2',
+			id: 'gridLegacy',
+			title: 'Grid Legacy',
 			type: 'item',
-			url: '/documentation/material-ui-components/doc/grid2'
+			url: '/documentation/material-ui-components/doc/grid-legacy'
 		},
 		{
 			id: 'imageList',

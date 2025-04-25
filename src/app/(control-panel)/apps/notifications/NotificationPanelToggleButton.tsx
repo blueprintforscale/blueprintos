@@ -25,9 +25,9 @@ function NotificationPanelToggleButton(props: NotificationPanelToggleButtonProps
 			<FuseSvgIcon
 				size={20}
 				sx={(theme) => ({
-					color: theme.palette.text.secondary,
+					color: theme.vars.palette.text.secondary,
 					...theme.applyStyles('dark', {
-						color: theme.palette.text.primary
+						color: theme.vars.palette.text.primary
 					})
 				})}
 			>
@@ -46,14 +46,15 @@ function NotificationPanelToggleButton(props: NotificationPanelToggleButtonProps
 		if (animate) {
 			controls.start({
 				rotate: [0, 20, -20, 0],
-				color: [theme.palette.secondary.main],
+				color: [theme.vars.palette.secondary.main],
 				transition: { duration: 0.2, repeat: 5 }
 			});
 		} else {
 			controls.start({
 				rotate: 0,
 				scale: 1,
-				color: theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.text.secondary
+				color:
+					theme.palette.mode === 'dark' ? theme.vars.palette.text.primary : theme.vars.palette.text.secondary
 			});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

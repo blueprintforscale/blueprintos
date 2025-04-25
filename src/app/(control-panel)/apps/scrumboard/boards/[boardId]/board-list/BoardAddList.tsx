@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
-import { alpha, darken } from '@mui/material/styles';
+import { darken } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -15,11 +15,9 @@ import { z } from 'zod';
 import { ScrumboardList, useCreateScrumboardBoardListMutation } from '../../../ScrumboardApi';
 import useUpdateScrumboardBoard from '../../../hooks/useUpdateScrumboardBoard';
 
-type FormType = {
+const defaultValues: {
 	title: ScrumboardList['title'];
-};
-
-const defaultValues = {
+} = {
 	title: ''
 };
 
@@ -27,8 +25,10 @@ const defaultValues = {
  * Form Validation Schema
  */
 const schema = z.object({
-	title: z.string().nonempty('You must enter a title')
+	title: z.string().min(1, 'You must enter a title').nonempty('You must enter a title')
 });
+
+type FormType = z.infer<typeof schema>;
 
 /**
  * The board add list component.
@@ -67,7 +67,11 @@ function BoardAddList() {
 	}
 
 	function onSubmit(data: FormType) {
-		createList({ boardId, ...data }).then((res) => {
+		const payload = {
+			boardId,
+			title: data.title
+		};
+		createList(payload).then((res) => {
 			const newList = res?.data as ScrumboardList;
 			updateBoard((board) => ({
 				...board,
@@ -105,17 +109,21 @@ function BoardAddList() {
 										variant="outlined"
 										placeholder="List title*"
 										autoFocus
-										InputProps={{
-											endAdornment: (
-												<InputAdornment position="end">
-													<IconButton
-														onClick={handleCloseForm}
-														size="small"
-													>
-														<FuseSvgIcon size={18}>heroicons-outline:x-mark</FuseSvgIcon>
-													</IconButton>
-												</InputAdornment>
-											)
+										slotProps={{
+											input: {
+												endAdornment: (
+													<InputAdornment position="end">
+														<IconButton
+															onClick={handleCloseForm}
+															size="small"
+														>
+															<FuseSvgIcon size={18}>
+																heroicons-outline:x-mark
+															</FuseSvgIcon>
+														</IconButton>
+													</InputAdornment>
+												)
+											}
 										}}
 									/>
 								)}
@@ -144,7 +152,7 @@ function BoardAddList() {
 						sx={{
 							backgroundColor: 'divider',
 							'&:hover, &:focus': {
-								backgroundColor: (theme) => alpha(theme.palette.divider, 0.8)
+								backgroundColor: (theme) => `rgba(${theme.vars.palette.dividerChannel} / 0.8)`
 							},
 							color: 'text.secondary'
 						}}

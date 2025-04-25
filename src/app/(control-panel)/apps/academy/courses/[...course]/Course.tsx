@@ -8,7 +8,6 @@ import Stepper from '@mui/material/Stepper';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from '@fuse/core/Link';
-import SwipeableViews from 'react-swipeable-views';
 import { Step, StepContent, StepLabel } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
@@ -27,6 +26,31 @@ import {
 	useGetAcademyCourseStepsQuery
 } from '../../AcademyApi';
 import CourseStepContent from './CourseStepContent';
+
+interface TabPanelProps {
+	children?: React.ReactNode;
+	index: number;
+	value: number;
+	dir?: string;
+}
+
+function TabPanel(props: TabPanelProps) {
+	const { children, value, index, dir, ...other } = props;
+
+	return (
+		<div
+			role="tabpanel"
+			hidden={value !== index}
+			id={`course-tabpanel-${index}`}
+			aria-labelledby={`course-tab-${index}`}
+			dir={dir}
+			{...other}
+			className="flex-auto"
+		>
+			{value === index && <Box className="h-full">{children}</Box>}
+		</div>
+	);
+}
 
 /**
  * The Course page.
@@ -144,29 +168,26 @@ function Course() {
 						</Paper>
 					)}
 
-					<SwipeableViews
-						className="flex flex-col flex-auto w-full min-h-full"
-						containerStyle={{ minHeight: '100%' }}
-						index={activeStep - 1}
-						enableMouseEvents
-						onChangeIndex={handleStepChange}
-					>
-						{courseSteps?.map((step, index: number) => (
-							<div
-								className="flex justify-center p-4 pb-16 sm:p-6 sm:pb-16 md:p-12 md:pb-24 min-h-full"
+					<div className="flex flex-col flex-auto w-full min-h-full">
+						{courseSteps?.map((step, index) => (
+							<TabPanel
 								key={index}
+								value={activeStep - 1}
+								index={index}
+								dir={theme.direction}
 							>
-								<CourseStepContent step={step} />
-							</div>
+								<div className="flex justify-center p-4 pb-16 sm:p-6 sm:pb-16 md:p-12 md:pb-24 min-h-full">
+									<CourseStepContent step={step} />
+								</div>
+							</TabPanel>
 						))}
-					</SwipeableViews>
+					</div>
 
 					{!isMobile && (
 						<div className="flex justify-center w-full absolute bottom-0 left-0 right-0 p-4 pb-8 z-10">
 							<ButtonGroup
 								variant="contained"
-								aria-label=""
-								className="rounded-full"
+								aria-label="Next and previous buttons"
 								color="secondary"
 							>
 								<Button
@@ -272,18 +293,18 @@ function Course() {
 											'& .MuiSvgIcon-root': {
 												color: 'background.default',
 												'& .MuiStepIcon-text': {
-													fill: (_theme) => _theme.palette.text.secondary
+													fill: (_theme) => _theme.vars.palette.text.secondary
 												},
 												'&.Mui-completed': {
 													color: 'secondary.main',
 													'& .MuiStepIcon-text ': {
-														fill: (_theme) => _theme.palette.secondary.contrastText
+														fill: (_theme) => _theme.vars.palette.secondary.contrastText
 													}
 												},
 												'&.Mui-active': {
 													color: 'secondary.main',
 													'& .MuiStepIcon-text ': {
-														fill: (_theme) => _theme.palette.secondary.contrastText
+														fill: (_theme) => _theme.vars.palette.secondary.contrastText
 													}
 												}
 											}

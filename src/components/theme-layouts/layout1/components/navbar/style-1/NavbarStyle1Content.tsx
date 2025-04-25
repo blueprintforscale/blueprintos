@@ -9,8 +9,8 @@ import Logo from '../../../../components/Logo';
 import GoToDocBox from '@/components/theme-layouts/components/GoToDocBox';
 
 const Root = styled('div')(({ theme }) => ({
-	backgroundColor: theme.palette.background.default,
-	color: theme.palette.text.primary,
+	backgroundColor: theme.vars.palette.background.default,
+	color: theme.vars.palette.text.primary,
 	'& ::-webkit-scrollbar-thumb': {
 		boxShadow: `inset 0 0 0 20px ${'rgba(255, 255, 255, 0.24)'}`,
 		...theme.applyStyles('light', {

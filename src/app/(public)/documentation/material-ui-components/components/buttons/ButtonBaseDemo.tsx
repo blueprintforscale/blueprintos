@@ -62,7 +62,7 @@ const Image = styled('span')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: theme.palette.common.white,
+  color: theme.vars.palette.common.white,
 }));
 
 const ImageBackdrop = styled('span')(({ theme }) => ({
@@ -71,7 +71,7 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
   right: 0,
   top: 0,
   bottom: 0,
-  backgroundColor: theme.palette.common.black,
+  backgroundColor: theme.vars.palette.common.black,
   opacity: 0.4,
   transition: theme.transitions.create('opacity'),
 }));
@@ -79,7 +79,7 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
 const ImageMarked = styled('span')(({ theme }) => ({
   height: 3,
   width: 18,
-  backgroundColor: theme.palette.common.white,
+  backgroundColor: theme.vars.palette.common.white,
   position: 'absolute',
   bottom: -2,
   left: 'calc(50% - 9px)',

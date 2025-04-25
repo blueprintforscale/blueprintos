@@ -7,7 +7,7 @@ import prism from './prism';
 const Root = styled('div')(({ theme }) => ({
 	fontFamily: theme.typography.fontFamily,
 	fontSize: 16,
-	color: theme.palette.text.primary,
+	color: theme.vars.palette.text.primary,
 	'& .anchor-link': {
 		marginTop: -96, // Offset for the anchor.
 		position: 'absolute'
@@ -15,7 +15,7 @@ const Root = styled('div')(({ theme }) => ({
 	'& pre, & pre[class*="language-"]': {
 		margin: '24px 0',
 		padding: '12px 18px',
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.vars.palette.background.paper,
 		borderRadius: theme.shape.borderRadius,
 		overflow: 'auto',
 		WebkitOverflowScrolling: 'touch' // iOS momentum scrolling.
@@ -25,8 +25,8 @@ const Root = styled('div')(({ theme }) => ({
 		lineHeight: 1.6,
 		fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
 		padding: '3px 6px',
-		color: theme.palette.text.primary,
-		backgroundColor: theme.palette.background.paper,
+		color: theme.vars.palette.text.primary,
+		backgroundColor: theme.vars.palette.background.paper,
 		fontSize: 14
 	},
 	'& p code, & ul code, & pre code': {
@@ -34,22 +34,22 @@ const Root = styled('div')(({ theme }) => ({
 		lineHeight: 1.6
 	},
 	'& h1': {
-		color: theme.palette.text.secondary,
+		color: theme.vars.palette.text.secondary,
 		margin: '32px 0 16px'
 	},
 	'& .description': {
 		margin: '0 0 40px'
 	},
 	'& h2': {
-		color: theme.palette.text.secondary,
+		color: theme.vars.palette.text.secondary,
 		margin: '32px 0 24px'
 	},
 	'& h3': {
-		color: theme.palette.text.secondary,
+		color: theme.vars.palette.text.secondary,
 		margin: '32px 0 24px'
 	},
 	'& h4': {
-		color: theme.palette.text.secondary,
+		color: theme.vars.palette.text.secondary,
 		margin: '24px 0 16px'
 	},
 	'& p, & ul, & ol': {
@@ -74,7 +74,7 @@ const Root = styled('div')(({ theme }) => ({
 			opacity: 1,
 			padding: '0 8px',
 			'&:hover': {
-				color: theme.palette.text.secondary
+				color: theme.vars.palette.text.secondary
 			},
 			'& svg': {
 				width: '0.55em',
@@ -106,21 +106,21 @@ const Root = styled('div')(({ theme }) => ({
 		'& .prop-default': {
 			fontSize: 13,
 			fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
-			borderBottom: `1px dotted ${theme.palette.divider}`
+			borderBottom: `1px dotted ${theme.vars.palette.divider}`
 		}
 	},
 	'& thead': {
 		fontSize: 14,
 		fontWeight: theme.typography.fontWeightMedium,
-		color: theme.palette.text.secondary
+		color: theme.vars.palette.text.secondary
 	},
 	'& tbody': {
 		fontSize: 14,
 		lineHeight: 1.5,
-		color: theme.palette.text.primary
+		color: theme.vars.palette.text.primary
 	},
 	'& td': {
-		borderBottom: `1px solid ${theme.palette.divider}`,
+		borderBottom: `1px solid ${theme.vars.palette.divider}`,
 		padding: '8px 16px 8px 8px',
 		textAlign: 'left'
 	},
@@ -136,7 +136,7 @@ const Root = styled('div')(({ theme }) => ({
 	},
 	'& th': {
 		whiteSpace: 'pre',
-		borderBottom: `1px solid ${theme.palette.divider}`,
+		borderBottom: `1px solid ${theme.vars.palette.divider}`,
 		fontWeight: theme.typography.fontWeightMedium,
 		padding: '0 16px 0 8px',
 		textAlign: 'left'
@@ -154,14 +154,14 @@ const Root = styled('div')(({ theme }) => ({
 		fontWeight: theme.typography.fontWeightMedium
 	},
 	'& blockquote': {
-		borderLeft: `5px solid ${theme.palette.divider}`,
-		backgroundColor: theme.palette.background.paper,
+		borderLeft: `5px solid ${theme.vars.palette.divider}`,
+		backgroundColor: theme.vars.palette.background.paper,
 		padding: '4px 24px',
 		margin: '24px 0'
 	},
 	'& a, & a code': {
 		// Style taken from the Link component
-		color: theme.palette.secondary.main,
+		color: theme.vars.palette.secondary.main,
 		textDecoration: 'none',
 		'&:hover': {
 			textDecoration: 'underline'

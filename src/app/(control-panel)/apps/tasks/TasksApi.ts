@@ -139,6 +139,12 @@ export type GetTasksTagsApiArg = void;
 export type CreateTasksTagApiResponse = /** status 200 OK */ Tag;
 export type CreateTasksTagApiArg = Tag;
 
+export type SubTask = {
+	id: string;
+	title: string;
+	completed: boolean;
+};
+
 export type Task = {
 	id: string;
 	type: string;
@@ -149,11 +155,7 @@ export type Task = {
 	priority: number;
 	tags: string[];
 	assignedTo?: null | string;
-	subTasks: {
-		id: string;
-		title: string;
-		completed: boolean;
-	}[];
+	subTasks: SubTask[];
 	order: number;
 };
 

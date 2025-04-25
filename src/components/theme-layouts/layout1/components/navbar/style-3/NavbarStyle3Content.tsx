@@ -15,8 +15,8 @@ import usePathname from '@fuse/hooks/usePathname';
 import useNavigation from '@/components/theme-layouts/components/navigation/hooks/useNavigation';
 
 const Root = styled('div')(({ theme }) => ({
-	backgroundColor: theme.palette.background.default,
-	color: theme.palette.text.primary
+	backgroundColor: theme.vars.palette.background.default,
+	color: theme.vars.palette.text.primary
 }));
 
 type StyledPanelProps = {
@@ -25,8 +25,8 @@ type StyledPanelProps = {
 };
 
 const StyledPanel = styled(FuseScrollbars)<StyledPanelProps>(({ theme }) => ({
-	backgroundColor: theme.palette.background.default,
-	color: theme.palette.text.primary,
+	backgroundColor: theme.vars.palette.background.default,
+	color: theme.vars.palette.text.primary,
 	transition: theme.transitions.create(['opacity'], {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.shortest

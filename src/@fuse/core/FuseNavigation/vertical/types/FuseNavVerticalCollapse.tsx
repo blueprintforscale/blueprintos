@@ -1,6 +1,6 @@
 'use client';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
@@ -31,9 +31,9 @@ const Root = styled(List)<ListComponentProps>(({ theme, ...props }) => ({
 		paddingLeft: props.itempadding > 80 ? 80 : props.itempadding,
 		paddingTop: 10,
 		paddingBottom: 10,
-		color: alpha(theme.palette.text.primary, 0.7),
+		color: `rgba(${theme.vars.palette.text.primaryChannel} / 0.7)`,
 		'&:hover': {
-			color: theme.palette.text.primary
+			color: theme.vars.palette.text.primary
 		},
 		'& > .fuse-list-item-icon': {
 			marginRight: 16,

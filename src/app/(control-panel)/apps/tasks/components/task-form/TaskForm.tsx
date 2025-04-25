@@ -11,8 +11,8 @@ import Box from '@mui/system/Box';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import Autocomplete from '@mui/material/Autocomplete/Autocomplete';
-import Checkbox from '@mui/material/Checkbox/Checkbox';
+import Autocomplete from '@mui/material/Autocomplete';
+import Checkbox from '@mui/material/Checkbox';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import IconButton from '@mui/material/IconButton';
 import { useDeepCompareEffect } from '@fuse/hooks';
@@ -33,7 +33,7 @@ import {
 } from '../../TasksApi';
 import SectionModel from '../../models/SectionModel';
 import TaskModel from '../../models/TaskModel';
-
+import { subTaskModel } from '../../models/TaskModel';
 /**
  * Form Validation Schema
  */
@@ -58,6 +58,8 @@ const schema = z.object({
 	order: z.number()
 });
 
+type FormType = z.infer<typeof schema>;
+
 /**
  * The task form.
  */
@@ -79,7 +81,7 @@ function TaskForm() {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	const { control, watch, reset, handleSubmit, formState } = useForm<Task>({
+	const { control, watch, reset, handleSubmit, formState } = useForm<FormType>({
 		mode: 'onChange',
 		resolver: zodResolver(schema)
 	});
@@ -114,8 +116,14 @@ function TaskForm() {
 	/**
 	 * Form Submit
 	 */
-	function onSubmit(data: Task) {
-		updateTask(data);
+	function onSubmit(data: FormType) {
+		updateTask(
+			TaskModel({
+				...data,
+				title: data.title,
+				subTasks: data.subTasks?.map((subTask) => subTaskModel(subTask))
+			})
+		);
 	}
 
 	function onSubmitNew(data: Task) {
@@ -291,16 +299,18 @@ function TaskForm() {
 							multiline
 							minRows={5}
 							maxRows={10}
-							InputProps={{
-								className: 'max-h-min h-min items-start',
-								startAdornment: (
-									<InputAdornment
-										className="mt-4"
-										position="start"
-									>
-										<FuseSvgIcon size={20}>heroicons-solid:bars-3-bottom-left</FuseSvgIcon>
-									</InputAdornment>
-								)
+							slotProps={{
+								input: {
+									className: 'max-h-min h-min items-start',
+									startAdornment: (
+										<InputAdornment
+											className="mt-4"
+											position="start"
+										>
+											<FuseSvgIcon size={20}>heroicons-solid:bars-3-bottom-left</FuseSvgIcon>
+										</InputAdornment>
+									)
+								}
 							}}
 						/>
 					)}

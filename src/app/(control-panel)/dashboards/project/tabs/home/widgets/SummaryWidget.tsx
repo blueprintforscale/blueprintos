@@ -41,8 +41,10 @@ function SummaryWidget() {
 					classes={{ select: 'py-0 flex items-center' }}
 					value={currentRange}
 					onChange={handleChangeRange}
-					inputProps={{
-						name: 'currentRange'
+					slotProps={{
+						input: {
+							name: 'currentRange'
+						}
 					}}
 					variant="filled"
 				>

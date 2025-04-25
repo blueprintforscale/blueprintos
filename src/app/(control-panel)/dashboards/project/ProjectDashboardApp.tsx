@@ -15,8 +15,8 @@ import { useGetProjectDashboardWidgetsQuery } from './ProjectDashboardApi';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
 	'& .FusePageSimple-header': {
-		backgroundColor: theme.palette.background.paper,
-		boxShadow: `inset 0 -1px 0 0px  ${theme.palette.divider}`
+		backgroundColor: theme.vars.palette.background.paper,
+		boxShadow: `inset 0 -1px 0 0px  ${theme.vars.palette.divider}`
 	}
 }));
 

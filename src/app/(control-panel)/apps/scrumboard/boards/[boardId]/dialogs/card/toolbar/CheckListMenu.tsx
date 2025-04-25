@@ -11,10 +11,6 @@ import ToolbarMenu from './ToolbarMenu';
 import ChecklistModel from '../../../../../models/ChecklistModel';
 import { ScrumboardChecklist } from '../../../../../ScrumboardApi';
 
-type FormType = {
-	name: ScrumboardChecklist['name'];
-};
-
 /**
  * Form Validation Schema
  */
@@ -22,6 +18,7 @@ const schema = z.object({
 	name: z.string().nonempty('You must enter a title')
 });
 
+type FormType = z.infer<typeof schema>;
 type CheckListMenuProps = {
 	name?: string;
 	onAddCheckList: (checklist: ScrumboardChecklist) => void;

@@ -16,7 +16,7 @@ const schema = z.object({
 	content: z.string().nonempty('You must enter a content')
 });
 
-type FormType = Pick<NoteListItemType, 'content'>;
+type FormType = z.infer<typeof schema>;
 
 const defaultValues: FormType = {
 	content: ''
@@ -74,9 +74,11 @@ function NoteFormAddListItem(props: NoteFormAddListItemProps) {
 							autoFocus
 							hiddenLabel
 							size="small"
-							InputProps={{
-								disableUnderline: true,
-								className: ''
+							slotProps={{
+								input: {
+									disableUnderline: true,
+									className: ''
+								}
 							}}
 						/>
 					)}

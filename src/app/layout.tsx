@@ -1,6 +1,10 @@
 import clsx from 'clsx';
 import 'src/styles/splash-screen.css';
 import 'src/styles/index.css';
+import '../../public/assets/fonts/material-design-icons/MaterialIconsOutlined.css';
+import '../../public/assets/fonts/inter/inter.css';
+import '../../public/assets/fonts/meteocons/style.css';
+import '../../public/assets/styles/prism.css';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@auth/authJs';
 import generateMetadata from '../utils/generateMetadata';
@@ -47,23 +51,6 @@ export default async function RootLayout({
 				<link
 					rel="shortcut icon"
 					href="/favicon.ico"
-				/>
-
-				<link
-					href="/assets/fonts/material-design-icons/MaterialIconsOutlined.css"
-					rel="stylesheet"
-				/>
-				<link
-					href="/assets/fonts/inter/inter.css"
-					rel="stylesheet"
-				/>
-				<link
-					href="/assets/fonts/meteocons/style.css"
-					rel="stylesheet"
-				/>
-				<link
-					href="/assets/styles/prism.css"
-					rel="stylesheet"
 				/>
 				<noscript id="emotion-insertion-point" />
 			</head>

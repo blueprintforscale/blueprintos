@@ -20,8 +20,10 @@ function PricingTab() {
 						className="mt-2 mb-4"
 						label="Tax Excluded Price"
 						id="priceTaxExcl"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
+						slotProps={{
+							input: {
+								startAdornment: <InputAdornment position="start">$</InputAdornment>
+							}
 						}}
 						type="number"
 						variant="outlined"
@@ -40,8 +42,10 @@ function PricingTab() {
 						className="mt-2 mb-4"
 						label="Tax Included Price"
 						id="priceTaxIncl"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
+						slotProps={{
+							input: {
+								startAdornment: <InputAdornment position="start">$</InputAdornment>
+							}
 						}}
 						type="number"
 						variant="outlined"
@@ -59,8 +63,10 @@ function PricingTab() {
 						className="mt-2 mb-4"
 						label="Tax Rate"
 						id="taxRate"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
+						slotProps={{
+							input: {
+								startAdornment: <InputAdornment position="start">$</InputAdornment>
+							}
 						}}
 						type="number"
 						variant="outlined"
@@ -78,8 +84,10 @@ function PricingTab() {
 						className="mt-2 mb-4"
 						label="Compared Price"
 						id="comparedPrice"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">$</InputAdornment>
+						slotProps={{
+							input: {
+								startAdornment: <InputAdornment position="start">$</InputAdornment>
+							}
 						}}
 						type="number"
 						variant="outlined"

@@ -25,9 +25,12 @@ import { Label, useDeleteCalendarLabelMutation, useUpdateCalendarLabelMutation }
  * Form Validation Schema
  */
 const schema = z.object({
+	id: z.string().optional(),
 	title: z.string().nonempty('You must enter a label title'),
 	color: z.string().optional()
 });
+
+type FormType = z.infer<typeof schema>;
 
 type NewLabelFormProps = {
 	label: Label;
@@ -43,7 +46,7 @@ function NewLabelForm(props: NewLabelFormProps) {
 	const [deleteLabel] = useDeleteCalendarLabelMutation();
 	const [updateLabel] = useUpdateCalendarLabelMutation();
 
-	const { control, formState, reset, watch } = useForm({
+	const { control, formState, reset, watch } = useForm<FormType>({
 		mode: 'onChange',
 		defaultValues: label,
 		resolver: zodResolver(schema)
@@ -56,9 +59,10 @@ function NewLabelForm(props: NewLabelFormProps) {
 		reset(label);
 	}, [label, reset]);
 
-	const debouncedUpdateLabel = useDebounce((_form: Label) => {
+	const debouncedUpdateLabel = useDebounce((_form: FormType) => {
 		if (!_.isEqual(_form, label)) {
-			updateLabel(_form);
+			const { title, color } = _form;
+			updateLabel({ id: label.id, title, color });
 		}
 	}, 300);
 
@@ -118,42 +122,44 @@ function NewLabelForm(props: NewLabelFormProps) {
 						helperText={errors?.title?.message}
 						placeholder="Create new label"
 						variant="outlined"
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<Controller
-										name="color"
-										control={control}
-										render={({ field: { onChange: _onChange, value: _value } }) => (
-											<FormLabel
-												className="w-4 h-4 shrink-0 rounded-full"
-												sx={{ backgroundColor: _value }}
-											>
-												<Input
-													value={_value}
-													onChange={(ev) => {
-														_onChange(ev.target.value);
-													}}
-													type="color"
-													className="opacity-0"
-												/>
-											</FormLabel>
-										)}
-									/>
-								</InputAdornment>
-							),
-							endAdornment: !isLast && (
-								<InputAdornment position="end">
-									<IconButton
-										onClick={handleOnRemove}
-										className="p-0"
-										aria-label="Delete"
-										size="small"
-									>
-										<FuseSvgIcon color="action">heroicons-outline:trash</FuseSvgIcon>
-									</IconButton>
-								</InputAdornment>
-							)
+						slotProps={{
+							input: {
+								startAdornment: (
+									<InputAdornment position="start">
+										<Controller
+											name="color"
+											control={control}
+											render={({ field: { onChange: _onChange, value: _value } }) => (
+												<FormLabel
+													className="w-4 h-4 shrink-0 rounded-full"
+													sx={{ backgroundColor: _value }}
+												>
+													<Input
+														value={_value}
+														onChange={(ev) => {
+															_onChange(ev.target.value);
+														}}
+														type="color"
+														className="opacity-0"
+													/>
+												</FormLabel>
+											)}
+										/>
+									</InputAdornment>
+								),
+								endAdornment: !isLast && (
+									<InputAdornment position="end">
+										<IconButton
+											onClick={handleOnRemove}
+											className="p-0"
+											aria-label="Delete"
+											size="small"
+										>
+											<FuseSvgIcon color="action">heroicons-outline:trash</FuseSvgIcon>
+										</IconButton>
+									</InputAdornment>
+								)
+							}
 						}}
 					/>
 				)}

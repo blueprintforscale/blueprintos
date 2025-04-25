@@ -8,12 +8,15 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ContactEmail } from '../../ContactsApi';
 
+// Define schema for validation
 const schema = z.object({
-	email: z.string().optional(),
+	email: z.string().email('Invalid email').min(1, 'You must enter an email'),
 	label: z.string().optional()
 });
 
-const defaultValues = {
+type FormType = z.infer<typeof schema>;
+
+const defaultValues: FormType = {
 	email: '',
 	label: ''
 };
@@ -31,7 +34,7 @@ type EmailInputProps = {
 function EmailInput(props: EmailInputProps) {
 	const { value, hideRemove = false, onChange, onRemove } = props;
 
-	const { control, formState, handleSubmit, reset } = useForm<ContactEmail>({
+	const { control, formState, handleSubmit, reset } = useForm<FormType>({
 		mode: 'all',
 		defaultValues,
 		resolver: zodResolver(schema)
@@ -43,14 +46,20 @@ function EmailInput(props: EmailInputProps) {
 
 	const { errors } = formState;
 
-	function onSubmit(data: ContactEmail): void {
-		onChange(data);
+	function handleFormSubmit(data: FormType): void {
+		const { email, label } = data;
+
+		// Use explicit type casting to validated against the ContactEmail type.
+		onChange({
+			email,
+			label
+		});
 	}
 
 	return (
 		<form
 			className="flex space-x-4 mb-4"
-			onChange={handleSubmit(onSubmit)}
+			onChange={handleSubmit(handleFormSubmit)}
 		>
 			<Controller
 				control={control}
@@ -64,12 +73,14 @@ function EmailInput(props: EmailInputProps) {
 						fullWidth
 						error={!!errors.email}
 						helperText={errors?.email?.message}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<FuseSvgIcon size={20}>heroicons-solid:envelope</FuseSvgIcon>
-								</InputAdornment>
-							)
+						slotProps={{
+							input: {
+								startAdornment: (
+									<InputAdornment position="start">
+										<FuseSvgIcon size={20}>heroicons-solid:envelope</FuseSvgIcon>
+									</InputAdornment>
+								)
+							}
 						}}
 					/>
 				)}
@@ -86,12 +97,14 @@ function EmailInput(props: EmailInputProps) {
 						fullWidth
 						error={!!errors.label}
 						helperText={errors?.label?.message}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<FuseSvgIcon size={20}>heroicons-solid:tag</FuseSvgIcon>
-								</InputAdornment>
-							)
+						slotProps={{
+							input: {
+								startAdornment: (
+									<InputAdornment position="start">
+										<FuseSvgIcon size={20}>heroicons-solid:tag</FuseSvgIcon>
+									</InputAdornment>
+								)
+							}
 						}}
 					/>
 				)}

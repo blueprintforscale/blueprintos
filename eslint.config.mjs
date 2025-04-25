@@ -22,6 +22,7 @@ export default tseslint.config({
         '**/app/(public)/documentation/material-ui-components/components/**',
         '**/app/(public)/documentation/material-ui-components/doc/**',
         '**/utils/node-scripts/fuse-react-message.js',
+        '**/components/tiptap/**',
         '**/.next/**',
     ],
     languageOptions: {
@@ -167,5 +168,6 @@ export default tseslint.config({
         "import/no-import-module-exports": "off",
         "import/no-extraneous-dependencies": "off",
         "camelcase": "off",
+        "@next/next/no-img-element": "off",
     },
 });

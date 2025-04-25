@@ -35,13 +35,6 @@ const defaultValues = {
 	amountType: 'usd'
 };
 
-type FormType = {
-	action: string;
-	wallet: string;
-	amount: number;
-	amountType: string;
-};
-
 /**
  * Form Validation Schema
  */
@@ -56,6 +49,8 @@ const schema = z.object({
 		.or(z.number().min(0, 'Amount must be greater than or equal to 0')), // allows zero
 	amountType: z.string().min(1, 'You must select a value')
 });
+
+type FormType = z.infer<typeof schema>;
 
 /**
  * The buy sell form.
@@ -306,44 +301,46 @@ function BuySellForm() {
 							required
 							fullWidth
 							type="number"
-							InputProps={{
-								endAdornment: (
-									<Controller
-										control={control}
-										name="amountType"
-										render={({ field: _field }) => (
-											<FormControl className="min-w-20">
-												<Select
-													{..._field}
-													variant="outlined"
-													size="small"
-													sx={{
-														'& .MuiSelect-select ': {
-															minHeight: '0!important',
-															paddingY: 0
-														},
-														'& fieldset': {
-															display: 'none'
-														}
-													}}
-												>
-													<MenuItem
-														key="usd"
-														value="usd"
+							slotProps={{
+								input: {
+									endAdornment: (
+										<Controller
+											control={control}
+											name="amountType"
+											render={({ field: _field }) => (
+												<FormControl className="min-w-20">
+													<Select
+														{..._field}
+														variant="outlined"
+														size="small"
+														sx={{
+															'& .MuiSelect-select ': {
+																minHeight: '0!important',
+																paddingY: 0
+															},
+															'& fieldset': {
+																display: 'none'
+															}
+														}}
 													>
-														USD
-													</MenuItem>
-													<MenuItem
-														key={walletValue}
-														value={walletValue}
-													>
-														{walletValue?.toUpperCase()}
-													</MenuItem>
-												</Select>
-											</FormControl>
-										)}
-									/>
-								)
+														<MenuItem
+															key="usd"
+															value="usd"
+														>
+															USD
+														</MenuItem>
+														<MenuItem
+															key={walletValue}
+															value={walletValue}
+														>
+															{walletValue?.toUpperCase()}
+														</MenuItem>
+													</Select>
+												</FormControl>
+											)}
+										/>
+									)
+								}
 							}}
 						/>
 					)}

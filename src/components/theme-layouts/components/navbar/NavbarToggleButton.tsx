@@ -4,7 +4,7 @@ import _ from 'lodash';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import clsx from 'clsx';
-import { IconButtonProps } from '@mui/material/IconButton/IconButton';
+import { IconButtonProps } from '@mui/material/IconButton';
 import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 import { navbarToggle, navbarToggleMobile } from './navbarSlice';

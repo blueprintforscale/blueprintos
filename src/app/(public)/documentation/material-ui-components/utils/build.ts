@@ -14,7 +14,7 @@ const demoDir = './src/app/(public)/documentation/material-ui-components/compone
 const rootDirectory = './src/app/(public)/documentation/material-ui-components';
 const examplesDirectory = path.resolve(rootDirectory, './components');
 const pagesDirectory = path.resolve(rootDirectory, './doc');
-const routesFilePath = path.resolve(rootDirectory, './MaterialUIComponentsRoute.tsx');
+// const routesFilePath = path.resolve(rootDirectory, './MaterialUIComponentsRoute.tsx');
 const navigationFilePath = path.resolve(rootDirectory, './MaterialUIComponentsNavigation.ts');
 const projectDir = path.resolve(rootDirectory, '..', '..', '..', '..', '..');
 const nodeModulesDir = path.resolve(projectDir, 'node_modules');
@@ -59,16 +59,16 @@ renderer.heading = (text, level) => {
 	let className = '';
 	switch (level) {
 		case 1:
-			className = 'text-5xl my-16 font-700';
+			className = 'text-5xl my-4 font-bold';
 			break;
 		case 2:
-			className = 'text-3xl mt-24 mb-10 font-700';
+			className = 'text-3xl mt-6 mb-2.5 font-bold';
 			break;
 		case 3:
-			className = 'text-15 mt-20 mb-10 font-700';
+			className = 'text-lg mt-5 mb-2.5 font-bold';
 			break;
 		default:
-			className = 'text-base mt-12 mb-10';
+			className = 'text-base mt-3 mb-2.5';
 	}
 
 	return `<Typography className="${className}" component="h${level}">${text}</Typography>\n`;
@@ -180,13 +180,13 @@ const rmDir = async (dirPath: string) => {
 	return true;
 };
 
-function allReplace(str: string, obj: Record<string, string>): string {
-	let retStr = str;
-	Object.keys(obj).forEach((key) => {
-		retStr = retStr.replace(new RegExp(key, 'g'), obj[key]);
-	});
-	return retStr;
-}
+// function allReplace(str: string, obj: Record<string, string>): string {
+// 	let retStr = str;
+// 	Object.keys(obj).forEach((key) => {
+// 		retStr = retStr.replace(new RegExp(key, 'g'), obj[key]);
+// 	});
+// 	return retStr;
+// }
 
 function getContents(markdown: string) {
 	return markdown
@@ -366,6 +366,8 @@ function writePage(fileDir: string) {
 	const { htmlCode, importPaths } = getHtmlCode(markdownSource, fileDir);
 
 	const componentContent = `
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';

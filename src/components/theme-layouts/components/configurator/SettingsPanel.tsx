@@ -8,17 +8,14 @@ import { styled, useTheme } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
-import useUser from '@auth/useUser';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
-
-import { useAppDispatch } from '@/store/hooks';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
 		position: 'fixed',
 		width: 380,
 		maxWidth: '90vw',
-		backgroundColor: theme.palette.background.paper,
+		backgroundColor: theme.vars.palette.background.paper,
 		top: 0,
 		height: '100%',
 		minHeight: '100%',
@@ -63,8 +60,8 @@ type SettingsPanelProps = {
 
 function SettingsPanel(props: SettingsPanelProps) {
 	const { settingsHandlers, onClose, open } = props;
-	const { isGuest, updateUserSettings } = useUser();
-	const dispatch = useAppDispatch();
+	// const { isGuest, updateUserSettings } = useUser();
+	// const dispatch = useAppDispatch();
 
 	const { data: settings, setSettings } = useFuseSettings();
 
@@ -92,7 +89,12 @@ function SettingsPanel(props: SettingsPanelProps) {
 			aria-describedby="settings"
 			open={open}
 			onClose={onClose}
-			BackdropProps={{ invisible: true }}
+			slotProps={{
+				backdrop: {
+					invisible: true
+				}
+			}}
+			disableRestoreFocus
 			classes={{
 				paper: 'shadow-lg'
 			}}

@@ -21,11 +21,11 @@ const Root = styled('div')(({ theme }) => ({
 	},
 	'& .divider': {
 		width: 1,
-		backgroundColor: theme.palette.divider,
+		backgroundColor: theme.vars.palette.divider,
 		height: 144
 	},
 	'& .seller': {
-		backgroundColor: theme.palette.primary.dark,
+		backgroundColor: theme.vars.palette.primary.dark,
 		color: theme.palette.getContrastText(theme.palette.primary.dark),
 		marginRight: -88,
 		paddingRight: 66,

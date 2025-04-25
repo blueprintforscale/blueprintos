@@ -70,8 +70,10 @@ function ContactsHeader() {
 						disableUnderline
 						fullWidth
 						value={searchText}
-						inputProps={{
-							'aria-label': 'Search'
+						slotProps={{
+							input: {
+								'aria-label': 'Search'
+							}
 						}}
 						onChange={(ev: ChangeEvent<HTMLInputElement>) => dispatch(setSearchText(ev))}
 					/>

@@ -37,7 +37,7 @@ function AuthGuardRedirect({ auth, children, loginRedirectUrl = '/' }: AuthGuard
 			navigate(redirectUrl);
 			resetSessionRedirectUrl();
 		}
-	}, [isGuest, loginRedirectUrl]);
+	}, [isGuest, loginRedirectUrl, navigate]);
 
 	// Check user's permissions and set access granted state
 	useEffect(() => {
@@ -46,7 +46,6 @@ function AuthGuardRedirect({ auth, children, loginRedirectUrl = '/' }: AuthGuard
 		const ignoredPaths = ['/', '/callback', '/sign-in', '/sign-out', '/logout', '/404'];
 
 		if (!auth || (auth && userHasPermission) || (isOnlyGuestAllowed && isGuest)) {
-			resetSessionRedirectUrl();
 			setAccessGranted(true);
 			return;
 		}
@@ -68,7 +67,7 @@ function AuthGuardRedirect({ auth, children, loginRedirectUrl = '/' }: AuthGuard
 		}
 
 		handleRedirection();
-	}, [auth, userRole, isGuest, pathname]);
+	}, [auth, userRole, isGuest, pathname, handleRedirection]);
 
 	// Return children if access is granted, otherwise null
 	return accessGranted ? children : <FuseLoading />;

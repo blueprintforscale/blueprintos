@@ -3,7 +3,7 @@
 import FuseLoading from '@fuse/core/FuseLoading';
 import FusePageSimple from '@fuse/core/FusePageSimple/FusePageSimple';
 import Typography from '@mui/material/Typography';
-import Masonry from 'react-masonry-css';
+import Masonry from '@mui/lab/Masonry';
 import _ from 'lodash';
 import { useDeleteNotificationMutation, useGetAllNotificationsQuery } from './NotificationApi';
 import NotificationCard from './NotificationCard';
@@ -26,21 +26,23 @@ function NotificationsApp() {
 		<FusePageSimple
 			header={<NotificationsAppHeader />}
 			content={
-				<div className="flex flex-col w-full p-4 mt-0 sm:mt-2">
+				<div className="flex flex-wrap w-full p-4 mt-0 sm:mt-2">
 					<Masonry
-						breakpointCols={{
-							default: 4,
-							960: 3,
-							600: 2,
-							480: 1
+						columns={{
+							xs: 1,
+							sm: 2,
+							md: 3,
+							lg: 4,
+							xl: 5,
+							xxl: 6
 						}}
+						spacing={2}
 						className="my-masonry-grid flex w-full"
-						columnClassName="my-masonry-grid_column flex flex-col p-2"
 					>
 						{_.orderBy(notifications, ['time'], ['desc']).map((notification) => (
 							<NotificationCard
 								key={notification.id}
-								className="mb-4"
+								className=""
 								item={notification}
 								onClose={handleDismiss}
 							/>
