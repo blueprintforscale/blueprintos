@@ -3,7 +3,7 @@ import apiService from './apiService';
 import { navigationSlice } from '@/components/theme-layouts/components/navigation/store/navigationSlice';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
+// @ts-ignore
 export interface LazyLoadedSlices {}
 
 // `combineSlices` automatically combines the reducers using
