@@ -119,13 +119,13 @@ const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme, dense }) => ({
 		{
 			props: ({ folded, open, position }) => !folded && !open && position === 'left',
 			style: {
-				marginLeft: -(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)
+				marginLeft: `${-(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)}px!important`
 			}
 		},
 		{
 			props: ({ folded, open, position }) => !folded && !open && position === 'right',
 			style: {
-				marginRight: -(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)
+				marginRight: `${-(dense ? navbarWidthDense + panelWidth : navbarWidth + panelWidth)}px!important`
 			}
 		},
 		{
