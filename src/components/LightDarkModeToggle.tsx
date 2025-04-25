@@ -8,8 +8,6 @@ import clsx from 'clsx';
 import { useMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
-import useUser from '@auth/useUser';
-import { useAppDispatch } from '@/store/hooks';
 
 type LightDarkModeToggleProps = {
 	className?: string;
@@ -21,8 +19,8 @@ function LightDarkModeToggle(props: LightDarkModeToggleProps) {
 	const { className = '', lightTheme, darkTheme } = props;
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const { setSettings } = useFuseSettings();
-	const { isGuest, updateUserSettings } = useUser();
-	const dispatch = useAppDispatch();
+	// const { isGuest, updateUserSettings } = useUser();
+	// const dispatch = useAppDispatch();
 
 	const mainTheme = useMainTheme();
 

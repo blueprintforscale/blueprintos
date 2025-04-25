@@ -8,10 +8,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
-import useUser from '@auth/useUser';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
-
-import { useAppDispatch } from '@/store/hooks';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
@@ -63,8 +60,8 @@ type SettingsPanelProps = {
 
 function SettingsPanel(props: SettingsPanelProps) {
 	const { settingsHandlers, onClose, open } = props;
-	const { isGuest, updateUserSettings } = useUser();
-	const dispatch = useAppDispatch();
+	// const { isGuest, updateUserSettings } = useUser();
+	// const dispatch = useAppDispatch();
 
 	const { data: settings, setSettings } = useFuseSettings();
 

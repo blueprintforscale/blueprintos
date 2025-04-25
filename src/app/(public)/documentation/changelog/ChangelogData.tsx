@@ -23,7 +23,7 @@ export type ChangelogItemType = {
 const changelogData: ChangelogItemType[] = [
 	{
 		version: '15.0.0',
-		date: '2025-04-21',
+		date: '2025-04-25',
 		newChanges: [
 			'React updated to v19.1.0',
 			'MUI updated to v7.0.2',
@@ -39,7 +39,8 @@ const changelogData: ChangelogItemType[] = [
 			'Rich text editor react-draft-wysiwyg removed, replaced with @tiptap/react.',
 			"react-masonry-css removed, replaced with mui's masonry component.",
 			'react-swipeable-views removed.',
-			'draft-js removed.'
+			'draft-js removed.',
+			'convert next.config.mjs to next.config.ts'
 		]
 	},
 	{

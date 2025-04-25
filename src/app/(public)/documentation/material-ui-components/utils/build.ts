@@ -14,7 +14,7 @@ const demoDir = './src/app/(public)/documentation/material-ui-components/compone
 const rootDirectory = './src/app/(public)/documentation/material-ui-components';
 const examplesDirectory = path.resolve(rootDirectory, './components');
 const pagesDirectory = path.resolve(rootDirectory, './doc');
-const routesFilePath = path.resolve(rootDirectory, './MaterialUIComponentsRoute.tsx');
+// const routesFilePath = path.resolve(rootDirectory, './MaterialUIComponentsRoute.tsx');
 const navigationFilePath = path.resolve(rootDirectory, './MaterialUIComponentsNavigation.ts');
 const projectDir = path.resolve(rootDirectory, '..', '..', '..', '..', '..');
 const nodeModulesDir = path.resolve(projectDir, 'node_modules');
@@ -180,13 +180,13 @@ const rmDir = async (dirPath: string) => {
 	return true;
 };
 
-function allReplace(str: string, obj: Record<string, string>): string {
-	let retStr = str;
-	Object.keys(obj).forEach((key) => {
-		retStr = retStr.replace(new RegExp(key, 'g'), obj[key]);
-	});
-	return retStr;
-}
+// function allReplace(str: string, obj: Record<string, string>): string {
+// 	let retStr = str;
+// 	Object.keys(obj).forEach((key) => {
+// 		retStr = retStr.replace(new RegExp(key, 'g'), obj[key]);
+// 	});
+// 	return retStr;
+// }
 
 function getContents(markdown: string) {
 	return markdown

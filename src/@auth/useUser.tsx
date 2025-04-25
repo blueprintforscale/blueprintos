@@ -10,7 +10,7 @@ type useUser = {
 	isGuest: boolean;
 	updateUser: (updates: Partial<User>) => Promise<User | undefined>;
 	updateUserSettings: (newSettings: User['settings']) => Promise<User['settings'] | undefined>;
-	signOut: typeof signOut;
+	signOut: () => Promise<void>;
 };
 
 function useUser(): useUser {

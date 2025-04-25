@@ -1,7 +1,6 @@
 'use client';
 
 import FuseShortcuts from '@fuse/core/FuseShortcuts';
-import { usePrevious } from '@fuse/hooks';
 import { useEffect, useState } from 'react';
 import useUser from '@auth/useUser';
 import useNavigation from './hooks/useNavigation';
@@ -17,9 +16,9 @@ type NavigationShortcutsProps = {
 function NavigationShortcuts(props: NavigationShortcutsProps) {
 	const { variant, className } = props;
 	const { flattenNavigation: navigation } = useNavigation();
-	const { data: user, updateUser, isGuest } = useUser();
+	const { data: user, isGuest } = useUser();
 	const [userShortcuts, setUserShortcuts] = useState<string[]>(user?.shortcuts || []);
-	const prevUserShortcuts = usePrevious(userShortcuts);
+	// const prevUserShortcuts = usePrevious(userShortcuts);
 
 	useEffect(() => {
 		/**

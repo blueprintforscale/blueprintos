@@ -21,14 +21,11 @@ const schema = z.object({
 	password: z
 		.string()
 		.min(4, 'Password is too short - must be at least 4 chars.')
-		.nonempty('Please enter your password.')
+		.nonempty('Please enter your password.'),
+	remember: z.boolean().optional()
 });
 
-type FormType = {
-	email: string;
-	password: string;
-	remember?: boolean;
-};
+type FormType = z.infer<typeof schema>;
 
 const defaultValues = {
 	email: '',

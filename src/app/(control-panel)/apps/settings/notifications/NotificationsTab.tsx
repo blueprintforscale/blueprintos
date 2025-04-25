@@ -11,13 +11,7 @@ import Switch from '@mui/material/Switch';
 import FormHelperText from '@mui/material/FormHelperText';
 import _ from 'lodash';
 import { useEffect } from 'react';
-import {
-	SettingsNotifications,
-	useGetNotificationSettingsQuery,
-	useUpdateNotificationSettingsMutation
-} from '../SettingsApi';
-
-type FormType = SettingsNotifications;
+import { useGetNotificationSettingsQuery, useUpdateNotificationSettingsMutation } from '../SettingsApi';
 
 const defaultValues: FormType = {
 	id: '',
@@ -34,6 +28,7 @@ const defaultValues: FormType = {
  * Form Validation Schema
  */
 const schema = z.object({
+	id: z.string(),
 	communication: z.boolean(),
 	security: z.boolean(),
 	meetups: z.boolean(),
@@ -42,6 +37,8 @@ const schema = z.object({
 	follow: z.boolean(),
 	inquiry: z.boolean()
 });
+
+type FormType = z.infer<typeof schema>;
 
 function NotificationsTab() {
 	const { data: notificationSettings } = useGetNotificationSettingsQuery();
@@ -63,7 +60,7 @@ function NotificationsTab() {
 	 * Form Submit
 	 */
 	function onSubmit(formData: FormType) {
-		updateNotificationSettings(formData);
+		updateNotificationSettings({ ...formData, id: formData.id });
 	}
 
 	return (

@@ -53,17 +53,21 @@ export function FuseSettingsProvider({ children }: { children: ReactNode }) {
 		if (!_.isEqual(data, newSettings)) {
 			setData(newSettings);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [calculateSettings]);
 
-	const setSettings = (newSettings: Partial<FuseSettingsConfigType>) => {
-		const _settings = generateSettings(data, newSettings);
+	const setSettings = useCallback(
+		(newSettings: Partial<FuseSettingsConfigType>) => {
+			const _settings = generateSettings(data, newSettings);
 
-		if (!_.isEqual(_settings, data)) {
-			setData(_.merge({}, _settings));
-		}
+			if (!_.isEqual(_settings, data)) {
+				setData(_.merge({}, _settings));
+			}
 
-		return _settings;
-	};
+			return _settings;
+		},
+		[data]
+	);
 
 	const changeTheme = useCallback(
 		(newTheme: FuseThemesType) => {
@@ -92,7 +96,7 @@ export function FuseSettingsProvider({ children }: { children: ReactNode }) {
 					setSettings,
 					changeTheme
 				}),
-				[data, setSettings]
+				[data, setSettings, changeTheme]
 			)}
 		>
 			{children}

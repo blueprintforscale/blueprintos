@@ -16,7 +16,7 @@ import PageBreadcrumb from 'src/components/PageBreadcrumb';
 import DocumentationNavigation from '../DocumentationNavigation';
 import DocumentationSidebarHeader from './DocumentationSidebarHeader';
 
-const Root = styled(FusePageSimple)(({ theme }) => ({
+const Root = styled(FusePageSimple)(() => ({
 	'& [class^="language-"]': {
 		margin: 0
 	}

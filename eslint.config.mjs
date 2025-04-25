@@ -168,5 +168,6 @@ export default tseslint.config({
         "import/no-import-module-exports": "off",
         "import/no-extraneous-dependencies": "off",
         "camelcase": "off",
+        "@next/next/no-img-element": "off",
     },
 });
