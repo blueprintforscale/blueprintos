@@ -15,7 +15,7 @@ import { NotificationPanelContextProvider } from '@/app/(control-panel)/apps/not
 import { FuseDialogContextProvider } from '@fuse/core/FuseDialog/contexts/FuseDialogContext/FuseDialogContextProvider';
 import { NavbarContextProvider } from '@/components/theme-layouts/components/navbar/contexts/NavbarContext/NavbarContextProvider';
 import { QuickPanelProvider } from '@/components/theme-layouts/components/quickPanel/contexts/QuickPanelContext/QuickPanelContextProvider';
-import RootThemeProvider from '@/app/contexts/RootThemeProvider';
+import RootThemeProvider from '@/contexts/RootThemeProvider';
 import { NavigationContextProvider } from '@/components/theme-layouts/components/navigation/contexts/NavigationContextProvider';
 
 const queryClient = new QueryClient({

@@ -26,7 +26,7 @@ function PoweredByLinks() {
 			variants={container}
 			initial="hidden"
 			animate="show"
-			className="overflow-hidde1 flex items-center gap-1"
+			className="flex items-center gap-1 overflow-hidden"
 		>
 			<Tooltip
 				title="React"

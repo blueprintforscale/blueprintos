@@ -12,7 +12,7 @@ import Alert from '@mui/material/Alert';
 
 type FuseExampleProps = {
 	name?: string;
-	raw?: unknown; // Allow any type to handle both string and React elements
+	raw?: unknown;
 	showCode?: boolean;
 	component: ElementType;
 	iframe?: ReactNode;

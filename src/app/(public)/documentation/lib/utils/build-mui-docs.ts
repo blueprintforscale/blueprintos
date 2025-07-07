@@ -11,13 +11,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const documentationDir = './src/app/(public)/documentation';
-// const demoDir = path.resolve(rootDirectory, './components/ui/material-ui-components');
 const exampleComponentsDir = path.resolve(documentationDir, './components/ui/material-ui-components');
 const viewComponentsDir = path.resolve(documentationDir, './components/views/material-ui-components');
 const routesDir = path.resolve(documentationDir, './(routes)/material-ui-components');
-// const routesFilePath = path.resolve(rootDirectory, './MaterialUIComponentsRoute.tsx');
 const navigationFilePath = path.resolve(documentationDir, './lib/constants/materialUIComponentsNavigation.ts');
-const projectDir = path.resolve(documentationDir, '..', '..', '..', '..', '..');
+const projectDir = path.resolve(documentationDir, '..', '..', '..', '..');
 const nodeModulesDir = path.resolve(projectDir, 'node_modules');
 
 const demoRegexp = /^"demo": "(.*)"/;
@@ -436,7 +434,7 @@ function writeNavigationFile(pages: string[]) {
 			id: 'material-ui-components',
 			title: 'Material UI Components',
 			type: 'collapse',
-			icon: 'layers',
+			icon: 'lucide:layers',
 			children: [${navigation.join()}]
 		};
 												

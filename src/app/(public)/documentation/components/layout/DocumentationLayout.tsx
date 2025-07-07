@@ -23,7 +23,7 @@ const Root = styled(FusePageSimple)(() => ({
 }));
 
 type DocumentationLayoutProps = {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 };
 
 /**
