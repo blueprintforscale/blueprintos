@@ -9,10 +9,8 @@ import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
 import themeOptions from 'src/configs/themeOptions';
 import { FuseThemeOption } from '@fuse/core/FuseThemeSelector/ThemePreview';
-import useUser from '@auth/useUser';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
-import { useSnackbar } from 'notistack';
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
 		position: 'fixed',
@@ -67,13 +65,18 @@ type ThemesPanelProps = {
 function ThemesPanel(props: ThemesPanelProps) {
 	const { schemesHandlers, onClose, open } = props;
 	const { setSettings } = useFuseSettings();
-	const { isGuest, updateUserSettings } = useUser();
-	const { enqueueSnackbar } = useSnackbar();
+	// const { isGuest, updateUserSettings } = useUser();
+	// const { enqueueSnackbar } = useSnackbar();
 
 	async function handleThemeSelect(_theme: FuseThemeOption) {
 		const _newSettings = setSettings({ theme: { ..._theme?.section } } as Partial<FuseSettingsConfigType>);
 
-		if (!isGuest) {
+		/**
+		 * Updating user settings disabled for demonstration purposes
+		 * The request is made to the mock API and will not persist the changes
+		 * You can enable it by removing the comment block below when using a real API
+		 * */
+		/* if (!isGuest) {
 			const updatedUserData = await updateUserSettings(_newSettings);
 
 			if (updatedUserData) {
@@ -81,7 +84,7 @@ function ThemesPanel(props: ThemesPanelProps) {
 					variant: 'success'
 				});
 			}
-		}
+		}*/
 	}
 
 	return (

@@ -2,10 +2,7 @@
 import FuseShortcuts from '@fuse/core/FuseShortcuts';
 import { usePrevious } from '@fuse/hooks';
 import { useEffect, useState } from 'react';
-import _ from 'lodash';
-import { User } from '@auth/user';
 import useUser from '@auth/useUser';
-import setIn from '@/utils/setIn';
 import useNavigationItems from './hooks/useNavigationItems';
 
 type NavigationShortcutsProps = {
@@ -24,9 +21,14 @@ function NavigationShortcuts(props: NavigationShortcutsProps) {
 	const prevUserShortcuts = usePrevious(userShortcuts);
 
 	useEffect(() => {
-		if (!isGuest && prevUserShortcuts && !_.isEqual(userShortcuts, prevUserShortcuts)) {
+		/**
+		 * Updating user settings disabled for demonstration purposes
+		 * The request is made to the mock API and will not persist the changes
+		 * You can enable it by removing the comment block below when using a real API
+		 * */
+		/* if (!isGuest && prevUserShortcuts && !_.isEqual(userShortcuts, prevUserShortcuts)) {
 			updateUser(setIn(user, 'shortcuts', userShortcuts) as User);
-		}
+		}*/
 	}, [isGuest, prevUserShortcuts, updateUser, user, userShortcuts]);
 
 	function handleShortcutsChange(newShortcuts: string[]) {

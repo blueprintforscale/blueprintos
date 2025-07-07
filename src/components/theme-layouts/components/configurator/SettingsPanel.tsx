@@ -8,9 +8,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
-import useUser from '@auth/useUser';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
-import { useSnackbar } from 'notistack';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
@@ -62,15 +60,20 @@ type SettingsPanelProps = {
 
 function SettingsPanel(props: SettingsPanelProps) {
 	const { settingsHandlers, onClose, open } = props;
-	const { isGuest, updateUserSettings } = useUser();
-	const { enqueueSnackbar } = useSnackbar();
+	// const { isGuest, updateUserSettings } = useUser();
+	// const { enqueueSnackbar } = useSnackbar();
 
 	const { data: settings, setSettings } = useFuseSettings();
 
 	const handleSettingsChange = async (newSettings: Partial<FuseSettingsConfigType>) => {
 		const _newSettings = setSettings(newSettings);
 
-		if (!isGuest) {
+		/**
+		 * Updating user settings disabled for demonstration purposes
+		 * The request is made to the mock API and will not persist the changes
+		 * You can enable it by removing the comment block below when using a real API
+		 * */
+		/* if (!isGuest) {
 			const updatedUserData = await updateUserSettings(_newSettings);
 
 			if (updatedUserData) {
@@ -78,7 +81,7 @@ function SettingsPanel(props: SettingsPanelProps) {
 					variant: 'success'
 				});
 			}
-		}
+		} */
 	};
 
 	return (
