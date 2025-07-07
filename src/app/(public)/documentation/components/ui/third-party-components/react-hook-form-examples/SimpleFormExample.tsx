@@ -15,6 +15,7 @@ import clsx from 'clsx';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import FormHelperText from '@mui/material/FormHelperText';
+import InputAdornment from '@mui/material/InputAdornment';
 import { DateTimePicker } from '@mui/x-date-pickers';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -324,11 +325,12 @@ function SimpleFormExample() {
 										fullWidth: true,
 										variant: 'outlined',
 										error: !!errors.DateTimePicker,
-										helperText: errors?.DateTimePicker?.message
-									},
-									inputAdornment: {
-										position: 'start',
-										children: <FuseSvgIcon size={20}>heroicons-solid:cake</FuseSvgIcon>
+										helperText: errors?.DateTimePicker?.message,
+										startAdornment: (
+											<InputAdornment position="start">
+												<FuseSvgIcon>lucide:cake</FuseSvgIcon>
+											</InputAdornment>
+										)
 									}
 								}}
 							/>

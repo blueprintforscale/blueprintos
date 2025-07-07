@@ -5,7 +5,7 @@ const fuseComponentsNavigation = {
 	id: 'fuse-components',
 	title: 'Fuse Components',
 	type: 'collapse',
-	icon: 'widgets',
+	icon: 'lucide:component',
 	children: [
 		{
 			id: 'fuse-theme',

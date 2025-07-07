@@ -23,7 +23,7 @@ export default function Error({ error, reset }: ErrorProps) {
 					color="error"
 					size={64}
 				>
-					heroicons-outline:information-circle
+					lucide:info
 				</FuseSvgIcon>
 				<Typography
 					className="mb-4 text-xl lg:text-3xl"

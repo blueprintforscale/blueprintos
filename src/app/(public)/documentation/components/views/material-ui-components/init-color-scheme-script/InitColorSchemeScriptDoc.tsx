@@ -14,16 +14,16 @@ import Typography from '@mui/material/Typography';
 function InitColorSchemeScriptDoc(props) {
 	return (
 		<>
-			<Button 
+			<Button
 				className="normal-case absolute right-0 not-prose"
 				variant="contained"
 				color="secondary"
-				component="a" 
-				href="https://mui.com/components/init-color-scheme-script" 
+				component="a"
+				href="https://mui.com/components/init-color-scheme-script"
 				target="_blank"
 				role="button"
 				size="small"
-				startIcon={<FuseSvgIcon size={16}>heroicons-outline:arrow-top-right-on-square</FuseSvgIcon>}
+				startIcon={<FuseSvgIcon size={16}>lucide:square-arrow-out-up-right</FuseSvgIcon>}
 			>
 				Reference
 			</Button>

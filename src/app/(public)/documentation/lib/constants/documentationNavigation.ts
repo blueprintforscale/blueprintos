@@ -11,14 +11,14 @@ const documentationNavigation: FuseNavItemType = {
 	id: 'documentation',
 	title: 'Documentation',
 	subtitle: 'Everything you need to know about Fuse',
-	icon: 'heroicons-outline:book-open',
+	icon: 'lucide:book-open',
 	type: 'group',
 	children: [
 		{
 			id: 'changelog',
 			title: 'Changelog',
 			type: 'item',
-			icon: 'heroicons-outline:megaphone',
+			icon: 'lucide:megaphone',
 			url: '/documentation/changelog',
 			badge: {
 				title: fuseReactLatestVersion,
@@ -36,14 +36,14 @@ const documentationNavigation: FuseNavItemType = {
 					id: 'introduction-doc',
 					title: 'Introduction',
 					type: 'item',
-					icon: 'heroicons-outline:play',
+					icon: 'lucide:play',
 					url: '/documentation/getting-started/introduction'
 				},
 				{
 					id: 'git-repository-doc',
 					title: 'Git Repository',
 					type: 'item',
-					icon: 'heroicons-outline:folder-open',
+					icon: 'lucide:folder-open',
 					url: '/documentation/getting-started/git-repository'
 				}
 			]
@@ -58,42 +58,42 @@ const documentationNavigation: FuseNavItemType = {
 					id: 'installation-doc',
 					title: 'Installation',
 					type: 'item',
-					icon: 'heroicons-outline:code-bracket-square',
+					icon: 'lucide:cog',
 					url: '/documentation/getting-started/installation'
 				},
 				{
 					id: 'development-server-doc',
 					title: 'Development Server',
 					type: 'item',
-					icon: 'heroicons-outline:server',
+					icon: 'lucide:server',
 					url: '/documentation/development/development-server'
 				},
 				{
 					id: 'production-doc',
 					title: 'Production Build',
 					type: 'item',
-					icon: 'heroicons-outline:bolt',
+					icon: 'lucide:zap',
 					url: '/documentation/development/production'
 				},
 				{
 					id: 'deployment-doc',
 					title: 'Deployment',
 					type: 'item',
-					icon: 'heroicons-outline:paper-airplane',
+					icon: 'lucide:send',
 					url: '/documentation/development/deployment'
 				},
 				{
 					id: 'directory-structure-doc',
 					title: 'Directory Structure',
 					type: 'item',
-					icon: 'heroicons-outline:folder',
+					icon: 'lucide:folder',
 					url: '/documentation/development/directory-structure'
 				},
 				{
 					id: 'api-integration-doc',
 					title: 'API Integration',
 					type: 'collapse',
-					icon: 'heroicons-outline:cloud',
+					icon: 'lucide:cloud',
 					url: '/documentation/development/api-integration',
 					children: [
 						{
@@ -114,21 +114,21 @@ const documentationNavigation: FuseNavItemType = {
 					id: 'fuse-react-multi-language-doc',
 					title: 'Localization (Multi-Language)',
 					type: 'item',
-					icon: 'heroicons-outline:globe-alt',
+					icon: 'lucide:globe',
 					url: '/documentation/development/multi-language'
 				},
 				{
 					id: 'updating-fuse-react-doc',
 					title: 'Updating Guide',
 					type: 'item',
-					icon: 'heroicons-outline:chevron-double-up',
+					icon: 'lucide:chevrons-up',
 					url: '/documentation/development/updating-fuse-react'
 				},
 				{
 					id: 'fuse-react-ides-vscode-webstorm-doc',
 					title: 'IDE Configuration',
 					type: 'item',
-					icon: 'heroicons-outline:code-bracket',
+					icon: 'lucide:code-xml',
 					url: '/documentation/development/ides-vscode-webstorm'
 				}
 			]
@@ -143,21 +143,21 @@ const documentationNavigation: FuseNavItemType = {
 					id: 'default-settings-doc',
 					title: 'Default Settings',
 					type: 'item',
-					icon: 'heroicons-outline:cog',
+					icon: 'lucide:settings-2',
 					url: '/documentation/configuration/settings'
 				},
 				{
 					id: 'fuse-react-routing-doc',
 					title: 'Routing',
 					type: 'item',
-					icon: 'heroicons-outline:map',
+					icon: 'lucide:map',
 					url: '/documentation/configuration/routing'
 				},
 				{
 					id: 'fuse-react-navigation-doc',
 					title: 'Navigation',
 					type: 'item',
-					icon: 'heroicons-outline:queue-list',
+					icon: 'lucide:square-menu',
 					url: '/documentation/configuration/navigation'
 				}
 			]
@@ -172,21 +172,21 @@ const documentationNavigation: FuseNavItemType = {
 					id: 'theme-schemes-doc',
 					title: 'Theme Schemes',
 					type: 'item',
-					icon: 'heroicons-outline:swatch',
+					icon: 'lucide:swatch-book',
 					url: '/documentation/user-interface/theme-schemes'
 				},
 				{
 					id: 'theme-layouts-doc',
 					title: 'Theme Layouts',
 					type: 'item',
-					icon: 'heroicons-outline:square-3-stack-3d',
+					icon: 'lucide:layers',
 					url: '/documentation/user-interface/theme-layouts'
 				},
 				{
 					id: 'user-interface.page-layouts',
 					title: 'Page Layouts',
 					type: 'collapse',
-					icon: 'heroicons-outline:rectangle-group',
+					icon: 'lucide:layout-grid',
 					children: [
 						{
 							id: 'user-interface.page-layouts.overview',
@@ -348,7 +348,7 @@ const documentationNavigation: FuseNavItemType = {
 					id: 'user-interface.icons',
 					title: 'Icons',
 					type: 'collapse',
-					icon: 'heroicons-outline:bolt',
+					icon: 'lucide:sparkles',
 					url: '/documentation/user-interface/icons',
 					children: [
 						{
@@ -399,28 +399,28 @@ const documentationNavigation: FuseNavItemType = {
 					id: 'user-interface.tailwindcss',
 					title: 'TailwindCSS',
 					type: 'item',
-					icon: 'heroicons-outline:sparkles',
+					icon: 'lucide:wind',
 					url: '/documentation/user-interface/tailwindcss'
 				},
 				{
 					id: 'user-interface.typography',
 					title: 'Typography',
 					type: 'item',
-					icon: 'heroicons-outline:pencil',
+					icon: 'lucide:pencil',
 					url: '/documentation/user-interface/typography'
 				},
 				{
 					id: 'changing-default-font-doc',
 					title: 'Changing Default Font',
 					type: 'item',
-					icon: 'heroicons-outline:italic',
+					icon: 'lucide:italic',
 					url: '/documentation/user-interface/changing-default-font'
 				},
 				{
 					id: 'rtl-doc',
 					title: 'RTL Support',
 					type: 'item',
-					icon: 'heroicons-outline:language',
+					icon: 'lucide:languages',
 					url: '/documentation/user-interface/rtl-support'
 				}
 			]
@@ -431,20 +431,20 @@ const documentationNavigation: FuseNavItemType = {
 			title: 'Authentication & Authorization',
 			subtitle: 'User roles and permissions',
 			type: 'group',
-			icon: 'heroicons-outline:square-3-stack-3d',
+			icon: 'lucide:layers',
 			children: [
 				{
 					id: 'authentication',
 					title: 'Authentication',
 					type: 'item',
-					icon: 'heroicons-outline:shield-check',
+					icon: 'lucide:shield-check',
 					url: '/documentation/authentication'
 				},
 				{
 					id: 'authorization',
 					title: 'Authorization',
 					type: 'item',
-					icon: 'heroicons-outline:shield-exclamation',
+					icon: 'lucide:shield-alert',
 					url: '/documentation/authorization'
 				}
 			]
@@ -453,7 +453,7 @@ const documentationNavigation: FuseNavItemType = {
 			id: 'components',
 			title: 'Components',
 			type: 'group',
-			icon: 'heroicons-outline:collection',
+			icon: 'lucide:component',
 			children: [fuseComponentsNavigation, materialUIComponentsNavigation, thirdPartyComponentsNavigation]
 		}
 	]

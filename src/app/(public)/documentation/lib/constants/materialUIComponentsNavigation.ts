@@ -2,7 +2,7 @@ const materialUIComponentsNavigation = {
 	id: 'material-ui-components',
 	title: 'Material UI Components',
 	type: 'collapse',
-	icon: 'layers',
+	icon: 'lucide:layers',
 	children: [
 		{
 			id: 'accordion',

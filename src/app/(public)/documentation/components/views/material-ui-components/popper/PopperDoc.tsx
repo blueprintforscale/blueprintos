@@ -31,7 +31,7 @@ function PopperDoc(props) {
 				target="_blank"
 				role="button"
 				size="small"
-				startIcon={<FuseSvgIcon size={16}>heroicons-outline:arrow-top-right-on-square</FuseSvgIcon>}
+				startIcon={<FuseSvgIcon size={16}>lucide:square-arrow-out-up-right</FuseSvgIcon>}
 			>
 				Reference
 			</Button>

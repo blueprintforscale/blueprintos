@@ -5,7 +5,7 @@ const thirdPartyComponentsNavigation = {
 	id: '3rd-party-components',
 	title: '3rd Party Components',
 	type: 'collapse',
-	icon: 'settings_input_component',
+	icon: 'lucide:puzzle',
 	children: [
 		{
 			id: 'react-hook-form',

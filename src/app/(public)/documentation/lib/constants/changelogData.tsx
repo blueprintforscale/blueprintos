@@ -235,7 +235,7 @@ const changelogData: ChangelogItemType[] = [
 								/>
 							</div>
 						}
-						endIcon={<FuseSvgIcon size={16}>heroicons-outline:arrow-right</FuseSvgIcon>}
+						endIcon={<FuseSvgIcon size={16}>lucide:arrow-right</FuseSvgIcon>}
 					>
 						Go to the demo
 					</Button>

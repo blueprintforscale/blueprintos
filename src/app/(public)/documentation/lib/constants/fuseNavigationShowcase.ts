@@ -4,12 +4,12 @@ const fuseNavigationShowcase = [
 		title: 'Navigation features',
 		subtitle: 'Collapsable levels & badge styles',
 		type: 'group',
-		icon: 'heroicons-outline:bars-3',
+		icon: 'lucide:columns-3',
 		children: [
 			{
 				id: 'navigation-features.level.0',
 				title: 'Level 0',
-				icon: 'heroicons-outline:check-circle',
+				icon: 'lucide:circle-check',
 				type: 'collapse',
 				children: [
 					{
@@ -58,7 +58,7 @@ const fuseNavigationShowcase = [
 				id: 'navigation-features2.level.0',
 				title: 'Level 0',
 				subtitle: 'With subtitle',
-				icon: 'heroicons-outline:check-circle',
+				icon: 'lucide:circle-check',
 				type: 'collapse',
 				children: [
 					{
@@ -77,7 +77,7 @@ const fuseNavigationShowcase = [
 				id: 'navigation-features.active',
 				title: 'Active item',
 				subtitle: 'Manually marked as active',
-				icon: 'heroicons-outline:check-circle',
+				icon: 'lucide:circle-check',
 				type: 'item',
 				active: true
 			},
@@ -85,7 +85,7 @@ const fuseNavigationShowcase = [
 				id: 'navigation-features.disabled-collapse',
 				title: 'Disabled collapse',
 				subtitle: 'Some subtitle',
-				icon: 'heroicons-outline:check-circle',
+				icon: 'lucide:circle-check',
 				type: 'collapse',
 				disabled: true,
 				children: [
@@ -100,14 +100,14 @@ const fuseNavigationShowcase = [
 				id: 'navigation-features.disabled-item',
 				title: 'Disabled item',
 				subtitle: 'Some subtitle',
-				icon: 'heroicons-outline:check-circle',
+				icon: 'lucide:circle-check',
 				type: 'item',
 				disabled: true
 			},
 			{
 				id: 'navigation-features.badge-style-oval',
 				title: 'Oval badge',
-				icon: 'heroicons-outline:tag',
+				icon: 'lucide:tag',
 				type: 'item',
 				badge: {
 					title: '8',
@@ -117,7 +117,7 @@ const fuseNavigationShowcase = [
 			{
 				id: 'navigation-features.badge-style-rectangle',
 				title: 'Rectangle badge',
-				icon: 'heroicons-outline:tag',
+				icon: 'lucide:tag',
 				type: 'item',
 				badge: {
 					title: 'Updated!',
@@ -127,7 +127,7 @@ const fuseNavigationShowcase = [
 			{
 				id: 'navigation-features.badge-style-rounded',
 				title: 'Rounded badge',
-				icon: 'heroicons-outline:tag',
+				icon: 'lucide:tag',
 				type: 'item',
 				badge: {
 					title: 'NEW',
@@ -137,7 +137,7 @@ const fuseNavigationShowcase = [
 			{
 				id: 'navigation-features.badge-style-simple',
 				title: 'Simple badge',
-				icon: 'heroicons-outline:tag',
+				icon: 'lucide:tag',
 				type: 'item',
 				badge: {
 					title: '87 Unread',
