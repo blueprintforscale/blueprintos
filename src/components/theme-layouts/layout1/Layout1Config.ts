@@ -80,25 +80,17 @@ const Layout1Config = {
 					type: 'radio',
 					options: [
 						{
-							name: 'Slide (style-1)',
+							name: 'Slide',
 							value: 'style-1'
 						},
 						{
-							name: 'Folded (style-2)',
+							name: 'Tabbed',
 							value: 'style-2'
-						},
-						{
-							name: 'Tabbed (style-3)',
-							value: 'style-3'
-						},
-						{
-							name: 'Tabbed Dense (style-3-dense)',
-							value: 'style-3-dense'
 						}
 					]
 				},
 				folded: {
-					title: 'Folded (style-2, style-3)',
+					title: 'Tabbed Folded (default)',
 					type: 'switch'
 				}
 			}

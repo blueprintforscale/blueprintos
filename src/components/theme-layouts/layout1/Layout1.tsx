@@ -1,7 +1,5 @@
 'use client';
-
 import { styled } from '@mui/material/styles';
-import FuseMessage from '@fuse/core/FuseMessage';
 import { memo, ReactNode } from 'react';
 import { Layout1ConfigDefaultsType } from 'src/components/theme-layouts/layout1/Layout1Config';
 import Configurator from 'src/components/theme-layouts/components/configurator/Configurator';
@@ -11,7 +9,6 @@ import LeftSideLayout1 from './components/LeftSideLayout1';
 import NavbarWrapperLayout1 from './components/NavbarWrapperLayout1';
 import RightSideLayout1 from './components/RightSideLayout1';
 import ToolbarLayout1 from './components/ToolbarLayout1';
-import FuseDialog from '@fuse/core/FuseDialog';
 
 const Root = styled('div')(({ config }: { config: Layout1ConfigDefaultsType }) => ({
 	...(config.mode === 'boxed' && {
@@ -54,7 +51,7 @@ function Layout1(props: Layout1Props) {
 		<Root
 			id="fuse-layout"
 			config={config}
-			className="flex flex-auto w-full"
+			className="flex w-full flex-auto"
 		>
 			{config.leftSidePanel.display && <LeftSideLayout1 />}
 
@@ -63,7 +60,7 @@ function Layout1(props: Layout1Props) {
 
 				<main
 					id="fuse-main"
-					className="relative z-10 flex min-h-full min-w-0 flex-auto flex-col"
+					className="relative z-10 flex min-h-svh min-w-0 flex-auto flex-col"
 				>
 					{config.toolbar.display && (
 						<ToolbarLayout1 className={config.toolbar.style === 'fixed' ? 'sticky top-0' : ''} />
@@ -73,10 +70,7 @@ function Layout1(props: Layout1Props) {
 						<Configurator />
 					</div>
 
-					<div className="relative z-10 flex min-h-0 flex-auto flex-col">
-						<FuseDialog />
-						{children}
-					</div>
+					<div className="relative z-10 flex min-h-0 flex-auto flex-col">{children}</div>
 
 					{config.footer.display && (
 						<FooterLayout1 className={config.footer.style === 'fixed' ? 'sticky bottom-0' : ''} />
@@ -87,7 +81,6 @@ function Layout1(props: Layout1Props) {
 			</div>
 
 			{config.rightSidePanel.display && <RightSideLayout1 />}
-			<FuseMessage />
 		</Root>
 	);
 }

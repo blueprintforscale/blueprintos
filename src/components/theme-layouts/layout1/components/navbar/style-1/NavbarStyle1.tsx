@@ -1,16 +1,11 @@
 import { styled, Theme } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import {
-	navbarCloseMobile,
-	resetNavbar,
-	selectFuseNavbar
-} from 'src/components/theme-layouts/components/navbar/navbarSlice';
 import { useEffect } from 'react';
 import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import NavbarStyle1Content from './NavbarStyle1Content';
 import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
+import { useNavbarContext } from '@/components/theme-layouts/components/navbar/contexts/NavbarContext/useNavbarContext';
 
 const navbarWidth = 280;
 
@@ -82,26 +77,31 @@ const StyledNavBarMobile = styled(SwipeableDrawer)(() => ({
  * The navbar style 1.
  */
 function NavbarStyle1() {
-	const dispatch = useAppDispatch();
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 	const settings = useFuseLayoutSettings();
 	const config = settings.config as Layout1ConfigDefaultsType;
 
-	const navbar = useAppSelector(selectFuseNavbar);
+	const {
+		isOpen: isNavbarOpen,
+		mobileOpen: isNavbarMobileOpen,
+		reset: resetNavbar,
+		closeMobileNavbar
+	} = useNavbarContext();
 
 	useEffect(() => {
 		return () => {
-			dispatch(resetNavbar());
+			resetNavbar();
 		};
-	}, [dispatch]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<>
 			{!isMobile && (
 				<StyledNavBar
-					className="sticky top-0 z-20 h-screen flex-auto shrink-0 flex-col overflow-hidden shadow-sm"
-					open={navbar.open}
+					className="sticky top-0 z-20 h-screen flex-auto shrink-0 flex-col"
+					open={isNavbarOpen}
 					position={config.navbar.position}
 				>
 					<NavbarStyle1Content />
@@ -115,8 +115,8 @@ function NavbarStyle1() {
 					}}
 					anchor={config.navbar.position as 'left' | 'top' | 'right' | 'bottom'}
 					variant="temporary"
-					open={navbar.mobileOpen}
-					onClose={() => dispatch(navbarCloseMobile())}
+					open={isNavbarMobileOpen}
+					onClose={() => closeMobileNavbar()}
 					onOpen={() => {}}
 					disableSwipeToOpen
 					ModalProps={{

@@ -1,12 +1,11 @@
 'use client';
-
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import { memo, ReactNode, useImperativeHandle, useRef, RefObject } from 'react';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { SystemStyleObject, Theme } from '@mui/system';
-import FusePageCardedSidebar from './FusePageCardedSidebar';
+import FusePageCardedSidebar, { FusePageCardedSidebarProps } from './FusePageCardedSidebar';
 import FusePageCardedHeader from './FusePageCardedHeader';
 import { FuseScrollbarsProps } from '../FuseScrollbars/FuseScrollbars';
 
@@ -15,19 +14,11 @@ const toolbarHeight = 64;
 
 type FusePageCardedProps = SystemStyleObject<Theme> & {
 	className?: string;
-	leftSidebarContent?: ReactNode;
-	leftSidebarVariant?: 'permanent' | 'persistent' | 'temporary';
-	rightSidebarContent?: ReactNode;
-	rightSidebarVariant?: 'permanent' | 'persistent' | 'temporary';
 	header?: ReactNode;
 	content?: ReactNode;
+	leftSidebarProps?: FusePageCardedSidebarProps;
+	rightSidebarProps?: FusePageCardedSidebarProps;
 	scroll?: 'normal' | 'page' | 'content';
-	leftSidebarOpen?: boolean;
-	rightSidebarOpen?: boolean;
-	leftSidebarWidth?: number;
-	rightSidebarWidth?: number;
-	rightSidebarOnClose?: () => void;
-	leftSidebarOnClose?: () => void;
 	contentScrollbarsProps?: FuseScrollbarsProps;
 	ref?: RefObject<{ toggleLeftSidebar: (val: boolean) => void; toggleRightSidebar: (val: boolean) => void }>;
 };
@@ -57,7 +48,9 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 		minWidth: 0,
 		height: '100%',
 		backgroundColor: theme.vars.palette.background.paper,
-
+		boxShadow: theme.vars.shadows[2],
+		borderRadius: '12px 12px 0 0',
+		margin: '2px 2px 0 2px',
 		...(props.scroll === 'content' && {
 			position: 'absolute',
 			top: 0,
@@ -113,10 +106,10 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 					}),
 
 					'&.FusePageCarded-leftSidebar': {
-						marginLeft: -props.leftSidebarWidth
+						marginLeft: -props.leftSidebarProps?.width
 					},
 					'&.FusePageCarded-rightSidebar': {
-						marginRight: -props.rightSidebarWidth
+						marginRight: -props.rightSidebarProps?.width
 					}
 				}
 			}
@@ -138,7 +131,7 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 	},
 
 	'& .FusePageCarded-leftSidebar': {
-		width: props.leftSidebarWidth,
+		width: props.leftSidebarProps?.width,
 
 		[theme.breakpoints.up('lg')]: {
 			// borderRight: `1px solid ${theme.vars.palette.divider}`,
@@ -147,7 +140,7 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 	},
 
 	'& .FusePageCarded-rightSidebar': {
-		width: props.rightSidebarWidth,
+		width: props.rightSidebarProps?.width,
 
 		[theme.breakpoints.up('lg')]: {
 			// borderLeft: `1px solid ${theme.vars.palette.divider}`,
@@ -180,22 +173,16 @@ const Root = styled('div')<FusePageCardedProps>(({ theme, ...props }) => ({
 	}
 }));
 
+const sidebarPropsDefaults = { variant: 'permanent' as const };
+
 function FusePageCarded(props: FusePageCardedProps) {
 	const {
 		scroll = 'page',
 		className,
 		header,
 		content,
-		leftSidebarContent,
-		rightSidebarContent,
-		leftSidebarOpen = false,
-		rightSidebarOpen = false,
-		rightSidebarWidth = 240,
-		leftSidebarWidth = 240,
-		leftSidebarVariant = 'permanent',
-		rightSidebarVariant = 'permanent',
-		rightSidebarOnClose,
-		leftSidebarOnClose,
+		leftSidebarProps,
+		rightSidebarProps,
 		contentScrollbarsProps,
 		ref
 	} = props;
@@ -245,25 +232,19 @@ function FusePageCarded(props: FusePageCardedProps) {
 				className={clsx('FusePageCarded-root', `FusePageCarded-scroll-${scroll}`, className)}
 				ref={rootRef}
 				scroll={scroll}
-				leftSidebarWidth={leftSidebarWidth}
-				rightSidebarWidth={rightSidebarWidth}
+				leftSidebarProps={{ ...sidebarPropsDefaults, ...leftSidebarProps }}
+				rightSidebarProps={{ ...sidebarPropsDefaults, ...rightSidebarProps }}
 			>
 				{header && <FusePageCardedHeader header={header} />}
 
-				<div className="container relative z-10 flex h-full flex-auto flex-col overflow-hidden rounded-t-lg shadow-1">
+				<div className="relative z-10 container flex h-full flex-auto flex-col overflow-hidden">
 					<div className="FusePageCarded-wrapper">
-						{leftSidebarContent && (
-							<FusePageCardedSidebar
-								position="left"
-								variant={leftSidebarVariant}
-								ref={leftSidebarRef}
-								open={leftSidebarOpen}
-								onClose={leftSidebarOnClose}
-								width={leftSidebarWidth}
-							>
-								{leftSidebarContent}
-							</FusePageCardedSidebar>
-						)}
+						<FusePageCardedSidebar
+							position="left"
+							ref={leftSidebarRef}
+							{...sidebarPropsDefaults}
+							{...leftSidebarProps}
+						/>
 						<FuseScrollbars
 							className="FusePageCarded-contentWrapper"
 							enable={scroll === 'content'}
@@ -271,18 +252,12 @@ function FusePageCarded(props: FusePageCardedProps) {
 						>
 							{content && <div className={clsx('FusePageCarded-content')}>{content}</div>}
 						</FuseScrollbars>
-						{rightSidebarContent && (
-							<FusePageCardedSidebar
-								position="right"
-								variant={rightSidebarVariant || 'permanent'}
-								ref={rightSidebarRef}
-								open={rightSidebarOpen}
-								onClose={rightSidebarOnClose}
-								width={rightSidebarWidth}
-							>
-								{rightSidebarContent}
-							</FusePageCardedSidebar>
-						)}
+						<FusePageCardedSidebar
+							position="right"
+							ref={rightSidebarRef}
+							{...sidebarPropsDefaults}
+							{...rightSidebarProps}
+						/>
 					</div>
 				</div>
 			</Root>

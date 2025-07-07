@@ -92,7 +92,7 @@ function NavbarToggleFab(props: NavbarToggleFabProps) {
 					color="action"
 					className="button-icon"
 				>
-					heroicons-outline:bars-3
+					lucide:menu
 				</FuseSvgIcon>
 			</Fab>
 		</Root>

@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 import { FuseSettingsConfigType } from '../FuseSettings';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
-import { TextField } from '@mui/material';
+import { FormControl, FormLabel, TextField } from '@mui/material';
 
 type NumberFormControllerProps = {
 	name: keyof FuseSettingsConfigType;
@@ -29,6 +29,7 @@ function NumberFormController(props: NumberFormControllerProps) {
 				control={control}
 				render={({ field: { onChange, value } }) => (
 					<NumberTextField
+						name={name}
 						value={+value}
 						onChange={onChange}
 						item={item}
@@ -43,10 +44,11 @@ type NumberTextFieldProps = {
 	value: number;
 	onChange: (value: number) => void;
 	item: NumberFormControllerProps['item'];
+	name: string;
 };
 
 function NumberTextField(props: NumberTextFieldProps) {
-	const { value, onChange, item } = props;
+	const { value, onChange, item, name } = props;
 	const [localValue, setLocalValue] = useState(value);
 	const [error, setError] = useState('');
 
@@ -81,21 +83,23 @@ function NumberTextField(props: NumberTextFieldProps) {
 	}, [value]);
 
 	return (
-		<TextField
-			value={localValue}
-			onChange={handleChange}
-			label={item.title}
-			type="number"
-			slotProps={{
-				inputLabel: { shrink: true },
-				input: {
-					inputProps: { min: item.min, max: item.max }
-				}
-			}}
-			variant="outlined"
-			error={!!error}
-			helperText={error}
-		/>
+		<FormControl>
+			<FormLabel htmlFor={`${name}-input`}>{item.title}</FormLabel>
+			<TextField
+				id={`${name}-input`}
+				value={localValue}
+				onChange={handleChange}
+				type="number"
+				slotProps={{
+					input: {
+						inputProps: { min: item.min, max: item.max }
+					}
+				}}
+				variant="outlined"
+				error={!!error}
+				helperText={error}
+			/>
+		</FormControl>
 	);
 }
 

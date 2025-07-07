@@ -22,11 +22,11 @@ function FooterLayout3(props: FooterLayout3Props) {
 		<ThemeProvider theme={footerTheme}>
 			<AppBar
 				id="fuse-footer"
-				className={clsx('relative z-20 shadow-md', className)}
+				className={clsx('relative z-20 border-t', className)}
 				color="default"
 				style={{ backgroundColor: footerTheme.palette.background.paper }}
 			>
-				<Toolbar className="container flex min-h-12 items-center overflow-x-auto px-2 py-0 sm:px-3 md:min-h-16 lg:px-5">
+				<Toolbar className="container flex min-h-12 items-center overflow-x-auto px-2 py-0 sm:px-8 md:min-h-16">
 					<DemoLayoutFooterContent />
 				</Toolbar>
 			</AppBar>

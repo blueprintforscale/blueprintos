@@ -53,8 +53,8 @@ function MainProjectSelection() {
 					<img
 						src={theme.palette.mode === 'dark' ? selectedProject.darkLogo : selectedProject.logo}
 						alt={`${selectedProject.name} Logo`}
-						width={20}
-						height={20}
+						width={16}
+						height={16}
 						style={{ marginRight: 8 }}
 					/>
 					<Typography className="text-md font-semibold">{selectedProject.name}</Typography>
@@ -81,8 +81,8 @@ function MainProjectSelection() {
 						<img
 							src={theme.palette.mode === 'dark' ? project.darkLogo : project.logo}
 							alt={`${project.name} Logo`}
-							width={20}
-							height={20}
+							width={16}
+							height={16}
 						/>
 					</ListItemIcon>
 					<ListItemText

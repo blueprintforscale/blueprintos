@@ -216,9 +216,7 @@ function FuseSidePanel(props: FuseSidePanelProps) {
 								disableRipple
 								size="large"
 							>
-								<FuseSvgIcon className="FuseSidePanel-buttonIcon">
-									heroicons-outline:chevron-left
-								</FuseSvgIcon>
+								<FuseSvgIcon className="FuseSidePanel-buttonIcon">lucide:chevron-left</FuseSvgIcon>
 							</IconButton>
 						</Tooltip>
 					</div>
@@ -249,9 +247,7 @@ function FuseSidePanel(props: FuseSidePanelProps) {
 							onClick={toggleMobileDrawer}
 							disableRipple
 						>
-							<FuseSvgIcon className="FuseSidePanel-buttonIcon">
-								heroicons-outline:chevron-right
-							</FuseSvgIcon>
+							<FuseSvgIcon className="FuseSidePanel-buttonIcon">lucide:chevron-right</FuseSvgIcon>
 						</Fab>
 					</Tooltip>
 				</>

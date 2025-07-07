@@ -6,7 +6,6 @@ import ListItemText from '@mui/material/ListItemText';
 import clsx from 'clsx';
 import { memo, useMemo } from 'react';
 import { ListItemButton, ListItemButtonProps } from '@mui/material';
-import { WithRouterProps } from '@fuse/core/withRouter/withRouter';
 import FuseNavBadge from '../../FuseNavBadge';
 import FuseSvgIcon from '../../../FuseSvgIcon';
 import { FuseNavItemComponentProps } from '../../FuseNavItem';
@@ -31,7 +30,7 @@ const Root = styled(ListItemButton)<ListItemButtonProps>(({ theme }) => ({
 	}
 }));
 
-type FuseNavHorizontalItemProps = FuseNavItemComponentProps & WithRouterProps;
+type FuseNavHorizontalItemProps = FuseNavItemComponentProps;
 
 /**
  * FuseNavHorizontalItem is a component responsible for rendering the navigation element in the horizontal menu in the Fuse theme.

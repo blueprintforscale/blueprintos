@@ -1,10 +1,10 @@
-import List from '@mui/material/List';
 import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import FuseNavItem from '../FuseNavItem';
 import { FuseNavigationProps } from '../FuseNavigation';
+import { Box } from '@mui/material';
 
-const StyledList = styled(List)(({ theme }) => ({
+const FuseNav = styled(Box)(({ theme }) => ({
 	'& .fuse-list-item': {
 		'&:hover': {
 			backgroundColor: 'rgba(0,0,0,.04)',
@@ -43,9 +43,9 @@ function FuseNavHorizontalLayout1(props: FuseNavigationProps) {
 	const { navigation, active, dense, className, checkPermission } = props;
 
 	return (
-		<StyledList
+		<FuseNav
 			className={clsx(
-				'navigation flex whitespace-nowrap p-0',
+				'navigation flex p-0 whitespace-nowrap',
 				`active-${active}-list`,
 				dense && 'dense',
 				className
@@ -61,7 +61,7 @@ function FuseNavHorizontalLayout1(props: FuseNavigationProps) {
 					checkPermission={checkPermission}
 				/>
 			))}
-		</StyledList>
+		</FuseNav>
 	);
 }
 

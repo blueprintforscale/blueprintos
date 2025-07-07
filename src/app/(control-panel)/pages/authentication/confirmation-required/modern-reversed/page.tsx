@@ -1,3 +1,0 @@
-import ModernReversedConfirmationRequiredPage from './ModernReversedConfirmationRequiredPage';
-
-export default ModernReversedConfirmationRequiredPage;

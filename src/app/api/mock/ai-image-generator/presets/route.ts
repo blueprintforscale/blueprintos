@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { AiImageGenPreset } from '@/app/(control-panel)/apps/ai-image-generator/AiImageGenApi';
+import { AiImageGenPreset } from '@/app/(control-panel)/apps/ai-image-generator/api/types';
 
 /**
  * GET api/mock/ai-image-generator/presets

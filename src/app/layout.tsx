@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import 'src/styles/splash-screen.css';
 import 'src/styles/index.css';
 import '../../public/assets/fonts/material-design-icons/MaterialIconsOutlined.css';
-import '../../public/assets/fonts/inter/inter.css';
+import '../../public/assets/fonts/Geist/geist.css';
 import '../../public/assets/fonts/meteocons/style.css';
 import '../../public/assets/styles/prism.css';
 import { SessionProvider } from 'next-auth/react';

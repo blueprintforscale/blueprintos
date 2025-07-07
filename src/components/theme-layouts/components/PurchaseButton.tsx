@@ -10,18 +10,7 @@ type PurchaseButtonProps = ButtonProps & {
  * The purchase button.
  */
 function PurchaseButton(props: PurchaseButtonProps) {
-	const {
-		className = '',
-		children = (
-			<>
-				<span>Purchase</span>
-				<span className="flex items-center space-x-1">
-					<span>FUSE React</span>
-				</span>
-			</>
-		),
-		...rest
-	} = props;
+	const { className = '', children = 'Purchase FUSE React', ...rest } = props;
 
 	return (
 		<Button
@@ -30,10 +19,10 @@ function PurchaseButton(props: PurchaseButtonProps) {
 			target="_blank"
 			rel="noreferrer noopener"
 			role="button"
-			className={clsx('space-x-1 whitespace-nowrap', className)}
+			className={clsx('whitespace-nowrap', className)}
 			variant="contained"
 			color="secondary"
-			startIcon={<FuseSvgIcon size={16}>heroicons-outline:shopping-cart</FuseSvgIcon>}
+			startIcon={<FuseSvgIcon>lucide:shopping-cart</FuseSvgIcon>}
 			{...rest}
 		>
 			{children}

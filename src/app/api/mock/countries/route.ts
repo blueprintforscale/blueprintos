@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { Country } from '@/app/(control-panel)/apps/contacts/ContactsApi';
+import { Country } from '@/app/(control-panel)/apps/contacts/api/types';
 
 /**
  * GET api/mock/countries

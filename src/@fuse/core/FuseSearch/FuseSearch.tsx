@@ -90,9 +90,8 @@ function renderInputComponent(props: RenderInputComponentProps) {
 					<FuseSvgIcon
 						className="pointer-events-none absolute top-0 h-9 w-9 p-2 ltr:right-0 rtl:left-0"
 						color="action"
-						size={20}
 					>
-						heroicons-outline:magnifying-glass
+						lucide:search
 					</FuseSvgIcon>
 				</>
 			) : (
@@ -128,7 +127,7 @@ function renderSuggestion(suggestion: FuseFlatNavItemType, { query, isHighlighte
 			selected={Boolean(isHighlighted)}
 			component="div"
 		>
-			<ListItemIcon className="min-w-9">
+			<ListItemIcon>
 				{suggestion.icon ? (
 					<FuseSvgIcon>{suggestion.icon}</FuseSvgIcon>
 				) : (
@@ -282,8 +281,8 @@ function FuseSearch(props: FuseSearchProps) {
 		placeholder = 'Search',
 		noResults = 'No results..',
 		trigger = (
-			<IconButton className="border border-divider">
-				<FuseSvgIcon size={20}>heroicons-outline:magnifying-glass</FuseSvgIcon>
+			<IconButton>
+				<FuseSvgIcon>lucide:search</FuseSvgIcon>
 			</IconButton>
 		)
 	} = props;
@@ -452,7 +451,7 @@ function FuseSearch(props: FuseSearchProps) {
 					{state.opened && (
 						<ClickAwayListener onClickAway={handleClickAway}>
 							<Paper
-								className="absolute inset-x-0 top-0 z-9999 h-full shadow-0"
+								className="shadow-0 absolute inset-x-0 top-0 z-9999 h-full"
 								square
 							>
 								<div
@@ -523,7 +522,7 @@ function FuseSearch(props: FuseSearchProps) {
 										className="mx-2"
 										size="large"
 									>
-										<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
+										<FuseSvgIcon>lucide:x</FuseSvgIcon>
 									</IconButton>
 								</div>
 							</Paper>

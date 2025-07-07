@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { ScrumboardMember } from '@/app/(control-panel)/apps/scrumboard/ScrumboardApi';
+import { ScrumboardMember } from '@/app/(control-panel)/apps/scrumboard/api/types';
 
 /**
  * GET api/mock/scrumboard/members/{id}

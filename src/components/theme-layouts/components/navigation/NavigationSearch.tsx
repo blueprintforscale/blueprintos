@@ -1,7 +1,6 @@
 'use client';
-
 import FuseSearch from '@fuse/core/FuseSearch';
-import useNavigation from './hooks/useNavigation';
+import useNavigationItems from './hooks/useNavigationItems';
 
 type NavigationSearchProps = {
 	className?: string;
@@ -13,7 +12,7 @@ type NavigationSearchProps = {
  */
 function NavigationSearch(props: NavigationSearchProps) {
 	const { variant, className } = props;
-	const { flattenNavigation: navigation } = useNavigation();
+	const { flattenData: navigation } = useNavigationItems();
 
 	return (
 		<FuseSearch

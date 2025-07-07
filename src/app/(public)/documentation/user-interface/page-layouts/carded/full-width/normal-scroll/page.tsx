@@ -1,3 +1,0 @@
-import CardedFullWidthNormalScrollComponent from './CardedFullWidthNormalScrollComponent';
-
-export default CardedFullWidthNormalScrollComponent;

@@ -1,3 +1,0 @@
-import SplitScreenReversedResetPasswordPage from './SplitScreenReversedResetPasswordPage';
-
-export default SplitScreenReversedResetPasswordPage;

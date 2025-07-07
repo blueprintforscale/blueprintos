@@ -8,7 +8,9 @@ import { styled, useTheme } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
+import useUser from '@auth/useUser';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
+import { useSnackbar } from 'notistack';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
@@ -60,26 +62,23 @@ type SettingsPanelProps = {
 
 function SettingsPanel(props: SettingsPanelProps) {
 	const { settingsHandlers, onClose, open } = props;
-	// const { isGuest, updateUserSettings } = useUser();
-	// const dispatch = useAppDispatch();
+	const { isGuest, updateUserSettings } = useUser();
+	const { enqueueSnackbar } = useSnackbar();
 
 	const { data: settings, setSettings } = useFuseSettings();
 
 	const handleSettingsChange = async (newSettings: Partial<FuseSettingsConfigType>) => {
 		const _newSettings = setSettings(newSettings);
 
-		/**
-		 * Updating user settings disabled for demonstration purposes
-		 * The request is made to the mock API and will not persist the changes
-		 * You can enable it by removing the comment block below when using a real API
-		 * */
-		/* if (!isGuest) {
+		if (!isGuest) {
 			const updatedUserData = await updateUserSettings(_newSettings);
 
 			if (updatedUserData) {
-				dispatch(showMessage({ message: 'User settings saved.' }));
+				enqueueSnackbar('User settings saved.', {
+					variant: 'success'
+				});
 			}
-		} */
+		}
 	};
 
 	return (
@@ -100,13 +99,13 @@ function SettingsPanel(props: SettingsPanelProps) {
 			}}
 			{...settingsHandlers}
 		>
-			<FuseScrollbars className="p-4 sm:p-6 space-y-8">
+			<FuseScrollbars className="flex flex-col gap-8 p-4 sm:p-6">
 				<IconButton
 					className="fixed top-0 z-10 ltr:right-0 rtl:left-0"
 					onClick={onClose}
 					size="large"
 				>
-					<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
+					<FuseSvgIcon>lucide:x</FuseSvgIcon>
 				</IconButton>
 
 				<Typography

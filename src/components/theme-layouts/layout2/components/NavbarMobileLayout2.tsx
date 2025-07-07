@@ -57,7 +57,7 @@ function NavbarMobileLayout2(props: NavbarMobileLayout2Props) {
 			>
 				<Navigation layout="vertical" />
 
-				<div className="shrink-0 flex items-center justify-center py-12 opacity-10">
+				<div className="flex shrink-0 items-center justify-center py-12 opacity-10">
 					<img
 						className="w-full max-w-16"
 						src="/assets/images/logo/logo.svg"
@@ -70,7 +70,7 @@ function NavbarMobileLayout2(props: NavbarMobileLayout2Props) {
 
 			<Divider />
 
-			<div className="p-1 md:p-4 w-full">
+			<div className="w-full p-1 md:p-4">
 				<UserMenu className="w-full" />
 			</div>
 		</Root>

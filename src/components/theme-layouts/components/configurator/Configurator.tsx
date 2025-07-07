@@ -1,5 +1,4 @@
 'use client';
-
 import { styled, useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { red } from '@mui/material/colors';
@@ -90,7 +89,7 @@ function Configurator() {
 					autoFocus={false}
 				>
 					<span>
-						<FuseSvgIcon size={20}>heroicons-solid:cog-6-tooth</FuseSvgIcon>
+						<FuseSvgIcon>lucide:settings</FuseSvgIcon>
 					</span>
 				</Button>
 
@@ -102,7 +101,7 @@ function Configurator() {
 					disableRipple
 					autoFocus={false}
 				>
-					<FuseSvgIcon size={20}>heroicons-outline:swatch</FuseSvgIcon>
+					<FuseSvgIcon>lucide:swatch-book</FuseSvgIcon>
 				</Button>
 			</Root>
 

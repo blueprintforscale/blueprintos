@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { Notification } from '@/app/(control-panel)/apps/notifications/NotificationApi';
+import { Notification } from '@/app/(control-panel)/apps/notifications/api/types';
 
 /**
  * GET api/mock/notifications/{id}

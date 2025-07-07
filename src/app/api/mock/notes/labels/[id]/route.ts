@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { NotesLabel } from '@/app/(control-panel)/apps/notes/NotesApi';
+import { NotesLabel } from '@/app/(control-panel)/apps/notes/api/types';
 
 /**
  * GET api/mock/notes/labels/{id}

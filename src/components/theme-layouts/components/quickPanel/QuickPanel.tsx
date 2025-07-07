@@ -4,7 +4,6 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
@@ -12,9 +11,8 @@ import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import { format } from 'date-fns/format';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { selectQuickPanelData, selectQuickPanelOpen, toggleQuickPanel } from './quickPanelSlice';
+import { useQuickPanelContext } from './contexts/QuickPanelContext/useQuickPanelContext';
 
 const StyledSwipeableDrawer = styled(SwipeableDrawer)(() => ({
 	'& .MuiDrawer-paper': {
@@ -26,9 +24,7 @@ const StyledSwipeableDrawer = styled(SwipeableDrawer)(() => ({
  * The quick panel.
  */
 function QuickPanel() {
-	const dispatch = useAppDispatch();
-	const data = useAppSelector(selectQuickPanelData);
-	const open = useAppSelector(selectQuickPanelOpen);
+	const { data, open, toggleQuickPanel } = useQuickPanelContext();
 
 	const [checked, setChecked] = useState<string[]>(['notifications']);
 
@@ -50,7 +46,7 @@ function QuickPanel() {
 			open={open}
 			anchor="right"
 			onOpen={() => {}}
-			onClose={() => dispatch(toggleQuickPanel())}
+			onClose={() => toggleQuickPanel()}
 			disableSwipeToOpen
 		>
 			<FuseScrollbars>
@@ -113,44 +109,47 @@ function QuickPanel() {
 				<Divider />
 				<List>
 					<ListSubheader component="div">Quick Settings</ListSubheader>
-					<ListItem>
-						<ListItemIcon className="min-w-9">
-							<FuseSvgIcon>material-outline:notifications</FuseSvgIcon>
-						</ListItemIcon>
-						<ListItemText primary="Notifications" />
-						<ListItemSecondaryAction>
+					<ListItem
+						secondaryAction={
 							<Switch
 								color="primary"
 								onChange={handleToggle('notifications')}
 								checked={checked.indexOf('notifications') !== -1}
 							/>
-						</ListItemSecondaryAction>
-					</ListItem>
-					<ListItem>
+						}
+					>
 						<ListItemIcon className="min-w-9">
-							<FuseSvgIcon>material-outline:cloud</FuseSvgIcon>
+							<FuseSvgIcon>lucide:bell</FuseSvgIcon>
 						</ListItemIcon>
-						<ListItemText primary="Cloud Sync" />
-						<ListItemSecondaryAction>
+						<ListItemText primary="Notifications" />
+					</ListItem>
+					<ListItem
+						secondaryAction={
 							<Switch
 								color="secondary"
 								onChange={handleToggle('cloudSync')}
 								checked={checked.indexOf('cloudSync') !== -1}
 							/>
-						</ListItemSecondaryAction>
-					</ListItem>
-					<ListItem>
+						}
+					>
 						<ListItemIcon className="min-w-9">
-							<FuseSvgIcon>material-outline:brightness_high</FuseSvgIcon>
+							<FuseSvgIcon>lucide:cloud</FuseSvgIcon>
 						</ListItemIcon>
-						<ListItemText primary="Retro Thrusters" />
-						<ListItemSecondaryAction>
+						<ListItemText primary="Cloud Sync" />
+					</ListItem>
+					<ListItem
+						secondaryAction={
 							<Switch
 								color="primary"
 								onChange={handleToggle('retroThrusters')}
 								checked={checked.indexOf('retroThrusters') !== -1}
 							/>
-						</ListItemSecondaryAction>
+						}
+					>
+						<ListItemIcon className="min-w-9">
+							<FuseSvgIcon>lucide:sun</FuseSvgIcon>
+						</ListItemIcon>
+						<ListItemText primary="Retro Thrusters" />
 					</ListItem>
 				</List>
 			</FuseScrollbars>

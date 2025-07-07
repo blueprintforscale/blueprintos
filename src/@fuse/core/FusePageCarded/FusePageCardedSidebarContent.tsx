@@ -7,21 +7,22 @@ import { ReactNode } from 'react';
 type FusePageCardedSidebarContentProps = {
 	innerScroll?: boolean;
 	children?: ReactNode;
+	content?: ReactNode;
 };
 
 /**
  * The FusePageCardedSidebarContent component is a content container for the FusePageCardedSidebar component.
  */
 function FusePageCardedSidebarContent(props: FusePageCardedSidebarContentProps) {
-	const { innerScroll, children } = props;
+	const { innerScroll, children, content } = props;
 
-	if (!children) {
+	if (!content && !children) {
 		return null;
 	}
 
 	return (
 		<FuseScrollbars enable={innerScroll}>
-			<div className="FusePageCarded-sidebarContent min-w-80 lg:min-w-0">{children}</div>
+			<div className="FusePageCarded-sidebarContent lg:min-w-0">{content || children}</div>
 		</FuseScrollbars>
 	);
 }

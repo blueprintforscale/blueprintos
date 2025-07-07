@@ -1,3 +1,0 @@
-import CardedWithSidebarsNormalScrollComponent from './CardedWithSidebarsNormalScrollComponent';
-
-export default CardedWithSidebarsNormalScrollComponent;

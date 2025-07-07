@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { useTheme, Theme } from '@mui/material/styles';
 
@@ -13,37 +12,39 @@ function useThemeMediaQuery(themeCallbackFunc: (theme: Theme) => string) {
 
 	const query = themeCallbackFunc(theme).replace('@media ', '');
 
-	// State to track whether the component has mounted
-	const [hasMounted, setHasMounted] = useState(false);
-	const [matches, setMatches] = useState(false);
+	/**
+	 * The getMatches function checks if the current screen matches the specified media query.
+	 * It takes in a media query string as a parameter and returns a boolean indicating whether the screen matches the query.
+	 *
+	 */
+	function getMatches(q: string) {
+		if (typeof window !== 'undefined') {
+			return window.matchMedia(q).matches;
+		}
 
-	useEffect(() => {
-		// After mounting, we can safely access the `window` object and evaluate the media query
-		setHasMounted(true);
-	}, []);
+		return false;
+	}
 
-	useEffect(() => {
-		if (hasMounted) {
+	const [matches, setMatches] = useState(getMatches(query));
+
+	useEffect(
+		() => {
 			const mediaQuery = window.matchMedia(query);
 
 			// Update the state with the current value
-			setMatches(mediaQuery.matches);
+			setMatches(getMatches(query));
 
-			// Create an event listener to update state when the query matches change
+			// Create an event listener
 			const handler = (event: MediaQueryListEvent) => setMatches(event.matches);
+
+			// Attach the event listener to know when the matches value changes
 			mediaQuery.addEventListener('change', handler);
 
-			// Cleanup event listener on unmount
+			// Remove the event listener on cleanup
 			return () => mediaQuery.removeEventListener('change', handler);
-		}
-
-		return undefined;
-	}, [query, hasMounted]);
-
-	// Prevent rendering mismatched content by ensuring consistent SSR and client behavior
-	if (!hasMounted) {
-		return false; // Prevents server-client mismatch by avoiding media queries until client-side render
-	}
+		},
+		[query] // Empty array ensures effect is only run on mount and unmount
+	);
 
 	return matches;
 }

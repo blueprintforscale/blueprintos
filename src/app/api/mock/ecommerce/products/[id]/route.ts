@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { EcommerceProduct } from '@/app/(control-panel)/apps/e-commerce/ECommerceApi';
+import { Product } from '@/app/(control-panel)/apps/e-commerce/api/types';
 
 /**
  * GET api/mock/ecommerce/products/{id}
@@ -7,7 +7,7 @@ import { EcommerceProduct } from '@/app/(control-panel)/apps/e-commerce/ECommerc
 export async function GET(req: Request, props: { params: Promise<{ id: string }> }) {
 	const { id } = await props.params;
 	const api = mockApi('ecommerce_products');
-	const item = await api.find<EcommerceProduct>(id);
+	const item = await api.find<Product>(id);
 
 	if (!item) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });
@@ -22,8 +22,8 @@ export async function GET(req: Request, props: { params: Promise<{ id: string }>
 export async function PUT(req: Request, props: { params: Promise<{ id: string }> }) {
 	const { id } = await props.params;
 	const api = mockApi('ecommerce_products');
-	const data = (await req.json()) as EcommerceProduct;
-	const updatedItem = await api.update<EcommerceProduct>(id, data);
+	const data = (await req.json()) as Product;
+	const updatedItem = await api.update<Product>(id, data);
 
 	if (!updatedItem) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });

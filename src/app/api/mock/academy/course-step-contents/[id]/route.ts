@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { CourseStepContent } from '@/app/(control-panel)/apps/academy/AcademyApi';
+import { CourseStepContent } from '@/app/(control-panel)/apps/academy/api/types';
 
 /**
  * GET api/mock/academy/course-step-contents/{id}

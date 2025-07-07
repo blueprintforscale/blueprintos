@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { FileManagerItem } from '@/app/(control-panel)/apps/file-manager/FileManagerApi';
+import { FileManagerItem } from '@/app/(control-panel)/apps/file-manager/api/types';
 
 /**
  * GET api/mock/file-manager/items

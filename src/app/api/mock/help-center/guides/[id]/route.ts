@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { Guide } from '@/app/(control-panel)/apps/help-center/HelpCenterApi';
+import { Guide } from '@/app/(control-panel)/apps/help-center/api/types';
 
 /**
  * GET api/mock/help-center/guides/{id}

@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { FileManagerItem } from '@/app/(control-panel)/apps/file-manager/FileManagerApi';
+import { FileManagerItem } from '@/app/(control-panel)/apps/file-manager/api/types';
 
 /**
  * GET api/mock/file-manager/items/{id}
@@ -23,7 +23,7 @@ export async function PUT(req: Request, props: { params: Promise<{ id: string }>
 	const { id } = await props.params;
 	const api = mockApi('file_manager_items');
 	const data = (await req.json()) as FileManagerItem;
-	const updatedItem = await api.update(id, data);
+	const updatedItem = await api.update<FileManagerItem>(id, data as unknown as Record<string, unknown>);
 
 	if (!updatedItem) {
 		return new Response(JSON.stringify({ message: 'Item not found' }), { status: 404 });

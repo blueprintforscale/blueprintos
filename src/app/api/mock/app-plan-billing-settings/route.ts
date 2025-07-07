@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { SettingsPlanBilling } from '@/app/(control-panel)/apps/settings/SettingsApi';
+import { SettingsPlanBilling } from '@/app/(control-panel)/apps/settings/api/types';
 
 /**
  * GET api/mock/app-plan-billing-settings

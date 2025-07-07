@@ -39,7 +39,7 @@ function TitleReferenceLink(props: TitleReferenceLinkProps) {
 				<Typography
 					component={Link}
 					to={href}
-					className="opacity-30 italic"
+					className="italic opacity-30"
 					sx={{ color: 'inherit!important', textDecoration: 'none!important' }}
 					onClick={handleCopy}
 				>

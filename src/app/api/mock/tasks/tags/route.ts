@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { Tag } from '@/app/(control-panel)/apps/tasks/TasksApi';
+import { Tag } from '@/app/(control-panel)/apps/tasks/api/types';
 
 /**
  * GET api/mock/tasks/tags

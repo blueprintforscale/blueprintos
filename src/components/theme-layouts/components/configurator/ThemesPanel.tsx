@@ -9,15 +9,18 @@ import Slide from '@mui/material/Slide';
 import { SwipeableHandlers } from 'react-swipeable';
 import themeOptions from 'src/configs/themeOptions';
 import { FuseThemeOption } from '@fuse/core/FuseThemeSelector/ThemePreview';
+import useUser from '@auth/useUser';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
-
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
-
+import { useSnackbar } from 'notistack';
 const StyledDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialog-paper': {
 		position: 'fixed',
-		width: 380,
-		maxWidth: '90vw',
+		width: '100%',
+		maxWidth: '40%',
+		[theme.breakpoints.down('md')]: {
+			maxWidth: '90%'
+		},
 		backgroundColor: theme.vars.palette.background.paper,
 		top: 0,
 		height: '100%',
@@ -64,29 +67,28 @@ type ThemesPanelProps = {
 function ThemesPanel(props: ThemesPanelProps) {
 	const { schemesHandlers, onClose, open } = props;
 	const { setSettings } = useFuseSettings();
-	// const { isGuest, updateUserSettings } = useUser();
-	// const dispatch = useAppDispatch();
+	const { isGuest, updateUserSettings } = useUser();
+	const { enqueueSnackbar } = useSnackbar();
 
 	async function handleThemeSelect(_theme: FuseThemeOption) {
 		const _newSettings = setSettings({ theme: { ..._theme?.section } } as Partial<FuseSettingsConfigType>);
 
-		/**
-		 * Updating user settings disabled for demonstration purposes
-		 * The request is made to the mock API and will not persist the changes
-		 * You can enable it by removing the comment block below when using a real API
-		 * */
-		/* if (!isGuest) {
+		if (!isGuest) {
 			const updatedUserData = await updateUserSettings(_newSettings);
 
 			if (updatedUserData) {
-				dispatch(showMessage({ message: 'User settings saved.' }));
+				enqueueSnackbar('User settings saved.', {
+					variant: 'success'
+				});
 			}
-		} */
+		}
 	}
 
 	return (
 		<StyledDialog
-			TransitionComponent={Transition}
+			slots={{
+				transition: Transition
+			}}
 			aria-labelledby="schemes-panel"
 			aria-describedby="schemes"
 			open={open}
@@ -96,9 +98,11 @@ function ThemesPanel(props: ThemesPanelProps) {
 					invisible: true
 				}
 			}}
+			fullScreen
 			classes={{
 				paper: 'shadow-lg'
 			}}
+			disableRestoreFocus
 			{...schemesHandlers}
 		>
 			<FuseScrollbars className="p-4 sm:p-6">
@@ -107,7 +111,7 @@ function ThemesPanel(props: ThemesPanelProps) {
 					onClick={onClose}
 					size="large"
 				>
-					<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
+					<FuseSvgIcon>lucide:x</FuseSvgIcon>
 				</IconButton>
 
 				<Typography
@@ -118,7 +122,7 @@ function ThemesPanel(props: ThemesPanelProps) {
 				</Typography>
 
 				<Typography
-					className="mb-6 text-justify text-md italic"
+					className="text-md mb-6 text-justify italic"
 					color="text.secondary"
 				>
 					* Selected option will be applied to all layout elements (navbar, toolbar, etc.). You can also

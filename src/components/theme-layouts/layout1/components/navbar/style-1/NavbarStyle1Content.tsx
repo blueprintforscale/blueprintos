@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { memo } from 'react';
 import Navigation from 'src/components/theme-layouts/components/navigation/Navigation';
 import UserMenu from 'src/components/theme-layouts/components/UserMenu';
-import { Divider } from '@mui/material';
 import Logo from '../../../../components/Logo';
 import GoToDocBox from '@/components/theme-layouts/components/GoToDocBox';
 
@@ -47,7 +46,7 @@ function NavbarStyle1Content(props: NavbarStyle1ContentProps) {
 
 	return (
 		<Root className={clsx('flex h-full flex-auto flex-col overflow-hidden', className)}>
-			<div className="flex h-12 shrink-0 flex-row items-center px-3 md:h-18">
+			<div className="flex h-12 shrink-0 flex-row items-center px-5 md:h-16">
 				<Logo />
 			</div>
 
@@ -55,22 +54,15 @@ function NavbarStyle1Content(props: NavbarStyle1ContentProps) {
 				className="flex min-h-0 flex-1 flex-col"
 				option={{ suppressScrollX: true, wheelPropagation: false }}
 			>
-				<Navigation layout="vertical" />
-
-				<div className="shrink-0 flex items-center justify-center py-12 opacity-10">
-					<img
-						className="w-full max-w-16"
-						src="/assets/images/logo/logo.svg"
-						alt="footer logo"
-					/>
-				</div>
+				<Navigation
+					layout="vertical"
+					className="-mt-2"
+				/>
 			</StyledContent>
 
-			<GoToDocBox className="mx-3 my-4" />
+			<div className="flex flex-col gap-3 p-3">
+				<GoToDocBox className="mx-1" />
 
-			<Divider />
-
-			<div className="p-1 md:p-4 w-full">
 				<UserMenu className="w-full" />
 			</div>
 		</Root>

@@ -1,34 +1,32 @@
-import { useParams } from 'next/navigation';
+'use client';
+
+import useParams from '@fuse/hooks/useParams';
 import _ from 'lodash';
-import { useAppSelector } from 'src/store/hooks';
 import { useMemo } from 'react';
-import {
-	FileManagerItem,
-	FileManagerPath,
-	useGetFileManagerAllFolderItemsQuery,
-	useGetFileManagerFolderQuery
-} from '../FileManagerApi';
-import { selectSelectedItemId } from '../fileManagerAppSlice';
+import { FileManagerItem, FileManagerPath } from '../api/types';
+import { useFolderItems } from '../api/hooks/folders/useFolderItems';
+import { useFileManagerAppContext } from '../contexts/FileManagerAppContext/useFileManagerAppContext';
+import { useAllFolderItems } from '../api/hooks/folders/useAllFolderItems';
 
 function useFileManagerData() {
-	const routeParams = useParams<{ folderId: string[] }>();
-	const { folderId } = routeParams;
+	const routeParams = useParams();
+	const [folderId] = routeParams?.folderParams ?? [];
+	const _folderId = folderId ?? 'root';
+	const { selectedItemId } = useFileManagerAppContext();
 
-	const _folderId = folderId?.[0] ?? 'root';
-	const { data, isLoading } = useGetFileManagerFolderQuery(_folderId);
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-expect-error
-	const { data: folderItems } = useGetFileManagerAllFolderItemsQuery();
+	const { data: allFolderItems } = useAllFolderItems();
 
-	const folders = _.filter(data, { type: 'folder' });
-	const files = _.reject(data, { type: 'folder' });
+	const { data: folderItems, isLoading } = useFolderItems(_folderId);
+	const folders = useMemo(() => _.filter(folderItems, { type: 'folder' }), [folderItems]);
+	const files = useMemo(() => _.reject(folderItems, { type: 'folder' }), [folderItems]);
+
 	const path = useMemo(() => {
 		const path: FileManagerPath[] = [];
 
 		let currentFolder: FileManagerItem | null = null;
 
 		if (_folderId) {
-			currentFolder = _.find(folderItems, { id: _folderId });
+			currentFolder = _.find(allFolderItems, { id: _folderId });
 
 			if (currentFolder) {
 				path.push(currentFolder);
@@ -36,7 +34,7 @@ function useFileManagerData() {
 		}
 
 		while (currentFolder?.folderId) {
-			currentFolder = folderItems.find((item) => item.id === currentFolder?.folderId);
+			currentFolder = allFolderItems.find((item) => item.id === currentFolder?.folderId);
 
 			if (currentFolder) {
 				path.unshift(currentFolder);
@@ -46,8 +44,7 @@ function useFileManagerData() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [folderItems, folderId]);
 
-	const selectedItemId = useAppSelector(selectSelectedItemId);
-	const selectedItem = _.find(data, { id: selectedItemId });
+	const selectedItem = useMemo(() => _.find(folderItems, { id: selectedItemId }), [folderItems, selectedItemId]);
 
 	return {
 		folders,

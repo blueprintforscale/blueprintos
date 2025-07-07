@@ -21,10 +21,128 @@ export const darkPaletteText = {
 };
 
 /**
+ * Shared neutral ramp & status colours
+ */
+const neutrals = {
+	grey: {
+		50: '#F9FAFB',
+		100: '#F3F4F6',
+		200: '#E5E7EB',
+		300: '#D1D5DB',
+		400: '#9CA3AF',
+		500: '#6B7280',
+		600: '#4B5563',
+		700: '#374151',
+		800: '#272F3C',
+		900: '#1F232B',
+		A100: '#F3F4F6',
+		A200: '#E5E7EB',
+		A400: '#6B7280',
+		A700: '#374151'
+	},
+	success: { main: '#22C55E', light: '#4ADE80', dark: '#15803D', contrastText: '#1F232B' },
+	info: { main: '#3B82F6', light: '#60A5FA', dark: '#1D4ED8', contrastText: '#FFFFFF' },
+	warning: { main: '#F59E0B', light: '#FBBF24', dark: '#B45309', contrastText: '#1F232B' },
+	error: { main: '#EF4444', light: '#F87171', dark: '#B91C1C', contrastText: '#FFFFFF' }
+};
+
+/**
  * The themesConfig object is a configuration object for the color themes of the Fuse application.
  */
 export const themesConfig: FuseThemesType = {
 	default: {
+		palette: {
+			mode: 'light',
+			primary: { main: '#1F232B', light: '#363B44', dark: '#0F1115', contrastText: '#FFFFFF' },
+			secondary: { main: '#1565C0', light: '#3C83D6', dark: '#0E4B90', contrastText: '#FFFFFF' },
+			...neutrals,
+			text: { primary: '#1F232B', secondary: '#4B5563', disabled: '#9CA3AF' },
+			background: { default: '#F6F7F8', paper: '#FFFFFF' },
+			divider: '#E5E7EB',
+			action: {
+				active: '#4B5563',
+				hover: '#E5E7EB',
+				selected: '#D1D5DB',
+				disabled: '#BFC4CC',
+				disabledBackground: '#F6F7F8',
+				focus: '#D1D5DB'
+			}
+		}
+	},
+	defaultDark: {
+		palette: {
+			mode: 'dark',
+			divider: 'rgb(39, 39, 42)',
+			text: {
+				primary: 'rgb(244, 244, 245)',
+				secondary: 'rgb(161, 161, 170)'
+			},
+			common: {
+				black: '#000000',
+				white: '#FFFFFF'
+			},
+			primary: {
+				light: '#e6e6e6',
+				main: '#d9d9d9',
+				dark: '#a6a6a6',
+				contrastText: '#18181b'
+			},
+			secondary: {
+				light: '#afafaf',
+				main: '#fafafa',
+				dark: '#fdfdfd',
+				contrastText: '#18181b'
+			},
+			background: {
+				paper: '#18181B',
+				default: '#09090B'
+			},
+			error: {
+				light: '#FCA5A5',
+				main: '#EF4444',
+				dark: '#B91C1C',
+				contrastText: '#FFFFFF'
+			},
+			success: {
+				light: '#86EFAC',
+				main: '#22C55E',
+				dark: '#15803D',
+				contrastText: '#FFFFFF'
+			},
+			warning: {
+				light: '#FCD34D',
+				main: '#F59E0B',
+				dark: '#B45309',
+				contrastText: '#FFFFFF'
+			},
+			info: {
+				light: '#93C5FD',
+				main: '#3B82F6',
+				dark: '#1D4ED8',
+				contrastText: '#FFFFFF'
+			}
+		}
+	},
+	defaultNavbar: {
+		palette: {
+			mode: 'light',
+			...neutrals,
+			primary: { main: '#1F232B', light: '#363B44', dark: '#0F1115', contrastText: '#FFFFFF' },
+			secondary: { main: '#1565C0', light: '#3C83D6', dark: '#0E4B90', contrastText: '#FFFFFF' },
+			text: { primary: '#1F232B', secondary: '#4B5563', disabled: '#9CA3AF' },
+			background: { default: '#E5E7EB', paper: '#FFFFFF' },
+			divider: '#E5E7EB',
+			action: {
+				active: '#4B5563',
+				hover: '#E5E7EB',
+				selected: '#D1D5DB',
+				disabled: '#BFC4CC',
+				disabledBackground: '#F6F7F8',
+				focus: '#D1D5DB'
+			}
+		}
+	},
+	legacyDefault: {
 		palette: {
 			mode: 'light',
 			divider: 'rgba(0, 0, 0, 0.12)',
@@ -60,7 +178,7 @@ export const themesConfig: FuseThemesType = {
 			}
 		}
 	},
-	defaultDark: {
+	legacyDark: {
 		palette: {
 			mode: 'dark',
 			divider: 'rgba(255, 255, 255, 0.12)',
@@ -93,6 +211,44 @@ export const themesConfig: FuseThemesType = {
 				main: '#D32F2F',
 				dark: '#B71C1C',
 				contrastText: '#FFFFFF'
+			}
+		}
+	},
+	navyTealPalette: {
+		palette: {
+			mode: 'light',
+			primary: { main: '#0F3C6E', light: '#365E92', dark: '#08254A', contrastText: '#FFFFFF' },
+			secondary: { main: '#00B4A6', light: '#33C7BB', dark: '#00867B', contrastText: '#FFFFFF' },
+			...neutrals,
+			text: { primary: '#0F3C6E', secondary: '#4B5563', disabled: '#9CA3AF' },
+			background: { default: '#F6F8FA', paper: '#FFFFFF' },
+			divider: '#E5E7EB',
+			action: {
+				active: '#4B5563',
+				hover: '#E5E7EB',
+				selected: '#D1D5DB',
+				disabled: '#BFC4CC',
+				disabledBackground: '#F6F7F8',
+				focus: '#D1D5DB'
+			}
+		}
+	},
+	indigoAmberPalette: {
+		palette: {
+			mode: 'light',
+			primary: { main: '#21255F', light: '#40448A', dark: '#15183C', contrastText: '#FFFFFF' },
+			secondary: { main: '#FFB547', light: '#FFC66D', dark: '#D89330', contrastText: '#FFFFFF' },
+			...neutrals,
+			text: { primary: '#21255F', secondary: '#4B5563', disabled: '#9CA3AF' },
+			background: { default: '#F7F8FC', paper: '#FFFFFF' },
+			divider: '#E5E7EB',
+			action: {
+				active: '#4B5563',
+				hover: '#E5E7EB',
+				selected: '#D1D5DB',
+				disabled: '#BFC4CC',
+				disabledBackground: '#F6F7F8',
+				focus: '#D1D5DB'
 			}
 		}
 	},

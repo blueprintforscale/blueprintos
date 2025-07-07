@@ -1,28 +1,27 @@
 import { User } from '@auth/user';
 import UserModel from '@auth/user/models/UserModel';
 import { PartialDeep } from 'type-fest';
-import apiFetch from '@/utils/apiFetch';
+import api from '@/utils/api';
 
 /**
  * Get user by id
  */
 export async function authGetDbUser(userId: string): Promise<Response> {
-	return apiFetch(`/api/mock/auth/user/${userId}`);
+	return api.get(`mock/auth/user/${userId}`);
 }
 
 /**
  * Get user by email
  */
 export async function authGetDbUserByEmail(email: string): Promise<Response> {
-	return apiFetch(`/api/mock/auth/user-by-email/${email}`);
+	return api.get(`mock/auth/user-by-email/${email}`);
 }
 
 /**
  * Update user
  */
 export function authUpdateDbUser(user: PartialDeep<User>) {
-	return apiFetch(`/api/mock/auth/user/${user.id}`, {
-		method: 'PUT',
+	return api.put(`mock/auth/user/${user.id}`, {
 		body: JSON.stringify(UserModel(user))
 	});
 }
@@ -31,8 +30,7 @@ export function authUpdateDbUser(user: PartialDeep<User>) {
  * Create user
  */
 export async function authCreateDbUser(user: PartialDeep<User>) {
-	return apiFetch('/api/mock/users', {
-		method: 'POST',
+	return api.post('mock/users', {
 		body: JSON.stringify(UserModel(user))
 	});
 }

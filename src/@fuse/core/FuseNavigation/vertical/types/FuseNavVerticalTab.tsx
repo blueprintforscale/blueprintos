@@ -2,7 +2,6 @@
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import { styled } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
-import ListItemText from '@mui/material/ListItemText';
 import clsx from 'clsx';
 import { useMemo } from 'react';
 import Box from '@mui/material/Box';
@@ -15,20 +14,15 @@ import { FuseNavItemComponentProps } from '../../FuseNavItem';
 
 const Root = styled(Box)(({ theme }) => ({
 	'& > .fuse-list-item': {
-		minHeight: 100,
-		height: 100,
-		width: 100,
+		minHeight: 52,
+		height: 52,
+		width: 52,
 		borderRadius: 12,
 		margin: '0 0 4px 0',
 		cursor: 'pointer',
 		textDecoration: 'none!important',
 		padding: 0,
 		color: (theme) => `rgba(${theme.vars.palette.text.primaryChannel} / 0.7)`,
-		'&.dense': {
-			minHeight: 52,
-			height: 52,
-			width: 52
-		},
 		'&.type-divider': {
 			padding: 0,
 			height: 2,
@@ -69,7 +63,7 @@ export type FuseNavVerticalTabProps = Omit<FuseNavigationProps, 'navigation'> & 
  *  'selection' and 'divider'
  * */
 function FuseNavVerticalTab(props: FuseNavVerticalTabProps) {
-	const { item, onItemClick, firstLevel, dense, selectedId, checkPermission } = props;
+	const { item, onItemClick, firstLevel, selectedId, checkPermission } = props;
 	const component = item.url ? NavLinkAdapter : 'li';
 
 	const itemProps = useMemo(
@@ -91,71 +85,35 @@ function FuseNavVerticalTab(props: FuseNavVerticalTabProps) {
 					component={component}
 					className={clsx(
 						`type-${item.type}`,
-						dense && 'dense',
 						selectedId === item.id && 'active',
-						'fuse-list-item flex flex-col items-center justify-center p-3'
+						'fuse-list-item flex h-8 min-h-0 w-8 flex-col items-center justify-center rounded-lg'
 					)}
 					onClick={() => onItemClick && onItemClick(item)}
 					{...itemProps}
 				>
-					{dense ? (
-						<Tooltip
-							title={item.title || ''}
-							placement="right"
-						>
-							<div className="relative flex h-8 min-h-8 w-8 items-center justify-center">
-								{item.icon ? (
-									<FuseSvgIcon
-										className={clsx('fuse-list-item-icon', item.iconClass)}
-										color="action"
-									>
-										{item.icon}
-									</FuseSvgIcon>
-								) : (
-									item.title && <Typography className="text-lg font-bold">{item.title[0]}</Typography>
-								)}
-								{item.badge && (
-									<FuseNavBadge
-										badge={item.badge}
-										className="absolute top-0 h-4 min-w-4 justify-center p-1 ltr:right-0 rtl:left-0"
-									/>
-								)}
-							</div>
-						</Tooltip>
-					) : (
-						<>
-							<div className="relative mb-2 flex h-8 min-h-8 w-8 items-center justify-center">
-								{item.icon ? (
-									<FuseSvgIcon
-										size={32}
-										className={clsx('fuse-list-item-icon', item.iconClass)}
-										color="action"
-									>
-										{item.icon}
-									</FuseSvgIcon>
-								) : (
-									item.title && (
-										<Typography className="text-2xl font-bold">{item.title[0]}</Typography>
-									)
-								)}
-								{item.badge && (
-									<FuseNavBadge
-										badge={item.badge}
-										className="absolute top-0 h-4 min-w-4 justify-center p-1 ltr:right-0 rtl:left-0"
-									/>
-								)}
-							</div>
-
-							<ListItemText
-								className="fuse-list-item-text w-full grow-0 px-2"
-								primary={item.title}
-								classes={{
-									primary:
-										'text-md font-medium fuse-list-item-text-primary truncate text-center truncate'
-								}}
-							/>
-						</>
-					)}
+					<Tooltip
+						title={item.title || ''}
+						placement="right"
+					>
+						<div className="relative flex items-center justify-center">
+							{item.icon ? (
+								<FuseSvgIcon
+									className={clsx('fuse-list-item-icon', item.iconClass)}
+									color="action"
+								>
+									{item.icon}
+								</FuseSvgIcon>
+							) : (
+								item.title && <Typography className="text-lg font-bold">{item.title[0]}</Typography>
+							)}
+							{item.badge && (
+								<FuseNavBadge
+									badge={item.badge}
+									className="absolute top-0 h-4 min-w-4 justify-center p-1 ltr:right-0 rtl:left-0"
+								/>
+							)}
+						</div>
+					</Tooltip>
 				</ListItemButton>
 				{!firstLevel &&
 					item.children &&
@@ -166,14 +124,13 @@ function FuseNavVerticalTab(props: FuseNavVerticalTabProps) {
 							item={_item}
 							nestedLevel={0}
 							onItemClick={onItemClick}
-							dense={dense}
 							selectedId={selectedId}
 							checkPermission={checkPermission}
 						/>
 					))}
 			</Root>
 		),
-		[item, component, dense, selectedId, itemProps, firstLevel, onItemClick, checkPermission]
+		[item, component, selectedId, itemProps, firstLevel, onItemClick, checkPermission]
 	);
 
 	if (checkPermission && !item?.hasPermission) {

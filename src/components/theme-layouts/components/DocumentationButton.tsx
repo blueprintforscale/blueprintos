@@ -20,7 +20,7 @@ function DocumentationButton(props: DocumentationButtonProps) {
 			className={className}
 			variant="contained"
 			color="primary"
-			startIcon={<FuseSvgIcon size={16}>heroicons-outline:book-open</FuseSvgIcon>}
+			startIcon={<FuseSvgIcon>lucide:book-open</FuseSvgIcon>}
 		>
 			Documentation
 		</Button>

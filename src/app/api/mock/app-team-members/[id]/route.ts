@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { SettingsTeamMember } from '@/app/(control-panel)/apps/settings/SettingsApi';
+import { SettingsTeamMember } from '@/app/(control-panel)/apps/settings/api/types';
 
 /**
  * PUT api/mock/app-team-members/{id}

@@ -8,12 +8,12 @@ import PurchaseButton from './PurchaseButton';
 function DemoLayoutFooterContent() {
 	return (
 		<>
-			<div className="flex grow shrink-0">
-				<PurchaseButton className="mx-1" />
-				<DocumentationButton className="mx-1" />
+			<div className="flex flex-auto shrink-0 gap-2">
+				<PurchaseButton />
+				<DocumentationButton />
 			</div>
 
-			<div className="flex grow shrink-0 px-3 justify-end">
+			<div className="flex shrink-0 justify-end">
 				<PoweredByLinks />
 			</div>
 		</>

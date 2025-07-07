@@ -9,11 +9,12 @@ import useThemeMediaQuery from '../../hooks/useThemeMediaQuery';
 /**
  * Props for the FusePageSimpleSidebar component.
  */
-type FusePageSimpleSidebarProps = {
+export type FusePageSimpleSidebarProps = {
 	open?: boolean;
 	position?: SwipeableDrawerProps['anchor'];
 	variant?: SwipeableDrawerProps['variant'];
 	onClose?: () => void;
+	content?: ReactNode;
 	children?: ReactNode;
 	ref?: React.RefObject<{ toggleSidebar: (T: boolean) => void }>;
 	width?: number;
@@ -23,10 +24,9 @@ type FusePageSimpleSidebarProps = {
  * The FusePageSimpleSidebar component.
  */
 function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
-	const { open = true, position, variant, onClose = () => {}, ref } = props;
+	const { open = true, position, variant, onClose = () => {}, ref, width = 240, children, content } = props;
 
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
-
 	const [isOpen, setIsOpen] = useState(open);
 
 	useImperativeHandle(ref, () => ({
@@ -40,6 +40,10 @@ function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
 	useEffect(() => {
 		handleToggleDrawer(open);
 	}, [handleToggleDrawer, open]);
+
+	if (!children && !content) {
+		return null;
+	}
 
 	return (
 		<>
@@ -57,7 +61,7 @@ function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
 							'FusePageSimple-sidebar',
 							variant,
 							position === 'left' ? 'FusePageSimple-leftSidebar' : 'FusePageSimple-rightSidebar',
-							'max-w-full'
+							'max-w-full min-w-80'
 						)
 					}}
 					ModalProps={{
@@ -71,7 +75,7 @@ function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
 							}
 						}
 					}}
-					sx={{ position: 'absolute', '& .MuiPaper-root': { width: `${props.width}px` } }}
+					sx={{ position: 'absolute', '& .MuiPaper-root': { width: isMobile ? 'auto' : `${width}px` } }}
 				>
 					<FusePageSimpleSidebarContent {...props} />
 				</SwipeableDrawer>
@@ -91,7 +95,7 @@ function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
 					classes={{
 						paper: clsx('FusePageSimple-sidebar border-0 w-full', variant)
 					}}
-					sx={{ '& .MuiPaper-root': { width: `${props.width}px` } }}
+					sx={{ '& .MuiPaper-root': { width: `${width}px` } }}
 				>
 					<FusePageSimpleSidebarContent {...props} />
 				</Drawer>

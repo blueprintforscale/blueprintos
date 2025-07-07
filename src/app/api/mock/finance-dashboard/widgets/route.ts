@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { FinanceDashboardWidgetType } from '@/app/(control-panel)/dashboards/finance/FinanceDashboardApi';
+import { FinanceDashboardWidgetType } from '@/app/(control-panel)/dashboards/finance/api/types';
 
 /**
  * GET api/mock/finance-dashboard/widgets

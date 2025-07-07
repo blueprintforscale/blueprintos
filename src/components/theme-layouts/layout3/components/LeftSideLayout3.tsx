@@ -7,10 +7,10 @@ import NavigationShortcuts from '../../components/navigation/NavigationShortcuts
  */
 function LeftSideLayout3() {
 	return (
-		<FuseSidePanel className="flex flex-col justify-star items-center py-3 space-y-2">
+		<FuseSidePanel className="justify-star flex flex-col items-center gap-2 p-2">
 			<div>
 				<NavigationShortcuts
-					className="flex shrink"
+					className="m-1 flex shrink"
 					variant="vertical"
 				/>
 			</div>

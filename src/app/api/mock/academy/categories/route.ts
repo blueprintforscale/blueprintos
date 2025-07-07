@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { Category } from '@/app/(control-panel)/apps/academy/AcademyApi';
+import { Category } from '@/app/(control-panel)/apps/academy/api/types';
 
 /**
  * GET api/mock/academy/categories

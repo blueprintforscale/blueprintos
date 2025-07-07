@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { Course } from '@/app/(control-panel)/apps/academy/AcademyApi';
+import { Course } from '@/app/(control-panel)/apps/academy/api/types';
 
 /**
  * GET api/mock/academy/courses

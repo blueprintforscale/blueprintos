@@ -2,7 +2,7 @@ import * as React from 'react';
 import { type Editor } from '@tiptap/react';
 
 // --- Hooks ---
-import { useTiptapEditor } from '@/hooks/use-tiptap-editor';
+import { useTiptapEditor } from '@/hooks/useTiptapEditor';
 
 // --- Icons ---
 import { ImagePlusIcon } from '@/components/tiptap/tiptap-icons/image-plus-icon';

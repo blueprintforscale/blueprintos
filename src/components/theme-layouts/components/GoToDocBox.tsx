@@ -12,7 +12,7 @@ function GoToDocBox(props: GoToDocBoxProps) {
 	const { className } = props;
 	return (
 		<Box
-			className={clsx('documentation-hero flex flex-col px-3 py-2 border-1 rounded-sm gap-2', className)}
+			className={clsx('documentation-hero flex flex-col gap-2 rounded-sm border-1 px-3 py-2', className)}
 			sx={{ backgroundColor: 'background.paper', borderColor: 'divider' }}
 		>
 			<Typography className="truncate">Need assistance to get started?</Typography>
@@ -22,7 +22,7 @@ function GoToDocBox(props: GoToDocBoxProps) {
 				to="/documentation"
 				color="secondary"
 			>
-				View documentation <FuseSvgIcon size={16}>heroicons-outline:arrow-right</FuseSvgIcon>
+				View documentation <FuseSvgIcon>lucide:arrow-right</FuseSvgIcon>
 			</Typography>
 		</Box>
 	);

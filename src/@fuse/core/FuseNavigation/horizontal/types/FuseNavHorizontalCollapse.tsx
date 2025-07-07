@@ -126,9 +126,7 @@ function FuseNavHorizontalCollapse(props: FuseNavHorizontalCollapseProps) {
 											size={12}
 											className="arrow-icon"
 										>
-											{theme.direction === 'ltr'
-												? 'heroicons-outline:chevron-right'
-												: 'heroicons-outline:chevron-left'}
+											{theme.direction === 'ltr' ? 'lucide:chevron-right' : 'lucide:chevron-left'}
 										</FuseSvgIcon>
 									</IconButton>
 								</Root>
