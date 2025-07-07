@@ -54,7 +54,7 @@ function FuseHighlight(props: FuseHighlightProps) {
 	}
 
 	return (
-		<div className={clsx('not-prose relative', className)}>
+		<div className={clsx('not-prose relative min-h-9', className)}>
 			{copy && (
 				<Tooltip
 					title="Copied!"
@@ -83,7 +83,7 @@ function FuseHighlight(props: FuseHighlightProps) {
 			)}
 
 			<Wrapper
-				className="m-0"
+				className="m-0 min-h-full"
 				ref={innerRef}
 			>
 				{source}

@@ -752,8 +752,7 @@ export const defaultThemeOptions: DefaultThemeOptions = {
 			styleOverrides: {
 				root: {
 					padding: `${spacing(12)} ${spacing(16)}`, // 12px 16px
-					borderRadius: spacing(8),
-					backgroundColor: 'transparent'
+					borderRadius: spacing(8)
 				},
 				icon: {
 					padding: `${spacing(2)} 0`, // 2px 0

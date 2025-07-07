@@ -55,15 +55,9 @@ function FuseExample(props: FuseExampleProps) {
 	}
 
 	return (
-		<Card className={clsx(className, 'not-prose rounded-md shadow-sm')}>
+		<Card className={clsx(className, 'not-prose border-divider rounded-md border shadow-xs')}>
 			{Component && (
-				<Box
-					className="relative flex max-w-full justify-center p-4"
-					sx={{
-						backgroundColor: (theme) =>
-							darken(theme.palette.background.paper, theme.palette.mode === 'light' ? 0.03 : 0.3)
-					}}
-				>
+				<Box className="relative flex max-w-full justify-center p-4">
 					{iframe ? (
 						<DemoFrame name={name}>
 							<Component />
@@ -98,6 +92,7 @@ function FuseExample(props: FuseExampleProps) {
 					</Button>
 				</Tooltip>
 				<Button
+					className="min-w-30"
 					onClick={toggleShowCode}
 					variant="outlined"
 					size="small"

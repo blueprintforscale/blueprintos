@@ -18,7 +18,7 @@ function SignInPageView() {
 					<AuthJsForm formType="signin" />
 
 					<Box
-						className="text-md mt-6 rounded-lg px-4 py-2 leading-[1.625]"
+						className="text-md rounded-lg px-4 py-2 leading-[1.625]"
 						sx={{
 							backgroundColor: (theme) => lighten(theme.palette.primary.main, 0.8),
 							color: 'primary.dark'

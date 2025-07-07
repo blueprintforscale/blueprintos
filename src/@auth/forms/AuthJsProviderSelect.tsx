@@ -37,7 +37,6 @@ function AuthJsProviderSelect() {
 							key={provider.id}
 							className="items-between text-md flex"
 							onClick={() => handleSignIn(provider.id)}
-							size="large"
 							sx={(theme) => ({
 								backgroundColor: theme.palette.background.default,
 								color: theme.palette.text.primary,
@@ -52,7 +51,7 @@ function AuthJsProviderSelect() {
 								}
 							})}
 							endIcon={
-								<Box className="provider-icon flex h-8 w-8 items-center justify-center rounded-full">
+								<Box className="provider-icon flex h-6 w-6 items-center justify-center rounded-full">
 									<img
 										className="flex h-auto w-4"
 										src={`${providerLogoPath}/${provider.id}.svg`}
