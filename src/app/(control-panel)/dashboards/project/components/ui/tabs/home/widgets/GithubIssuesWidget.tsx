@@ -167,13 +167,13 @@ function GithubIssuesWidget() {
 						>
 							<Typography
 								className="text-5xl leading-none font-semibold tracking-tight sm:text-7xl"
-								color="primary.dark"
+								color="secondary"
 							>
 								{overview[currentRange]['new-issues']}
 							</Typography>
 							<Typography
 								className="mt-1 text-sm font-medium sm:text-lg"
-								color="primary.dark"
+								color="secondary"
 							>
 								New Issues
 							</Typography>
@@ -184,13 +184,13 @@ function GithubIssuesWidget() {
 						>
 							<Typography
 								className="text-5xl leading-none font-semibold tracking-tight sm:text-7xl"
-								color="secondary.dark"
+								color="secondary"
 							>
 								{overview[currentRange]['closed-issues']}
 							</Typography>
 							<Typography
 								className="mt-1 text-sm font-medium sm:text-lg"
-								color="secondary.dark"
+								color="secondary"
 							>
 								Closed
 							</Typography>
