@@ -34,4 +34,3 @@ The max-width matches the min-width of the current breakpoint.
 ```jsx
 <Container fixed>
 ```
-

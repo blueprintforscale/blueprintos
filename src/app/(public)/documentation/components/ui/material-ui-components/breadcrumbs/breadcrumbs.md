@@ -65,4 +65,3 @@ The accessibility of this component relies on:
 - The set of links is structured using an ordered list (`<ol>` element).
 - To prevent screen reader announcement of the visual separators between links, they are hidden with `aria-hidden`.
 - A nav element labeled with `aria-label` identifies the structure as a breadcrumb trail and makes it a navigation landmark so that it is easy to locate.
-

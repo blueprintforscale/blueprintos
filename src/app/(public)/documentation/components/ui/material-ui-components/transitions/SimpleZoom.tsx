@@ -6,51 +6,40 @@ import Zoom from '@mui/material/Zoom';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 const icon = (
-	<Paper
-		sx={{ m: 1, width: 100, height: 100 }}
-		elevation={4}
-	>
-		<svg>
-			<Box
-				component="polygon"
-				points="0,100 50,00, 100,100"
-				sx={(theme) => ({
-					fill: theme.vars.palette.common.white,
-					stroke: theme.vars.palette.divider,
-					strokeWidth: 1
-				})}
-			/>
-		</svg>
-	</Paper>
+  <Paper sx={{ m: 1, width: 100, height: 100 }} elevation={4}>
+    <svg>
+      <Box
+        component="polygon"
+        points="0,100 50,00, 100,100"
+        sx={(theme) => ({
+          fill: theme.palette.common.white,
+          stroke: theme.palette.divider,
+          strokeWidth: 1,
+        })}
+      />
+    </svg>
+  </Paper>
 );
 
 export default function SimpleZoom() {
-	const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
 
-	const handleChange = () => {
-		setChecked((prev) => !prev);
-	};
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
 
-	return (
-		<Box sx={{ height: 180 }}>
-			<FormControlLabel
-				control={
-					<Switch
-						checked={checked}
-						onChange={handleChange}
-					/>
-				}
-				label="Show"
-			/>
-			<Box sx={{ display: 'flex' }}>
-				<Zoom in={checked}>{icon}</Zoom>
-				<Zoom
-					in={checked}
-					style={{ transitionDelay: checked ? '500ms' : '0ms' }}
-				>
-					{icon}
-				</Zoom>
-			</Box>
-		</Box>
-	);
+  return (
+    <Box sx={{ height: 180 }}>
+      <FormControlLabel
+        control={<Switch checked={checked} onChange={handleChange} />}
+        label="Show"
+      />
+      <Box sx={{ display: 'flex' }}>
+        <Zoom in={checked}>{icon}</Zoom>
+        <Zoom in={checked} style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
+          {icon}
+        </Zoom>
+      </Box>
+    </Box>
+  );
 }

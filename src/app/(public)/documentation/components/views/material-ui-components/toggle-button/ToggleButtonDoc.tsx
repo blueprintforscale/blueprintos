@@ -23,6 +23,10 @@ import StandaloneToggleButtonComponent from '../../../ui/material-ui-components/
 import StandaloneToggleButtonRaw from '../../../ui/material-ui-components/toggle-button/StandaloneToggleButton.tsx?raw';
 import CustomizedDividersComponent from '../../../ui/material-ui-components/toggle-button/CustomizedDividers';
 import CustomizedDividersRaw from '../../../ui/material-ui-components/toggle-button/CustomizedDividers.tsx?raw';
+import HorizontalSpacingToggleButtonComponent from '../../../ui/material-ui-components/toggle-button/HorizontalSpacingToggleButton';
+import HorizontalSpacingToggleButtonRaw from '../../../ui/material-ui-components/toggle-button/HorizontalSpacingToggleButton.tsx?raw';
+import VerticalSpacingToggleButtonComponent from '../../../ui/material-ui-components/toggle-button/VerticalSpacingToggleButton';
+import VerticalSpacingToggleButtonRaw from '../../../ui/material-ui-components/toggle-button/VerticalSpacingToggleButton.tsx?raw';
 
 function ToggleButtonDoc(props) {
 	return (
@@ -271,6 +275,55 @@ const handleDevices = (event, newDevices) => {
 					iframe={false}
 					component={CustomizedDividersComponent}
 					raw={CustomizedDividersRaw}
+				/>
+			</Typography>
+			<Typography
+				className="mt-5 mb-2.5 text-lg font-bold"
+				component="h3"
+			>
+				Spacing
+			</Typography>
+			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				The demos below show how to adjust spacing between toggle buttons in horizontal and vertical
+				orientations.
+			</Typography>
+			<Typography
+				className="mt-3 mb-2.5 text-base"
+				component="h4"
+			>
+				Horizontal Spacing
+			</Typography>
+			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				<FuseExample
+					name="HorizontalSpacingToggleButton.js"
+					className="my-4"
+					iframe={false}
+					component={HorizontalSpacingToggleButtonComponent}
+					raw={HorizontalSpacingToggleButtonRaw}
+				/>
+			</Typography>
+			<Typography
+				className="mt-3 mb-2.5 text-base"
+				component="h4"
+			>
+				Vertical Spacing
+			</Typography>
+			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				<FuseExample
+					name="VerticalSpacingToggleButton.js"
+					className="my-4"
+					iframe={false}
+					component={VerticalSpacingToggleButtonComponent}
+					raw={VerticalSpacingToggleButtonRaw}
 				/>
 			</Typography>
 			<Typography

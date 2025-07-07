@@ -153,4 +153,3 @@ Following the [Material Design guidelines](https://m2.material.io/design/color/d
 You can override this behavior by setting the `enableColorOnDark` prop to `true`.
 
 {{"demo": "EnableColorOnDarkAppBar.js", "bg": true}}
-

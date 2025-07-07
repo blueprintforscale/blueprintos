@@ -7,37 +7,22 @@ import PersonPinIcon from '@mui/icons-material/PersonPin';
 import PhoneMissedIcon from '@mui/icons-material/PhoneMissed';
 
 export default function IconPositionTabs() {
-	const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0);
 
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setValue(newValue);
-	};
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
-	return (
-		<Tabs
-			value={value}
-			onChange={handleChange}
-			aria-label="icon position tabs example"
-		>
-			<Tab
-				icon={<PhoneIcon />}
-				label="top"
-			/>
-			<Tab
-				icon={<PhoneMissedIcon />}
-				iconPosition="start"
-				label="start"
-			/>
-			<Tab
-				icon={<FavoriteIcon />}
-				iconPosition="end"
-				label="end"
-			/>
-			<Tab
-				icon={<PersonPinIcon />}
-				iconPosition="bottom"
-				label="bottom"
-			/>
-		</Tabs>
-	);
+  return (
+    <Tabs
+      value={value}
+      onChange={handleChange}
+      aria-label="icon position tabs example"
+    >
+      <Tab icon={<PhoneIcon />} label="top" />
+      <Tab icon={<PhoneMissedIcon />} iconPosition="start" label="start" />
+      <Tab icon={<FavoriteIcon />} iconPosition="end" label="end" />
+      <Tab icon={<PersonPinIcon />} iconPosition="bottom" label="bottom" />
+    </Tabs>
+  );
 }

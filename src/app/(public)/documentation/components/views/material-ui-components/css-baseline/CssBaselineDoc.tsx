@@ -130,7 +130,7 @@ export default function MyApp() {
 				<li>
 					The default Material Design background color is applied. It&#39;s using{' '}
 					<a href="/material-ui/customization/default-theme/?expand-path=$.palette.background">
-						<code>theme.vars.palette.background.default</code>
+						<code>theme.palette.background.default</code>
 					</a>{' '}
 					for standard devices and a white background for print devices.
 				</li>

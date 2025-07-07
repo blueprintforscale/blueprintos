@@ -7,38 +7,30 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 export default function LabelBottomNavigation() {
-	const [value, setValue] = React.useState('recents');
+  const [value, setValue] = React.useState('recents');
 
-	const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-		setValue(newValue);
-	};
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
 
-	return (
-		<BottomNavigation
-			sx={{ width: 500 }}
-			value={value}
-			onChange={handleChange}
-		>
-			<BottomNavigationAction
-				label="Recents"
-				value="recents"
-				icon={<RestoreIcon />}
-			/>
-			<BottomNavigationAction
-				label="Favorites"
-				value="favorites"
-				icon={<FavoriteIcon />}
-			/>
-			<BottomNavigationAction
-				label="Nearby"
-				value="nearby"
-				icon={<LocationOnIcon />}
-			/>
-			<BottomNavigationAction
-				label="Folder"
-				value="folder"
-				icon={<FolderIcon />}
-			/>
-		</BottomNavigation>
-	);
+  return (
+    <BottomNavigation sx={{ width: 500 }} value={value} onChange={handleChange}>
+      <BottomNavigationAction
+        label="Recents"
+        value="recents"
+        icon={<RestoreIcon />}
+      />
+      <BottomNavigationAction
+        label="Favorites"
+        value="favorites"
+        icon={<FavoriteIcon />}
+      />
+      <BottomNavigationAction
+        label="Nearby"
+        value="nearby"
+        icon={<LocationOnIcon />}
+      />
+      <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
+    </BottomNavigation>
+  );
 }

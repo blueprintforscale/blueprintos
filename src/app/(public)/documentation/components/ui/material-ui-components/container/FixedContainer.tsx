@@ -4,12 +4,12 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
 export default function FixedContainer() {
-	return (
-		<React.Fragment>
-			<CssBaseline />
-			<Container fixed>
-				<Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} />
-			</Container>
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container fixed>
+        <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} />
+      </Container>
+    </React.Fragment>
+  );
 }

@@ -4,12 +4,12 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
 export default function SimpleContainer() {
-	return (
-		<React.Fragment>
-			<CssBaseline />
-			<Container maxWidth="sm">
-				<Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} />
-			</Container>
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} />
+      </Container>
+    </React.Fragment>
+  );
 }

@@ -149,6 +149,12 @@ const materialUIComponentsNavigation = {
 			url: '/documentation/material-ui-components/image-list'
 		},
 		{
+			id: 'initColorSchemeScript',
+			title: 'Init Color Scheme Script',
+			type: 'item',
+			url: '/documentation/material-ui-components/init-color-scheme-script'
+		},
+		{
 			id: 'links',
 			title: 'Links',
 			type: 'item',

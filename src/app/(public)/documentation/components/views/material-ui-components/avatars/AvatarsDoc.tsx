@@ -30,6 +30,8 @@ import SpacingComponent from '../../../ui/material-ui-components/avatars/Spacing
 import SpacingRaw from '../../../ui/material-ui-components/avatars/Spacing.tsx?raw';
 import BadgeAvatarsComponent from '../../../ui/material-ui-components/avatars/BadgeAvatars';
 import BadgeAvatarsRaw from '../../../ui/material-ui-components/avatars/BadgeAvatars.tsx?raw';
+import UploadAvatarsComponent from '../../../ui/material-ui-components/avatars/UploadAvatars';
+import UploadAvatarsRaw from '../../../ui/material-ui-components/avatars/UploadAvatars.tsx?raw';
 
 function AvatarsDoc(props) {
 	return (
@@ -354,6 +356,24 @@ function AvatarsDoc(props) {
 					iframe={false}
 					component={BadgeAvatarsComponent}
 					raw={BadgeAvatarsRaw}
+				/>
+			</Typography>
+			<Typography
+				className="mt-6 mb-2.5 text-3xl font-bold"
+				component="h2"
+			>
+				Avatar upload
+			</Typography>
+			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				<FuseExample
+					name="UploadAvatars.js"
+					className="my-4"
+					iframe={false}
+					component={UploadAvatarsComponent}
+					raw={UploadAvatarsRaw}
 				/>
 			</Typography>
 		</>

@@ -249,6 +249,37 @@ import SnackbarContent from '@mui/material/SnackbarContent';
 				className="mt-5 mb-2.5 text-lg font-bold"
 				component="h3"
 			>
+				Preventing default click away event
+			</Typography>
+			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				If you would like to prevent the default onClickAway behavior, you can set the event&#39;s{' '}
+				<code>defaultMuiPrevented</code> property to <code>true</code>:
+			</Typography>
+
+			<FuseHighlight
+				component="pre"
+				className="language-jsx"
+			>
+				{` 
+<Snackbar
+  slotProps={{
+    clickAwayListener: {
+      onClickAway: (event) => {
+        // Prevent's default 'onClickAway' behavior.
+        event.defaultMuiPrevented = true;
+      },
+    },
+  
+/>
+`}
+			</FuseHighlight>
+			<Typography
+				className="mt-5 mb-2.5 text-lg font-bold"
+				component="h3"
+			>
 				Use with Alerts
 			</Typography>
 			<Typography

@@ -238,9 +238,9 @@ function TextFieldsDoc(props) {
 				component="div"
 			>
 				The <code>multiline</code> prop transforms the Text Field into a{' '}
-				<a href="/base-ui/react-textarea-autosize/">MUI Base Textarea Autosize</a> element. Unless the{' '}
-				<code>rows</code> prop is set, the height of the text field dynamically matches its content. You can use
-				the <code>minRows</code> and <code>maxRows</code> props to bound it.
+				<a href="https://v6.mui.com/base-ui/react-textarea-autosize/">MUI Base Textarea Autosize</a> element.
+				Unless the <code>rows</code> prop is set, the height of the text field dynamically matches its content.
+				You can use the <code>minRows</code> and <code>maxRows</code> props to bound it.
 			</Typography>
 			<Typography
 				className="mb-8 text-base"
@@ -873,7 +873,7 @@ export default function App() {
 			>
 				The input label &quot;shrink&quot; state isn&#39;t always correct. The input label is supposed to shrink
 				as soon as the input is displaying something. In some circumstances, we can&#39;t determine the
-				&quot;shrink&quot; state (number input, datetime input, Stripe input). You might notice an overlap.
+				&quot;shrink&quot; state (datetime input, Stripe input). You might notice an overlap.
 			</Typography>
 			<Typography
 				className="mb-8 text-base"
@@ -983,7 +983,7 @@ export default function App() {
 				component="div"
 			>
 				If you need a text field with number validation, you can use MUI Base&#39;s{' '}
-				<a href="/base-ui/react-number-input/">Number Input</a> instead.
+				<a href="https://mui.com/base-ui/react-number-input/">Number Input</a> instead.
 			</Typography>
 			<Typography
 				className="mb-8 text-base"

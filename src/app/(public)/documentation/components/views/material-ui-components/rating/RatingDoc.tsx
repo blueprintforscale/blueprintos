@@ -3,6 +3,7 @@
 'use client';
 
 import FuseExample from '@fuse/core/FuseExample';
+import FuseHighlight from '@fuse/core/FuseHighlight';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -272,6 +273,63 @@ function RatingDoc(props) {
 			>
 				The read only rating is not focusable.
 			</Typography>
+			<Typography
+				className="mt-6 mb-2.5 text-3xl font-bold"
+				component="h2"
+			>
+				Testing
+			</Typography>
+			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				When testing the Rating component in environments such as Jest with jsdom, certain user
+				interactions—especially hover-based interactions—may not behave as expected. This is because the
+				component relies on <code>getBoundingClientRect()</code> to calculate the position of each icon and
+				determine which icon is currently being hovered. In jsdom, <code>getBoundingClientRect()</code> returns{' '}
+				<code>0</code> values by default, which can lead to incorrect behavior such as <code>NaN</code> being
+				passed to the <code>onChange</code> handler.
+			</Typography>
+			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				To avoid this issue in your test suite:
+			</Typography>
+			<ul className="space-y-4">
+				<li>
+					Prefer <code>fireEvent</code> over <code>userEvent</code> when simulating click events.
+				</li>
+				<li>Avoid relying on hover behavior to trigger changes.</li>
+				<li>
+					If needed, mock <code>getBoundingClientRect()</code> manually for more advanced interactions.
+				</li>
+			</ul>
+
+			<FuseHighlight
+				component="pre"
+				className="language-tsx"
+			>
+				{` 
+// @vitest-environment jsdom
+
+import { Rating } from '@mui/material';
+import { render, fireEvent, screen } from '@testing-library/react';
+
+import { describe, test, vi } from 'vitest';
+
+describe('Rating', () => {
+  test('should update rating on click', () => {
+    const handleChange = vi.fn();
+    render(<Rating onChange={(_, newValue) => handleChange(newValue)} />);
+
+    fireEvent.click(screen.getByLabelText('2 Stars'));
+
+    expect(handleChange).toHaveBeenCalledWith(2);
+  });
+});
+`}
+			</FuseHighlight>
 		</>
 	);
 }

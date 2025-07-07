@@ -6,30 +6,17 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 
 export default function IconLabelTabs() {
-	const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0);
 
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setValue(newValue);
-	};
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
-	return (
-		<Tabs
-			value={value}
-			onChange={handleChange}
-			aria-label="icon label tabs example"
-		>
-			<Tab
-				icon={<PhoneIcon />}
-				label="RECENTS"
-			/>
-			<Tab
-				icon={<FavoriteIcon />}
-				label="FAVORITES"
-			/>
-			<Tab
-				icon={<PersonPinIcon />}
-				label="NEARBY"
-			/>
-		</Tabs>
-	);
+  return (
+    <Tabs value={value} onChange={handleChange} aria-label="icon label tabs example">
+      <Tab icon={<PhoneIcon />} label="RECENTS" />
+      <Tab icon={<FavoriteIcon />} label="FAVORITES" />
+      <Tab icon={<PersonPinIcon />} label="NEARBY" />
+    </Tabs>
+  );
 }

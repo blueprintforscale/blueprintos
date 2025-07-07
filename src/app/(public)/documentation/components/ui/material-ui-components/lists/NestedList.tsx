@@ -13,62 +13,52 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 
 export default function NestedList() {
-	const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(true);
 
-	const handleClick = () => {
-		setOpen(!open);
-	};
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
-	return (
-		<List
-			sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-			component="nav"
-			aria-labelledby="nested-list-subheader"
-			subheader={
-				<ListSubheader
-					component="div"
-					id="nested-list-subheader"
-				>
-					Nested List Items
-				</ListSubheader>
-			}
-		>
-			<ListItemButton>
-				<ListItemIcon>
-					<SendIcon />
-				</ListItemIcon>
-				<ListItemText primary="Sent mail" />
-			</ListItemButton>
-			<ListItemButton>
-				<ListItemIcon>
-					<DraftsIcon />
-				</ListItemIcon>
-				<ListItemText primary="Drafts" />
-			</ListItemButton>
-			<ListItemButton onClick={handleClick}>
-				<ListItemIcon>
-					<InboxIcon />
-				</ListItemIcon>
-				<ListItemText primary="Inbox" />
-				{open ? <ExpandLess /> : <ExpandMore />}
-			</ListItemButton>
-			<Collapse
-				in={open}
-				timeout="auto"
-				unmountOnExit
-			>
-				<List
-					component="div"
-					disablePadding
-				>
-					<ListItemButton sx={{ pl: 4 }}>
-						<ListItemIcon>
-							<StarBorder />
-						</ListItemIcon>
-						<ListItemText primary="Starred" />
-					</ListItemButton>
-				</List>
-			</Collapse>
-		</List>
-	);
+  return (
+    <List
+      sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+      subheader={
+        <ListSubheader component="div" id="nested-list-subheader">
+          Nested List Items
+        </ListSubheader>
+      }
+    >
+      <ListItemButton>
+        <ListItemIcon>
+          <SendIcon />
+        </ListItemIcon>
+        <ListItemText primary="Sent mail" />
+      </ListItemButton>
+      <ListItemButton>
+        <ListItemIcon>
+          <DraftsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Drafts" />
+      </ListItemButton>
+      <ListItemButton onClick={handleClick}>
+        <ListItemIcon>
+          <InboxIcon />
+        </ListItemIcon>
+        <ListItemText primary="Inbox" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Starred" />
+          </ListItemButton>
+        </List>
+      </Collapse>
+    </List>
+  );
 }
