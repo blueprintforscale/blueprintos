@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Controller, useFormContext } from 'react-hook-form';
-import { Product } from '../../../api/types';
+import { Product } from '../../../../../api/types';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 

@@ -1,4 +1,4 @@
-import SearchItemType from '../types/SearchItemType';
+import SearchItemType from '../../types/SearchItemType';
 
 /**
  * This is an example of a search response that you might get from your API.

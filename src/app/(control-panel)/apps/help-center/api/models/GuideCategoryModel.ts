@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { PartialDeep } from 'type-fest';
-import { GuideCategory } from '../api/types';
+import { GuideCategory } from '../types';
 
 /**
  * Creates a new guide category object with the specified data.

@@ -21,7 +21,6 @@ export default tseslint.config({
     ignores: [
         '**/app/(public)/documentation/components/views/material-ui-components/**',
         '**/app/(public)/documentation/components/ui/material-ui-components/**',
-        '**/app/(public)/documentation/material-ui-components/doc/**',
         '**/utils/node-scripts/fuse-react-message.js',
         '**/components/tiptap/**',
         '**/.next/**',

@@ -5,7 +5,7 @@ import FuseUtils from '@fuse/utils';
 import { Controller, useFormContext } from 'react-hook-form';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Box from '@mui/material/Box';
-import { Product } from '../../../api/types';
+import { Product } from '../../../../../api/types';
 
 const Root = styled('div')(({ theme }) => ({
 	'& .productImageFeaturedStar': {

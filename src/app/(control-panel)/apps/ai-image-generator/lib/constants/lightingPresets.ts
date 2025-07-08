@@ -1,4 +1,4 @@
-import { StyleOption } from '../components/generator-form/controllers/StyleSelectFormController';
+import { StyleOption } from '../../components/forms/generator-form/controllers/StyleSelectFormController';
 
 const lightingPresets: StyleOption[] = [
 	{

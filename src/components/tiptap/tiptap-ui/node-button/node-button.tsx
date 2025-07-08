@@ -9,7 +9,7 @@ import { BlockQuoteIcon } from '@/components/tiptap/tiptap-icons/block-quote-ico
 import { CodeBlockIcon } from '@/components/tiptap/tiptap-icons/code-block-icon';
 
 // --- Lib ---
-import { isNodeInSchema } from '@/lib/tiptap-utils';
+import { isNodeInSchema } from '@/utils/tiptap-utils';
 
 // --- UI Primitives ---
 import { Button, ButtonProps } from '@/components/tiptap/tiptap-ui-primitive/button';

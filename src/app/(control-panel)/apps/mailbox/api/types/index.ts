@@ -1,4 +1,4 @@
-import { LabelColorsType } from '../mail/labelColors';
+import { LabelColorsType } from '../../components/ui/mail/labelColors';
 
 export type RouteParams = Record<string, unknown>;
 

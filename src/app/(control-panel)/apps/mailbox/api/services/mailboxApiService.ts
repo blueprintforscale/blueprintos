@@ -1,5 +1,5 @@
 import { api } from '@/utils/api';
-import type { MailboxMail, MailboxFilter, MailboxLabel, MailboxFolder } from './types';
+import type { MailboxMail, MailboxFilter, MailboxLabel, MailboxFolder } from '../types';
 
 export const mailboxApi = {
 	getMails: (params?: Record<string, string>) =>

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { PartialDeep } from 'type-fest';
-import { Guide } from '../api/types';
+import { Guide } from '../types';
 
 /**
  * Creates a new guide object with the specified data.

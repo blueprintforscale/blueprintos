@@ -642,20 +642,26 @@ async function build() {
 	log('PagesDirectory created.');
 
 	readDir(exampleComponentsDir).then(({ dir: _dir, list }) => {
-		writePages(_dir, list).then((pages) => {
+		writePages(_dir, list).then(async (pages) => {
 			log('Route file created.');
 
 			writeNavigationFile(pages);
 
 			log('Navigation file created.');
 
-			const eslintPath = path.resolve(projectDir, './node_modules/.bin/eslint');
-			const eslintConfigPath = path.resolve(projectDir, './eslint.config.mjs');
+			await runLint();
+		});
+	});
+}
 
-			const tempConfigPath = path.join(nodeModulesDir, '.temp-eslint.mjs');
+async function runLint() {
+	const eslintPath = path.resolve(projectDir, './node_modules/.bin/eslint');
+	const eslintConfigPath = path.resolve(projectDir, './eslint.config.mjs');
 
-			async function createEslintConfig() {
-				const configContent = `
+	const tempConfigPath = path.join(nodeModulesDir, '.temp-eslint.mjs');
+
+	async function createEslintConfig() {
+		const configContent = `
 					import baseConfig from '${eslintConfigPath}';
 					
 					export default baseConfig.map(config => {
@@ -682,35 +688,37 @@ async function build() {
 					});
 				`;
 
-				await fsp.writeFile(tempConfigPath, configContent);
+		await fsp.writeFile(tempConfigPath, configContent);
+	}
+
+	createEslintConfig();
+
+	process.chdir(projectDir);
+
+	async function runEslintCommand(filesDir: string) {
+		return runCommand(eslintPath, [`${filesDir}`, '--fix', '--config', tempConfigPath]);
+	}
+
+	const promises = [
+		runEslintCommand(exampleComponentsDir),
+		runEslintCommand(viewComponentsDir),
+		runEslintCommand(navigationFilePath)
+	];
+
+	return Promise.all(promises)
+		.then(() => {
+			log('Linting done.');
+			log(`Done`);
+		})
+		.catch((err) => {
+			if (err) {
+				log(err);
 			}
-
-			createEslintConfig();
-
-			process.chdir(projectDir);
-
-			async function runEslintCommand(filesDir: string) {
-				return runCommand(eslintPath, [`${filesDir}`, '--fix', '--config', tempConfigPath]);
-			}
-
-			const promises = [runEslintCommand(viewComponentsDir), runEslintCommand(navigationFilePath)];
-
-			Promise.all(promises)
-				.then(() => {
-					log('Linting done.');
-					log(`Done`);
-				})
-				.catch((err) => {
-					if (err) {
-						log(err);
-					}
-				})
-				.finally(async () => {
-					log('Eslint format completed.');
-					await removeFile(tempConfigPath);
-				});
+		})
+		.finally(async () => {
+			log('Eslint format completed.');
+			await removeFile(tempConfigPath);
 		});
-	});
 }
 
 function runCommand(command: string, args: string[]) {

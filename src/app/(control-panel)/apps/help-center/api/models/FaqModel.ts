@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { PartialDeep } from 'type-fest';
-import { Faq } from '../api/types';
+import { Faq } from '../types';
 
 /**
  * Creates a new faq object with the specified data.

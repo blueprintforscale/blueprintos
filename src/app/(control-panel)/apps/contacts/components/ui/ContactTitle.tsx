@@ -1,4 +1,4 @@
-import { useContact } from '../api/hooks/contacts/useContact';
+import { useContact } from '../../api/hooks/contacts/useContact';
 
 type ContactTitleProps = {
 	contactId?: string;

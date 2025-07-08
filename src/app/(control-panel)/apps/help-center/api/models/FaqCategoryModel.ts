@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { PartialDeep } from 'type-fest';
-import { FaqCategory } from '../api/types';
+import { FaqCategory } from '../types';
 
 /**
  * Creates a new faq category object with the specified data.

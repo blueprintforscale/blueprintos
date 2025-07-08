@@ -8,52 +8,53 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 
 const StyledRating = styled(Rating)(({ theme }) => ({
-  '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
-    color: theme.palette.action.disabled,
-  },
+	'& .MuiRating-iconEmpty .MuiSvgIcon-root': {
+		color: theme.palette.action.disabled
+	}
 }));
 
-const customIcons: {
-  [index: string]: {
-    icon: React.ReactElement<unknown>;
-    label: string;
-  };
-} = {
-  1: {
-    icon: <SentimentVeryDissatisfiedIcon color="error" />,
-    label: 'Very Dissatisfied',
-  },
-  2: {
-    icon: <SentimentDissatisfiedIcon color="error" />,
-    label: 'Dissatisfied',
-  },
-  3: {
-    icon: <SentimentSatisfiedIcon color="warning" />,
-    label: 'Neutral',
-  },
-  4: {
-    icon: <SentimentSatisfiedAltIcon color="success" />,
-    label: 'Satisfied',
-  },
-  5: {
-    icon: <SentimentVerySatisfiedIcon color="success" />,
-    label: 'Very Satisfied',
-  },
+const customIcons: Record<
+	string,
+	{
+		icon: React.ReactElement<unknown>;
+		label: string;
+	}
+> = {
+	1: {
+		icon: <SentimentVeryDissatisfiedIcon color="error" />,
+		label: 'Very Dissatisfied'
+	},
+	2: {
+		icon: <SentimentDissatisfiedIcon color="error" />,
+		label: 'Dissatisfied'
+	},
+	3: {
+		icon: <SentimentSatisfiedIcon color="warning" />,
+		label: 'Neutral'
+	},
+	4: {
+		icon: <SentimentSatisfiedAltIcon color="success" />,
+		label: 'Satisfied'
+	},
+	5: {
+		icon: <SentimentVerySatisfiedIcon color="success" />,
+		label: 'Very Satisfied'
+	}
 };
 
 function IconContainer(props: IconContainerProps) {
-  const { value, ...other } = props;
-  return <span {...other}>{customIcons[value].icon}</span>;
+	const { value, ...other } = props;
+	return <span {...other}>{customIcons[value].icon}</span>;
 }
 
 export default function RadioGroupRating() {
-  return (
-    <StyledRating
-      name="highlight-selected-only"
-      defaultValue={2}
-      IconContainerComponent={IconContainer}
-      getLabelText={(value: number) => customIcons[value].label}
-      highlightSelectedOnly
-    />
-  );
+	return (
+		<StyledRating
+			name="highlight-selected-only"
+			defaultValue={2}
+			IconContainerComponent={IconContainer}
+			getLabelText={(value: number) => customIcons[value].label}
+			highlightSelectedOnly
+		/>
+	);
 }

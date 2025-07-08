@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { PartialDeep } from 'type-fest';
-import { FileManagerItem } from '../api/types';
+import { FileManagerItem } from '../types';
 
 /**
  * FileManager Item Model

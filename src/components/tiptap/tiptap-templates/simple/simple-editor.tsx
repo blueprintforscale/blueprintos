@@ -51,7 +51,7 @@ import { useMobile } from '@/hooks/useMobile';
 import { useWindowSize } from '@/hooks/useWindowSize';
 
 // --- Lib ---
-import { handleImageUpload, MAX_FILE_SIZE } from '@/lib/tiptap-utils';
+import { handleImageUpload, MAX_FILE_SIZE } from '@/utils/tiptap-utils';
 
 // --- Styles ---
 import '@/components/tiptap/tiptap-templates/simple/simple-editor.scss';

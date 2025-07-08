@@ -14,7 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import Input from '@mui/material/Input';
 import Card from '@mui/material/Card';
-import { ProfilePost } from '../../api/types';
+import { ProfilePost } from '../../../../api/types';
 
 type PostProps = {
 	item: ProfilePost;

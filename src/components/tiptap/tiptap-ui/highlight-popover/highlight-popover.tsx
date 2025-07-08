@@ -10,7 +10,7 @@ import { BanIcon } from '@/components/tiptap/tiptap-icons/ban-icon';
 import { HighlighterIcon } from '@/components/tiptap/tiptap-icons/highlighter-icon';
 
 // --- Lib ---
-import { isMarkInSchema } from '@/lib/tiptap-utils';
+import { isMarkInSchema } from '@/utils/tiptap-utils';
 
 // --- UI Primitives ---
 import { Button, ButtonProps } from '@/components/tiptap/tiptap-ui-primitive/button';
