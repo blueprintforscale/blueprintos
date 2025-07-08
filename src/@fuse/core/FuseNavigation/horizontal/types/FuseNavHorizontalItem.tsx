@@ -13,6 +13,7 @@ import { FuseNavItemComponentProps } from '../../FuseNavItem';
 const Root = styled(ListItemButton)<ListItemButtonProps>(({ theme }) => ({
 	color: theme.vars.palette.text.primary,
 	textDecoration: 'none!important',
+	flex: '0 1 auto',
 	minHeight: 48,
 	'&.active': {
 		backgroundColor: `${theme.vars.palette.secondary.main}!important`,
