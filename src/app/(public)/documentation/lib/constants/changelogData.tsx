@@ -21,6 +21,95 @@ export type ChangelogItemType = {
  */
 const changelogData: ChangelogItemType[] = [
 	{
+		version: '16.0.0',
+		date: '2025-07-08',
+		newChanges: [
+			'🔄 Migrated from Redux to TanStack Query for better state management',
+			'📁 Restructured project with new feature-based directory organization',
+			'🎨 Updated design system with modern UI components and improved aesthetics',
+			'🔤 Changed default font to Geist for improved readability',
+			'🎯 Migrated from Hero Icons to Lucide Icons',
+			'🎭 Updated default theme and color schemes',
+			'🚀 Added @tanstack/react-query (v5.74.7) for improved data fetching',
+			'🛠️ Added @tanstack/react-query-devtools for development tools',
+			'📡 Added ky (v1.8.1) HTTP client library',
+			'⚡ Updated Next.js to v15.3.5',
+			'🔐 Updated next-auth to v5.0.0-beta.29',
+			'🎯 Updated MUI Base to v5.0.0-beta.70',
+			'📊 Updated MUI X Data Grid to v8.7.0',
+			'📅 Updated MUI X Date Pickers to v8.7.0',
+			'💫 Updated Material UI Popup State to v5.3.6',
+			'🎭 Enhanced UI/UX'
+		],
+		breakingChanges: [
+			'Complete migration from Redux to TanStack Query - requires updating all data fetching logic',
+			'Major directory structure reorganization',
+			'Removed Redux store, actions, and reducers in favor of TanStack Query',
+			'Changed state management patterns to align with TanStack Query best practices',
+			'Icon system changed from Hero Icons to Lucide Icons - requires icon name updates',
+			'Default font changed to Geist'
+		],
+		notes: (
+			<div className="mt-10 mb-6 w-full max-w-2xl rounded-xl border-2 border-red-500 p-6 text-base">
+				<Typography component="div">
+					<Alert
+						severity="warning"
+						className="mb-4"
+					>
+						<Typography className="font-medium">Important Note for Production Projects</Typography>
+						<Typography>
+							This version introduces significant architectural changes. If you have a mature,
+							production-ready project, you may want to stay on the previous version. The migration effort
+							might outweigh the benefits for established applications. Consider this update primarily for
+							new projects or those in early development stages.
+						</Typography>
+					</Alert>
+					<ul className="list-disc">
+						<li className="leading-[2]">
+							<b>Major State Management Change:</b> This version marks a significant shift from Redux to
+							TanStack Query, offering improved data fetching, caching, and state management capabilities.
+							This change requires updating existing data fetching logic but provides better performance
+							and developer experience.
+						</li>
+						<li className="leading-[2]">
+							<b>Directory Structure Update:</b> The project structure has been completely reorganized to
+							follow a more feature-based approach:
+							<ul className="mt-2 ml-4 list-disc">
+								<li>
+									Reorganized <code>components/</code> with clear separation of UI, views, and forms
+								</li>
+								<li>
+									Optional directories (<code>contexts/</code>, <code>hooks/</code>, <code>lib/</code>
+									, <code>types/</code>) for better code organization
+								</li>
+								<li>Clear guidelines for file placement and folder creation</li>
+							</ul>
+						</li>
+						<li className="leading-[2]">
+							<b>Design System Enhancements:</b>
+							<ul className="mt-2 ml-4 list-disc">
+								<li>New Geist font for improved readability and modern aesthetics</li>
+								<li>Switched to Lucide Icons for a more consistent and maintainable icon system</li>
+								<li>Refreshed color schemes and default theme for better visual hierarchy</li>
+								<li>Enhanced component theming and dark mode support</li>
+							</ul>
+						</li>
+						<li className="leading-[2]">
+							<b>Migration Steps:</b>
+							<ul className="mt-2 ml-4 list-disc">
+								<li>Replace Redux actions/reducers with TanStack Query hooks</li>
+								<li>Reorganize components following the new directory guidelines</li>
+								<li>Update API integration to use the new ky HTTP client</li>
+								<li>Update icon imports and names to use Lucide Icons</li>
+								<li>Review layouts for potential font-related adjustments</li>
+							</ul>
+						</li>
+					</ul>
+				</Typography>
+			</div>
+		)
+	},
+	{
 		version: '15.0.0',
 		date: '2025-04-25',
 		newChanges: [
@@ -296,7 +385,7 @@ const changelogData: ChangelogItemType[] = [
 		breakingChanges: [
 			'Renamed all *Config.tsx files to *Route.tsx.',
 			'Removed @history package.',
-			'Re-configured the router to support React Router v6’s new data APIs.'
+			"Re-configured the router to support React Router v6's new data APIs."
 		],
 		notes: (
 			<div className="mt-10 mb-6 w-full max-w-2xl rounded-xl border-2 border-red-500 p-6 text-base">
@@ -305,7 +394,7 @@ const changelogData: ChangelogItemType[] = [
 						component="li"
 						className="leading-[2]"
 					>
-						The routing system has been updated to support React Router v6’s new data APIs.
+						The routing system has been updated to support React Router v6's new data APIs.
 					</Typography>
 					<Typography
 						component="li"
@@ -317,7 +406,7 @@ const changelogData: ChangelogItemType[] = [
 						component="li"
 						className="leading-[2]"
 					>
-						You don’t need to manually import routes anymore. The new routing system automatically populates
+						You don't need to manually import routes anymore. The new routing system automatically populates
 						all routes in routesConfig.tsx.
 					</Typography>
 					<Typography
@@ -949,9 +1038,9 @@ const changelogData: ChangelogItemType[] = [
 							<ul className="ml-2">
 								As mentioned in its official docs, it helps to solve three major problems people had
 								with Redux:
-								<li>“Configuring a Redux store is too complicated.”</li>
-								<li>“I have to add a lot of packages to get Redux to do anything useful.”</li>
-								<li>“Redux requires too much boilerplate code.”</li>
+								<li>"Configuring a Redux store is too complicated."</li>
+								<li>"I have to add a lot of packages to get Redux to do anything useful."</li>
+								<li>"Redux requires too much boilerplate code."</li>
 							</ul>
 						</li>
 						<li>
@@ -1302,7 +1391,7 @@ const changelogData: ChangelogItemType[] = [
 			'purgecss added to decrease file size of the production build.'
 		],
 		fixedChanges: [
-			'Fuse vertical navigation collapse items don’t have to be collapsed whenever navigation updated or location path changed.'
+			"Fuse vertical navigation collapse items don't have to be collapsed whenever navigation updated or location path changed."
 		],
 		breakingChanges: [
 			'src/styles/fuse-helpers.css renamed with src/styles/tailwind.css',
