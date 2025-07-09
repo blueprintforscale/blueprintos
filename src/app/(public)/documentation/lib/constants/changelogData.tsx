@@ -22,7 +22,7 @@ export type ChangelogItemType = {
 const changelogData: ChangelogItemType[] = [
 	{
 		version: '16.0.0',
-		date: '2025-07-08',
+		date: '2025-07-09',
 		newChanges: [
 			'🔄 Migrated from Redux to TanStack Query for better state management',
 			'📁 Restructured project with new feature-based directory organization',
