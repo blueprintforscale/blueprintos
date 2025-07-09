@@ -54,10 +54,7 @@ function NavbarStyle1Content(props: NavbarStyle1ContentProps) {
 				className="flex min-h-0 flex-1 flex-col"
 				option={{ suppressScrollX: true, wheelPropagation: false }}
 			>
-				<Navigation
-					layout="vertical"
-					className="-mt-2"
-				/>
+				<Navigation layout="vertical" />
 			</StyledContent>
 
 			<div className="flex flex-col gap-3 p-3">
