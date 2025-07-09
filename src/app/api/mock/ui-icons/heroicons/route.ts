@@ -8,6 +8,5 @@ export async function GET(req: Request) {
 	const queryParams = Object.fromEntries(url.searchParams.entries());
 	const api = mockApi('ui_icons_heroicons');
 	const items = await api.findAll<string>(queryParams);
-
 	return new Response(JSON.stringify(items), { status: 200 });
 }

@@ -45,7 +45,7 @@ function FuseSettingsViewerDialog(props: FuseSettingsViewerDialogProps) {
 				color="secondary"
 				className="w-full"
 				onClick={handleOpenDialog}
-				startIcon={<FuseSvgIcon>heroicons-outline:code-bracket</FuseSvgIcon>}
+				startIcon={<FuseSvgIcon>lucide:code-xml</FuseSvgIcon>}
 			>
 				View settings as json/query params
 			</Button>
@@ -57,7 +57,7 @@ function FuseSettingsViewerDialog(props: FuseSettingsViewerDialogProps) {
 			>
 				<DialogTitle>Fuse Settings Viewer</DialogTitle>
 				<DialogContent>
-					<Typography className="mb-4 mt-6 text-lg font-bold">JSON</Typography>
+					<Typography className="mt-6 mb-4 text-lg font-bold">JSON</Typography>
 
 					<FuseHighlight
 						component="pre"
@@ -66,7 +66,7 @@ function FuseSettingsViewerDialog(props: FuseSettingsViewerDialogProps) {
 						{JSON.stringify(settings, null, 2)}
 					</FuseHighlight>
 
-					<Typography className="mb-4 mt-6 text-lg font-bold">Query Params</Typography>
+					<Typography className="mt-6 mb-4 text-lg font-bold">Query Params</Typography>
 
 					{queryString}
 				</DialogContent>

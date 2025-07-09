@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { SettingsAccount } from '@/app/(control-panel)/apps/settings/SettingsApi';
+import { SettingsAccount } from '@/app/(control-panel)/apps/settings/api/types';
 
 /**
  * GET api/mock/app-account-settings/{id}

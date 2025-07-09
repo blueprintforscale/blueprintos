@@ -7,21 +7,24 @@ import { ReactNode } from 'react';
 type FusePageSimpleSidebarContentProps = {
 	innerScroll?: boolean;
 	children?: ReactNode;
+	content?: ReactNode;
 };
 
 /**
  * The FusePageSimpleSidebarContent component is a content container for the FusePageSimpleSidebar component.
  */
 function FusePageSimpleSidebarContent(props: FusePageSimpleSidebarContentProps) {
-	const { innerScroll, children } = props;
+	const { innerScroll, children, content } = props;
 
-	if (!children) {
+	if (!children && !content) {
 		return null;
 	}
 
 	return (
 		<FuseScrollbars enable={innerScroll}>
-			<div className="FusePageSimple-sidebarContent flex flex-col min-h-full min-w-80 lg:min-w-0">{children}</div>
+			<div className="FusePageSimple-sidebarContent flex min-h-full flex-col lg:min-w-0">
+				{content || children}
+			</div>
 		</FuseScrollbars>
 	);
 }

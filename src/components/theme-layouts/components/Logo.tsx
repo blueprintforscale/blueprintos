@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import MainProjectSelection from '@/components/MainProjectSelection';
+import clsx from 'clsx';
 
 const Root = styled('div')(({ theme }) => ({
 	'& > .logo-icon': {
@@ -17,28 +18,30 @@ const Root = styled('div')(({ theme }) => ({
 	}
 }));
 
+type LogoProps = {
+	className?: string;
+};
+
 /**
  * The logo component.
  */
-function Logo() {
+function Logo(props: LogoProps) {
+	const { className = '' } = props;
 	return (
-		<Root className="flex flex-1 items-center space-x-3">
-			<div className="flex flex-1 items-center space-x-2 px-2.5">
+		<Root className={clsx('flex flex-shrink-0 flex-grow items-center gap-3', className)}>
+			<div className="flex flex-1 items-center gap-2">
 				<img
-					className="logo-icon h-8 w-8"
+					className="logo-icon h-6 w-6"
 					src="/assets/images/logo/logo.svg"
 					alt="logo"
 				/>
-				<div className="logo-text flex flex-col flex-auto gap-0.5">
-					<Typography className="text-2xl tracking-light font-semibold leading-none">FUSE</Typography>
+				<div className="logo-text flex flex-auto flex-col gap-0.5">
+					<Typography className="tracking-light text-lg leading-none font-semibold">FUSE</Typography>
 					<Typography
-						className="text-[13.6px] tracking-light font-semibold leading-none"
-						color="primary"
-						sx={{
-							color: '#82d7f7'
-						}}
+						className="tracking-light text-[12px] leading-none font-semibold"
+						color="text.secondary"
 					>
-						REACT
+						React
 					</Typography>
 				</div>
 			</div>

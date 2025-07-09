@@ -7,11 +7,12 @@ import usePathname from '@fuse/hooks/usePathname';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import Link from '@fuse/core/Link';
-import useNavigation from './theme-layouts/components/navigation/hooks/useNavigation';
+import useNavigationItems from './theme-layouts/components/navigation/hooks/useNavigationItems';
 
 type PageBreadcrumbProps = BreadcrumbsProps & {
 	className?: string;
 	skipHome?: boolean;
+	borderColor?: string;
 };
 
 // Function to get the navigation item based on URL
@@ -33,9 +34,16 @@ function getNavigationItem(url: string, navigationItems: FuseNavItemType[]): Fus
 }
 
 function PageBreadcrumb(props: PageBreadcrumbProps) {
-	const { className, skipHome = false, ...rest } = props;
+	const {
+		className,
+		skipHome = false,
+		color = 'action.active',
+		borderColor = 'divider',
+		maxItems = 4,
+		...rest
+	} = props;
 	const pathname = usePathname();
-	const { navigation } = useNavigation();
+	const { data: navigation } = useNavigationItems();
 
 	const crumbs = pathname
 		.split('/')
@@ -55,9 +63,11 @@ function PageBreadcrumb(props: PageBreadcrumbProps) {
 	return (
 		<Breadcrumbs
 			classes={{ ol: 'list-none m-0 p-0' }}
-			className={clsx('flex w-full', className)}
+			className={clsx('flex w-fit rounded-sm border-1 px-2', className)}
+			sx={{ borderColor: borderColor + '!important' }}
 			aria-label="breadcrumb"
-			color="primary"
+			color={color}
+			maxItems={maxItems}
 			{...rest}
 		>
 			{crumbs.map((item, index) => (
@@ -65,8 +75,9 @@ function PageBreadcrumb(props: PageBreadcrumbProps) {
 					component={item.url ? Link : 'span'}
 					to={item.url}
 					key={index}
-					className="block font-medium tracking-tight capitalize max-w-32 truncate"
+					className="text-md block max-w-32 truncate font-medium tracking-tight capitalize"
 					role="button"
+					color="inherit"
 				>
 					{item.title}
 				</Typography>

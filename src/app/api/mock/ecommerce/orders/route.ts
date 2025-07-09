@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { EcommerceOrder } from '@/app/(control-panel)/apps/e-commerce/ECommerceApi';
+import { Order } from '@/app/(control-panel)/apps/e-commerce/api/types';
 
 /**
  * GET api/mock/ecommerce/orders
@@ -8,7 +8,7 @@ export async function GET(req: Request) {
 	const url = new URL(req.url);
 	const queryParams = Object.fromEntries(url.searchParams.entries());
 	const api = mockApi('ecommerce_orders');
-	const items = await api.findAll<EcommerceOrder>(queryParams);
+	const items = await api.findAll<Order>(queryParams);
 
 	return new Response(JSON.stringify(items), { status: 200 });
 }

@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { Event } from '@/app/(control-panel)/apps/calendar/CalendarApi';
+import { CalendarEvent } from '@/app/(control-panel)/apps/calendar/api/types';
 
 /**
  * GET api/mock/calendar/events
@@ -8,7 +8,7 @@ export async function GET(req: Request) {
 	const url = new URL(req.url);
 	const queryParams = Object.fromEntries(url.searchParams.entries());
 	const api = mockApi('calendar_events');
-	const items = await api.findAll<Event>(queryParams);
+	const items = await api.findAll<CalendarEvent>(queryParams);
 
 	return new Response(JSON.stringify(items), { status: 200 });
 }
@@ -18,8 +18,8 @@ export async function GET(req: Request) {
  */
 export async function POST(req: Request) {
 	const api = mockApi('calendar_events');
-	const requestData = (await req.json()) as Event;
-	const newItem = await api.create<Event>(requestData);
+	const requestData = (await req.json()) as CalendarEvent;
+	const newItem = await api.create<CalendarEvent>(requestData);
 
 	return new Response(JSON.stringify(newItem), { status: 201 });
 }

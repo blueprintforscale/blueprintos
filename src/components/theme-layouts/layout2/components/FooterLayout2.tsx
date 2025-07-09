@@ -1,10 +1,9 @@
 import AppBar from '@mui/material/AppBar';
-import { ThemeProvider } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
 import { memo } from 'react';
 import DemoLayoutFooterContent from 'src/components/theme-layouts/components/DemoLayoutFooterContent';
-import { useFooterTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
+import FooterTheme from '@/contexts/FooterTheme';
 
 type FooterLayout2Props = {
 	className?: string;
@@ -15,21 +14,20 @@ type FooterLayout2Props = {
  */
 function FooterLayout2(props: FooterLayout2Props) {
 	const { className = '' } = props;
-	const footerTheme = useFooterTheme();
 
 	return (
-		<ThemeProvider theme={footerTheme}>
+		<FooterTheme>
 			<AppBar
 				id="fuse-footer"
-				className={clsx('relative z-20 shadow-md', className)}
+				className={clsx('relative z-20 border-t', className)}
 				color="default"
-				sx={{ backgroundColor: footerTheme.palette.background.paper }}
+				sx={{ backgroundColor: (theme) => theme.vars.palette.background.paper }}
 			>
-				<Toolbar className="container flex min-h-12 items-center overflow-x-auto px-2 py-0 sm:px-3 md:min-h-16">
+				<Toolbar className="container flex min-h-12 items-center overflow-x-auto px-2 py-0 sm:px-8 md:min-h-16">
 					<DemoLayoutFooterContent />
 				</Toolbar>
 			</AppBar>
-		</ThemeProvider>
+		</FooterTheme>
 	);
 }
 

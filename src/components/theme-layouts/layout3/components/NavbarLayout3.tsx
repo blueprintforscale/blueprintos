@@ -3,6 +3,8 @@ import { styled } from '@mui/material/styles';
 import clsx from 'clsx';
 import { memo } from 'react';
 import Navigation from '../../components/navigation/Navigation';
+import NavigationSearch from '../../components/navigation/NavigationSearch';
+import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 
 const Root = styled('div')(({ theme }) => ({
 	backgroundColor: theme.vars.palette.background.default,
@@ -19,16 +21,19 @@ type NavbarLayout3Props = {
 function NavbarLayout3(props: NavbarLayout3Props) {
 	const { className = '' } = props;
 
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
+
 	return (
-		<Root className={clsx('h-16 max-h-16 min-h-16 w-full shadow-md', className)}>
-			<div className="container flex h-full w-full flex-auto items-center px-4 lg:px-6">
-				<FuseScrollbars className="flex h-full items-center">
+		<Root className={clsx('h-16 max-h-16 min-h-16 w-full', className)}>
+			<div className="container flex h-full w-full flex-auto items-center px-4 lg:px-8">
+				<FuseScrollbars className="flex h-full w-full flex-auto items-center">
 					<Navigation
 						className="w-full"
 						layout="horizontal"
 						dense
 					/>
 				</FuseScrollbars>
+				<div className="flex">{!isMobile && <NavigationSearch variant="basic" />}</div>
 			</div>
 		</Root>
 	);

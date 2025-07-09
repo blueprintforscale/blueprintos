@@ -19,7 +19,7 @@ function AuthJsProviderSelect() {
 
 	return (
 		<div className="w-full">
-			<div className="flex items-center mb-8">
+			<div className="mb-8 flex items-center">
 				<div className="mt-px flex-auto border-t" />
 				<Typography
 					className="mx-2"
@@ -35,9 +35,8 @@ function AuthJsProviderSelect() {
 					.map((provider) => (
 						<Button
 							key={provider.id}
-							className="flex items-between text-md"
+							className="items-between text-md flex"
 							onClick={() => handleSignIn(provider.id)}
-							size="large"
 							sx={(theme) => ({
 								backgroundColor: theme.palette.background.default,
 								color: theme.palette.text.primary,
@@ -52,9 +51,9 @@ function AuthJsProviderSelect() {
 								}
 							})}
 							endIcon={
-								<Box className="provider-icon rounded-full flex items-center justify-center w-8 h-8">
+								<Box className="provider-icon flex h-6 w-6 items-center justify-center rounded-full">
 									<img
-										className="flex w-4 h-auto"
+										className="flex h-auto w-4"
 										src={`${providerLogoPath}/${provider.id}.svg`}
 										alt={provider.name}
 									/>

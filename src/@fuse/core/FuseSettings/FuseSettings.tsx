@@ -160,7 +160,7 @@ function FuseSettings(props: FuseSettingsProps) {
 				)}
 
 				<Typography
-					className="my-4 text-md italic"
+					className="text-md my-4 italic"
 					color="text.secondary"
 				>
 					*Not all option combinations are available
@@ -184,7 +184,7 @@ function FuseSettings(props: FuseSettingsProps) {
 								value={value}
 								onChange={onChange}
 								triggerElement={
-									<div className="group m-2 flex w-32 cursor-pointer flex-col items-center space-y-2">
+									<div className="group m-2 flex w-32 cursor-pointer flex-col items-center gap-2">
 										<SectionPreview
 											className="transition-shadow group-hover:shadow-lg"
 											section="main"
@@ -205,7 +205,7 @@ function FuseSettings(props: FuseSettingsProps) {
 								value={value}
 								onChange={onChange}
 								triggerElement={
-									<div className="group m-2 flex w-32 cursor-pointer flex-col items-center space-y-2">
+									<div className="group m-2 flex w-32 cursor-pointer flex-col items-center gap-2">
 										<SectionPreview
 											className="transition-shadow group-hover:shadow-lg"
 											section="navbar"
@@ -226,7 +226,7 @@ function FuseSettings(props: FuseSettingsProps) {
 								value={value}
 								onChange={onChange}
 								triggerElement={
-									<div className="group m-2 flex w-32 cursor-pointer flex-col items-center space-y-2">
+									<div className="group m-2 flex w-32 cursor-pointer flex-col items-center gap-2">
 										<SectionPreview
 											className="transition-shadow group-hover:shadow-lg"
 											section="toolbar"
@@ -247,7 +247,7 @@ function FuseSettings(props: FuseSettingsProps) {
 								value={value}
 								onChange={onChange}
 								triggerElement={
-									<div className="group m-2 flex w-32 cursor-pointer flex-col items-center space-y-2">
+									<div className="group m-2 flex w-32 cursor-pointer flex-col items-center gap-2">
 										<SectionPreview
 											className="transition-shadow group-hover:shadow-lg"
 											section="footer"

@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { ProfilePost } from '@/app/(control-panel)/apps/profile/ProfileApi';
+import { ProfilePost } from '@/app/(control-panel)/apps/profile/api/types';
 
 /**
  * GET api/mock/profile/posts

@@ -1,14 +1,11 @@
 'use client';
-
 import FuseNavigation from '@fuse/core/FuseNavigation';
 import clsx from 'clsx';
 import { useMemo } from 'react';
-import { useAppDispatch } from 'src/store/hooks';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import { FuseNavigationProps } from '@fuse/core/FuseNavigation/FuseNavigation';
-import { navbarCloseMobile } from '../navbar/navbarSlice';
-import useNavigation from './hooks/useNavigation';
-
+import useNavigationItems from './hooks/useNavigationItems';
+import { useNavbarContext } from '../navbar/contexts/NavbarContext/useNavbarContext';
 /**
  * Navigation
  */
@@ -17,16 +14,15 @@ type NavigationProps = Partial<FuseNavigationProps>;
 
 function Navigation(props: NavigationProps) {
 	const { className = '', layout = 'vertical', dense, active } = props;
-	const { navigation } = useNavigation();
+	const { data: navigation } = useNavigationItems();
+	const { closeMobileNavbar } = useNavbarContext();
 
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
-	const dispatch = useAppDispatch();
-
 	return useMemo(() => {
-		function handleItemClick() {
-			if (isMobile) {
-				dispatch(navbarCloseMobile());
+		function handleItemClick(item) {
+			if (item?.url && isMobile) {
+				closeMobileNavbar();
 			}
 		}
 
@@ -41,7 +37,8 @@ function Navigation(props: NavigationProps) {
 				checkPermission
 			/>
 		);
-	}, [dispatch, isMobile, navigation, active, className, dense, layout]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isMobile, navigation, active, className, dense, layout]);
 }
 
 export default Navigation;

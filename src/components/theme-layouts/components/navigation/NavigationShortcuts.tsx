@@ -1,9 +1,9 @@
 'use client';
-
 import FuseShortcuts from '@fuse/core/FuseShortcuts';
+import { usePrevious } from '@fuse/hooks';
 import { useEffect, useState } from 'react';
 import useUser from '@auth/useUser';
-import useNavigation from './hooks/useNavigation';
+import useNavigationItems from './hooks/useNavigationItems';
 
 type NavigationShortcutsProps = {
 	className?: string;
@@ -15,10 +15,10 @@ type NavigationShortcutsProps = {
  */
 function NavigationShortcuts(props: NavigationShortcutsProps) {
 	const { variant, className } = props;
-	const { flattenNavigation: navigation } = useNavigation();
-	const { data: user, isGuest } = useUser();
+	const { flattenData: navigation } = useNavigationItems();
+	const { data: user, updateUser, isGuest } = useUser();
 	const [userShortcuts, setUserShortcuts] = useState<string[]>(user?.shortcuts || []);
-	// const prevUserShortcuts = usePrevious(userShortcuts);
+	const prevUserShortcuts = usePrevious(userShortcuts);
 
 	useEffect(() => {
 		/**
@@ -28,8 +28,8 @@ function NavigationShortcuts(props: NavigationShortcutsProps) {
 		 * */
 		/* if (!isGuest && prevUserShortcuts && !_.isEqual(userShortcuts, prevUserShortcuts)) {
 			updateUser(setIn(user, 'shortcuts', userShortcuts) as User);
-		} */
-	}, [isGuest, userShortcuts]);
+		}*/
+	}, [isGuest, prevUserShortcuts, updateUser, user, userShortcuts]);
 
 	function handleShortcutsChange(newShortcuts: string[]) {
 		setUserShortcuts(newShortcuts);

@@ -43,7 +43,7 @@ function SectionPreview(props: SectionPreviewProps) {
 								}
 							}
 				]}
-				className="w-8 space-y-0.25 px-1.5 pt-3"
+				className="flex w-8 flex-col gap-0.25 px-1.5 pt-3"
 			>
 				<div className="h-1 rounded-xs" />
 				<div className="h-1 rounded-xs" />

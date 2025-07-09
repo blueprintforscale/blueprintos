@@ -3,7 +3,7 @@ import { FuseNavItemType } from '@fuse/core/FuseNavigation/types/FuseNavItemType
 import ar from './navigation-i18n/ar';
 import en from './navigation-i18n/en';
 import tr from './navigation-i18n/tr';
-import SettingsAppNavigation from '../app/(control-panel)/apps/settings/SettingsAppNavigation';
+import SettingsAppNavigation from '../app/(control-panel)/apps/settings/lib/constants/SettingsAppNavigation';
 
 i18n.addResourceBundle('en', 'navigation', en);
 i18n.addResourceBundle('tr', 'navigation', tr);
@@ -18,35 +18,35 @@ const navigationConfig: FuseNavItemType[] = [
 		title: 'Dashboards',
 		subtitle: 'Unique dashboard designs',
 		type: 'group',
-		icon: 'heroicons-outline:home',
+		icon: 'lucide:layout-dashboard',
 		translate: 'DASHBOARDS',
 		children: [
 			{
 				id: 'dashboards.project',
 				title: 'Project',
 				type: 'item',
-				icon: 'heroicons-outline:clipboard-document-check',
+				icon: 'lucide:clipboard-check',
 				url: '/dashboards/project'
 			},
 			{
 				id: 'dashboards.analytics',
 				title: 'Analytics',
 				type: 'item',
-				icon: 'heroicons-outline:chart-pie',
+				icon: 'lucide:chart-pie',
 				url: '/dashboards/analytics'
 			},
 			{
 				id: 'dashboards.finance',
 				title: 'Finance',
 				type: 'item',
-				icon: 'heroicons-outline:banknotes',
+				icon: 'lucide:banknote',
 				url: '/dashboards/finance'
 			},
 			{
 				id: 'dashboards.crypto',
 				title: 'Crypto',
 				type: 'item',
-				icon: 'heroicons-outline:currency-dollar',
+				icon: 'lucide:dollar-sign',
 				url: '/dashboards/crypto'
 			}
 		]
@@ -56,14 +56,14 @@ const navigationConfig: FuseNavItemType[] = [
 		title: 'Applications',
 		subtitle: 'Custom made application designs',
 		type: 'group',
-		icon: 'heroicons-outline:cube',
+		icon: 'lucide:box',
 		translate: 'APPLICATIONS',
 		children: [
 			{
 				id: 'apps.ai-image-generator',
 				title: 'AI Image Generator',
 				type: 'item',
-				icon: 'heroicons-outline:photo',
+				icon: 'lucide:image',
 				url: '/apps/ai-image-generator',
 				badge: {
 					title: 'NEW'
@@ -73,7 +73,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.academy',
 				title: 'Academy',
 				type: 'item',
-				icon: 'heroicons-outline:academic-cap',
+				icon: 'lucide:graduation-cap',
 				url: '/apps/academy',
 				translate: 'ACADEMY'
 			},
@@ -82,7 +82,7 @@ const navigationConfig: FuseNavItemType[] = [
 				title: 'Calendar',
 				subtitle: '3 upcoming events',
 				type: 'item',
-				icon: 'heroicons-outline:calendar',
+				icon: 'lucide:calendar',
 				url: '/apps/calendar',
 				translate: 'CALENDAR'
 			},
@@ -90,7 +90,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.messenger',
 				title: 'Messenger',
 				type: 'item',
-				icon: 'heroicons-outline:chat-bubble-bottom-center',
+				icon: 'lucide:message-square',
 				url: '/apps/messenger',
 				translate: 'MESSENGER'
 			},
@@ -98,7 +98,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.contacts',
 				title: 'Contacts',
 				type: 'item',
-				icon: 'heroicons-outline:user-group',
+				icon: 'lucide:users',
 				url: '/apps/contacts',
 				translate: 'CONTACTS'
 			},
@@ -106,8 +106,9 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.ecommerce',
 				title: 'ECommerce',
 				type: 'collapse',
-				icon: 'heroicons-outline:shopping-cart',
+				icon: 'lucide:shopping-cart',
 				translate: 'ECOMMERCE',
+				url: '/apps/e-commerce/products',
 				children: [
 					{
 						id: 'e-commerce-products',
@@ -147,7 +148,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.file-manager',
 				title: 'File Manager',
 				type: 'item',
-				icon: 'heroicons-outline:cloud',
+				icon: 'lucide:cloud',
 				url: '/apps/file-manager',
 				end: true,
 				translate: 'FILE_MANAGER'
@@ -156,7 +157,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.help-center',
 				title: 'Help Center',
 				type: 'collapse',
-				icon: 'heroicons-outline:information-circle',
+				icon: 'lucide:info',
 				url: '/apps/help-center',
 				children: [
 					{
@@ -190,7 +191,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.mailbox',
 				title: 'Mailbox',
 				type: 'item',
-				icon: 'heroicons-outline:envelope',
+				icon: 'lucide:mail',
 				url: '/apps/mailbox/folders/inbox',
 				translate: 'MAIL',
 				badge: {
@@ -202,7 +203,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.notes',
 				title: 'Notes',
 				type: 'item',
-				icon: 'heroicons-outline:pencil-square',
+				icon: 'lucide:square-pen',
 				url: '/apps/notes',
 				translate: 'NOTES'
 			},
@@ -210,7 +211,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.scrumboard',
 				title: 'Scrumboard',
 				type: 'item',
-				icon: 'heroicons-outline:view-columns',
+				icon: 'lucide:columns-3',
 				url: '/apps/scrumboard',
 				translate: 'SCRUMBOARD'
 			},
@@ -219,7 +220,7 @@ const navigationConfig: FuseNavItemType[] = [
 				title: 'Tasks',
 				subtitle: '12 remaining tasks',
 				type: 'item',
-				icon: 'heroicons-outline:check-circle',
+				icon: 'lucide:circle-check',
 				url: '/apps/tasks',
 				translate: 'TASKS'
 			},
@@ -227,14 +228,14 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'apps.profile',
 				title: 'Profile',
 				type: 'item',
-				icon: 'heroicons-outline:user-circle',
+				icon: 'lucide:circle-user',
 				url: '/apps/profile'
 			},
 			{
 				id: 'apps.notifications',
 				title: 'Notifications',
 				type: 'item',
-				icon: 'heroicons-outline:bell',
+				icon: 'lucide:bell',
 				url: '/apps/notifications'
 			},
 			{
@@ -251,20 +252,20 @@ const navigationConfig: FuseNavItemType[] = [
 		title: 'Pages',
 		subtitle: 'Custom made page designs',
 		type: 'group',
-		icon: 'heroicons-outline:document',
+		icon: 'lucide:file-text',
 		children: [
 			{
 				id: 'pages.activities',
 				title: 'Activities',
 				type: 'item',
-				icon: 'heroicons-outline:bars-3-bottom-left',
+				icon: 'lucide:align-left',
 				url: '/pages/activities'
 			},
 			{
 				id: 'pages.authentication',
 				title: 'Authentication',
 				type: 'collapse',
-				icon: 'heroicons-outline:lock-closed',
+				icon: 'lucide:lock',
 				children: [
 					{
 						id: 'pages.authentication.sign-in',
@@ -615,7 +616,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'pages.coming-soon',
 				title: 'Coming Soon',
 				type: 'collapse',
-				icon: 'heroicons-outline:clock',
+				icon: 'lucide:clock',
 				url: '/pages/coming-soon',
 				children: [
 					{
@@ -666,7 +667,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'pages.error',
 				title: 'Error',
 				type: 'collapse',
-				icon: 'heroicons-outline:exclamation-circle',
+				icon: 'lucide:circle-alert',
 				children: [
 					{
 						id: 'pages.error.401',
@@ -692,7 +693,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'pages.invoice',
 				title: 'Invoice',
 				type: 'collapse',
-				icon: 'heroicons-outline:calculator',
+				icon: 'lucide:calculator',
 				children: [
 					{
 						id: 'pages.invoice.compact',
@@ -712,14 +713,14 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'pages.maintenance',
 				title: 'Maintenance',
 				type: 'item',
-				icon: 'heroicons-outline:exclamation-triangle',
+				icon: 'lucide:triangle-alert',
 				url: '/pages/maintenance'
 			},
 			{
 				id: 'pages.pricing',
 				title: 'Pricing',
 				type: 'collapse',
-				icon: 'heroicons-outline:banknotes',
+				icon: 'lucide:banknote',
 				children: [
 					{
 						id: 'pages.pricing.modern',
@@ -751,7 +752,7 @@ const navigationConfig: FuseNavItemType[] = [
 				id: 'pages.search',
 				title: 'Search',
 				type: 'collapse',
-				icon: 'search',
+				icon: 'lucide:search',
 				children: [
 					{
 						id: 'pages.search.classic-search',
@@ -766,6 +767,13 @@ const navigationConfig: FuseNavItemType[] = [
 						url: '/pages/search/modern'
 					}
 				]
+			},
+			{
+				id: 'fuse-theme-www',
+				title: 'fusetheme.com',
+				type: 'link',
+				url: 'https://www.fusetheme.com',
+				icon: 'lucide:link-2'
 			}
 		]
 	}

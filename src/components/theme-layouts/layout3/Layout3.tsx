@@ -1,6 +1,4 @@
-import FuseDialog from '@fuse/core/FuseDialog';
 import { styled } from '@mui/material/styles';
-import FuseMessage from '@fuse/core/FuseMessage';
 import clsx from 'clsx';
 import { memo, ReactNode } from 'react';
 import Configurator from 'src/components/theme-layouts/components/configurator/Configurator';
@@ -53,7 +51,7 @@ function Layout3(props: Layout3Props) {
 	return (
 		<Root
 			id="fuse-layout"
-			className="flex flex-auto w-full"
+			className="flex w-full flex-auto"
 			config={config}
 		>
 			{config.leftSidePanel.display && <LeftSideLayout3 />}
@@ -61,7 +59,7 @@ function Layout3(props: Layout3Props) {
 			<div className="flex min-w-0 flex-auto flex-col">
 				<main
 					id="fuse-main"
-					className="relative flex min-h-full min-w-0 flex-auto flex-col"
+					className="relative flex min-h-svh min-w-0 flex-auto flex-col"
 				>
 					{config.navbar.display && (
 						<NavbarWrapperLayout3
@@ -82,10 +80,7 @@ function Layout3(props: Layout3Props) {
 						<Configurator />
 					</div>
 
-					<div className="relative z-10 flex min-h-0 flex-auto flex-col">
-						<FuseDialog />
-						{children}
-					</div>
+					<div className="relative z-10 flex min-h-0 flex-auto flex-col">{children}</div>
 
 					{config.footer.display && (
 						<FooterLayout3 className={config.footer.style === 'fixed' ? 'sticky bottom-0' : ''} />
@@ -94,7 +89,6 @@ function Layout3(props: Layout3Props) {
 			</div>
 
 			{config.rightSidePanel.display && <RightSideLayout3 />}
-			<FuseMessage />
 		</Root>
 	);
 }

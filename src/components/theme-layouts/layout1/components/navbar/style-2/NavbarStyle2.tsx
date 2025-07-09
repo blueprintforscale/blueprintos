@@ -1,239 +1,198 @@
 import { styled } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import {
-	navbarCloseFolded,
-	navbarCloseMobile,
-	navbarOpenFolded,
-	resetNavbar,
-	selectFuseNavbar
-} from 'src/components/theme-layouts/components/navbar/navbarSlice';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-
+import GlobalStyles from '@mui/material/GlobalStyles';
 import { Theme } from '@mui/system';
+import clsx from 'clsx';
 import { useEffect } from 'react';
 import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import NavbarStyle2Content from './NavbarStyle2Content';
 import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
+import { useNavbarContext } from '@/components/theme-layouts/components/navbar/contexts/NavbarContext/useNavbarContext';
 
-const navbarWidth = 280;
-
-type StyledNavBarPropsProps = {
-	theme?: Theme;
-	folded: number;
-	open: boolean;
-};
-
-const Root = styled('div')<StyledNavBarPropsProps>(({ theme }) => ({
-	display: 'flex',
-	flexDirection: 'column',
-	zIndex: 4,
-	[theme.breakpoints.up('lg')]: {
-		width: navbarWidth,
-		minWidth: navbarWidth
-	},
-	variants: [
-		{
-			props: ({ folded }) => folded,
-			style: {
-				[theme.breakpoints.up('lg')]: {
-					width: 76,
-					minWidth: 76
-				}
-			}
-		}
-	]
-}));
+const navbarWidth = 48;
+const panelWidth = 280;
 
 type StyledNavBarProps = {
 	theme?: Theme;
 	open?: boolean;
-	folded: number;
-	foldedandopened: number;
-	foldedandclosed: number;
+	folded?: number;
 	position?: string;
+	className?: string;
 	anchor?: string;
 };
 
-const StyledNavbar = styled('div')<StyledNavBarProps>(({ theme }) => ({
+const StyledNavBar = styled('div')<StyledNavBarProps>(({ theme }) => ({
 	minWidth: navbarWidth,
 	width: navbarWidth,
 	maxWidth: navbarWidth,
-	maxHeight: '100%',
-	transition: theme.transitions.create(['width', 'min-width'], {
-		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.shorter
-	}),
 	variants: [
 		{
-			props: {
-				position: 'left'
-			},
+			props: ({ open, position }) => !open && position === 'left',
 			style: {
-				borderRight: `1px solid ${theme.vars.palette.divider}`,
-				left: 0
+				marginLeft: -navbarWidth
 			}
 		},
 		{
-			props: {
-				position: 'right'
-			},
+			props: ({ open, position }) => !open && position === 'right',
 			style: {
-				borderLight: `1px solid ${theme.vars.palette.divider}`,
-				right: 0
+				marginRight: -navbarWidth
 			}
 		},
 		{
-			props: ({ folded }) => folded,
+			props: ({ folded }) => !folded,
 			style: {
-				position: 'absolute',
-				width: 76,
-				minWidth: 76,
-				top: 0,
-				bottom: 0
-			}
-		},
-		{
-			props: ({ foldedandopened }) => foldedandopened,
-			style: {
-				width: navbarWidth,
-				minWidth: navbarWidth
-			}
-		},
-		{
-			props: ({ foldedandclosed }) => foldedandclosed,
-			style: {
-				'& .NavbarStyle2-content': {
-					'& .logo-icon': {
-						width: 44,
-						height: 44
-					},
-					'& .logo-text': {
-						opacity: 0
-					},
-					'& .react-badge': {
-						opacity: 0
-					},
-					'& .fuse-list-item': {
-						width: 52
-					},
-					'& .fuse-list-item-text, & .arrow-icon, & .item-badge': {
-						opacity: 0
-					},
-					'& .fuse-list-subheader .fuse-list-subheader-text': {
-						opacity: 0
-					},
-					'& .fuse-list-subheader:before': {
-						content: '""',
-						display: 'block',
-						position: 'absolute',
-						minWidth: 16,
-						borderTop: '2px solid',
-						opacity: 0.2
-					},
-					'& .collapse-children': {
-						display: 'none'
-					},
-					'& .user-menu': {
-						minWidth: 52,
-						'& .title': {
-							opacity: 0
-						},
-						'& .subtitle': {
-							opacity: 0
-						},
-						'& .info-icon': {
-							opacity: 0
-						},
-						'& .arrow': {
-							opacity: 0
-						}
-					}
+				minWidth: navbarWidth + panelWidth,
+				width: navbarWidth + panelWidth,
+				maxWidth: navbarWidth + panelWidth,
+				'& #fuse-navbar-panel': {
+					opacity: '1!important',
+					pointerEvents: 'initial!important'
 				}
+			}
+		},
+		{
+			props: ({ folded, open, position }) => !folded && !open && position === 'left',
+			style: {
+				marginLeft: `${-(navbarWidth + panelWidth)}px!important`
+			}
+		},
+		{
+			props: ({ folded, open, position }) => !folded && !open && position === 'right',
+			style: {
+				marginRight: `${-(navbarWidth + panelWidth)}px!important`
+			}
+		},
+		{
+			props: ({ open }) => !open,
+			style: {
+				transition: theme.transitions.create('margin', {
+					easing: theme.transitions.easing.easeOut,
+					duration: theme.transitions.duration.leavingScreen
+				})
+			}
+		},
+		{
+			props: ({ open }) => open,
+			style: {
+				transition: theme.transitions.create('margin', {
+					easing: theme.transitions.easing.easeOut,
+					duration: theme.transitions.duration.enteringScreen
+				})
 			}
 		}
 	]
 }));
 
-const StyledNavbarMobile = styled(SwipeableDrawer)<StyledNavBarProps>(({ theme }) => ({
-	'& > .MuiDrawer-paper': {
-		minWidth: navbarWidth,
-		width: navbarWidth,
-		maxWidth: navbarWidth,
-		maxHeight: '100%',
-		transition: theme.transitions.create(['width', 'min-width'], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.shorter
-		})
+const StyledNavBarMobile = styled(SwipeableDrawer)<StyledNavBarProps>(() => ({
+	'& .MuiDrawer-paper': {
+		'& #fuse-navbar-side-panel': {
+			minWidth: 'auto',
+			wdith: 'auto'
+		},
+		'& #fuse-navbar-panel': {
+			opacity: '1!important',
+			pointerEvents: 'initial!important'
+		}
+	},
+	'& .user-menu': {
+		minWidth: 56,
+		width: 56,
+		'& .title': {
+			opacity: 0
+		},
+		'& .subtitle': {
+			opacity: 0
+		},
+		'& .info-icon': {
+			opacity: 0
+		},
+		'& .arrow': {
+			opacity: 0
+		}
 	}
 }));
 
-/**
- * The navbar style 2.
- */
-function NavbarStyle2() {
-	const dispatch = useAppDispatch();
+type NavbarStyle2Props = {
+	className?: string;
+};
 
+/**
+ * The navbar style 3.
+ */
+function NavbarStyle2(props: NavbarStyle2Props) {
+	const { className = '' } = props;
 	const settings = useFuseLayoutSettings();
 	const config = settings.config as Layout1ConfigDefaultsType;
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
-	const navbar = useAppSelector(selectFuseNavbar);
+	const { folded } = config.navbar;
 
-	const folded = config.navbar?.folded;
-	const foldedandclosed = folded && !navbar.foldedOpen;
-	const foldedandopened = folded && navbar.foldedOpen;
+	const {
+		isOpen: isNavbarOpen,
+		mobileOpen: isNavbarMobileOpen,
+		reset: resetNavbar,
+		closeMobileNavbar
+	} = useNavbarContext();
 
 	useEffect(() => {
 		return () => {
-			dispatch(resetNavbar());
+			resetNavbar();
 		};
-	}, [dispatch]);
+	}, [resetNavbar]);
 
 	return (
-		<Root
-			folded={folded ? 1 : 0}
-			open={navbar.open}
-			id="fuse-navbar"
-			className="sticky top-0 z-20 h-screen shrink-0"
-		>
+		<>
+			<GlobalStyles
+				styles={(theme) => ({
+					'& #fuse-navbar-side-panel': {
+						width: navbarWidth,
+						minWidth: navbarWidth,
+						maxWidth: navbarWidth
+					},
+					'& #fuse-navbar-panel': {
+						maxWidth: '100%',
+						width: panelWidth,
+						borderRight: `1px solid ${theme.vars.palette.divider}!important`,
+						borderLeft: `1px solid ${theme.vars.palette.divider}!important`,
+						[theme.breakpoints.up('lg')]: {
+							minWidth: panelWidth,
+							maxWidth: 'initial'
+						}
+					}
+				})}
+			/>
+
 			{!isMobile && (
-				<StyledNavbar
-					className="hidden lg:flex sticky top-0 z-20 h-screen flex-auto shrink-0 flex-col overflow-hidden shadow-sm"
-					position={config?.navbar?.position}
+				<StyledNavBar
+					open={isNavbarOpen}
 					folded={folded ? 1 : 0}
-					foldedandopened={foldedandopened ? 1 : 0}
-					foldedandclosed={foldedandclosed ? 1 : 0}
-					onMouseEnter={() => foldedandclosed && dispatch(navbarOpenFolded())}
-					onMouseLeave={() => foldedandopened && dispatch(navbarCloseFolded())}
+					position={config.navbar.position}
+					className={clsx('sticky top-0 z-20 h-screen flex-auto shrink-0 flex-col', className)}
 				>
-					<NavbarStyle2Content className="NavbarStyle2-content" />
-				</StyledNavbar>
+					<NavbarStyle2Content />
+				</StyledNavBar>
 			)}
 
 			{isMobile && (
-				<StyledNavbarMobile
+				<StyledNavBarMobile
 					classes={{
-						root: 'flex lg:hidden',
-						paper: 'flex-col flex-auto h-full'
+						paper: clsx('h-screen w-auto max-w-full flex-auto flex-col overflow-hidden', className)
 					}}
-					folded={folded ? 1 : 0}
-					foldedandopened={foldedandopened ? 1 : 0}
-					foldedandclosed={foldedandclosed ? 1 : 0}
-					anchor={config?.navbar?.position as 'left' | 'top' | 'right' | 'bottom'}
+					anchor={config.navbar.position as 'left' | 'right'}
 					variant="temporary"
-					open={navbar.mobileOpen}
-					onClose={() => dispatch(navbarCloseMobile())}
+					open={isNavbarMobileOpen}
+					onClose={() => closeMobileNavbar()}
 					onOpen={() => {}}
 					disableSwipeToOpen
 					ModalProps={{
 						keepMounted: true // Better open performance on mobile.
 					}}
 				>
-					<NavbarStyle2Content className="NavbarStyle2-content" />
-				</StyledNavbarMobile>
+					<NavbarStyle2Content />
+				</StyledNavBarMobile>
 			)}
-		</Root>
+		</>
 	);
 }
 

@@ -9,12 +9,13 @@ import useThemeMediaQuery from '../../hooks/useThemeMediaQuery';
 /**
  * Props for the FusePageCardedSidebar component.
  */
-type FusePageCardedSidebarProps = {
+export type FusePageCardedSidebarProps = {
 	open?: boolean;
 	position?: SwipeableDrawerProps['anchor'];
 	variant?: SwipeableDrawerProps['variant'];
 	onClose?: () => void;
 	children?: ReactNode;
+	content?: ReactNode;
 	ref?: React.RefObject<{ toggleSidebar: (T: boolean) => void }>;
 	width?: number;
 };
@@ -23,7 +24,7 @@ type FusePageCardedSidebarProps = {
  * The FusePageCardedSidebar component is a sidebar for the FusePageCarded component.
  */
 function FusePageCardedSidebar(props: FusePageCardedSidebarProps) {
-	const { open = true, position, variant, onClose = () => {}, ref } = props;
+	const { open = true, position, variant, onClose = () => {}, ref, width = 240, children, content } = props;
 
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
@@ -41,6 +42,10 @@ function FusePageCardedSidebar(props: FusePageCardedSidebarProps) {
 		handleToggleDrawer(open);
 	}, [handleToggleDrawer, open]);
 
+	if (!content && !children) {
+		return null;
+	}
+
 	return (
 		<>
 			{((variant === 'permanent' && isMobile) || variant !== 'permanent') && (
@@ -56,7 +61,8 @@ function FusePageCardedSidebar(props: FusePageCardedSidebarProps) {
 						paper: clsx(
 							'FusePageCarded-sidebar',
 							variant,
-							position === 'left' ? 'FusePageCarded-leftSidebar' : 'FusePageCarded-rightSidebar'
+							position === 'left' ? 'FusePageCarded-leftSidebar' : 'FusePageCarded-rightSidebar',
+							'max-w-full min-w-80'
 						)
 					}}
 					ModalProps={{
@@ -69,7 +75,7 @@ function FusePageCardedSidebar(props: FusePageCardedSidebarProps) {
 							}
 						}
 					}}
-					sx={{ position: 'absolute', '& .MuiPaper-root': { width: `${props.width}px` } }}
+					sx={{ position: 'absolute', '& .MuiPaper-root': { width: isMobile ? 'auto' : `${width}px` } }}
 				>
 					<FusePageCardedSidebarContent {...props} />
 				</SwipeableDrawer>
@@ -89,7 +95,7 @@ function FusePageCardedSidebar(props: FusePageCardedSidebarProps) {
 					classes={{
 						paper: clsx('FusePageCarded-sidebar', variant)
 					}}
-					sx={{ '& .MuiPaper-root': { width: `${props.width}px` } }}
+					sx={{ '& .MuiPaper-root': { width: `${width}px` } }}
 				>
 					<FusePageCardedSidebarContent {...props} />
 				</Drawer>

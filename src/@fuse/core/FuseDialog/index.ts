@@ -1,1 +1,1 @@
-export { default } from './FuseDialog';
+export { FuseDialogContextProvider } from './contexts/FuseDialogContext/FuseDialogContextProvider';

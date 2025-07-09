@@ -1,3 +1,0 @@
-import FullScreenReversedUnlockSessionPage from './FullScreenReversedUnlockSessionPage';
-
-export default FullScreenReversedUnlockSessionPage;

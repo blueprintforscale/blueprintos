@@ -19,8 +19,8 @@ const compat = new FlatCompat({
 export default tseslint.config({
     files: ['**/*.ts', '**/*.tsx'],
     ignores: [
-        '**/app/(public)/documentation/material-ui-components/components/**',
-        '**/app/(public)/documentation/material-ui-components/doc/**',
+        '**/app/(public)/documentation/components/views/material-ui-components/**',
+        '**/app/(public)/documentation/components/ui/material-ui-components/**',
         '**/utils/node-scripts/fuse-react-message.js',
         '**/components/tiptap/**',
         '**/.next/**',
@@ -84,7 +84,8 @@ export default tseslint.config({
                 "tabWidth": 4,
                 "trailingComma": "none",
                 "useTabs": true,
-                "singleAttributePerLine": true
+                "singleAttributePerLine": true,
+                "plugins": ["prettier-plugin-tailwindcss"]
             }
         ],
         "quotes": [

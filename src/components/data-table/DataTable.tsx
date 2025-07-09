@@ -4,84 +4,42 @@ import { useMemo } from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Theme } from '@mui/material/styles';
 import DataTableTopToolbar from './DataTableTopToolbar';
+import { useThemeMediaQuery } from '@fuse/hooks';
 
 const tableIcons: Partial<MRT_Icons> = {
-	ArrowDownwardIcon: (props) => (
-		<FuseSvgIcon
-			size={20}
-			{...props}
-		>
-			heroicons-outline:arrow-down-circle
-		</FuseSvgIcon>
-	),
-	ClearAllIcon: () => <FuseSvgIcon size={20}>heroicons-outline:adjustments-horizontal</FuseSvgIcon>,
-	DensityLargeIcon: () => <FuseSvgIcon size={20}>heroicons-outline:bars-3-bottom-left</FuseSvgIcon>,
-	DensityMediumIcon: () => <FuseSvgIcon size={20}>heroicons-outline:bars-3</FuseSvgIcon>,
-	DensitySmallIcon: () => <FuseSvgIcon size={20}>heroicons-outline:bars-2</FuseSvgIcon>,
-	DragHandleIcon: () => (
-		<FuseSvgIcon
-			className="rotate-45"
-			size={14}
-		>
-			heroicons-outline:arrows-pointing-out
-		</FuseSvgIcon>
-	),
-	FilterListIcon: (props) => (
-		<FuseSvgIcon
-			size={16}
-			{...props}
-		>
-			heroicons-outline:funnel
-		</FuseSvgIcon>
-	),
-	FilterListOffIcon: () => <FuseSvgIcon size={20}>heroicons-outline:funnel</FuseSvgIcon>,
-	FullscreenExitIcon: () => <FuseSvgIcon size={20}>heroicons-outline:arrows-pointing-in</FuseSvgIcon>,
-	FullscreenIcon: () => <FuseSvgIcon size={20}>heroicons-outline:arrows-pointing-out</FuseSvgIcon>,
-	SearchIcon: (props) => (
-		<FuseSvgIcon
-			color="action"
-			size={20}
-			{...props}
-		>
-			heroicons-outline:magnifying-glass
-		</FuseSvgIcon>
-	),
-	SearchOffIcon: () => <FuseSvgIcon size={20}>heroicons-outline:magnifying-glass</FuseSvgIcon>,
-	ViewColumnIcon: () => <FuseSvgIcon size={20}>heroicons-outline:view-columns</FuseSvgIcon>,
-	MoreVertIcon: () => <FuseSvgIcon size={20}>heroicons-outline:ellipsis-vertical</FuseSvgIcon>,
-	MoreHorizIcon: () => <FuseSvgIcon size={20}>heroicons-outline:ellipsis-horizontal</FuseSvgIcon>,
-	SortIcon: (props) => (
-		<FuseSvgIcon
-			size={20}
-			{...props}
-		>
-			heroicons-outline:arrows-up-down
-		</FuseSvgIcon>
-	),
-	PushPinIcon: (props) => (
-		<FuseSvgIcon
-			size={20}
-			{...props}
-		>
-			heroicons-outline:bookmark
-		</FuseSvgIcon>
-	),
-	VisibilityOffIcon: () => <FuseSvgIcon size={20}>heroicons-outline:eye-slash</FuseSvgIcon>
+	ArrowDownwardIcon: (props) => <FuseSvgIcon {...props}>lucide:arrow-down</FuseSvgIcon>,
+	ClearAllIcon: () => <FuseSvgIcon>lucide:brush-cleaning</FuseSvgIcon>,
+	DensityLargeIcon: () => <FuseSvgIcon>lucide:rows-2</FuseSvgIcon>,
+	DensityMediumIcon: () => <FuseSvgIcon>lucide:rows-3</FuseSvgIcon>,
+	DensitySmallIcon: () => <FuseSvgIcon>lucide:rows-4</FuseSvgIcon>,
+	DragHandleIcon: () => <FuseSvgIcon>lucide:grip-vertical</FuseSvgIcon>,
+	FilterListIcon: (props) => <FuseSvgIcon {...props}>lucide:list-filter</FuseSvgIcon>,
+	FilterListOffIcon: () => <FuseSvgIcon>lucide:funnel</FuseSvgIcon>,
+	FullscreenExitIcon: () => <FuseSvgIcon>lucide:log-in</FuseSvgIcon>,
+	FullscreenIcon: () => <FuseSvgIcon>lucide:log-out</FuseSvgIcon>,
+	SearchIcon: (props) => <FuseSvgIcon {...props}>lucide:search</FuseSvgIcon>,
+	SearchOffIcon: () => <FuseSvgIcon>lucide:search-x</FuseSvgIcon>,
+	ViewColumnIcon: () => <FuseSvgIcon>lucide:columns-3-cog</FuseSvgIcon>,
+	MoreVertIcon: () => <FuseSvgIcon>lucide:ellipsis-vertical</FuseSvgIcon>,
+	MoreHorizIcon: () => <FuseSvgIcon>lucide:ellipsis</FuseSvgIcon>,
+	SortIcon: (props) => <FuseSvgIcon {...props}>lucide:arrow-down-up</FuseSvgIcon>,
+	PushPinIcon: (props) => <FuseSvgIcon {...props}>lucide:pin</FuseSvgIcon>,
+	VisibilityOffIcon: () => <FuseSvgIcon>lucide:eye-off</FuseSvgIcon>
 };
 
 function DataTable<TData>(props: MaterialReactTableProps<TData>) {
 	const { columns, data, ...rest } = props;
-
+	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 	const defaults = useMemo(
 		() =>
 			_.defaults(rest, {
 				initialState: {
-					density: 'spacious',
+					density: 'compact',
 					showColumnFilters: false,
 					showGlobalFilter: true,
 					columnPinning: {
-						left: ['mrt-row-expand', 'mrt-row-select'],
-						right: ['mrt-row-actions']
+						left: isMobile ? [] : ['mrt-row-expand', 'mrt-row-select'],
+						right: isMobile ? [] : ['mrt-row-actions']
 					},
 					pagination: {
 						pageSize: 15
@@ -128,18 +86,23 @@ function DataTable<TData>(props: MaterialReactTableProps<TData>) {
 					variant: 'outlined',
 					size: 'small',
 					sx: {
+						'& .MuiInputAdornment-root': {
+							padding: 0,
+							margin: 0
+						},
 						'& .MuiInputBase-root': {
-							padding: '0px 8px',
-							height: '32px!important',
-							minHeight: '32px!important'
+							padding: 0
+						},
+						'& .MuiInputBase-input': {
+							padding: 0
 						}
 					}
 				},
 				muiSelectAllCheckboxProps: {
-					className: 'w-12'
+					size: 'small'
 				},
 				muiSelectCheckboxProps: {
-					className: 'w-12'
+					size: 'small'
 				},
 				muiTableBodyRowProps: ({ row, table }) => {
 					const { density } = table.getState();
@@ -193,8 +156,10 @@ function DataTable<TData>(props: MaterialReactTableProps<TData>) {
 					pinnedColumnBackgroundColor: theme.palette.background.paper
 				}),
 				renderTopToolbar: (_props) => <DataTableTopToolbar {..._props} />,
-				icons: tableIcons
+				icons: tableIcons,
+				positionActionsColumn: 'last'
 			} as Partial<MaterialReactTableProps<TData>>),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[rest]
 	);
 

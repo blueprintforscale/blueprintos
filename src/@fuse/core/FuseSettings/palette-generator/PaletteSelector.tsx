@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import PalettePreview from './PalettePreview';
 import SectionPreview from './SectionPreview';
 import { FuseThemeType } from '../FuseSettings';
+import { FormControl, FormLabel } from '@mui/material';
 
 /**
  * Check if a color is dark
@@ -38,7 +39,7 @@ function PaletteSelector(props: PaletteSelectorProps) {
 		value,
 		onChange,
 		triggerElement = (
-			<div className="m-2 flex w-32 flex-col items-center space-y-2">
+			<div className="m-2 flex w-32 flex-col items-center gap-2">
 				<SectionPreview />
 				<Typography className="mb-6 flex-1 text-lg font-bold">Edit Palette</Typography>
 			</div>
@@ -142,7 +143,7 @@ function PaletteSelector(props: PaletteSelectorProps) {
 
 				<DialogContent>
 					<div className="flex w-full">
-						<div className="flex flex-1 flex-col items-center justify-center p-6">
+						<div className="flex flex-1 flex-col items-center justify-center gap-4 p-6">
 							<Controller
 								name="palette.mode"
 								control={control}
@@ -180,30 +181,31 @@ function PaletteSelector(props: PaletteSelectorProps) {
 								name="palette.primary.main"
 								control={control}
 								render={({ field: { onChange: _onChange, value: _value } }) => (
-									<TextField
-										value={_value}
-										onChange={(ev) => {
-											_onChange(ev.target.value);
-											setValue('palette.primary.light', lighten(ev.target.value, 0.8), {
-												shouldDirty: true
-											});
-											setValue('palette.primary.dark', darken(ev.target.value, 0.2), {
-												shouldDirty: true
-											});
-											setValue(
-												'palette.primary.contrastText',
-												theme.palette.getContrastText(ev.target.value),
-												{ shouldDirty: true }
-											);
-										}}
-										type="color"
-										variant="outlined"
-										className="mb-8"
-										label="Primary color"
-										slotProps={{
-											input: { className: 'w-50  h-8' }
-										}}
-									/>
+									<FormControl>
+										<FormLabel htmlFor="primary-color">Primary color</FormLabel>
+										<TextField
+											id="primary-color"
+											value={_value}
+											onChange={(ev) => {
+												_onChange(ev.target.value);
+												setValue('palette.primary.light', lighten(ev.target.value, 0.8), {
+													shouldDirty: true
+												});
+												setValue('palette.primary.dark', darken(ev.target.value, 0.2), {
+													shouldDirty: true
+												});
+												setValue(
+													'palette.primary.contrastText',
+													theme.palette.getContrastText(ev.target.value),
+													{ shouldDirty: true }
+												);
+											}}
+											type="color"
+											slotProps={{
+												input: { className: 'w-50  h-8' }
+											}}
+										/>
+									</FormControl>
 								)}
 							/>
 
@@ -211,30 +213,31 @@ function PaletteSelector(props: PaletteSelectorProps) {
 								name="palette.secondary.main"
 								control={control}
 								render={({ field: { onChange: _onChange, value: _value } }) => (
-									<TextField
-										value={_value}
-										onChange={(ev) => {
-											_onChange(ev.target.value);
-											setValue('palette.secondary.light', lighten(ev.target.value, 0.8), {
-												shouldDirty: true
-											});
-											setValue('palette.secondary.dark', darken(ev.target.value, 0.2), {
-												shouldDirty: true
-											});
-											setValue(
-												'palette.secondary.contrastText',
-												theme.palette.getContrastText(ev.target.value),
-												{ shouldDirty: true }
-											);
-										}}
-										type="color"
-										variant="outlined"
-										className="mb-8"
-										label="Secondary color"
-										slotProps={{
-											input: { className: 'w-50 h-8' }
-										}}
-									/>
+									<FormControl>
+										<FormLabel htmlFor="secondary-color">Secondary color</FormLabel>
+										<TextField
+											id="secondary-color"
+											value={_value}
+											onChange={(ev) => {
+												_onChange(ev.target.value);
+												setValue('palette.secondary.light', lighten(ev.target.value, 0.8), {
+													shouldDirty: true
+												});
+												setValue('palette.secondary.dark', darken(ev.target.value, 0.2), {
+													shouldDirty: true
+												});
+												setValue(
+													'palette.secondary.contrastText',
+													theme.palette.getContrastText(ev.target.value),
+													{ shouldDirty: true }
+												);
+											}}
+											type="color"
+											slotProps={{
+												input: { className: 'w-50 h-8' }
+											}}
+										/>
+									</FormControl>
 								)}
 							/>
 
@@ -247,18 +250,18 @@ function PaletteSelector(props: PaletteSelectorProps) {
 									}
 								}}
 								render={({ field }) => (
-									<TextField
-										{...field}
-										type="color"
-										variant="outlined"
-										className="mb-8"
-										label="Background paper"
-										slotProps={{
-											input: { className: 'w-50 h-8' }
-										}}
-										error={!!errors?.palette?.background?.paper}
-										helperText={errors?.palette?.background?.paper?.message}
-									/>
+									<FormControl>
+										<FormLabel htmlFor="background-paper">Background paper</FormLabel>
+										<TextField
+											{...field}
+											type="color"
+											slotProps={{
+												input: { className: 'w-50 h-8' }
+											}}
+											error={!!errors?.palette?.background?.paper}
+											helperText={errors?.palette?.background?.paper?.message}
+										/>
+									</FormControl>
 								)}
 							/>
 
@@ -271,17 +274,18 @@ function PaletteSelector(props: PaletteSelectorProps) {
 									}
 								}}
 								render={({ field }) => (
-									<TextField
-										{...field}
-										type="color"
-										variant="outlined"
-										label="Background default"
-										slotProps={{
-											input: { className: 'w-50 h-8' }
-										}}
-										error={!!errors?.palette?.background?.default}
-										helperText={errors?.palette?.background?.default?.message}
-									/>
+									<FormControl>
+										<FormLabel htmlFor="background-default">Background default</FormLabel>
+										<TextField
+											{...field}
+											type="color"
+											slotProps={{
+												input: { className: 'w-50 h-8' }
+											}}
+											error={!!errors?.palette?.background?.default}
+											helperText={errors?.palette?.background?.default?.message}
+										/>
+									</FormControl>
 								)}
 							/>
 						</div>

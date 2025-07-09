@@ -13,7 +13,6 @@ import * as ReactDOM from 'react-dom';
 import { Manager, Popper, Reference } from 'react-popper';
 import { ListItemButton, ListItemButtonProps } from '@mui/material';
 import isUrlInChildren from '@fuse/core/FuseNavigation/isUrlInChildren';
-import { WithRouterProps } from '@fuse/core/withRouter/withRouter';
 import * as PopperJS from '@popperjs/core';
 import usePathname from '@fuse/hooks/usePathname';
 import FuseNavItem, { FuseNavItemComponentProps } from '../../FuseNavItem';
@@ -44,7 +43,7 @@ const Root = styled(ListItemButton)<ListItemButtonProps>(({ theme }) => ({
 	}
 }));
 
-type FuseNavHorizontalGroupProps = FuseNavItemComponentProps & WithRouterProps;
+type FuseNavHorizontalGroupProps = FuseNavItemComponentProps;
 
 /**
  * FuseNavHorizontalGroup.
@@ -128,9 +127,7 @@ function FuseNavHorizontalGroup(props: FuseNavHorizontalGroupProps) {
 											size={16}
 											className="arrow-icon"
 										>
-											{theme.direction === 'ltr'
-												? 'heroicons-outline:chevron-right'
-												: 'heroicons-outline:chevron-left'}
+											{theme.direction === 'ltr' ? 'lucide:chevron-right' : 'lucide:chevron-left'}
 										</FuseSvgIcon>
 									</IconButton>
 								)}

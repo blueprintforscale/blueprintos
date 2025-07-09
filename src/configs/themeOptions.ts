@@ -5,9 +5,9 @@ const themeOptions = [
 		id: 'Default',
 		section: {
 			main: themesConfig.default,
-			navbar: themesConfig.defaultDark,
+			navbar: themesConfig.defaultNavbar,
 			toolbar: themesConfig.default,
-			footer: themesConfig.defaultDark
+			footer: themesConfig.default
 		}
 	},
 	{
@@ -17,6 +17,42 @@ const themeOptions = [
 			navbar: themesConfig.defaultDark,
 			toolbar: themesConfig.defaultDark,
 			footer: themesConfig.defaultDark
+		}
+	},
+	{
+		id: 'Legacy',
+		section: {
+			main: themesConfig.legacy,
+			navbar: themesConfig.legacyDark,
+			toolbar: themesConfig.legacy,
+			footer: themesConfig.legacy
+		}
+	},
+	{
+		id: 'Legacy Dark',
+		section: {
+			main: themesConfig.legacyDark,
+			navbar: themesConfig.legacyDark,
+			toolbar: themesConfig.legacyDark,
+			footer: themesConfig.legacyDark
+		}
+	},
+	{
+		id: 'Navy Teal',
+		section: {
+			main: themesConfig.navyTealPalette,
+			navbar: themesConfig.navyTealPalette,
+			toolbar: themesConfig.navyTealPalette,
+			footer: themesConfig.navyTealPalette
+		}
+	},
+	{
+		id: 'Indigo Amber',
+		section: {
+			main: themesConfig.indigoAmberPalette,
+			navbar: themesConfig.indigoAmberPalette,
+			toolbar: themesConfig.indigoAmberPalette,
+			footer: themesConfig.indigoAmberPalette
 		}
 	},
 	{

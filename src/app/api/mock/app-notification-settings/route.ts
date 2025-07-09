@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { SettingsNotifications } from '@/app/(control-panel)/apps/settings/SettingsApi';
+import { SettingsNotifications } from '@/app/(control-panel)/apps/settings/api/types';
 
 /**
  * GET api/mock/app-notification-settings

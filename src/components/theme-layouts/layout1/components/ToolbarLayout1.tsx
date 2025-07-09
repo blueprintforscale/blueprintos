@@ -1,17 +1,12 @@
-import { ThemeProvider } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import clsx from 'clsx';
 import { memo } from 'react';
 import NavbarToggleButton from 'src/components/theme-layouts/components/navbar/NavbarToggleButton';
-import { selectFuseNavbar } from 'src/components/theme-layouts/components/navbar/navbarSlice';
-import { useAppSelector } from 'src/store/hooks';
 import themeOptions from 'src/configs/themeOptions';
 import _ from 'lodash';
 import LightDarkModeToggle from 'src/components/LightDarkModeToggle';
 import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
-import { useToolbarTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
-import NotificationPanelToggleButton from '@/app/(control-panel)/apps/notifications/NotificationPanelToggleButton';
+import NotificationPanelToggleButton from '@/app/(control-panel)/apps/notifications/components/ui/notification-panel/NotificationPanelToggleButton';
 import AdjustFontSize from '../../components/AdjustFontSize';
 import FullScreenToggle from '../../components/FullScreenToggle';
 import LanguageSwitcher from '../../components/LanguageSwitcher';
@@ -20,6 +15,8 @@ import NavigationSearch from '../../components/navigation/NavigationSearch';
 import QuickPanelToggleButton from '../../components/quickPanel/QuickPanelToggleButton';
 import { Layout1ConfigDefaultsType } from '@/components/theme-layouts/layout1/Layout1Config';
 import useThemeMediaQuery from '../../../../@fuse/hooks/useThemeMediaQuery';
+import { AppBar, Divider } from '@mui/material';
+import ToolbarTheme from 'src/contexts/ToolbarTheme';
 
 type ToolbarLayout1Props = {
 	className?: string;
@@ -35,49 +32,34 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 	const config = settings.config as Layout1ConfigDefaultsType;
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 
-	const navbar = useAppSelector(selectFuseNavbar);
-	const toolbarTheme = useToolbarTheme();
-
 	return (
-		<ThemeProvider theme={toolbarTheme}>
+		<ToolbarTheme>
 			<AppBar
 				id="fuse-toolbar"
-				className={clsx('relative z-20 flex border-b', className)}
-				color="default"
+				className={clsx('relative z-20 flex', className)}
 				sx={(theme) => ({
-					backgroundColor: toolbarTheme.palette.background.default,
-					...theme.applyStyles('light', {
-						backgroundColor: toolbarTheme.palette.background.paper
-					})
+					backgroundColor: theme.vars.palette.background.default,
+					color: theme.vars.palette.text.primary
 				})}
-				position="static"
-				elevation={0}
 			>
 				<Toolbar className="min-h-12 p-0 md:min-h-16">
-					<div className="flex flex-1 px-2 md:px-4 space-x-2 ">
+					<div className="flex flex-1 items-center gap-3 px-2 md:px-4">
 						{config.navbar.display && config.navbar.position === 'left' && (
 							<>
-								{!isMobile && (
-									<>
-										{(config.navbar.style === 'style-3' ||
-											config.navbar.style === 'style-3-dense') && (
-											<NavbarToggleButton className="h-10 w-10 p-0" />
-										)}
+								<NavbarToggleButton />
 
-										{config.navbar.style === 'style-1' && !navbar.open && (
-											<NavbarToggleButton className="h-10 w-10 p-0" />
-										)}
-									</>
-								)}
-
-								{isMobile && <NavbarToggleButton className="h-10 w-10 p-0 sm:mx-2" />}
+								<Divider
+									orientation="vertical"
+									flexItem
+									variant="middle"
+								/>
 							</>
 						)}
 
 						{!isMobile && <NavigationShortcuts />}
 					</div>
 
-					<div className="flex items-center overflow-x-auto px-2 md:px-4 space-x-1.5">
+					<div className="flex items-center overflow-x-auto px-2 py-2 md:px-4">
 						<LanguageSwitcher />
 						<AdjustFontSize />
 						<FullScreenToggle />
@@ -94,13 +76,12 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 						<>
 							{!isMobile && (
 								<>
-									{(config.navbar.style === 'style-3' || config.navbar.style === 'style-3-dense') && (
-										<NavbarToggleButton className="h-10 w-10 p-0" />
-									)}
-
-									{config.navbar.style === 'style-1' && !navbar.open && (
-										<NavbarToggleButton className="h-10 w-10 p-0" />
-									)}
+									<Divider
+										orientation="vertical"
+										flexItem
+										variant="middle"
+									/>
+									<NavbarToggleButton />
 								</>
 							)}
 
@@ -109,7 +90,7 @@ function ToolbarLayout1(props: ToolbarLayout1Props) {
 					)}
 				</Toolbar>
 			</AppBar>
-		</ThemeProvider>
+		</ToolbarTheme>
 	);
 }
 

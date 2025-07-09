@@ -4,10 +4,10 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { FuseThemeOption } from '@fuse/core/FuseThemeSelector/ThemePreview';
-import clsx from 'clsx';
 import { useMainTheme } from '@fuse/core/FuseSettings/hooks/fuseThemeHooks';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
 import { FuseSettingsConfigType } from '@fuse/core/FuseSettings/FuseSettings';
+// import { useSnackbar } from 'notistack';
 
 type LightDarkModeToggleProps = {
 	className?: string;
@@ -20,8 +20,7 @@ function LightDarkModeToggle(props: LightDarkModeToggleProps) {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const { setSettings } = useFuseSettings();
 	// const { isGuest, updateUserSettings } = useUser();
-	// const dispatch = useAppDispatch();
-
+	// const { enqueueSnackbar } = useSnackbar();
 	const mainTheme = useMainTheme();
 
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -54,7 +53,9 @@ function LightDarkModeToggle(props: LightDarkModeToggleProps) {
 			const updatedUserData = await updateUserSettings(_newSettings);
 
 			if (updatedUserData) {
-				dispatch(showMessage({ message: 'User settings saved.' }));
+				enqueueSnackbar('User settings saved.', {
+					variant: 'success'
+				});
 			}
 		} */
 	}
@@ -65,10 +66,10 @@ function LightDarkModeToggle(props: LightDarkModeToggleProps) {
 				aria-controls="light-dark-toggle-menu"
 				aria-haspopup="true"
 				onClick={handleClick}
-				className={clsx('border border-divider', className)}
+				className={className}
 			>
-				{mainTheme.palette.mode === 'light' && <FuseSvgIcon>heroicons-outline:sun</FuseSvgIcon>}
-				{mainTheme.palette.mode === 'dark' && <FuseSvgIcon>heroicons-outline:moon</FuseSvgIcon>}
+				{mainTheme.palette.mode === 'light' && <FuseSvgIcon>lucide:sun</FuseSvgIcon>}
+				{mainTheme.palette.mode === 'dark' && <FuseSvgIcon>lucide:moon</FuseSvgIcon>}
 			</IconButton>
 			<Menu
 				id="light-dark-toggle-menu"

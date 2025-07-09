@@ -17,16 +17,16 @@ export default function Error({ error, reset }: ErrorProps) {
 
 	return (
 		<Container maxWidth="sm">
-			<div className="flex flex-col items-center justify-center min-h-screen text-center">
+			<div className="flex min-h-screen flex-col items-center justify-center text-center">
 				<FuseSvgIcon
 					className="mb-4"
 					color="error"
 					size={64}
 				>
-					heroicons-outline:information-circle
+					lucide:info
 				</FuseSvgIcon>
 				<Typography
-					className="text-xl lg:text-3xl mb-4"
+					className="mb-4 text-xl lg:text-3xl"
 					color="error.main"
 				>
 					Oops! Something went wrong

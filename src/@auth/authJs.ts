@@ -10,7 +10,6 @@ import Credentials from 'next-auth/providers/credentials';
 import Facebook from 'next-auth/providers/facebook';
 import Google from 'next-auth/providers/google';
 import { authGetDbUserByEmail, authCreateDbUser } from './authApi';
-import { FetchApiError } from '@/utils/apiFetch';
 
 const storage = createStorage({
 	driver: process.env.VERCEL
@@ -106,7 +105,7 @@ const config = {
 
 					return session;
 				} catch (error) {
-					const errorStatus = (error as FetchApiError).status;
+					const errorStatus = error?.status;
 
 					/** If user not found, create a new user */
 					if (errorStatus === 404) {

@@ -1,26 +1,33 @@
+import { ReactNode } from 'react';
 import Dialog from '@mui/material/Dialog';
-import { useAppDispatch, useAppSelector } from 'src/store/hooks';
-import { closeDialog, selectFuseDialogProps } from '@fuse/core/FuseDialog/fuseDialogSlice';
 
-/**
- * FuseDialog component
- * This component renders a material UI ```Dialog``` component
- * with properties pulled from the redux store
- */
-function FuseDialog() {
-	const dispatch = useAppDispatch();
-	const options = useAppSelector(selectFuseDialogProps);
+export interface FuseDialogContentProps {
+	handleClose: () => void;
+	data?: unknown;
+}
+
+export interface FuseDialogProps {
+	id: string;
+	open?: boolean;
+	onClose?: (T: string) => void;
+	content: (T: FuseDialogContentProps) => ReactNode;
+	data?: unknown;
+	classes?: { paper?: string };
+}
+
+export function FuseDialog(props: FuseDialogProps) {
+	const { id, open = false, onClose, content, data } = props;
+
+	function handleClose() {
+		onClose?.(id);
+	}
 
 	return (
 		<Dialog
-			onClose={() => dispatch(closeDialog())}
-			aria-labelledby="fuse-dialog-title"
-			classes={{
-				paper: 'rounded-lg'
-			}}
-			{...options}
-		/>
+			open={open}
+			onClose={() => handleClose()}
+		>
+			{content?.({ handleClose, data })}
+		</Dialog>
 	);
 }
-
-export default FuseDialog;

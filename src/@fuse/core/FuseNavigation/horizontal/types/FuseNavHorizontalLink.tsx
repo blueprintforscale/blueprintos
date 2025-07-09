@@ -5,7 +5,6 @@ import ListItemText from '@mui/material/ListItemText';
 import clsx from 'clsx';
 import { memo, useMemo } from 'react';
 import { Link, ListItemButton, ListItemButtonProps } from '@mui/material';
-import { WithRouterProps } from '@fuse/core/withRouter/withRouter';
 import FuseNavBadge from '../../FuseNavBadge';
 import FuseSvgIcon from '../../../FuseSvgIcon';
 import { FuseNavItemComponentProps } from '../../FuseNavItem';
@@ -30,7 +29,7 @@ const Root = styled(ListItemButton)<ListItemButtonProps>(({ theme }) => ({
 	}
 }));
 
-type FuseNavHorizontalLinkProps = FuseNavItemComponentProps & WithRouterProps;
+type FuseNavHorizontalLinkProps = FuseNavItemComponentProps;
 
 /*
  * FuseNavHorizontalLink

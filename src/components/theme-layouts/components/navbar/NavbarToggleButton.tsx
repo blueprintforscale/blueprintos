@@ -1,13 +1,11 @@
 import IconButton from '@mui/material/IconButton';
-import { useAppDispatch } from 'src/store/hooks';
 import _ from 'lodash';
 import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import clsx from 'clsx';
 import { IconButtonProps } from '@mui/material/IconButton';
 import useFuseLayoutSettings from '@fuse/core/FuseLayout/useFuseLayoutSettings';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
-import { navbarToggle, navbarToggleMobile } from './navbarSlice';
+import { useNavbarContext } from './contexts/NavbarContext/useNavbarContext';
 
 export type NavbarToggleButtonProps = IconButtonProps;
 
@@ -16,36 +14,30 @@ export type NavbarToggleButtonProps = IconButtonProps;
  */
 function NavbarToggleButton(props: NavbarToggleButtonProps) {
 	const {
-		className = '',
-		children = (
-			<FuseSvgIcon
-				size={20}
-				color="action"
-			>
-				heroicons-outline:bars-3
-			</FuseSvgIcon>
-		),
+		className = 'h-7 w-7 border border-divider',
+		children = <FuseSvgIcon>lucide:panel-left</FuseSvgIcon>,
 		...rest
 	} = props;
 
-	const dispatch = useAppDispatch();
+	const { toggleMobileNavbar, toggleNavbar } = useNavbarContext();
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 	const { config } = useFuseLayoutSettings();
 	const { setSettings } = useFuseSettings();
 
 	return (
 		<IconButton
+			size="small"
 			onClick={() => {
 				if (isMobile) {
-					dispatch(navbarToggleMobile());
+					toggleMobileNavbar();
 				} else if (config?.navbar?.style === 'style-2') {
 					setSettings(_.set({}, 'layout.config.navbar.folded', !config?.navbar?.folded));
 				} else {
-					dispatch(navbarToggle());
+					toggleNavbar();
 				}
 			}}
 			{...rest}
-			className={clsx('border border-divider', className)}
+			className={className}
 		>
 			{children}
 		</IconButton>

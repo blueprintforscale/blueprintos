@@ -61,7 +61,7 @@ type SettingsPanelProps = {
 function SettingsPanel(props: SettingsPanelProps) {
 	const { settingsHandlers, onClose, open } = props;
 	// const { isGuest, updateUserSettings } = useUser();
-	// const dispatch = useAppDispatch();
+	// const { enqueueSnackbar } = useSnackbar();
 
 	const { data: settings, setSettings } = useFuseSettings();
 
@@ -77,7 +77,9 @@ function SettingsPanel(props: SettingsPanelProps) {
 			const updatedUserData = await updateUserSettings(_newSettings);
 
 			if (updatedUserData) {
-				dispatch(showMessage({ message: 'User settings saved.' }));
+				enqueueSnackbar('User settings saved.', {
+					variant: 'success'
+				});
 			}
 		} */
 	};
@@ -100,13 +102,13 @@ function SettingsPanel(props: SettingsPanelProps) {
 			}}
 			{...settingsHandlers}
 		>
-			<FuseScrollbars className="p-4 sm:p-6 space-y-8">
+			<FuseScrollbars className="flex flex-col gap-8 p-4 sm:p-6">
 				<IconButton
 					className="fixed top-0 z-10 ltr:right-0 rtl:left-0"
 					onClick={onClose}
 					size="large"
 				>
-					<FuseSvgIcon>heroicons-outline:x-mark</FuseSvgIcon>
+					<FuseSvgIcon>lucide:x</FuseSvgIcon>
 				</IconButton>
 
 				<Typography

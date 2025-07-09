@@ -1,12 +1,10 @@
 'use client';
-
 import { MouseEvent, useState } from 'react';
 import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import clsx from 'clsx';
 
 const marks = [
 	{ value: 16 * 0.7, label: '70%' },
@@ -47,12 +45,12 @@ function AdjustFontSize(props: AdjustFontSizeProps) {
 	return (
 		<div>
 			<IconButton
-				className={clsx('border border-divider', className)}
+				className={className}
 				aria-controls="font-size-menu"
 				aria-haspopup="true"
 				onClick={handleClick}
 			>
-				<FuseSvgIcon size={20}>material-outline:format_size</FuseSvgIcon>
+				<FuseSvgIcon>lucide:a-large-small</FuseSvgIcon>
 			</IconButton>
 			<Menu
 				classes={{ paper: 'w-80' }}
@@ -71,13 +69,11 @@ function AdjustFontSize(props: AdjustFontSizeProps) {
 				}}
 			>
 				<div className="px-6 py-3">
-					<Typography className="mb-2 flex items-center justify-center text-lg font-semibold">
-						<FuseSvgIcon
-							color="action"
-							className="mr-1"
-						>
-							material-outline:format_size
-						</FuseSvgIcon>
+					<Typography
+						className="text-md mb-2 flex items-center justify-center gap-2 font-semibold"
+						color="text.secondary"
+					>
+						<FuseSvgIcon color="action">lucide:a-large-small</FuseSvgIcon>
 						Font Size
 					</Typography>
 					<Slider

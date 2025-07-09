@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { Contact } from '@/app/(control-panel)/apps/messenger/MessengerApi';
+import { Contact } from '@/app/(control-panel)/apps/messenger/api/types';
 
 /**
  * GET api/mock/messenger/contacts/{id}

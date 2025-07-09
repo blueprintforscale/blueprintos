@@ -21,7 +21,7 @@ const settingsConfig: FuseSettingsConfigType = {
 		 */
 		config: {
 			navbar: {
-				style: 'style-2'
+				style: 'style-1'
 			}
 		} // checkout default layout configs at src/components/theme-layouts for example  src/components/theme-layouts/layout1/Layout1Config.js
 	},
@@ -40,9 +40,9 @@ const settingsConfig: FuseSettingsConfigType = {
 	 */
 	theme: {
 		main: themesConfig.default,
-		navbar: themesConfig.defaultDark,
+		navbar: themesConfig.defaultNavbar,
 		toolbar: themesConfig.default,
-		footer: themesConfig.defaultDark
+		footer: themesConfig.default
 	},
 
 	/**

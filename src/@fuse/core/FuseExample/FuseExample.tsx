@@ -1,20 +1,19 @@
-'use client';
-
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Card from '@mui/material/Card';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import clsx from 'clsx';
 import { ElementType, ReactNode, useState } from 'react';
-import { darken } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import DemoFrame from './DemoFrame';
 import FuseSvgIcon from '../FuseSvgIcon';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { darken } from '@mui/material/styles';
+import Tooltip from '@mui/material/Tooltip';
+import Alert from '@mui/material/Alert';
 
 type FuseExampleProps = {
 	name?: string;
-	raw?: string;
-	currentTabIndex?: number;
+	raw?: unknown;
+	showCode?: boolean;
 	component: ElementType;
 	iframe?: ReactNode;
 	className: string;
@@ -25,72 +24,115 @@ type FuseExampleProps = {
  * It consists of two tabs, a visual tab and code tab.
  */
 function FuseExample(props: FuseExampleProps) {
-	const { component: Component, raw, iframe, className, name = '', currentTabIndex = 0 } = props;
+	const { component: Component, raw, iframe, className, name = '', showCode: defaultShowCode = false } = props;
+	const [open, setOpen] = useState(false);
+	const [showCode, setShowCode] = useState(defaultShowCode);
 
-	const [currentTab, setCurrentTab] = useState(currentTabIndex);
+	// Detect if we're running in Turbopack environment
+	const isTurbopackEnvironment = process.env.TURBOPACK === '1' || process.env.NODE_ENV === 'development';
 
-	function handleChange(event: React.SyntheticEvent, value: number) {
-		setCurrentTab(value);
+	// Detect if raw-loader is working properly
+	const isRawString = typeof raw === 'string';
+	const hasValidRaw = isRawString && raw.trim().length > 0;
+
+	// Show warning when Turbopack is running AND raw-loader failed
+	const showTurbopackWarning = isTurbopackEnvironment && !hasValidRaw && raw !== undefined;
+
+	function toggleShowCode() {
+		setShowCode(!showCode);
+	}
+
+	function handleCopy() {
+		if (!hasValidRaw) {
+			return;
+		}
+
+		navigator.clipboard.writeText(raw as string);
+		setOpen(true);
+		setTimeout(() => {
+			setOpen(false);
+		}, 800);
 	}
 
 	return (
-		<Card className={clsx(className, 'shadow-sm not-prose')}>
+		<Card className={clsx(className, 'not-prose border-divider rounded-md border shadow-xs')}>
+			{Component && (
+				<Box className="relative flex max-w-full justify-center p-4">
+					{iframe ? (
+						<DemoFrame name={name}>
+							<Component />
+						</DemoFrame>
+					) : (
+						<Component />
+					)}
+				</Box>
+			)}
 			<Box
+				className="flex items-center justify-end gap-3 border-t p-2"
 				sx={{
 					backgroundColor: (theme) =>
 						darken(theme.palette.background.paper, theme.palette.mode === 'light' ? 0.02 : 0.2)
 				}}
 			>
-				<Tabs
-					classes={{
-						root: 'border-b-1',
-						flexContainer: 'justify-end'
-					}}
-					value={currentTab}
-					onChange={handleChange}
-					textColor="secondary"
-					indicatorColor="secondary"
+				<Tooltip
+					title="Copied!"
+					open={open}
+					slotProps={{ popper: { placement: 'top' } }}
+					arrow
 				>
-					{Component && (
-						<Tab
-							classes={{ root: 'min-w-16' }}
-							icon={<FuseSvgIcon>heroicons-outline:eye</FuseSvgIcon>}
-						/>
-					)}
-					{raw && (
-						<Tab
-							classes={{ root: 'min-w-16' }}
-							icon={<FuseSvgIcon>heroicons-outline:code-bracket</FuseSvgIcon>}
-						/>
-					)}
-				</Tabs>
+					<Button
+						variant="text"
+						onClick={handleCopy}
+						size="small"
+						className=""
+						disabled={!hasValidRaw}
+						startIcon={<FuseSvgIcon>lucide:copy</FuseSvgIcon>}
+					>
+						Copy
+					</Button>
+				</Tooltip>
+				<Button
+					className="min-w-30"
+					onClick={toggleShowCode}
+					variant="outlined"
+					size="small"
+					disabled={!hasValidRaw && !showTurbopackWarning}
+					startIcon={<FuseSvgIcon>lucide:code-xml</FuseSvgIcon>}
+				>
+					{showCode ? 'Hide Code' : 'Show Code'}
+				</Button>
 			</Box>
-			<div className="relative flex max-w-full justify-center">
-				<div className={currentTab === 0 ? 'flex max-w-full flex-1' : 'hidden'}>
-					{Component &&
-						(iframe ? (
-							<DemoFrame name={name}>
-								<Component />
-							</DemoFrame>
-						) : (
-							<div className="flex max-w-full flex-1 justify-center p-6">
-								<Component />
+			{showCode && (
+				<div className="flex flex-1 flex-col">
+					{showTurbopackWarning && (
+						<Alert
+							severity="warning"
+							className="m-4"
+							variant="outlined"
+						>
+							<div>
+								<strong>Development Mode Limitation:</strong> Source code cannot be displayed because
+								raw-loader doesn't work with Turbopack in development mode.
 							</div>
-						))}
-				</div>
-				<div className={currentTab === 1 ? 'flex flex-1' : 'hidden'}>
-					{raw && (
-						<div className="flex flex-1">
-							<FuseHighlight
-								component="pre"
-								className="language-javascript w-full"
-							>
-								{raw}
-							</FuseHighlight>
-						</div>
+							<div className="mt-1 text-sm">
+								• This only affects development mode when using <code>npm run dev</code>
+								<br />• Production builds (<code>npm run build</code>) work normally
+								<br />• Alternative: Run dev without Turbopack using{' '}
+								<code>npm run dev -- --turbo=false</code>
+							</div>
+						</Alert>
+					)}
+					{hasValidRaw && (
+						<FuseHighlight
+							component="pre"
+							className="language-javascript w-full"
+							copy={false}
+						>
+							{raw}
+						</FuseHighlight>
 					)}
 				</div>
-			</div>
+			)}
 		</Card>
 	);
 }

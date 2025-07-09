@@ -1,3 +1,0 @@
-import SimpleFullWidthContentScrollComponent from './SimpleFullWidthContentScrollComponent';
-
-export default SimpleFullWidthContentScrollComponent;

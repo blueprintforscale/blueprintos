@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
+import { createTheme, useTheme } from '@mui/material/styles';
 import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
@@ -10,6 +10,7 @@ import { ReactElement } from 'react';
 type FramedDemoProps = {
 	document: Document;
 	children: ReactElement<{ window?: () => Window }>;
+	isolated?: boolean;
 };
 
 /**
@@ -17,7 +18,7 @@ type FramedDemoProps = {
  * This also add window property to the child with `getWindow` function, which is useful to fetch window property.
  */
 function FramedDemo(props: FramedDemoProps) {
-	const { children, document } = props;
+	const { children, document, isolated = false } = props;
 
 	const theme = useTheme();
 	React.useEffect(() => {
@@ -37,19 +38,26 @@ function FramedDemo(props: FramedDemoProps) {
 
 	const getWindow = React.useCallback(() => document.defaultView, [document]);
 
+	const iframeTheme = React.useMemo(() => {
+		if (isolated) {
+			return null;
+		}
+
+		return createTheme({
+			colorSchemes: { light: true, dark: true },
+			cssVariables: {
+				colorSchemeSelector: 'data-mui-color-scheme'
+			}
+		});
+	}, [isolated]);
+
 	return (
 		<StyleSheetManager
 			target={document.head}
 			stylisPlugins={theme.direction === 'rtl' ? [rtlPlugin] : []}
 		>
 			<CacheProvider value={cache}>
-				<GlobalStyles
-					styles={() => ({
-						html: {
-							fontSize: '62.5%'
-						}
-					})}
-				/>
+				{iframeTheme && <GlobalStyles styles={iframeTheme.generateStyleSheets?.() || []} />}
 				{React.cloneElement(children, {
 					window: getWindow
 				})}

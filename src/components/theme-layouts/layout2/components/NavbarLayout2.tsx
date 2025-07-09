@@ -21,15 +21,15 @@ function NavbarLayout2(props: NavbarLayout2Props) {
 	const { className = '' } = props;
 
 	return (
-		<Root className={clsx('h-16 max-h-16 min-h-16 w-full shadow-md', className)}>
-			<div className="container z-20 flex h-full w-full flex-auto items-center justify-between p-0 lg:px-6">
-				<div className="flex shrink-0 items-center px-2">
-					<Logo />
+		<Root className={clsx('h-16 max-h-16 min-h-16 w-full', className)}>
+			<div className="z-20 container flex h-full w-full flex-auto items-center justify-between gap-2 p-0 lg:px-8">
+				<div className="flex flex-auto">
+					<Logo className="" />
 				</div>
 
-				<FuseScrollbars className="flex h-full items-center">
+				<FuseScrollbars className="flex h-full w-full flex-auto items-center">
 					<Navigation
-						className="w-full"
+						className="w-full justify-end"
 						layout="horizontal"
 					/>
 				</FuseScrollbars>

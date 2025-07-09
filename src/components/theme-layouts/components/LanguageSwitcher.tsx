@@ -34,22 +34,19 @@ function LanguageSwitcher() {
 	return (
 		<>
 			<Button
-				className="border border-divider"
 				onClick={langMenuClick}
+				className="gap-1"
 			>
 				<img
-					className="mx-1 min-w-5"
+					className="min-w-5"
 					src={`/assets/images/flags/${language.flag}.svg`}
 					alt={language.title}
 				/>
 
 				<Typography
-					className="mx-1 font-semibold text-md uppercase"
+					className="text-sm font-medium uppercase"
 					sx={(theme) => ({
-						color: theme.vars.palette.text.secondary,
-						...theme.applyStyles('dark', {
-							color: theme.vars.palette.text.primary
-						})
+						color: theme.vars.palette.action.active
 					})}
 				>
 					{language.id}

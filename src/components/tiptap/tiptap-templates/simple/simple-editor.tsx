@@ -47,11 +47,11 @@ import { HighlighterIcon } from '@/components/tiptap/tiptap-icons/highlighter-ic
 import { LinkIcon } from '@/components/tiptap/tiptap-icons/link-icon';
 
 // --- Hooks ---
-import { useMobile } from '@/hooks/use-mobile';
-import { useWindowSize } from '@/hooks/use-window-size';
+import { useMobile } from '@/hooks/useMobile';
+import { useWindowSize } from '@/hooks/useWindowSize';
 
 // --- Lib ---
-import { handleImageUpload, MAX_FILE_SIZE } from '@/lib/tiptap-utils';
+import { handleImageUpload, MAX_FILE_SIZE } from '@/utils/tiptap-utils';
 
 // --- Styles ---
 import '@/components/tiptap/tiptap-templates/simple/simple-editor.scss';

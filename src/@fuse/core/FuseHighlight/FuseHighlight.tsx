@@ -1,5 +1,4 @@
 'use client';
-
 import * as Prism from 'prismjs';
 import { ElementType, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import './prism-languages';
@@ -55,7 +54,7 @@ function FuseHighlight(props: FuseHighlightProps) {
 	}
 
 	return (
-		<div className={clsx('relative not-prose', className)}>
+		<div className={clsx('not-prose relative min-h-9', className)}>
 			{copy && (
 				<Tooltip
 					title="Copied!"
@@ -68,7 +67,7 @@ function FuseHighlight(props: FuseHighlightProps) {
 						onClick={handleCopy}
 						size="small"
 						color="secondary"
-						className="absolute top-0 right-0 m-1.5 z-10 rounded-sm p-0 text-md min-h-0 h-auto w-auto min-w-0 px-2 py-1"
+						className="text-md absolute top-0 right-0 z-10 m-1.5 h-auto min-h-0 w-auto min-w-0 rounded-sm p-0 px-2 py-1"
 						classes={{ startIcon: 'mr-1' }}
 						sx={{
 							backgroundColor: (theme) => `rgba(${theme.vars.palette.secondary.mainChannel} / 0.6)`,
@@ -76,7 +75,7 @@ function FuseHighlight(props: FuseHighlightProps) {
 								backgroundColor: (theme) => `rgba(${theme.vars.palette.secondary.mainChannel} / 1)`
 							}
 						}}
-						startIcon={<FuseSvgIcon size={16}>heroicons-outline:clipboard</FuseSvgIcon>}
+						startIcon={<FuseSvgIcon>lucide:clipboard</FuseSvgIcon>}
 					>
 						Copy
 					</Button>
@@ -84,7 +83,7 @@ function FuseHighlight(props: FuseHighlightProps) {
 			)}
 
 			<Wrapper
-				className="m-0"
+				className="m-0 min-h-full"
 				ref={innerRef}
 			>
 				{source}

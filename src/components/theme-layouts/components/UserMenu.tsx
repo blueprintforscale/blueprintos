@@ -17,13 +17,15 @@ type UserMenuProps = {
 	className?: string;
 	popoverProps?: Partial<PopoverProps>;
 	arrowIcon?: string;
+	dense?: boolean;
+	onlyAvatar?: boolean;
 };
 
 /**
  * The user menu.
  */
 function UserMenu(props: UserMenuProps) {
-	const { className, popoverProps, arrowIcon = 'heroicons-outline:chevron-up' } = props;
+	const { className, popoverProps, arrowIcon = 'lucide:chevron-up', dense = false, onlyAvatar = false } = props;
 	const { data: user, signOut, isGuest } = useUser();
 	const [userMenu, setUserMenu] = useState<HTMLElement | null>(null);
 	const userMenuClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -42,18 +44,10 @@ function UserMenu(props: UserMenuProps) {
 		<>
 			<Button
 				className={clsx(
-					'user-menu flex justify-start shrink-0 min-h-14 h-14 rounded-lg p-2 space-x-3',
+					'user-menu flex shrink-0 justify-start',
+					onlyAvatar ? 'min-w-0 p-0' : dense ? 'h-9 min-h-9 gap-1.5 px-1' : 'h-14 min-h-14 gap-3',
 					className
 				)}
-				sx={(theme) => ({
-					borderColor: theme.vars.palette.divider,
-					'&:hover, &:focus': {
-						backgroundColor: `rgba(${theme.vars.palette.dividerChannel} / 0.6)`,
-						...theme.applyStyles('dark', {
-							backgroundColor: `rgba(${theme.vars.palette.dividerChannel} / 0.1)`
-						})
-					}
-				})}
 				onClick={userMenuClick}
 				color="inherit"
 			>
@@ -63,7 +57,7 @@ function UserMenu(props: UserMenuProps) {
 							background: theme.vars.palette.background.default,
 							color: theme.vars.palette.text.secondary
 						})}
-						className="avatar w-10 h-10 rounded-lg"
+						className={clsx('avatar rounded-lg', dense ? 'h-7 w-7' : 'h-10 w-10')}
 						alt="user photo"
 						src={user?.photoURL}
 						variant="rounded"
@@ -74,48 +68,54 @@ function UserMenu(props: UserMenuProps) {
 							background: (theme) => darken(theme.palette.background.default, 0.05),
 							color: theme.vars.palette.text.secondary
 						})}
-						className="avatar md:mx-1"
+						className={clsx('avatar h-10 w-10', dense && 'h-8 w-8')}
 					>
 						{user?.displayName?.[0]}
 					</Avatar>
 				)}
-				<div className="flex flex-col flex-auto space-y-2">
-					<Typography
-						component="span"
-						className="title flex font-semibold text-base capitalize truncate tracking-tight leading-none"
-					>
-						{user?.displayName}
-					</Typography>
-					<Typography
-						className="subtitle flex text-md font-medium tracking-tighter leading-none"
-						color="text.secondary"
-					>
-						{user?.email}
-					</Typography>
-				</div>
-				<div className="flex shrink-0 items-center space-x-2">
-					<Tooltip
-						title={
-							<>
-								{user.role?.toString()}
-								{(!user.role || (Array.isArray(user.role) && user.role.length === 0)) && 'Guest'}
-							</>
-						}
-					>
-						<FuseSvgIcon
-							className="info-icon"
-							size={20}
-						>
-							heroicons-outline:information-circle
-						</FuseSvgIcon>
-					</Tooltip>
-					<FuseSvgIcon
-						className="arrow"
-						size={13}
-					>
-						{arrowIcon}
-					</FuseSvgIcon>
-				</div>
+				{!onlyAvatar && (
+					<>
+						<div className={clsx('flex flex-auto flex-col', dense ? '' : 'gap-2')}>
+							<Typography
+								component="span"
+								className={clsx(
+									'title flex truncate leading-none font-semibold tracking-tight capitalize',
+									dense ? 'text-md' : 'text-base'
+								)}
+							>
+								{user?.displayName}
+							</Typography>
+							<Typography
+								className={clsx(
+									'flex leading-none font-medium tracking-tighter',
+									dense ? 'text-sm' : 'text-md'
+								)}
+								color="text.secondary"
+							>
+								{user?.email}
+							</Typography>
+						</div>
+						<div className="flex shrink-0 items-center gap-2">
+							<Tooltip
+								title={
+									<>
+										{user.role?.toString()}
+										{(!user.role || (Array.isArray(user.role) && user.role.length === 0)) &&
+											'Guest'}
+									</>
+								}
+							>
+								<FuseSvgIcon className="info-icon">lucide:info</FuseSvgIcon>
+							</Tooltip>
+							<FuseSvgIcon
+								className="arrow"
+								size={13}
+							>
+								{arrowIcon}
+							</FuseSvgIcon>
+						</div>
+					</>
+				)}
 			</Button>
 			<Popover
 				open={Boolean(userMenu)}
@@ -123,14 +123,14 @@ function UserMenu(props: UserMenuProps) {
 				onClose={userMenuClose}
 				anchorOrigin={{
 					vertical: 'top',
-					horizontal: 'center'
+					horizontal: 'right'
 				}}
 				transformOrigin={{
-					vertical: 'bottom',
-					horizontal: 'center'
+					vertical: 'top',
+					horizontal: 'left'
 				}}
 				classes={{
-					paper: 'py-2 min-w-64'
+					paper: 'min-w-32'
 				}}
 				{...popoverProps}
 			>
@@ -141,8 +141,8 @@ function UserMenu(props: UserMenuProps) {
 							to="/sign-in"
 							role="button"
 						>
-							<ListItemIcon className="min-w-9">
-								<FuseSvgIcon>heroicons-outline:lock-closed</FuseSvgIcon>
+							<ListItemIcon>
+								<FuseSvgIcon>lucide:lock</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Sign In" />
 						</MenuItem>
@@ -151,8 +151,8 @@ function UserMenu(props: UserMenuProps) {
 							to="/sign-up"
 							role="button"
 						>
-							<ListItemIcon className="min-w-9">
-								<FuseSvgIcon>heroicons-outline:user-plus</FuseSvgIcon>
+							<ListItemIcon>
+								<FuseSvgIcon>lucide:user-plus</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Sign up" />
 						</MenuItem>
@@ -165,8 +165,8 @@ function UserMenu(props: UserMenuProps) {
 							onClick={userMenuClose}
 							role="button"
 						>
-							<ListItemIcon className="min-w-9">
-								<FuseSvgIcon>heroicons-outline:user-circle</FuseSvgIcon>
+							<ListItemIcon>
+								<FuseSvgIcon>lucide:circle-user</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="My Profile" />
 						</MenuItem>
@@ -176,8 +176,8 @@ function UserMenu(props: UserMenuProps) {
 							onClick={userMenuClose}
 							role="button"
 						>
-							<ListItemIcon className="min-w-9">
-								<FuseSvgIcon>heroicons-outline:envelope</FuseSvgIcon>
+							<ListItemIcon>
+								<FuseSvgIcon>lucide:mail</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Inbox" />
 						</MenuItem>
@@ -186,8 +186,8 @@ function UserMenu(props: UserMenuProps) {
 								signOut();
 							}}
 						>
-							<ListItemIcon className="min-w-9">
-								<FuseSvgIcon>heroicons-outline:arrow-right-on-rectangle</FuseSvgIcon>
+							<ListItemIcon>
+								<FuseSvgIcon>lucide:square-arrow-right</FuseSvgIcon>
 							</ListItemIcon>
 							<ListItemText primary="Sign out" />
 						</MenuItem>

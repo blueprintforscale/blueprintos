@@ -1,3 +1,0 @@
-import SimpleWithSidebarsNormalScrollComponent from './SimpleWithSidebarsNormalScrollComponent';
-
-export default SimpleWithSidebarsNormalScrollComponent;

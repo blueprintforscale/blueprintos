@@ -1,5 +1,4 @@
 import { amber } from '@mui/material/colors';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -81,15 +80,10 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 	);
 
 	return (
-		<Box className={clsx('flex shrink overflow-hidden', variant === 'vertical' ? 'flex-col' : '', className)}>
+		<Box className={clsx('flex shrink', variant === 'vertical' ? 'flex-col' : '', className)}>
 			{useMemo(() => {
 				return (
-					<Box
-						className={clsx(
-							'flex flex-1 items-center border rounded-lg',
-							variant === 'vertical' ? 'flex-col' : 'max-h-9'
-						)}
-					>
+					<Box className={clsx('flex flex-1 items-center', variant === 'vertical' ? 'flex-col' : 'max-h-9')}>
 						{shortcutItems.map(
 							(_item) =>
 								_item && (
@@ -102,9 +96,9 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 											title={_item.title}
 											placement={variant === 'horizontal' ? 'bottom' : 'left'}
 										>
-											<IconButton className="h-9 w-9 p-0 rounded-none">
+											<IconButton>
 												{_item.icon ? (
-													<FuseSvgIcon size={20}>{_item.icon}</FuseSvgIcon>
+													<FuseSvgIcon>{_item.icon}</FuseSvgIcon>
 												) : (
 													<span className="text-2xl font-semibold uppercase">
 														{_item.title[0]}
@@ -121,16 +115,10 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 							placement={variant === 'horizontal' ? 'bottom' : 'left'}
 						>
 							<IconButton
-								className="h-9 w-9 p-0 rounded-none"
 								aria-haspopup="true"
 								onClick={addMenuClick}
 							>
-								<FuseSvgIcon
-									size={20}
-									sx={{ color: amber[600] }}
-								>
-									heroicons-solid:star
-								</FuseSvgIcon>
+								<FuseSvgIcon sx={{ color: amber[600] }}>lucide:star</FuseSvgIcon>
 							</IconButton>
 						</Tooltip>
 					</Box>
@@ -143,19 +131,22 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 				open={Boolean(addMenu)}
 				onClose={addMenuClose}
 				classes={{
-					paper: 'min-w-64'
+					paper: 'min-w-48'
 				}}
-				TransitionProps={{
-					onEntered: () => {
-						searchInputRef?.current?.focus();
-					},
-					onExited: () => {
-						setSearchText('');
+				slotProps={{
+					transition: {
+						onEnter: () => {
+							searchInputRef?.current?.focus();
+						},
+						onExited: () => {
+							setSearchText('');
+						}
 					}
 				}}
 			>
-				<div className="p-4 pt-2">
+				<div className="">
 					<Input
+						className="px-2"
 						inputRef={searchInputRef}
 						value={searchText}
 						onChange={search}
@@ -169,8 +160,6 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 						disableUnderline
 					/>
 				</div>
-
-				<Divider />
 
 				{useMemo(() => {
 					if (searchText.length === 0 || !searchResults || searchResults.length === 0) {
@@ -190,7 +179,7 @@ function FuseShortcuts(props: FuseShortcutsProps) {
 				{searchText.length !== 0 && searchResults.length === 0 && (
 					<Typography
 						color="text.secondary"
-						className="p-4 pb-2"
+						className="p-2 pt-0"
 					>
 						No results..
 					</Typography>
@@ -234,8 +223,12 @@ function ShortcutMenuItem(props: {
 			to={item.url || ''}
 			role="button"
 		>
-			<MenuItem key={item.id}>
-				<ListItemIcon className="min-w-9">
+			<MenuItem
+				key={item.id}
+				disableGutters
+				dense
+			>
+				<ListItemIcon>
 					{item.icon ? (
 						<FuseSvgIcon>{item.icon}</FuseSvgIcon>
 					) : (
@@ -244,15 +237,15 @@ function ShortcutMenuItem(props: {
 				</ListItemIcon>
 				<ListItemText primary={item.title} />
 				<IconButton
+					size="small"
 					onClick={(ev) => {
 						ev.preventDefault();
 						ev.stopPropagation();
 						onToggle(item.id);
 					}}
-					size="large"
 				>
 					<FuseSvgIcon color="action">
-						{shortcuts.includes(item.id) ? 'heroicons-solid:star' : 'heroicons-outline:star'}
+						{shortcuts.includes(item.id) ? 'lucide:star' : 'lucide:star'}
 					</FuseSvgIcon>
 				</IconButton>
 			</MenuItem>

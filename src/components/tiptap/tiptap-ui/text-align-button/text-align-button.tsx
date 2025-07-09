@@ -2,7 +2,7 @@ import * as React from 'react';
 import { type Editor, type ChainedCommands } from '@tiptap/react';
 
 // --- Hooks ---
-import { useTiptapEditor } from '@/hooks/use-tiptap-editor';
+import { useTiptapEditor } from '@/hooks/useTiptapEditor';
 
 // --- Icons ---
 import { AlignCenterIcon } from '@/components/tiptap/tiptap-icons/align-center-icon';

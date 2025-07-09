@@ -2,14 +2,14 @@ import * as React from 'react';
 import { isNodeSelection, type Editor } from '@tiptap/react';
 
 // --- Hooks ---
-import { useTiptapEditor } from '@/hooks/use-tiptap-editor';
+import { useTiptapEditor } from '@/hooks/useTiptapEditor';
 
 // --- Icons ---
 import { ChevronDownIcon } from '@/components/tiptap/tiptap-icons/chevron-down-icon';
 import { ListIcon } from '@/components/tiptap/tiptap-icons/list-icon';
 
 // --- Lib ---
-import { isNodeInSchema } from '@/lib/tiptap-utils';
+import { isNodeInSchema } from '@/utils/tiptap-utils';
 
 // --- Tiptap UI ---
 import {

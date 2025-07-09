@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { SettingsSecurity } from '@/app/(control-panel)/apps/settings/SettingsApi';
+import { SettingsSecurity } from '@/app/(control-panel)/apps/settings/api/types';
 
 /**
  * GET api/mock/app-security-settings/{id}

@@ -37,7 +37,7 @@ function PalettePreview(props: PalettePreviewProps) {
 				<span className="text-md">Header (Primary)</span>
 
 				<Box
-					className="absolute bottom-0 right-0 -mb-2.5 mr-1 flex h-5 w-5 items-center justify-center rounded-full text-xs shadow-sm"
+					className="absolute right-0 bottom-0 mr-1 -mb-2.5 flex h-5 w-5 items-center justify-center rounded-full text-xs shadow-sm"
 					sx={{
 						backgroundColor: palette.secondary.main,
 						color: () => palette.secondary.contrastText || palette.getContrastText(palette.secondary.main)
@@ -46,7 +46,7 @@ function PalettePreview(props: PalettePreviewProps) {
 					<span>S</span>
 				</Box>
 			</Box>
-			<div className="-mt-6 w-full pl-2 pr-7">
+			<div className="-mt-6 w-full pr-7 pl-2">
 				<Box
 					className="relative h-24 w-full rounded-sm p-2 shadow-sm"
 					sx={{

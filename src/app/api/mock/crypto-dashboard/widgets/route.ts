@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { CryptoDashboardWidgetType } from '@/app/(control-panel)/dashboards/crypto/CryptoDashboardApi';
+import { CryptoDashboardWidgetType } from '@/app/(control-panel)/dashboards/crypto/api/types';
 
 /**
  * GET api/mock/crypto-dashboard/widgets

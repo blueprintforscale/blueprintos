@@ -2,15 +2,15 @@ import * as React from 'react';
 import { isNodeSelection, type Editor } from '@tiptap/react';
 
 // --- Hooks ---
-import { useMenuNavigation } from '@/hooks/use-menu-navigation';
-import { useTiptapEditor } from '@/hooks/use-tiptap-editor';
+import { useMenuNavigation } from '@/hooks/useMenuNavigation';
+import { useTiptapEditor } from '@/hooks/useTiptapEditor';
 
 // --- Icons ---
 import { BanIcon } from '@/components/tiptap/tiptap-icons/ban-icon';
 import { HighlighterIcon } from '@/components/tiptap/tiptap-icons/highlighter-icon';
 
 // --- Lib ---
-import { isMarkInSchema } from '@/lib/tiptap-utils';
+import { isMarkInSchema } from '@/utils/tiptap-utils';
 
 // --- UI Primitives ---
 import { Button, ButtonProps } from '@/components/tiptap/tiptap-ui-primitive/button';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { isNodeSelection, type Editor } from '@tiptap/react';
 
 // --- Hooks ---
-import { useTiptapEditor } from '@/hooks/use-tiptap-editor';
+import { useTiptapEditor } from '@/hooks/useTiptapEditor';
 
 // --- Icons ---
 import { HeadingOneIcon } from '@/components/tiptap/tiptap-icons/heading-one-icon';
@@ -13,7 +13,7 @@ import { HeadingFiveIcon } from '@/components/tiptap/tiptap-icons/heading-five-i
 import { HeadingSixIcon } from '@/components/tiptap/tiptap-icons/heading-six-icon';
 
 // --- Lib ---
-import { isNodeInSchema } from '@/lib/tiptap-utils';
+import { isNodeInSchema } from '@/utils/tiptap-utils';
 
 // --- UI Primitives ---
 import { Button, ButtonProps } from '@/components/tiptap/tiptap-ui-primitive/button';

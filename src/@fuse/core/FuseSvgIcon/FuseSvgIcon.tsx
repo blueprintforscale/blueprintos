@@ -3,21 +3,23 @@ import { styled } from '@mui/material/styles';
 import { Box, BoxProps } from '@mui/material';
 import Icon from '@mui/material/Icon';
 import clsx from 'clsx';
+import { SVGProps } from 'react';
 
-type FuseSvgIconProps = BoxProps & {
-	fill?: string;
-	xmlns?: string;
-	viewBox?: string;
-	size?: number | string;
-	color?: 'inherit' | 'disabled' | 'primary' | 'secondary' | 'action' | 'error' | 'info' | 'success' | 'warning';
-	ref?: React.RefObject<SVGSVGElement>;
-};
+type FuseSvgIconProps = BoxProps &
+	SVGProps<SVGSVGElement> & {
+		fill?: string;
+		xmlns?: string;
+		viewBox?: string;
+		size?: number | string;
+		color?: 'inherit' | 'disabled' | 'primary' | 'secondary' | 'action' | 'error' | 'info' | 'success' | 'warning';
+		ref?: React.RefObject<SVGSVGElement>;
+	};
 
 /**
  * The Root styled component is used to style the root div of the FuseSvgIcon component.
  * It uses the styled function from the MUI styles library to create a styled component.
  */
-const Root = styled(Box)<FuseSvgIconProps>(({ theme, size = 20, color = 'inherit' }) => ({
+const Root = styled(Box)<FuseSvgIconProps>(({ theme, size = 16, color = 'inherit' }) => ({
 	width: size,
 	height: size,
 	minWidth: size,
@@ -60,6 +62,7 @@ function FuseSvgIcon(props: FuseSvgIconProps) {
 	}
 
 	const iconPath = children.replace(':', '.svg#');
+	const isLucideIcon = children.startsWith('lucide:');
 
 	return (
 		<Root
@@ -67,8 +70,14 @@ function FuseSvgIcon(props: FuseSvgIconProps) {
 			as="svg"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
-			viewBox="0 0 100 100"
-			className={clsx('shrink-0 fill-current', className)}
+			viewBox={isLucideIcon ? '0 0 24 24' : '0 0 100 100'}
+			className={clsx('shrink-0', isLucideIcon ? 'stroke-current' : 'fill-current', className)}
+			{...(isLucideIcon && {
+				stroke: 'currentColor',
+				strokeWidth: 2,
+				strokeLinecap: 'round',
+				strokeLinejoin: 'round'
+			})}
 			ref={ref}
 			color={color}
 		>

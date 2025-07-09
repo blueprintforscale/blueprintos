@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { ProjectType } from '@/app/(control-panel)/dashboards/project/ProjectDashboardApi';
+import { ProjectType } from '@/app/(control-panel)/dashboards/project/api/types';
 
 /**
  * GET api/mock/project-dashboard/projects

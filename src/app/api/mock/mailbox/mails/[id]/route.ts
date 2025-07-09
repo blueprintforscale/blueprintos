@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { MailboxMail } from '@/app/(control-panel)/apps/mailbox/MailboxApi';
+import { MailboxMail } from '@/app/(control-panel)/apps/mailbox/api/types';
 
 /**
  * GET api/mock/mailbox/mails/{id}

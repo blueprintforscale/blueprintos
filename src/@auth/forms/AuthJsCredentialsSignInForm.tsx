@@ -75,7 +75,7 @@ function AuthJsCredentialsSignInForm() {
 		<form
 			name="loginForm"
 			noValidate
-			className="mt-8 flex w-full flex-col justify-center"
+			className="flex w-full flex-col justify-center"
 			onSubmit={handleSubmit(onSubmit)}
 		>
 			{errors?.root?.message && (

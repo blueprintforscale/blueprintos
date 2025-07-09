@@ -1,5 +1,5 @@
 import mockApi from 'src/@mock-utils/mockApi';
-import { Tag } from '@/app/(control-panel)/apps/contacts/ContactsApi';
+import { Tag } from '@/app/(control-panel)/apps/contacts/api/types';
 
 /**
  * GET api/mock/contacts/tags/{id}
