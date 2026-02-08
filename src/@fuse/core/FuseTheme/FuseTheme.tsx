@@ -110,7 +110,7 @@ function FuseTheme(props: FuseThemeProps) {
 				<GlobalStyles
 					styles={(theme) => ({
 						html: {
-							backgroundColor: `${theme.vars.palette.background.default}`,
+							backgroundColor: `${theme.vars.palette.background.default}!important`,
 							color: `${theme.vars.palette.text.primary}`
 						},
 						body: {
