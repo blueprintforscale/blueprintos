@@ -162,6 +162,7 @@ function PageLayoutOverview(props: PageLayoutOverviewProps) {
 							</Box>
 
 							<div className="preview-component relative z-10 flex flex-auto flex-col">
+								{/* eslint-disable-next-line react-hooks/static-components */}
 								<SelectedComponent />
 							</div>
 
