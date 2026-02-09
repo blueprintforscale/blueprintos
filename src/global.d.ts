@@ -28,7 +28,6 @@ interface HotModule {
 	};
 }
 
-// eslint-disable-next-line @next/next/no-assign-module-variable
 declare const module: HotModule;
 
 import type {} from '@mui/material/themeCssVarsAugmentation';

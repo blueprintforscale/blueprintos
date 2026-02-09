@@ -54,16 +54,16 @@ function CardChecklistName(props: CardChecklistNameProps) {
 		}
 	}, [formOpen, reset, name]);
 
+	function handleOpenForm(ev: React.MouseEvent<HTMLElement>) {
+		ev.stopPropagation();
+		setFormOpen(true);
+	}
+
 	useImperativeHandle(ref, () => {
 		return {
 			openForm: (ev) => handleOpenForm(ev)
 		};
 	});
-
-	function handleOpenForm(ev: React.MouseEvent<HTMLElement>) {
-		ev.stopPropagation();
-		setFormOpen(true);
-	}
 
 	function handleCloseForm() {
 		setFormOpen(false);

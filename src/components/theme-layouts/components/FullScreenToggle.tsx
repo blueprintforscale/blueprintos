@@ -33,15 +33,6 @@ function HeaderFullScreenToggle(props: HeaderFullScreenToggleProps) {
 
 	const [isFullScreen, setIsFullScreen] = useState(false);
 
-	useEnhancedEffect(() => {
-		document.onfullscreenchange = () =>
-			setIsFullScreen((document as FullScreenDocumentType)[getBrowserFullscreenElementProp()] != null);
-
-		return () => {
-			document.onfullscreenchange = null;
-		};
-	});
-
 	function getBrowserFullscreenElementProp(): keyof FullScreenDocumentType {
 		const doc: FullScreenDocumentType = document as FullScreenDocumentType;
 
@@ -63,6 +54,15 @@ function HeaderFullScreenToggle(props: HeaderFullScreenToggleProps) {
 
 		throw new Error('fullscreenElement is not supported by this browser');
 	}
+
+	useEnhancedEffect(() => {
+		document.onfullscreenchange = () =>
+			setIsFullScreen((document as FullScreenDocumentType)[getBrowserFullscreenElementProp()] != null);
+
+		return () => {
+			document.onfullscreenchange = null;
+		};
+	});
 
 	/* View in fullscreen */
 	function openFullscreen() {

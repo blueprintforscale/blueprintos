@@ -1,3 +1,5 @@
+'use client';
+
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
 import settingsConfigRaw from 'src/configs/settingsConfig.ts?raw';

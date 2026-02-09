@@ -1,3 +1,5 @@
+'use client';
+
 import FuseHighlight from '@fuse/core/FuseHighlight';
 import Typography from '@mui/material/Typography';
 import i18Raw from '@i18n/i18n.ts?raw';

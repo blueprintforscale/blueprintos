@@ -30,11 +30,19 @@ export default function GroupedSelect() {
 				</Select>
 			</FormControl>
 			<FormControl sx={{ m: 1, minWidth: 120 }}>
-				<InputLabel htmlFor="grouped-select">Grouping</InputLabel>
+				<InputLabel
+					id="grouped-select-label"
+					htmlFor="grouped-select"
+				>
+					Grouping
+				</InputLabel>
 				<Select
 					defaultValue=""
 					id="grouped-select"
 					label="Grouping"
+					SelectDisplayProps={{
+						'aria-labelledby': 'grouped-select-label'
+					}}
 				>
 					<MenuItem value="">
 						<em>None</em>

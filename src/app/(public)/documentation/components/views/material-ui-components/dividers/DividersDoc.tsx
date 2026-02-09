@@ -256,7 +256,7 @@ import Divider from '@mui/material/Divider';
 				component="div"
 			>
 				Due to its implicit role of <code>separator</code>, the Divider, which is a <code>{`<hr>`}</code>{' '}
-				element, will be announced by screen readers as a &quot;Horziontal Splitter&quot; (or vertical, if
+				element, will be announced by screen readers as a &quot;Horizontal Splitter&quot; (or vertical, if
 				you&#39;re using the <code>orientation</code> prop).
 			</Typography>
 			<Typography

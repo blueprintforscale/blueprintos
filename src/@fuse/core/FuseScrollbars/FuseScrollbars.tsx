@@ -1,16 +1,11 @@
 'use client';
-import { styled } from '@mui/material/styles';
 import MobileDetect from 'mobile-detect';
 import PerfectScrollbar from 'perfect-scrollbar';
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
-import React, { useEffect, useRef, ReactNode, useCallback, useState, useMemo } from 'react';
+import React, { useEffect, useRef, ReactNode, useCallback, useMemo } from 'react';
 import usePathname from '@fuse/hooks/usePathname';
 import useFuseSettings from '@fuse/core/FuseSettings/hooks/useFuseSettings';
-
-const Root = styled('div')(() => ({
-	overscrollBehavior: 'contain',
-	minHeight: '100%'
-}));
+import { Box } from '@mui/material';
 
 const md = typeof window !== 'undefined' ? new MobileDetect(window.navigator.userAgent) : null;
 const isMobile = md?.mobile();
@@ -56,10 +51,9 @@ function FuseScrollbars(props: FuseScrollbarsProps) {
 		ref
 	} = props;
 
-	const containerRef = useRef<HTMLDivElement>(null);
+	const containerRef = useRef<HTMLDivElement | null>(null);
 	const psRef = useRef<PerfectScrollbar | null>(null);
 	const handlerByEvent = useRef<Map<string, EventListener>>(new Map());
-	const [style, setStyle] = useState({});
 	const { data: settings } = useFuseSettings();
 	const customScrollbars = useMemo(() => settings.customScrollbars, [settings.customScrollbars]);
 
@@ -123,17 +117,6 @@ function FuseScrollbars(props: FuseScrollbarsProps) {
 	}, [pathname, scrollToTop, scrollToTopOnRouteChange]);
 
 	useEffect(() => {
-		if (customScrollbars && enable && !isMobile) {
-			setStyle({
-				position: 'relative',
-				overflow: 'hidden!important'
-			});
-		} else {
-			setStyle({});
-		}
-	}, [customScrollbars, enable]);
-
-	useEffect(() => {
 		if (customScrollbars && !isMobile) {
 			const hash = window.location.hash.slice(1); // Remove the leading '#'
 
@@ -147,23 +130,36 @@ function FuseScrollbars(props: FuseScrollbarsProps) {
 		}
 	}, [customScrollbars, pathname]);
 
+	const sx = useMemo(() => {
+		return {
+			minHeight: '100%',
+			...(customScrollbars &&
+				enable &&
+				!isMobile && {
+					position: 'relative',
+					overflow: 'hidden!important',
+					overscrollBehavior: 'contain'
+				})
+		};
+	}, [customScrollbars, enable]);
+
 	return (
-		<Root
+		<Box
 			id={id}
 			className={className}
-			style={style}
+			sx={sx}
 			ref={(el) => {
-				containerRef.current = el;
+				containerRef.current = el as HTMLDivElement;
 
 				if (typeof ref === 'function') {
-					ref(el);
+					ref(el as HTMLDivElement);
 				} else if (ref) {
-					ref.current = el;
+					ref.current = el as HTMLDivElement;
 				}
 			}}
 		>
 			{children}
-		</Root>
+		</Box>
 	);
 }
 

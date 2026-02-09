@@ -18,25 +18,29 @@ type FramedDemoProps = {
  * This also add window property to the child with `getWindow` function, which is useful to fetch window property.
  */
 function FramedDemo(props: FramedDemoProps) {
-	const { children, document, isolated = false } = props;
+	const { children, document: frameDocument, isolated = false } = props;
 
 	const theme = useTheme();
 	React.useEffect(() => {
-		document.body.dir = theme.direction;
-	}, [document, theme.direction]);
+		const body = frameDocument.body;
+
+		if (body) {
+			body.setAttribute('dir', theme.direction);
+		}
+	}, [frameDocument, theme.direction]);
 
 	const cache = React.useMemo(
 		() =>
 			createCache({
 				key: `iframe-demo-${theme.direction}`,
 				prepend: true,
-				container: document.head,
+				container: frameDocument.head,
 				stylisPlugins: theme.direction === 'rtl' ? [rtlPlugin] : []
 			}),
-		[document, theme.direction]
+		[frameDocument, theme.direction]
 	);
 
-	const getWindow = React.useCallback(() => document.defaultView, [document]);
+	const getWindow = React.useCallback(() => frameDocument.defaultView, [frameDocument]);
 
 	const iframeTheme = React.useMemo(() => {
 		if (isolated) {
@@ -53,7 +57,7 @@ function FramedDemo(props: FramedDemoProps) {
 
 	return (
 		<StyleSheetManager
-			target={document.head}
+			target={frameDocument.head}
 			stylisPlugins={theme.direction === 'rtl' ? [rtlPlugin] : []}
 		>
 			<CacheProvider value={cache}>

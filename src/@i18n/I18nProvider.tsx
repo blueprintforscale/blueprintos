@@ -56,3 +56,5 @@ export function I18nProvider(props: I18nProviderProps) {
 		</I18nContext>
 	);
 }
+
+export default I18nProvider;

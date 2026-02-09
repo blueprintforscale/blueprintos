@@ -416,12 +416,7 @@ function App() {
 			</Typography>
 			<ol>
 				<li>
-					<Typography
-						className="mb-8 text-base"
-						component="div"
-					>
-						<code>options</code> (<em>object</em> [optional]):
-					</Typography>
+					<code>options</code> (<em>object</em> [optional]):
 					<ul className="space-y-4">
 						<li>
 							<code>options.disableHysteresis</code> (<em>bool</em> [optional]): Defaults to{' '}

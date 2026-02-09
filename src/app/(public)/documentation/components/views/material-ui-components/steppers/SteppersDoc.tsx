@@ -336,7 +336,7 @@ import StepLabel from '@mui/material/StepLabel';
 				className="language-jsx"
 			>
 				{` 
-<StepContent TransitionProps={{ unmountOnExit: false }} />
+<StepContent slotProps={{ transition: { unmountOnExit: false } }} />
 `}
 			</FuseHighlight>
 			<Typography

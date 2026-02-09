@@ -58,9 +58,8 @@ function PopperDoc(props) {
 				</li>
 				<li>💄 It&#39;s an alternative API to react-popper. It aims for simplicity.</li>
 				<li>
-					Its child element is a <a href="https://v6.mui.com/base-ui/react-portal/">MUI Base Portal</a> on the
-					body of the document to avoid rendering problems. You can disable this behavior with{' '}
-					<code>disablePortal</code>.
+					Its child element is a <a href="/material-ui/react-portal/">Portal</a> on the body of the document
+					to avoid rendering problems. You can disable this behavior with <code>disablePortal</code>.
 				</li>
 				<li>
 					The scroll isn&#39;t blocked like with the <a href="/material-ui/react-popover/">Popover</a>{' '}
@@ -68,8 +67,7 @@ function PopperDoc(props) {
 				</li>
 				<li>
 					Clicking away does not hide the Popper component. If you need this behavior, you can use the{' '}
-					<a href="https://v6.mui.com/base-ui/react-click-away-listener/">MUI Base Click-Away Listener</a> -
-					see the example in the{' '}
+					<a href="/material-ui/react-click-away-listener/">Click-Away Listener</a> - see the example in the{' '}
 					<a href="/material-ui/react-menu/#composition-with-menu-list">menu documentation section</a>.
 				</li>
 				<li>

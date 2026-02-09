@@ -38,7 +38,10 @@ const StyledMenu = styled((props: MenuProps) => (
 			'& .MuiSvgIcon-root': {
 				fontSize: 18,
 				color: theme.palette.text.secondary,
-				marginRight: theme.spacing(1.5)
+				marginRight: theme.spacing(1.5),
+				...theme.applyStyles('dark', {
+					color: 'inherit'
+				})
 			},
 			'&:active': {
 				backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)

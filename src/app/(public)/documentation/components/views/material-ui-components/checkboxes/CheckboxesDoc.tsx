@@ -358,7 +358,7 @@ function CheckboxesDoc(props) {
 				<li>
 					When a label can&#39;t be used, it&#39;s necessary to add an attribute directly to the input
 					component. In this case, you can apply the additional attribute (for example <code>aria-label</code>
-					, <code>aria-labelledby</code>, <code>title</code>) via the <code>inputProps</code> prop.
+					, <code>aria-labelledby</code>, <code>title</code>) via the <code>slotProps.input</code> prop.
 				</li>
 			</ul>
 
@@ -369,8 +369,8 @@ function CheckboxesDoc(props) {
 				{` 
 <Checkbox
   value="checkedA"
-  inputProps={{
-    'aria-label': 'Checkbox A',
+  slotProps={{
+    input: { 'aria-label': 'Checkbox A' },
   
 />
 `}

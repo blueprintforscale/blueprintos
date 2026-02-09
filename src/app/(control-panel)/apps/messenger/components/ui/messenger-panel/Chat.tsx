@@ -74,10 +74,6 @@ function Chat(props: ChatProps) {
 
 	const chatScroll = useRef<HTMLDivElement>(null);
 
-	useEffect(() => {
-		scrollToBottom();
-	}, [chat]);
-
 	function scrollToBottom() {
 		if (!chatScroll.current) {
 			return;
@@ -88,6 +84,10 @@ function Chat(props: ChatProps) {
 			behavior: 'instant'
 		});
 	}
+
+	useEffect(() => {
+		scrollToBottom();
+	}, [chat]);
 
 	const onInputChange = (ev: ChangeEvent<HTMLInputElement>) => {
 		setMessageText(ev.target.value);
@@ -144,8 +144,7 @@ function Chat(props: ChatProps) {
 									);
 								})
 							: null;
-						// eslint-disable-next-line
-					}, [chat, user?.id])}
+					}, [chat, messages, user])}
 				</div>
 				{chat?.length === 0 && (
 					<div className="flex flex-1 flex-col items-center justify-center gap-2">

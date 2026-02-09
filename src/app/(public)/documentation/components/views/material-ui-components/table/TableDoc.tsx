@@ -520,20 +520,6 @@ function TableDoc(props) {
 					raw={AccessibleTableRaw}
 				/>
 			</Typography>
-			<Typography
-				className="mt-6 mb-2.5 text-3xl font-bold"
-				component="h2"
-			>
-				Unstyled
-			</Typography>
-			<Typography
-				className="mb-8 text-base"
-				component="div"
-			>
-				If you would like to use an unstyled Table, you can use the primitive HTML elements and enhance the
-				table with the TablePaginationUnstyled component. See the demos in the{' '}
-				<a href="https://v6.mui.com/base-ui/react-table-pagination/">unstyled table pagination docs</a>
-			</Typography>
 		</>
 	);
 }

@@ -197,7 +197,8 @@ function SpeedDialDoc(props) {
 					You should provide an <code>ariaLabel</code> for the speed dial component.
 				</li>
 				<li>
-					You should provide a <code>tooltipTitle</code> for each speed dial action.
+					You should provide a tooltip title using <code>slotProps.tooltip.title</code> for each speed dial
+					action.
 				</li>
 			</ul>
 			<Typography

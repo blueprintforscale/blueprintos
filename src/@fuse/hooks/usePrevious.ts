@@ -13,6 +13,7 @@ function usePrevious<T>(value: T): T | undefined {
 	}, [value]);
 
 	// Return previous value (happens before update in useEffect above)
+	// eslint-disable-next-line react-hooks/refs
 	return ref.current;
 }
 

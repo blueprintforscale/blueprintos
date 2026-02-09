@@ -238,9 +238,9 @@ function TextFieldsDoc(props) {
 				component="div"
 			>
 				The <code>multiline</code> prop transforms the Text Field into a{' '}
-				<a href="https://v6.mui.com/base-ui/react-textarea-autosize/">MUI Base Textarea Autosize</a> element.
-				Unless the <code>rows</code> prop is set, the height of the text field dynamically matches its content.
-				You can use the <code>minRows</code> and <code>maxRows</code> props to bound it.
+				<a href="/material-ui/react-textarea-autosize/">Textarea Autosize</a> element. Unless the{' '}
+				<code>rows</code> prop is set, the height of the text field dynamically matches its content. You can use
+				the <code>minRows</code> and <code>maxRows</code> props to bound it.
 			</Typography>
 			<Typography
 				className="mb-8 text-base"
@@ -982,15 +982,8 @@ export default function App() {
 				className="mb-8 text-base"
 				component="div"
 			>
-				If you need a text field with number validation, you can use MUI Base&#39;s{' '}
-				<a href="https://mui.com/base-ui/react-number-input/">Number Input</a> instead.
-			</Typography>
-			<Typography
-				className="mb-8 text-base"
-				component="div"
-			>
-				You can follow <a href="https://github.com/mui/material-ui/issues/19154">this GitHub issue</a> to track
-				the progress of introducing the Number Input component to Material UI.
+				If you need a text field with number validation, you can use{' '}
+				<a href="/material-ui/react-number-field/">Number Field</a> instead.
 			</Typography>
 			<Typography
 				className="mt-5 mb-2.5 text-lg font-bold"

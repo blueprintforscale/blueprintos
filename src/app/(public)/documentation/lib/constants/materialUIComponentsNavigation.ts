@@ -185,6 +185,12 @@ const materialUIComponentsNavigation = {
 			url: '/documentation/material-ui-components/modal'
 		},
 		{
+			id: 'numberField',
+			title: 'Number Field',
+			type: 'item',
+			url: '/documentation/material-ui-components/number-field'
+		},
+		{
 			id: 'pagination',
 			title: 'Pagination',
 			type: 'item',

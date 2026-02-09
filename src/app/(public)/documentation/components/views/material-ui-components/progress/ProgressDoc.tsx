@@ -15,6 +15,8 @@ import CircularSizeComponent from '../../../ui/material-ui-components/progress/C
 import CircularSizeRaw from '../../../ui/material-ui-components/progress/CircularSize.tsx?raw';
 import CircularDeterminateComponent from '../../../ui/material-ui-components/progress/CircularDeterminate';
 import CircularDeterminateRaw from '../../../ui/material-ui-components/progress/CircularDeterminate.tsx?raw';
+import CircularEnableTrackComponent from '../../../ui/material-ui-components/progress/CircularEnableTrack';
+import CircularEnableTrackRaw from '../../../ui/material-ui-components/progress/CircularEnableTrack.tsx?raw';
 import CircularIntegrationComponent from '../../../ui/material-ui-components/progress/CircularIntegration';
 import CircularIntegrationRaw from '../../../ui/material-ui-components/progress/CircularIntegration.tsx?raw';
 import CircularWithValueLabelComponent from '../../../ui/material-ui-components/progress/CircularWithValueLabel';
@@ -161,6 +163,24 @@ function ProgressDoc(props) {
 					iframe={false}
 					component={CircularDeterminateComponent}
 					raw={CircularDeterminateRaw}
+				/>
+			</Typography>
+			<Typography
+				className="mt-5 mb-2.5 text-lg font-bold"
+				component="h3"
+			>
+				Circular track
+			</Typography>
+			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				<FuseExample
+					name="CircularEnableTrack.js"
+					className="my-4"
+					iframe={false}
+					component={CircularEnableTrackComponent}
+					raw={CircularEnableTrackRaw}
 				/>
 			</Typography>
 			<Typography
@@ -410,10 +430,10 @@ function Progress(props) {
 				autoPlay
 				muted
 				loop
-				playsInline
+				playsinline
 				width="1082"
 				height="158"
-				style={{ width: '541px' }}
+				style="width: 541px;"
 			>
 				<source
 					src="/material-ui-static/material-ui/react-components/progress-heavy-load.mp4"
