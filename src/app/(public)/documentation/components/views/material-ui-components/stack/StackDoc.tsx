@@ -214,7 +214,7 @@ import Stack from '@mui/material/Stack';
 				component="div"
 			>
 				To use{' '}
-				<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">
+				<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/gap">
 					flexbox <code>gap</code>
 				</a>{' '}
 				for the spacing implementation, set the <code>useFlexGap</code> prop to true.

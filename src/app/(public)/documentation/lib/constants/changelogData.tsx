@@ -21,25 +21,41 @@ export type ChangelogItemType = {
  */
 const changelogData: ChangelogItemType[] = [
 	{
+		version: '17.0.0',
+		date: '2026-02-09',
+		newChanges: [
+			'React updated to v19.2.4',
+			'Updated Material UI to v7.3.7',
+			'Updated React Query to v5.90.20',
+			'Tailwindcss updated to v4.1.18',
+			'Next.js updated to v16.1.6',
+			'All dependency packages updated.'
+		],
+		fixedChanges: [
+			'Fix: Force to set HTML background color so scrollbar is visible',
+			'fix(FusePage): restore scrolling for scroll type "page"'
+		]
+	},
+	{
 		version: '16.0.0',
 		date: '2025-07-09',
 		newChanges: [
-			'🔄 Migrated from Redux to TanStack Query for better state management',
-			'📁 Restructured project with new feature-based directory organization',
-			'🎨 Updated design system with modern UI components and improved aesthetics',
-			'🔤 Changed default font to Geist for improved readability',
-			'🎯 Migrated from Hero Icons to Lucide Icons',
-			'🎭 Updated default theme and color schemes',
-			'🚀 Added @tanstack/react-query (v5.74.7) for improved data fetching',
-			'🛠️ Added @tanstack/react-query-devtools for development tools',
-			'📡 Added ky (v1.8.1) HTTP client library',
-			'⚡ Updated Next.js to v15.3.5',
-			'🔐 Updated next-auth to v5.0.0-beta.29',
-			'🎯 Updated MUI Base to v5.0.0-beta.70',
-			'📊 Updated MUI X Data Grid to v8.7.0',
-			'📅 Updated MUI X Date Pickers to v8.7.0',
-			'💫 Updated Material UI Popup State to v5.3.6',
-			'🎭 Enhanced UI/UX'
+			'Migrated from Redux to TanStack Query for better state management',
+			'Restructured project with new feature-based directory organization',
+			'Updated design system with modern UI components and improved aesthetics',
+			'Changed default font to Geist for improved readability',
+			'Migrated from Hero Icons to Lucide Icons',
+			'Updated default theme and color schemes',
+			'Added @tanstack/react-query (v5.74.7) for improved data fetching',
+			'Added @tanstack/react-query-devtools for development tools',
+			'Added ky (v1.8.1) HTTP client library',
+			'Updated Next.js to v15.3.5',
+			'Updated next-auth to v5.0.0-beta.29',
+			'Updated MUI Base to v5.0.0-beta.70',
+			'Updated MUI X Data Grid to v8.7.0',
+			'Updated MUI X Date Pickers to v8.7.0',
+			'Updated Material UI Popup State to v5.3.6',
+			'Enhanced UI/UX'
 		],
 		breakingChanges: [
 			'Complete migration from Redux to TanStack Query - requires updating all data fetching logic',

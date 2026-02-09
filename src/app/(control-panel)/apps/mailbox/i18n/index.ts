@@ -6,3 +6,5 @@ import tr from './tr';
 i18n.addResourceBundle('en', 'mailboxApp', en);
 i18n.addResourceBundle('tr', 'mailboxApp', tr);
 i18n.addResourceBundle('ar', 'mailboxApp', ar);
+
+export default {};

@@ -220,7 +220,7 @@ function SwitchesDoc(props) {
 				component="div"
 			>
 				🎨 If you are looking for inspiration, you can check{' '}
-				<a href="https://mui-treasury.com/?path=/docs/switch-introduction--docs">
+				<a href="https://www.mui-treasury.com/?path=/docs/switch-introduction--docs">
 					MUI Treasury&#39;s customization examples
 				</a>
 				.
@@ -267,12 +267,6 @@ function SwitchesDoc(props) {
 				Accessibility
 			</Typography>
 			<ul className="space-y-4">
-				<li>
-					It will render an element with the <code>checkbox</code> role not <code>switch</code> role since
-					this role isn&#39;t widely supported yet. Please test first if assistive technology of your target
-					audience supports this role properly. Then you can change the role with
-					<code>{`<Switch inputProps={{ role: 'switch' }}>`}</code>
-				</li>
 				<li>
 					All form controls should have labels, and this includes radio buttons, checkboxes, and switches. In
 					most cases, this is done by using the <code>{`<label>`}</code> element (

@@ -182,6 +182,33 @@ const options = ['The Godfather', 'Pulp Fiction'];
 				current value.
 			</Typography>
 			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				:::warning If your options have duplicate labels, you must extract a unique key with the{' '}
+				<code>getOptionKey</code> prop.
+			</Typography>
+
+			<FuseHighlight
+				component="pre"
+				className="language-tsx"
+			>
+				{` 
+const options = [
+  { label: 'The Godfather', id: 1 },
+  { label: 'The Godfather', id: 2 },
+];
+
+return <Autocomplete options={options} getOptionKey={(option) => option.id} />;
+`}
+			</FuseHighlight>
+			<Typography
+				className="mb-8 text-base"
+				component="div"
+			>
+				:::
+			</Typography>
+			<Typography
 				className="mt-5 mb-2.5 text-lg font-bold"
 				component="h3"
 			>
@@ -725,20 +752,20 @@ import useAutocomplete from '@mui/material/useAutocomplete';
 				className="mt-6 mb-2.5 text-3xl font-bold"
 				component="h2"
 			>
-				Custom Single Value Rendering
+				Single value rendering
 			</Typography>
 			<Typography
 				className="mb-8 text-base"
 				component="div"
 			>
-				By default, when <code>{`multiple={false}`}</code>, the selected option is displayed as plain text
+				By default (when <code>{`multiple={false}`}</code>), the selected option is displayed as plain text
 				inside the input. The <code>renderValue</code> prop allows you to customize how the selected value is
 				rendered. This can be useful for adding custom styles, displaying additional information, or formatting
 				the value differently.
 			</Typography>
 			<ul className="space-y-4">
 				<li>
-					The <code>getItemProps</code> callback provides props like <code>data-item-index</code>,{' '}
+					The <code>getItemProps</code> getter provides props like <code>data-item-index</code>,{' '}
 					<code>disabled</code>, <code>tabIndex</code> and others. These props should be spread onto the
 					rendered component for proper accessibility.
 				</li>
@@ -774,7 +801,7 @@ import useAutocomplete from '@mui/material/useAutocomplete';
 			</Typography>
 			<ul className="space-y-4">
 				<li>
-					The <code>getItemProps</code> callback supplies essential props like <code>data-item-index</code>,{' '}
+					The <code>getItemProps</code> getter supplies essential props like <code>data-item-index</code>,{' '}
 					<code>disabled</code>, <code>tabIndex</code> and others. Make sure to spread them on each rendered
 					item.
 				</li>
@@ -929,7 +956,7 @@ import useAutocomplete from '@mui/material/useAutocomplete';
 				className="mt-5 mb-2.5 text-lg font-bold"
 				component="h3"
 			>
-				Globally Customized Options
+				Globally customized options
 			</Typography>
 			<Typography
 				className="mb-8 text-base"

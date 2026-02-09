@@ -113,7 +113,8 @@ function BtcMainChart() {
 				rotate: 0,
 				minHeight: 40,
 				hideOverlappingLabels: true,
-				formatter: (value) => format(sub(new Date(), { minutes: Math.abs(parseInt(value, 10)) }), 'HH:mm'),
+				formatter: (value) =>
+					format(sub(new Date(), { minutes: Math.abs(parseInt(String(value), 10)) }), 'HH:mm'),
 				style: {
 					colors: theme.palette.text.secondary
 				}

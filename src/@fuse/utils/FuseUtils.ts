@@ -329,7 +329,7 @@ class FuseUtils {
 
 		const randomColor = mainColors[Math.floor(Math.random() * mainColors.length)];
 
-		return (colors as Record<string, Color>)[randomColor][hue];
+		return (colors as unknown as Record<string, Color>)[randomColor][hue];
 	}
 
 	/**

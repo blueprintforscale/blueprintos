@@ -92,12 +92,6 @@ function MessengerChatView(props: MessengerChatViewProps) {
 	const { data: selectedContact } = useContact(contactId);
 	const { mutate: sendMessage } = useSendMessage();
 
-	useEffect(() => {
-		if (messages) {
-			setTimeout(scrollToBottom);
-		}
-	}, [messages]);
-
 	function scrollToBottom() {
 		if (!chatRef.current) {
 			return;
@@ -108,6 +102,12 @@ function MessengerChatView(props: MessengerChatViewProps) {
 			behavior: 'smooth'
 		});
 	}
+
+	useEffect(() => {
+		if (messages) {
+			setTimeout(scrollToBottom);
+		}
+	}, [messages]);
 
 	function isFirstMessageOfGroup(item: Message, i: number) {
 		return i === 0 || (messages[i - 1] && messages[i - 1].contactId !== item.contactId);

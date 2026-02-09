@@ -29,13 +29,13 @@ function FusePageSimpleSidebar(props: FusePageSimpleSidebarProps) {
 	const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
 	const [isOpen, setIsOpen] = useState(open);
 
-	useImperativeHandle(ref, () => ({
-		toggleSidebar: handleToggleDrawer
-	}));
-
 	const handleToggleDrawer = useCallback((val: boolean) => {
 		setIsOpen(val);
 	}, []);
+
+	useImperativeHandle(ref, () => ({
+		toggleSidebar: handleToggleDrawer
+	}));
 
 	useEffect(() => {
 		handleToggleDrawer(open);

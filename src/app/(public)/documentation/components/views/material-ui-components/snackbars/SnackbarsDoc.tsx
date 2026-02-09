@@ -98,9 +98,9 @@ function SnackbarsDoc(props) {
 				className="mb-8 text-base"
 				component="div"
 			>
-				Snackbars also from differ from <a href="/material-ui/react-dialog/">Dialogs</a> in that Snackbars are
-				not intended to convey <em>critical</em> information or block the user from interacting with the rest of
-				the app; Dialogs, by contrast, require input from the user in order to be dismissed.
+				Snackbars also differ from <a href="/material-ui/react-dialog/">Dialogs</a> in that Snackbars are not
+				intended to convey <em>critical</em> information or block the user from interacting with the rest of the
+				app; Dialogs, by contrast, require input from the user in order to be dismissed.
 			</Typography>
 			<Typography
 				className="mt-6 mb-2.5 text-3xl font-bold"

@@ -108,7 +108,7 @@ function GridDoc(props) {
 				</li>
 				<li>
 					It uses{' '}
-					<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">
+					<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/gap">
 						the <code>gap</code> CSS property
 					</a>{' '}
 					to add spacing between items.

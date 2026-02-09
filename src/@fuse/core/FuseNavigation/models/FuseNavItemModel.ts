@@ -6,9 +6,7 @@ import { FuseNavItemType } from '../types/FuseNavItemType';
  *  FuseNavItemModel
  *  Constructs a navigation item based on FuseNavItemType
  */
-function FuseNavItemModel(data?: PartialDeep<FuseNavItemType>) {
-	data = data || {};
-
+function FuseNavItemModel(data: PartialDeep<FuseNavItemType> = {}): FuseNavItemType {
 	return _.defaults(data, {
 		id: _.uniqueId(),
 		title: '',
@@ -27,7 +25,7 @@ function FuseNavItemModel(data?: PartialDeep<FuseNavItemType>) {
 		end: false,
 		badge: null,
 		children: []
-	});
+	}) as FuseNavItemType;
 }
 
 export default FuseNavItemModel;

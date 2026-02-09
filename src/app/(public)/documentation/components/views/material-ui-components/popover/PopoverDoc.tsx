@@ -179,7 +179,7 @@ interface PopoverVirtualElement {
 					</a>
 				</li>
 				<li>
-					<a href="https://drafts.fxtf.org/geometry-1/#domrectreadonly">DOMRect</a>
+					<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMRect">DOMRect</a>
 				</li>
 				<li>
 					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType">Node types</a>

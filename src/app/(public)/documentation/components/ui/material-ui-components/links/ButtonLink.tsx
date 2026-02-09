@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from '@mui/material/Link';
 
 export default function ButtonLink() {

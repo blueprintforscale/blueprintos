@@ -103,7 +103,11 @@ export default function PlaygroundSpeedDial() {
 						<SpeedDialAction
 							key={action.name}
 							icon={action.icon}
-							tooltipTitle={action.name}
+							slotProps={{
+								tooltip: {
+									title: action.name
+								}
+							}}
 						/>
 					))}
 				</StyledSpeedDial>

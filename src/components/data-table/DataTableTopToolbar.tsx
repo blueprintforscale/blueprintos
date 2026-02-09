@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useForkRef } from '@mui/material/utils';
 import {
 	MRT_GlobalFilterTextField,
 	MRT_LinearProgressBar,
@@ -38,6 +39,8 @@ function DataTableTopToolbar<TData extends MRT_RowData>({ table }: MRT_TopToolba
 	const isTablet = useMediaQuery('(max-width:1024px)');
 
 	const toolbarProps = parseFromValuesOrFunc(muiTopToolbarProps, { table });
+	const { ref: toolbarPropsRef, ...restToolbarProps } = toolbarProps ?? {};
+	const handleToolbarRef = useForkRef(topToolbarRef, toolbarPropsRef);
 
 	const stackAlertBanner = isMobile || !!renderTopToolbarCustomActions || (showGlobalFilter && isTablet);
 
@@ -53,16 +56,8 @@ function DataTableTopToolbar<TData extends MRT_RowData>({ table }: MRT_TopToolba
 		<div className="flex w-full flex-col border-b-1 px-3 py-1">
 			<Box
 				className="flex w-full flex-col items-center"
-				{...toolbarProps}
-				ref={(ref: HTMLDivElement) => {
-					topToolbarRef.current = ref;
-
-					if (toolbarProps?.ref) {
-						// eslint-disable-next-line
-						// @ts-ignore
-						toolbarProps.ref.current = ref;
-					}
-				}}
+				{...restToolbarProps}
+				ref={handleToolbarRef}
 				sx={[
 					(theme) => ({
 						backgroundColor: table.options.mrtTheme.baseBackgroundColor,

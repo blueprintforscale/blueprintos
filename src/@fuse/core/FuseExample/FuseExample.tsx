@@ -26,6 +26,7 @@ type FuseExampleProps = {
 function FuseExample(props: FuseExampleProps) {
 	const { component: Component, raw, iframe, className, name = '', showCode: defaultShowCode = false } = props;
 	const [open, setOpen] = useState(false);
+
 	const [showCode, setShowCode] = useState(defaultShowCode);
 
 	// Detect if we're running in Turbopack environment

@@ -30,6 +30,17 @@ function DemoFrame(props: DemoFrameProps) {
 	// If we load portal content into the iframe before the load event then that content
 	// is dropped in firefox.
 	const [iframeLoaded, onLoad] = React.useReducer(() => true, false);
+	const [frameDocument, setFrameDocument] = React.useState<Document | null>(null);
+
+	const handleLoad = React.useCallback(() => {
+		const nextDocument = frameRef.current?.contentDocument ?? null;
+
+		if (nextDocument) {
+			setFrameDocument(nextDocument);
+		}
+
+		onLoad();
+	}, [onLoad]);
 
 	React.useEffect(() => {
 		const document = frameRef.current?.contentDocument;
@@ -42,22 +53,24 @@ function DemoFrame(props: DemoFrameProps) {
 		// See https://github.com/facebook/react/pull/13862 for ongoing effort in React
 		// (though not with iframes in mind).
 		if (document != null && document.readyState === 'complete' && !iframeLoaded) {
+			setFrameDocument(document);
 			onLoad();
 		}
 	}, [iframeLoaded]);
 
-	const document = frameRef.current?.contentDocument;
-
 	return (
 		<>
 			<Frame
-				onLoad={onLoad}
+				onLoad={handleLoad}
 				ref={frameRef}
 				title={title}
 				{...other}
 			/>
-			{iframeLoaded !== false
-				? ReactDOM.createPortal(<FramedDemo document={document}>{children}</FramedDemo>, document.body)
+			{iframeLoaded !== false && frameDocument
+				? ReactDOM.createPortal(
+						<FramedDemo document={frameDocument}>{children}</FramedDemo>,
+						frameDocument.body
+					)
 				: null}
 		</>
 	);

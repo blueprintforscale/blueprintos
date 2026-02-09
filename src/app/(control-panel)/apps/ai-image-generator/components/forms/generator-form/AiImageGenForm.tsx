@@ -23,23 +23,10 @@ import FormSection from './FormSection';
 import useAiImageGenAppContext from '../../../contexts/AiImageGenAppContext/useAiImageGenAppContext';
 import artStylePresets from '../../../lib/constants/artStylePresets';
 import SizeFormController from './controllers/SizeFormController';
-import { AiImageGenPreset, AiImageGenSettings, AiImageGenApiResponse } from '../../../api/types';
+import { AiImageGenPreset, AiImageGenApiResponse } from '../../../api/types';
 import { useCreatePreset } from '../../../api/hooks/presets/useCreatePreset';
 import { useCreateItem } from '../../../api/hooks/items/useCreateItem';
 import clsx from 'clsx';
-
-type FormType = AiImageGenSettings;
-
-const defaultValues: FormType = {
-	prompt: '',
-	negativePrompt: '',
-	size: '1024x1024',
-	style: 'natural',
-	quality: 'standard',
-	artStyle: 'realistic',
-	mood: 'peaceful',
-	lighting: 'natural'
-};
 
 const schema = z.object({
 	prompt: z.string().min(1, 'You must enter a prompt'),
@@ -52,6 +39,19 @@ const schema = z.object({
 	lighting: z.string().min(1, 'You must select a lighting')
 });
 
+type FormType = z.infer<typeof schema>;
+
+const defaultValues: FormType = {
+	prompt: '',
+	negativePrompt: '',
+	size: '1024x1024',
+	style: 'natural',
+	quality: 'standard',
+	artStyle: 'realistic',
+	mood: 'peaceful',
+	lighting: 'natural'
+};
+
 type AiImageGenFormProps = {
 	className?: string;
 };
@@ -62,7 +62,7 @@ function AiImageGenForm(props: AiImageGenFormProps) {
 	const { setConfigDialogOpen, apiKey, setLoading } = useAiImageGenAppContext();
 	const { mutate: createItem } = useCreateItem();
 
-	const { control, handleSubmit, watch, formState, reset } = useForm({
+	const { control, handleSubmit, watch, formState, reset } = useForm<FormType>({
 		mode: 'all',
 		defaultValues,
 		resolver: zodResolver(schema)
@@ -78,7 +78,10 @@ function AiImageGenForm(props: AiImageGenFormProps) {
 	}, []);
 
 	function handleOnLoadPreset(preset: AiImageGenPreset) {
-		reset(preset.settings);
+		reset({
+			...defaultValues,
+			...preset.settings
+		});
 	}
 
 	function handleOnSavePreset(name: string) {

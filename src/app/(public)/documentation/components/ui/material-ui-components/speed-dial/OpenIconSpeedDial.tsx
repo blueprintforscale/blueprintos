@@ -27,7 +27,11 @@ export default function OpenIconSpeedDial() {
 					<SpeedDialAction
 						key={action.name}
 						icon={action.icon}
-						tooltipTitle={action.name}
+						slotProps={{
+							tooltip: {
+								title: action.name
+							}
+						}}
 					/>
 				))}
 			</SpeedDial>
