@@ -1,6 +1,5 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
 import { z } from 'zod';
 import _ from 'lodash';
 import TextField from '@mui/material/TextField';
@@ -41,17 +40,6 @@ function AuthJsCredentialsSignInForm() {
 	});
 
 	const { isValid, dirtyFields, errors } = formState;
-
-	useEffect(() => {
-		setValue('email', 'admin@fusetheme.com', {
-			shouldDirty: true,
-			shouldValidate: true
-		});
-		setValue('password', '5;4+0IOx:\\Dy', {
-			shouldDirty: true,
-			shouldValidate: true
-		});
-	}, [setValue]);
 
 	async function onSubmit(formData: FormType) {
 		const { email, password } = formData;

@@ -7,9 +7,7 @@ import { UnstorageAdapter } from '@auth/unstorage-adapter';
 import type { NextAuthConfig } from 'next-auth';
 import type { Provider } from 'next-auth/providers';
 import Credentials from 'next-auth/providers/credentials';
-import Facebook from 'next-auth/providers/facebook';
-import Google from 'next-auth/providers/google';
-import { authGetDbUserByEmail, authCreateDbUser } from './authApi';
+import { authSignIn, authSignUp, authGetDbUserByEmail, authCreateDbUser } from './authApi';
 
 const storage = createStorage({
 	driver: process.env.VERCEL
@@ -23,41 +21,32 @@ const storage = createStorage({
 
 export const providers: Provider[] = [
 	Credentials({
-		authorize(formInput) {
-			/**
-			 * !! This is just for demonstration purposes
-			 * You can create your own validation logic here
-			 * !! Do not use this in production
-			 */
+		async authorize(formInput) {
+			const email = formInput?.email as string;
+			const password = formInput?.password as string;
+			const formType = formInput?.formType as string;
+			const displayName = formInput?.displayName as string;
 
-			/**
-			 * Sign in
-			 */
-			if (formInput.formType === 'signin') {
-				if (formInput.password === '' || formInput.email !== 'admin@fusetheme.com') {
-					return null;
-				}
+			if (!email || !password) return null;
+
+			if (formType === 'signup') {
+				if (!displayName) return null;
+
+				const res = await authSignUp(email, password, displayName);
+
+				if (!res.ok) return null;
+
+				return { email };
 			}
 
-			/**
-			 * Sign up
-			 */
-			if (formInput.formType === 'signup') {
-				if (formInput.password === '' || formInput.email === '') {
-					return null;
-				}
-			}
+			// Sign in
+			const res = await authSignIn(email, password);
 
-			/**
-			 * Response Success with email
-			 */
-			return {
-				email: formInput?.email as string
-			};
+			if (!res.ok) return null;
+
+			return { email };
 		}
-	}),
-	Google,
-	Facebook
+	})
 ];
 
 const config = {
@@ -71,73 +60,43 @@ const config = {
 	trustHost: true,
 	callbacks: {
 		authorized() {
-			/** Checkout information to how to use middleware for authorization
-			 * https://next-auth.js.org/configuration/nextjs#middleware
-			 */
 			return true;
 		},
-		jwt({ token, trigger, account, user }) {
+		jwt({ token, trigger, user }) {
 			if (trigger === 'update') {
 				token.name = user.name;
 			}
 
-			if (account?.provider === 'keycloak') {
-				return { ...token, accessToken: account.access_token };
-			}
-
 			return token;
 		},
-		async session({ session, token }) {
-			if (token.accessToken && typeof token.accessToken === 'string') {
-				session.accessToken = token.accessToken;
-			}
-
+		async session({ session }) {
 			if (session) {
-				try {
-					/**
-					 * Get the session user from database
-					 */
-					const response = await authGetDbUserByEmail(session.user.email);
+				const response = await authGetDbUserByEmail(session.user.email);
 
-					const userDbData = (await response.json()) as User;
-
-					session.db = userDbData;
-
+				if (response.ok) {
+					session.db = (await response.json()) as User;
 					return session;
-				} catch (error) {
-					const errorStatus = error?.status;
+				}
 
-					/** If user not found, create a new user */
-					if (errorStatus === 404) {
-						const newUserResponse = await authCreateDbUser({
-							email: session.user.email,
-							role: ['admin'],
-							displayName: session.user.name,
-							photoURL: session.user.image
-						});
+				if (response.status === 404) {
+					const newUserResponse = await authCreateDbUser({
+						email: session.user.email,
+						displayName: session.user.name
+					});
 
-						const newUser = (await newUserResponse.json()) as User;
-
-						console.error('Error fetching user data:', error);
-
-						session.db = newUser;
-
+					if (newUserResponse.ok) {
+						session.db = (await newUserResponse.json()) as User;
 						return session;
 					}
-
-					throw error;
 				}
 			}
 
 			return null;
 		}
 	},
-	experimental: {
-		enableWebAuthn: true
-	},
 	session: {
 		strategy: 'jwt',
-		maxAge: 30 * 24 * 60 * 60 // 30 days
+		maxAge: 30 * 24 * 60 * 60
 	},
 	debug: process.env.NODE_ENV !== 'production'
 } satisfies NextAuthConfig;
