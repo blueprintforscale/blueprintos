@@ -55,7 +55,11 @@ const config = {
 			return token;
 		},
 		async session({ session }) {
-			if (session) {
+			if (!session?.user?.email) {
+				return session;
+			}
+
+			try {
 				const response = await authGetDbUserByEmail(session.user.email);
 
 				if (response.ok) {
@@ -74,9 +78,13 @@ const config = {
 						return session;
 					}
 				}
+
+				console.error('[auth] Failed to fetch user:', response.status, await response.text());
+			} catch (error) {
+				console.error('[auth] Session callback error:', error);
 			}
 
-			return null;
+			return session;
 		}
 	},
 	session: {
