@@ -41,12 +41,16 @@ function ClientAnalyticsView() {
   const [selectedClient, setSelectedClient] = useState<number | null>(DEFAULT_CLIENT);
   const [activeSource, setActiveSource] = useState('google_ads');
 
+  // 30-day rolling window
+  const dateTo = new Date().toISOString().split('T')[0];
+  const dateFrom = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
+
   const { data: clients } = useClients();
   const { data: adPerformance } = useAdPerformance(selectedClient!, 30);
-  const { data: funnel } = useFunnel(selectedClient!, activeSource);
+  const { data: funnel } = useFunnel(selectedClient!, activeSource, dateFrom, dateTo);
   const { data: trend } = useMonthlyTrend(selectedClient!, 6);
   const { data: activity } = useRecentActivity(selectedClient!);
-  const { data: leads } = useLeads(selectedClient!, 'google_ads');
+  const { data: leads } = useLeads(selectedClient!, activeSource === 'all' ? 'google_ads' : activeSource, dateFrom, dateTo);
   const { data: sourceTabs } = useSourceTabs(selectedClient!);
 
   const clientName = clients?.find((c) => c.customer_id === selectedClient)?.name || 'Select a client';
