@@ -10,18 +10,23 @@ import type { MonthlyTrend } from '../../../api/types';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 type Props = { data: MonthlyTrend[] | undefined };
-type Metric = 'leads' | 'spend' | 'cpl' | 'roas' | 'revenue' | 'conversions' | 'book_rate' | 'close_rate';
+type Metric = 'leads' | 'spend' | 'cpl' | 'book_rate' | 'close_rate' | 'roas';
 
-const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; unit?: string }[] = [
+const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string }[] = [
   { key: 'leads', label: 'Leads', format: (v) => String(Math.round(v)), color: '#000000' },
   { key: 'spend', label: 'Ad Spend', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#5a554d' },
   { key: 'cpl', label: 'CPL', format: (v) => `$${v.toFixed(0)}`, color: '#E85D4D' },
+  { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#E85D4D' },
+  { key: 'close_rate', label: 'Close Rate', format: (v) => `${v.toFixed(0)}%`, color: '#3b8a5a' },
   { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#3b8a5a' },
-  { key: 'revenue', label: 'Revenue', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#c4890a' },
-  { key: 'conversions', label: 'Conversions', format: (v) => String(Math.round(v)), color: '#6366f1' },
-  { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#E85D4D', unit: '%' },
-  { key: 'close_rate', label: 'Close Rate', format: (v) => `${v.toFixed(0)}%`, color: '#3b8a5a', unit: '%' },
 ];
+
+// Detect if a month_start is the current (incomplete) month
+function isCurrentMonth(monthStart: string): boolean {
+  const now = new Date();
+  const d = new Date(monthStart + 'T00:00:00');
+  return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+}
 
 function HistoricalPerformance({ data }: Props) {
   const [metric, setMetric] = useState<Metric>('leads');
@@ -36,6 +41,23 @@ function HistoricalPerformance({ data }: Props) {
   const labels = recent.map((d) => (d as any).short_label || d.label);
   const values = recent.map((d) => getValue(d, metric));
 
+  // Detect which data points are incomplete (current month)
+  const incompleteIdx = recent.findIndex((d) => isCurrentMonth((d as any).month_start));
+  const hasIncomplete = incompleteIdx >= 0;
+
+  // Split primary series: solid for complete months, dashed for current month
+  // ApexCharts doesn't support per-point dash, so we use two series:
+  // 1. Complete months (solid) — with null for the incomplete month
+  // 2. Incomplete bridge (dashed) — only the last complete point + incomplete point
+  const completeValues = values.map((v, i) => (hasIncomplete && i === incompleteIdx) ? null : v);
+  const incompleteValues: (number | null)[] = hasIncomplete
+    ? values.map((v, i) => {
+        if (i === incompleteIdx) return v;
+        if (i === incompleteIdx - 1) return v; // bridge from last complete point
+        return null;
+      })
+    : [];
+
   // Prior year for primary metric
   const priorValues = recent.map((d) => {
     const shortLabel = (d as any).short_label;
@@ -45,17 +67,27 @@ function HistoricalPerformance({ data }: Props) {
   });
   const hasPriorYear = priorValues.some((v) => v !== null && v > 0);
 
-  const latestValue = values[values.length - 1] || 0;
-  const priorMonthValue = values.length > 1 ? values[values.length - 2] : null;
-  const lastYearValue = priorValues[priorValues.length - 1];
+  // Use last complete month for headline value
+  const lastCompleteIdx = hasIncomplete && incompleteIdx > 0 ? incompleteIdx - 1 : values.length - 1;
+  const latestValue = values[lastCompleteIdx] || 0;
+  const incompleteValue = hasIncomplete ? values[incompleteIdx] : null;
+  const priorMonthValue = lastCompleteIdx > 0 ? values[lastCompleteIdx - 1] : null;
+  const lastYearValue = priorValues[lastCompleteIdx];
 
   // Build series
   const series: ApexAxisChartSeries = [
-    { name: cfg.label, data: values },
+    { name: cfg.label, data: completeValues as number[] },
   ];
   const colors = [cfg.color];
   const strokeWidth = [3];
   const dashArray = [0];
+
+  if (hasIncomplete) {
+    series.push({ name: `${cfg.label} (in progress)`, data: incompleteValues as number[] });
+    colors.push(cfg.color);
+    strokeWidth.push(2);
+    dashArray.push(6);
+  }
 
   if (hasPriorYear) {
     series.push({ name: `${cfg.label} (prior year)`, data: priorValues as number[] });
@@ -68,10 +100,29 @@ function HistoricalPerformance({ data }: Props) {
   overlays.forEach((ovKey) => {
     const ovCfg = metricsList.find((m) => m.key === ovKey)!;
     const ovValues = recent.map((d) => getValue(d, ovKey));
-    series.push({ name: ovCfg.label, data: ovValues });
+    // Split overlay into complete + incomplete too
+    const ovComplete = ovValues.map((v, i) => (hasIncomplete && i === incompleteIdx) ? null : v);
+    const ovIncomplete: (number | null)[] = hasIncomplete
+      ? ovValues.map((v, i) => (i === incompleteIdx || i === incompleteIdx - 1) ? v : null)
+      : [];
+
+    series.push({ name: ovCfg.label, data: ovComplete as number[] });
     colors.push(ovCfg.color);
     strokeWidth.push(2);
-    dashArray.push(3);
+    dashArray.push(0);
+
+    if (hasIncomplete) {
+      series.push({ name: `${ovCfg.label} (in progress)`, data: ovIncomplete as number[] });
+      colors.push(ovCfg.color);
+      strokeWidth.push(2);
+      dashArray.push(6);
+    }
+  });
+
+  // Marker sizes: show dots on solid lines, hollow circle on incomplete points
+  const markerSizes = series.map((s, i) => {
+    if (i === 0) return 4; // primary solid
+    return 0;
   });
 
   const chartOptions: ApexOptions = {
@@ -84,12 +135,18 @@ function HistoricalPerformance({ data }: Props) {
     },
     colors,
     stroke: { width: strokeWidth, curve: 'smooth', dashArray },
-    markers: { size: [4, ...new Array(series.length - 1).fill(0)], colors, strokeWidth: 0 },
+    markers: { size: markerSizes, colors, strokeWidth: 0 },
     xaxis: {
       categories: labels,
       axisBorder: { show: false },
       axisTicks: { show: false },
-      labels: { style: { colors: '#8a8279', fontSize: '11px' } },
+      labels: {
+        style: {
+          colors: labels.map((_, i) => (hasIncomplete && i === incompleteIdx) ? '#c5bfb6' : '#8a8279'),
+          fontSize: '11px',
+          fontWeight: labels.map((_, i) => (hasIncomplete && i === incompleteIdx) ? 400 : 400) as any,
+        },
+      },
     },
     yaxis: overlays.length > 0 ? [
       { labels: { formatter: cfg.format, style: { colors: '#8a8279', fontSize: '11px' } }, min: 0 },
@@ -106,10 +163,18 @@ function HistoricalPerformance({ data }: Props) {
       shared: true,
       intersect: false,
       y: { formatter: (val: number, opts: { seriesIndex: number }) => {
+        if (val === null || val === undefined) return '';
+        // Find which metric this series belongs to
         const idx = opts.seriesIndex;
-        if (idx === 0) return cfg.format(val);
-        if (hasPriorYear && idx === 1) return cfg.format(val);
-        const ovIdx = idx - (hasPriorYear ? 2 : 1);
+        // Primary + its incomplete
+        if (idx <= (hasIncomplete ? 1 : 0)) return cfg.format(val);
+        // Prior year
+        const priorIdx = hasIncomplete ? 2 : 1;
+        if (hasPriorYear && idx === priorIdx) return cfg.format(val);
+        // Overlays (each has complete + incomplete if hasIncomplete)
+        const overlayStart = priorIdx + (hasPriorYear ? 1 : 0);
+        const step = hasIncomplete ? 2 : 1;
+        const ovIdx = Math.floor((idx - overlayStart) / step);
         if (ovIdx >= 0 && ovIdx < overlays.length) {
           const ovCfg = metricsList.find((m) => m.key === overlays[ovIdx])!;
           return ovCfg.format(val);
@@ -118,8 +183,22 @@ function HistoricalPerformance({ data }: Props) {
       }},
     },
     grid: { borderColor: '#EEEAD9', xaxis: { lines: { show: false } }, yaxis: { lines: { show: true } } },
-    legend: { show: true, position: 'top', labels: { colors: '#8a8279' }, fontSize: '11px' },
+    legend: { show: false },
     dataLabels: { enabled: false },
+    annotations: hasIncomplete ? {
+      xaxis: [{
+        x: labels[incompleteIdx],
+        borderColor: '#ddd8cb',
+        strokeDashArray: 4,
+        label: {
+          text: 'In progress',
+          borderColor: 'transparent',
+          style: { background: 'transparent', color: '#c5bfb6', fontSize: '9px', fontWeight: 400, padding: { left: 4, right: 4, top: 2, bottom: 2 } },
+          position: 'top',
+          orientation: 'horizontal',
+        },
+      }],
+    } : undefined,
   };
 
   const toggleOverlay = (key: Metric) => {
@@ -139,8 +218,13 @@ function HistoricalPerformance({ data }: Props) {
               {cfg.format(latestValue)}
             </Typography>
             <Typography className="text-xs" style={{ color: '#8a8279' }}>
-              {labels[labels.length - 1]}
+              {labels[lastCompleteIdx]}
             </Typography>
+            {incompleteValue !== null && (
+              <Typography className="text-xs" style={{ color: '#c5bfb6' }}>
+                {labels[incompleteIdx]} so far: {cfg.format(incompleteValue)}
+              </Typography>
+            )}
           </div>
           <div className="mt-0.5 flex gap-4 text-[11px]" style={{ color: '#8a8279' }}>
             {priorMonthValue !== null && <span>Prior month: {cfg.format(priorMonthValue)}</span>}
