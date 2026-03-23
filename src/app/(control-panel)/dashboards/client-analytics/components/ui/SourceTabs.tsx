@@ -11,7 +11,7 @@ type Props = {
 };
 
 function SourceTabs({ tabs, activeTab, onTabChange }: Props) {
-  if (!tabs) return null;
+  if (!tabs || !Array.isArray(tabs)) return null;
 
   return (
     <div className="flex flex-wrap gap-2">

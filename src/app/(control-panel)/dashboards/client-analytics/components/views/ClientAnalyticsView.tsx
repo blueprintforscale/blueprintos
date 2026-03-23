@@ -72,7 +72,8 @@ function ClientAnalyticsView() {
     enabled: !!selectedClient && activeTab === 2,
   });
 
-  const clientName = clients?.find((c) => c.customer_id === selectedClient)?.name || 'Select a client';
+  const clientList = Array.isArray(clients) ? clients : [];
+  const clientName = clientList.find((c) => c.customer_id === selectedClient)?.name || 'Select a client';
 
   // Derive ad metrics from funnel
   const adMetrics = funnel ? {
@@ -97,7 +98,7 @@ function ClientAnalyticsView() {
               <Typography className="text-2xl font-bold tracking-tight">Client Analytics</Typography>
               <Typography className="text-sm text-gray-500">{clientName}</Typography>
             </div>
-            <ClientSelector clients={clients} selectedId={selectedClient} onSelect={setSelectedClient} />
+            <ClientSelector clients={clientList} selectedId={selectedClient} onSelect={setSelectedClient} />
           </div>
           <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
           <Tabs

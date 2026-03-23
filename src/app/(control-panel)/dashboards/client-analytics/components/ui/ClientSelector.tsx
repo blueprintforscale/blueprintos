@@ -12,7 +12,7 @@ type Props = {
 };
 
 function ClientSelector({ clients, selectedId, onSelect }: Props) {
-  if (!clients) return null;
+  if (!clients || !Array.isArray(clients) || clients.length === 0) return null;
 
   const selected = clients.find((c) => c.customer_id === selectedId) || null;
 
