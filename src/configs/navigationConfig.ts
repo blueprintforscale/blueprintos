@@ -48,6 +48,13 @@ const navigationConfig: FuseNavItemType[] = [
 				type: 'item',
 				icon: 'lucide:dollar-sign',
 				url: '/dashboards/crypto'
+			},
+			{
+				id: 'dashboards.client-analytics',
+				title: 'Client Analytics',
+				type: 'item',
+				icon: 'lucide:bar-chart-3',
+				url: '/dashboards/client-analytics'
 			}
 		]
 	},
