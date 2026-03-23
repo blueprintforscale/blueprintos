@@ -53,9 +53,13 @@ export type LeadContact = {
 export type MonthlyTrend = {
   month_start: string;
   label: string;
+  short_label?: string;
+  year?: number;
   leads: string;
   spend: string;
   cpl: string;
+  revenue?: string;
+  roas?: string;
 };
 
 export type RecentActivity = {
