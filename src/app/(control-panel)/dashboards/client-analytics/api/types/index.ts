@@ -28,6 +28,9 @@ export type AdPerformance = {
 
 export type FunnelData = {
   leads: number;
+  total_contacts?: number;
+  quality_leads?: number;
+  spam_count?: number;
   inspection_scheduled: number;
   inspection_completed: number;
   estimate_sent: number;
@@ -37,6 +40,9 @@ export type FunnelData = {
   estimate_sent_value: number;
   estimate_approved_value: number;
   job_value: number;
+  ad_spend?: number;
+  closed_rev?: number;
+  open_est_rev?: number;
 };
 
 export type LeadContact = {
