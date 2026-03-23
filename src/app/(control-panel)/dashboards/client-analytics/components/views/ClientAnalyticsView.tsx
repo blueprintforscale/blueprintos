@@ -51,6 +51,7 @@ function ClientAnalyticsView() {
   const [activeSource, setActiveSource] = useState('google_ads');
   const [activeTab, setActiveTab] = useState(0);
   const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
+  const [drawerTitle, setDrawerTitle] = useState<string | undefined>(undefined);
 
   const dateTo = new Date().toISOString().split('T')[0];
   const dateFrom = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
@@ -132,11 +133,11 @@ function ClientAnalyticsView() {
                   <AdMetricsCards data={adMetrics} />
                 </motion.div>
                 <motion.div variants={item}>
-                  <SummaryCards data={funnel as any} onStageClick={setDrawerStage} />
+                  <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                 </motion.div>
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                   <motion.div variants={item}>
-                    <FunnelChart data={funnel} onStageClick={setDrawerStage} />
+                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                   </motion.div>
                   <motion.div variants={item}>
                     <MonthlyTrendChart data={trend} />
@@ -175,8 +176,9 @@ function ClientAnalyticsView() {
     <FunnelDrawer
       open={drawerStage !== null}
       stage={drawerStage || 'leads'}
+      title={drawerTitle}
       leads={spreadsheetData}
-      onClose={() => setDrawerStage(null)}
+      onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); }}
     />
   </>
   );

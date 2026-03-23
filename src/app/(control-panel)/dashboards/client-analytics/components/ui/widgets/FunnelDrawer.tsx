@@ -92,11 +92,12 @@ function formatDollars(n: number) {
 type Props = {
   open: boolean;
   stage: FunnelStage;
+  title?: string;
   leads: Lead[] | undefined;
   onClose: () => void;
 };
 
-function FunnelDrawer({ open, stage, leads, onClose }: Props) {
+function FunnelDrawer({ open, stage, title, leads, onClose }: Props) {
   const filtered = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
 
   return (
@@ -114,7 +115,7 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
         style={{ backgroundColor: '#000' }}
       >
         <div>
-          <Typography className="text-base font-bold text-white">{stageLabels[stage]}</Typography>
+          <Typography className="text-base font-bold text-white">{title || stageLabels[stage]}</Typography>
           <Typography className="text-xs" style={{ color: '#c5bfb6' }}>{filtered.length} leads</Typography>
         </div>
         <IconButton onClick={onClose} size="small" sx={{ color: '#fff' }}>

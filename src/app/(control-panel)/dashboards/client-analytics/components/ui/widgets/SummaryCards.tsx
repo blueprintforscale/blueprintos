@@ -22,7 +22,7 @@ type ExtendedFunnel = FunnelData & {
 
 type Props = {
   data: ExtendedFunnel | undefined;
-  onStageClick?: (stage: FunnelStage) => void;
+  onStageClick?: (stage: FunnelStage, title?: string) => void;
 };
 
 function SummaryCards({ data, onStageClick }: Props) {
@@ -75,7 +75,7 @@ function SummaryCards({ data, onStageClick }: Props) {
           key={card.label}
           className={`flex flex-col rounded-xl p-5 shadow-sm transition-all ${card.stage && onStageClick ? 'cursor-pointer hover:shadow-md' : ''}`}
           sx={card.highlight ? { backgroundColor: '#E85D4D', color: '#fff' } : {}}
-          onClick={() => card.stage && onStageClick?.(card.stage)}
+          onClick={() => card.stage && onStageClick?.(card.stage, card.label)}
         >
           <Typography className={`text-xs font-medium uppercase tracking-wide ${card.highlight ? 'text-red-100' : 'text-gray-400'}`}>
             {card.label}
