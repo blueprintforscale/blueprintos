@@ -1,10 +1,10 @@
 'use client';
 
 import { memo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Drawer from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import Chip from '@mui/material/Chip';
 
 type Lead = {
   hcp_customer_id: string | null;
@@ -44,25 +44,6 @@ const stageLabels: Record<FunnelStage, string> = {
   job_completed: 'Job Completed',
 };
 
-function filterByStage(leads: Lead[], stage: FunnelStage): Lead[] {
-  if (stage === 'leads') return leads;
-  return leads.filter((l) => l[stage] === true);
-}
-
-function formatDate(d: string) {
-  return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-}
-
-function formatPhone(p: string) {
-  if (!p || p.length !== 10) return p || '';
-  return `(${p.slice(0, 3)}) ${p.slice(3, 6)}-${p.slice(6)}`;
-}
-
-function formatDollars(n: number) {
-  if (!n) return '';
-  return `$${n.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-}
-
 const answerColors: Record<string, string> = {
   answered: 'bg-green-100 text-green-700',
   missed: 'bg-red-100 text-red-700',
@@ -89,6 +70,25 @@ function getHighestStage(lead: Lead): string {
   return 'Lead';
 }
 
+function filterByStage(leads: Lead[], stage: FunnelStage): Lead[] {
+  if (stage === 'leads') return leads;
+  return leads.filter((l) => l[stage] === true);
+}
+
+function formatDate(d: string) {
+  return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function formatPhone(p: string) {
+  if (!p || p.length !== 10) return p || '';
+  return `(${p.slice(0, 3)}) ${p.slice(3, 6)}-${p.slice(6)}`;
+}
+
+function formatDollars(n: number) {
+  if (!n) return '';
+  return `$${n.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+}
+
 type Props = {
   open: boolean;
   stage: FunnelStage;
@@ -105,41 +105,51 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
       open={open}
       onClose={onClose}
       PaperProps={{
-        sx: { width: { xs: '100%', sm: 480 }, p: 0 },
+        sx: { width: { xs: '100%', sm: 440 }, p: 0, backgroundColor: '#fff' },
       }}
     >
-      {/* Header */}
-      <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white px-5 py-4">
+      {/* Header — black background like the portal funnel */}
+      <div
+        className="sticky top-0 z-10 flex items-center justify-between px-5 py-4"
+        style={{ backgroundColor: '#000' }}
+      >
         <div>
-          <Typography className="text-lg font-semibold">{stageLabels[stage]}</Typography>
-          <Typography className="text-xs text-gray-400">{filtered.length} leads</Typography>
+          <Typography className="text-base font-bold text-white">{stageLabels[stage]}</Typography>
+          <Typography className="text-xs" style={{ color: '#c5bfb6' }}>{filtered.length} leads</Typography>
         </div>
-        <IconButton onClick={onClose} size="small">
+        <IconButton onClick={onClose} size="small" sx={{ color: '#fff' }}>
           <span className="text-lg">&#x2715;</span>
         </IconButton>
       </div>
 
-      {/* Lead list */}
+      {/* Lead list with staggered animation */}
       <div className="flex-1 overflow-y-auto">
         {filtered.length === 0 ? (
-          <div className="flex h-32 items-center justify-center text-sm text-gray-400">
+          <div className="flex h-32 items-center justify-center text-sm" style={{ color: '#8a8279' }}>
             No leads at this stage
           </div>
         ) : (
-          <div className="divide-y divide-gray-50">
+          <AnimatePresence>
             {filtered.map((lead, i) => {
               const approvedRev = parseFloat(String(lead.approved_revenue)) || 0;
               const invoicedRev = parseFloat(String(lead.invoiced_revenue)) || 0;
               const revenue = approvedRev + invoicedRev;
               const highestStage = getHighestStage(lead);
               const stageStyle = stageStyles[highestStage] || stageStyles['Lead'];
+
               return (
-                <div key={`${lead.phone}-${i}`} className="flex items-start gap-3 px-5 py-3.5 hover:bg-gray-50">
-                  {/* Middle: details */}
-                  <div className="min-w-0 flex-1">
-                    {/* Name + source badge */}
+                <motion.div
+                  key={`${lead.phone}-${i}`}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.03, duration: 0.2 }}
+                  className="border-b px-5 py-3 hover:bg-gray-50"
+                  style={{ borderColor: '#f0ede6' }}
+                >
+                  {/* Row 1: Name + source badge + revenue */}
+                  <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Typography className="truncate text-sm font-medium">
+                      <Typography className="text-sm font-semibold" style={{ color: '#000' }}>
                         {lead.name || 'Unknown'}
                       </Typography>
                       <span
@@ -149,53 +159,49 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
                         Google Ads
                       </span>
                     </div>
-
-                    {/* Date + phone + answer status (only for Lead stage) */}
-                    <div className="mt-0.5 flex items-center gap-2 text-xs text-gray-400">
-                      <span>{formatDate(lead.contact_date)}</span>
-                      <span>{formatPhone(lead.phone)}</span>
-                      {highestStage === 'Lead' && lead.answer_status && lead.answer_status !== 'form' && (
-                        <span className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${answerColors[lead.answer_status] || 'bg-gray-100 text-gray-500'}`}>
-                          {lead.answer_status}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Stage badge */}
-                    <div className="mt-1.5">
-                      <span
-                        className="inline-block rounded px-2 py-0.5 text-[10px] font-medium"
-                        style={{ backgroundColor: stageStyle.bg, color: stageStyle.text }}
-                      >
-                        {highestStage}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Right: revenue breakdown */}
-                  <div className="flex flex-col items-end gap-0.5">
                     {revenue > 0 && (
-                      <Typography className="text-sm font-bold text-green-700">
+                      <Typography className="text-sm font-bold" style={{ color: '#3b8a5a' }}>
                         {formatDollars(revenue)}
                       </Typography>
                     )}
-                    {approvedRev > 0 && invoicedRev > 0 && (
-                      <div className="flex flex-col items-end text-[9px]" style={{ color: '#8a8279' }}>
-                        <span>Est: {formatDollars(approvedRev)}</span>
-                        <span>Inv: {formatDollars(invoicedRev)}</span>
-                      </div>
+                  </div>
+
+                  {/* Row 2: Date · Phone · Stage badge */}
+                  <div className="mt-1 flex items-center gap-1.5 text-[11px]" style={{ color: '#8a8279' }}>
+                    <span>{formatDate(lead.contact_date)}</span>
+                    <span>·</span>
+                    <span>{formatPhone(lead.phone)}</span>
+                    {highestStage !== 'Lead' && (
+                      <>
+                        <span>·</span>
+                        <span
+                          className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium"
+                          style={{ backgroundColor: stageStyle.bg, color: stageStyle.text }}
+                        >
+                          {highestStage}
+                        </span>
+                      </>
                     )}
-                    {approvedRev > 0 && invoicedRev === 0 && revenue > 0 && (
-                      <div className="text-[9px]" style={{ color: '#8a8279' }}>Approved est.</div>
-                    )}
-                    {invoicedRev > 0 && approvedRev === 0 && revenue > 0 && (
-                      <div className="text-[9px]" style={{ color: '#8a8279' }}>Invoiced</div>
+                    {highestStage === 'Lead' && lead.answer_status && lead.answer_status !== 'form' && (
+                      <>
+                        <span>·</span>
+                        <span className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${answerColors[lead.answer_status] || ''}`}>
+                          {lead.answer_status}
+                        </span>
+                      </>
                     )}
                   </div>
-                </div>
+
+                  {/* Revenue breakdown if both exist */}
+                  {approvedRev > 0 && invoicedRev > 0 && (
+                    <div className="mt-0.5 text-[10px]" style={{ color: '#c5bfb6' }}>
+                      Est: {formatDollars(approvedRev)} · Inv: {formatDollars(invoicedRev)}
+                    </div>
+                  )}
+                </motion.div>
               );
             })}
-          </div>
+          </AnimatePresence>
         )}
       </div>
     </Drawer>
