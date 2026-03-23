@@ -22,6 +22,7 @@ type Lead = {
   job_completed: boolean;
   approved_revenue: number;
   invoiced_revenue: number;
+  lost_reason?: string | null;
 };
 
 // Source detection — for now everything is Google Ads, but this is where
@@ -31,13 +32,14 @@ function getSource(_lead: Lead): string {
 }
 
 function getHighestStage(lead: Lead): string {
+  // Lost leads show as Lost regardless of funnel position
+  if (lead.lost_reason) return 'Lost';
   if (lead.job_completed) return 'Job Completed';
   if (lead.job_scheduled) return 'Job Scheduled';
   if (lead.estimate_approved) return 'Estimate Approved';
   if (lead.estimate_sent) return 'Estimate Sent';
   if (lead.inspection_completed) return 'Inspection Complete';
   if (lead.inspection_scheduled) return 'Inspection Scheduled';
-  // For unmatched/new leads, show answer status instead
   if (lead.answer_status === 'form') return 'Form Lead';
   if (lead.answer_status === 'answered' || (lead.duration && lead.duration > 30)) return 'Answered';
   if (lead.answer_status === 'missed') return 'Missed';
@@ -88,6 +90,7 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
   'Form Lead': { bg: '#EEEAD9', text: '#5a554d' },
   'Missed': { bg: '#fde8e4', text: '#c44a3c' },
   'Abandoned': { bg: '#EEEAD9', text: '#c5bfb6' },
+  'Lost': { bg: '#fde8e4', text: '#c44a3c' },
   'New Lead': { bg: '#EEEAD9', text: '#8a8279' },
 };
 
@@ -96,21 +99,37 @@ type Props = { data: Lead[] | undefined; customerId?: number };
 
 function LeadSpreadsheet({ data, customerId }: Props) {
   const [expandedLead, setExpandedLead] = useState<string | null>(null);
+  const [showLost, setShowLost] = useState(false);
 
   if (!data || !Array.isArray(data)) return null;
 
-  const filtered = data;
+  const lostCount = data.filter((l) => l.lost_reason).length;
+  const filtered = showLost ? data : data.filter((l) => !l.lost_reason);
   const matched = filtered.filter((l) => l.match_status === 'matched').length;
   const unmatched = filtered.length - matched;
 
   return (
     <Paper className="flex flex-col overflow-hidden rounded-xl shadow-sm">
       {/* Header */}
-      <div className="px-6 pt-6 pb-3">
-        <Typography className="text-lg font-semibold">Lead Journey</Typography>
-        <Typography className="text-xs" style={{ color: '#8a8279' }}>
-          {filtered.length} leads ({matched} in CRM, {unmatched} unmatched)
-        </Typography>
+      <div className="flex items-center justify-between px-6 pt-6 pb-3">
+        <div>
+          <Typography className="text-lg font-semibold">Lead Journey</Typography>
+          <Typography className="text-xs" style={{ color: '#8a8279' }}>
+            {filtered.length} leads ({matched} in CRM, {unmatched} unmatched)
+            {!showLost && lostCount > 0 && ` · ${lostCount} lost hidden`}
+          </Typography>
+        </div>
+        {lostCount > 0 && (
+          <label className="flex cursor-pointer items-center gap-1.5 text-xs" style={{ color: '#8a8279' }}>
+            <input
+              type="checkbox"
+              checked={showLost}
+              onChange={(e) => setShowLost(e.target.checked)}
+              className="rounded"
+            />
+            Show lost ({lostCount})
+          </label>
+        )}
       </div>
 
       {/* Table */}
@@ -175,6 +194,11 @@ function LeadSpreadsheet({ data, customerId }: Props) {
                     >
                       {stage}
                     </span>
+                    {lead.lost_reason && (
+                      <div className="mt-0.5 text-[9px]" style={{ color: '#c5bfb6' }}>
+                        {lead.lost_reason}
+                      </div>
+                    )}
                   </td>
                   <td className="whitespace-nowrap px-3 py-2.5 text-right font-medium">
                     {revenue > 0 ? `$${revenue.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '-'}
