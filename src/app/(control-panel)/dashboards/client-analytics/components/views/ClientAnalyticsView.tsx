@@ -7,13 +7,13 @@ import FusePageSimple from '@fuse/core/FusePageSimple';
 import ClientSelector from '../ui/ClientSelector';
 import SourceTabs from '../ui/SourceTabs';
 import AdMetricsCards from '../ui/widgets/AdMetricsCards';
+import SummaryCards from '../ui/widgets/SummaryCards';
 import FunnelChart from '../ui/widgets/FunnelChart';
 import MonthlyTrendChart from '../ui/widgets/MonthlyTrendChart';
 import RecentActivityWidget from '../ui/widgets/RecentActivityWidget';
 import LeadsTable from '../ui/widgets/LeadsTable';
 import {
   useClients,
-  useAdPerformance,
   useFunnel,
   useMonthlyTrend,
   useRecentActivity,
@@ -46,7 +46,6 @@ function ClientAnalyticsView() {
   const dateFrom = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
 
   const { data: clients } = useClients();
-  const { data: adPerformance } = useAdPerformance(selectedClient!, 30);
   const { data: funnel } = useFunnel(selectedClient!, activeSource, dateFrom, dateTo);
   const { data: trend } = useMonthlyTrend(selectedClient!, 6);
   const { data: activity } = useRecentActivity(selectedClient!);
@@ -85,9 +84,31 @@ function ClientAnalyticsView() {
             initial="hidden"
             animate="show"
           >
-            {/* Ad Performance Cards */}
+            {/* Ad Performance Cards — derived from funnel data */}
             <motion.div variants={item}>
-              <AdMetricsCards data={adPerformance} />
+              <AdMetricsCards data={funnel ? {
+                ad_spend: parseFloat(funnel.ad_spend as any) || 0,
+                quality_leads: parseInt(funnel.quality_leads as any) || 0,
+                actual_quality_leads: parseInt(funnel.quality_leads as any) || 0,
+                cpl: (parseInt(funnel.quality_leads as any) || 0) > 0
+                  ? (parseFloat(funnel.ad_spend as any) || 0) / parseInt(funnel.quality_leads as any)
+                  : 0,
+                total_closed_rev: parseFloat(funnel.closed_rev as any) || 0,
+                total_open_est_rev: parseFloat(funnel.open_est_rev as any) || 0,
+                roas: (parseFloat(funnel.ad_spend as any) || 0) > 0
+                  ? (parseFloat(funnel.closed_rev as any) || 0) / (parseFloat(funnel.ad_spend as any) || 0)
+                  : 0,
+                all_time_rev: 0,
+                all_time_spend: 0,
+                guarantee: 0,
+                lsa_spend: 0,
+                lsa_leads: 0,
+              } : undefined} />
+            </motion.div>
+
+            {/* Summary Cards (contacts, revenue, pipeline, conversion) */}
+            <motion.div variants={item}>
+              <SummaryCards data={funnel as any} />
             </motion.div>
 
             {/* Funnel + Trend side by side on desktop */}
