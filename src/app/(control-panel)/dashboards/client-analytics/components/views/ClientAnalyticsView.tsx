@@ -151,7 +151,7 @@ function ClientAnalyticsView() {
             {/* ====== LEADS TAB ====== */}
             {activeTab === 1 && (
               <motion.div variants={item}>
-                <LeadSpreadsheet data={spreadsheetData} />
+                <LeadSpreadsheet data={spreadsheetData} customerId={selectedClient!} />
               </motion.div>
             )}
 

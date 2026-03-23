@@ -1,9 +1,10 @@
 'use client';
 
-import { memo, useState } from 'react';
+import React, { memo, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
+import LeadDetailPanel from './LeadDetailPanel';
 
 type Lead = {
   hcp_customer_id: string | null;
@@ -81,10 +82,11 @@ const answerColors: Record<string, string> = {
   form: 'bg-blue-100 text-blue-800',
 };
 
-type Props = { data: Lead[] | undefined };
+type Props = { data: Lead[] | undefined; customerId?: number };
 
-function LeadSpreadsheet({ data }: Props) {
+function LeadSpreadsheet({ data, customerId }: Props) {
   const [sourceFilter, setSourceFilter] = useState<string>('all');
+  const [expandedLead, setExpandedLead] = useState<string | null>(null);
 
   if (!data || !Array.isArray(data)) return null;
 
@@ -149,10 +151,13 @@ function LeadSpreadsheet({ data }: Props) {
               const sourceClass = sourceColors[source] || 'bg-gray-500 text-white';
               const stageClass = stageColors[stage] || 'bg-gray-400 text-white';
 
+              const isExpanded = expandedLead === `${lead.phone}-${i}`;
+              const canExpand = lead.match_status === 'matched' && lead.hcp_customer_id;
               return (
+                <React.Fragment key={`${lead.phone}-${i}`}>
                 <tr
-                  key={`${lead.phone}-${i}`}
-                  className={`border-b border-gray-50 hover:bg-gray-50 ${lead.match_status === 'unmatched' ? 'opacity-60' : ''}`}
+                  className={`border-b border-gray-50 hover:bg-gray-50 ${lead.match_status === 'unmatched' ? 'opacity-60' : ''} ${canExpand ? 'cursor-pointer' : ''} ${isExpanded ? 'bg-gray-50' : ''}`}
+                  onClick={() => canExpand && setExpandedLead(isExpanded ? null : `${lead.phone}-${i}`)}
                 >
                   <td className="sticky left-0 whitespace-nowrap bg-white px-4 py-2.5 text-gray-500">{formatDate(lead.contact_date)}</td>
                   <td className="max-w-[160px] truncate px-4 py-2.5 font-medium">{lead.name || '-'}</td>
@@ -184,6 +189,14 @@ function LeadSpreadsheet({ data }: Props) {
                     {revenue > 0 ? `$${revenue.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '-'}
                   </td>
                 </tr>
+                {isExpanded && canExpand && customerId && (
+                  <tr>
+                    <td colSpan={9} className="p-0">
+                      <LeadDetailPanel customerId={customerId} hcpCustomerId={lead.hcp_customer_id!} />
+                    </td>
+                  </tr>
+                )}
+                </React.Fragment>
               );
             })}
           </tbody>

@@ -164,12 +164,18 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
                     </div>
                   </div>
 
-                  {/* Right: revenue */}
-                  <div className="flex flex-col items-end">
+                  {/* Right: revenue breakdown */}
+                  <div className="flex flex-col items-end gap-0.5">
                     {revenue > 0 && (
                       <Typography className="text-sm font-bold text-green-700">
                         {formatDollars(revenue)}
                       </Typography>
+                    )}
+                    {lead.approved_revenue > 0 && lead.invoiced_revenue > 0 && (
+                      <div className="flex flex-col items-end text-[9px] text-gray-400">
+                        <span>Est: {formatDollars(lead.approved_revenue)}</span>
+                        <span>Inv: {formatDollars(lead.invoiced_revenue)}</span>
+                      </div>
                     )}
                   </div>
                 </div>
