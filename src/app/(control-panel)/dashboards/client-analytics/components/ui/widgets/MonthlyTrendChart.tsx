@@ -15,7 +15,7 @@ type Props = { data: MonthlyTrend[] | undefined };
 function MonthlyTrendChart({ data }: Props) {
   const theme = useTheme();
 
-  if (!data || data.length === 0) return null;
+  if (!data || !Array.isArray(data) || data.length === 0) return null;
 
   const labels = data.map((d) => d.label);
   const leads = data.map((d) => parseInt(d.leads, 10));

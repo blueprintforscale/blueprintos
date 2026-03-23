@@ -29,7 +29,7 @@ function HistoricalPerformance({ data }: Props) {
   const [metric, setMetric] = useState<Metric>('leads');
   const [showPriorYear, setShowPriorYear] = useState(false);
 
-  if (!data || data.length === 0) return null;
+  if (!data || !Array.isArray(data) || data.length === 0) return null;
 
   const cfg = metricConfig[metric];
   const labels = data.map((d) => (d as any).short_label || d.label);

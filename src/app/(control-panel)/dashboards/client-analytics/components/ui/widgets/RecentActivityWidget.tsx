@@ -27,7 +27,7 @@ function formatAmount(a: string) {
 type Props = { data: RecentActivity[] | undefined };
 
 function RecentActivityWidget({ data }: Props) {
-  if (!data || data.length === 0) return null;
+  if (!data || !Array.isArray(data) || data.length === 0) return null;
 
   return (
     <Paper className="flex flex-col rounded-xl p-6 shadow-sm">

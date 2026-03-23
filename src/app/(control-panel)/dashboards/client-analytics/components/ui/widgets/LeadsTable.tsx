@@ -32,7 +32,7 @@ const answerColors: Record<string, 'success' | 'error' | 'warning' | 'info'> = {
 type Props = { data: LeadContact[] | undefined };
 
 function LeadsTable({ data }: Props) {
-  if (!data || data.length === 0) return null;
+  if (!data || !Array.isArray(data) || data.length === 0) return null;
 
   return (
     <Paper className="flex flex-col overflow-hidden rounded-xl shadow-sm">
