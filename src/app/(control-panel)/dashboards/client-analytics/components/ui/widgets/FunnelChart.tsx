@@ -9,8 +9,7 @@ import type { FunnelStage } from './FunnelDrawer';
 
 function formatDollars(n: number) {
   if (!n) return '';
-  if (n >= 1000) return `$${(n / 1000).toFixed(0)}K`;
-  return `$${n.toFixed(0)}`;
+  return `$${n.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
 }
 
 type Props = {
@@ -36,79 +35,80 @@ function FunnelChart({ data, onStageClick }: Props) {
   return (
     <Paper
       className="flex flex-col overflow-hidden rounded-xl border-0 shadow-none"
-      style={{ backgroundColor: '#000' }}
+      style={{ backgroundColor: '#1a1a1a' }}
     >
-      {/* Header */}
-      <div className="px-6 pt-5 pb-3">
+      <div className="px-6 pt-5 pb-2">
         <Typography className="text-sm font-semibold uppercase tracking-wide" style={{ color: '#8a8279' }}>
           Conversion Funnel
         </Typography>
       </div>
 
-      {/* Funnel bars */}
-      <div className="flex flex-col gap-1.5 px-5 pb-5">
+      <div className="flex flex-col px-5 pb-4">
         {stages.map((stage, i) => {
-          const widthPct = Math.max((stage.count / maxCount) * 100, 12);
+          const barPct = Math.max((stage.count / maxCount) * 100, 5);
           const convRate = i > 0 && stages[i - 1].count > 0
             ? ((stage.count / stages[i - 1].count) * 100).toFixed(1)
             : null;
 
-          // Tapered funnel: each bar gets progressively more rounded and slightly indented
-          const indent = i * 2;
-
           return (
-            <motion.div
-              key={stage.key}
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.08, duration: 0.3, ease: 'easeOut' }}
-              className={`flex items-center gap-3 ${onStageClick ? 'cursor-pointer' : ''}`}
-              onClick={() => onStageClick?.(stage.key)}
-              style={{ paddingLeft: indent }}
-            >
-              {/* Bar */}
-              <div className="relative flex-1">
-                <div
-                  className={`flex items-center rounded-md px-4 py-2.5 transition-all duration-200 ${onStageClick ? 'hover:brightness-110' : ''}`}
-                  style={{
-                    width: `${widthPct}%`,
-                    minWidth: '100px',
-                    backgroundColor: i === 0 ? '#E85D4D' : `rgba(232, 93, 77, ${1 - i * 0.12})`,
-                  }}
-                >
-                  <span className="text-xs font-semibold text-white">{stage.label}</span>
+            <div key={stage.key}>
+              {/* Stage row */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.08, duration: 0.3 }}
+                className={`flex items-center gap-4 py-1.5 ${onStageClick ? 'cursor-pointer group' : ''}`}
+                onClick={() => onStageClick?.(stage.key)}
+              >
+                {/* Bar area — fixed proportion of the row */}
+                <div className="relative flex-1">
+                  <div className="flex items-center">
+                    {/* Colored bar */}
+                    <div
+                      className={`flex items-center rounded-md px-4 py-3 transition-all duration-200 ${onStageClick ? 'group-hover:brightness-110' : ''}`}
+                      style={{
+                        width: `${barPct}%`,
+                        minWidth: '80px',
+                        backgroundColor: `rgba(232, 93, 77, ${1 - i * 0.1})`,
+                      }}
+                    >
+                      <span className="text-sm font-bold text-white whitespace-nowrap">{stage.label}</span>
+                    </div>
+                    {/* Extending line */}
+                    <div className="flex-1 border-b" style={{ borderColor: '#333' }} />
+                  </div>
                 </div>
-                {/* Conversion rate badge */}
-                {convRate && (
+
+                {/* Count */}
+                <div className="flex items-baseline gap-2 w-32 justify-end">
+                  <span className="text-2xl font-extrabold text-white">{stage.count}</span>
+                  {stage.value ? (
+                    <span className="text-xs" style={{ color: '#8a8279' }}>{formatDollars(stage.value)}</span>
+                  ) : null}
+                </div>
+              </motion.div>
+
+              {/* Conversion rate pill — centered between rows */}
+              {convRate && (
+                <div className="flex justify-center py-0.5">
                   <span
-                    className="absolute top-1/2 -translate-y-1/2 rounded-full px-2 py-0.5 text-[10px] font-medium"
-                    style={{
-                      left: `calc(${widthPct}% + 8px)`,
-                      color: '#8a8279',
-                    }}
+                    className="rounded-full px-3 py-0.5 text-[11px] font-medium"
+                    style={{ backgroundColor: '#2a2a2a', color: '#8a8279' }}
                   >
                     {convRate}%
                   </span>
-                )}
-              </div>
-
-              {/* Count + value */}
-              <div className="flex w-20 flex-col items-end">
-                <span className="text-xl font-bold text-white">{stage.count}</span>
-                {stage.value ? (
-                  <span className="text-[10px]" style={{ color: '#8a8279' }}>{formatDollars(stage.value)}</span>
-                ) : null}
-              </div>
-            </motion.div>
+                </div>
+              )}
+            </div>
           );
         })}
       </div>
 
-      {/* Overall conversion */}
+      {/* Overall */}
       {data.leads > 0 && (
-        <div className="border-t px-6 py-3" style={{ borderColor: '#222' }}>
+        <div className="border-t px-6 py-3" style={{ borderColor: '#2a2a2a' }}>
           <Typography className="text-center text-[11px]" style={{ color: '#5a554d' }}>
-            Overall conversion rate: {((data.job_completed / data.leads) * 100).toFixed(1)}%
+            Overall conversion rate: <strong style={{ color: '#8a8279' }}>{((data.job_completed / data.leads) * 100).toFixed(1)}%</strong>
           </Typography>
         </div>
       )}
