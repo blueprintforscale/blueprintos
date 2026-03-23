@@ -2,8 +2,6 @@
 
 import { memo } from 'react';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Chip from '@mui/material/Chip';
 import { useQuery } from '@tanstack/react-query';
 
 type Props = {
@@ -22,17 +20,50 @@ function formatDollars(cents: number | null) {
   return `$${(cents / 100).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
 }
 
+// Normalize HCP statuses to client-friendly pipeline labels
+function normalizeStatus(status: string): string {
+  const map: Record<string, string> = {
+    'scheduled': 'Scheduled',
+    'in progress': 'In Progress',
+    'needs scheduling': 'Needs Scheduling',
+    'complete rated': 'Complete',
+    'complete unrated': 'Complete',
+    'user canceled': 'Canceled',
+    'pro canceled': 'Canceled',
+    'sent': 'Sent',
+    'approved': 'Approved',
+    'declined': 'Declined',
+    'draft': 'Draft',
+    'invoiced': 'Invoiced',
+    'paid': 'Paid',
+    'unpaid': 'Unpaid',
+    'active': 'Active',
+  };
+  return map[status?.toLowerCase()] || status || '-';
+}
+
 const statusColors: Record<string, string> = {
-  approved: 'bg-green-100 text-green-700',
-  sent: 'bg-blue-100 text-blue-700',
-  declined: 'bg-red-100 text-red-700',
-  scheduled: 'bg-purple-100 text-purple-700',
-  'complete rated': 'bg-green-100 text-green-700',
-  'complete unrated': 'bg-green-100 text-green-700',
-  'in progress': 'bg-amber-100 text-amber-700',
-  paid: 'bg-green-100 text-green-700',
-  unpaid: 'bg-red-100 text-red-700',
+  'Complete': 'bg-green-100 text-green-700',
+  'Approved': 'bg-green-100 text-green-700',
+  'Paid': 'bg-green-100 text-green-700',
+  'Invoiced': 'bg-green-100 text-green-700',
+  'Sent': 'bg-blue-100 text-blue-700',
+  'Scheduled': 'bg-purple-100 text-purple-700',
+  'In Progress': 'bg-amber-100 text-amber-700',
+  'Declined': 'bg-red-100 text-red-700',
+  'Canceled': 'bg-red-100 text-red-700',
+  'Draft': 'bg-gray-100 text-gray-500',
 };
+
+function StatusBadge({ status }: { status: string }) {
+  const label = normalizeStatus(status);
+  const colorClass = statusColors[label] || 'bg-gray-100 text-gray-600';
+  return (
+    <span className={`inline-block rounded px-2 py-0.5 text-[10px] font-medium ${colorClass}`}>
+      {label}
+    </span>
+  );
+}
 
 function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
   const { data, isLoading } = useQuery({
@@ -42,11 +73,11 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
   });
 
   if (isLoading) {
-    return <div className="px-6 py-4 text-sm text-gray-400">Loading details...</div>;
+    return <div className="px-6 py-4 text-sm" style={{ color: '#8a8279' }}>Loading details...</div>;
   }
 
   if (!data || data.error) {
-    return <div className="px-6 py-4 text-sm text-gray-400">No details available</div>;
+    return <div className="px-6 py-4 text-sm" style={{ color: '#8a8279' }}>No details available</div>;
   }
 
   const inspections = data.inspections || [];
@@ -54,55 +85,53 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
   const jobs = data.jobs || [];
   const invoices = data.invoices || [];
 
-  // HCP deep link
   const hcpUrl = `https://pro.housecallpro.com/pro/customers/${hcpCustomerId.replace('cus_', '')}`;
 
   return (
-    <div className="border-t border-gray-100 bg-gray-50 px-6 py-4">
+    <div className="border-t px-6 py-4" style={{ borderColor: '#ddd8cb', backgroundColor: '#F5F1E8' }}>
       <div className="flex flex-col gap-4">
 
-        {/* Header with CRM link */}
+        {/* Header with CRM arrow link */}
         <div className="flex items-center justify-between">
-          <Typography className="text-sm font-semibold text-gray-700">
-            {data.first_name} {data.last_name}
-          </Typography>
-          <Button
-            size="small"
-            variant="outlined"
+          <div>
+            <Typography className="text-sm font-semibold">{data.first_name} {data.last_name}</Typography>
+            <div className="mt-0.5 flex flex-wrap gap-3 text-[11px]" style={{ color: '#8a8279' }}>
+              {data.phone && <span>{data.phone}</span>}
+              {data.email && <span>{data.email}</span>}
+              {data.contact_date && <span>Created {formatDate(data.contact_date)}</span>}
+            </div>
+          </div>
+          <a
             href={hcpUrl}
             target="_blank"
-            sx={{ fontSize: '0.7rem', textTransform: 'none', borderRadius: 2 }}
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition-colors hover:bg-white"
+            style={{ color: '#E85D4D' }}
+            title="Open in HouseCall Pro"
           >
-            Open in HouseCall Pro &rarr;
-          </Button>
-        </div>
-
-        {/* Contact info */}
-        <div className="flex flex-wrap gap-4 text-xs text-gray-500">
-          {data.phone && <span>Phone: {data.phone}</span>}
-          {data.email && <span>Email: {data.email}</span>}
-          {data.contact_date && <span>Created: {formatDate(data.contact_date)}</span>}
+            HCP <span className="text-base">&#8599;</span>
+          </a>
         </div>
 
         {/* Inspections */}
         {inspections.length > 0 && (
           <div>
-            <Typography className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-gray-400">
-              Inspections ({inspections.length})
+            <Typography className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#8a8279' }}>
+              Inspections
             </Typography>
             <div className="space-y-1.5">
               {inspections.map((insp: any, i: number) => (
-                <div key={i} className="flex items-center justify-between rounded bg-white px-3 py-2 text-xs">
+                <div key={i} className="flex items-center justify-between rounded-lg bg-white px-3 py-2.5 text-xs">
                   <div className="flex items-center gap-2">
-                    <Chip label={insp.status} size="small"
-                      className={statusColors[insp.status] || 'bg-gray-100'}
-                      sx={{ height: 20, fontSize: '0.65rem' }} />
-                    <span className="text-gray-500">
-                      {insp.scheduled_at ? `Scheduled ${formatDate(insp.scheduled_at)}` : ''}
-                      {insp.completed_at ? ` · Completed ${formatDate(insp.completed_at)}` : ''}
+                    <StatusBadge status={insp.status} />
+                    <span style={{ color: '#5a554d' }}>
+                      {insp.scheduled_at && `Scheduled ${formatDate(insp.scheduled_at)}`}
+                      {insp.completed_at && ` · Completed ${formatDate(insp.completed_at)}`}
                     </span>
                   </div>
-                  <span className="font-medium">{formatDollars(insp.total_cents)}</span>
+                  {insp.total_cents > 0 && (
+                    <span className="font-semibold">{formatDollars(insp.total_cents)}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -112,37 +141,35 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
         {/* Estimates */}
         {estimates.length > 0 && (
           <div>
-            <Typography className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-gray-400">
-              Estimates ({estimates.length})
+            <Typography className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#8a8279' }}>
+              Estimates
             </Typography>
             <div className="space-y-2">
               {estimates.map((est: any, i: number) => (
-                <div key={i} className="rounded bg-white px-3 py-2 text-xs">
+                <div key={i} className="rounded-lg bg-white px-3 py-2.5 text-xs">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Chip label={est.status} size="small"
-                        className={statusColors[est.status] || 'bg-gray-100'}
-                        sx={{ height: 20, fontSize: '0.65rem' }} />
-                      <span className="text-gray-400">{est.estimate_type}</span>
-                      {est.sent_at && <span className="text-gray-500">Sent {formatDate(est.sent_at)}</span>}
+                      <StatusBadge status={est.status} />
+                      {est.estimate_type && (
+                        <span className="rounded px-1.5 py-0.5 text-[10px]" style={{ backgroundColor: '#EEEAD9', color: '#5a554d' }}>
+                          {est.estimate_type}
+                        </span>
+                      )}
+                      {est.sent_at && <span style={{ color: '#8a8279' }}>Sent {formatDate(est.sent_at)}</span>}
                     </div>
-                    <span className="font-medium">
+                    <span className="font-semibold">
                       {est.status === 'approved' ? formatDollars(est.approved_total_cents) : formatDollars(est.highest_option_cents)}
                     </span>
                   </div>
                   {/* Options */}
                   {est.options && est.options.length > 0 && (
-                    <div className="mt-1.5 ml-3 space-y-1 border-l-2 border-gray-200 pl-3">
+                    <div className="mt-2 ml-1 space-y-1 border-l-2 pl-3" style={{ borderColor: '#ddd8cb' }}>
                       {est.options.map((opt: any, j: number) => (
-                        <div key={j} className="flex items-center justify-between text-gray-500">
-                          <span>{opt.name || `Option ${j + 1}`}</span>
+                        <div key={j} className="flex items-center justify-between" style={{ color: '#5a554d' }}>
+                          <span className="truncate">{opt.name || `Option ${j + 1}`}</span>
                           <div className="flex items-center gap-2">
                             <span>{formatDollars(opt.total_cents)}</span>
-                            {opt.approval_status && (
-                              <Chip label={opt.approval_status} size="small"
-                                className={statusColors[opt.approval_status] || 'bg-gray-100'}
-                                sx={{ height: 18, fontSize: '0.6rem' }} />
-                            )}
+                            {opt.approval_status && <StatusBadge status={opt.approval_status} />}
                           </div>
                         </div>
                       ))}
@@ -157,22 +184,23 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
         {/* Jobs */}
         {jobs.length > 0 && (
           <div>
-            <Typography className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-gray-400">
-              Jobs ({jobs.length})
+            <Typography className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#8a8279' }}>
+              Jobs
             </Typography>
             <div className="space-y-1.5">
               {jobs.map((job: any, i: number) => (
-                <div key={i} className="flex items-center justify-between rounded bg-white px-3 py-2 text-xs">
+                <div key={i} className="flex items-center justify-between rounded-lg bg-white px-3 py-2.5 text-xs">
                   <div className="flex items-center gap-2">
-                    <Chip label={job.status} size="small"
-                      className={statusColors[job.status] || 'bg-gray-100'}
-                      sx={{ height: 20, fontSize: '0.65rem' }} />
-                    <span className="text-gray-500">
+                    <StatusBadge status={job.status} />
+                    <span style={{ color: '#5a554d' }}>
                       {job.description || ''}
-                      {job.scheduled_at ? ` · ${formatDate(job.scheduled_at)}` : ''}
+                      {job.scheduled_at && ` · ${formatDate(job.scheduled_at)}`}
+                      {job.completed_at && ` · Done ${formatDate(job.completed_at)}`}
                     </span>
                   </div>
-                  <span className="font-medium">{formatDollars(job.total_cents)}</span>
+                  {job.total_cents > 0 && (
+                    <span className="font-semibold">{formatDollars(job.total_cents)}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -182,30 +210,31 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
         {/* Invoices */}
         {invoices.length > 0 && (
           <div>
-            <Typography className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-gray-400">
-              Invoices ({invoices.length})
+            <Typography className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#8a8279' }}>
+              Invoices
             </Typography>
             <div className="space-y-1.5">
               {invoices.map((inv: any, i: number) => (
-                <div key={i} className="flex items-center justify-between rounded bg-white px-3 py-2 text-xs">
+                <div key={i} className="flex items-center justify-between rounded-lg bg-white px-3 py-2.5 text-xs">
                   <div className="flex items-center gap-2">
-                    <Chip label={`${inv.invoice_type} · ${inv.status}`} size="small"
-                      className={statusColors[inv.status] || 'bg-gray-100'}
-                      sx={{ height: 20, fontSize: '0.65rem' }} />
-                    <span className="text-gray-500">{formatDate(inv.invoice_date)}</span>
-                    {inv.paid_at && <span className="text-green-600">Paid {formatDate(inv.paid_at)}</span>}
+                    <StatusBadge status={inv.status} />
+                    <span className="rounded px-1.5 py-0.5 text-[10px]" style={{ backgroundColor: '#EEEAD9', color: '#5a554d' }}>
+                      {inv.invoice_type}
+                    </span>
+                    <span style={{ color: '#8a8279' }}>{formatDate(inv.invoice_date)}</span>
+                    {inv.paid_at && <span style={{ color: '#3b8a5a' }}>Paid {formatDate(inv.paid_at)}</span>}
                   </div>
-                  <span className="font-medium">{formatDollars(inv.amount_cents)}</span>
+                  <span className="font-semibold">{formatDollars(inv.amount_cents)}</span>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Empty state for unmatched leads */}
+        {/* Empty state */}
         {inspections.length === 0 && estimates.length === 0 && jobs.length === 0 && invoices.length === 0 && (
-          <Typography className="text-xs text-gray-400">
-            No funnel activity yet — this lead hasn't been booked in {fieldMgmt === 'jobber' ? 'Jobber' : 'HouseCall Pro'}
+          <Typography className="text-xs" style={{ color: '#8a8279' }}>
+            No funnel activity yet
           </Typography>
         )}
       </div>
