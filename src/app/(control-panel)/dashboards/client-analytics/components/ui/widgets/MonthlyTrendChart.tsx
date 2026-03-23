@@ -99,9 +99,9 @@ function MonthlyTrendChart({ data }: Props) {
   };
 
   const series = [
-    { name: 'Quality Leads', type: 'column', data: qualityLeads },
-    { name: 'Removed', type: 'column', data: spamLeads },
-    { name: 'CPL', type: 'line', data: cpl },
+    { name: 'Quality Leads', type: 'bar' as const, data: qualityLeads, group: 'leads' },
+    { name: 'Contacts (removed)', type: 'bar' as const, data: spamLeads, group: 'leads' },
+    { name: 'CPL', type: 'line' as const, data: cpl },
   ];
 
   return (
