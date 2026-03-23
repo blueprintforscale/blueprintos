@@ -37,6 +37,11 @@ function getHighestStage(lead: Lead): string {
   if (lead.estimate_sent) return 'Estimate Sent';
   if (lead.inspection_completed) return 'Inspection Complete';
   if (lead.inspection_scheduled) return 'Inspection Scheduled';
+  // For unmatched/new leads, show answer status instead
+  if (lead.answer_status === 'form') return 'Form Lead';
+  if (lead.answer_status === 'answered' || (lead.duration && lead.duration > 30)) return 'Answered';
+  if (lead.answer_status === 'missed') return 'Missed';
+  if (lead.answer_status === 'abandoned') return 'Abandoned';
   return 'New Lead';
 }
 
@@ -79,19 +84,13 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
   'Estimate Sent': { bg: '#EEEAD9', text: '#5a554d' },
   'Inspection Complete': { bg: '#E85D4D', text: '#fff' },
   'Inspection Scheduled': { bg: '#fde8e4', text: '#c44a3c' },
+  'Answered': { bg: '#e6f3ec', text: '#3b8a5a' },
+  'Form Lead': { bg: '#EEEAD9', text: '#5a554d' },
+  'Missed': { bg: '#fde8e4', text: '#c44a3c' },
+  'Abandoned': { bg: '#EEEAD9', text: '#c5bfb6' },
   'New Lead': { bg: '#EEEAD9', text: '#8a8279' },
 };
 
-const answerColors: Record<string, string> = {
-  answered: 'bg-green-100 text-green-800',
-  missed: 'bg-red-100 text-red-800',
-  abandoned: 'bg-amber-100 text-amber-800',
-  form: 'text-white',
-};
-
-const answerBgOverride: Record<string, string | undefined> = {
-  form: '#5a554d',
-};
 
 type Props = { data: Lead[] | undefined; customerId?: number };
 
@@ -124,7 +123,6 @@ function LeadSpreadsheet({ data, customerId }: Props) {
               <th className="px-3 py-2.5">Phone</th>
               <th className="px-3 py-2.5">Source</th>
               <th className="px-3 py-2.5">Type</th>
-              <th className="px-3 py-2.5">Status</th>
               <th className="px-3 py-2.5">Duration</th>
               <th className="px-3 py-2.5">Stage</th>
               <th className="px-3 py-2.5 text-right">Revenue</th>
@@ -135,7 +133,6 @@ function LeadSpreadsheet({ data, customerId }: Props) {
               const revenue = (lead.approved_revenue || 0) + (lead.invoiced_revenue || 0);
               const source = getSource(lead);
               const stage = getHighestStage(lead);
-              const answerClass = answerColors[lead.answer_status || ''] || 'bg-gray-100 text-gray-600';
 
               const isExpanded = expandedLead === `${lead.phone}-${i}`;
               const canExpand = lead.match_status === 'matched' && lead.hcp_customer_id;
@@ -167,16 +164,6 @@ function LeadSpreadsheet({ data, customerId }: Props) {
                       {lead.lead_type}
                     </span>
                   </td>
-                  <td className="px-3 py-2.5">
-                    {lead.answer_status && (
-                      <span
-                        className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${answerClass}`}
-                        style={answerBgOverride[lead.answer_status] ? { backgroundColor: answerBgOverride[lead.answer_status] } : {}}
-                      >
-                        {lead.answer_status}
-                      </span>
-                    )}
-                  </td>
                   <td className="px-3 py-2.5" style={{ color: '#8a8279' }}>{formatDuration(lead.duration)}</td>
                   <td className="px-3 py-2.5">
                     <span
@@ -195,7 +182,7 @@ function LeadSpreadsheet({ data, customerId }: Props) {
                 </tr>
                 {isExpanded && canExpand && customerId && (
                   <tr>
-                    <td colSpan={9} className="p-0">
+                    <td colSpan={8} className="p-0">
                       <LeadDetailPanel customerId={customerId} hcpCustomerId={lead.hcp_customer_id!} />
                     </td>
                   </tr>
