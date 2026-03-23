@@ -3,7 +3,6 @@
 import React, { memo, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import Chip from '@mui/material/Chip';
 import LeadDetailPanel from './LeadDetailPanel';
 
 type Lead = {
@@ -85,45 +84,22 @@ const answerColors: Record<string, string> = {
 type Props = { data: Lead[] | undefined; customerId?: number };
 
 function LeadSpreadsheet({ data, customerId }: Props) {
-  const [sourceFilter, setSourceFilter] = useState<string>('all');
   const [expandedLead, setExpandedLead] = useState<string | null>(null);
 
   if (!data || !Array.isArray(data)) return null;
 
-  // Build source options from data
-  const allSources = [...new Set(data.map(getSource))].sort();
-  const sourceOptions = [{ key: 'all', label: 'All Sources' }, ...allSources.map((s) => ({ key: s, label: s }))];
-
-  // Filter
-  const filtered = sourceFilter === 'all' ? data : data.filter((l) => getSource(l) === sourceFilter);
-
+  const filtered = data;
   const matched = filtered.filter((l) => l.match_status === 'matched').length;
   const unmatched = filtered.length - matched;
 
   return (
     <Paper className="flex flex-col overflow-hidden rounded-xl shadow-sm">
       {/* Header */}
-      <div className="flex flex-col gap-3 px-6 pt-6 pb-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <Typography className="text-lg font-semibold">Lead Journey</Typography>
-          <Typography className="text-xs text-gray-400">
-            {filtered.length} leads ({matched} in CRM, {unmatched} unmatched)
-          </Typography>
-        </div>
-        {/* Source filter chips */}
-        <div className="flex flex-wrap gap-1.5">
-          {sourceOptions.map((opt) => (
-            <Chip
-              key={opt.key}
-              label={opt.label}
-              size="small"
-              variant={sourceFilter === opt.key ? 'filled' : 'outlined'}
-              color={sourceFilter === opt.key ? 'primary' : 'default'}
-              onClick={() => setSourceFilter(opt.key)}
-              sx={{ fontSize: '0.7rem', height: 26 }}
-            />
-          ))}
-        </div>
+      <div className="px-6 pt-6 pb-3">
+        <Typography className="text-lg font-semibold">Lead Journey</Typography>
+        <Typography className="text-xs" style={{ color: '#8a8279' }}>
+          {filtered.length} leads ({matched} in CRM, {unmatched} unmatched)
+        </Typography>
       </div>
 
       {/* Table */}
