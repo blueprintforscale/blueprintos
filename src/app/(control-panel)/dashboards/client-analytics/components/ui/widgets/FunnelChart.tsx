@@ -4,6 +4,7 @@ import { memo } from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import type { FunnelData } from '../../../api/types';
+import type { FunnelStage } from './FunnelDrawer';
 
 function formatDollars(n: number) {
   if (!n) return '';
@@ -11,19 +12,22 @@ function formatDollars(n: number) {
   return `$${n.toFixed(0)}`;
 }
 
-type Props = { data: FunnelData | undefined };
+type Props = {
+  data: FunnelData | undefined;
+  onStageClick?: (stage: FunnelStage) => void;
+};
 
-function FunnelChart({ data }: Props) {
+function FunnelChart({ data, onStageClick }: Props) {
   if (!data) return null;
 
-  const stages = [
-    { label: 'Leads', count: data.leads, value: null, color: '#1a1a1a' },
-    { label: 'Inspection Scheduled', count: data.inspection_scheduled, value: null, color: '#2d2d2d' },
-    { label: 'Inspection Completed', count: data.inspection_completed, value: null, color: '#404040' },
-    { label: 'Estimate Sent', count: data.estimate_sent, value: data.estimate_sent_value, color: '#555555' },
-    { label: 'Estimate Approved', count: data.estimate_approved, value: data.estimate_approved_value, color: '#6b6b6b' },
-    { label: 'Job Scheduled', count: data.job_scheduled, value: data.job_value, color: '#808080' },
-    { label: 'Job Completed', count: data.job_completed, value: null, color: '#999999' },
+  const stages: { label: string; key: FunnelStage; count: number; value: number | null; color: string }[] = [
+    { label: 'Leads', key: 'leads', count: data.leads, value: null, color: '#1a1a1a' },
+    { label: 'Inspection Scheduled', key: 'inspection_scheduled', count: data.inspection_scheduled, value: null, color: '#2d2d2d' },
+    { label: 'Inspection Completed', key: 'inspection_completed', count: data.inspection_completed, value: null, color: '#404040' },
+    { label: 'Estimate Sent', key: 'estimate_sent', count: data.estimate_sent, value: data.estimate_sent_value, color: '#555555' },
+    { label: 'Estimate Approved', key: 'estimate_approved', count: data.estimate_approved, value: data.estimate_approved_value, color: '#6b6b6b' },
+    { label: 'Job Scheduled', key: 'job_scheduled', count: data.job_scheduled, value: data.job_value, color: '#808080' },
+    { label: 'Job Completed', key: 'job_completed', count: data.job_completed, value: null, color: '#999999' },
   ];
 
   const maxCount = Math.max(data.leads, 1);
@@ -39,10 +43,14 @@ function FunnelChart({ data }: Props) {
             : null;
 
           return (
-            <div key={stage.label} className="flex items-center gap-4">
+            <div
+              key={stage.label}
+              className={`flex items-center gap-4 ${onStageClick ? 'cursor-pointer' : ''}`}
+              onClick={() => onStageClick?.(stage.key)}
+            >
               <div className="relative flex-1">
                 <div
-                  className="flex items-center rounded-md px-4 py-3 transition-all duration-300"
+                  className={`flex items-center rounded-md px-4 py-3 transition-all duration-300 ${onStageClick ? 'hover:opacity-80' : ''}`}
                   style={{
                     width: `${width}%`,
                     backgroundColor: stage.color,

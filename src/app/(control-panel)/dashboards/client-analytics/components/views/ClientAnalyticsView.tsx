@@ -15,6 +15,8 @@ import MonthlyTrendChart from '../ui/widgets/MonthlyTrendChart';
 import RecentActivityWidget from '../ui/widgets/RecentActivityWidget';
 import LeadSpreadsheet from '../ui/widgets/LeadSpreadsheet';
 import HistoricalPerformance from '../ui/widgets/HistoricalPerformance';
+import FunnelDrawer from '../ui/widgets/FunnelDrawer';
+import type { FunnelStage } from '../ui/widgets/FunnelDrawer';
 import {
   useClients,
   useFunnel,
@@ -48,6 +50,7 @@ function ClientAnalyticsView() {
   const [selectedClient, setSelectedClient] = useState<number | null>(DEFAULT_CLIENT);
   const [activeSource, setActiveSource] = useState('google_ads');
   const [activeTab, setActiveTab] = useState(0);
+  const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
 
   const dateTo = new Date().toISOString().split('T')[0];
   const dateFrom = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
@@ -62,7 +65,7 @@ function ClientAnalyticsView() {
   const { data: spreadsheetData } = useQuery({
     queryKey: ['leadSpreadsheet', selectedClient, activeSource, dateFrom, dateTo],
     queryFn: () => fetch(`/api/blueprint/clients/${selectedClient}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`).then(r => r.json()),
-    enabled: !!selectedClient && activeTab === 1,
+    enabled: !!selectedClient && (activeTab === 1 || drawerStage !== null),
   });
 
   // Historical data (only fetch when on Performance tab)
@@ -90,6 +93,7 @@ function ClientAnalyticsView() {
   } : undefined;
 
   return (
+    <>
     <FusePageSimple
       header={
         <div className="flex w-full flex-col gap-4 px-6 pt-6 md:px-8">
@@ -128,11 +132,11 @@ function ClientAnalyticsView() {
                   <AdMetricsCards data={adMetrics} />
                 </motion.div>
                 <motion.div variants={item}>
-                  <SummaryCards data={funnel as any} />
+                  <SummaryCards data={funnel as any} onStageClick={setDrawerStage} />
                 </motion.div>
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                   <motion.div variants={item}>
-                    <FunnelChart data={funnel} />
+                    <FunnelChart data={funnel} onStageClick={setDrawerStage} />
                   </motion.div>
                   <motion.div variants={item}>
                     <MonthlyTrendChart data={trend} />
@@ -166,6 +170,15 @@ function ClientAnalyticsView() {
       }
       scroll="content"
     />
+
+    {/* Drill-down drawer */}
+    <FunnelDrawer
+      open={drawerStage !== null}
+      stage={drawerStage || 'leads'}
+      leads={spreadsheetData}
+      onClose={() => setDrawerStage(null)}
+    />
+  </>
   );
 }
 

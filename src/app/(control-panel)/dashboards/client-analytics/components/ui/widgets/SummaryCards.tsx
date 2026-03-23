@@ -4,6 +4,7 @@ import { memo } from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import type { FunnelData } from '../../../api/types';
+import type { FunnelStage } from './FunnelDrawer';
 
 function formatDollars(n: number) {
   if (!n) return '$0';
@@ -19,9 +20,12 @@ type ExtendedFunnel = FunnelData & {
   open_est_rev?: number;
 };
 
-type Props = { data: ExtendedFunnel | undefined };
+type Props = {
+  data: ExtendedFunnel | undefined;
+  onStageClick?: (stage: FunnelStage) => void;
+};
 
-function SummaryCards({ data }: Props) {
+function SummaryCards({ data, onStageClick }: Props) {
   if (!data) return null;
 
   const contacts = parseInt(data.total_contacts as any) || 0;
@@ -33,30 +37,34 @@ function SummaryCards({ data }: Props) {
     ? ((parseInt(data.job_completed as any) || 0) / parseInt(data.leads as any) * 100)
     : 0;
 
-  const cards = [
+  const cards: { label: string; value: string; sub: string | null; highlight: boolean; stage?: FunnelStage }[] = [
     {
       label: 'Contacts',
       value: String(contacts),
-      sub: `${quality} quality leads${spam > 0 ? ` · ${spam} spam (${contacts > 0 ? ((spam / contacts) * 100).toFixed(1) : 0}%)` : ''}`,
+      sub: `${quality} quality leads${spam > 0 ? ` · ${spam} spam` : ''}`,
       highlight: false,
+      stage: 'leads',
     },
     {
       label: 'Revenue Closed',
       value: formatDollars(closedRev),
       sub: null,
       highlight: true,
+      stage: 'estimate_approved',
     },
     {
       label: 'Open Estimates',
       value: formatDollars(openEst),
       sub: 'Pipeline value',
       highlight: false,
+      stage: 'estimate_sent',
     },
     {
       label: 'Conversion Rate',
       value: `${convRate.toFixed(1)}%`,
       sub: 'Lead → Job Completed',
       highlight: false,
+      stage: 'job_completed',
     },
   ];
 
@@ -65,8 +73,9 @@ function SummaryCards({ data }: Props) {
       {cards.map((card) => (
         <Paper
           key={card.label}
-          className="flex flex-col rounded-xl p-5 shadow-sm"
+          className={`flex flex-col rounded-xl p-5 shadow-sm transition-all ${card.stage && onStageClick ? 'cursor-pointer hover:shadow-md' : ''}`}
           sx={card.highlight ? { backgroundColor: '#E85D4D', color: '#fff' } : {}}
+          onClick={() => card.stage && onStageClick?.(card.stage)}
         >
           <Typography className={`text-xs font-medium uppercase tracking-wide ${card.highlight ? 'text-red-100' : 'text-gray-400'}`}>
             {card.label}
