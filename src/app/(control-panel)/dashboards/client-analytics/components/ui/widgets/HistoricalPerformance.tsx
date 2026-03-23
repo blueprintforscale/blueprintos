@@ -17,11 +17,11 @@ type Props = { data: MonthlyTrend[] | undefined };
 type Metric = 'leads' | 'spend' | 'cpl' | 'roas' | 'revenue';
 
 const metricConfig: Record<Metric, { label: string; format: (v: number) => string; color: string }> = {
-  leads: { label: 'Leads', format: (v) => String(v), color: '#1a1a1a' },
-  spend: { label: 'Ad Spend', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#6366f1' },
+  leads: { label: 'Leads', format: (v) => String(v), color: '#000000' },
+  spend: { label: 'Ad Spend', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#5a554d' },
   cpl: { label: 'Cost Per Lead', format: (v) => `$${v.toFixed(0)}`, color: '#E85D4D' },
-  roas: { label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#10b981' },
-  revenue: { label: 'Revenue', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#f59e0b' },
+  roas: { label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#3b8a5a' },
+  revenue: { label: 'Revenue', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#c4890a' },
 };
 
 function HistoricalPerformance({ data }: Props) {

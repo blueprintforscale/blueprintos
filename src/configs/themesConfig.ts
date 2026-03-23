@@ -81,19 +81,19 @@ export const themesConfig: FuseThemesType = {
 	default: {
 		palette: {
 			mode: 'light',
-			primary: { main: '#1F232B', light: '#363B44', dark: '#0F1115', contrastText: '#FFFFFF' },
-			secondary: { main: '#1565C0', light: '#3C83D6', dark: '#0E4B90', contrastText: '#FFFFFF' },
+			primary: { main: '#000000', light: '#333333', dark: '#000000', contrastText: '#FFFFFF' },
+			secondary: { main: '#E85D4D', light: '#F08070', dark: '#c44a3c', contrastText: '#FFFFFF' },
 			...neutralsLightTheme,
-			text: { primary: '#1F232B', secondary: '#4B5563', disabled: '#9CA3AF' },
-			background: { default: '#F6F7F8', paper: '#FFFFFF' },
-			divider: '#E5E7EB',
+			text: { primary: '#000000', secondary: '#5a554d', disabled: '#c5bfb6' },
+			background: { default: '#F5F1E8', paper: '#FFFFFF' },
+			divider: '#ddd8cb',
 			action: {
-				active: '#4B5563',
-				hover: '#E5E7EB',
-				selected: '#D1D5DB',
-				disabled: '#BFC4CC',
-				disabledBackground: '#F6F7F8',
-				focus: '#D1D5DB'
+				active: '#5a554d',
+				hover: '#EEEAD9',
+				selected: '#ddd8cb',
+				disabled: '#c5bfb6',
+				disabledBackground: '#F5F1E8',
+				focus: '#ddd8cb'
 			}
 		}
 	},
@@ -137,18 +137,18 @@ export const themesConfig: FuseThemesType = {
 		palette: {
 			mode: 'light',
 			...neutralsLightTheme,
-			primary: { main: '#1F232B', light: '#363B44', dark: '#0F1115', contrastText: '#FFFFFF' },
-			secondary: { main: '#1565C0', light: '#3C83D6', dark: '#0E4B90', contrastText: '#FFFFFF' },
-			text: { primary: '#1F232B', secondary: '#4B5563', disabled: '#9CA3AF' },
-			background: { default: '#E5E7EB', paper: '#FFFFFF' },
-			divider: '#E5E7EB',
+			primary: { main: '#000000', light: '#333333', dark: '#000000', contrastText: '#FFFFFF' },
+			secondary: { main: '#E85D4D', light: '#F08070', dark: '#c44a3c', contrastText: '#FFFFFF' },
+			text: { primary: '#000000', secondary: '#5a554d', disabled: '#c5bfb6' },
+			background: { default: '#EEEAD9', paper: '#F5F1E8' },
+			divider: '#ddd8cb',
 			action: {
-				active: '#4B5563',
-				hover: '#E5E7EB',
-				selected: '#D1D5DB',
-				disabled: '#BFC4CC',
-				disabledBackground: '#F6F7F8',
-				focus: '#D1D5DB'
+				active: '#5a554d',
+				hover: '#EEEAD9',
+				selected: '#ddd8cb',
+				disabled: '#c5bfb6',
+				disabledBackground: '#F5F1E8',
+				focus: '#ddd8cb'
 			}
 		}
 	},

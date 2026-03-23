@@ -96,11 +96,11 @@ function ClientAnalyticsView() {
     <>
     <FusePageSimple
       header={
-        <div className="flex w-full flex-col gap-4 px-6 pt-6 md:px-8">
+        <div className="flex w-full flex-col gap-4 px-6 pt-6 md:px-8" style={{ backgroundColor: '#F5F1E8' }}>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <Typography className="text-2xl font-bold tracking-tight">Client Analytics</Typography>
-              <Typography className="text-sm text-gray-500">{clientName}</Typography>
+              <Typography className="text-2xl font-extrabold uppercase tracking-tight" sx={{ color: '#000000' }}>Client Analytics</Typography>
+              <Typography className="text-sm" sx={{ color: '#5a554d' }}>{clientName}</Typography>
             </div>
             <ClientSelector clients={clientList} selectedId={selectedClient} onSelect={setSelectedClient} />
           </div>

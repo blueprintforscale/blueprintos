@@ -29,7 +29,7 @@ function MonthlyTrendChart({ data }: Props) {
       toolbar: { show: false },
       zoom: { enabled: false },
     },
-    colors: ['#1a1a1a', '#E85D4D'],
+    colors: ['#000000', '#E85D4D'],
     stroke: { width: [3, 2], curve: 'smooth', dashArray: [0, 5] },
     xaxis: { categories: labels },
     yaxis: [

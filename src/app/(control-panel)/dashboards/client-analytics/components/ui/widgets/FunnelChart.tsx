@@ -21,13 +21,13 @@ function FunnelChart({ data, onStageClick }: Props) {
   if (!data) return null;
 
   const stages: { label: string; key: FunnelStage; count: number; value: number | null; color: string }[] = [
-    { label: 'Leads', key: 'leads', count: data.leads, value: null, color: '#1a1a1a' },
-    { label: 'Inspection Scheduled', key: 'inspection_scheduled', count: data.inspection_scheduled, value: null, color: '#2d2d2d' },
-    { label: 'Inspection Completed', key: 'inspection_completed', count: data.inspection_completed, value: null, color: '#404040' },
-    { label: 'Estimate Sent', key: 'estimate_sent', count: data.estimate_sent, value: data.estimate_sent_value, color: '#555555' },
-    { label: 'Estimate Approved', key: 'estimate_approved', count: data.estimate_approved, value: data.estimate_approved_value, color: '#6b6b6b' },
-    { label: 'Job Scheduled', key: 'job_scheduled', count: data.job_scheduled, value: data.job_value, color: '#808080' },
-    { label: 'Job Completed', key: 'job_completed', count: data.job_completed, value: null, color: '#999999' },
+    { label: 'Leads', key: 'leads', count: data.leads, value: null, color: '#000000' },
+    { label: 'Inspection Scheduled', key: 'inspection_scheduled', count: data.inspection_scheduled, value: null, color: '#E85D4D' },
+    { label: 'Inspection Completed', key: 'inspection_completed', count: data.inspection_completed, value: null, color: '#c44a3c' },
+    { label: 'Estimate Sent', key: 'estimate_sent', count: data.estimate_sent, value: data.estimate_sent_value, color: '#5a554d' },
+    { label: 'Estimate Approved', key: 'estimate_approved', count: data.estimate_approved, value: data.estimate_approved_value, color: '#3b8a5a' },
+    { label: 'Job Scheduled', key: 'job_scheduled', count: data.job_scheduled, value: data.job_value, color: '#2d7a4a' },
+    { label: 'Job Completed', key: 'job_completed', count: data.job_completed, value: null, color: '#1a6638' },
   ];
 
   const maxCount = Math.max(data.leads, 1);
