@@ -127,6 +127,8 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
                     <span style={{ color: '#5a554d' }}>
                       {insp.scheduled_at && `Scheduled ${formatDate(insp.scheduled_at)}`}
                       {insp.completed_at && ` · Completed ${formatDate(insp.completed_at)}`}
+                      {insp.description && ` · ${insp.description}`}
+                      {insp.service_address && !insp.description && ` · ${insp.service_address}`}
                     </span>
                   </div>
                   {insp.total_cents > 0 && (
@@ -150,16 +152,18 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <StatusBadge status={est.status} />
-                      {est.estimate_type && (
+                      {est.estimate_type && est.estimate_type !== 'unknown' && (
                         <span className="rounded px-1.5 py-0.5 text-[10px]" style={{ backgroundColor: '#EEEAD9', color: '#5a554d' }}>
                           {est.estimate_type}
                         </span>
                       )}
                       {est.sent_at && <span style={{ color: '#8a8279' }}>Sent {formatDate(est.sent_at)}</span>}
                     </div>
-                    <span className="font-semibold">
-                      {est.status === 'approved' ? formatDollars(est.approved_total_cents) : formatDollars(est.highest_option_cents)}
-                    </span>
+                    {(est.status === 'approved' ? est.approved_total_cents : est.highest_option_cents) > 0 && (
+                      <span className="font-semibold">
+                        {est.status === 'approved' ? formatDollars(est.approved_total_cents) : formatDollars(est.highest_option_cents)}
+                      </span>
+                    )}
                   </div>
                   {/* Options */}
                   {est.options && est.options.length > 0 && (

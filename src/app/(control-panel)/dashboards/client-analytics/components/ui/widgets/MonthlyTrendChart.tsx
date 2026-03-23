@@ -32,7 +32,7 @@ function MonthlyTrendChart({ data }: Props) {
       stacked: true,
       background: 'transparent',
     },
-    colors: ['#000000', '#c5bfb6', '#E85D4D'],
+    colors: ['#000000', '#ddd8cb', '#E85D4D'],
     stroke: { width: [0, 0, 3], curve: 'smooth' },
     plotOptions: {
       bar: {
@@ -77,11 +77,14 @@ function MonthlyTrendChart({ data }: Props) {
         html += `<div style="font-weight:700;color:#000;margin-bottom:2px">${month}</div>`;
         html += `<div><span style="color:#000">&#9632;</span> Quality leads: <strong>${quality}</strong></div>`;
         if (spam > 0) {
-          html += `<div><span style="color:#c5bfb6">&#9632;</span> Removed: <strong>${spam}</strong></div>`;
-          html += `<div style="color:#8a8279">Total contacts: ${total}</div>`;
+          html += `<div><span style="color:#ddd8cb">&#9632;</span> Contacts: <strong>${total}</strong> <span style="color:#c5bfb6">(${spam} removed)</span></div>`;
         }
         if (cplVal !== null && cplVal > 0) {
-          html += `<div style="color:#E85D4D;margin-top:2px">CPL: $${Math.round(cplVal)}</div>`;
+          html += `<div style="color:#E85D4D;margin-top:2px">CPL (quality): $${Math.round(cplVal)}</div>`;
+          if (total > 0 && total !== quality) {
+            const contactCpl = (cplVal * quality) / total;
+            html += `<div style="color:#8a8279">CPL (contacts): $${Math.round(contactCpl)}</div>`;
+          }
         }
         html += `</div>`;
         return html;
@@ -112,7 +115,7 @@ function MonthlyTrendChart({ data }: Props) {
             <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: '#000' }} /> Quality leads
           </span>
           <span className="flex items-center gap-1">
-            <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: '#c5bfb6' }} /> Removed (spam/junk)
+            <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: '#ddd8cb' }} /> Contacts (removed)
           </span>
           <span className="flex items-center gap-1">
             <span className="inline-block h-0.5 w-4" style={{ backgroundColor: '#E85D4D' }} /> CPL
