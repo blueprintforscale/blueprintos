@@ -57,28 +57,40 @@ function formatPhone(p: string) {
 }
 
 const sourceColors: Record<string, string> = {
-  'Google Ads': 'bg-green-600 text-white',
-  'Google Business Profile': 'bg-amber-500 text-white',
-  'Direct / Organic': 'bg-blue-500 text-white',
-  'Referral': 'bg-purple-500 text-white',
-  'LSA': 'bg-indigo-500 text-white',
+  'Google Ads': 'text-white',
+  'Google Business Profile': 'text-white',
+  'Direct / Organic': 'text-white',
+  'Referral': 'text-white',
+  'LSA': 'text-white',
 };
 
-const stageColors: Record<string, string> = {
-  'Job Completed': 'bg-green-600 text-white',
-  'Job Scheduled': 'bg-green-500 text-white',
-  'Estimate Approved': 'bg-blue-600 text-white',
-  'Estimate Sent': 'bg-blue-400 text-white',
-  'Inspection Complete': 'bg-purple-500 text-white',
-  'Inspection Scheduled': 'bg-purple-400 text-white',
-  'New Lead': 'bg-gray-400 text-white',
+const sourceBgColors: Record<string, string> = {
+  'Google Ads': '#3b8a5a',
+  'Google Business Profile': '#c4890a',
+  'Direct / Organic': '#5a554d',
+  'Referral': '#E85D4D',
+  'LSA': '#000000',
+};
+
+const stageStyles: Record<string, { bg: string; text: string }> = {
+  'Job Completed': { bg: '#3b8a5a', text: '#fff' },
+  'Job Scheduled': { bg: '#e6f3ec', text: '#3b8a5a' },
+  'Estimate Approved': { bg: '#3b8a5a', text: '#fff' },
+  'Estimate Sent': { bg: '#EEEAD9', text: '#5a554d' },
+  'Inspection Complete': { bg: '#E85D4D', text: '#fff' },
+  'Inspection Scheduled': { bg: '#fde8e4', text: '#c44a3c' },
+  'New Lead': { bg: '#EEEAD9', text: '#8a8279' },
 };
 
 const answerColors: Record<string, string> = {
   answered: 'bg-green-100 text-green-800',
   missed: 'bg-red-100 text-red-800',
   abandoned: 'bg-amber-100 text-amber-800',
-  form: 'bg-blue-100 text-blue-800',
+  form: 'text-white',
+};
+
+const answerBgOverride: Record<string, string | undefined> = {
+  form: '#5a554d',
 };
 
 type Props = { data: Lead[] | undefined; customerId?: number };
@@ -124,8 +136,6 @@ function LeadSpreadsheet({ data, customerId }: Props) {
               const source = getSource(lead);
               const stage = getHighestStage(lead);
               const answerClass = answerColors[lead.answer_status || ''] || 'bg-gray-100 text-gray-600';
-              const sourceClass = sourceColors[source] || 'bg-gray-500 text-white';
-              const stageClass = stageColors[stage] || 'bg-gray-400 text-white';
 
               const isExpanded = expandedLead === `${lead.phone}-${i}`;
               const canExpand = lead.match_status === 'matched' && lead.hcp_customer_id;
@@ -139,25 +149,43 @@ function LeadSpreadsheet({ data, customerId }: Props) {
                   <td className="max-w-[160px] truncate px-4 py-2.5 font-medium">{lead.name || '-'}</td>
                   <td className="whitespace-nowrap px-3 py-2.5 text-gray-500">{formatPhone(lead.phone)}</td>
                   <td className="px-3 py-2.5">
-                    <span className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${sourceClass}`}>
+                    <span
+                      className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium text-white"
+                      style={{ backgroundColor: sourceBgColors[source] || '#5a554d' }}
+                    >
                       {source}
                     </span>
                   </td>
                   <td className="px-3 py-2.5">
-                    <span className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${lead.lead_type === 'call' ? 'bg-gray-100' : lead.lead_type === 'form' ? 'bg-blue-50 text-blue-700' : 'bg-purple-50 text-purple-700'}`}>
+                    <span
+                      className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium"
+                      style={{
+                        backgroundColor: lead.lead_type === 'form' ? '#EEEAD9' : '#f5f5f5',
+                        color: lead.lead_type === 'form' ? '#5a554d' : '#8a8279',
+                      }}
+                    >
                       {lead.lead_type}
                     </span>
                   </td>
                   <td className="px-3 py-2.5">
                     {lead.answer_status && (
-                      <span className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${answerClass}`}>
+                      <span
+                        className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${answerClass}`}
+                        style={answerBgOverride[lead.answer_status] ? { backgroundColor: answerBgOverride[lead.answer_status] } : {}}
+                      >
                         {lead.answer_status}
                       </span>
                     )}
                   </td>
-                  <td className="px-3 py-2.5 text-gray-500">{formatDuration(lead.duration)}</td>
+                  <td className="px-3 py-2.5" style={{ color: '#8a8279' }}>{formatDuration(lead.duration)}</td>
                   <td className="px-3 py-2.5">
-                    <span className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${stageClass}`}>
+                    <span
+                      className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium"
+                      style={{
+                        backgroundColor: (stageStyles[stage] || stageStyles['New Lead']).bg,
+                        color: (stageStyles[stage] || stageStyles['New Lead']).text,
+                      }}
+                    >
                       {stage}
                     </span>
                   </td>

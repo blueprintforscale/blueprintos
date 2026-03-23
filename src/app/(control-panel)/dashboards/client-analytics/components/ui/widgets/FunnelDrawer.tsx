@@ -69,14 +69,14 @@ const answerColors: Record<string, string> = {
   abandoned: 'bg-amber-100 text-amber-700',
 };
 
-const stageColors: Record<string, string> = {
-  'Job Completed': 'bg-green-600 text-white',
-  'Job Scheduled': 'bg-green-500 text-white',
-  'Estimate Approved': 'bg-blue-600 text-white',
-  'Estimate Sent': 'bg-blue-400 text-white',
-  'Inspection Complete': 'bg-purple-500 text-white',
-  'Inspection Scheduled': 'bg-purple-400 text-white',
-  'Lead': 'bg-gray-400 text-white',
+const stageStyles: Record<string, { bg: string; text: string }> = {
+  'Job Completed': { bg: '#3b8a5a', text: '#fff' },
+  'Job Scheduled': { bg: '#e6f3ec', text: '#3b8a5a' },
+  'Estimate Approved': { bg: '#3b8a5a', text: '#fff' },
+  'Estimate Sent': { bg: '#EEEAD9', text: '#5a554d' },
+  'Inspection Complete': { bg: '#E85D4D', text: '#fff' },
+  'Inspection Scheduled': { bg: '#fde8e4', text: '#c44a3c' },
+  'Lead': { bg: '#EEEAD9', text: '#8a8279' },
 };
 
 function getHighestStage(lead: Lead): string {
@@ -130,7 +130,7 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
             {filtered.map((lead, i) => {
               const revenue = (lead.approved_revenue || 0) + (lead.invoiced_revenue || 0);
               const highestStage = getHighestStage(lead);
-              const stageColor = stageColors[highestStage] || 'bg-gray-400 text-white';
+              const stageStyle = stageStyles[highestStage] || stageStyles['Lead'];
               return (
                 <div key={`${lead.phone}-${i}`} className="flex items-start gap-3 px-5 py-3.5 hover:bg-gray-50">
                   {/* Middle: details */}
@@ -140,7 +140,10 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
                       <Typography className="truncate text-sm font-medium">
                         {lead.name || 'Unknown'}
                       </Typography>
-                      <span className="inline-block rounded bg-green-600 px-1.5 py-0.5 text-[10px] font-medium text-white">
+                      <span
+                        className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium text-white"
+                        style={{ backgroundColor: '#3b8a5a' }}
+                      >
                         Google Ads
                       </span>
                     </div>
@@ -158,7 +161,10 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
 
                     {/* Stage badge */}
                     <div className="mt-1.5">
-                      <span className={`inline-block rounded px-2 py-0.5 text-[10px] font-medium ${stageColor}`}>
+                      <span
+                        className="inline-block rounded px-2 py-0.5 text-[10px] font-medium"
+                        style={{ backgroundColor: stageStyle.bg, color: stageStyle.text }}
+                      >
                         {highestStage}
                       </span>
                     </div>
