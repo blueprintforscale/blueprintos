@@ -10,60 +10,69 @@ import type { MonthlyTrend } from '../../../api/types';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 type Props = { data: MonthlyTrend[] | undefined };
-type Metric = 'leads' | 'spend' | 'cpl' | 'roas' | 'revenue';
+type Metric = 'leads' | 'spend' | 'cpl' | 'roas' | 'revenue' | 'conversions' | 'book_rate' | 'close_rate';
 
-const metricsList: { key: Metric; label: string; format: (v: number) => string }[] = [
-  { key: 'leads', label: 'Leads', format: (v) => String(Math.round(v)) },
-  { key: 'spend', label: 'Ad Spend', format: (v) => `$${(v / 1000).toFixed(1)}K` },
-  { key: 'cpl', label: 'CPL', format: (v) => `$${v.toFixed(0)}` },
-  { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x` },
-  { key: 'revenue', label: 'Revenue', format: (v) => `$${(v / 1000).toFixed(1)}K` },
+const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; unit?: string }[] = [
+  { key: 'leads', label: 'Leads', format: (v) => String(Math.round(v)), color: '#000000' },
+  { key: 'spend', label: 'Ad Spend', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#5a554d' },
+  { key: 'cpl', label: 'CPL', format: (v) => `$${v.toFixed(0)}`, color: '#E85D4D' },
+  { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#3b8a5a' },
+  { key: 'revenue', label: 'Revenue', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#c4890a' },
+  { key: 'conversions', label: 'Conversions', format: (v) => String(Math.round(v)), color: '#6366f1' },
+  { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#E85D4D', unit: '%' },
+  { key: 'close_rate', label: 'Close Rate', format: (v) => `${v.toFixed(0)}%`, color: '#3b8a5a', unit: '%' },
 ];
 
 function HistoricalPerformance({ data }: Props) {
   const [metric, setMetric] = useState<Metric>('leads');
+  const [overlays, setOverlays] = useState<Metric[]>([]);
 
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
   const cfg = metricsList.find((m) => m.key === metric)!;
-  const getValue = (d: MonthlyTrend): number => parseFloat((d as any)[metric]) || 0;
+  const getValue = (d: MonthlyTrend, key: Metric): number => parseFloat((d as any)[key]) || 0;
 
-  // Use all data as a continuous timeline (last 12 months)
-  // Take the most recent 12 months
   const recent = data.slice(-12);
   const labels = recent.map((d) => (d as any).short_label || d.label);
-  const values = recent.map(getValue);
+  const values = recent.map((d) => getValue(d, metric));
 
-  // Build prior year comparison: for each month in recent, find the same month 12 months earlier
+  // Prior year for primary metric
   const priorValues = recent.map((d) => {
     const shortLabel = (d as any).short_label;
     const year = (d as any).year;
-    const priorMatch = data.find(
-      (p) => (p as any).short_label === shortLabel && (p as any).year === year - 1
-    );
-    return priorMatch ? getValue(priorMatch) : null;
+    const priorMatch = data.find((p) => (p as any).short_label === shortLabel && (p as any).year === year - 1);
+    return priorMatch ? getValue(priorMatch, metric) : null;
   });
   const hasPriorYear = priorValues.some((v) => v !== null && v > 0);
 
-  // Latest values for header
   const latestValue = values[values.length - 1] || 0;
   const priorMonthValue = values.length > 1 ? values[values.length - 2] : null;
   const lastYearValue = priorValues[priorValues.length - 1];
 
-  // Series
+  // Build series
   const series: ApexAxisChartSeries = [
-    { name: 'Current', data: values },
+    { name: cfg.label, data: values },
   ];
-  const colors = ['#000000'];
+  const colors = [cfg.color];
   const strokeWidth = [3];
   const dashArray = [0];
 
   if (hasPriorYear) {
-    series.push({ name: 'Prior Year', data: priorValues as number[] });
+    series.push({ name: `${cfg.label} (prior year)`, data: priorValues as number[] });
     colors.push('#c5bfb6');
     strokeWidth.push(2);
     dashArray.push(5);
   }
+
+  // Overlay series
+  overlays.forEach((ovKey) => {
+    const ovCfg = metricsList.find((m) => m.key === ovKey)!;
+    const ovValues = recent.map((d) => getValue(d, ovKey));
+    series.push({ name: ovCfg.label, data: ovValues });
+    colors.push(ovCfg.color);
+    strokeWidth.push(2);
+    dashArray.push(3);
+  });
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -75,61 +84,47 @@ function HistoricalPerformance({ data }: Props) {
     },
     colors,
     stroke: { width: strokeWidth, curve: 'smooth', dashArray },
-    markers: { size: [4, 0], colors, strokeWidth: 0 },
+    markers: { size: [4, ...new Array(series.length - 1).fill(0)], colors, strokeWidth: 0 },
     xaxis: {
       categories: labels,
       axisBorder: { show: false },
       axisTicks: { show: false },
       labels: { style: { colors: '#8a8279', fontSize: '11px' } },
     },
-    yaxis: {
-      labels: {
-        formatter: cfg.format,
-        style: { colors: '#8a8279', fontSize: '11px' },
-      },
+    yaxis: overlays.length > 0 ? [
+      { labels: { formatter: cfg.format, style: { colors: '#8a8279', fontSize: '11px' } }, min: 0 },
+      ...overlays.map((ovKey) => {
+        const ovCfg = metricsList.find((m) => m.key === ovKey)!;
+        return { opposite: true, labels: { formatter: ovCfg.format, style: { colors: ovCfg.color, fontSize: '10px' } }, min: 0 };
+      }),
+    ] : {
+      labels: { formatter: cfg.format, style: { colors: '#8a8279', fontSize: '11px' } },
       min: 0,
     },
     tooltip: {
       theme: 'light',
-      custom: ({ series: s, dataPointIndex }) => {
-        const val = s[0][dataPointIndex];
-        const priorVal = hasPriorYear && s[1] ? s[1][dataPointIndex] : null;
-        const monthLabel = labels[dataPointIndex];
-        const prevMonth = dataPointIndex > 0 ? s[0][dataPointIndex - 1] : null;
-
-        let html = `<div style="padding:10px 14px;font-size:12px;line-height:1.6">`;
-        html += `<div style="font-weight:700;color:#000;margin-bottom:4px">${monthLabel}</div>`;
-        html += `<div style="color:#000">${cfg.label}: <strong>${cfg.format(val)}</strong></div>`;
-
-        if (prevMonth !== null) {
-          const change = val - prevMonth;
-          const pct = prevMonth > 0 ? ((change / prevMonth) * 100).toFixed(0) : '—';
-          const arrow = change > 0 ? '↑' : change < 0 ? '↓' : '→';
-          const color = change > 0 ? (metric === 'cpl' ? '#c44a3c' : '#3b8a5a') : change < 0 ? (metric === 'cpl' ? '#3b8a5a' : '#c44a3c') : '#8a8279';
-          html += `<div style="color:${color}">${arrow} ${pct}% vs prior month</div>`;
+      shared: true,
+      intersect: false,
+      y: { formatter: (val: number, opts: { seriesIndex: number }) => {
+        const idx = opts.seriesIndex;
+        if (idx === 0) return cfg.format(val);
+        if (hasPriorYear && idx === 1) return cfg.format(val);
+        const ovIdx = idx - (hasPriorYear ? 2 : 1);
+        if (ovIdx >= 0 && ovIdx < overlays.length) {
+          const ovCfg = metricsList.find((m) => m.key === overlays[ovIdx])!;
+          return ovCfg.format(val);
         }
-
-        if (priorVal !== null && priorVal !== undefined && priorVal > 0) {
-          const yoyChange = val - priorVal;
-          const yoyPct = priorVal > 0 ? ((yoyChange / priorVal) * 100).toFixed(0) : '—';
-          const yoyArrow = yoyChange > 0 ? '↑' : yoyChange < 0 ? '↓' : '→';
-          const yoyColor = yoyChange > 0 ? (metric === 'cpl' ? '#c44a3c' : '#3b8a5a') : yoyChange < 0 ? (metric === 'cpl' ? '#3b8a5a' : '#c44a3c') : '#8a8279';
-          html += `<div style="color:#c5bfb6;margin-top:2px">Prior year: ${cfg.format(priorVal)}</div>`;
-          html += `<div style="color:${yoyColor}">${yoyArrow} ${yoyPct}% year over year</div>`;
-        }
-
-        html += `</div>`;
-        return html;
-      },
+        return String(val);
+      }},
     },
-    grid: {
-      borderColor: '#EEEAD9',
-      strokeDashArray: 0,
-      xaxis: { lines: { show: false } },
-      yaxis: { lines: { show: true } },
-    },
-    legend: { show: false },
+    grid: { borderColor: '#EEEAD9', xaxis: { lines: { show: false } }, yaxis: { lines: { show: true } } },
+    legend: { show: true, position: 'top', labels: { colors: '#8a8279' }, fontSize: '11px' },
     dataLabels: { enabled: false },
+  };
+
+  const toggleOverlay = (key: Metric) => {
+    if (key === metric) return;
+    setOverlays((prev) => prev.includes(key) ? prev.filter((k) => k !== key) : prev.length >= 2 ? [prev[1], key] : [...prev, key]);
   };
 
   return (
@@ -148,20 +143,17 @@ function HistoricalPerformance({ data }: Props) {
             </Typography>
           </div>
           <div className="mt-0.5 flex gap-4 text-[11px]" style={{ color: '#8a8279' }}>
-            {priorMonthValue !== null && (
-              <span>Prior month: {cfg.format(priorMonthValue)}</span>
-            )}
-            {lastYearValue !== null && lastYearValue > 0 && (
-              <span>Year ago: {cfg.format(lastYearValue)}</span>
-            )}
+            {priorMonthValue !== null && <span>Prior month: {cfg.format(priorMonthValue)}</span>}
+            {lastYearValue !== null && lastYearValue > 0 && <span>Year ago: {cfg.format(lastYearValue)}</span>}
           </div>
         </div>
 
-        <div className="flex gap-1">
+        {/* Primary metric pills */}
+        <div className="flex flex-wrap gap-1">
           {metricsList.map((m) => (
             <button
               key={m.key}
-              onClick={() => setMetric(m.key)}
+              onClick={() => { setMetric(m.key); setOverlays((prev) => prev.filter((k) => k !== m.key)); }}
               className="rounded-md px-2.5 py-1 text-xs font-medium transition-colors"
               style={{
                 backgroundColor: metric === m.key ? '#000' : 'transparent',
@@ -174,18 +166,32 @@ function HistoricalPerformance({ data }: Props) {
         </div>
       </div>
 
-      {hasPriorYear && (
-        <div className="flex gap-4 px-6 pb-1 text-[10px]" style={{ color: '#8a8279' }}>
-          <span className="flex items-center gap-1">
-            <span className="inline-block h-0.5 w-4" style={{ backgroundColor: '#000' }} /> Last 12 months
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="inline-block h-0.5 w-4 border-t border-dashed" style={{ borderColor: '#c5bfb6' }} /> Prior year
-          </span>
+      {/* Overlay toggles */}
+      <div className="flex items-center gap-2 px-6 pb-2">
+        <span className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>Compare:</span>
+        <div className="flex flex-wrap gap-1">
+          {metricsList.filter((m) => m.key !== metric).map((m) => {
+            const isActive = overlays.includes(m.key);
+            return (
+              <button
+                key={m.key}
+                onClick={() => toggleOverlay(m.key)}
+                className="rounded-full px-2 py-0.5 text-[10px] font-medium transition-colors"
+                style={{
+                  backgroundColor: isActive ? m.color : 'transparent',
+                  color: isActive ? '#fff' : '#c5bfb6',
+                  border: `1px solid ${isActive ? m.color : '#ddd8cb'}`,
+                }}
+              >
+                {m.label}
+              </button>
+            );
+          })}
         </div>
-      )}
+      </div>
 
-      <div className="px-2 pb-4" style={{ height: 280 }}>
+      {/* Chart */}
+      <div className="px-2 pb-4" style={{ height: 300 }}>
         <ReactApexChart options={chartOptions} series={series} type="line" height="100%" />
       </div>
     </Paper>
