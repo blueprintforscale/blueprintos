@@ -145,10 +145,15 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
                       </span>
                     </div>
 
-                    {/* Date + phone */}
+                    {/* Date + phone + answer status (only for Lead stage) */}
                     <div className="mt-0.5 flex items-center gap-2 text-xs text-gray-400">
                       <span>{formatDate(lead.contact_date)}</span>
                       <span>{formatPhone(lead.phone)}</span>
+                      {highestStage === 'Lead' && lead.answer_status && lead.answer_status !== 'form' && (
+                        <span className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${answerColors[lead.answer_status] || 'bg-gray-100 text-gray-500'}`}>
+                          {lead.answer_status}
+                        </span>
+                      )}
                     </div>
 
                     {/* Stage badge */}
