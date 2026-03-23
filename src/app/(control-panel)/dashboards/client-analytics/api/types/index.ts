@@ -62,6 +62,7 @@ export type MonthlyTrend = {
   short_label?: string;
   year?: number;
   leads: string;
+  spam?: string;
   spend: string;
   cpl: string;
   revenue?: string;
