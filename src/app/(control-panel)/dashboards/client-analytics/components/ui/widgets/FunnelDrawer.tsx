@@ -128,7 +128,9 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
         ) : (
           <div className="divide-y divide-gray-50">
             {filtered.map((lead, i) => {
-              const revenue = (lead.approved_revenue || 0) + (lead.invoiced_revenue || 0);
+              const approvedRev = parseFloat(String(lead.approved_revenue)) || 0;
+              const invoicedRev = parseFloat(String(lead.invoiced_revenue)) || 0;
+              const revenue = approvedRev + invoicedRev;
               const highestStage = getHighestStage(lead);
               const stageStyle = stageStyles[highestStage] || stageStyles['Lead'];
               return (
@@ -177,11 +179,17 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
                         {formatDollars(revenue)}
                       </Typography>
                     )}
-                    {lead.approved_revenue > 0 && lead.invoiced_revenue > 0 && (
-                      <div className="flex flex-col items-end text-[9px] text-gray-400">
-                        <span>Est: {formatDollars(lead.approved_revenue)}</span>
-                        <span>Inv: {formatDollars(lead.invoiced_revenue)}</span>
+                    {approvedRev > 0 && invoicedRev > 0 && (
+                      <div className="flex flex-col items-end text-[9px]" style={{ color: '#8a8279' }}>
+                        <span>Est: {formatDollars(approvedRev)}</span>
+                        <span>Inv: {formatDollars(invoicedRev)}</span>
                       </div>
+                    )}
+                    {approvedRev > 0 && invoicedRev === 0 && revenue > 0 && (
+                      <div className="text-[9px]" style={{ color: '#8a8279' }}>Approved est.</div>
+                    )}
+                    {invoicedRev > 0 && approvedRev === 0 && revenue > 0 && (
+                      <div className="text-[9px]" style={{ color: '#8a8279' }}>Invoiced</div>
                     )}
                   </div>
                 </div>

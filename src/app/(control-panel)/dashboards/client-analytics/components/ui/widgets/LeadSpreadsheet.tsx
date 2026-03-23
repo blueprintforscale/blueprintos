@@ -130,7 +130,7 @@ function LeadSpreadsheet({ data, customerId }: Props) {
           </thead>
           <tbody>
             {filtered.map((lead, i) => {
-              const revenue = (lead.approved_revenue || 0) + (lead.invoiced_revenue || 0);
+              const revenue = (parseFloat(String(lead.approved_revenue)) || 0) + (parseFloat(String(lead.invoiced_revenue)) || 0);
               const source = getSource(lead);
               const stage = getHighestStage(lead);
 
