@@ -17,6 +17,7 @@ import LeadSpreadsheet from '../ui/widgets/LeadSpreadsheet';
 import HistoricalPerformance from '../ui/widgets/HistoricalPerformance';
 import FunnelDrawer from '../ui/widgets/FunnelDrawer';
 import type { FunnelStage } from '../ui/widgets/FunnelDrawer';
+import DateRangePicker from '../ui/DateRangePicker';
 import {
   useClients,
   useFunnel,
@@ -52,9 +53,14 @@ function ClientAnalyticsView() {
   const [activeTab, setActiveTab] = useState(0);
   const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
   const [drawerTitle, setDrawerTitle] = useState<string | undefined>(undefined);
+  const [dateRange, setDateRange] = useState({
+    from: new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0],
+    to: new Date().toISOString().split('T')[0],
+    days: 90 as number | null,
+  });
 
-  const dateTo = new Date().toISOString().split('T')[0];
-  const dateFrom = new Date(Date.now() - 30 * 86400000).toISOString().split('T')[0];
+  const dateFrom = dateRange.from;
+  const dateTo = dateRange.to;
 
   const { data: clients } = useClients();
   const { data: funnel } = useFunnel(selectedClient!, activeSource, dateFrom, dateTo);
@@ -106,6 +112,7 @@ function ClientAnalyticsView() {
             <ClientSelector clients={clientList} selectedId={selectedClient} onSelect={setSelectedClient} />
           </div>
           <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
+          <DateRangePicker value={dateRange} onChange={setDateRange} />
           <Tabs
             value={activeTab}
             onChange={(_, v) => setActiveTab(v)}
