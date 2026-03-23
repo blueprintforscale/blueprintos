@@ -69,6 +69,26 @@ const answerColors: Record<string, string> = {
   abandoned: 'bg-amber-100 text-amber-700',
 };
 
+const stageColors: Record<string, string> = {
+  'Job Completed': 'bg-green-600 text-white',
+  'Job Scheduled': 'bg-green-500 text-white',
+  'Estimate Approved': 'bg-blue-600 text-white',
+  'Estimate Sent': 'bg-blue-400 text-white',
+  'Inspection Complete': 'bg-purple-500 text-white',
+  'Inspection Scheduled': 'bg-purple-400 text-white',
+  'Lead': 'bg-gray-400 text-white',
+};
+
+function getHighestStage(lead: Lead): string {
+  if (lead.job_completed) return 'Job Completed';
+  if (lead.job_scheduled) return 'Job Scheduled';
+  if (lead.estimate_approved) return 'Estimate Approved';
+  if (lead.estimate_sent) return 'Estimate Sent';
+  if (lead.inspection_completed) return 'Inspection Complete';
+  if (lead.inspection_scheduled) return 'Inspection Scheduled';
+  return 'Lead';
+}
+
 type Props = {
   open: boolean;
   stage: FunnelStage;
@@ -109,57 +129,33 @@ function FunnelDrawer({ open, stage, leads, onClose }: Props) {
           <div className="divide-y divide-gray-50">
             {filtered.map((lead, i) => {
               const revenue = (lead.approved_revenue || 0) + (lead.invoiced_revenue || 0);
+              const highestStage = getHighestStage(lead);
+              const stageColor = stageColors[highestStage] || 'bg-gray-400 text-white';
               return (
                 <div key={`${lead.phone}-${i}`} className="flex items-start gap-3 px-5 py-3.5 hover:bg-gray-50">
-                  {/* Left: status indicator */}
-                  <div className="mt-1 flex flex-col items-center">
-                    <div className={`h-2.5 w-2.5 rounded-full ${lead.match_status === 'matched' ? 'bg-green-400' : 'bg-gray-300'}`} />
-                  </div>
-
                   {/* Middle: details */}
                   <div className="min-w-0 flex-1">
+                    {/* Name + source badge */}
                     <div className="flex items-center gap-2">
                       <Typography className="truncate text-sm font-medium">
                         {lead.name || 'Unknown'}
                       </Typography>
-                      {lead.answer_status && lead.answer_status !== 'form' && (
-                        <span className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-medium ${answerColors[lead.answer_status] || 'bg-gray-100 text-gray-500'}`}>
-                          {lead.answer_status}
-                        </span>
-                      )}
+                      <span className="inline-block rounded bg-green-600 px-1.5 py-0.5 text-[10px] font-medium text-white">
+                        Google Ads
+                      </span>
                     </div>
+
+                    {/* Date + phone */}
                     <div className="mt-0.5 flex items-center gap-2 text-xs text-gray-400">
                       <span>{formatDate(lead.contact_date)}</span>
                       <span>{formatPhone(lead.phone)}</span>
-                      <Chip
-                        label={lead.lead_type}
-                        size="small"
-                        variant="outlined"
-                        sx={{ height: 18, fontSize: '0.6rem' }}
-                      />
                     </div>
 
-                    {/* Funnel progress dots */}
-                    <div className="mt-2 flex items-center gap-1">
-                      {[
-                        { key: 'inspection_scheduled', label: 'Insp' },
-                        { key: 'inspection_completed', label: 'Comp' },
-                        { key: 'estimate_sent', label: 'Est' },
-                        { key: 'estimate_approved', label: 'Appr' },
-                        { key: 'job_scheduled', label: 'Job' },
-                        { key: 'job_completed', label: 'Done' },
-                      ].map((s) => (
-                        <div
-                          key={s.key}
-                          className={`flex h-5 items-center rounded px-1.5 text-[9px] font-medium ${
-                            (lead as any)[s.key]
-                              ? 'bg-green-100 text-green-700'
-                              : 'bg-gray-50 text-gray-300'
-                          }`}
-                        >
-                          {s.label}
-                        </div>
-                      ))}
+                    {/* Stage badge */}
+                    <div className="mt-1.5">
+                      <span className={`inline-block rounded px-2 py-0.5 text-[10px] font-medium ${stageColor}`}>
+                        {highestStage}
+                      </span>
                     </div>
                   </div>
 
