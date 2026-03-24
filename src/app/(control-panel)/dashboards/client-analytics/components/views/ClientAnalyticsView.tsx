@@ -112,7 +112,7 @@ function ClientAnalyticsView() {
             <ClientSelector clients={clientList} selectedId={selectedClient} onSelect={setSelectedClient} />
           </div>
           <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
-          <DateRangePicker value={dateRange} onChange={setDateRange} />
+          {activeTab !== 2 && <DateRangePicker value={dateRange} onChange={setDateRange} />}
           <Tabs
             value={activeTab}
             onChange={(_, v) => setActiveTab(v)}
@@ -136,9 +136,11 @@ function ClientAnalyticsView() {
             {/* ====== OVERVIEW TAB ====== */}
             {activeTab === 0 && (
               <>
-                <motion.div variants={item}>
-                  <AdMetricsCards data={adMetrics} />
-                </motion.div>
+                {activeSource !== 'all' && (
+                  <motion.div variants={item}>
+                    <AdMetricsCards data={adMetrics} />
+                  </motion.div>
+                )}
                 <motion.div variants={item}>
                   <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                 </motion.div>

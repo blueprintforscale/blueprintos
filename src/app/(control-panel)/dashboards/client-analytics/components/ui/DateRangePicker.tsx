@@ -6,10 +6,10 @@ import TextField from '@mui/material/TextField';
 type DateRange = { from: string; to: string; days: number | null };
 
 const presets = [
-  { label: '7d', days: 7 },
-  { label: '30d', days: 30 },
-  { label: '60d', days: 60 },
   { label: '90d', days: 90 },
+  { label: '60d', days: 60 },
+  { label: '30d', days: 30 },
+  { label: '7d', days: 7 },
 ];
 
 function toDateStr(d: Date) {
