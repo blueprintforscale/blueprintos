@@ -109,9 +109,9 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
             rel="noopener noreferrer"
             className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition-colors hover:bg-white"
             style={{ color: '#E85D4D' }}
-            title="Open in HouseCall Pro"
+            title={fieldMgmt === 'jobber' ? 'Open in Jobber' : 'Open in Housecall Pro'}
           >
-            HCP <span className="text-base">&#8599;</span>
+            {fieldMgmt === 'jobber' ? 'Jobber' : 'HCP'} <span className="text-base">&#8599;</span>
           </a>
         </div>
 
@@ -119,7 +119,7 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
         {inspections.length > 0 && (
           <div>
             <Typography className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#8a8279' }}>
-              Inspections
+              {fieldMgmt === 'jobber' ? 'Assessments' : 'Inspections'}
             </Typography>
             <div className="space-y-1.5">
               {inspections.map((insp: any, i: number) => (
@@ -146,7 +146,7 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
         {estimates.length > 0 && (
           <div>
             <Typography className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#8a8279' }}>
-              Estimates
+              {fieldMgmt === 'jobber' ? 'Quotes' : 'Estimates'}
             </Typography>
             <div className="space-y-2">
               {estimates.map((est: any, i: number) => (
