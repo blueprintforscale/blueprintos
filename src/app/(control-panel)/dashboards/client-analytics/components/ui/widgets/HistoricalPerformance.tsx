@@ -87,6 +87,14 @@ function HistoricalPerformance({ data }: Props) {
     dashArray.push(5);
   }
 
+  // Trend line
+  if (trendLine) {
+    series.push({ name: 'Trend', data: trendLine });
+    seriesColors.push('#ddd8cb');
+    strokeWidth.push(1.5);
+    dashArray.push(6);
+  }
+
   // Overlay series
   overlays.forEach((ovKey) => {
     const ovCfg = metricsList.find((m) => m.key === ovKey)!;
@@ -97,28 +105,47 @@ function HistoricalPerformance({ data }: Props) {
     dashArray.push(3);
   });
 
-  // Annotations for projection
+  // Projection: point annotation at projected value for current month
   const annotations: ApexOptions['annotations'] = {};
   if (projectedValue !== null && projectedValue > 0) {
-    annotations.yaxis = [{
+    annotations.points = [{
+      x: labels[labels.length - 1],
       y: projectedValue,
-      borderColor: cfg.color,
-      strokeDashArray: 4,
-      opacity: 0.4,
+      seriesIndex: 0,
+      marker: {
+        size: 6,
+        fillColor: '#fff',
+        strokeColor: cfg.color,
+        strokeWidth: 2,
+        shape: 'circle',
+      },
       label: {
-        text: `~${cfg.format(projectedValue)} projected`,
-        borderColor: 'transparent',
-        position: 'left',
-        offsetX: 10,
+        text: `~${cfg.format(projectedValue)}`,
+        borderColor: cfg.color,
+        offsetY: -10,
         style: {
           background: '#1a1a1a',
-          color: '#c5bfb6',
+          color: '#fff',
           fontSize: '10px',
           fontWeight: 600,
-          padding: { left: 8, right: 8, top: 3, bottom: 3 },
+          padding: { left: 6, right: 6, top: 3, bottom: 3 },
         },
       },
     }];
+  }
+
+  // Trend line (linear regression) across all complete months
+  const completeValues = lastIsIncomplete ? values.slice(0, -1) : values;
+  const n = completeValues.length;
+  let trendLine: number[] | null = null;
+  if (n >= 3) {
+    const sumX = completeValues.reduce((s, _, i) => s + i, 0);
+    const sumY = completeValues.reduce((s, v) => s + v, 0);
+    const sumXY = completeValues.reduce((s, v, i) => s + i * v, 0);
+    const sumX2 = completeValues.reduce((s, _, i) => s + i * i, 0);
+    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+    const intercept = (sumY - slope * sumX) / n;
+    trendLine = values.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
   }
 
   const chartOptions: ApexOptions = {

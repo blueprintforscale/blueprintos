@@ -49,26 +49,44 @@ function MonthlyTrendChart({ data }: Props) {
   // Annotation for projected leads
   const annotations: ApexOptions['annotations'] = {};
   if (projectedLeads !== null && projectedLeads > 0) {
-    annotations.yaxis = [{
+    annotations.points = [{
+      x: labels[labels.length - 1],
       y: projectedLeads,
-      yAxisIndex: 0,
-      borderColor: '#000',
-      strokeDashArray: 4,
-      opacity: 0.4,
+      seriesIndex: 0,
+      marker: {
+        size: 6,
+        fillColor: '#fff',
+        strokeColor: '#000',
+        strokeWidth: 2,
+        shape: 'circle',
+      },
       label: {
-        text: `~${projectedLeads} projected`,
-        borderColor: 'transparent',
-        position: 'left',
-        offsetX: 10,
+        text: `~${projectedLeads}`,
+        borderColor: '#000',
+        offsetY: -10,
         style: {
           background: '#1a1a1a',
-          color: '#c5bfb6',
+          color: '#fff',
           fontSize: '10px',
           fontWeight: 600,
-          padding: { left: 8, right: 8, top: 3, bottom: 3 },
+          padding: { left: 6, right: 6, top: 3, bottom: 3 },
         },
       },
     }];
+  }
+
+  // Trend line (linear regression on quality leads)
+  const completeLeads = lastIsIncomplete ? qualityLeads.slice(0, -1) : qualityLeads;
+  const n = completeLeads.length;
+  let trendLine: number[] | null = null;
+  if (n >= 3) {
+    const sumX = completeLeads.reduce((s, _, i) => s + i, 0);
+    const sumY = completeLeads.reduce((s, v) => s + v, 0);
+    const sumXY = completeLeads.reduce((s, v, i) => s + i * v, 0);
+    const sumX2 = completeLeads.reduce((s, _, i) => s + i * i, 0);
+    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+    const intercept = (sumY - slope * sumX) / n;
+    trendLine = qualityLeads.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
   }
 
   const series: any[] = [
@@ -76,6 +94,16 @@ function MonthlyTrendChart({ data }: Props) {
     { name: 'Contacts (removed)', type: 'bar' as const, data: spamLeads, group: 'leads' },
     { name: 'CPL', type: 'line' as const, data: cpl },
   ];
+
+  if (trendLine) {
+    series.push({ name: 'Trend', type: 'line' as const, data: trendLine });
+  }
+
+  const chartColors = trendLine
+    ? ['#000000', '#ddd8cb', '#E85D4D', '#c5bfb6']
+    : ['#000000', '#ddd8cb', '#E85D4D'];
+  const strokeWidths = trendLine ? [0, 0, 3, 1.5] : [0, 0, 3];
+  const dashArrays = trendLine ? [0, 0, 0, 6] : [0, 0, 0];
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -86,8 +114,8 @@ function MonthlyTrendChart({ data }: Props) {
       stacked: true,
       background: 'transparent',
     },
-    colors: ['#000000', '#ddd8cb', '#E85D4D'],
-    stroke: { width: [0, 0, 3], curve: 'smooth' },
+    colors: chartColors,
+    stroke: { width: strokeWidths, curve: 'smooth', dashArray: dashArrays },
     forecastDataPoints: { count: forecastCount, dashArray: 6, strokeWidth: 2 },
     plotOptions: {
       bar: {
@@ -169,6 +197,9 @@ function MonthlyTrendChart({ data }: Props) {
           </span>
           <span className="flex items-center gap-1">
             <span className="inline-block h-0.5 w-4" style={{ backgroundColor: '#E85D4D' }} /> CPL
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="inline-block h-0.5 w-4 border-t border-dashed" style={{ borderColor: '#c5bfb6' }} /> Trend
           </span>
         </div>
         {projectedLeads !== null && currentLeads !== null && (
