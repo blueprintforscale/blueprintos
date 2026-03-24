@@ -48,6 +48,7 @@ type Props = {
     customer_id: number;
     name: string;
     field_management_software: string;
+    start_date?: string;
   };
 };
 
@@ -196,7 +197,7 @@ export default function SharedDashboard({ client }: Props) {
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                   </motion.div>
                   <motion.div variants={item}>
-                    <MonthlyTrendChart data={trend} />
+                    <MonthlyTrendChart data={trend} startDate={client.start_date} />
                   </motion.div>
                 </div>
                 <motion.div variants={item}>
@@ -221,7 +222,7 @@ export default function SharedDashboard({ client }: Props) {
                     </div>
                   </div>
                 ) : (
-                  <HistoricalPerformance data={historicalData} />
+                  <HistoricalPerformance data={historicalData} startDate={client.start_date} />
                 )}
               </motion.div>
             )}

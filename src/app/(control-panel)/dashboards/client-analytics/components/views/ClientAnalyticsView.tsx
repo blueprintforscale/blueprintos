@@ -197,7 +197,7 @@ function ClientAnalyticsView() {
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                   </motion.div>
                   <motion.div variants={item}>
-                    <MonthlyTrendChart data={trend} />
+                    <MonthlyTrendChart data={trend} startDate={selectedClientObj?.start_date} />
                   </motion.div>
                 </div>
                 <motion.div variants={item}>
@@ -224,7 +224,7 @@ function ClientAnalyticsView() {
                     </div>
                   </div>
                 ) : (
-                  <HistoricalPerformance data={historicalData} />
+                  <HistoricalPerformance data={historicalData} startDate={selectedClientObj?.start_date} />
                 )}
               </motion.div>
             )}

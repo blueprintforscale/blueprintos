@@ -13,6 +13,7 @@ type ClientInfo = {
   customer_id: number;
   name: string;
   field_management_software: string;
+  start_date?: string;
 };
 
 export default function SharePage() {

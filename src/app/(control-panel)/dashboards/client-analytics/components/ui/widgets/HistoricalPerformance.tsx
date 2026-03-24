@@ -9,7 +9,7 @@ import type { MonthlyTrend } from '../../../api/types';
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-type Props = { data: MonthlyTrend[] | undefined };
+type Props = { data: MonthlyTrend[] | undefined; startDate?: string };
 type Metric = 'leads' | 'spend' | 'cpl' | 'conversions';
 
 const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; projectable: boolean }[] = [
@@ -32,7 +32,7 @@ function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction
   return { dayElapsed, daysInMonth, fraction: dayElapsed / daysInMonth };
 }
 
-function HistoricalPerformance({ data }: Props) {
+function HistoricalPerformance({ data, startDate }: Props) {
   const [metric, setMetric] = useState<Metric>('leads');
   const [overlays, setOverlays] = useState<Metric[]>([]);
 
@@ -43,6 +43,13 @@ function HistoricalPerformance({ data }: Props) {
 
   const recent = data.slice(-12);
   const labels = recent.map((d) => (d as any).short_label || d.label);
+
+  // Detect program start month index
+  const startMonthIdx = startDate ? recent.findIndex((d) => {
+    const ms = new Date((d as any).month_start);
+    const sd = new Date(startDate);
+    return ms.getUTCFullYear() === sd.getFullYear() && ms.getUTCMonth() === sd.getMonth();
+  }) : -1;
   const values = recent.map((d) => getValue(d, metric));
 
   // Detect current (incomplete) month
@@ -120,8 +127,57 @@ function HistoricalPerformance({ data }: Props) {
     dashArray.push(3);
   });
 
+  // Average line
+  const avgValue = values.length > 0
+    ? values.reduce((s, v) => s + v, 0) / values.length
+    : 0;
+
   // Projection: point annotation at projected value for current month
   const annotations: ApexOptions['annotations'] = {};
+  if (avgValue > 0) {
+    annotations.yaxis = [{
+      y: avgValue,
+      yAxisIndex: 0,
+      borderColor: '#8a8279',
+      strokeDashArray: 4,
+      opacity: 0.4,
+      label: {
+        text: `Avg: ${cfg.format(avgValue)}`,
+        borderColor: 'transparent',
+        position: 'left',
+        offsetX: 5,
+        style: {
+          background: '#8a8279',
+          color: '#fff',
+          fontSize: '9px',
+          fontWeight: 600,
+          padding: { left: 5, right: 5, top: 2, bottom: 2 },
+        },
+      },
+    }];
+  }
+  if (startMonthIdx >= 0) {
+    annotations.xaxis = [{
+      x: labels[startMonthIdx],
+      borderColor: '#E85D4D',
+      strokeDashArray: 3,
+      opacity: 0.6,
+      label: {
+        text: 'Program Start',
+        borderColor: 'transparent',
+        position: 'top',
+        orientation: 'horizontal',
+        offsetY: -5,
+        style: {
+          background: '#E85D4D',
+          color: '#fff',
+          fontSize: '9px',
+          fontWeight: 600,
+          padding: { left: 4, right: 4, top: 2, bottom: 2 },
+        },
+      },
+    }];
+  }
   if (projectedValue !== null && projectedValue > 0) {
     annotations.points = [{
       x: labels[labels.length - 1],

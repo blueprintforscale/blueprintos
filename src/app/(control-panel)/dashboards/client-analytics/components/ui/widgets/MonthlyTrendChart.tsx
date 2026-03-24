@@ -9,7 +9,7 @@ import type { MonthlyTrend } from '../../../api/types';
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-type Props = { data: MonthlyTrend[] | undefined };
+type Props = { data: MonthlyTrend[] | undefined; startDate?: string };
 
 function isCurrentMonth(monthStart: string): boolean {
   const now = new Date();
@@ -24,10 +24,17 @@ function getMonthProgress(): { fraction: number } {
   return { fraction: dayElapsed / daysInMonth };
 }
 
-function MonthlyTrendChart({ data }: Props) {
+function MonthlyTrendChart({ data, startDate }: Props) {
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
   const labels = data.map((d) => (d as any).short_label || d.label);
+
+  // Detect program start month index
+  const startMonthIdx = startDate ? data.findIndex((d) => {
+    const ms = new Date((d as any).month_start);
+    const sd = new Date(startDate);
+    return ms.getUTCFullYear() === sd.getFullYear() && ms.getUTCMonth() === sd.getMonth();
+  }) : -1;
   const lastIsIncomplete = data.length > 0 && isCurrentMonth((data[data.length - 1] as any).month_start);
   const { fraction: monthFraction } = getMonthProgress();
 
@@ -45,10 +52,32 @@ function MonthlyTrendChart({ data }: Props) {
     ? Math.round(currentLeads / monthFraction)
     : null;
 
-  // Projection: dashed line at projected value, label on right
+  // Trend line (linear regression) — uses projected value for current month
+  const trendInputs = lastIsIncomplete && projectedLeads
+    ? [...qualityLeads.slice(0, -1), projectedLeads]
+    : qualityLeads;
+  const n = trendInputs.length;
+  let trendLine: number[] | null = null;
+  if (n >= 3) {
+    const sumX = trendInputs.reduce((s, _, i) => s + i, 0);
+    const sumY = trendInputs.reduce((s, v) => s + v, 0);
+    const sumXY = trendInputs.reduce((s, v, i) => s + i * v, 0);
+    const sumX2 = trendInputs.reduce((s, _, i) => s + i * i, 0);
+    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+    const intercept = (sumY - slope * sumX) / n;
+    trendLine = trendInputs.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
+  }
+
+  // Average line
+  const avg = trendInputs.length > 0
+    ? Math.round(trendInputs.reduce((s, v) => s + v, 0) / trendInputs.length)
+    : 0;
+
+  // Annotations
   const annotations: ApexOptions['annotations'] = {};
+  const yAnnotations: ApexOptions['annotations']['yaxis'] = [];
   if (projectedLeads !== null && projectedLeads > 0) {
-    annotations.yaxis = [{
+    yAnnotations.push({
       y: projectedLeads,
       yAxisIndex: 0,
       borderColor: '#E85D4D',
@@ -67,23 +96,52 @@ function MonthlyTrendChart({ data }: Props) {
           padding: { left: 5, right: 5, top: 2, bottom: 2 },
         },
       },
-    }];
+    });
   }
-
-  // Trend line (linear regression) — uses projected value for current month
-  const trendInputs = lastIsIncomplete && projectedLeads
-    ? [...qualityLeads.slice(0, -1), projectedLeads]
-    : qualityLeads;
-  const n = trendInputs.length;
-  let trendLine: number[] | null = null;
-  if (n >= 3) {
-    const sumX = trendInputs.reduce((s, _, i) => s + i, 0);
-    const sumY = trendInputs.reduce((s, v) => s + v, 0);
-    const sumXY = trendInputs.reduce((s, v, i) => s + i * v, 0);
-    const sumX2 = trendInputs.reduce((s, _, i) => s + i * i, 0);
-    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
-    const intercept = (sumY - slope * sumX) / n;
-    trendLine = trendInputs.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
+  if (avg > 0) {
+    yAnnotations.push({
+      y: avg,
+      yAxisIndex: 0,
+      borderColor: '#8a8279',
+      strokeDashArray: 4,
+      opacity: 0.4,
+      label: {
+        text: `Avg: ${avg}`,
+        borderColor: 'transparent',
+        position: 'left',
+        offsetX: 5,
+        style: {
+          background: '#8a8279',
+          color: '#fff',
+          fontSize: '9px',
+          fontWeight: 600,
+          padding: { left: 5, right: 5, top: 2, bottom: 2 },
+        },
+      },
+    });
+  }
+  if (yAnnotations.length > 0) annotations.yaxis = yAnnotations;
+  if (startMonthIdx >= 0) {
+    annotations.xaxis = [{
+      x: labels[startMonthIdx],
+      borderColor: '#E85D4D',
+      strokeDashArray: 3,
+      opacity: 0.6,
+      label: {
+        text: 'Start',
+        borderColor: 'transparent',
+        position: 'top',
+        orientation: 'horizontal',
+        offsetY: -5,
+        style: {
+          background: '#E85D4D',
+          color: '#fff',
+          fontSize: '9px',
+          fontWeight: 600,
+          padding: { left: 4, right: 4, top: 2, bottom: 2 },
+        },
+      },
+    }];
   }
 
   const series: any[] = [
@@ -197,6 +255,11 @@ function MonthlyTrendChart({ data }: Props) {
           <span className="flex items-center gap-1">
             <span className="inline-block h-0.5 w-4 border-t border-dashed" style={{ borderColor: '#c5bfb6' }} /> Trend
           </span>
+          {avg > 0 && (
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-0.5 w-4 border-t border-dashed" style={{ borderColor: '#8a8279' }} /> Avg: {avg}
+            </span>
+          )}
         </div>
         {projectedLeads !== null && currentLeads !== null && (
           <div className="mt-1 text-[10px]" style={{ color: '#c5bfb6' }}>

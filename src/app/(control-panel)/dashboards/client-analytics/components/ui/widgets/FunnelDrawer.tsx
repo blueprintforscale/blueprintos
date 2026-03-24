@@ -109,17 +109,27 @@ type Props = {
   onClose: () => void;
 };
 
+// Detect CRM per-lead: Jobber IDs are base64 GraphQL node IDs, HCP IDs start with cus_
+function detectLeadCrm(id: string, clientCrm?: string): 'jobber' | 'hcp' {
+  if (clientCrm === 'jobber') return 'jobber';
+  if (id.startsWith('cus_')) return 'hcp';
+  try {
+    const decoded = atob(id);
+    if (decoded.includes('Jobber')) return 'jobber';
+  } catch { /* not base64 */ }
+  return 'hcp';
+}
+
 function getCrmUrl(id: string | null, crm?: string): string | null {
   if (!id) return null;
-  if (crm === 'jobber') {
-    // Decode base64 Jobber GraphQL ID: gid://Jobber/Client/12345 → 12345
+  const leadCrm = detectLeadCrm(id, crm);
+  if (leadCrm === 'jobber') {
     try {
       const decoded = atob(id);
       const numericId = decoded.split('/').pop();
       return numericId ? `https://secure.getjobber.com/clients/${numericId}` : null;
     } catch { return null; }
   }
-  // Default: HCP
   return `https://pro.housecallpro.com/pro/customers/${id.replace('cus_', '')}`;
 }
 
@@ -354,7 +364,7 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
                           className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-gray-100"
-                          title={crm === 'jobber' ? 'Open in Jobber' : 'Open in Housecall Pro'}
+                          title={detectLeadCrm(lead.hcp_customer_id, crm) === 'jobber' ? 'Open in Jobber' : 'Open in Housecall Pro'}
                         >
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8a8279" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />

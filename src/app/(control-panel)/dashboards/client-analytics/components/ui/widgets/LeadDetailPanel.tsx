@@ -65,6 +65,18 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
+// Detect CRM per-lead: Jobber IDs are base64 GraphQL node IDs, HCP IDs start with cus_
+function detectLeadCrm(id: string, clientCrm?: string): 'jobber' | 'hcp' {
+  if (clientCrm === 'jobber') return 'jobber';
+  if (id.startsWith('cus_')) return 'hcp';
+  // Try base64 decode — Jobber IDs decode to gid://Jobber/...
+  try {
+    const decoded = atob(id);
+    if (decoded.includes('Jobber')) return 'jobber';
+  } catch { /* not base64 */ }
+  return 'hcp';
+}
+
 function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
   const { data, isLoading } = useQuery({
     queryKey: ['leadDetail', customerId, hcpCustomerId],
@@ -85,7 +97,8 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
   const jobs = data.jobs || [];
   const invoices = data.invoices || [];
 
-  const crmUrl = fieldMgmt === 'jobber'
+  const leadCrm = detectLeadCrm(hcpCustomerId, fieldMgmt);
+  const crmUrl = leadCrm === 'jobber'
     ? (() => { try { const decoded = atob(hcpCustomerId); return `https://secure.getjobber.com/clients/${decoded.split('/').pop()}`; } catch { return null; } })()
     : `https://pro.housecallpro.com/pro/customers/${hcpCustomerId.replace('cus_', '')}`;
 
@@ -109,9 +122,9 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
             rel="noopener noreferrer"
             className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition-colors hover:bg-white"
             style={{ color: '#E85D4D' }}
-            title={fieldMgmt === 'jobber' ? 'Open in Jobber' : 'Open in Housecall Pro'}
+            title={leadCrm === 'jobber' ? 'Open in Jobber' : 'Open in Housecall Pro'}
           >
-            {fieldMgmt === 'jobber' ? 'Jobber' : 'HCP'} <span className="text-base">&#8599;</span>
+            {leadCrm === 'jobber' ? 'Jobber' : 'HCP'} <span className="text-base">&#8599;</span>
           </a>
         </div>
 
@@ -119,7 +132,7 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
         {inspections.length > 0 && (
           <div>
             <Typography className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#8a8279' }}>
-              {fieldMgmt === 'jobber' ? 'Assessments' : 'Inspections'}
+              {leadCrm === 'jobber' ? 'Assessments' : 'Inspections'}
             </Typography>
             <div className="space-y-1.5">
               {inspections.map((insp: any, i: number) => (
@@ -146,7 +159,7 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
         {estimates.length > 0 && (
           <div>
             <Typography className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider" style={{ color: '#8a8279' }}>
-              {fieldMgmt === 'jobber' ? 'Quotes' : 'Estimates'}
+              {leadCrm === 'jobber' ? 'Quotes' : 'Estimates'}
             </Typography>
             <div className="space-y-2">
               {estimates.map((est: any, i: number) => (
