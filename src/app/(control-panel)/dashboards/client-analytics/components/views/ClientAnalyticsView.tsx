@@ -247,6 +247,8 @@ function ClientAnalyticsView() {
       crm={clientCrm}
       adSpend={drawerAdSpend}
       programPrice={drawerProgramPrice}
+      closedRev={adMetrics?.total_closed_rev}
+      periodAdSpend={adMetrics?.ad_spend}
       onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); setDrawerAdSpend(undefined); setDrawerProgramPrice(undefined); }}
     />
   </>

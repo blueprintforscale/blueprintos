@@ -103,6 +103,8 @@ type Props = {
   crm?: string;
   adSpend?: number;
   programPrice?: number;
+  closedRev?: number;
+  periodAdSpend?: number;
   onClose: () => void;
 };
 
@@ -120,9 +122,10 @@ function getCrmUrl(id: string | null, crm?: string): string | null {
   return `https://pro.housecallpro.com/pro/customers/${id.replace('cus_', '')}`;
 }
 
-function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, programPrice, onClose }: Props) {
+function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, programPrice, closedRev, periodAdSpend, onClose }: Props) {
   const filtered = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
   const [flagModal, setFlagModal] = useState<Lead | null>(null);
+  const [projectedCloses, setProjectedCloses] = useState<Set<string>>(new Set());
   const [flaggedLocally, setFlaggedLocally] = useState<Set<string>>(new Set());
 
   const handleFlag = async (reason: string, notes: string) => {
@@ -226,6 +229,54 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
             <span className="text-sm font-bold">
               {formatDollars(totalRevenue)} / {formatDollars(adSpend)} = <span style={{ color: '#E85D4D' }}>{(totalRevenue / adSpend).toFixed(1)}x</span>
             </span>
+          </div>
+        </div>
+      )}
+
+      {/* Projected ROAS — shown on estimate_sent stage */}
+      {stage === 'estimate_sent' && periodAdSpend !== undefined && periodAdSpend > 0 && (
+        <div className="sticky top-[68px] z-10 border-b px-5 py-3" style={{ borderColor: '#f0ede6', backgroundColor: '#fafaf7' }}>
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: '#8a8279' }}>Projected ROAS</div>
+              <div className="flex items-baseline gap-2 mt-0.5">
+                <span className="text-xl font-bold" style={{ color: '#E85D4D' }}>
+                  {periodAdSpend > 0
+                    ? (((closedRev || 0) + [...projectedCloses].reduce((sum, id) => {
+                        const lead = filtered.find(l => (l as any).hcp_customer_id === id || (l as any).phone === id);
+                        return sum + (lead ? (parseFloat(String(lead.estimate_value)) || 0) : 0);
+                      }, 0)) / periodAdSpend).toFixed(1)
+                    : '0.0'}x
+                </span>
+                <span className="text-[10px]" style={{ color: '#c5bfb6' }}>
+                  if {projectedCloses.size} estimate{projectedCloses.size !== 1 ? 's' : ''} close
+                </span>
+              </div>
+              <div className="text-[10px] mt-0.5" style={{ color: '#c5bfb6' }}>
+                Current: {periodAdSpend > 0 ? ((closedRev || 0) / periodAdSpend).toFixed(1) : '0.0'}x
+                → +{formatDollars([...projectedCloses].reduce((sum, id) => {
+                  const lead = filtered.find(l => (l as any).hcp_customer_id === id || (l as any).phone === id);
+                  return sum + (lead ? (parseFloat(String(lead.estimate_value)) || 0) : 0);
+                }, 0))} projected
+              </div>
+            </div>
+            {projectedCloses.size > 0 && (
+              <button
+                onClick={async () => {
+                  if (customerId) {
+                    await fetch(`/api/blueprint/clients/${customerId}/projected-roas/clear`, { method: 'POST' });
+                  }
+                  setProjectedCloses(new Set());
+                }}
+                className="rounded px-2 py-1 text-[10px] font-medium transition-colors hover:bg-gray-100"
+                style={{ color: '#E85D4D', border: '1px solid #f0ddd9' }}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+          <div className="mt-2 text-[9px]" style={{ color: '#c5bfb6' }}>
+            Toggle estimates below to project what ROAS would be if they close
           </div>
         </div>
       )}
@@ -339,24 +390,59 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                     </div>
                   )}
 
-                  {/* Flag button */}
-                  <div className="mt-1.5 flex justify-end">
-                    {isLeadFlagged(lead) ? (
-                      <span
-                        className="inline-block rounded px-2 py-0.5 text-[10px] font-medium"
-                        style={{ backgroundColor: '#fdf8ed', color: '#c4890a', border: '1px solid #e8d9a8' }}
-                      >
-                        Flagged
-                      </span>
-                    ) : (
+                  {/* Actions row: projected close toggle + flag */}
+                  <div className="mt-1.5 flex items-center justify-between">
+                    {/* Projected close toggle — only on estimate_sent */}
+                    {stage === 'estimate_sent' && periodAdSpend !== undefined && estValue > 0 ? (
                       <button
-                        onClick={() => setFlagModal(lead)}
-                        className="rounded px-2 py-0.5 text-[10px] font-medium transition-colors hover:bg-gray-100"
-                        style={{ color: '#c5bfb6', border: '1px solid #e8e4d9' }}
+                        onClick={async () => {
+                          const leadId = lead.hcp_customer_id || lead.phone;
+                          const isOn = projectedCloses.has(leadId);
+                          const next = new Set(projectedCloses);
+                          if (isOn) { next.delete(leadId); } else { next.add(leadId); }
+                          setProjectedCloses(next);
+                          if (customerId) {
+                            fetch(`/api/blueprint/clients/${customerId}/projected-roas/toggle`, {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({
+                                estimate_id: lead.hcp_customer_id || lead.phone,
+                                estimate_type: crm || 'hcp',
+                                value_cents: Math.round(estValue * 100),
+                                projected_close: !isOn,
+                              }),
+                            });
+                          }
+                        }}
+                        className="rounded px-2.5 py-1 text-[10px] font-semibold transition-all"
+                        style={projectedCloses.has(lead.hcp_customer_id || lead.phone)
+                          ? { backgroundColor: '#3b8a5a', color: '#fff' }
+                          : { backgroundColor: 'transparent', color: '#8a8279', border: '1px solid #ddd8cb' }
+                        }
                       >
-                        Flag
+                        {projectedCloses.has(lead.hcp_customer_id || lead.phone) ? 'Will close' : 'Will close?'}
                       </button>
-                    )}
+                    ) : <div />}
+
+                    {/* Flag button */}
+                    <div>
+                      {isLeadFlagged(lead) ? (
+                        <span
+                          className="inline-block rounded px-2 py-0.5 text-[10px] font-medium"
+                          style={{ backgroundColor: '#fdf8ed', color: '#c4890a', border: '1px solid #e8d9a8' }}
+                        >
+                          Flagged
+                        </span>
+                      ) : (
+                        <button
+                          onClick={() => setFlagModal(lead)}
+                          className="rounded px-2 py-0.5 text-[10px] font-medium transition-colors hover:bg-gray-100"
+                          style={{ color: '#c5bfb6', border: '1px solid #e8e4d9' }}
+                        >
+                          Flag
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               );

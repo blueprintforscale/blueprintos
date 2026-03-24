@@ -245,6 +245,8 @@ export default function SharedDashboard({ client }: Props) {
       crm={client.field_management_software}
       adSpend={drawerAdSpend}
       programPrice={drawerProgramPrice}
+      closedRev={adMetrics?.total_closed_rev}
+      periodAdSpend={adMetrics?.ad_spend}
       onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); setDrawerAdSpend(undefined); setDrawerProgramPrice(undefined); }}
     />
     </>
