@@ -59,9 +59,9 @@ function CplRangeBar({ cpl }: { cpl: number }) {
   );
 }
 
-type Props = { data: AdPerformance | undefined };
+type Props = { data: AdPerformance | undefined; onRoasClick?: () => void };
 
-function AdMetricsCards({ data }: Props) {
+function AdMetricsCards({ data, onRoasClick }: Props) {
   if (!data) return null;
 
   return (
@@ -83,8 +83,9 @@ function AdMetricsCards({ data }: Props) {
 
       {/* ROAS */}
       <Paper
-        className="flex flex-col rounded-xl border p-5 shadow-none"
+        className={`flex flex-col rounded-xl border p-5 shadow-none ${onRoasClick ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}`}
         sx={{ borderColor: '#E85D4D', backgroundColor: '#000000' }}
+        onClick={onRoasClick}
       >
         <Typography className="text-xs font-semibold uppercase tracking-wide" sx={{ color: '#E85D4D' }}>ROAS</Typography>
         <Typography className="mt-1 text-3xl font-bold tracking-tight" sx={{ color: '#fff' }}>{data.roas.toFixed(1)}x</Typography>

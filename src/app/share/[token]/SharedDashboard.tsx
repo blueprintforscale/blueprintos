@@ -57,6 +57,7 @@ export default function SharedDashboard({ client }: Props) {
   const [activeTab, setActiveTab] = useState(0);
   const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
   const [drawerTitle, setDrawerTitle] = useState<string | undefined>(undefined);
+  const [drawerAdSpend, setDrawerAdSpend] = useState<number | undefined>(undefined);
   const [dateRange, setDateRange] = useState({
     from: new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0],
     to: new Date().toISOString().split('T')[0],
@@ -137,7 +138,11 @@ export default function SharedDashboard({ client }: Props) {
           <>
             {activeSource !== 'all' && (
               <motion.div variants={item}>
-                <AdMetricsCards data={adMetrics} />
+                <AdMetricsCards data={adMetrics} onRoasClick={() => {
+                  setDrawerStage('estimate_approved');
+                  setDrawerTitle('ROAS Breakdown');
+                  setDrawerAdSpend(adMetrics?.ad_spend);
+                }} />
               </motion.div>
             )}
             <motion.div variants={item}>
@@ -187,7 +192,8 @@ export default function SharedDashboard({ client }: Props) {
       leads={spreadsheetData}
       customerId={customerId}
       crm={client.field_management_software}
-      onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); }}
+      adSpend={drawerAdSpend}
+      onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); setDrawerAdSpend(undefined); }}
     />
     </>
   );
