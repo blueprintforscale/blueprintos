@@ -137,7 +137,7 @@ function HistoricalPerformance({ data }: Props) {
       label: {
         text: `~${cfg.format(projectedValue)}`,
         borderColor: cfg.color,
-        offsetY: -10,
+        offsetY: -18,
         style: {
           background: '#1a1a1a',
           color: '#fff',
@@ -194,7 +194,7 @@ function HistoricalPerformance({ data }: Props) {
       }},
     },
     grid: { borderColor: '#EEEAD9', xaxis: { lines: { show: false } }, yaxis: { lines: { show: true } } },
-    legend: { show: true, position: 'top', labels: { colors: '#8a8279' }, fontSize: '11px' },
+    legend: { show: false },
     dataLabels: { enabled: false },
     annotations,
   };
