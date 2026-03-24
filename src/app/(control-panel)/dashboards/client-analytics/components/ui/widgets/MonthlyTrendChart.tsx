@@ -52,20 +52,24 @@ function MonthlyTrendChart({ data, startDate }: Props) {
     ? Math.round(currentLeads / monthFraction)
     : null;
 
-  // Trend line (linear regression)
+  // Trend line (linear regression starting from program start)
+  const trendStart = startMonthIdx >= 0 ? startMonthIdx : 0;
   const trendInputs = lastIsIncomplete && projectedLeads
     ? [...qualityLeads.slice(0, -1), projectedLeads]
     : qualityLeads;
-  const n = trendInputs.length;
-  let trendLine: number[] | null = null;
-  if (n >= 3) {
-    const sumX = trendInputs.reduce((s, _, i) => s + i, 0);
-    const sumY = trendInputs.reduce((s, v) => s + v, 0);
-    const sumXY = trendInputs.reduce((s, v, i) => s + i * v, 0);
-    const sumX2 = trendInputs.reduce((s, _, i) => s + i * i, 0);
+  const trendSlice = trendInputs.slice(trendStart);
+  const n = trendSlice.length;
+  let trendLine: (number | null)[] | null = null;
+  if (n >= 2) {
+    const sumX = trendSlice.reduce((s, _, i) => s + i, 0);
+    const sumY = trendSlice.reduce((s, v) => s + v, 0);
+    const sumXY = trendSlice.reduce((s, v, i) => s + i * v, 0);
+    const sumX2 = trendSlice.reduce((s, _, i) => s + i * i, 0);
     const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
     const intercept = (sumY - slope * sumX) / n;
-    trendLine = trendInputs.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
+    trendLine = trendInputs.map((_, i) =>
+      i < trendStart ? null : Math.max(Math.round(intercept + slope * (i - trendStart)), 0)
+    );
   }
 
   // Annotations
@@ -132,6 +136,9 @@ function MonthlyTrendChart({ data, startDate }: Props) {
     : ['#000000', '#ddd8cb', '#E85D4D'];
   const strokeWidths = trendLine ? [0, 0, 3, 1.5] : [0, 0, 3];
   const dashArrays = trendLine ? [0, 0, 0, 6] : [0, 0, 0];
+  const strokeCurves = trendLine
+    ? ['smooth', 'smooth', 'smooth', 'straight'] as any
+    : ['smooth', 'smooth', 'smooth'] as any;
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -143,7 +150,7 @@ function MonthlyTrendChart({ data, startDate }: Props) {
       background: 'transparent',
     },
     colors: chartColors,
-    stroke: { width: strokeWidths, curve: 'smooth', dashArray: dashArrays },
+    stroke: { width: strokeWidths, curve: strokeCurves, dashArray: dashArrays },
     plotOptions: {
       bar: {
         columnWidth: '50%',

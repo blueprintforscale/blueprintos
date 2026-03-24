@@ -79,20 +79,25 @@ function HistoricalPerformance({ data, startDate }: Props) {
   const priorMonthValue = lastCompleteIdx > 0 ? values[lastCompleteIdx - 1] : null;
   const lastYearValue = priorValues[lastCompleteIdx];
 
-  // Trend line (linear regression)
+  // Trend line (linear regression starting from program start)
+  const trendStart = startMonthIdx >= 0 ? startMonthIdx : 0;
   const trendInputs = lastIsIncomplete && projectedValue !== null && cfg.projectable
     ? [...values.slice(0, -1), projectedValue]
     : values;
-  const nPts = trendInputs.length;
-  let trendLine: number[] | null = null;
-  if (nPts >= 3) {
-    const sX = trendInputs.reduce((s, _, i) => s + i, 0);
-    const sY = trendInputs.reduce((s, v) => s + v, 0);
-    const sXY = trendInputs.reduce((s, v, i) => s + i * v, 0);
-    const sX2 = trendInputs.reduce((s, _, i) => s + i * i, 0);
+  const trendSlice = trendInputs.slice(trendStart);
+  const nPts = trendSlice.length;
+  let trendLine: (number | null)[] | null = null;
+  if (nPts >= 2) {
+    const sX = trendSlice.reduce((s, _, i) => s + i, 0);
+    const sY = trendSlice.reduce((s, v) => s + v, 0);
+    const sXY = trendSlice.reduce((s, v, i) => s + i * v, 0);
+    const sX2 = trendSlice.reduce((s, _, i) => s + i * i, 0);
     const sl = (nPts * sXY - sX * sY) / (nPts * sX2 - sX * sX);
     const ic = (sY - sl * sX) / nPts;
-    trendLine = trendInputs.map((_, i) => Math.max(Math.round(ic + sl * i), 0));
+    // null before start, straight regression from start onward
+    trendLine = trendInputs.map((_, i) =>
+      i < trendStart ? null : Math.max(Math.round(ic + sl * (i - trendStart)), 0)
+    );
   }
 
   // Build series
@@ -102,19 +107,22 @@ function HistoricalPerformance({ data, startDate }: Props) {
   const seriesColors = [cfg.color];
   const strokeWidth = [3];
   const dashArray = [0];
+  const strokeCurve: ('smooth' | 'straight')[] = ['smooth'];
 
   if (hasPriorYear) {
     series.push({ name: `${cfg.label} (prior year)`, data: priorValues as number[] });
     seriesColors.push('#c5bfb6');
     strokeWidth.push(2);
     dashArray.push(5);
+    strokeCurve.push('smooth');
   }
 
   if (trendLine) {
-    series.push({ name: 'Trend', data: trendLine });
+    series.push({ name: 'Trend', data: trendLine as any });
     seriesColors.push('#ddd8cb');
     strokeWidth.push(1.5);
     dashArray.push(6);
+    strokeCurve.push('straight');
   }
 
   // Overlay series
@@ -125,6 +133,7 @@ function HistoricalPerformance({ data, startDate }: Props) {
     seriesColors.push(ovCfg.color);
     strokeWidth.push(2);
     dashArray.push(3);
+    strokeCurve.push('smooth');
   });
 
   // Projection: point annotation at projected value for current month
@@ -188,7 +197,7 @@ function HistoricalPerformance({ data, startDate }: Props) {
       background: 'transparent',
     },
     colors: seriesColors,
-    stroke: { width: strokeWidth, curve: 'smooth', dashArray },
+    stroke: { width: strokeWidth, curve: strokeCurve as any, dashArray },
     markers: { size: [4, ...new Array(series.length - 1).fill(0)], colors: seriesColors, strokeWidth: 0 },
     forecastDataPoints: { count: forecastCount, dashArray: 6, strokeWidth: 2 },
     xaxis: {
