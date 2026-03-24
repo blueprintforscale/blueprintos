@@ -85,7 +85,9 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
   const jobs = data.jobs || [];
   const invoices = data.invoices || [];
 
-  const hcpUrl = `https://pro.housecallpro.com/pro/customers/${hcpCustomerId.replace('cus_', '')}`;
+  const crmUrl = fieldMgmt === 'jobber'
+    ? (() => { try { const decoded = atob(hcpCustomerId); return `https://secure.getjobber.com/clients/${decoded.split('/').pop()}`; } catch { return null; } })()
+    : `https://pro.housecallpro.com/pro/customers/${hcpCustomerId.replace('cus_', '')}`;
 
   return (
     <div className="border-t px-6 py-4" style={{ borderColor: '#ddd8cb', backgroundColor: '#F5F1E8' }}>
@@ -102,7 +104,7 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
             </div>
           </div>
           <a
-            href={hcpUrl}
+            href={crmUrl || '#'}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition-colors hover:bg-white"

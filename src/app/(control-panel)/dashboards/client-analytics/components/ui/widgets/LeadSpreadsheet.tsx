@@ -88,9 +88,9 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
   'New Lead': { bg: '#EEEAD9', text: '#8a8279' },
 };
 
-type Props = { data: Lead[] | undefined; customerId?: number };
+type Props = { data: Lead[] | undefined; customerId?: number; crm?: string };
 
-function LeadSpreadsheet({ data, customerId }: Props) {
+function LeadSpreadsheet({ data, customerId, crm }: Props) {
   const [expandedLead, setExpandedLead] = useState<string | null>(null);
   const [showLost, setShowLost] = useState(false);
   const [flagModal, setFlagModal] = useState<{ lead: Lead; index: number } | null>(null);
@@ -248,7 +248,7 @@ function LeadSpreadsheet({ data, customerId }: Props) {
                 {isExpanded && canExpand && customerId && (
                   <tr>
                     <td colSpan={9} className="p-0">
-                      <LeadDetailPanel customerId={customerId} hcpCustomerId={lead.hcp_customer_id!} />
+                      <LeadDetailPanel customerId={customerId} hcpCustomerId={lead.hcp_customer_id!} fieldMgmt={crm} />
                     </td>
                   </tr>
                 )}

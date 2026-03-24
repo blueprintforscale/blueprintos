@@ -159,7 +159,7 @@ export default function SharedDashboard({ client }: Props) {
 
         {activeTab === 1 && (
           <motion.div variants={item}>
-            <LeadSpreadsheet data={spreadsheetData} customerId={customerId} />
+            <LeadSpreadsheet data={spreadsheetData} customerId={customerId} crm={client.field_management_software} />
           </motion.div>
         )}
 
