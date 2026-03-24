@@ -40,6 +40,7 @@ export type FunnelData = {
   estimate_approved: number;
   job_scheduled: number;
   job_completed: number;
+  revenue_closed?: number;
   estimate_sent_value: number;
   estimate_approved_value: number;
   job_value: number;

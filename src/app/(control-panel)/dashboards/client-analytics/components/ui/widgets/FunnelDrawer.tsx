@@ -23,6 +23,7 @@ type Lead = {
   estimate_approved: boolean;
   job_scheduled: boolean;
   job_completed: boolean;
+  revenue_closed: boolean;
   approved_revenue: number;
   invoiced_revenue: number;
   estimate_value?: number;
@@ -38,7 +39,8 @@ export type FunnelStage =
   | 'estimate_sent'
   | 'estimate_approved'
   | 'job_scheduled'
-  | 'job_completed';
+  | 'job_completed'
+  | 'revenue_closed';
 
 const stageLabels: Record<FunnelStage, string> = {
   leads: 'All Leads',
@@ -48,6 +50,7 @@ const stageLabels: Record<FunnelStage, string> = {
   estimate_approved: 'Estimate Approved',
   job_scheduled: 'Job Scheduled',
   job_completed: 'Job Completed',
+  revenue_closed: 'Revenue Closed',
 };
 
 const answerColors: Record<string, string> = {
@@ -57,6 +60,7 @@ const answerColors: Record<string, string> = {
 };
 
 const stageStyles: Record<string, { bg: string; text: string }> = {
+  'Revenue Closed': { bg: '#2d7a4a', text: '#fff' },
   'Job Completed': { bg: '#3b8a5a', text: '#fff' },
   'Job Scheduled': { bg: '#e6f3ec', text: '#3b8a5a' },
   'Estimate Approved': { bg: '#3b8a5a', text: '#fff' },
@@ -67,6 +71,7 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
 };
 
 function getHighestStage(lead: Lead): string {
+  if (lead.revenue_closed) return 'Revenue Closed';
   if (lead.job_completed) return 'Job Completed';
   if (lead.job_scheduled) return 'Job Scheduled';
   if (lead.estimate_approved) return 'Estimate Approved';
@@ -167,6 +172,7 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
     if (stage === 'estimate_sent') rev = estVal;
     else if (stage === 'estimate_approved') rev = approved;
     else if (stage === 'job_scheduled' || stage === 'job_completed') rev = invoiced > 0 ? invoiced : approved;
+    else if (stage === 'revenue_closed') rev = invoiced;
     else rev = (approved + invoiced) > 0 ? (approved + invoiced) : estVal;
     return sum + rev;
   }, 0);
@@ -309,6 +315,7 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
               if (stage === 'estimate_sent') revenue = estValue;
               else if (stage === 'estimate_approved') revenue = approvedRev;
               else if (stage === 'job_scheduled' || stage === 'job_completed') revenue = invoicedRev > 0 ? invoicedRev : approvedRev;
+              else if (stage === 'revenue_closed') revenue = invoicedRev;
               else revenue = (approvedRev + invoicedRev) > 0 ? (approvedRev + invoicedRev) : estValue;
               const highestStage = getHighestStage(lead);
               const stageStyle = stageStyles[highestStage] || stageStyles['Lead'];
