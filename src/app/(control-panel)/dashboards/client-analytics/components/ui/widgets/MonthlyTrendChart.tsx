@@ -30,6 +30,7 @@ function MonthlyTrendChart({ data }: Props) {
   const labels = data.map((d) => (d as any).short_label || d.label);
   const lastIsIncomplete = data.length > 0 && isCurrentMonth((data[data.length - 1] as any).month_start);
   const forecastCount = lastIsIncomplete ? 1 : 0;
+  const { fraction: monthFraction } = getMonthProgress();
 
   const qualityLeads = data.map((d) => {
     const total = parseInt(d.leads, 10) || 0;
@@ -39,36 +40,38 @@ function MonthlyTrendChart({ data }: Props) {
   const spamLeads = data.map((d) => parseInt((d as any).spam, 10) || 0);
   const cpl = data.map((d) => parseFloat(d.cpl));
 
-  // Projection for current month leads
-  const { fraction: monthFraction } = getMonthProgress();
+  // Projection: ghost bar showing projected remaining leads for current month
   const currentLeads = lastIsIncomplete ? qualityLeads[qualityLeads.length - 1] : null;
   const projectedLeads = lastIsIncomplete && currentLeads !== null && monthFraction > 0
     ? Math.round(currentLeads / monthFraction)
     : null;
+  const projectedRemaining = projectedLeads !== null && currentLeads !== null
+    ? Math.max(projectedLeads - currentLeads, 0)
+    : 0;
 
-  // Annotations for projected leads
-  const annotations: ApexOptions['annotations'] = {};
-  if (projectedLeads !== null && projectedLeads > 0) {
-    annotations.yaxis = [{
-      y: projectedLeads,
-      yAxisIndex: 0,
-      borderColor: '#000000',
-      strokeDashArray: 4,
-      opacity: 0.2,
-      label: {
-        text: `~${projectedLeads} projected`,
-        borderColor: 'transparent',
-        position: 'left',
-        style: {
-          background: 'transparent',
-          color: '#c5bfb6',
-          fontSize: '10px',
-          fontWeight: 400,
-          padding: { left: 6, right: 6, top: 2, bottom: 2 },
-        },
-      },
-    }];
+  // Build ghost bar series (all zeros except current month shows the projected remaining)
+  const ghostBar = data.map((_, i) =>
+    lastIsIncomplete && i === data.length - 1 ? projectedRemaining : 0
+  );
+  const hasProjection = projectedRemaining > 0;
+
+  const chartColors = hasProjection
+    ? ['#000000', '#ddd8cb', '#00000020', '#E85D4D']
+    : ['#000000', '#ddd8cb', '#E85D4D'];
+
+  const strokeWidths = hasProjection ? [0, 0, 0, 3] : [0, 0, 3];
+  const dashArrays = hasProjection ? [0, 0, 0, 0] : [0, 0, 0];
+
+  const series: any[] = [
+    { name: 'Quality Leads', type: 'bar' as const, data: qualityLeads, group: 'leads' },
+    { name: 'Contacts (removed)', type: 'bar' as const, data: spamLeads, group: 'leads' },
+  ];
+
+  if (hasProjection) {
+    series.push({ name: 'Projected', type: 'bar' as const, data: ghostBar, group: 'leads' });
   }
+
+  series.push({ name: 'CPL', type: 'line' as const, data: cpl });
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -79,8 +82,8 @@ function MonthlyTrendChart({ data }: Props) {
       stacked: true,
       background: 'transparent',
     },
-    colors: ['#000000', '#ddd8cb', '#E85D4D'],
-    stroke: { width: [0, 0, 3], curve: 'smooth' },
+    colors: chartColors,
+    stroke: { width: strokeWidths, curve: 'smooth', dashArray: dashArrays },
     forecastDataPoints: { count: forecastCount, dashArray: 6, strokeWidth: 2 },
     plotOptions: {
       bar: {
@@ -88,6 +91,16 @@ function MonthlyTrendChart({ data }: Props) {
         borderRadius: 3,
         borderRadiusApplication: 'end',
       },
+    },
+    fill: {
+      type: hasProjection
+        ? ['solid', 'solid', 'pattern', 'solid']
+        : ['solid', 'solid', 'solid'],
+      pattern: {
+        style: hasProjection ? ['', '', 'horizontalLines', ''] : undefined,
+        strokeWidth: 1,
+      },
+      opacity: hasProjection ? [1, 1, 0.3, 1] : [1, 1, 1],
     },
     xaxis: {
       categories: labels,
@@ -118,7 +131,8 @@ function MonthlyTrendChart({ data }: Props) {
         const quality = s[0][dataPointIndex] || 0;
         const spam = s[1][dataPointIndex] || 0;
         const total = quality + spam;
-        const cplVal = s[2] ? s[2][dataPointIndex] : null;
+        const cplIdx = hasProjection ? 3 : 2;
+        const cplVal = s[cplIdx] ? s[cplIdx][dataPointIndex] : null;
         const month = labels[dataPointIndex];
         const isIncomplete = lastIsIncomplete && dataPointIndex === data.length - 1;
 
@@ -126,7 +140,7 @@ function MonthlyTrendChart({ data }: Props) {
         html += `<div style="font-weight:700;color:#000;margin-bottom:2px">${month}${isIncomplete ? ' <span style="color:#c5bfb6;font-weight:400">(in progress)</span>' : ''}</div>`;
         html += `<div><span style="color:#000">&#9632;</span> Quality leads: <strong>${quality}</strong></div>`;
         if (isIncomplete && projectedLeads !== null) {
-          html += `<div style="color:#c5bfb6">Projected: ~${projectedLeads}</div>`;
+          html += `<div style="color:#c5bfb6">Projected end of month: ~<strong>${projectedLeads}</strong></div>`;
         }
         if (spam > 0) {
           html += `<div><span style="color:#ddd8cb">&#9632;</span> Contacts: <strong>${total}</strong> <span style="color:#c5bfb6">(${spam} removed)</span></div>`;
@@ -148,14 +162,7 @@ function MonthlyTrendChart({ data }: Props) {
     },
     legend: { show: false },
     dataLabels: { enabled: false },
-    annotations,
   };
-
-  const series = [
-    { name: 'Quality Leads', type: 'bar' as const, data: qualityLeads, group: 'leads' },
-    { name: 'Contacts (removed)', type: 'bar' as const, data: spamLeads, group: 'leads' },
-    { name: 'CPL', type: 'line' as const, data: cpl },
-  ];
 
   return (
     <Paper className="flex flex-col rounded-xl border shadow-none" style={{ borderColor: '#ddd8cb' }}>
@@ -173,7 +180,17 @@ function MonthlyTrendChart({ data }: Props) {
           <span className="flex items-center gap-1">
             <span className="inline-block h-0.5 w-4" style={{ backgroundColor: '#E85D4D' }} /> CPL
           </span>
+          {hasProjection && (
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: '#00000015', border: '1px dashed #00000040' }} /> Projected
+            </span>
+          )}
         </div>
+        {projectedLeads !== null && currentLeads !== null && (
+          <div className="mt-1 text-[10px]" style={{ color: '#c5bfb6' }}>
+            {labels[labels.length - 1]}: {currentLeads} leads so far — on pace for ~{projectedLeads}
+          </div>
+        )}
       </div>
       <div className="px-2 pb-4" style={{ height: 260 }}>
         <ReactApexChart options={chartOptions} series={series} type="line" height="100%" />
