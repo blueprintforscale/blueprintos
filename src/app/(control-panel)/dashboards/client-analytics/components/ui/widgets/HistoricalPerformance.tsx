@@ -141,10 +141,11 @@ function HistoricalPerformance({ data }: Props) {
       axisBorder: { show: false },
       axisTicks: { show: false },
       labels: {
+        rotate: 0,
+        hideOverlappingLabels: false,
         style: {
           colors: labels.map((_, i) => (hasIncomplete && i === incompleteIdx) ? '#c5bfb6' : '#8a8279'),
           fontSize: '11px',
-          fontWeight: labels.map((_, i) => (hasIncomplete && i === incompleteIdx) ? 400 : 400) as any,
         },
       },
     },
