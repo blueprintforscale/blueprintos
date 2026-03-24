@@ -28,9 +28,10 @@ type Props = {
 function SummaryCards({ data, onStageClick }: Props) {
   if (!data) return null;
 
-  const contacts = parseInt(data.total_contacts as any) || 0;
+  const rawContacts = parseInt(data.total_contacts as any) || 0;
   const quality = parseInt(data.quality_leads as any) || parseInt(data.leads as any) || 0;
-  const spam = parseInt(data.spam_count as any) || 0;
+  const contacts = Math.max(rawContacts, quality);
+  const spam = Math.max(contacts - quality, 0);
   const closedRev = parseFloat(data.closed_rev as any) || 0;
   const openEst = parseFloat(data.open_est_rev as any) || 0;
   const estSent = parseInt(data.estimate_sent as any) || 0;
@@ -43,9 +44,9 @@ function SummaryCards({ data, onStageClick }: Props) {
 
   const cards: { label: string; value: string; sub: string | null; highlight: boolean; stage?: FunnelStage }[] = [
     {
-      label: 'Quality Leads',
-      value: String(quality),
-      sub: spam > 0 ? `${contacts} contacts · ${spam} removed` : `${contacts} contacts`,
+      label: 'Contacts',
+      value: String(contacts),
+      sub: spam > 0 ? `${quality} quality leads · ${spam} removed` : `${quality} quality leads`,
       highlight: false,
       stage: 'leads',
     },
