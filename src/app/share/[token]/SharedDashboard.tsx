@@ -191,15 +191,14 @@ export default function SharedDashboard({ client }: Props) {
                 <motion.div variants={item}>
                   <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                 </motion.div>
-                <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: '#c5bfb6', marginBottom: -16 }}>Trends</div>
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                  <motion.div variants={item}>
-                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
-                  </motion.div>
-                  <motion.div variants={item}>
-                    <MonthlyTrendChart data={trend} startDate={client.start_date} />
-                  </motion.div>
-                </div>
+                <motion.div variants={item}>
+                  <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                </motion.div>
+                {/* MonthlyTrendChart hidden from Overview — still available on Trends tab
+                <motion.div variants={item}>
+                  <MonthlyTrendChart data={trend} startDate={client.start_date} />
+                </motion.div>
+                */}
                 <motion.div variants={item}>
                   <RecentActivityWidget data={activity} />
                 </motion.div>

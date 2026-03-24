@@ -51,7 +51,7 @@ function FunnelChart({ data, onStageClick }: Props) {
               {i > 0 && (
                 <div className="flex items-center py-1" style={{ marginLeft: 0 }}>
                   {/* Left: thin vertical line from label area */}
-                  <div className="w-28 shrink-0 flex justify-center">
+                  <div className="w-36 shrink-0 flex justify-center">
                     <div className="h-5 w-px" style={{ backgroundColor: '#333' }} />
                   </div>
                   {/* Center: pill */}
@@ -59,7 +59,7 @@ function FunnelChart({ data, onStageClick }: Props) {
                     <div className="flex-1 h-px" style={{ backgroundColor: '#333' }} />
                     {convRate && (
                       <span
-                        className="shrink-0 rounded-full px-3 py-0.5 text-[10px] font-semibold mx-2"
+                        className="shrink-0 rounded-full px-3 py-0.5 text-[11px] font-semibold mx-2"
                         style={{ backgroundColor: '#2a2a2a', color: '#c5bfb6', border: '1px solid #3a3a3a' }}
                       >
                         {convRate}%
@@ -68,7 +68,7 @@ function FunnelChart({ data, onStageClick }: Props) {
                     <div className="flex-1 h-px" style={{ backgroundColor: '#333' }} />
                   </div>
                   {/* Right: line to count area */}
-                  <div className="w-16 shrink-0 flex justify-center">
+                  <div className="w-20 shrink-0 flex justify-center">
                     <div className="h-5 w-px" style={{ backgroundColor: '#333' }} />
                   </div>
                 </div>
@@ -83,14 +83,14 @@ function FunnelChart({ data, onStageClick }: Props) {
                 onClick={() => onStageClick?.(stage.key)}
               >
                 {/* Label */}
-                <span className="text-xs font-semibold text-white whitespace-nowrap w-28 shrink-0">
+                <span className="text-sm font-semibold text-white whitespace-nowrap w-36 shrink-0">
                   {stage.label}
                 </span>
 
                 {/* Bar */}
                 <div className="flex-1 flex items-center">
                   <div
-                    className={`h-9 rounded-md transition-all duration-300 ${onStageClick ? 'group-hover:brightness-125' : ''}`}
+                    className={`h-11 rounded-md transition-all duration-300 ${onStageClick ? 'group-hover:brightness-125' : ''}`}
                     style={{
                       width: `${barPct}%`,
                       minWidth: '4px',
@@ -102,7 +102,7 @@ function FunnelChart({ data, onStageClick }: Props) {
                 </div>
 
                 {/* Count */}
-                <span className="text-2xl font-extrabold text-white w-16 text-right shrink-0">
+                <span className="text-3xl font-extrabold text-white w-20 text-right shrink-0">
                   {stage.count}
                 </span>
               </motion.div>
