@@ -41,42 +41,35 @@ function FunnelChart({ data, onStageClick }: Props) {
       <div className="flex flex-col px-5 pb-4">
         {stages.map((stage, i) => {
           const barPct = Math.max((stage.count / maxCount) * 100, 3);
-          const prevBarPct = i > 0 ? Math.max((stages[i - 1].count / maxCount) * 100, 3) : 100;
           const convRate = i > 0 && stages[i - 1].count > 0
             ? ((stage.count / stages[i - 1].count) * 100).toFixed(1)
             : null;
-          const dropOff = i > 0 ? stages[i - 1].count - stage.count : 0;
 
           return (
             <div key={stage.key}>
-              {/* Connector between stages — tapered line showing drop-off */}
+              {/* Connector with percentage pill */}
               {i > 0 && (
-                <div className="relative flex items-center" style={{ height: 28, marginLeft: 112 }}>
-                  {/* Tapered connector SVG */}
-                  <svg width="100%" height="28" preserveAspectRatio="none" className="absolute inset-0" style={{ overflow: 'visible' }}>
-                    <defs>
-                      <linearGradient id={`grad-${i}`} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor={`rgba(232, 93, 77, ${1 - (i - 1) * 0.1})`} stopOpacity="0.15" />
-                        <stop offset="100%" stopColor={`rgba(232, 93, 77, ${1 - i * 0.1})`} stopOpacity="0.15" />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      d={`M 0,0 L ${prevBarPct}%,0 L ${barPct}%,28 L 0,28 Z`}
-                      fill={`url(#grad-${i})`}
-                    />
-                    {/* Left edge line */}
-                    <line x1="0" y1="0" x2="0" y2="28" stroke="#333" strokeWidth="1" />
-                  </svg>
-                  {/* Conversion rate + drop-off */}
-                  <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex items-center py-1" style={{ marginLeft: 0 }}>
+                  {/* Left: thin vertical line from label area */}
+                  <div className="w-28 shrink-0 flex justify-center">
+                    <div className="h-5 w-px" style={{ backgroundColor: '#333' }} />
+                  </div>
+                  {/* Center: pill */}
+                  <div className="flex-1 flex items-center">
+                    <div className="flex-1 h-px" style={{ backgroundColor: '#333' }} />
                     {convRate && (
                       <span
-                        className="rounded-full px-3 py-0.5 text-[10px] font-semibold z-10"
+                        className="shrink-0 rounded-full px-3 py-0.5 text-[10px] font-semibold mx-2"
                         style={{ backgroundColor: '#2a2a2a', color: '#c5bfb6', border: '1px solid #3a3a3a' }}
                       >
-                        {convRate}%{dropOff > 0 ? ` · -${dropOff}` : ''}
+                        {convRate}%
                       </span>
                     )}
+                    <div className="flex-1 h-px" style={{ backgroundColor: '#333' }} />
+                  </div>
+                  {/* Right: line to count area */}
+                  <div className="w-16 shrink-0 flex justify-center">
+                    <div className="h-5 w-px" style={{ backgroundColor: '#333' }} />
                   </div>
                 </div>
               )}
@@ -97,13 +90,15 @@ function FunnelChart({ data, onStageClick }: Props) {
                 {/* Bar */}
                 <div className="flex-1 flex items-center">
                   <div
-                    className={`h-9 rounded-md transition-all duration-300 flex items-center ${onStageClick ? 'group-hover:brightness-125' : ''}`}
+                    className={`h-9 rounded-md transition-all duration-300 ${onStageClick ? 'group-hover:brightness-125' : ''}`}
                     style={{
                       width: `${barPct}%`,
                       minWidth: '4px',
                       backgroundColor: `rgba(232, 93, 77, ${1 - i * 0.1})`,
                     }}
                   />
+                  {/* Connecting line from bar end to count */}
+                  <div className="flex-1 h-px" style={{ backgroundColor: '#333' }} />
                 </div>
 
                 {/* Count */}
@@ -120,7 +115,7 @@ function FunnelChart({ data, onStageClick }: Props) {
       {data.leads > 0 && (
         <div className="border-t px-6 py-3" style={{ borderColor: '#2a2a2a' }}>
           <Typography className="text-center text-xs" style={{ color: '#5a554d' }}>
-            Overall: <strong style={{ color: '#c5bfb6' }}>{data.leads}</strong> leads → <strong style={{ color: '#c5bfb6' }}>{data.job_completed}</strong> jobs completed = <strong style={{ color: '#E85D4D' }}>{((data.job_completed / data.leads) * 100).toFixed(1)}%</strong>
+            Overall: <strong style={{ color: '#c5bfb6' }}>{data.leads}</strong> leads → <strong style={{ color: '#c5bfb6' }}>{data.job_completed}</strong> jobs = <strong style={{ color: '#E85D4D' }}>{((data.job_completed / data.leads) * 100).toFixed(1)}%</strong>
           </Typography>
         </div>
       )}
