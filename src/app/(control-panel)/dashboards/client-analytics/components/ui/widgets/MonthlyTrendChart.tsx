@@ -13,8 +13,8 @@ type Props = { data: MonthlyTrend[] | undefined };
 
 function isCurrentMonth(monthStart: string): boolean {
   const now = new Date();
-  const d = new Date(monthStart + 'T00:00:00');
-  return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+  const d = new Date(monthStart);
+  return d.getUTCFullYear() === now.getFullYear() && d.getUTCMonth() === now.getMonth();
 }
 
 function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction: number } {
