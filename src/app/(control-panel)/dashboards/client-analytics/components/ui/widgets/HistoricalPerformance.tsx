@@ -72,18 +72,20 @@ function HistoricalPerformance({ data }: Props) {
   const priorMonthValue = lastCompleteIdx > 0 ? values[lastCompleteIdx - 1] : null;
   const lastYearValue = priorValues[lastCompleteIdx];
 
-  // Trend line (linear regression) across all complete months
-  const completeVals = lastIsIncomplete ? values.slice(0, -1) : values;
-  const nPts = completeVals.length;
+  // Trend line (linear regression) — uses projected value for current month
+  const trendInputs = lastIsIncomplete && projectedValue !== null && cfg.projectable
+    ? [...values.slice(0, -1), projectedValue]
+    : values;
+  const nPts = trendInputs.length;
   let trendLine: number[] | null = null;
   if (nPts >= 3) {
-    const sX = completeVals.reduce((s, _, i) => s + i, 0);
-    const sY = completeVals.reduce((s, v) => s + v, 0);
-    const sXY = completeVals.reduce((s, v, i) => s + i * v, 0);
-    const sX2 = completeVals.reduce((s, _, i) => s + i * i, 0);
+    const sX = trendInputs.reduce((s, _, i) => s + i, 0);
+    const sY = trendInputs.reduce((s, v) => s + v, 0);
+    const sXY = trendInputs.reduce((s, v, i) => s + i * v, 0);
+    const sX2 = trendInputs.reduce((s, _, i) => s + i * i, 0);
     const sl = (nPts * sXY - sX * sY) / (nPts * sX2 - sX * sX);
     const ic = (sY - sl * sX) / nPts;
-    trendLine = values.map((_, i) => Math.max(Math.round(ic + sl * i), 0));
+    trendLine = trendInputs.map((_, i) => Math.max(Math.round(ic + sl * i), 0));
   }
 
   // Build series

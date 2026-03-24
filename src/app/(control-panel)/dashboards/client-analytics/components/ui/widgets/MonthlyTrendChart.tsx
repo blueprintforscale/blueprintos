@@ -29,7 +29,6 @@ function MonthlyTrendChart({ data }: Props) {
 
   const labels = data.map((d) => (d as any).short_label || d.label);
   const lastIsIncomplete = data.length > 0 && isCurrentMonth((data[data.length - 1] as any).month_start);
-  const forecastCount = lastIsIncomplete ? 1 : 0;
   const { fraction: monthFraction } = getMonthProgress();
 
   const qualityLeads = data.map((d) => {
@@ -46,43 +45,45 @@ function MonthlyTrendChart({ data }: Props) {
     ? Math.round(currentLeads / monthFraction)
     : null;
 
-  // Annotation for projected leads
+  // Projection annotation: point above the March bar only
   const annotations: ApexOptions['annotations'] = {};
   if (projectedLeads !== null && projectedLeads > 0) {
-    annotations.yaxis = [{
+    annotations.points = [{
+      x: labels[labels.length - 1],
       y: projectedLeads,
-      yAxisIndex: 0,
-      borderColor: '#000',
-      strokeDashArray: 3,
-      opacity: 0.5,
+      seriesIndex: 0,
+      marker: {
+        size: 0,
+      },
       label: {
-        text: `~${projectedLeads} projected`,
-        borderColor: 'transparent',
-        position: 'right',
-        offsetX: -10,
+        text: `~${projectedLeads}`,
+        borderColor: '#000',
+        offsetY: -8,
         style: {
           background: '#1a1a1a',
-          color: '#c5bfb6',
+          color: '#fff',
           fontSize: '10px',
           fontWeight: 600,
-          padding: { left: 8, right: 8, top: 3, bottom: 3 },
+          padding: { left: 6, right: 6, top: 3, bottom: 3 },
         },
       },
     }];
   }
 
-  // Trend line (linear regression on quality leads)
-  const completeLeads = lastIsIncomplete ? qualityLeads.slice(0, -1) : qualityLeads;
-  const n = completeLeads.length;
+  // Trend line (linear regression) — uses projected value for current month
+  const trendInputs = lastIsIncomplete && projectedLeads
+    ? [...qualityLeads.slice(0, -1), projectedLeads]
+    : qualityLeads;
+  const n = trendInputs.length;
   let trendLine: number[] | null = null;
   if (n >= 3) {
-    const sumX = completeLeads.reduce((s, _, i) => s + i, 0);
-    const sumY = completeLeads.reduce((s, v) => s + v, 0);
-    const sumXY = completeLeads.reduce((s, v, i) => s + i * v, 0);
-    const sumX2 = completeLeads.reduce((s, _, i) => s + i * i, 0);
+    const sumX = trendInputs.reduce((s, _, i) => s + i, 0);
+    const sumY = trendInputs.reduce((s, v) => s + v, 0);
+    const sumXY = trendInputs.reduce((s, v, i) => s + i * v, 0);
+    const sumX2 = trendInputs.reduce((s, _, i) => s + i * i, 0);
     const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
     const intercept = (sumY - slope * sumX) / n;
-    trendLine = qualityLeads.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
+    trendLine = trendInputs.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
   }
 
   const series: any[] = [
@@ -112,7 +113,6 @@ function MonthlyTrendChart({ data }: Props) {
     },
     colors: chartColors,
     stroke: { width: strokeWidths, curve: 'smooth', dashArray: dashArrays },
-    forecastDataPoints: { count: forecastCount, dashArray: 6, strokeWidth: 2 },
     plotOptions: {
       bar: {
         columnWidth: '50%',
