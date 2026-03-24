@@ -7,11 +7,6 @@ import Typography from '@mui/material/Typography';
 import type { FunnelData } from '../../../api/types';
 import type { FunnelStage } from './FunnelDrawer';
 
-function formatDollars(n: number) {
-  if (!n) return '';
-  return `$${n.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-}
-
 type Props = {
   data: FunnelData | undefined;
   onStageClick?: (stage: FunnelStage) => void;
@@ -20,14 +15,14 @@ type Props = {
 function FunnelChart({ data, onStageClick }: Props) {
   if (!data) return null;
 
-  const stages: { label: string; key: FunnelStage; count: number; value: number | null }[] = [
-    { label: 'Leads', key: 'leads', count: data.leads, value: null },
-    { label: 'Inspection Scheduled', key: 'inspection_scheduled', count: data.inspection_scheduled, value: null },
-    { label: 'Inspection Completed', key: 'inspection_completed', count: data.inspection_completed, value: null },
-    { label: 'Estimate Sent', key: 'estimate_sent', count: data.estimate_sent, value: data.estimate_sent_value },
-    { label: 'Estimate Approved', key: 'estimate_approved', count: data.estimate_approved, value: data.estimate_approved_value },
-    { label: 'Job Scheduled', key: 'job_scheduled', count: data.job_scheduled, value: data.job_value },
-    { label: 'Job Completed', key: 'job_completed', count: data.job_completed, value: null },
+  const stages: { label: string; key: FunnelStage; count: number }[] = [
+    { label: 'Leads', key: 'leads', count: data.leads },
+    { label: 'Inspection Scheduled', key: 'inspection_scheduled', count: data.inspection_scheduled },
+    { label: 'Inspection Completed', key: 'inspection_completed', count: data.inspection_completed },
+    { label: 'Estimate Sent', key: 'estimate_sent', count: data.estimate_sent },
+    { label: 'Estimate Approved', key: 'estimate_approved', count: data.estimate_approved },
+    { label: 'Job Scheduled', key: 'job_scheduled', count: data.job_scheduled },
+    { label: 'Job Completed', key: 'job_completed', count: data.job_completed },
   ];
 
   const maxCount = Math.max(data.leads, 1);
@@ -45,7 +40,7 @@ function FunnelChart({ data, onStageClick }: Props) {
 
       <div className="flex flex-col px-5 pb-4">
         {stages.map((stage, i) => {
-          const barPct = Math.max((stage.count / maxCount) * 100, 5);
+          const barPct = Math.max((stage.count / maxCount) * 100, 8);
           const convRate = i > 0 && stages[i - 1].count > 0
             ? ((stage.count / stages[i - 1].count) * 100).toFixed(1)
             : null;
@@ -60,40 +55,35 @@ function FunnelChart({ data, onStageClick }: Props) {
                 className={`flex items-center gap-4 py-1.5 ${onStageClick ? 'cursor-pointer group' : ''}`}
                 onClick={() => onStageClick?.(stage.key)}
               >
-                {/* Bar area — fixed proportion of the row */}
+                {/* Bar area */}
                 <div className="relative flex-1">
                   <div className="flex items-center">
-                    {/* Colored bar */}
                     <div
                       className={`flex items-center rounded-md px-4 py-3 transition-all duration-200 ${onStageClick ? 'group-hover:brightness-110' : ''}`}
                       style={{
                         width: `${barPct}%`,
-                        minWidth: '80px',
+                        minWidth: '100px',
                         backgroundColor: `rgba(232, 93, 77, ${1 - i * 0.1})`,
                       }}
                     >
                       <span className="text-sm font-bold text-white whitespace-nowrap">{stage.label}</span>
                     </div>
-                    {/* Extending line */}
                     <div className="flex-1 border-b" style={{ borderColor: '#333' }} />
                   </div>
                 </div>
 
-                {/* Count */}
-                <div className="flex items-baseline gap-2 w-32 justify-end">
+                {/* Count only — no revenue */}
+                <div className="flex items-baseline w-20 justify-end">
                   <span className="text-2xl font-extrabold text-white">{stage.count}</span>
-                  {stage.value ? (
-                    <span className="text-xs" style={{ color: '#8a8279' }}>{formatDollars(stage.value)}</span>
-                  ) : null}
                 </div>
               </motion.div>
 
-              {/* Conversion rate pill — centered between rows */}
+              {/* Conversion rate pill — bigger, more visible */}
               {convRate && (
-                <div className="flex justify-center py-0.5">
+                <div className="flex justify-center py-1">
                   <span
-                    className="rounded-full px-3 py-0.5 text-[11px] font-medium"
-                    style={{ backgroundColor: '#2a2a2a', color: '#8a8279' }}
+                    className="rounded-full px-4 py-1 text-xs font-semibold"
+                    style={{ backgroundColor: '#2a2a2a', color: '#c5bfb6', border: '1px solid #3a3a3a' }}
                   >
                     {convRate}%
                   </span>
@@ -107,8 +97,8 @@ function FunnelChart({ data, onStageClick }: Props) {
       {/* Overall */}
       {data.leads > 0 && (
         <div className="border-t px-6 py-3" style={{ borderColor: '#2a2a2a' }}>
-          <Typography className="text-center text-[11px]" style={{ color: '#5a554d' }}>
-            Overall conversion rate: <strong style={{ color: '#8a8279' }}>{((data.job_completed / data.leads) * 100).toFixed(1)}%</strong>
+          <Typography className="text-center text-xs" style={{ color: '#5a554d' }}>
+            Overall conversion: <strong style={{ color: '#c5bfb6' }}>{((data.job_completed / data.leads) * 100).toFixed(1)}%</strong>
           </Typography>
         </div>
       )}

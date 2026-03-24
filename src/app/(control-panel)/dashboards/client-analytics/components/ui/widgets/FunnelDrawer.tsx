@@ -100,6 +100,13 @@ type Props = {
 function FunnelDrawer({ open, stage, title, leads, onClose }: Props) {
   const filtered = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
 
+  // Calculate total revenue for this stage
+  const totalRevenue = filtered.reduce((sum, lead) => {
+    const approved = parseFloat(String(lead.approved_revenue)) || 0;
+    const invoiced = parseFloat(String(lead.invoiced_revenue)) || 0;
+    return sum + approved + invoiced;
+  }, 0);
+
   return (
     <Drawer
       anchor="right"
@@ -115,7 +122,14 @@ function FunnelDrawer({ open, stage, title, leads, onClose }: Props) {
         style={{ backgroundColor: '#000' }}
       >
         <div>
-          <Typography className="text-base font-bold text-white">{title || stageLabels[stage]}</Typography>
+          <div className="flex items-center gap-3">
+            <Typography className="text-base font-bold text-white">{title || stageLabels[stage]}</Typography>
+            {totalRevenue > 0 && (
+              <Typography className="text-base font-bold" style={{ color: '#3b8a5a' }}>
+                {formatDollars(totalRevenue)}
+              </Typography>
+            )}
+          </div>
           <Typography className="text-xs" style={{ color: '#c5bfb6' }}>{filtered.length} leads</Typography>
         </div>
         <IconButton onClick={onClose} size="small" sx={{ color: '#fff' }}>
