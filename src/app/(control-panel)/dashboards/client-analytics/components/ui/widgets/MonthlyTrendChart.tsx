@@ -52,17 +52,7 @@ function MonthlyTrendChart({ data, startDate }: Props) {
     ? Math.round(currentLeads / monthFraction)
     : null;
 
-  // Trend line (average) — uses projected value for current month
-  const trendInputs = lastIsIncomplete && projectedLeads
-    ? [...qualityLeads.slice(0, -1), projectedLeads]
-    : qualityLeads;
-  let trendLine: number[] | null = null;
-  const avg = trendInputs.length > 0
-    ? Math.round(trendInputs.reduce((s, v) => s + v, 0) / trendInputs.length)
-    : 0;
-  if (trendInputs.length >= 2 && avg > 0) {
-    trendLine = trendInputs.map(() => avg);
-  }
+  const trendLine: number[] | null = null;
 
   // Annotations
   const annotations: ApexOptions['annotations'] = {};
@@ -220,9 +210,6 @@ function MonthlyTrendChart({ data, startDate }: Props) {
           </span>
           <span className="flex items-center gap-1">
             <span className="inline-block h-0.5 w-4" style={{ backgroundColor: '#E85D4D' }} /> CPL
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="inline-block h-0.5 w-4 border-t border-dashed" style={{ borderColor: '#c5bfb6' }} /> Avg{avg > 0 ? `: ${avg}` : ''}
           </span>
         </div>
         {projectedLeads !== null && currentLeads !== null && (

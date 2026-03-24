@@ -79,15 +79,7 @@ function HistoricalPerformance({ data, startDate }: Props) {
   const priorMonthValue = lastCompleteIdx > 0 ? values[lastCompleteIdx - 1] : null;
   const lastYearValue = priorValues[lastCompleteIdx];
 
-  // Trend line (average) — uses projected value for current month
-  const trendInputs = lastIsIncomplete && projectedValue !== null && cfg.projectable
-    ? [...values.slice(0, -1), projectedValue]
-    : values;
-  let trendLine: number[] | null = null;
-  if (trendInputs.length >= 2) {
-    const avg = trendInputs.reduce((s, v) => s + v, 0) / trendInputs.length;
-    trendLine = trendInputs.map(() => Math.round(avg));
-  }
+  const trendLine: number[] | null = null;
 
   // Build series
   const series: ApexAxisChartSeries = [
