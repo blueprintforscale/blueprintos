@@ -79,20 +79,14 @@ function HistoricalPerformance({ data, startDate }: Props) {
   const priorMonthValue = lastCompleteIdx > 0 ? values[lastCompleteIdx - 1] : null;
   const lastYearValue = priorValues[lastCompleteIdx];
 
-  // Trend line (linear regression) — uses projected value for current month
+  // Trend line (average) — uses projected value for current month
   const trendInputs = lastIsIncomplete && projectedValue !== null && cfg.projectable
     ? [...values.slice(0, -1), projectedValue]
     : values;
-  const nPts = trendInputs.length;
   let trendLine: number[] | null = null;
-  if (nPts >= 3) {
-    const sX = trendInputs.reduce((s, _, i) => s + i, 0);
-    const sY = trendInputs.reduce((s, v) => s + v, 0);
-    const sXY = trendInputs.reduce((s, v, i) => s + i * v, 0);
-    const sX2 = trendInputs.reduce((s, _, i) => s + i * i, 0);
-    const sl = (nPts * sXY - sX * sY) / (nPts * sX2 - sX * sX);
-    const ic = (sY - sl * sX) / nPts;
-    trendLine = trendInputs.map((_, i) => Math.max(Math.round(ic + sl * i), 0));
+  if (trendInputs.length >= 2) {
+    const avg = trendInputs.reduce((s, v) => s + v, 0) / trendInputs.length;
+    trendLine = trendInputs.map(() => Math.round(avg));
   }
 
   // Build series
@@ -127,35 +121,8 @@ function HistoricalPerformance({ data, startDate }: Props) {
     dashArray.push(3);
   });
 
-  // Average line
-  const avgValue = values.length > 0
-    ? values.reduce((s, v) => s + v, 0) / values.length
-    : 0;
-
   // Projection: point annotation at projected value for current month
   const annotations: ApexOptions['annotations'] = {};
-  if (avgValue > 0) {
-    annotations.yaxis = [{
-      y: avgValue,
-      yAxisIndex: 0,
-      borderColor: '#8a8279',
-      strokeDashArray: 4,
-      opacity: 0.4,
-      label: {
-        text: `Avg: ${cfg.format(avgValue)}`,
-        borderColor: 'transparent',
-        position: 'left',
-        offsetX: 5,
-        style: {
-          background: '#8a8279',
-          color: '#fff',
-          fontSize: '9px',
-          fontWeight: 600,
-          padding: { left: 5, right: 5, top: 2, bottom: 2 },
-        },
-      },
-    }];
-  }
   if (startMonthIdx >= 0) {
     annotations.xaxis = [{
       x: labels[startMonthIdx],

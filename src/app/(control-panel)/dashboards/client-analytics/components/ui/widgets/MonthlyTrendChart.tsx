@@ -52,26 +52,17 @@ function MonthlyTrendChart({ data, startDate }: Props) {
     ? Math.round(currentLeads / monthFraction)
     : null;
 
-  // Trend line (linear regression) — uses projected value for current month
+  // Trend line (average) — uses projected value for current month
   const trendInputs = lastIsIncomplete && projectedLeads
     ? [...qualityLeads.slice(0, -1), projectedLeads]
     : qualityLeads;
-  const n = trendInputs.length;
   let trendLine: number[] | null = null;
-  if (n >= 3) {
-    const sumX = trendInputs.reduce((s, _, i) => s + i, 0);
-    const sumY = trendInputs.reduce((s, v) => s + v, 0);
-    const sumXY = trendInputs.reduce((s, v, i) => s + i * v, 0);
-    const sumX2 = trendInputs.reduce((s, _, i) => s + i * i, 0);
-    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
-    const intercept = (sumY - slope * sumX) / n;
-    trendLine = trendInputs.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
-  }
-
-  // Average line
   const avg = trendInputs.length > 0
     ? Math.round(trendInputs.reduce((s, v) => s + v, 0) / trendInputs.length)
     : 0;
+  if (trendInputs.length >= 2 && avg > 0) {
+    trendLine = trendInputs.map(() => avg);
+  }
 
   // Annotations
   const annotations: ApexOptions['annotations'] = {};
@@ -90,28 +81,6 @@ function MonthlyTrendChart({ data, startDate }: Props) {
         offsetX: -5,
         style: {
           background: '#E85D4D',
-          color: '#fff',
-          fontSize: '9px',
-          fontWeight: 600,
-          padding: { left: 5, right: 5, top: 2, bottom: 2 },
-        },
-      },
-    });
-  }
-  if (avg > 0) {
-    yAnnotations.push({
-      y: avg,
-      yAxisIndex: 0,
-      borderColor: '#8a8279',
-      strokeDashArray: 4,
-      opacity: 0.4,
-      label: {
-        text: `Avg: ${avg}`,
-        borderColor: 'transparent',
-        position: 'left',
-        offsetX: 5,
-        style: {
-          background: '#8a8279',
           color: '#fff',
           fontSize: '9px',
           fontWeight: 600,
@@ -253,13 +222,8 @@ function MonthlyTrendChart({ data, startDate }: Props) {
             <span className="inline-block h-0.5 w-4" style={{ backgroundColor: '#E85D4D' }} /> CPL
           </span>
           <span className="flex items-center gap-1">
-            <span className="inline-block h-0.5 w-4 border-t border-dashed" style={{ borderColor: '#c5bfb6' }} /> Trend
+            <span className="inline-block h-0.5 w-4 border-t border-dashed" style={{ borderColor: '#c5bfb6' }} /> Avg{avg > 0 ? `: ${avg}` : ''}
           </span>
-          {avg > 0 && (
-            <span className="flex items-center gap-1">
-              <span className="inline-block h-0.5 w-4 border-t border-dashed" style={{ borderColor: '#8a8279' }} /> Avg: {avg}
-            </span>
-          )}
         </div>
         {projectedLeads !== null && currentLeads !== null && (
           <div className="mt-1 text-[10px]" style={{ color: '#c5bfb6' }}>
