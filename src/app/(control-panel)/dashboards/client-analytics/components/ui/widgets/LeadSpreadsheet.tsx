@@ -4,6 +4,7 @@ import React, { memo, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import LeadDetailPanel from './LeadDetailPanel';
+import FlagLeadModal from './FlagLeadModal';
 
 type Lead = {
   hcp_customer_id: string | null;
@@ -23,16 +24,17 @@ type Lead = {
   approved_revenue: number;
   invoiced_revenue: number;
   lost_reason?: string | null;
+  job_description?: string | null;
+  service_address?: string | null;
+  client_flag_reason?: string | null;
+  client_flag_at?: string | null;
 };
 
-// Source detection — for now everything is Google Ads, but this is where
-// we'll add GBP, Direct, Referral, etc. when multi-source goes live
 function getSource(_lead: Lead): string {
   return 'Google Ads';
 }
 
 function getHighestStage(lead: Lead): string {
-  // Lost leads show as Lost regardless of funnel position
   if (lead.lost_reason) return 'Lost';
   if (lead.job_completed) return 'Job Completed';
   if (lead.job_scheduled) return 'Job Scheduled';
@@ -63,14 +65,6 @@ function formatPhone(p: string) {
   return `(${p.slice(0, 3)}) ${p.slice(3, 6)}-${p.slice(6)}`;
 }
 
-const sourceColors: Record<string, string> = {
-  'Google Ads': 'text-white',
-  'Google Business Profile': 'text-white',
-  'Direct / Organic': 'text-white',
-  'Referral': 'text-white',
-  'LSA': 'text-white',
-};
-
 const sourceBgColors: Record<string, string> = {
   'Google Ads': '#3b8a5a',
   'Google Business Profile': '#c4890a',
@@ -94,12 +88,13 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
   'New Lead': { bg: '#EEEAD9', text: '#8a8279' },
 };
 
-
 type Props = { data: Lead[] | undefined; customerId?: number };
 
 function LeadSpreadsheet({ data, customerId }: Props) {
   const [expandedLead, setExpandedLead] = useState<string | null>(null);
   const [showLost, setShowLost] = useState(false);
+  const [flagModal, setFlagModal] = useState<{ lead: Lead; index: number } | null>(null);
+  const [flaggedLocally, setFlaggedLocally] = useState<Set<string>>(new Set());
 
   if (!data || !Array.isArray(data)) return null;
 
@@ -108,7 +103,29 @@ function LeadSpreadsheet({ data, customerId }: Props) {
   const matched = filtered.filter((l) => l.match_status === 'matched').length;
   const unmatched = filtered.length - matched;
 
+  const handleFlag = async (reason: string, notes: string) => {
+    if (!flagModal || !customerId) return;
+    const lead = flagModal.lead;
+    await fetch(`/api/blueprint/clients/${customerId}/flag-lead`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        hcp_customer_id: lead.hcp_customer_id || null,
+        phone: lead.phone,
+        callrail_id: null,
+        name: lead.name,
+        reason,
+        notes,
+      }),
+    });
+    setFlaggedLocally((prev) => new Set(prev).add(`${lead.phone}-${flagModal.index}`));
+  };
+
+  const isLeadFlagged = (lead: Lead, i: number) =>
+    !!lead.client_flag_reason || flaggedLocally.has(`${lead.phone}-${i}`);
+
   return (
+    <>
     <Paper className="flex flex-col overflow-hidden rounded-xl shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between px-6 pt-6 pb-3">
@@ -145,6 +162,7 @@ function LeadSpreadsheet({ data, customerId }: Props) {
               <th className="px-3 py-2.5">Duration</th>
               <th className="px-3 py-2.5">Stage</th>
               <th className="px-3 py-2.5 text-right">Revenue</th>
+              <th className="px-3 py-2.5 text-center w-16"></th>
             </tr>
           </thead>
           <tbody>
@@ -152,17 +170,24 @@ function LeadSpreadsheet({ data, customerId }: Props) {
               const revenue = (parseFloat(String(lead.approved_revenue)) || 0) + (parseFloat(String(lead.invoiced_revenue)) || 0);
               const source = getSource(lead);
               const stage = getHighestStage(lead);
+              const flagged = isLeadFlagged(lead, i);
 
               const isExpanded = expandedLead === `${lead.phone}-${i}`;
               const canExpand = lead.match_status === 'matched' && lead.hcp_customer_id;
               return (
                 <React.Fragment key={`${lead.phone}-${i}`}>
                 <tr
-                  className={`border-b border-gray-50 hover:bg-gray-50 ${lead.match_status === 'unmatched' ? 'opacity-60' : ''} ${canExpand ? 'cursor-pointer' : ''} ${isExpanded ? 'bg-gray-50' : ''}`}
+                  className={`border-b border-gray-50 hover:bg-gray-50 ${lead.match_status === 'unmatched' ? 'opacity-60' : ''} ${canExpand ? 'cursor-pointer' : ''} ${isExpanded ? 'bg-gray-50' : ''} ${flagged ? 'opacity-70' : ''}`}
+                  style={flagged ? { borderLeft: '3px solid #c4890a' } : undefined}
                   onClick={() => canExpand && setExpandedLead(isExpanded ? null : `${lead.phone}-${i}`)}
                 >
                   <td className="sticky left-0 whitespace-nowrap bg-white px-4 py-2.5 text-gray-500">{formatDate(lead.contact_date)}</td>
-                  <td className="max-w-[160px] truncate px-4 py-2.5 font-medium">{lead.name || '-'}</td>
+                  <td className="max-w-[200px] px-4 py-2.5">
+                    <div className="font-medium truncate">{lead.name || '-'}</div>
+                    {lead.service_address && (
+                      <div className="text-[9px] truncate" style={{ color: '#c5bfb6' }}>{lead.service_address}</div>
+                    )}
+                  </td>
                   <td className="whitespace-nowrap px-3 py-2.5 text-gray-500">{formatPhone(lead.phone)}</td>
                   <td className="px-3 py-2.5">
                     <span
@@ -195,18 +220,34 @@ function LeadSpreadsheet({ data, customerId }: Props) {
                       {stage}
                     </span>
                     {lead.lost_reason && (
-                      <div className="mt-0.5 text-[9px]" style={{ color: '#c5bfb6' }}>
-                        {lead.lost_reason}
-                      </div>
+                      <div className="mt-0.5 text-[9px]" style={{ color: '#c5bfb6' }}>{lead.lost_reason}</div>
                     )}
                   </td>
                   <td className="whitespace-nowrap px-3 py-2.5 text-right font-medium">
                     {revenue > 0 ? `$${revenue.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '-'}
                   </td>
+                  <td className="px-3 py-2.5 text-center">
+                    {flagged ? (
+                      <span
+                        className="inline-block rounded px-2 py-0.5 text-[10px] font-medium"
+                        style={{ backgroundColor: '#fdf8ed', color: '#c4890a', border: '1px solid #e8d9a8' }}
+                      >
+                        Flagged
+                      </span>
+                    ) : (
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setFlagModal({ lead, index: i }); }}
+                        className="rounded px-2 py-0.5 text-[10px] font-medium transition-colors hover:bg-gray-100"
+                        style={{ color: '#c5bfb6' }}
+                      >
+                        Flag
+                      </button>
+                    )}
+                  </td>
                 </tr>
                 {isExpanded && canExpand && customerId && (
                   <tr>
-                    <td colSpan={8} className="p-0">
+                    <td colSpan={9} className="p-0">
                       <LeadDetailPanel customerId={customerId} hcpCustomerId={lead.hcp_customer_id!} />
                     </td>
                   </tr>
@@ -224,6 +265,15 @@ function LeadSpreadsheet({ data, customerId }: Props) {
         </div>
       )}
     </Paper>
+
+    {/* Flag modal */}
+    <FlagLeadModal
+      open={flagModal !== null}
+      leadName={flagModal?.lead.name || ''}
+      onClose={() => setFlagModal(null)}
+      onSubmit={handleFlag}
+    />
+    </>
   );
 }
 

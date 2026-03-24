@@ -23,6 +23,9 @@ type Lead = {
   job_completed: boolean;
   approved_revenue: number;
   invoiced_revenue: number;
+  client_flag_reason?: string | null;
+  client_flag_at?: string | null;
+  service_address?: string | null;
 };
 
 export type FunnelStage =
@@ -158,10 +161,10 @@ function FunnelDrawer({ open, stage, title, leads, onClose }: Props) {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.03, duration: 0.2 }}
-                  className="border-b px-5 py-3 hover:bg-gray-50"
-                  style={{ borderColor: '#f0ede6' }}
+                  className={`border-b px-5 py-3 hover:bg-gray-50 ${lead.client_flag_reason ? 'opacity-70' : ''}`}
+                  style={{ borderColor: '#f0ede6', borderLeft: lead.client_flag_reason ? '3px solid #c4890a' : undefined }}
                 >
-                  {/* Row 1: Name + source badge + revenue */}
+                  {/* Row 1: Name + source badge + flag badge + revenue */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Typography className="text-sm font-semibold" style={{ color: '#000' }}>
@@ -173,6 +176,14 @@ function FunnelDrawer({ open, stage, title, leads, onClose }: Props) {
                       >
                         Google Ads
                       </span>
+                      {lead.client_flag_reason && (
+                        <span
+                          className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium"
+                          style={{ backgroundColor: '#fdf8ed', color: '#c4890a', border: '1px solid #e8d9a8' }}
+                        >
+                          Flagged
+                        </span>
+                      )}
                     </div>
                     {revenue > 0 && (
                       <Typography className="text-sm font-bold" style={{ color: '#3b8a5a' }}>

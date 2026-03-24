@@ -31,3 +31,29 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     return NextResponse.json({ error: 'API request failed' }, { status: 502 });
   }
 }
+
+export async function POST(request: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+  const { path } = await params;
+  const apiBase = process.env.BLUEPRINTOS_API_URL || 'https://api.blueprintforscale.com';
+  const apiKey = process.env.BLUEPRINTOS_API_KEY || '';
+
+  const pathStr = path.join('/');
+  const url = `${apiBase}/${pathStr}`;
+
+  try {
+    const body = await request.json();
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'x-api-key': apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json();
+    return NextResponse.json(data);
+  } catch (err) {
+    return NextResponse.json({ error: 'API request failed' }, { status: 502 });
+  }
+}
