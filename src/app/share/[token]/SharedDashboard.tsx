@@ -100,89 +100,123 @@ export default function SharedDashboard({ client }: Props) {
     all_time_rev: 0, all_time_spend: 0, guarantee: 0, lsa_spend: 0, lsa_leads: 0,
   } : undefined;
 
+  const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
   return (
     <>
-    <div className="min-h-screen" style={{ backgroundColor: '#F5F1E8' }}>
-      {/* Header */}
-      <div className="flex w-full flex-col gap-4 px-6 pt-6 md:px-8" style={{ backgroundColor: '#F5F1E8' }}>
-        <div>
-          <Typography className="text-2xl font-extrabold uppercase tracking-tight" sx={{ color: '#000' }}>
-            {displayName}
-          </Typography>
-          <Typography className="text-xs" sx={{ color: '#8a8279' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#ebe7de' }}>
+      {/* Branded header bar */}
+      <div style={{ backgroundColor: '#000' }}>
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 md:px-8">
+          <div className="flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-md" style={{ backgroundColor: '#E85D4D' }}>
+              <span className="text-sm font-black text-white">B</span>
+            </div>
+            <div>
+              <Typography className="text-sm font-bold text-white">{displayName}</Typography>
+              <Typography className="text-[10px]" style={{ color: '#8a8279' }}>Blueprint for Scale</Typography>
+            </div>
+          </div>
+          <Typography className="text-[10px]" style={{ color: '#5a554d' }}>{today}</Typography>
+        </div>
+      </div>
+
+      {/* Main container */}
+      <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
+        <div className="rounded-2xl shadow-sm" style={{ backgroundColor: '#F5F1E8' }}>
+          {/* Controls bar */}
+          <div className="flex flex-col gap-3 px-6 pt-5 pb-2 md:px-8">
+            <div className="flex flex-wrap items-center gap-3">
+              <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
+              {activeTab !== 2 && (
+                <>
+                  <div className="h-4 w-px" style={{ backgroundColor: '#ddd8cb' }} />
+                  <DateRangePicker value={dateRange} onChange={setDateRange} />
+                </>
+              )}
+            </div>
+            <Tabs
+              value={activeTab}
+              onChange={(_, v) => setActiveTab(v)}
+              sx={{ minHeight: 36, '& .MuiTab-root': { minHeight: 36, py: 0.5, fontSize: '0.8rem', textTransform: 'none' } }}
+            >
+              {VIEW_TABS.map((t) => (
+                <Tab key={t.label} label={t.label} />
+              ))}
+            </Tabs>
+          </div>
+
+          {/* Content */}
+          <motion.div
+            key={activeTab}
+            className="flex w-full flex-col gap-6 px-6 py-6 md:px-8"
+            variants={container}
+            initial="hidden"
+            animate="show"
+          >
+            {activeTab === 0 && (
+              <>
+                {activeSource !== 'all' && (
+                  <>
+                    <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: '#c5bfb6', marginBottom: -16 }}>Ad Performance</div>
+                    <motion.div variants={item}>
+                      <AdMetricsCards data={adMetrics} onRoasClick={() => {
+                        setDrawerStage('estimate_approved');
+                        setDrawerTitle('ROAS Breakdown');
+                        setDrawerAdSpend(adMetrics?.ad_spend);
+                      }} />
+                    </motion.div>
+                  </>
+                )}
+                <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: '#c5bfb6', marginBottom: -16 }}>Pipeline</div>
+                <motion.div variants={item}>
+                  <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                </motion.div>
+                <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: '#c5bfb6', marginBottom: -16 }}>Trends</div>
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                  <motion.div variants={item}>
+                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                  </motion.div>
+                  <motion.div variants={item}>
+                    <MonthlyTrendChart data={trend} />
+                  </motion.div>
+                </div>
+                <motion.div variants={item}>
+                  <RecentActivityWidget data={activity} />
+                </motion.div>
+              </>
+            )}
+
+            {activeTab === 1 && (
+              <motion.div variants={item}>
+                <LeadSpreadsheet data={spreadsheetData} customerId={customerId} crm={client.field_management_software} />
+              </motion.div>
+            )}
+
+            {activeTab === 2 && (
+              <motion.div variants={item}>
+                {historicalLoading ? (
+                  <div className="flex h-64 items-center justify-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
+                      <span className="text-xs" style={{ color: '#8a8279' }}>Loading performance data...</span>
+                    </div>
+                  </div>
+                ) : (
+                  <HistoricalPerformance data={historicalData} />
+                )}
+              </motion.div>
+            )}
+          </motion.div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-4 flex items-center justify-center pb-6">
+          <Typography className="text-[10px]" style={{ color: '#c5bfb6' }}>
             Powered by Blueprint for Scale
           </Typography>
         </div>
-        <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
-        {activeTab !== 2 && <DateRangePicker value={dateRange} onChange={setDateRange} />}
-        <Tabs
-          value={activeTab}
-          onChange={(_, v) => setActiveTab(v)}
-          sx={{ minHeight: 36, '& .MuiTab-root': { minHeight: 36, py: 0.5, fontSize: '0.8rem', textTransform: 'none' } }}
-        >
-          {VIEW_TABS.map((t) => (
-            <Tab key={t.label} label={t.label} />
-          ))}
-        </Tabs>
       </div>
-
-      {/* Content */}
-      <motion.div
-        key={activeTab}
-        className="flex w-full flex-col gap-6 px-6 py-6 md:px-8"
-        variants={container}
-        initial="hidden"
-        animate="show"
-      >
-        {activeTab === 0 && (
-          <>
-            {activeSource !== 'all' && (
-              <motion.div variants={item}>
-                <AdMetricsCards data={adMetrics} onRoasClick={() => {
-                  setDrawerStage('estimate_approved');
-                  setDrawerTitle('ROAS Breakdown');
-                  setDrawerAdSpend(adMetrics?.ad_spend);
-                }} />
-              </motion.div>
-            )}
-            <motion.div variants={item}>
-              <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
-            </motion.div>
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <motion.div variants={item}>
-                <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
-              </motion.div>
-              <motion.div variants={item}>
-                <MonthlyTrendChart data={trend} />
-              </motion.div>
-            </div>
-            <motion.div variants={item}>
-              <RecentActivityWidget data={activity} />
-            </motion.div>
-          </>
-        )}
-
-        {activeTab === 1 && (
-          <motion.div variants={item}>
-            <LeadSpreadsheet data={spreadsheetData} customerId={customerId} crm={client.field_management_software} />
-          </motion.div>
-        )}
-
-        {activeTab === 2 && (
-          <motion.div variants={item}>
-            {historicalLoading ? (
-              <div className="flex h-64 items-center justify-center">
-                <div className="flex flex-col items-center gap-3">
-                  <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
-                  <span className="text-xs" style={{ color: '#8a8279' }}>Loading performance data...</span>
-                </div>
-              </div>
-            ) : (
-              <HistoricalPerformance data={historicalData} />
-            )}
-          </motion.div>
-        )}
-      </motion.div>
     </div>
 
     <FunnelDrawer
