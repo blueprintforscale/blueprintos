@@ -43,9 +43,9 @@ function SummaryCards({ data, onStageClick }: Props) {
 
   const cards: { label: string; value: string; sub: string | null; highlight: boolean; stage?: FunnelStage }[] = [
     {
-      label: 'Contacts',
-      value: String(contacts),
-      sub: `${quality} quality leads${spam > 0 ? ` · ${spam} spam` : ''}`,
+      label: 'Quality Leads',
+      value: String(quality),
+      sub: spam > 0 ? `${contacts} contacts · ${spam} removed` : `${contacts} contacts`,
       highlight: false,
       stage: 'leads',
     },
