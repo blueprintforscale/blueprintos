@@ -142,12 +142,16 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, onClose }: P
   const isLeadFlagged = (lead: Lead) =>
     !!lead.client_flag_reason || flaggedLocally.has(lead.phone);
 
-  // Calculate total revenue for this stage
+  // Calculate total revenue — contextual to the stage we drilled into
   const totalRevenue = filtered.reduce((sum, lead) => {
     const approved = parseFloat(String(lead.approved_revenue)) || 0;
     const invoiced = parseFloat(String(lead.invoiced_revenue)) || 0;
     const estVal = parseFloat(String(lead.estimate_value)) || 0;
-    const rev = (approved + invoiced) > 0 ? (approved + invoiced) : estVal;
+    let rev = 0;
+    if (stage === 'estimate_sent') rev = estVal;
+    else if (stage === 'estimate_approved') rev = approved;
+    else if (stage === 'job_scheduled' || stage === 'job_completed') rev = invoiced > 0 ? invoiced : approved;
+    else rev = (approved + invoiced) > 0 ? (approved + invoiced) : estVal;
     return sum + rev;
   }, 0);
 
@@ -193,8 +197,12 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, onClose }: P
               const approvedRev = parseFloat(String(lead.approved_revenue)) || 0;
               const invoicedRev = parseFloat(String(lead.invoiced_revenue)) || 0;
               const estValue = parseFloat(String(lead.estimate_value)) || 0;
-              // Show approved+invoiced if available, otherwise fall back to estimate sent value
-              const revenue = (approvedRev + invoicedRev) > 0 ? (approvedRev + invoicedRev) : estValue;
+              // Revenue is contextual to the funnel stage we drilled into
+              let revenue = 0;
+              if (stage === 'estimate_sent') revenue = estValue;
+              else if (stage === 'estimate_approved') revenue = approvedRev;
+              else if (stage === 'job_scheduled' || stage === 'job_completed') revenue = invoicedRev > 0 ? invoicedRev : approvedRev;
+              else revenue = (approvedRev + invoicedRev) > 0 ? (approvedRev + invoicedRev) : estValue;
               const highestStage = getHighestStage(lead);
               const stageStyle = stageStyles[highestStage] || stageStyles['Lead'];
 
