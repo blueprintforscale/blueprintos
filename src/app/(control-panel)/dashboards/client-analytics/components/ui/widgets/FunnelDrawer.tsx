@@ -187,7 +187,7 @@ function FunnelDrawer({ open, stage, title, leads, customerId, onClose }: Props)
                   className={`border-b px-5 py-3 hover:bg-gray-50 ${lead.client_flag_reason ? 'opacity-70' : ''}`}
                   style={{ borderColor: '#f0ede6', borderLeft: lead.client_flag_reason ? '3px solid #c4890a' : undefined }}
                 >
-                  {/* Row 1: Name + source badge + flag badge + revenue */}
+                  {/* Row 1: Name + source badge + flag badge + revenue + HCP link */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Typography className="text-sm font-semibold" style={{ color: '#000' }}>
@@ -208,11 +208,29 @@ function FunnelDrawer({ open, stage, title, leads, customerId, onClose }: Props)
                         </span>
                       )}
                     </div>
-                    {revenue > 0 && (
-                      <Typography className="text-sm font-bold" style={{ color: '#3b8a5a' }}>
-                        {formatDollars(revenue)}
-                      </Typography>
-                    )}
+                    <div className="flex items-center gap-2">
+                      {revenue > 0 && (
+                        <Typography className="text-sm font-bold" style={{ color: '#3b8a5a' }}>
+                          {formatDollars(revenue)}
+                        </Typography>
+                      )}
+                      {lead.hcp_customer_id && (
+                        <a
+                          href={`https://pro.housecallpro.com/pro/customers/${lead.hcp_customer_id.replace('cus_', '')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-gray-100"
+                          title="Open in Housecall Pro"
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8a8279" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                          </svg>
+                        </a>
+                      )}
+                    </div>
                   </div>
 
                   {/* Row 2: Date · Phone · Stage badge */}
