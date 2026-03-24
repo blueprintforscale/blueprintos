@@ -107,8 +107,20 @@ function AdMetricsCards({ data, days, onRoasClick, onGuaranteeClick }: Props) {
           </>
         ) : (
           <>
-            <Typography className="mt-1 text-3xl font-bold tracking-tight" sx={{ color: '#fff' }}>{data.roas.toFixed(1)}x</Typography>
-            <Typography className="mt-1 text-xs" sx={{ color: '#c5bfb6' }}>{formatDollars(data.total_closed_rev)} / {formatDollars(data.ad_spend)}</Typography>
+            <div className="mt-1 flex items-baseline gap-2">
+              <Typography className="text-3xl font-bold tracking-tight" sx={{ color: '#fff' }}>{data.roas.toFixed(1)}x</Typography>
+              {(data.projected_close_total || 0) > 0 && data.ad_spend > 0 && (
+                <Typography className="text-lg font-medium tracking-tight" sx={{ color: '#5a554d' }}>
+                  → {((data.total_closed_rev + (data.projected_close_total || 0)) / data.ad_spend).toFixed(1)}x
+                </Typography>
+              )}
+            </div>
+            <Typography className="mt-1 text-xs" sx={{ color: '#c5bfb6' }}>
+              {formatDollars(data.total_closed_rev)} / {formatDollars(data.ad_spend)}
+              {(data.projected_close_total || 0) > 0 && (
+                <span style={{ color: '#5a554d' }}> · +{formatDollars(data.projected_close_total || 0)} projected</span>
+              )}
+            </Typography>
           </>
         )}
       </Paper>

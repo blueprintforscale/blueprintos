@@ -113,6 +113,7 @@ function ClientAnalyticsView() {
     program_price: parseFloat((funnel as any).program_price) || 0,
     guarantee: parseFloat((funnel as any).program_price) > 0
       ? (parseFloat((funnel as any).all_time_rev) || 0) / parseFloat((funnel as any).program_price) : 0,
+    projected_close_total: parseFloat((funnel as any).projected_close_total) || 0,
     lsa_spend: 0, lsa_leads: 0,
   } : undefined;
 
