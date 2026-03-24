@@ -65,8 +65,14 @@ function ClientAnalyticsView() {
   const dateFrom = dateRange.from;
   const dateTo = dateRange.to;
 
+  const isShortRange = dateRange.days !== null && dateRange.days <= 7;
+  const ninetyDayFrom = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
+  const ninetyDayTo = new Date().toISOString().split('T')[0];
+
   const { data: clients } = useClients();
   const { data: funnel } = useFunnel(selectedClient!, activeSource, dateFrom, dateTo);
+  // 90-day funnel for CPL fallback on short ranges
+  const { data: funnel90 } = useFunnel(selectedClient!, activeSource, ninetyDayFrom, ninetyDayTo);
   const { data: trend } = useMonthlyTrend(selectedClient!, 6);
   const { data: activity } = useRecentActivity(selectedClient!);
   const { data: sourceTabs } = useSourceTabs(selectedClient!);
@@ -90,13 +96,14 @@ function ClientAnalyticsView() {
   const clientName = selectedClientObj?.name || 'Select a client';
   const clientCrm = selectedClientObj?.field_management_software;
 
-  // Derive ad metrics from funnel
+  // Derive ad metrics from funnel — CPL falls back to 90-day on short ranges
+  const cplSource = isShortRange && funnel90 ? funnel90 : funnel;
   const adMetrics = funnel ? {
     ad_spend: parseFloat(funnel.ad_spend as any) || 0,
     quality_leads: parseInt(funnel.quality_leads as any) || 0,
-    actual_quality_leads: parseInt(funnel.quality_leads as any) || 0,
-    cpl: (parseInt(funnel.quality_leads as any) || 0) > 0
-      ? (parseFloat(funnel.ad_spend as any) || 0) / parseInt(funnel.quality_leads as any) : 0,
+    actual_quality_leads: parseInt((cplSource as any)?.quality_leads) || 0,
+    cpl: (parseInt((cplSource as any)?.quality_leads) || 0) > 0
+      ? (parseFloat((cplSource as any)?.ad_spend) || 0) / parseInt((cplSource as any)?.quality_leads) : 0,
     total_closed_rev: parseFloat(funnel.closed_rev as any) || 0,
     total_open_est_rev: parseFloat(funnel.open_est_rev as any) || 0,
     roas: (parseFloat(funnel.ad_spend as any) || 0) > 0
@@ -168,7 +175,7 @@ function ClientAnalyticsView() {
               <>
                 {activeSource !== 'all' && (
                   <motion.div variants={item}>
-                    <AdMetricsCards data={adMetrics} onRoasClick={() => {
+                    <AdMetricsCards data={adMetrics} days={dateRange.days} onRoasClick={() => {
                       setDrawerStage('estimate_approved');
                       setDrawerTitle('ROAS Breakdown');
                       setDrawerAdSpend(adMetrics?.ad_spend);
