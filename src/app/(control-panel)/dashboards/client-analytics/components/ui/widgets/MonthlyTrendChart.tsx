@@ -45,24 +45,26 @@ function MonthlyTrendChart({ data }: Props) {
     ? Math.round(currentLeads / monthFraction)
     : null;
 
-  // Projection annotation: label on the March x-axis position
+  // Projection: dashed line at projected value, label on right
   const annotations: ApexOptions['annotations'] = {};
   if (projectedLeads !== null && projectedLeads > 0) {
-    annotations.xaxis = [{
-      x: labels[labels.length - 1],
-      borderColor: 'transparent',
+    annotations.yaxis = [{
+      y: projectedLeads,
+      yAxisIndex: 0,
+      borderColor: '#E85D4D',
+      strokeDashArray: 3,
+      opacity: 0.5,
       label: {
-        text: `~${projectedLeads} projected`,
+        text: `~${projectedLeads}`,
         borderColor: 'transparent',
-        position: 'top',
-        orientation: 'horizontal',
-        offsetY: -5,
+        position: 'right',
+        offsetX: -5,
         style: {
           background: '#E85D4D',
           color: '#fff',
           fontSize: '9px',
           fontWeight: 600,
-          padding: { left: 6, right: 6, top: 3, bottom: 3 },
+          padding: { left: 5, right: 5, top: 2, bottom: 2 },
         },
       },
     }];
