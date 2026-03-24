@@ -1,10 +1,11 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Drawer from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import FlagLeadModal from './FlagLeadModal';
 
 type Lead = {
   hcp_customer_id: string | null;
@@ -97,11 +98,33 @@ type Props = {
   stage: FunnelStage;
   title?: string;
   leads: Lead[] | undefined;
+  customerId?: number;
   onClose: () => void;
 };
 
-function FunnelDrawer({ open, stage, title, leads, onClose }: Props) {
+function FunnelDrawer({ open, stage, title, leads, customerId, onClose }: Props) {
   const filtered = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
+  const [flagModal, setFlagModal] = useState<Lead | null>(null);
+  const [flaggedLocally, setFlaggedLocally] = useState<Set<string>>(new Set());
+
+  const handleFlag = async (reason: string, notes: string) => {
+    if (!flagModal || !customerId) return;
+    await fetch(`/api/blueprint/clients/${customerId}/flag-lead`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        hcp_customer_id: flagModal.hcp_customer_id || null,
+        phone: flagModal.phone,
+        name: flagModal.name,
+        reason,
+        notes,
+      }),
+    });
+    setFlaggedLocally((prev) => new Set(prev).add(flagModal.phone));
+  };
+
+  const isLeadFlagged = (lead: Lead) =>
+    !!lead.client_flag_reason || flaggedLocally.has(lead.phone);
 
   // Calculate total revenue for this stage
   const totalRevenue = filtered.reduce((sum, lead) => {
@@ -224,12 +247,40 @@ function FunnelDrawer({ open, stage, title, leads, onClose }: Props) {
                       Est: {formatDollars(approvedRev)} · Inv: {formatDollars(invoicedRev)}
                     </div>
                   )}
+
+                  {/* Flag button */}
+                  <div className="mt-1.5 flex justify-end">
+                    {isLeadFlagged(lead) ? (
+                      <span
+                        className="inline-block rounded px-2 py-0.5 text-[10px] font-medium"
+                        style={{ backgroundColor: '#fdf8ed', color: '#c4890a', border: '1px solid #e8d9a8' }}
+                      >
+                        Flagged
+                      </span>
+                    ) : (
+                      <button
+                        onClick={() => setFlagModal(lead)}
+                        className="rounded px-2 py-0.5 text-[10px] font-medium transition-colors hover:bg-gray-100"
+                        style={{ color: '#c5bfb6', border: '1px solid #e8e4d9' }}
+                      >
+                        Flag
+                      </button>
+                    )}
+                  </div>
                 </motion.div>
               );
             })}
           </AnimatePresence>
         )}
       </div>
+
+      {/* Flag modal */}
+      <FlagLeadModal
+        open={flagModal !== null}
+        leadName={flagModal?.name || ''}
+        onClose={() => setFlagModal(null)}
+        onSubmit={handleFlag}
+      />
     </Drawer>
   );
 }

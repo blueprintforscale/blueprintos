@@ -196,6 +196,7 @@ function ClientAnalyticsView() {
       stage={drawerStage || 'leads'}
       title={drawerTitle}
       leads={spreadsheetData}
+      customerId={selectedClient!}
       onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); }}
     />
   </>
