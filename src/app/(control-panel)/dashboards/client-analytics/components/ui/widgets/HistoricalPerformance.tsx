@@ -104,17 +104,18 @@ function HistoricalPerformance({ data }: Props) {
       y: projectedValue,
       borderColor: cfg.color,
       strokeDashArray: 4,
-      opacity: 0.3,
+      opacity: 0.4,
       label: {
         text: `~${cfg.format(projectedValue)} projected`,
         borderColor: 'transparent',
         position: 'left',
+        offsetX: 10,
         style: {
-          background: 'transparent',
+          background: '#1a1a1a',
           color: '#c5bfb6',
           fontSize: '10px',
-          fontWeight: 400,
-          padding: { left: 6, right: 6, top: 2, bottom: 2 },
+          fontWeight: 600,
+          padding: { left: 8, right: 8, top: 3, bottom: 3 },
         },
       },
     }];
