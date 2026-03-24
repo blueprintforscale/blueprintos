@@ -1,0 +1,193 @@
+'use client';
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import Typography from '@mui/material/Typography';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import { useQuery } from '@tanstack/react-query';
+
+// Reuse all the existing widgets
+import SourceTabs from '../../(control-panel)/dashboards/client-analytics/components/ui/SourceTabs';
+import AdMetricsCards from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/AdMetricsCards';
+import SummaryCards from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/SummaryCards';
+import FunnelChart from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelChart';
+import MonthlyTrendChart from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/MonthlyTrendChart';
+import RecentActivityWidget from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/RecentActivityWidget';
+import LeadSpreadsheet from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/LeadSpreadsheet';
+import HistoricalPerformance from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/HistoricalPerformance';
+import FunnelDrawer from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
+import type { FunnelStage } from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
+import DateRangePicker from '../../(control-panel)/dashboards/client-analytics/components/ui/DateRangePicker';
+import {
+  useFunnel,
+  useMonthlyTrend,
+  useRecentActivity,
+  useSourceTabs,
+} from '../../(control-panel)/dashboards/client-analytics/api/hooks/useClientAnalytics';
+import { clientAnalyticsService } from '../../(control-panel)/dashboards/client-analytics/api/services/clientAnalyticsService';
+
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.06 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 },
+};
+
+const VIEW_TABS = [
+  { label: 'Overview' },
+  { label: 'Leads' },
+  { label: 'Performance' },
+];
+
+type Props = {
+  client: {
+    customer_id: number;
+    name: string;
+    field_management_software: string;
+  };
+};
+
+export default function SharedDashboard({ client }: Props) {
+  const customerId = client.customer_id;
+  const [activeSource, setActiveSource] = useState('google_ads');
+  const [activeTab, setActiveTab] = useState(0);
+  const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
+  const [drawerTitle, setDrawerTitle] = useState<string | undefined>(undefined);
+  const [dateRange, setDateRange] = useState({
+    from: new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0],
+    to: new Date().toISOString().split('T')[0],
+    days: 90 as number | null,
+  });
+
+  const dateFrom = dateRange.from;
+  const dateTo = dateRange.to;
+
+  const { data: funnel } = useFunnel(customerId, activeSource, dateFrom, dateTo);
+  const { data: trend } = useMonthlyTrend(customerId, 6);
+  const { data: activity } = useRecentActivity(customerId);
+  const { data: sourceTabs } = useSourceTabs(customerId);
+
+  const { data: spreadsheetData } = useQuery({
+    queryKey: ['leadSpreadsheet', customerId, activeSource, dateFrom, dateTo],
+    queryFn: () => fetch(`/api/blueprint/clients/${customerId}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`).then(r => r.json()),
+    enabled: activeTab === 1 || drawerStage !== null,
+  });
+
+  const { data: historicalData, isLoading: historicalLoading } = useQuery({
+    queryKey: ['historicalTrend', customerId, 24],
+    queryFn: () => clientAnalyticsService.getMonthlyTrend(customerId, 24),
+    enabled: activeTab === 2,
+  });
+
+  // Extract client display name (after " | " if present)
+  const displayName = client.name.includes('|') ? client.name.split('|').pop()?.trim() : client.name;
+
+  const adMetrics = funnel ? {
+    ad_spend: parseFloat(funnel.ad_spend as any) || 0,
+    quality_leads: parseInt(funnel.quality_leads as any) || 0,
+    actual_quality_leads: parseInt(funnel.quality_leads as any) || 0,
+    cpl: (parseInt(funnel.quality_leads as any) || 0) > 0
+      ? (parseFloat(funnel.ad_spend as any) || 0) / parseInt(funnel.quality_leads as any) : 0,
+    total_closed_rev: parseFloat(funnel.closed_rev as any) || 0,
+    total_open_est_rev: parseFloat(funnel.open_est_rev as any) || 0,
+    roas: (parseFloat(funnel.ad_spend as any) || 0) > 0
+      ? (parseFloat(funnel.closed_rev as any) || 0) / (parseFloat(funnel.ad_spend as any) || 0) : 0,
+    all_time_rev: 0, all_time_spend: 0, guarantee: 0, lsa_spend: 0, lsa_leads: 0,
+  } : undefined;
+
+  return (
+    <>
+    <div className="min-h-screen" style={{ backgroundColor: '#F5F1E8' }}>
+      {/* Header */}
+      <div className="flex w-full flex-col gap-4 px-6 pt-6 md:px-8" style={{ backgroundColor: '#F5F1E8' }}>
+        <div>
+          <Typography className="text-2xl font-extrabold uppercase tracking-tight" sx={{ color: '#000' }}>
+            {displayName}
+          </Typography>
+          <Typography className="text-xs" sx={{ color: '#8a8279' }}>
+            Powered by Blueprint for Scale
+          </Typography>
+        </div>
+        <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
+        {activeTab !== 2 && <DateRangePicker value={dateRange} onChange={setDateRange} />}
+        <Tabs
+          value={activeTab}
+          onChange={(_, v) => setActiveTab(v)}
+          sx={{ minHeight: 36, '& .MuiTab-root': { minHeight: 36, py: 0.5, fontSize: '0.8rem', textTransform: 'none' } }}
+        >
+          {VIEW_TABS.map((t) => (
+            <Tab key={t.label} label={t.label} />
+          ))}
+        </Tabs>
+      </div>
+
+      {/* Content */}
+      <motion.div
+        key={activeTab}
+        className="flex w-full flex-col gap-6 px-6 py-6 md:px-8"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
+        {activeTab === 0 && (
+          <>
+            {activeSource !== 'all' && (
+              <motion.div variants={item}>
+                <AdMetricsCards data={adMetrics} />
+              </motion.div>
+            )}
+            <motion.div variants={item}>
+              <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+            </motion.div>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <motion.div variants={item}>
+                <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+              </motion.div>
+              <motion.div variants={item}>
+                <MonthlyTrendChart data={trend} />
+              </motion.div>
+            </div>
+            <motion.div variants={item}>
+              <RecentActivityWidget data={activity} />
+            </motion.div>
+          </>
+        )}
+
+        {activeTab === 1 && (
+          <motion.div variants={item}>
+            <LeadSpreadsheet data={spreadsheetData} customerId={customerId} />
+          </motion.div>
+        )}
+
+        {activeTab === 2 && (
+          <motion.div variants={item}>
+            {historicalLoading ? (
+              <div className="flex h-64 items-center justify-center">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
+                  <span className="text-xs" style={{ color: '#8a8279' }}>Loading performance data...</span>
+                </div>
+              </div>
+            ) : (
+              <HistoricalPerformance data={historicalData} />
+            )}
+          </motion.div>
+        )}
+      </motion.div>
+    </div>
+
+    <FunnelDrawer
+      open={drawerStage !== null}
+      stage={drawerStage || 'leads'}
+      title={drawerTitle}
+      leads={spreadsheetData}
+      customerId={customerId}
+      onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); }}
+    />
+    </>
+  );
+}
