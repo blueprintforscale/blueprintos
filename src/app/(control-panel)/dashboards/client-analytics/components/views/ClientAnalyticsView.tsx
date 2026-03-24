@@ -54,6 +54,7 @@ function ClientAnalyticsView() {
   const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
   const [drawerTitle, setDrawerTitle] = useState<string | undefined>(undefined);
   const [drawerAdSpend, setDrawerAdSpend] = useState<number | undefined>(undefined);
+  const [drawerProgramPrice, setDrawerProgramPrice] = useState<number | undefined>(undefined);
   const [shareCopied, setShareCopied] = useState(false);
   const [dateRange, setDateRange] = useState({
     from: new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0],
@@ -102,8 +103,9 @@ function ClientAnalyticsView() {
       ? (parseFloat(funnel.closed_rev as any) || 0) / (parseFloat(funnel.ad_spend as any) || 0) : 0,
     all_time_rev: parseFloat((funnel as any).all_time_rev) || 0,
     all_time_spend: parseFloat((funnel as any).all_time_spend) || 0,
-    guarantee: parseFloat((funnel as any).all_time_spend) > 0
-      ? (parseFloat((funnel as any).all_time_rev) || 0) / parseFloat((funnel as any).all_time_spend) : 0,
+    program_price: parseFloat((funnel as any).program_price) || 0,
+    guarantee: parseFloat((funnel as any).program_price) > 0
+      ? (parseFloat((funnel as any).all_time_rev) || 0) / parseFloat((funnel as any).program_price) : 0,
     lsa_spend: 0, lsa_leads: 0,
   } : undefined;
 
@@ -170,6 +172,12 @@ function ClientAnalyticsView() {
                       setDrawerStage('estimate_approved');
                       setDrawerTitle('ROAS Breakdown');
                       setDrawerAdSpend(adMetrics?.ad_spend);
+                      setDrawerProgramPrice(undefined);
+                    }} onGuaranteeClick={() => {
+                      setDrawerStage('estimate_approved');
+                      setDrawerTitle('Guarantee Breakdown');
+                      setDrawerProgramPrice(adMetrics?.program_price);
+                      setDrawerAdSpend(undefined);
                     }} />
                   </motion.div>
                 )}
@@ -231,7 +239,8 @@ function ClientAnalyticsView() {
       customerId={selectedClient!}
       crm={clientCrm}
       adSpend={drawerAdSpend}
-      onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); setDrawerAdSpend(undefined); }}
+      programPrice={drawerProgramPrice}
+      onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); setDrawerAdSpend(undefined); setDrawerProgramPrice(undefined); }}
     />
   </>
   );

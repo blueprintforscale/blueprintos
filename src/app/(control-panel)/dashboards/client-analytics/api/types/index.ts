@@ -22,6 +22,7 @@ export type AdPerformance = {
   roas: number;
   all_time_rev: number;
   all_time_spend: number;
+  program_price?: number;
   guarantee: number;
   lsa_spend: number;
   lsa_leads: number;

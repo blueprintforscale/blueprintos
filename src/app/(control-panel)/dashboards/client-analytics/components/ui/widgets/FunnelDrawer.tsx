@@ -102,6 +102,7 @@ type Props = {
   customerId?: number;
   crm?: string;
   adSpend?: number;
+  programPrice?: number;
   onClose: () => void;
 };
 
@@ -119,7 +120,7 @@ function getCrmUrl(id: string | null, crm?: string): string | null {
   return `https://pro.housecallpro.com/pro/customers/${id.replace('cus_', '')}`;
 }
 
-function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, onClose }: Props) {
+function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, programPrice, onClose }: Props) {
   const filtered = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
   const [flagModal, setFlagModal] = useState<Lead | null>(null);
   const [flaggedLocally, setFlaggedLocally] = useState<Set<string>>(new Set());
@@ -186,8 +187,31 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, onC
         </IconButton>
       </div>
 
+      {/* Guarantee breakdown — shown when programPrice is provided */}
+      {programPrice !== undefined && programPrice > 0 && (
+        <div className="border-b px-5 py-3" style={{ borderColor: '#f0ede6', backgroundColor: '#fafaf7' }}>
+          <div className="flex items-center justify-between text-xs">
+            <span style={{ color: '#8a8279' }}>All-Time Google Ads Revenue</span>
+            <span className="font-bold" style={{ color: '#3b8a5a' }}>{formatDollars(totalRevenue)}</span>
+          </div>
+          <div className="flex items-center justify-between text-xs mt-1">
+            <span style={{ color: '#8a8279' }}>Program Investment</span>
+            <span className="font-bold">{formatDollars(programPrice)}</span>
+          </div>
+          <div className="mt-2 border-t pt-2 flex items-center justify-between" style={{ borderColor: '#e8e4d9' }}>
+            <span className="text-xs" style={{ color: '#8a8279' }}>Guarantee</span>
+            <span className="text-sm font-bold">
+              {formatDollars(totalRevenue)} / {formatDollars(programPrice)} = <span style={{ color: '#E85D4D' }}>{(totalRevenue / programPrice).toFixed(1)}x</span>
+            </span>
+          </div>
+          <div className="mt-1 text-[10px]" style={{ color: '#c5bfb6' }}>
+            For every $1 invested in the program, Google Ads has generated ${(totalRevenue / programPrice).toFixed(2)} in revenue
+          </div>
+        </div>
+      )}
+
       {/* ROAS breakdown — shown when adSpend is provided */}
-      {adSpend !== undefined && adSpend > 0 && (
+      {adSpend !== undefined && adSpend > 0 && !programPrice && (
         <div className="border-b px-5 py-3" style={{ borderColor: '#f0ede6', backgroundColor: '#fafaf7' }}>
           <div className="flex items-center justify-between text-xs">
             <span style={{ color: '#8a8279' }}>Total Revenue</span>

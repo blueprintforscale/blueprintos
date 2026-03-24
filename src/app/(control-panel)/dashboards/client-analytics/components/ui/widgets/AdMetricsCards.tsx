@@ -59,9 +59,9 @@ function CplRangeBar({ cpl }: { cpl: number }) {
   );
 }
 
-type Props = { data: AdPerformance | undefined; onRoasClick?: () => void };
+type Props = { data: AdPerformance | undefined; onRoasClick?: () => void; onGuaranteeClick?: () => void };
 
-function AdMetricsCards({ data, onRoasClick }: Props) {
+function AdMetricsCards({ data, onRoasClick, onGuaranteeClick }: Props) {
   if (!data) return null;
 
   return (
@@ -93,10 +93,16 @@ function AdMetricsCards({ data, onRoasClick }: Props) {
       </Paper>
 
       {/* Guarantee */}
-      <Paper className="flex flex-col rounded-xl border p-5 shadow-none" sx={{ borderColor: '#ddd8cb' }}>
+      <Paper
+        className={`flex flex-col rounded-xl border p-5 shadow-none ${onGuaranteeClick ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}`}
+        sx={{ borderColor: '#ddd8cb' }}
+        onClick={onGuaranteeClick}
+      >
         <Typography className="text-xs font-semibold uppercase tracking-wide" sx={{ color: '#8a8279' }}>Guarantee</Typography>
         <Typography className="mt-1 text-3xl font-bold tracking-tight">{data.guarantee.toFixed(1)}x</Typography>
-        <Typography className="mt-1 text-xs" sx={{ color: '#8a8279' }}>All-time</Typography>
+        <Typography className="mt-1 text-xs" sx={{ color: '#8a8279' }}>
+          {formatDollars(data.all_time_rev)} / {formatDollars(data.program_price || 0)}
+        </Typography>
       </Paper>
     </div>
   );
