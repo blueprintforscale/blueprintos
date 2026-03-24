@@ -97,7 +97,11 @@ export default function SharedDashboard({ client }: Props) {
     total_open_est_rev: parseFloat(funnel.open_est_rev as any) || 0,
     roas: (parseFloat(funnel.ad_spend as any) || 0) > 0
       ? (parseFloat(funnel.closed_rev as any) || 0) / (parseFloat(funnel.ad_spend as any) || 0) : 0,
-    all_time_rev: 0, all_time_spend: 0, guarantee: 0, lsa_spend: 0, lsa_leads: 0,
+    all_time_rev: parseFloat((funnel as any).all_time_rev) || 0,
+    all_time_spend: parseFloat((funnel as any).all_time_spend) || 0,
+    guarantee: parseFloat((funnel as any).all_time_spend) > 0
+      ? (parseFloat((funnel as any).all_time_rev) || 0) / parseFloat((funnel as any).all_time_spend) : 0,
+    lsa_spend: 0, lsa_leads: 0,
   } : undefined;
 
   const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -109,12 +113,12 @@ export default function SharedDashboard({ client }: Props) {
       <div style={{ backgroundColor: '#000' }}>
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 md:px-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md" style={{ backgroundColor: '#E85D4D' }}>
-              <span className="text-sm font-black text-white">B</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg" style={{ backgroundColor: '#E85D4D' }}>
+              <span className="text-base font-black text-white">B</span>
             </div>
             <div>
-              <Typography className="text-sm font-bold text-white">{displayName}</Typography>
-              <Typography className="text-[10px]" style={{ color: '#8a8279' }}>Blueprint for Scale</Typography>
+              <Typography className="text-lg font-extrabold text-white tracking-tight">{displayName}</Typography>
+              <Typography className="text-[10px]" style={{ color: '#5a554d' }}>Blueprint for Scale</Typography>
             </div>
           </div>
           <Typography className="text-[10px]" style={{ color: '#5a554d' }}>{today}</Typography>

@@ -100,7 +100,11 @@ function ClientAnalyticsView() {
     total_open_est_rev: parseFloat(funnel.open_est_rev as any) || 0,
     roas: (parseFloat(funnel.ad_spend as any) || 0) > 0
       ? (parseFloat(funnel.closed_rev as any) || 0) / (parseFloat(funnel.ad_spend as any) || 0) : 0,
-    all_time_rev: 0, all_time_spend: 0, guarantee: 0, lsa_spend: 0, lsa_leads: 0,
+    all_time_rev: parseFloat((funnel as any).all_time_rev) || 0,
+    all_time_spend: parseFloat((funnel as any).all_time_spend) || 0,
+    guarantee: parseFloat((funnel as any).all_time_spend) > 0
+      ? (parseFloat((funnel as any).all_time_rev) || 0) / parseFloat((funnel as any).all_time_spend) : 0,
+    lsa_spend: 0, lsa_leads: 0,
   } : undefined;
 
   return (
