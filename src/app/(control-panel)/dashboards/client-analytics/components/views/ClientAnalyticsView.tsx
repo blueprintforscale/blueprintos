@@ -44,7 +44,7 @@ const DEFAULT_CLIENT = 7441590915;
 const VIEW_TABS = [
   { label: 'Overview', icon: 'lucide:layout-dashboard' },
   { label: 'Leads', icon: 'lucide:users' },
-  { label: 'Performance', icon: 'lucide:trending-up' },
+  { label: 'Trends', icon: 'lucide:trending-up' },
 ];
 
 function ClientAnalyticsView() {

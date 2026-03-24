@@ -94,13 +94,22 @@ type Props = { data: Lead[] | undefined; customerId?: number; crm?: string };
 function LeadSpreadsheet({ data, customerId, crm }: Props) {
   const [expandedLead, setExpandedLead] = useState<string | null>(null);
   const [showLost, setShowLost] = useState(false);
+  const [search, setSearch] = useState('');
   const [flagModal, setFlagModal] = useState<{ lead: Lead; index: number } | null>(null);
   const [flaggedLocally, setFlaggedLocally] = useState<Set<string>>(new Set());
 
   if (!data || !Array.isArray(data)) return null;
 
   const lostCount = data.filter((l) => l.lost_reason).length;
-  const filtered = showLost ? data : data.filter((l) => !l.lost_reason);
+  const afterLost = showLost ? data : data.filter((l) => !l.lost_reason);
+  const filtered = search.trim()
+    ? afterLost.filter((l) => {
+        const q = search.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const name = (l.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const phone = (l.phone || '').replace(/[^0-9]/g, '');
+        return name.includes(q) || phone.includes(q);
+      })
+    : afterLost;
   const matched = filtered.filter((l) => l.match_status === 'matched').length;
   const unmatched = filtered.length - matched;
 
@@ -129,25 +138,36 @@ function LeadSpreadsheet({ data, customerId, crm }: Props) {
     <>
     <Paper className="flex flex-col overflow-hidden rounded-xl shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between px-6 pt-6 pb-3">
-        <div>
-          <Typography className="text-lg font-semibold">Lead Journey</Typography>
-          <Typography className="text-xs" style={{ color: '#8a8279' }}>
-            {filtered.length} leads ({matched} in CRM, {unmatched} unmatched)
-            {!showLost && lostCount > 0 && ` · ${lostCount} lost hidden`}
-          </Typography>
+      <div className="flex flex-col gap-2 px-6 pt-6 pb-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <Typography className="text-lg font-semibold">Lead Journey</Typography>
+            <Typography className="text-xs" style={{ color: '#8a8279' }}>
+              {filtered.length} leads ({matched} in CRM, {unmatched} unmatched)
+              {!showLost && lostCount > 0 && ` · ${lostCount} lost hidden`}
+              {search && ` · searching "${search}"`}
+            </Typography>
+          </div>
+          {lostCount > 0 && (
+            <label className="flex cursor-pointer items-center gap-1.5 text-xs" style={{ color: '#8a8279' }}>
+              <input
+                type="checkbox"
+                checked={showLost}
+                onChange={(e) => setShowLost(e.target.checked)}
+                className="rounded"
+              />
+              Show lost ({lostCount})
+            </label>
+          )}
         </div>
-        {lostCount > 0 && (
-          <label className="flex cursor-pointer items-center gap-1.5 text-xs" style={{ color: '#8a8279' }}>
-            <input
-              type="checkbox"
-              checked={showLost}
-              onChange={(e) => setShowLost(e.target.checked)}
-              className="rounded"
-            />
-            Show lost ({lostCount})
-          </label>
-        )}
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by name or phone..."
+          className="w-full max-w-xs rounded-md border px-3 py-1.5 text-xs outline-none transition-colors focus:border-gray-400"
+          style={{ borderColor: '#ddd8cb', color: '#000' }}
+        />
       </div>
 
       {/* Table */}

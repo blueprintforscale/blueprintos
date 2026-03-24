@@ -40,7 +40,7 @@ const item = {
 const VIEW_TABS = [
   { label: 'Overview' },
   { label: 'Leads' },
-  { label: 'Performance' },
+  { label: 'Trends' },
 ];
 
 type Props = {
