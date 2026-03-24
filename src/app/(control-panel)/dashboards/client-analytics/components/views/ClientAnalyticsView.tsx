@@ -76,7 +76,7 @@ function ClientAnalyticsView() {
   });
 
   // Historical data (only fetch when on Performance tab)
-  const { data: historicalData } = useQuery({
+  const { data: historicalData, isLoading: historicalLoading } = useQuery({
     queryKey: ['historicalTrend', selectedClient, 24],
     queryFn: () => clientAnalyticsService.getMonthlyTrend(selectedClient!, 24),
     enabled: !!selectedClient && activeTab === 2,
@@ -168,7 +168,16 @@ function ClientAnalyticsView() {
             {/* ====== PERFORMANCE TAB ====== */}
             {activeTab === 2 && (
               <motion.div variants={item}>
-                <HistoricalPerformance data={historicalData} />
+                {historicalLoading ? (
+                  <div className="flex h-64 items-center justify-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
+                      <span className="text-xs" style={{ color: '#8a8279' }}>Loading performance data...</span>
+                    </div>
+                  </div>
+                ) : (
+                  <HistoricalPerformance data={historicalData} />
+                )}
               </motion.div>
             )}
           </motion.div>
