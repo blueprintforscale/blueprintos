@@ -99,10 +99,25 @@ type Props = {
   title?: string;
   leads: Lead[] | undefined;
   customerId?: number;
+  crm?: string;
   onClose: () => void;
 };
 
-function FunnelDrawer({ open, stage, title, leads, customerId, onClose }: Props) {
+function getCrmUrl(id: string | null, crm?: string): string | null {
+  if (!id) return null;
+  if (crm === 'jobber') {
+    // Decode base64 Jobber GraphQL ID: gid://Jobber/Client/12345 → 12345
+    try {
+      const decoded = atob(id);
+      const numericId = decoded.split('/').pop();
+      return numericId ? `https://secure.getjobber.com/clients/${numericId}` : null;
+    } catch { return null; }
+  }
+  // Default: HCP
+  return `https://pro.housecallpro.com/pro/customers/${id.replace('cus_', '')}`;
+}
+
+function FunnelDrawer({ open, stage, title, leads, customerId, crm, onClose }: Props) {
   const filtered = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
   const [flagModal, setFlagModal] = useState<Lead | null>(null);
   const [flaggedLocally, setFlaggedLocally] = useState<Set<string>>(new Set());
@@ -214,14 +229,14 @@ function FunnelDrawer({ open, stage, title, leads, customerId, onClose }: Props)
                           {formatDollars(revenue)}
                         </Typography>
                       )}
-                      {lead.hcp_customer_id && (
+                      {lead.hcp_customer_id && getCrmUrl(lead.hcp_customer_id, crm) && (
                         <a
-                          href={`https://pro.housecallpro.com/pro/customers/${lead.hcp_customer_id.replace('cus_', '')}`}
+                          href={getCrmUrl(lead.hcp_customer_id, crm)!}
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
                           className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-gray-100"
-                          title="Open in Housecall Pro"
+                          title={crm === 'jobber' ? 'Open in Jobber' : 'Open in Housecall Pro'}
                         >
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8a8279" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />

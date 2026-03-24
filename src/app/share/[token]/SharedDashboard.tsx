@@ -186,6 +186,7 @@ export default function SharedDashboard({ client }: Props) {
       title={drawerTitle}
       leads={spreadsheetData}
       customerId={customerId}
+      crm={client.field_management_software}
       onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); }}
     />
     </>

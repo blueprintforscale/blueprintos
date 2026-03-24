@@ -83,7 +83,9 @@ function ClientAnalyticsView() {
   });
 
   const clientList = Array.isArray(clients) ? clients : [];
-  const clientName = clientList.find((c) => c.customer_id === selectedClient)?.name || 'Select a client';
+  const selectedClientObj = clientList.find((c) => c.customer_id === selectedClient);
+  const clientName = selectedClientObj?.name || 'Select a client';
+  const clientCrm = selectedClientObj?.field_management_software;
 
   // Derive ad metrics from funnel
   const adMetrics = funnel ? {
@@ -197,6 +199,7 @@ function ClientAnalyticsView() {
       title={drawerTitle}
       leads={spreadsheetData}
       customerId={selectedClient!}
+      crm={clientCrm}
       onClose={() => { setDrawerStage(null); setDrawerTitle(undefined); }}
     />
   </>
