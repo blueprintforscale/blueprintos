@@ -33,6 +33,10 @@ function SummaryCards({ data, onStageClick }: Props) {
   const spam = parseInt(data.spam_count as any) || 0;
   const closedRev = parseFloat(data.closed_rev as any) || 0;
   const openEst = parseFloat(data.open_est_rev as any) || 0;
+  const estSent = parseInt(data.estimate_sent as any) || 0;
+  const estApproved = parseInt(data.estimate_approved as any) || 0;
+  const openEstCount = Math.max(estSent - estApproved, 0);
+  const avgOpenEst = openEstCount > 0 ? openEst / openEstCount : 0;
   const convRate = parseInt(data.leads as any) > 0
     ? ((parseInt(data.job_completed as any) || 0) / parseInt(data.leads as any) * 100)
     : 0;
@@ -55,7 +59,7 @@ function SummaryCards({ data, onStageClick }: Props) {
     {
       label: 'Open Estimates',
       value: formatDollars(openEst),
-      sub: 'Pipeline value',
+      sub: openEstCount > 0 ? `${openEstCount} estimates · avg ${formatDollars(avgOpenEst)}` : 'Pipeline value',
       highlight: false,
       stage: 'estimate_sent',
     },
