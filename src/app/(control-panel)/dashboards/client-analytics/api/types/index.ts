@@ -9,6 +9,7 @@ export type Client = {
   inspection_type: string;
   months_in_program: number;
   parent_customer_id: number | null;
+  dashboard_token?: string;
 };
 
 export type AdPerformance = {

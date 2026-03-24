@@ -53,6 +53,7 @@ function ClientAnalyticsView() {
   const [activeTab, setActiveTab] = useState(0);
   const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
   const [drawerTitle, setDrawerTitle] = useState<string | undefined>(undefined);
+  const [shareCopied, setShareCopied] = useState(false);
   const [dateRange, setDateRange] = useState({
     from: new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0],
     to: new Date().toISOString().split('T')[0],
@@ -109,7 +110,27 @@ function ClientAnalyticsView() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <Typography className="text-2xl font-extrabold uppercase tracking-tight" sx={{ color: '#000000' }}>Client Analytics</Typography>
-              <Typography className="text-sm" sx={{ color: '#5a554d' }}>{clientName}</Typography>
+              <div className="flex items-center gap-2">
+                <Typography className="text-sm" sx={{ color: '#5a554d' }}>{clientName}</Typography>
+                {(selectedClientObj as any)?.dashboard_token && (
+                  <button
+                    onClick={() => {
+                      const url = `${window.location.origin}/share/${(selectedClientObj as any).dashboard_token}`;
+                      navigator.clipboard.writeText(url);
+                      setShareCopied(true);
+                      setTimeout(() => setShareCopied(false), 2000);
+                    }}
+                    className="rounded px-2 py-0.5 text-[10px] font-medium transition-colors"
+                    style={{
+                      backgroundColor: shareCopied ? '#3b8a5a' : 'transparent',
+                      color: shareCopied ? '#fff' : '#c5bfb6',
+                      border: `1px solid ${shareCopied ? '#3b8a5a' : '#ddd8cb'}`,
+                    }}
+                  >
+                    {shareCopied ? 'Link copied!' : 'Share'}
+                  </button>
+                )}
+              </div>
             </div>
             <ClientSelector clients={clientList} selectedId={selectedClient} onSelect={setSelectedClient} />
           </div>
