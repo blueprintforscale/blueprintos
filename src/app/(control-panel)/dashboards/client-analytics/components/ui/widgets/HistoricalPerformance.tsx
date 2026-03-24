@@ -72,6 +72,20 @@ function HistoricalPerformance({ data }: Props) {
   const priorMonthValue = lastCompleteIdx > 0 ? values[lastCompleteIdx - 1] : null;
   const lastYearValue = priorValues[lastCompleteIdx];
 
+  // Trend line (linear regression) across all complete months
+  const completeVals = lastIsIncomplete ? values.slice(0, -1) : values;
+  const nPts = completeVals.length;
+  let trendLine: number[] | null = null;
+  if (nPts >= 3) {
+    const sX = completeVals.reduce((s, _, i) => s + i, 0);
+    const sY = completeVals.reduce((s, v) => s + v, 0);
+    const sXY = completeVals.reduce((s, v, i) => s + i * v, 0);
+    const sX2 = completeVals.reduce((s, _, i) => s + i * i, 0);
+    const sl = (nPts * sXY - sX * sY) / (nPts * sX2 - sX * sX);
+    const ic = (sY - sl * sX) / nPts;
+    trendLine = values.map((_, i) => Math.max(Math.round(ic + sl * i), 0));
+  }
+
   // Build series
   const series: ApexAxisChartSeries = [
     { name: cfg.label, data: values },
@@ -87,7 +101,6 @@ function HistoricalPerformance({ data }: Props) {
     dashArray.push(5);
   }
 
-  // Trend line
   if (trendLine) {
     series.push({ name: 'Trend', data: trendLine });
     seriesColors.push('#ddd8cb');
@@ -132,20 +145,6 @@ function HistoricalPerformance({ data }: Props) {
         },
       },
     }];
-  }
-
-  // Trend line (linear regression) across all complete months
-  const completeValues = lastIsIncomplete ? values.slice(0, -1) : values;
-  const n = completeValues.length;
-  let trendLine: number[] | null = null;
-  if (n >= 3) {
-    const sumX = completeValues.reduce((s, _, i) => s + i, 0);
-    const sumY = completeValues.reduce((s, v) => s + v, 0);
-    const sumXY = completeValues.reduce((s, v, i) => s + i * v, 0);
-    const sumX2 = completeValues.reduce((s, _, i) => s + i * i, 0);
-    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
-    const intercept = (sumY - slope * sumX) / n;
-    trendLine = values.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
   }
 
   const chartOptions: ApexOptions = {
