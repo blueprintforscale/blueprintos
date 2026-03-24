@@ -23,6 +23,7 @@ type Lead = {
   job_completed: boolean;
   approved_revenue: number;
   invoiced_revenue: number;
+  estimate_value?: number;
   lost_reason?: string | null;
   job_description?: string | null;
   service_address?: string | null;

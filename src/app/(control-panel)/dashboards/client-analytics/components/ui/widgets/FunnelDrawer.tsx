@@ -24,6 +24,7 @@ type Lead = {
   job_completed: boolean;
   approved_revenue: number;
   invoiced_revenue: number;
+  estimate_value?: number;
   client_flag_reason?: string | null;
   client_flag_at?: string | null;
   service_address?: string | null;
@@ -145,7 +146,9 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, onClose }: P
   const totalRevenue = filtered.reduce((sum, lead) => {
     const approved = parseFloat(String(lead.approved_revenue)) || 0;
     const invoiced = parseFloat(String(lead.invoiced_revenue)) || 0;
-    return sum + approved + invoiced;
+    const estVal = parseFloat(String(lead.estimate_value)) || 0;
+    const rev = (approved + invoiced) > 0 ? (approved + invoiced) : estVal;
+    return sum + rev;
   }, 0);
 
   return (
@@ -189,7 +192,9 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, onClose }: P
             {filtered.map((lead, i) => {
               const approvedRev = parseFloat(String(lead.approved_revenue)) || 0;
               const invoicedRev = parseFloat(String(lead.invoiced_revenue)) || 0;
-              const revenue = approvedRev + invoicedRev;
+              const estValue = parseFloat(String(lead.estimate_value)) || 0;
+              // Show approved+invoiced if available, otherwise fall back to estimate sent value
+              const revenue = (approvedRev + invoicedRev) > 0 ? (approvedRev + invoicedRev) : estValue;
               const highestStage = getHighestStage(lead);
               const stageStyle = stageStyles[highestStage] || stageStyles['Lead'];
 
