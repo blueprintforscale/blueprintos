@@ -12,19 +12,26 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 type Props = { data: MonthlyTrend[] | undefined };
 type Metric = 'leads' | 'spend' | 'cpl' | 'book_rate' | 'close_rate' | 'roas';
 
-const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string }[] = [
-  { key: 'leads', label: 'Leads', format: (v) => String(Math.round(v)), color: '#000000' },
-  { key: 'spend', label: 'Ad Spend', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#5a554d' },
-  { key: 'cpl', label: 'CPL', format: (v) => `$${v.toFixed(0)}`, color: '#E85D4D' },
-  { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#E85D4D' },
-  { key: 'close_rate', label: 'Close Rate', format: (v) => `${v.toFixed(0)}%`, color: '#3b8a5a' },
-  { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#3b8a5a' },
+const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; projectable: boolean }[] = [
+  { key: 'leads', label: 'Leads', format: (v) => String(Math.round(v)), color: '#000000', projectable: true },
+  { key: 'spend', label: 'Ad Spend', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#5a554d', projectable: true },
+  { key: 'cpl', label: 'CPL', format: (v) => `$${v.toFixed(0)}`, color: '#E85D4D', projectable: false },
+  { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#E85D4D', projectable: false },
+  { key: 'close_rate', label: 'Close Rate', format: (v) => `${v.toFixed(0)}%`, color: '#3b8a5a', projectable: false },
+  { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#3b8a5a', projectable: false },
 ];
 
 function isCurrentMonth(monthStart: string): boolean {
   const now = new Date();
   const d = new Date(monthStart + 'T00:00:00');
   return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+}
+
+function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction: number } {
+  const now = new Date();
+  const dayElapsed = now.getDate();
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  return { dayElapsed, daysInMonth, fraction: dayElapsed / daysInMonth };
 }
 
 function HistoricalPerformance({ data }: Props) {
@@ -40,9 +47,16 @@ function HistoricalPerformance({ data }: Props) {
   const labels = recent.map((d) => (d as any).short_label || d.label);
   const values = recent.map((d) => getValue(d, metric));
 
-  // Detect current (incomplete) month — last data point if it's the current month
+  // Detect current (incomplete) month
   const lastIsIncomplete = recent.length > 0 && isCurrentMonth((recent[recent.length - 1] as any).month_start);
   const forecastCount = lastIsIncomplete ? 1 : 0;
+
+  // Projection for current month
+  const { fraction: monthFraction } = getMonthProgress();
+  const currentValue = lastIsIncomplete ? values[values.length - 1] : null;
+  const projectedValue = lastIsIncomplete && cfg.projectable && currentValue !== null && monthFraction > 0
+    ? Math.round(currentValue / monthFraction)
+    : null;
 
   // Prior year for primary metric
   const priorValues = recent.map((d) => {
@@ -84,6 +98,29 @@ function HistoricalPerformance({ data }: Props) {
     strokeWidth.push(2);
     dashArray.push(3);
   });
+
+  // Annotations for projection
+  const annotations: ApexOptions['annotations'] = {};
+  if (projectedValue !== null && projectedValue > 0) {
+    annotations.yaxis = [{
+      y: projectedValue,
+      borderColor: cfg.color,
+      strokeDashArray: 4,
+      opacity: 0.3,
+      label: {
+        text: `~${cfg.format(projectedValue)} projected`,
+        borderColor: 'transparent',
+        position: 'left',
+        style: {
+          background: 'transparent',
+          color: '#c5bfb6',
+          fontSize: '10px',
+          fontWeight: 400,
+          padding: { left: 6, right: 6, top: 2, bottom: 2 },
+        },
+      },
+    }];
+  }
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -132,6 +169,7 @@ function HistoricalPerformance({ data }: Props) {
     grid: { borderColor: '#EEEAD9', xaxis: { lines: { show: false } }, yaxis: { lines: { show: true } } },
     legend: { show: true, position: 'top', labels: { colors: '#8a8279' }, fontSize: '11px' },
     dataLabels: { enabled: false },
+    annotations,
   };
 
   const toggleOverlay = (key: Metric) => {
@@ -153,15 +191,20 @@ function HistoricalPerformance({ data }: Props) {
             <Typography className="text-xs" style={{ color: '#8a8279' }}>
               {labels[lastCompleteIdx]}
             </Typography>
-            {incompleteValue !== null && (
-              <Typography className="text-xs" style={{ color: '#c5bfb6' }}>
-                {labels[labels.length - 1]} so far: {cfg.format(incompleteValue)}
-              </Typography>
-            )}
           </div>
-          <div className="mt-0.5 flex gap-4 text-[11px]" style={{ color: '#8a8279' }}>
-            {priorMonthValue !== null && <span>Prior month: {cfg.format(priorMonthValue)}</span>}
-            {lastYearValue !== null && lastYearValue > 0 && <span>Year ago: {cfg.format(lastYearValue)}</span>}
+          <div className="mt-0.5 flex flex-col gap-0.5">
+            <div className="flex gap-4 text-[11px]" style={{ color: '#8a8279' }}>
+              {priorMonthValue !== null && <span>Prior month: {cfg.format(priorMonthValue)}</span>}
+              {lastYearValue !== null && lastYearValue > 0 && <span>Year ago: {cfg.format(lastYearValue)}</span>}
+            </div>
+            {incompleteValue !== null && (
+              <div className="flex gap-3 text-[11px]" style={{ color: '#c5bfb6' }}>
+                <span>{labels[labels.length - 1]} so far: {cfg.format(incompleteValue)}</span>
+                {projectedValue !== null && (
+                  <span>Projected: ~{cfg.format(projectedValue)}</span>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

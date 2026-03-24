@@ -17,6 +17,13 @@ function isCurrentMonth(monthStart: string): boolean {
   return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
 }
 
+function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction: number } {
+  const now = new Date();
+  const dayElapsed = now.getDate();
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  return { dayElapsed, daysInMonth, fraction: dayElapsed / daysInMonth };
+}
+
 function MonthlyTrendChart({ data }: Props) {
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
@@ -31,6 +38,37 @@ function MonthlyTrendChart({ data }: Props) {
   });
   const spamLeads = data.map((d) => parseInt((d as any).spam, 10) || 0);
   const cpl = data.map((d) => parseFloat(d.cpl));
+
+  // Projection for current month leads
+  const { fraction: monthFraction } = getMonthProgress();
+  const currentLeads = lastIsIncomplete ? qualityLeads[qualityLeads.length - 1] : null;
+  const projectedLeads = lastIsIncomplete && currentLeads !== null && monthFraction > 0
+    ? Math.round(currentLeads / monthFraction)
+    : null;
+
+  // Annotations for projected leads
+  const annotations: ApexOptions['annotations'] = {};
+  if (projectedLeads !== null && projectedLeads > 0) {
+    annotations.yaxis = [{
+      y: projectedLeads,
+      yAxisIndex: 0,
+      borderColor: '#000000',
+      strokeDashArray: 4,
+      opacity: 0.2,
+      label: {
+        text: `~${projectedLeads} projected`,
+        borderColor: 'transparent',
+        position: 'left',
+        style: {
+          background: 'transparent',
+          color: '#c5bfb6',
+          fontSize: '10px',
+          fontWeight: 400,
+          padding: { left: 6, right: 6, top: 2, bottom: 2 },
+        },
+      },
+    }];
+  }
 
   const chartOptions: ApexOptions = {
     chart: {
@@ -87,6 +125,9 @@ function MonthlyTrendChart({ data }: Props) {
         let html = `<div style="padding:10px 14px;font-size:12px;line-height:1.6">`;
         html += `<div style="font-weight:700;color:#000;margin-bottom:2px">${month}${isIncomplete ? ' <span style="color:#c5bfb6;font-weight:400">(in progress)</span>' : ''}</div>`;
         html += `<div><span style="color:#000">&#9632;</span> Quality leads: <strong>${quality}</strong></div>`;
+        if (isIncomplete && projectedLeads !== null) {
+          html += `<div style="color:#c5bfb6">Projected: ~${projectedLeads}</div>`;
+        }
         if (spam > 0) {
           html += `<div><span style="color:#ddd8cb">&#9632;</span> Contacts: <strong>${total}</strong> <span style="color:#c5bfb6">(${spam} removed)</span></div>`;
         }
@@ -107,6 +148,7 @@ function MonthlyTrendChart({ data }: Props) {
     },
     legend: { show: false },
     dataLabels: { enabled: false },
+    annotations,
   };
 
   const series = [
