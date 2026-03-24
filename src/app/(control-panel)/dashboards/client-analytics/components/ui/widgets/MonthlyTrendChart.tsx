@@ -52,7 +52,21 @@ function MonthlyTrendChart({ data, startDate }: Props) {
     ? Math.round(currentLeads / monthFraction)
     : null;
 
-  const trendLine: number[] | null = null;
+  // Trend line (linear regression)
+  const trendInputs = lastIsIncomplete && projectedLeads
+    ? [...qualityLeads.slice(0, -1), projectedLeads]
+    : qualityLeads;
+  const n = trendInputs.length;
+  let trendLine: number[] | null = null;
+  if (n >= 3) {
+    const sumX = trendInputs.reduce((s, _, i) => s + i, 0);
+    const sumY = trendInputs.reduce((s, v) => s + v, 0);
+    const sumXY = trendInputs.reduce((s, v, i) => s + i * v, 0);
+    const sumX2 = trendInputs.reduce((s, _, i) => s + i * i, 0);
+    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+    const intercept = (sumY - slope * sumX) / n;
+    trendLine = trendInputs.map((_, i) => Math.max(Math.round(intercept + slope * i), 0));
+  }
 
   // Annotations
   const annotations: ApexOptions['annotations'] = {};
@@ -210,6 +224,9 @@ function MonthlyTrendChart({ data, startDate }: Props) {
           </span>
           <span className="flex items-center gap-1">
             <span className="inline-block h-0.5 w-4" style={{ backgroundColor: '#E85D4D' }} /> CPL
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="inline-block h-0.5 w-4 border-t border-dashed" style={{ borderColor: '#c5bfb6' }} /> Trend
           </span>
         </div>
         {projectedLeads !== null && currentLeads !== null && (
