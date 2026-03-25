@@ -198,7 +198,12 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
         <div>
           <div className="flex items-center gap-3">
             <Typography className="text-base font-bold text-white">{title || stageLabels[stage]}</Typography>
-            {totalRevenue > 0 && (
+            {(closedRev || totalRevenue) > 0 && adSpend !== undefined && (
+              <Typography className="text-base font-bold" style={{ color: '#3b8a5a' }}>
+                {formatDollars(closedRev || totalRevenue)}
+              </Typography>
+            )}
+            {(closedRev || totalRevenue) > 0 && adSpend === undefined && (
               <Typography className="text-base font-bold" style={{ color: '#3b8a5a' }}>
                 {formatDollars(totalRevenue)}
               </Typography>
@@ -239,7 +244,7 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
         <div className="border-b px-5 py-3" style={{ borderColor: '#f0ede6', backgroundColor: '#fafaf7' }}>
           <div className="flex items-center justify-between text-xs">
             <span style={{ color: '#8a8279' }}>Total Revenue</span>
-            <span className="font-bold" style={{ color: '#3b8a5a' }}>{formatDollars(totalRevenue)}</span>
+            <span className="font-bold" style={{ color: '#3b8a5a' }}>{formatDollars(closedRev || totalRevenue)}</span>
           </div>
           <div className="flex items-center justify-between text-xs mt-1">
             <span style={{ color: '#8a8279' }}>Ad Spend</span>
@@ -248,7 +253,7 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
           <div className="mt-2 border-t pt-2 flex items-center justify-between" style={{ borderColor: '#e8e4d9' }}>
             <span className="text-xs" style={{ color: '#8a8279' }}>ROAS</span>
             <span className="text-sm font-bold">
-              {formatDollars(totalRevenue)} / {formatDollars(adSpend)} = <span style={{ color: '#E85D4D' }}>{(totalRevenue / adSpend).toFixed(1)}x</span>
+              {formatDollars(closedRev || totalRevenue)} / {formatDollars(adSpend)} = <span style={{ color: '#E85D4D' }}>{((closedRev || totalRevenue) / adSpend).toFixed(1)}x</span>
             </span>
           </div>
         </div>
