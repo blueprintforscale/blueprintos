@@ -309,7 +309,14 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
 
       {/* Lead list with staggered animation */}
       <div className="flex-1 overflow-y-auto">
-        {filtered.length === 0 ? (
+        {!leads || !Array.isArray(leads) ? (
+          <div className="flex h-32 items-center justify-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
+              <span className="text-xs" style={{ color: '#8a8279' }}>Loading leads...</span>
+            </div>
+          </div>
+        ) : filtered.length === 0 ? (
           <div className="flex h-32 items-center justify-center text-sm" style={{ color: '#8a8279' }}>
             No leads at this stage
           </div>
