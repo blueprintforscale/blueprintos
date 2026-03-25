@@ -26,6 +26,7 @@ type Lead = {
   revenue_closed: boolean;
   approved_revenue: number;
   invoiced_revenue: number;
+  invoice_breakdown?: { amount: number; type: string; status: string }[];
   estimate_value?: number;
   client_flag_reason?: string | null;
   client_flag_at?: string | null;
@@ -417,7 +418,21 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                     <div className="mt-0.5 text-[10px]" style={{ color: '#c5bfb6' }}>
                       {approvedRev > 0 && <span>Est: {formatDollars(approvedRev)}</span>}
                       {approvedRev > 0 && invoicedRev > 0 && <span> · </span>}
-                      {invoicedRev > 0 && <span>Inv: {formatDollars(invoicedRev)}</span>}
+                      {invoicedRev > 0 && (
+                        <span>
+                          Inv: {lead.invoice_breakdown && lead.invoice_breakdown.length > 1
+                            ? lead.invoice_breakdown.map((inv, j) => (
+                                <span key={j}>
+                                  {j > 0 && ' + '}
+                                  <span style={{ color: inv.amount < 1000 ? '#c4890a' : '#c5bfb6' }}>
+                                    {formatDollars(inv.amount)}
+                                  </span>
+                                </span>
+                              ))
+                            : formatDollars(invoicedRev)
+                          }
+                        </span>
+                      )}
                     </div>
                   )}
 
