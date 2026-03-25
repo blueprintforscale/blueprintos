@@ -40,7 +40,8 @@ export type FunnelStage =
   | 'estimate_approved'
   | 'job_scheduled'
   | 'job_completed'
-  | 'revenue_closed';
+  | 'revenue_closed'
+  | 'open_estimates';
 
 const stageLabels: Record<FunnelStage, string> = {
   leads: 'All Leads',
@@ -51,6 +52,7 @@ const stageLabels: Record<FunnelStage, string> = {
   job_scheduled: 'Job Scheduled',
   job_completed: 'Job Completed',
   revenue_closed: 'Revenue Closed',
+  open_estimates: 'Open Estimates',
 };
 
 const answerColors: Record<string, string> = {
@@ -83,6 +85,9 @@ function getHighestStage(lead: Lead): string {
 
 function filterByStage(leads: Lead[], stage: FunnelStage): Lead[] {
   if (stage === 'leads') return leads;
+  if (stage === 'open_estimates') {
+    return leads.filter((l) => l.estimate_sent && !l.estimate_approved && !l.revenue_closed);
+  }
   return leads.filter((l) => l[stage] === true);
 }
 

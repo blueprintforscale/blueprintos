@@ -62,7 +62,7 @@ function SummaryCards({ data, onStageClick }: Props) {
       value: formatDollars(openEst),
       sub: openEstCount > 0 ? `${openEstCount} estimates · avg ${formatDollars(avgOpenEst)}` : 'Pipeline value',
       highlight: false,
-      stage: 'estimate_sent',
+      stage: 'open_estimates',
     },
     {
       label: 'Conversion Rate',
