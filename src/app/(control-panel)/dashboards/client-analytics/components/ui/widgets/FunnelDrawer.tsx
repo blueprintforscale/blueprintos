@@ -414,10 +414,12 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                     )}
                   </div>
 
-                  {/* Revenue breakdown if both exist */}
-                  {approvedRev > 0 && invoicedRev > 0 && (
+                  {/* Revenue breakdown — itemized */}
+                  {(approvedRev > 0 || invoicedRev > 0) && (
                     <div className="mt-0.5 text-[10px]" style={{ color: '#c5bfb6' }}>
-                      Est: {formatDollars(approvedRev)} · Inv: {formatDollars(invoicedRev)}
+                      {approvedRev > 0 && <span>Est: {formatDollars(approvedRev)}</span>}
+                      {approvedRev > 0 && invoicedRev > 0 && <span> · </span>}
+                      {invoicedRev > 0 && <span>Inv: {formatDollars(invoicedRev)}</span>}
                     </div>
                   )}
 

@@ -174,7 +174,7 @@ export default function SharedDashboard({ client }: Props) {
                     <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: '#c5bfb6', marginBottom: -16 }}>Ad Performance</div>
                     <motion.div variants={item}>
                       <AdMetricsCards data={adMetrics} days={dateRange.days} onRoasClick={() => {
-                        setDrawerStage('estimate_approved');
+                        setDrawerStage('revenue_closed');
                         setDrawerTitle('ROAS Breakdown');
                         setDrawerAdSpend(adMetrics?.ad_spend);
                         setDrawerProgramPrice(undefined);
