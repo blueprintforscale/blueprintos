@@ -54,7 +54,7 @@ function SummaryCards({ data, onStageClick }: Props) {
       value: formatDollars(closedRev),
       sub: null,
       highlight: true,
-      stage: 'estimate_approved',
+      stage: 'revenue_closed',
     },
     {
       label: 'Open Estimates',
