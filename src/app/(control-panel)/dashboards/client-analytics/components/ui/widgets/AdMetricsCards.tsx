@@ -62,11 +62,12 @@ function CplRangeBar({ cpl }: { cpl: number }) {
 type Props = {
   data: AdPerformance | undefined;
   days?: number | null;
+  onCplClick?: () => void;
   onRoasClick?: () => void;
   onGuaranteeClick?: () => void;
 };
 
-function AdMetricsCards({ data, days, onRoasClick, onGuaranteeClick }: Props) {
+function AdMetricsCards({ data, days, onCplClick, onRoasClick, onGuaranteeClick }: Props) {
   if (!data) return null;
 
   const isShortRange = days !== null && days !== undefined && days <= 7;
@@ -82,7 +83,11 @@ function AdMetricsCards({ data, days, onRoasClick, onGuaranteeClick }: Props) {
       </Paper>
 
       {/* Cost Per Lead — with cohort range bar */}
-      <Paper className="flex flex-col rounded-xl border p-5 shadow-none" sx={{ borderColor: '#ddd8cb' }}>
+      <Paper
+        className={`flex flex-col rounded-xl border p-5 shadow-none ${onCplClick ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}`}
+        sx={{ borderColor: '#ddd8cb' }}
+        onClick={onCplClick}
+      >
         <Typography className="text-xs font-semibold uppercase tracking-wide" sx={{ color: '#8a8279' }}>Cost Per Lead</Typography>
         <Typography className="mt-1 text-3xl font-bold tracking-tight">
           ${data.cpl.toFixed(0)}
@@ -91,6 +96,11 @@ function AdMetricsCards({ data, days, onRoasClick, onGuaranteeClick }: Props) {
           {data.actual_quality_leads} quality leads{isShortRange ? ' (90-day)' : ''}
         </Typography>
         <CplRangeBar cpl={data.cpl} />
+        {data.ad_spend > 0 && data.quality_leads > 0 && data.quality_leads !== data.actual_quality_leads && (
+          <div className="mt-1 text-[9px]" style={{ color: '#c5bfb6' }}>
+            ${Math.round(data.ad_spend / data.quality_leads)} per contact
+          </div>
+        )}
       </Paper>
 
       {/* ROAS */}

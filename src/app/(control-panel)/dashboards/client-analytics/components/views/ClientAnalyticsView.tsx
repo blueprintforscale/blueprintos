@@ -176,7 +176,12 @@ function ClientAnalyticsView() {
               <>
                 {activeSource !== 'all' && (
                   <motion.div variants={item}>
-                    <AdMetricsCards data={adMetrics} days={dateRange.days} onRoasClick={() => {
+                    <AdMetricsCards data={adMetrics} days={dateRange.days} onCplClick={() => {
+                      setDrawerStage('cpl_leads');
+                      setDrawerTitle('Cost Per Lead');
+                      setDrawerAdSpend(undefined);
+                      setDrawerProgramPrice(undefined);
+                    }} onRoasClick={() => {
                       setDrawerStage('revenue_closed');
                       setDrawerTitle('ROAS Breakdown');
                       setDrawerAdSpend(adMetrics?.ad_spend);

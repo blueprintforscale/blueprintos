@@ -31,6 +31,8 @@ type Lead = {
   client_flag_reason?: string | null;
   client_flag_at?: string | null;
   service_address?: string | null;
+  lost_reason?: string | null;
+  is_spam?: boolean;
 };
 
 export type FunnelStage =
@@ -42,7 +44,8 @@ export type FunnelStage =
   | 'job_scheduled'
   | 'job_completed'
   | 'revenue_closed'
-  | 'open_estimates';
+  | 'open_estimates'
+  | 'cpl_leads';
 
 const stageLabels: Record<FunnelStage, string> = {
   leads: 'All Leads',
@@ -54,6 +57,7 @@ const stageLabels: Record<FunnelStage, string> = {
   job_completed: 'Job Completed',
   revenue_closed: 'Revenue Closed',
   open_estimates: 'Open Estimates',
+  cpl_leads: 'All Contacts',
 };
 
 const answerColors: Record<string, string> = {
@@ -82,8 +86,9 @@ function getHighestStage(lead: Lead): string {
   return 'Lead';
 }
 
-function filterByStage(leads: Lead[], stage: FunnelStage): Lead[] {
+function filterByStage(leads: Lead[], stage: FunnelStage, showExcluded?: boolean): Lead[] {
   if (stage === 'leads') return leads;
+  if (stage === 'cpl_leads') return leads; // all leads shown, toggle handled in UI
   if (stage === 'open_estimates') {
     return leads.filter((l) => l.estimate_sent && !l.estimate_approved && !l.revenue_closed);
   }
@@ -143,10 +148,16 @@ function getCrmUrl(id: string | null, crm?: string): string | null {
 }
 
 function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, programPrice, closedRev, periodAdSpend, onClose }: Props) {
-  const filtered = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
   const [flagModal, setFlagModal] = useState<Lead | null>(null);
   const [projectedCloses, setProjectedCloses] = useState<Set<string>>(new Set());
   const [flaggedLocally, setFlaggedLocally] = useState<Set<string>>(new Set());
+  const [showExcluded, setShowExcluded] = useState(true);
+
+  const allForStage = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
+  const filtered = stage === 'cpl_leads' && !showExcluded
+    ? allForStage.filter((l) => !l.lost_reason && !l.is_spam)
+    : allForStage;
+  const excludedCount = stage === 'cpl_leads' ? allForStage.filter((l) => l.lost_reason || l.is_spam).length : 0;
 
   const handleFlag = async (reason: string, notes: string) => {
     if (!flagModal || !customerId) return;
@@ -215,6 +226,26 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
           <span className="text-lg">&#x2715;</span>
         </IconButton>
       </div>
+
+      {/* CPL leads toggle */}
+      {stage === 'cpl_leads' && (
+        <div className="border-b px-5 py-3 flex items-center justify-between" style={{ borderColor: '#f0ede6', backgroundColor: '#fafaf7' }}>
+          <div>
+            <div className="text-xs" style={{ color: '#8a8279' }}>
+              {allForStage.length} total contacts · {allForStage.length - excludedCount} quality · {excludedCount} removed
+            </div>
+          </div>
+          <label className="flex cursor-pointer items-center gap-1.5 text-xs" style={{ color: '#8a8279' }}>
+            <input
+              type="checkbox"
+              checked={showExcluded}
+              onChange={(e) => setShowExcluded(e.target.checked)}
+              className="rounded"
+            />
+            Show removed
+          </label>
+        </div>
+      )}
 
       {/* Guarantee breakdown — shown when programPrice is provided */}
       {programPrice !== undefined && programPrice > 0 && (
@@ -342,8 +373,8 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.03, duration: 0.2 }}
-                  className={`border-b px-5 py-3 hover:bg-gray-50 ${lead.client_flag_reason ? 'opacity-70' : ''}`}
-                  style={{ borderColor: '#f0ede6', borderLeft: lead.client_flag_reason ? '3px solid #c4890a' : undefined }}
+                  className={`border-b px-5 py-3 hover:bg-gray-50 ${lead.client_flag_reason ? 'opacity-70' : ''} ${stage === 'cpl_leads' && (lead.lost_reason || lead.is_spam) ? 'opacity-50' : ''}`}
+                  style={{ borderColor: '#f0ede6', borderLeft: lead.client_flag_reason ? '3px solid #c4890a' : stage === 'cpl_leads' && (lead.lost_reason || lead.is_spam) ? '3px solid #c5bfb6' : undefined }}
                 >
                   {/* Row 1: Name + source badge + flag badge + revenue + HCP link */}
                   <div className="flex items-center justify-between">
@@ -423,7 +454,19 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                         </span>
                       </>
                     )}
+                    {lead.duration && lead.duration > 0 && (
+                      <>
+                        <span>·</span>
+                        <span>{Math.floor(lead.duration / 60)}m {lead.duration % 60}s</span>
+                      </>
+                    )}
                   </div>
+                  {/* Lost/spam indicator for CPL drawer */}
+                  {stage === 'cpl_leads' && (lead.lost_reason || lead.is_spam) && (
+                    <div className="mt-0.5 text-[10px]" style={{ color: '#c4890a' }}>
+                      Removed: {lead.lost_reason || 'spam'}
+                    </div>
+                  )}
 
                   {/* Revenue breakdown — itemized */}
                   {(approvedRev > 0 || invoicedRev > 0) && (
