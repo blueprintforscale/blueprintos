@@ -47,7 +47,7 @@ function SummaryCards({ data, onStageClick }: Props) {
       value: String(contacts),
       sub: spam > 0 ? `${quality} quality leads · ${spam} removed` : `${quality} quality leads`,
       highlight: false,
-      stage: 'leads',
+      stage: 'cpl_leads',
     },
     {
       label: 'Revenue Closed',
