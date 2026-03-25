@@ -62,7 +62,6 @@ const answerColors: Record<string, string> = {
 };
 
 const stageStyles: Record<string, { bg: string; text: string }> = {
-  'Revenue Closed': { bg: '#2d7a4a', text: '#fff' },
   'Job Completed': { bg: '#3b8a5a', text: '#fff' },
   'Job Scheduled': { bg: '#e6f3ec', text: '#3b8a5a' },
   'Estimate Approved': { bg: '#3b8a5a', text: '#fff' },
@@ -73,7 +72,6 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
 };
 
 function getHighestStage(lead: Lead): string {
-  if (lead.revenue_closed) return 'Revenue Closed';
   if (lead.job_completed) return 'Job Completed';
   if (lead.job_scheduled) return 'Job Scheduled';
   if (lead.estimate_approved) return 'Estimate Approved';
@@ -176,9 +174,9 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
     let rev = 0;
     if (stage === 'estimate_sent') rev = estVal;
     else if (stage === 'estimate_approved') rev = approved;
-    else if (stage === 'job_scheduled' || stage === 'job_completed') rev = invoiced > 0 ? invoiced : approved;
-    else if (stage === 'revenue_closed') rev = invoiced;
-    else rev = (approved + invoiced) > 0 ? (approved + invoiced) : estVal;
+    else if (stage === 'job_scheduled' || stage === 'job_completed') rev = Math.max(invoiced, approved);
+    else if (stage === 'revenue_closed') rev = Math.max(invoiced, approved);
+    else rev = (approved + invoiced) > 0 ? Math.max(approved, invoiced) : estVal;
     return sum + rev;
   }, 0);
 
@@ -319,9 +317,9 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
               let revenue = 0;
               if (stage === 'estimate_sent') revenue = estValue;
               else if (stage === 'estimate_approved') revenue = approvedRev;
-              else if (stage === 'job_scheduled' || stage === 'job_completed') revenue = invoicedRev > 0 ? invoicedRev : approvedRev;
-              else if (stage === 'revenue_closed') revenue = invoicedRev;
-              else revenue = (approvedRev + invoicedRev) > 0 ? (approvedRev + invoicedRev) : estValue;
+              else if (stage === 'job_scheduled' || stage === 'job_completed') revenue = Math.max(invoicedRev, approvedRev);
+              else if (stage === 'revenue_closed') revenue = Math.max(invoicedRev, approvedRev);
+              else revenue = (approvedRev + invoicedRev) > 0 ? Math.max(approvedRev, invoicedRev) : estValue;
               const highestStage = getHighestStage(lead);
               const stageStyle = stageStyles[highestStage] || stageStyles['Lead'];
 
