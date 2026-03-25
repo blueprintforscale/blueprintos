@@ -18,6 +18,7 @@ type ExtendedFunnel = FunnelData & {
   spam_count?: number;
   closed_rev?: number;
   open_est_rev?: number;
+  open_estimate_count?: number;
 };
 
 type Props = {
@@ -34,9 +35,7 @@ function SummaryCards({ data, onStageClick }: Props) {
   const spam = Math.max(contacts - quality, 0);
   const closedRev = parseFloat(data.closed_rev as any) || 0;
   const openEst = parseFloat(data.open_est_rev as any) || 0;
-  const estSent = parseInt(data.estimate_sent as any) || 0;
-  const estApproved = parseInt(data.estimate_approved as any) || 0;
-  const openEstCount = Math.max(estSent - estApproved, 0);
+  const openEstCount = parseInt(data.open_estimate_count as any) || Math.max((parseInt(data.estimate_sent as any) || 0) - (parseInt(data.estimate_approved as any) || 0), 0);
   const avgOpenEst = openEstCount > 0 ? openEst / openEstCount : 0;
   const convRate = parseInt(data.leads as any) > 0
     ? ((parseInt(data.job_completed as any) || 0) / parseInt(data.leads as any) * 100)
