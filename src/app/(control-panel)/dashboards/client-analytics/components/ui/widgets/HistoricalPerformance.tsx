@@ -10,10 +10,11 @@ import type { MonthlyTrend } from '../../../api/types';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 type Props = { data: MonthlyTrend[] | undefined; startDate?: string };
-type Metric = 'leads' | 'spend' | 'cpl' | 'conversions';
+type Metric = 'leads' | 'contacts' | 'spend' | 'cpl' | 'conversions';
 
 const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; projectable: boolean }[] = [
   { key: 'leads', label: 'Leads', format: (v) => String(Math.round(v)), color: '#000000', projectable: true },
+  { key: 'contacts', label: 'Contacts', format: (v) => String(Math.round(v)), color: '#8a8279', projectable: true },
   { key: 'spend', label: 'Ad Spend', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#5a554d', projectable: true },
   { key: 'cpl', label: 'CPL', format: (v) => `$${v.toFixed(0)}`, color: '#E85D4D', projectable: false },
   { key: 'conversions', label: 'Conversions', format: (v) => String(Math.round(v)), color: '#6366f1', projectable: true },
@@ -39,7 +40,10 @@ function HistoricalPerformance({ data, startDate }: Props) {
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
   const cfg = metricsList.find((m) => m.key === metric)!;
-  const getValue = (d: MonthlyTrend, key: Metric): number => parseFloat((d as any)[key]) || 0;
+  const getValue = (d: MonthlyTrend, key: Metric): number => {
+    if (key === 'contacts') return (parseFloat((d as any).leads) || 0) + (parseFloat((d as any).spam) || 0);
+    return parseFloat((d as any)[key]) || 0;
+  };
 
   const recent = data.slice(-12);
   const labels = recent.map((d) => (d as any).short_label || d.label);
