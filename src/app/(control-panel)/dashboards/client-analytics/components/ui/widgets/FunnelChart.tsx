@@ -23,7 +23,6 @@ function FunnelChart({ data, onStageClick }: Props) {
     { label: 'Est. Approved', key: 'estimate_approved', count: data.estimate_approved },
     { label: 'Job Scheduled', key: 'job_scheduled', count: data.job_scheduled },
     { label: 'Job Completed', key: 'job_completed', count: data.job_completed },
-    { label: 'Revenue Closed', key: 'revenue_closed', count: data.revenue_closed ?? 0 },
   ];
 
   const maxCount = Math.max(data.leads, 1);
