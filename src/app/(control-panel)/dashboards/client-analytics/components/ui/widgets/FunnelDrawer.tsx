@@ -153,11 +153,14 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
   const [flaggedLocally, setFlaggedLocally] = useState<Set<string>>(new Set());
   const [showExcluded, setShowExcluded] = useState(true);
 
+  const spamPattern = /spam|not a lead|wrong number|out of area|wrong service|abandoned/i;
+  const isSpamFiltered = (l: Lead) => l.lost_reason ? spamPattern.test(l.lost_reason) : false;
+
   const allForStage = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
   const filtered = stage === 'cpl_leads' && !showExcluded
-    ? allForStage.filter((l) => !l.lost_reason && !l.is_spam)
+    ? allForStage.filter((l) => !isSpamFiltered(l))
     : allForStage;
-  const excludedCount = stage === 'cpl_leads' ? allForStage.filter((l) => l.lost_reason || l.is_spam).length : 0;
+  const excludedCount = stage === 'cpl_leads' ? allForStage.filter((l) => isSpamFiltered(l)).length : 0;
 
   const handleFlag = async (reason: string, notes: string) => {
     if (!flagModal || !customerId) return;
@@ -209,12 +212,12 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
         <div>
           <div className="flex items-center gap-3">
             <Typography className="text-base font-bold text-white">{title || stageLabels[stage]}</Typography>
-            {(closedRev || totalRevenue) > 0 && adSpend !== undefined && (
+            {stage !== 'cpl_leads' && (closedRev || totalRevenue) > 0 && adSpend !== undefined && (
               <Typography className="text-base font-bold" style={{ color: '#3b8a5a' }}>
                 {formatDollars(closedRev || totalRevenue)}
               </Typography>
             )}
-            {(closedRev || totalRevenue) > 0 && adSpend === undefined && (
+            {stage !== 'cpl_leads' && (closedRev || totalRevenue) > 0 && adSpend === undefined && (
               <Typography className="text-base font-bold" style={{ color: '#3b8a5a' }}>
                 {formatDollars(totalRevenue)}
               </Typography>
@@ -373,8 +376,8 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.03, duration: 0.2 }}
-                  className={`border-b px-5 py-3 hover:bg-gray-50 ${lead.client_flag_reason ? 'opacity-70' : ''} ${stage === 'cpl_leads' && (lead.lost_reason || lead.is_spam) ? 'opacity-50' : ''}`}
-                  style={{ borderColor: '#f0ede6', borderLeft: lead.client_flag_reason ? '3px solid #c4890a' : stage === 'cpl_leads' && (lead.lost_reason || lead.is_spam) ? '3px solid #c5bfb6' : undefined }}
+                  className={`border-b px-5 py-3 hover:bg-gray-50 ${lead.client_flag_reason ? 'opacity-70' : ''} ${stage === 'cpl_leads' && isSpamFiltered(lead) ? 'opacity-50' : ''}`}
+                  style={{ borderColor: '#f0ede6', borderLeft: lead.client_flag_reason ? '3px solid #c4890a' : stage === 'cpl_leads' && isSpamFiltered(lead) ? '3px solid #c5bfb6' : undefined }}
                 >
                   {/* Row 1: Name + source badge + flag badge + revenue + HCP link */}
                   <div className="flex items-center justify-between">
@@ -461,10 +464,10 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                       </>
                     )}
                   </div>
-                  {/* Lost/spam indicator for CPL drawer */}
-                  {stage === 'cpl_leads' && (lead.lost_reason || lead.is_spam) && (
+                  {/* Spam filter indicator for CPL drawer */}
+                  {stage === 'cpl_leads' && isSpamFiltered(lead) && (
                     <div className="mt-0.5 text-[10px]" style={{ color: '#c4890a' }}>
-                      Removed: {lead.lost_reason || 'spam'}
+                      Removed: {lead.lost_reason}
                     </div>
                   )}
 
