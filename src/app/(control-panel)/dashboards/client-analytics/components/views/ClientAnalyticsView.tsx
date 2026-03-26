@@ -77,11 +77,11 @@ function ClientAnalyticsView() {
   const { data: activity } = useRecentActivity(selectedClient!);
   const { data: sourceTabs } = useSourceTabs(selectedClient!);
 
-  // Lead spreadsheet (only fetch when on Leads tab)
+  // Lead spreadsheet — always fetch so drawer data is ready on click
   const { data: spreadsheetData } = useQuery({
     queryKey: ['leadSpreadsheet', selectedClient, activeSource, dateFrom, dateTo],
     queryFn: () => fetch(`/api/blueprint/clients/${selectedClient}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`).then(r => r.json()),
-    enabled: !!selectedClient && (activeTab === 1 || drawerStage !== null),
+    enabled: !!selectedClient,
   });
 
   // Historical data (only fetch when on Performance tab)
