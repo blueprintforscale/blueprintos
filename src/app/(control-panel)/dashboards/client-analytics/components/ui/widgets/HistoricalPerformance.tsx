@@ -9,7 +9,7 @@ import type { MonthlyTrend } from '../../../api/types';
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-type Props = { data: MonthlyTrend[] | undefined; startDate?: string };
+type Props = { data: MonthlyTrend[] | undefined; startDate?: string; showSuperQuality?: boolean };
 type Metric = 'leads' | 'contacts' | 'super_quality' | 'spend' | 'cpl' | 'conversions';
 
 const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; projectable: boolean }[] = [
@@ -34,13 +34,14 @@ function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction
   return { dayElapsed, daysInMonth, fraction: dayElapsed / daysInMonth };
 }
 
-function HistoricalPerformance({ data, startDate }: Props) {
+function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
   const [metric, setMetric] = useState<Metric>('leads');
   const [overlays, setOverlays] = useState<Metric[]>([]);
 
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
-  const cfg = metricsList.find((m) => m.key === metric)!;
+  const visibleMetrics = showSuperQuality ? metricsList : metricsList.filter((m) => m.key !== 'super_quality');
+  const cfg = visibleMetrics.find((m) => m.key === metric) || visibleMetrics[0];
   const getValue = (d: MonthlyTrend, key: Metric): number => {
     if (key === 'contacts') return (parseFloat((d as any).leads) || 0) + (parseFloat((d as any).spam) || 0);
     if (key === 'super_quality') {
@@ -287,7 +288,7 @@ function HistoricalPerformance({ data, startDate }: Props) {
 
         {/* Primary metric pills */}
         <div className="flex flex-wrap gap-1">
-          {metricsList.map((m) => (
+          {visibleMetrics.map((m) => (
             <button
               key={m.key}
               onClick={() => { setMetric(m.key); setOverlays((prev) => prev.filter((k) => k !== m.key)); }}
@@ -307,7 +308,7 @@ function HistoricalPerformance({ data, startDate }: Props) {
       <div className="flex items-center gap-2 px-6 pb-2">
         <span className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>Compare:</span>
         <div className="flex flex-wrap gap-1">
-          {metricsList.filter((m) => m.key !== metric).map((m) => {
+          {visibleMetrics.filter((m) => m.key !== metric).map((m) => {
             const isActive = overlays.includes(m.key);
             return (
               <button

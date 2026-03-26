@@ -229,7 +229,7 @@ function ClientAnalyticsView() {
                     </div>
                   </div>
                 ) : (
-                  <HistoricalPerformance data={historicalData} startDate={selectedClientObj?.start_date} />
+                  <HistoricalPerformance data={historicalData} startDate={selectedClientObj?.start_date} showSuperQuality={(selectedClientObj as any)?.dashboard_config?.show_super_quality} />
                 )}
               </motion.div>
             )}
