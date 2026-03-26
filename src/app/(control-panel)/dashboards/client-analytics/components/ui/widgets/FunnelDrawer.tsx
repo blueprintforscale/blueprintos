@@ -19,6 +19,7 @@ type Lead = {
   inspection_scheduled: boolean;
   inspection_completed: boolean;
   inspection_completed_inferred?: boolean;
+  inferred?: boolean;
   estimate_sent: boolean;
   estimate_approved: boolean;
   job_scheduled: boolean;
@@ -399,7 +400,7 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                           Flagged
                         </span>
                       )}
-                      {lead.inspection_completed_inferred && (stage === 'inspection_completed' || stage === 'inspection_scheduled') && (
+                      {(lead.inferred || (lead.inspection_completed_inferred && (stage === 'inspection_completed' || stage === 'inspection_scheduled'))) && (
                         <span
                           className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium"
                           style={{ backgroundColor: '#fef9e6', color: '#c4a55a', border: '1px solid #e8d9a8' }}
