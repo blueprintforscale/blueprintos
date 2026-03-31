@@ -366,7 +366,7 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
               if (stage === 'estimate_sent') revenue = estValue;
               else if (stage === 'estimate_approved') revenue = approvedRev;
               else if (stage === 'job_scheduled' || stage === 'job_completed') revenue = Math.max(invoicedRev, approvedRev);
-              else if (stage === 'revenue_closed') revenue = Math.max(invoicedRev, approvedRev);
+              else if (stage === 'revenue_closed') revenue = Math.max(invoicedRev, approvedRev) || estValue;
               else revenue = (approvedRev + invoicedRev) > 0 ? Math.max(approvedRev, invoicedRev) : estValue;
               const highestStage = getHighestStage(lead);
               const stageStyle = stageStyles[highestStage] || stageStyles['Lead'];
