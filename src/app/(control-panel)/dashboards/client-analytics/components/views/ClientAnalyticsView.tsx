@@ -70,7 +70,7 @@ function ClientAnalyticsView() {
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
   const { data: clients } = useClients();
-  const { data: funnel } = useFunnel(selectedClient!, activeSource, dateFrom, dateTo);
+  const { data: funnel, isLoading: funnelLoading } = useFunnel(selectedClient!, activeSource, dateFrom, dateTo);
   // 90-day funnel for CPL fallback on short ranges
   const { data: funnel90 } = useFunnel(selectedClient!, activeSource, ninetyDayFrom, ninetyDayTo);
   const { data: trend } = useMonthlyTrend(selectedClient!, 6);
@@ -172,7 +172,15 @@ function ClientAnalyticsView() {
             animate="show"
           >
             {/* ====== OVERVIEW TAB ====== */}
-            {activeTab === 0 && (
+            {activeTab === 0 && funnelLoading && (
+              <div className="flex h-64 items-center justify-center">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
+                  <span className="text-xs" style={{ color: '#8a8279' }}>Loading funnel data...</span>
+                </div>
+              </div>
+            )}
+            {activeTab === 0 && !funnelLoading && (
               <>
                 {activeSource !== 'all' && (
                   <motion.div variants={item}>
