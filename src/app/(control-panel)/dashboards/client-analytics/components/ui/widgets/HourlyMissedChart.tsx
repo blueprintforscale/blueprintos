@@ -15,9 +15,9 @@ const HOUR_LABELS = [
   '4p','5p','6p','7p','8p','9p','10p','11p',
 ];
 
-type Props = { data: CallAnalyticsData | undefined };
+type Props = { data: CallAnalyticsData | undefined; dateFrom?: string; dateTo?: string };
 
-function HourlyMissedChart({ data }: Props) {
+function HourlyMissedChart({ data, dateFrom, dateTo }: Props) {
   if (!data || !data.hourly_missed) return null;
 
   const hasData = data.hourly_missed.some((v) => v > 0);
@@ -80,6 +80,7 @@ function HourlyMissedChart({ data }: Props) {
           </Typography>
           <Typography className="text-[11px] font-medium" style={{ color: '#8a8279' }}>
             All sources · missed + hung up
+            {dateFrom && dateTo && ` · ${new Date(dateFrom).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${new Date(dateTo).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`}
           </Typography>
         </div>
         <div className="flex items-center gap-3 text-[10px]" style={{ color: '#8a8279' }}>

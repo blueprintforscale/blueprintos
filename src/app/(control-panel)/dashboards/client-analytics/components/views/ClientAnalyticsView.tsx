@@ -19,6 +19,7 @@ import CallSummaryCards from '../ui/widgets/CallSummaryCards';
 import CallDonutCharts from '../ui/widgets/CallDonutCharts';
 import HourlyMissedChart from '../ui/widgets/HourlyMissedChart';
 import MissedCallsTable from '../ui/widgets/MissedCallsTable';
+import MissedByAttemptChart from '../ui/widgets/MissedByAttemptChart';
 import FunnelDrawer from '../ui/widgets/FunnelDrawer';
 import type { FunnelStage } from '../ui/widgets/FunnelDrawer';
 import DateRangePicker from '../ui/DateRangePicker';
@@ -255,7 +256,10 @@ function ClientAnalyticsView() {
                   <CallDonutCharts data={callData} />
                 </motion.div>
                 <motion.div variants={item}>
-                  <HourlyMissedChart data={callData} />
+                  <HourlyMissedChart data={callData} dateFrom={dateFrom} dateTo={dateTo} />
+                </motion.div>
+                <motion.div variants={item}>
+                  <MissedByAttemptChart data={callData} />
                 </motion.div>
                 <motion.div variants={item}>
                   <MissedCallsTable data={callData?.missed_calls_table} />

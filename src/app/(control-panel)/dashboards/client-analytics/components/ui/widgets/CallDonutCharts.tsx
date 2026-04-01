@@ -40,12 +40,13 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
           size: '62%',
           labels: {
             show: true,
-            name: { show: true, offsetY: 4, fontSize: '11px', color: '#8a8279' },
-            value: { show: true, offsetY: -2, fontSize: '28px', fontWeight: '800', color: '#000000',
+            name: { show: false },
+            value: {
+              show: true, offsetY: 8, fontSize: '32px', fontWeight: '800', color: '#000000',
               formatter: () => `${answerRate}%`,
             },
             total: {
-              show: true, label: 'Answer Rate',
+              show: true, label: '',
               formatter: () => `${answerRate}%`,
             },
           },
@@ -64,11 +65,11 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
       >
         {donut.label}
       </Typography>
-      <Typography className="mb-3 text-center text-[10px] font-medium" style={{ color: '#8a8279' }}>
+      <Typography className="mb-2 text-center text-[10px] font-medium" style={{ color: '#8a8279' }}>
         {subtitle}
       </Typography>
-      <ReactApexChart options={options} series={series} type="donut" width={180} height={180} />
-      <div className="mt-3 flex items-center gap-4 text-[10px]" style={{ color: '#8a8279' }}>
+      <ReactApexChart options={options} series={series} type="donut" width={160} height={160} />
+      <div className="mt-2 flex items-center gap-4 text-[10px]" style={{ color: '#8a8279' }}>
         <span><span className="mr-1 inline-block h-2 w-2 rounded-full" style={{ backgroundColor: '#3b8a5a' }} />
           {donut.answered} answered</span>
         <span><span className="mr-1 inline-block h-2 w-2 rounded-full" style={{ backgroundColor: '#E85D4D' }} />

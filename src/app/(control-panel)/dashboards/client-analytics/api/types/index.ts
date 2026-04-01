@@ -130,6 +130,7 @@ export type CallAnalyticsData = {
   donut_overall: CallDonut;
   hourly_missed: number[];
   biz_hours: { start: number; end: number };
+  missed_by_attempt: { first: number; second: number; third: number };
   missed_calls_table: MissedCallRow[];
 };
 

@@ -75,30 +75,31 @@ function CallSummaryCards({ data }: Props) {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-      {cards.map((card) => (
-        <Paper
-          key={card.label}
-          className="flex flex-col rounded-xl p-5 shadow-sm"
-          sx={card.highlight ? { backgroundColor: '#E85D4D', color: '#fff' } : {}}
-        >
-          <Typography
-            className={`text-xs font-medium uppercase tracking-wide ${card.highlight ? 'text-red-100' : 'text-gray-400'}`}
+    <Paper className="rounded-xl p-4 shadow-sm">
+      <div className="grid grid-cols-4 divide-x" style={{ borderColor: '#e8e3d8' }}>
+        {cards.map((card) => (
+          <div
+            key={card.label}
+            className="flex flex-col items-center px-4 py-2"
+            style={card.highlight ? { backgroundColor: '#E85D4D', borderRadius: 8 } : {}}
           >
-            {card.label}
-          </Typography>
-          <Typography className="mt-1 text-3xl font-bold tracking-tight">
-            {card.value}
-          </Typography>
-          {card.sub && (
-            <Typography className={`mt-1 text-xs ${card.highlight ? 'text-red-100' : 'text-gray-400'}`}>
-              {card.sub}
-            </Typography>
-          )}
-          {card.trend && <div>{card.trend}</div>}
-        </Paper>
-      ))}
-    </div>
+            <span
+              className="text-[9px] font-bold uppercase tracking-widest"
+              style={{ color: card.highlight ? 'rgba(255,255,255,0.7)' : '#8a8279' }}
+            >
+              {card.label}
+            </span>
+            <span
+              className="text-2xl font-extrabold"
+              style={{ color: card.highlight ? '#fff' : '#000' }}
+            >
+              {card.value}
+            </span>
+            {card.trend && <div>{card.trend}</div>}
+          </div>
+        ))}
+      </div>
+    </Paper>
   );
 }
 
