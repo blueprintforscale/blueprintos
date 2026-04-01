@@ -15,6 +15,10 @@ import MonthlyTrendChart from '../ui/widgets/MonthlyTrendChart';
 import RecentActivityWidget from '../ui/widgets/RecentActivityWidget';
 import LeadSpreadsheet from '../ui/widgets/LeadSpreadsheet';
 import HistoricalPerformance from '../ui/widgets/HistoricalPerformance';
+import CallSummaryCards from '../ui/widgets/CallSummaryCards';
+import CallDonutCharts from '../ui/widgets/CallDonutCharts';
+import HourlyMissedChart from '../ui/widgets/HourlyMissedChart';
+import MissedCallsTable from '../ui/widgets/MissedCallsTable';
 import FunnelDrawer from '../ui/widgets/FunnelDrawer';
 import type { FunnelStage } from '../ui/widgets/FunnelDrawer';
 import DateRangePicker from '../ui/DateRangePicker';
@@ -25,6 +29,7 @@ import {
   useRecentActivity,
   useLeads,
   useSourceTabs,
+  useCallAnalytics,
 } from '../../api/hooks/useClientAnalytics';
 import { clientAnalyticsService } from '../../api/services/clientAnalyticsService';
 import { useQuery } from '@tanstack/react-query';
@@ -44,6 +49,7 @@ const DEFAULT_CLIENT = 7441590915;
 const VIEW_TABS = [
   { label: 'Overview', icon: 'lucide:layout-dashboard' },
   { label: 'Leads', icon: 'lucide:users' },
+  { label: 'Calls', icon: 'lucide:phone' },
   { label: 'Trends', icon: 'lucide:trending-up' },
 ];
 
@@ -84,11 +90,16 @@ function ClientAnalyticsView() {
     enabled: !!selectedClient,
   });
 
-  // Historical data (only fetch when on Performance tab)
+  // Call analytics data (only fetch when on Calls tab)
+  const { data: callData, isLoading: callsLoading } = useCallAnalytics(
+    selectedClient!, dateFrom, dateTo
+  );
+
+  // Historical data (only fetch when on Performance tab — now tab 3)
   const { data: historicalData, isLoading: historicalLoading } = useQuery({
     queryKey: ['historicalTrend', selectedClient, 24],
     queryFn: () => clientAnalyticsService.getMonthlyTrend(selectedClient!, 24),
-    enabled: !!selectedClient && activeTab === 2,
+    enabled: !!selectedClient && activeTab === 3,
   });
 
   const clientList = Array.isArray(clients) ? clients : [];
@@ -150,7 +161,7 @@ function ClientAnalyticsView() {
             <ClientSelector clients={clientList} selectedId={selectedClient} onSelect={setSelectedClient} />
           </div>
           <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
-          {activeTab !== 2 && <DateRangePicker value={dateRange} onChange={setDateRange} />}
+          {activeTab !== 3 && <DateRangePicker value={dateRange} onChange={setDateRange} />}
           <Tabs
             value={activeTab}
             onChange={(_, v) => setActiveTab(v)}
@@ -226,8 +237,34 @@ function ClientAnalyticsView() {
               </motion.div>
             )}
 
+            {/* ====== CALLS TAB ====== */}
+            {activeTab === 2 && callsLoading && (
+              <div className="flex h-64 items-center justify-center">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
+                  <span className="text-xs" style={{ color: '#8a8279' }}>Loading call data...</span>
+                </div>
+              </div>
+            )}
+            {activeTab === 2 && !callsLoading && (
+              <>
+                <motion.div variants={item}>
+                  <CallSummaryCards data={callData} />
+                </motion.div>
+                <motion.div variants={item}>
+                  <CallDonutCharts data={callData} />
+                </motion.div>
+                <motion.div variants={item}>
+                  <HourlyMissedChart data={callData} />
+                </motion.div>
+                <motion.div variants={item}>
+                  <MissedCallsTable data={callData?.missed_calls_table} />
+                </motion.div>
+              </>
+            )}
+
             {/* ====== PERFORMANCE TAB ====== */}
-            {activeTab === 2 && (
+            {activeTab === 3 && (
               <motion.div variants={item}>
                 {historicalLoading ? (
                   <div className="flex h-64 items-center justify-center">

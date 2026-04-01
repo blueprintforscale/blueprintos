@@ -7,6 +7,7 @@ import type {
   RecentActivity,
   SourceTab,
   RiskData,
+  CallAnalyticsData,
 } from '../types';
 
 const BASE = '/api/blueprint';
@@ -47,6 +48,13 @@ export const clientAnalyticsService = {
 
   getSourceTabs: (customerId: number) =>
     fetchJson<SourceTab[]>(`clients/${customerId}/source-tabs`),
+
+  getCallAnalytics: (customerId: number, dateFrom?: string, dateTo?: string) => {
+    const params = new URLSearchParams();
+    if (dateFrom) params.set('date_from', dateFrom);
+    if (dateTo) params.set('date_to', dateTo);
+    return fetchJson<CallAnalyticsData>(`clients/${customerId}/call-analytics?${params}`);
+  },
 
   getRisk: (customerId: number, days = 30) =>
     fetchJson<RiskData>(`clients/${customerId}/risk?days=${days}`),

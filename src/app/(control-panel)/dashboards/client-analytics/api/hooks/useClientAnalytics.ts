@@ -66,6 +66,14 @@ export function useSourceTabs(customerId: number) {
   });
 }
 
+export function useCallAnalytics(customerId: number, dateFrom?: string, dateTo?: string) {
+  return useQuery({
+    queryKey: ['callAnalytics', customerId, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getCallAnalytics(customerId, dateFrom, dateTo),
+    enabled: !!customerId,
+  });
+}
+
 export function useRisk(customerId: number) {
   return useQuery({
     queryKey: ['risk', customerId],
