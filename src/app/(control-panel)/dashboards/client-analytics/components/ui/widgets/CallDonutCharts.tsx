@@ -38,18 +38,7 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
       pie: {
         donut: {
           size: '65%',
-          labels: {
-            show: true,
-            name: { show: false },
-            value: {
-              show: true, offsetY: 2, fontSize: '24px', fontWeight: '800', color: '#000000',
-              formatter: () => `${answerRate}%`,
-            },
-            total: {
-              show: true, label: '',
-              formatter: () => `${answerRate}%`,
-            },
-          },
+          labels: { show: false },
         },
       },
     },
@@ -71,8 +60,11 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
       <Typography className="mb-2 text-center text-[9px] font-medium" style={{ color: '#8a8279' }}>
         {subtitle}
       </Typography>
-      <div style={{ width: 140, height: 140 }}>
+      <div className="relative" style={{ width: 140, height: 140 }}>
         <ReactApexChart options={options} series={series} type="donut" width={140} height={140} />
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <span className="text-2xl font-extrabold" style={{ color: '#000' }}>{answerRate}%</span>
+        </div>
       </div>
       <div className="mt-2 flex items-center gap-3 text-[10px]" style={{ color: '#5a554d' }}>
         <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#3b8a5a' }} />
