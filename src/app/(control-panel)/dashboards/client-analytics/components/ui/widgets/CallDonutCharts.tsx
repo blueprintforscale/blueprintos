@@ -42,7 +42,7 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
             show: true,
             name: { show: false },
             value: {
-              show: true, offsetY: 6, fontSize: '24px', fontWeight: '800', color: '#000000',
+              show: true, offsetY: 2, fontSize: '24px', fontWeight: '800', color: '#000000',
               formatter: () => `${answerRate}%`,
             },
             total: {

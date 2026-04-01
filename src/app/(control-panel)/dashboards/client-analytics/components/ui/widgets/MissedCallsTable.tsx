@@ -70,6 +70,7 @@ function MissedCallsTable({ data }: Props) {
               <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>When</th>
               <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>Caller ID</th>
               <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>Source</th>
+              <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -98,6 +99,15 @@ function MissedCallsTable({ data }: Props) {
                       style={{ backgroundColor: '#e6f3ec', color: '#2d6e46' }}>Google Ads</span>
                   ) : (
                     <span className="text-[10px]" style={{ color: '#8a8279' }}>{call.source_name || 'Other'}</span>
+                  )}
+                </td>
+                <td className="border-b px-3 py-2" style={{ borderColor: '#eee' }}>
+                  {call.classified_status === 'missed' ? (
+                    <span className="inline-block rounded-full px-2 py-0.5 text-[9px] font-semibold"
+                      style={{ backgroundColor: '#fde8e6', color: '#c44a3c' }}>Missed</span>
+                  ) : (
+                    <span className="inline-block rounded-full px-2 py-0.5 text-[9px] font-semibold"
+                      style={{ backgroundColor: '#fef3d1', color: '#a87408' }}>Hung Up</span>
                   )}
                 </td>
               </tr>
