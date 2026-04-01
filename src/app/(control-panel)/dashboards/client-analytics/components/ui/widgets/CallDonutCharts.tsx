@@ -29,7 +29,7 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
   }
 
   const options: ApexOptions = {
-    chart: { type: 'donut', background: 'transparent' },
+    chart: { type: 'donut', background: 'transparent', sparkline: { enabled: true } },
     colors,
     labels,
     dataLabels: { enabled: false },
@@ -37,12 +37,12 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
     plotOptions: {
       pie: {
         donut: {
-          size: '62%',
+          size: '65%',
           labels: {
             show: true,
             name: { show: false },
             value: {
-              show: true, offsetY: 8, fontSize: '32px', fontWeight: '800', color: '#000000',
+              show: true, offsetY: 6, fontSize: '24px', fontWeight: '800', color: '#000000',
               formatter: () => `${answerRate}%`,
             },
             total: {
@@ -53,29 +53,34 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
         },
       },
     },
-    stroke: { width: 3, colors: ['#F5F1E8'] },
+    stroke: { width: 2, colors: ['#fff'] },
     tooltip: { enabled: true, y: { formatter: (val: number) => `${val} calls` } },
+    states: {
+      active: { filter: { type: 'darken' } },
+    },
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center rounded-xl p-4" style={{ backgroundColor: '#EEEAD9' }}>
       <Typography
-        className="mb-1 text-center text-[10px] font-extrabold uppercase tracking-widest"
+        className="mb-0.5 text-center text-[9px] font-extrabold uppercase tracking-widest"
         style={{ color: '#E85D4D' }}
       >
         {donut.label}
       </Typography>
-      <Typography className="mb-2 text-center text-[10px] font-medium" style={{ color: '#8a8279' }}>
+      <Typography className="mb-2 text-center text-[9px] font-medium" style={{ color: '#8a8279' }}>
         {subtitle}
       </Typography>
-      <ReactApexChart options={options} series={series} type="donut" width={160} height={160} />
-      <div className="mt-2 flex items-center gap-4 text-[10px]" style={{ color: '#8a8279' }}>
-        <span><span className="mr-1 inline-block h-2 w-2 rounded-full" style={{ backgroundColor: '#3b8a5a' }} />
-          {donut.answered} answered</span>
-        <span><span className="mr-1 inline-block h-2 w-2 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
-          {donut.missed} missed</span>
+      <div style={{ width: 140, height: 140 }}>
+        <ReactApexChart options={options} series={series} type="donut" width={140} height={140} />
+      </div>
+      <div className="mt-2 flex items-center gap-3 text-[10px]" style={{ color: '#5a554d' }}>
+        <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#3b8a5a' }} />
+          {donut.answered} ans</span>
+        <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
+          {donut.missed} miss</span>
         {donut.abandoned > 0 && (
-          <span><span className="mr-1 inline-block h-2 w-2 rounded-full" style={{ backgroundColor: '#c4890a' }} />
+          <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#c4890a' }} />
             {donut.abandoned} hung up</span>
         )}
       </div>
@@ -89,8 +94,8 @@ function CallDonutCharts({ data }: Props) {
   if (!data) return null;
 
   return (
-    <Paper className="rounded-xl p-6 shadow-sm">
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+    <Paper className="rounded-xl p-4 shadow-sm">
+      <div className="grid grid-cols-2 gap-4">
         <DonutCard donut={data.donut_google_ads} subtitle="First-Time Callers · Business Hours" />
         <DonutCard donut={data.donut_overall} subtitle="All Sources · Business Hours" />
       </div>

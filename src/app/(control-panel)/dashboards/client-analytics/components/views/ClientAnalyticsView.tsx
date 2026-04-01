@@ -250,9 +250,6 @@ function ClientAnalyticsView() {
             {activeTab === 2 && !callsLoading && (
               <>
                 <motion.div variants={item}>
-                  <CallSummaryCards data={callData} />
-                </motion.div>
-                <motion.div variants={item}>
                   <CallDonutCharts data={callData} />
                 </motion.div>
                 <motion.div variants={item}>
@@ -260,6 +257,9 @@ function ClientAnalyticsView() {
                 </motion.div>
                 <motion.div variants={item}>
                   <MissedByAttemptChart data={callData} />
+                </motion.div>
+                <motion.div variants={item}>
+                  <CallSummaryCards data={callData} />
                 </motion.div>
                 <motion.div variants={item}>
                   <MissedCallsTable data={callData?.missed_calls_table} />
