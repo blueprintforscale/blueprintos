@@ -24,6 +24,7 @@ export type AdPerformance = {
   all_time_spend: number;
   program_price?: number;
   projected_close_total?: number;
+  months_in_program?: number;
   guarantee: number;
   lsa_spend: number;
   lsa_leads: number;
@@ -132,6 +133,29 @@ export type CallAnalyticsData = {
   biz_hours: { start: number; end: number };
   missed_by_attempt: { first: number; second: number; third: number };
   missed_calls_table: MissedCallRow[];
+};
+
+export type CampaignBreakdown = {
+  campaign_name: string;
+  campaign_type: string;
+  impressions: number;
+  clicks: number;
+  cost: string;
+  conversions: string;
+  ctr: string;
+};
+
+export type SearchTermData = {
+  search_term: string;
+  impressions: number;
+  clicks: number;
+  cost: string;
+  conversions: string;
+};
+
+export type DailySpend = {
+  date: string;
+  spend: string;
 };
 
 export type RiskData = {

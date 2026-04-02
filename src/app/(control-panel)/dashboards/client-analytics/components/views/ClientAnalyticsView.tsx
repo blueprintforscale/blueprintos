@@ -20,6 +20,9 @@ import CallDonutCharts from '../ui/widgets/CallDonutCharts';
 import HourlyMissedChart from '../ui/widgets/HourlyMissedChart';
 import MissedCallsTable from '../ui/widgets/MissedCallsTable';
 import MissedByAttemptChart from '../ui/widgets/MissedByAttemptChart';
+import GoogleAdsPanel from '../ui/widgets/GoogleAdsPanel';
+import CohortTiles from '../ui/widgets/CohortTiles';
+import GuaranteeBar from '../ui/widgets/GuaranteeBar';
 import FunnelDrawer from '../ui/widgets/FunnelDrawer';
 import type { FunnelStage } from '../ui/widgets/FunnelDrawer';
 import DateRangePicker from '../ui/DateRangePicker';
@@ -96,6 +99,24 @@ function ClientAnalyticsView() {
     selectedClient!, dateFrom, dateTo
   );
 
+  // Google Ads panel data (only fetch on Overview with Google Ads source)
+  const isGoogleAds = activeSource === 'google_ads';
+  const { data: campaignData } = useQuery({
+    queryKey: ['campaignBreakdown', selectedClient, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getCampaignBreakdown(selectedClient!, dateFrom, dateTo),
+    enabled: !!selectedClient && activeTab === 0 && isGoogleAds,
+  });
+  const { data: searchTermsData } = useQuery({
+    queryKey: ['searchTerms', selectedClient, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getSearchTerms(selectedClient!, dateFrom, dateTo),
+    enabled: !!selectedClient && activeTab === 0 && isGoogleAds,
+  });
+  const { data: dailySpendData } = useQuery({
+    queryKey: ['dailySpend', selectedClient, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getDailySpend(selectedClient!, dateFrom, dateTo),
+    enabled: !!selectedClient && activeTab === 0 && isGoogleAds,
+  });
+
   // Historical data (only fetch when on Performance tab — now tab 3)
   const { data: historicalData, isLoading: historicalLoading } = useQuery({
     queryKey: ['historicalTrend', selectedClient, 24],
@@ -126,6 +147,7 @@ function ClientAnalyticsView() {
     guarantee: parseFloat((funnel as any).program_price) > 0
       ? (parseFloat((funnel as any).all_time_rev) || 0) / parseFloat((funnel as any).program_price) : 0,
     projected_close_total: parseFloat((funnel as any).projected_close_total) || 0,
+    months_in_program: parseInt((funnel as any).months_in_program) || 0,
     lsa_spend: 0, lsa_leads: 0,
   } : undefined;
 
@@ -194,6 +216,18 @@ function ClientAnalyticsView() {
             )}
             {activeTab === 0 && !funnelLoading && (
               <>
+                {/* Revenue cards */}
+                <motion.div variants={item}>
+                  <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                </motion.div>
+                {/* Conversion funnel + cohort tiles */}
+                <motion.div variants={item}>
+                  <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                    <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                  </div>
+                </motion.div>
+                {/* Google Ads metrics (CPL, ROAS, Ad Spend) */}
                 {activeSource !== 'all' && (
                   <motion.div variants={item}>
                     <AdMetricsCards data={adMetrics} days={dateRange.days} onCplClick={() => {
@@ -206,7 +240,23 @@ function ClientAnalyticsView() {
                       setDrawerTitle('ROAS Breakdown');
                       setDrawerAdSpend(adMetrics?.ad_spend);
                       setDrawerProgramPrice(undefined);
-                    }} onGuaranteeClick={() => {
+                    }} />
+                  </motion.div>
+                )}
+                {/* Google Ads details panel */}
+                {isGoogleAds && (
+                  <motion.div variants={item}>
+                    <GoogleAdsPanel
+                      campaigns={campaignData}
+                      searchTerms={searchTermsData}
+                      dailySpend={dailySpendData}
+                    />
+                  </motion.div>
+                )}
+                {/* Guarantee progress bar */}
+                {activeSource !== 'all' && (
+                  <motion.div variants={item}>
+                    <GuaranteeBar data={adMetrics} onClick={() => {
                       setDrawerStage('estimate_approved');
                       setDrawerTitle('Guarantee Breakdown');
                       setDrawerProgramPrice(adMetrics?.program_price);
@@ -214,17 +264,6 @@ function ClientAnalyticsView() {
                     }} />
                   </motion.div>
                 )}
-                <motion.div variants={item}>
-                  <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
-                </motion.div>
-                <motion.div variants={item}>
-                  <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
-                </motion.div>
-                {/* MonthlyTrendChart hidden from Overview — still available on Trends tab
-                <motion.div variants={item}>
-                  <MonthlyTrendChart data={trend} startDate={selectedClientObj?.start_date} />
-                </motion.div>
-                */}
                 <motion.div variants={item}>
                   <RecentActivityWidget data={activity} />
                 </motion.div>

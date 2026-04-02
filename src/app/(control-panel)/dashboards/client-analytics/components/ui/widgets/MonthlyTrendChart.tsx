@@ -41,9 +41,14 @@ function MonthlyTrendChart({ data, startDate }: Props) {
   const qualityLeads = data.map((d) => {
     const total = parseInt(d.leads, 10) || 0;
     const spam = parseInt((d as any).spam, 10) || 0;
-    return total - spam;
+    const abandoned = parseInt((d as any).excluded_abandoned, 10) || 0;
+    return total - spam - abandoned;
   });
-  const spamLeads = data.map((d) => parseInt((d as any).spam, 10) || 0);
+  const spamLeads = data.map((d) => {
+    const spam = parseInt((d as any).spam, 10) || 0;
+    const abandoned = parseInt((d as any).excluded_abandoned, 10) || 0;
+    return spam + abandoned;
+  });
   const cpl = data.map((d) => parseFloat(d.cpl));
 
   // Projection
