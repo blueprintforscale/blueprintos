@@ -60,22 +60,32 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
       <Typography className="mb-2 text-center text-[9px] font-medium" style={{ color: '#8a8279' }}>
         {subtitle}
       </Typography>
-      <div className="relative" style={{ width: 140, height: 140 }}>
-        <ReactApexChart options={options} series={series} type="donut" width={140} height={140} />
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <span className="text-2xl font-extrabold" style={{ color: '#000' }}>{answerRate}%</span>
+      {total === 0 ? (
+        <div className="flex h-[140px] w-[140px] items-center justify-center">
+          <span className="text-center text-xs font-medium" style={{ color: '#8a8279' }}>
+            No biz-hour calls<br />in this period
+          </span>
         </div>
-      </div>
-      <div className="mt-2 flex items-center gap-3 text-[10px]" style={{ color: '#5a554d' }}>
-        <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#3b8a5a' }} />
-          {donut.answered} ans</span>
-        <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
-          {donut.missed} miss</span>
-        {donut.abandoned > 0 && (
-          <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#c4890a' }} />
-            {donut.abandoned} hung up</span>
-        )}
-      </div>
+      ) : (
+        <>
+          <div className="relative" style={{ width: 140, height: 140 }}>
+            <ReactApexChart options={options} series={series} type="donut" width={140} height={140} />
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <span className="text-2xl font-extrabold" style={{ color: '#000' }}>{answerRate}%</span>
+            </div>
+          </div>
+          <div className="mt-2 flex items-center gap-3 text-[10px]" style={{ color: '#5a554d' }}>
+            <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#3b8a5a' }} />
+              {donut.answered} ans</span>
+            <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
+              {donut.missed} miss</span>
+            {donut.abandoned > 0 && (
+              <span><span className="mr-1 inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#c4890a' }} />
+                {donut.abandoned} hung up</span>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
