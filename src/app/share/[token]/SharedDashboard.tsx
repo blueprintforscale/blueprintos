@@ -192,11 +192,6 @@ export default function SharedDashboard({ client }: Props) {
                         setDrawerTitle('ROAS Breakdown');
                         setDrawerAdSpend(adMetrics?.ad_spend);
                         setDrawerProgramPrice(undefined);
-                      }} onGuaranteeClick={() => {
-                        setDrawerStage('estimate_approved');
-                        setDrawerTitle('Guarantee Breakdown');
-                        setDrawerProgramPrice(adMetrics?.program_price);
-                        setDrawerAdSpend(undefined);
                       }} />
                     </motion.div>
                   </>

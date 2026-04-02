@@ -10,15 +10,21 @@ function formatDollars(n: number) {
   return `$${n.toFixed(0)}`;
 }
 
-// Cohort benchmark: healthy CPL range across all mold remediation clients
+// Cohort benchmarks across all mold remediation clients
 const CPL_RANGE = { min: 60, max: 160 };
+const ROAS_RANGE = { min: 2, max: 4 };
 
 function CplRangeBar({ cpl }: { cpl: number }) {
-  // Scale: show range from $0 to $200 (a little past max for context)
-  const scaleMax = 200;
-  const rangeLeftPct = (CPL_RANGE.min / scaleMax) * 100;
-  const rangeWidthPct = ((CPL_RANGE.max - CPL_RANGE.min) / scaleMax) * 100;
-  const markerPct = Math.min(Math.max((cpl / scaleMax) * 100, 0), 100);
+  // Scale starts just below range min so green zone dominates
+  const padding = (CPL_RANGE.max - CPL_RANGE.min) * 0.3;
+  const scaleMin = Math.max(0, CPL_RANGE.min - padding);
+  const isAboveCpl = cpl > CPL_RANGE.max;
+  const scaleMax = isAboveCpl ? cpl + padding * 0.5 : CPL_RANGE.max + padding;
+  const scaleSpan = scaleMax - scaleMin;
+
+  const rangeLeftPct = ((CPL_RANGE.min - scaleMin) / scaleSpan) * 100;
+  const rangeWidthPct = ((CPL_RANGE.max - CPL_RANGE.min) / scaleSpan) * 100;
+  const markerPct = Math.min(Math.max(((cpl - scaleMin) / scaleSpan) * 100, 2), 98);
 
   const isHealthy = cpl >= CPL_RANGE.min && cpl <= CPL_RANGE.max;
   const isLow = cpl < CPL_RANGE.min;
@@ -59,22 +65,88 @@ function CplRangeBar({ cpl }: { cpl: number }) {
   );
 }
 
+function RoasRangeBar({ roas }: { roas: number }) {
+  // Scale starts just below range min so green zone dominates the bar
+  const padding = (ROAS_RANGE.max - ROAS_RANGE.min) * 0.3;
+  const scaleMin = Math.max(0, ROAS_RANGE.min - padding);
+  const isAbove = roas > ROAS_RANGE.max;
+  const scaleMax = isAbove ? roas + padding * 0.5 : ROAS_RANGE.max + padding;
+  const scaleSpan = scaleMax - scaleMin;
+
+  const rangeLeftPct = ((ROAS_RANGE.min - scaleMin) / scaleSpan) * 100;
+  const rangeWidthPct = ((ROAS_RANGE.max - ROAS_RANGE.min) / scaleSpan) * 100;
+  const markerPct = Math.min(Math.max(((roas - scaleMin) / scaleSpan) * 100, 2), 98);
+
+  const isHealthy = roas >= ROAS_RANGE.min && roas <= ROAS_RANGE.max;
+  const isHigh = roas > ROAS_RANGE.max;
+  const markerColor = isHealthy ? '#3b8a5a' : isHigh ? '#3b8a5a' : '#E85D4D';
+
+  return (
+    <div className="mt-3">
+      <div className="relative h-2 w-full rounded-full" style={{ backgroundColor: '#444' }}>
+        <div
+          className="absolute top-0 h-full rounded-full"
+          style={{
+            left: `${rangeLeftPct}%`,
+            width: `${rangeWidthPct}%`,
+            backgroundColor: 'rgba(59, 138, 90, 0.35)',
+          }}
+        />
+        {/* Client marker */}
+        <div
+          className="absolute top-1/2 -translate-y-1/2 h-4 w-1.5 rounded-full"
+          style={{
+            left: `${markerPct}%`,
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: markerColor,
+          }}
+        />
+      </div>
+      <div className="relative mt-1 text-[9px]" style={{ height: '14px' }}>
+        <span className="absolute" style={{ left: `${rangeLeftPct}%`, transform: 'translateX(-50%)', color: '#8a8279' }}>
+          {ROAS_RANGE.min}x
+        </span>
+        <span className="absolute" style={{ left: `${((ROAS_RANGE.max - scaleMin) / scaleSpan) * 100}%`, transform: 'translateX(-50%)', color: '#8a8279' }}>
+          {ROAS_RANGE.max}x
+        </span>
+        {isHigh && (
+          <span className="absolute font-semibold" style={{
+            left: `${markerPct}%`,
+            transform: 'translateX(-50%)',
+            color: '#4ade80',
+          }}>
+            {roas.toFixed(1)}x ▲
+          </span>
+        )}
+        {!isHealthy && !isHigh && (
+          <span className="absolute font-semibold" style={{
+            left: `${markerPct}%`,
+            transform: 'translateX(-50%)',
+            color: '#f87171',
+          }}>
+            {roas.toFixed(1)}x ▼
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 type Props = {
   data: AdPerformance | undefined;
   days?: number | null;
   onCplClick?: () => void;
   onRoasClick?: () => void;
-  onGuaranteeClick?: () => void;
 };
 
-function AdMetricsCards({ data, days, onCplClick, onRoasClick, onGuaranteeClick }: Props) {
+function AdMetricsCards({ data, days, onCplClick, onRoasClick }: Props) {
   if (!data) return null;
 
   const isShortRange = days !== null && days !== undefined && days <= 7;
   const periodLabel = days ? `${days}-day` : 'Custom';
 
   return (
-    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
       {/* Ad Spend */}
       <Paper className="flex flex-col rounded-xl border p-5 shadow-none" sx={{ borderColor: '#ddd8cb' }}>
         <Typography className="text-xs font-semibold uppercase tracking-wide" sx={{ color: '#8a8279' }}>Ad Spend</Typography>
@@ -131,23 +203,11 @@ function AdMetricsCards({ data, days, onCplClick, onRoasClick, onGuaranteeClick 
                 <span style={{ color: '#5a554d' }}> · +{formatDollars(data.projected_close_total || 0)} projected</span>
               )}
             </Typography>
+            <RoasRangeBar roas={data.roas} />
           </>
         )}
       </Paper>
 
-      {/* Guarantee — always all-time, never changes with date range */}
-      <Paper
-        className={`flex flex-col rounded-xl border p-5 shadow-none ${onGuaranteeClick ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}`}
-        sx={{ borderColor: '#ddd8cb' }}
-        onClick={onGuaranteeClick}
-      >
-        <Typography className="text-xs font-semibold uppercase tracking-wide" sx={{ color: '#8a8279' }}>Guarantee</Typography>
-        <Typography className="mt-1 text-3xl font-bold tracking-tight">{data.guarantee.toFixed(1)}x</Typography>
-        <Typography className="mt-1 text-xs" sx={{ color: '#8a8279' }}>
-          {formatDollars(data.all_time_rev)} / {formatDollars(data.program_price || 0)}
-        </Typography>
-        <Typography className="text-[9px] mt-0.5" sx={{ color: '#c5bfb6' }}>All-time</Typography>
-      </Paper>
     </div>
   );
 }
