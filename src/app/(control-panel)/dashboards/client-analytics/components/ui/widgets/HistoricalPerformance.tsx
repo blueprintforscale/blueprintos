@@ -44,6 +44,12 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
   const cfg = visibleMetrics.find((m) => m.key === metric) || visibleMetrics[0];
   const getValue = (d: MonthlyTrend, key: Metric): number => {
     if (key === 'contacts') return (parseFloat((d as any).leads) || 0) + (parseFloat((d as any).spam) || 0);
+    if (key === 'leads') {
+      const leads = parseFloat((d as any).leads) || 0;
+      const spam = parseFloat((d as any).spam) || 0;
+      const excludedAbandoned = parseFloat((d as any).excluded_abandoned) || 0;
+      return leads - spam - excludedAbandoned;
+    }
     if (key === 'super_quality') {
       const leads = parseFloat((d as any).leads) || 0;
       const spam = parseFloat((d as any).spam) || 0;
