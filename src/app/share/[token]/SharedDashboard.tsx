@@ -16,6 +16,11 @@ import MonthlyTrendChart from '../../(control-panel)/dashboards/client-analytics
 import RecentActivityWidget from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/RecentActivityWidget';
 import LeadSpreadsheet from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/LeadSpreadsheet';
 import HistoricalPerformance from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/HistoricalPerformance';
+import CallDonutCharts from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/CallDonutCharts';
+import HourlyMissedChart from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/HourlyMissedChart';
+import MissedByAttemptChart from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/MissedByAttemptChart';
+import CallSummaryCards from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/CallSummaryCards';
+import MissedCallsTable from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/MissedCallsTable';
 import FunnelDrawer from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
 import type { FunnelStage } from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
 import DateRangePicker from '../../(control-panel)/dashboards/client-analytics/components/ui/DateRangePicker';
@@ -24,6 +29,7 @@ import {
   useMonthlyTrend,
   useRecentActivity,
   useSourceTabs,
+  useCallAnalytics,
 } from '../../(control-panel)/dashboards/client-analytics/api/hooks/useClientAnalytics';
 import { clientAnalyticsService } from '../../(control-panel)/dashboards/client-analytics/api/services/clientAnalyticsService';
 
@@ -40,6 +46,7 @@ const item = {
 const VIEW_TABS = [
   { label: 'Overview' },
   { label: 'Leads' },
+  { label: 'Calls' },
   { label: 'Trends' },
 ];
 
@@ -84,10 +91,12 @@ export default function SharedDashboard({ client }: Props) {
     enabled: activeTab === 1 || drawerStage !== null,
   });
 
+  const { data: callData, isLoading: callsLoading } = useCallAnalytics(customerId, dateFrom, dateTo);
+
   const { data: historicalData, isLoading: historicalLoading } = useQuery({
     queryKey: ['historicalTrend', customerId, 24],
     queryFn: () => clientAnalyticsService.getMonthlyTrend(customerId, 24),
-    enabled: activeTab === 2,
+    enabled: activeTab === 3,
   });
 
   // Extract client display name (after " | " if present)
@@ -141,7 +150,7 @@ export default function SharedDashboard({ client }: Props) {
           <div className="flex flex-col gap-3 px-6 pt-5 pb-2 md:px-8">
             <div className="flex flex-wrap items-center gap-3">
               <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
-              {activeTab !== 2 && (
+              {activeTab !== 3 && (
                 <>
                   <div className="h-4 w-px" style={{ backgroundColor: '#ddd8cb' }} />
                   <DateRangePicker value={dateRange} onChange={setDateRange} />
@@ -216,7 +225,35 @@ export default function SharedDashboard({ client }: Props) {
               </motion.div>
             )}
 
-            {activeTab === 2 && (
+            {activeTab === 2 && callsLoading && (
+              <div className="flex h-64 items-center justify-center">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
+                  <span className="text-xs" style={{ color: '#8a8279' }}>Loading call data...</span>
+                </div>
+              </div>
+            )}
+            {activeTab === 2 && !callsLoading && (
+              <>
+                <motion.div variants={item}>
+                  <CallDonutCharts data={callData} />
+                </motion.div>
+                <motion.div variants={item}>
+                  <HourlyMissedChart data={callData} dateFrom={dateFrom} dateTo={dateTo} />
+                </motion.div>
+                <motion.div variants={item}>
+                  <MissedByAttemptChart data={callData} />
+                </motion.div>
+                <motion.div variants={item}>
+                  <CallSummaryCards data={callData} />
+                </motion.div>
+                <motion.div variants={item}>
+                  <MissedCallsTable data={callData?.missed_calls_table} />
+                </motion.div>
+              </>
+            )}
+
+            {activeTab === 3 && (
               <motion.div variants={item}>
                 {historicalLoading ? (
                   <div className="flex h-64 items-center justify-center">
