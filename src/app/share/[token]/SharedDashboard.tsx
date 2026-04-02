@@ -21,6 +21,9 @@ import HourlyMissedChart from '../../(control-panel)/dashboards/client-analytics
 import MissedByAttemptChart from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/MissedByAttemptChart';
 import CallSummaryCards from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/CallSummaryCards';
 import MissedCallsTable from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/MissedCallsTable';
+import CohortTiles from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/CohortTiles';
+import GoogleAdsPanel from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/GoogleAdsPanel';
+import GuaranteeBar from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/GuaranteeBar';
 import FunnelDrawer from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
 import type { FunnelStage } from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
 import DateRangePicker from '../../(control-panel)/dashboards/client-analytics/components/ui/DateRangePicker';
@@ -93,6 +96,24 @@ export default function SharedDashboard({ client }: Props) {
 
   const { data: callData, isLoading: callsLoading } = useCallAnalytics(customerId, dateFrom, dateTo);
 
+  // Google Ads panel data
+  const isGoogleAds = activeSource === 'google_ads';
+  const { data: campaignData } = useQuery({
+    queryKey: ['campaignBreakdown', customerId, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getCampaignBreakdown(customerId, dateFrom, dateTo),
+    enabled: activeTab === 0 && isGoogleAds,
+  });
+  const { data: searchTermsData } = useQuery({
+    queryKey: ['searchTerms', customerId, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getSearchTerms(customerId, dateFrom, dateTo),
+    enabled: activeTab === 0 && isGoogleAds,
+  });
+  const { data: dailySpendData } = useQuery({
+    queryKey: ['dailySpend', customerId, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getDailySpend(customerId, dateFrom, dateTo),
+    enabled: activeTab === 0 && isGoogleAds,
+  });
+
   const { data: historicalData, isLoading: historicalLoading } = useQuery({
     queryKey: ['historicalTrend', customerId, 24],
     queryFn: () => clientAnalyticsService.getMonthlyTrend(customerId, 24),
@@ -119,6 +140,7 @@ export default function SharedDashboard({ client }: Props) {
     guarantee: parseFloat((funnel as any).program_price) > 0
       ? (parseFloat((funnel as any).all_time_rev) || 0) / parseFloat((funnel as any).program_price) : 0,
     projected_close_total: parseFloat((funnel as any).projected_close_total) || 0,
+    months_in_program: parseInt((funnel as any).months_in_program) || 0,
     lsa_spend: 0, lsa_leads: 0,
   } : undefined;
 
@@ -178,36 +200,54 @@ export default function SharedDashboard({ client }: Props) {
           >
             {activeTab === 0 && (
               <>
-                {activeSource !== 'all' && (
-                  <>
-                    <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: '#c5bfb6', marginBottom: -16 }}>Ad Performance</div>
-                    <motion.div variants={item}>
-                      <AdMetricsCards data={adMetrics} days={dateRange.days} onCplClick={() => {
-                        setDrawerStage('cpl_leads');
-                        setDrawerTitle('Cost Per Lead');
-                        setDrawerAdSpend(undefined);
-                        setDrawerProgramPrice(undefined);
-                      }} onRoasClick={() => {
-                        setDrawerStage('revenue_closed');
-                        setDrawerTitle('ROAS Breakdown');
-                        setDrawerAdSpend(adMetrics?.ad_spend);
-                        setDrawerProgramPrice(undefined);
-                      }} />
-                    </motion.div>
-                  </>
-                )}
-                <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: '#c5bfb6', marginBottom: -16 }}>Pipeline</div>
+                {/* Revenue cards */}
                 <motion.div variants={item}>
                   <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                 </motion.div>
+                {/* Conversion funnel + cohort tiles */}
                 <motion.div variants={item}>
-                  <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                  <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                    <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                  </div>
                 </motion.div>
-                {/* MonthlyTrendChart hidden from Overview — still available on Trends tab
-                <motion.div variants={item}>
-                  <MonthlyTrendChart data={trend} startDate={client.start_date} />
-                </motion.div>
-                */}
+                {/* Google Ads metrics */}
+                {activeSource !== 'all' && (
+                  <motion.div variants={item}>
+                    <AdMetricsCards data={adMetrics} days={dateRange.days} onCplClick={() => {
+                      setDrawerStage('cpl_leads');
+                      setDrawerTitle('Cost Per Lead');
+                      setDrawerAdSpend(undefined);
+                      setDrawerProgramPrice(undefined);
+                    }} onRoasClick={() => {
+                      setDrawerStage('revenue_closed');
+                      setDrawerTitle('ROAS Breakdown');
+                      setDrawerAdSpend(adMetrics?.ad_spend);
+                      setDrawerProgramPrice(undefined);
+                    }} />
+                  </motion.div>
+                )}
+                {/* Google Ads details */}
+                {isGoogleAds && (
+                  <motion.div variants={item}>
+                    <GoogleAdsPanel
+                      campaigns={campaignData}
+                      searchTerms={searchTermsData}
+                      dailySpend={dailySpendData}
+                    />
+                  </motion.div>
+                )}
+                {/* Guarantee */}
+                {activeSource !== 'all' && (
+                  <motion.div variants={item}>
+                    <GuaranteeBar data={adMetrics} onClick={() => {
+                      setDrawerStage('estimate_approved');
+                      setDrawerTitle('Guarantee Breakdown');
+                      setDrawerProgramPrice(adMetrics?.program_price);
+                      setDrawerAdSpend(undefined);
+                    }} />
+                  </motion.div>
+                )}
                 <motion.div variants={item}>
                   <RecentActivityWidget data={activity} />
                 </motion.div>
