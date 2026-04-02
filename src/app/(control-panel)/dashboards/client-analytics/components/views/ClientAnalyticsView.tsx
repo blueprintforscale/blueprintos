@@ -20,6 +20,7 @@ import CallDonutCharts from '../ui/widgets/CallDonutCharts';
 import HourlyMissedChart from '../ui/widgets/HourlyMissedChart';
 import MissedCallsTable from '../ui/widgets/MissedCallsTable';
 import MissedByAttemptChart from '../ui/widgets/MissedByAttemptChart';
+import GoogleAdsPanel from '../ui/widgets/GoogleAdsPanel';
 import FunnelDrawer from '../ui/widgets/FunnelDrawer';
 import type { FunnelStage } from '../ui/widgets/FunnelDrawer';
 import DateRangePicker from '../ui/DateRangePicker';
@@ -95,6 +96,24 @@ function ClientAnalyticsView() {
   const { data: callData, isLoading: callsLoading } = useCallAnalytics(
     selectedClient!, dateFrom, dateTo
   );
+
+  // Google Ads panel data (only fetch on Overview with Google Ads source)
+  const isGoogleAds = activeSource === 'google_ads';
+  const { data: campaignData } = useQuery({
+    queryKey: ['campaignBreakdown', selectedClient, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getCampaignBreakdown(selectedClient!, dateFrom, dateTo),
+    enabled: !!selectedClient && activeTab === 0 && isGoogleAds,
+  });
+  const { data: searchTermsData } = useQuery({
+    queryKey: ['searchTerms', selectedClient, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getSearchTerms(selectedClient!, dateFrom, dateTo),
+    enabled: !!selectedClient && activeTab === 0 && isGoogleAds,
+  });
+  const { data: dailySpendData } = useQuery({
+    queryKey: ['dailySpend', selectedClient, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getDailySpend(selectedClient!, dateFrom, dateTo),
+    enabled: !!selectedClient && activeTab === 0 && isGoogleAds,
+  });
 
   // Historical data (only fetch when on Performance tab — now tab 3)
   const { data: historicalData, isLoading: historicalLoading } = useQuery({
@@ -218,13 +237,17 @@ function ClientAnalyticsView() {
                   <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                 </motion.div>
                 <motion.div variants={item}>
-                  <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                  <div className={`grid gap-6 ${isGoogleAds ? 'lg:grid-cols-[55%_1fr]' : ''}`}>
+                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                    {isGoogleAds && (
+                      <GoogleAdsPanel
+                        campaigns={campaignData}
+                        searchTerms={searchTermsData}
+                        dailySpend={dailySpendData}
+                      />
+                    )}
+                  </div>
                 </motion.div>
-                {/* MonthlyTrendChart hidden from Overview — still available on Trends tab
-                <motion.div variants={item}>
-                  <MonthlyTrendChart data={trend} startDate={selectedClientObj?.start_date} />
-                </motion.div>
-                */}
                 <motion.div variants={item}>
                   <RecentActivityWidget data={activity} />
                 </motion.div>

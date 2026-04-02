@@ -8,6 +8,9 @@ import type {
   SourceTab,
   RiskData,
   CallAnalyticsData,
+  CampaignBreakdown,
+  SearchTermData,
+  DailySpend,
 } from '../types';
 
 const BASE = '/api/blueprint';
@@ -54,6 +57,27 @@ export const clientAnalyticsService = {
     if (dateFrom) params.set('date_from', dateFrom);
     if (dateTo) params.set('date_to', dateTo);
     return fetchJson<CallAnalyticsData>(`clients/${customerId}/call-analytics?${params}`);
+  },
+
+  getCampaignBreakdown: (customerId: number, dateFrom?: string, dateTo?: string) => {
+    const params = new URLSearchParams();
+    if (dateFrom) params.set('date_from', dateFrom);
+    if (dateTo) params.set('date_to', dateTo);
+    return fetchJson<CampaignBreakdown[]>(`clients/${customerId}/campaign-breakdown?${params}`);
+  },
+
+  getSearchTerms: (customerId: number, dateFrom?: string, dateTo?: string, limit = 10) => {
+    const params = new URLSearchParams({ limit: String(limit) });
+    if (dateFrom) params.set('date_from', dateFrom);
+    if (dateTo) params.set('date_to', dateTo);
+    return fetchJson<SearchTermData[]>(`clients/${customerId}/search-terms?${params}`);
+  },
+
+  getDailySpend: (customerId: number, dateFrom?: string, dateTo?: string) => {
+    const days = dateFrom && dateTo
+      ? Math.ceil((new Date(dateTo).getTime() - new Date(dateFrom).getTime()) / 86400000)
+      : 90;
+    return fetchJson<DailySpend[]>(`clients/${customerId}/ad-spend-daily?days=${days}`);
   },
 
   getRisk: (customerId: number, days = 30) =>
