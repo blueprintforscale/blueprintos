@@ -66,6 +66,7 @@ function ClientAnalyticsView() {
   const [drawerAdSpend, setDrawerAdSpend] = useState<number | undefined>(undefined);
   const [drawerProgramPrice, setDrawerProgramPrice] = useState<number | undefined>(undefined);
   const [shareCopied, setShareCopied] = useState(false);
+  const [embedCopied, setEmbedCopied] = useState(false);
   const [dateRange, setDateRange] = useState({
     from: new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0],
     to: new Date().toISOString().split('T')[0],
@@ -177,6 +178,24 @@ function ClientAnalyticsView() {
                     }}
                   >
                     {shareCopied ? 'Link copied!' : 'Share'}
+                  </button>
+                )}
+                {(selectedClientObj as any)?.dashboard_token && (
+                  <button
+                    onClick={() => {
+                      const url = `${window.location.origin}/share/${(selectedClientObj as any).dashboard_token}?embed=true`;
+                      navigator.clipboard.writeText(url);
+                      setEmbedCopied(true);
+                      setTimeout(() => setEmbedCopied(false), 2000);
+                    }}
+                    className="rounded px-2 py-0.5 text-[10px] font-medium transition-colors"
+                    style={{
+                      backgroundColor: embedCopied ? '#3b8a5a' : 'transparent',
+                      color: embedCopied ? '#fff' : '#c5bfb6',
+                      border: `1px solid ${embedCopied ? '#3b8a5a' : '#ddd8cb'}`,
+                    }}
+                  >
+                    {embedCopied ? 'Embed link copied!' : 'Embed'}
                   </button>
                 )}
               </div>
