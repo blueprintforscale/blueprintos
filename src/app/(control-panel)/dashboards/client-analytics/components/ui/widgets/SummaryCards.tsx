@@ -35,7 +35,7 @@ function SummaryCards({ data, onStageClick }: Props) {
   const avgOpenEst = openEstCount > 0 ? openEst / openEstCount : 0;
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
       {/* Revenue Closed */}
       <Paper
         className="flex flex-col rounded-xl p-5 shadow-sm transition-all cursor-pointer hover:shadow-md"
