@@ -206,7 +206,7 @@ export default function SharedDashboard({ client }: Props) {
                 </motion.div>
                 {/* Conversion funnel + cohort tiles */}
                 <motion.div variants={item}>
-                  <div className="grid gap-6" style={{ gridTemplateColumns: '2fr 1fr' }}
+                  <div className="grid gap-6" style={{ gridTemplateColumns: '2fr 1fr' }}>
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                     <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                   </div>
