@@ -146,7 +146,7 @@ function AdMetricsCards({ data, days, onCplClick, onRoasClick }: Props) {
   const periodLabel = days ? `${days}-day` : 'Custom';
 
   return (
-    <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
       {/* Ad Spend */}
       <Paper className="flex flex-col rounded-xl border p-5 shadow-none" sx={{ borderColor: '#ddd8cb' }}>
         <Typography className="text-xs font-semibold uppercase tracking-wide" sx={{ color: '#8a8279' }}>Ad Spend</Typography>
