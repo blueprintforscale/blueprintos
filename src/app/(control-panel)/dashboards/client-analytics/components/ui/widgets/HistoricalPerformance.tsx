@@ -74,10 +74,12 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
   const lastIsIncomplete = recent.length > 0 && isCurrentMonth((recent[recent.length - 1] as any).month_start);
   const forecastCount = lastIsIncomplete ? 1 : 0;
 
-  // Projection for current month
-  const { fraction: monthFraction } = getMonthProgress();
+  // Projection for current month (suppress before day 7 or before 4 months of data)
+  const { dayElapsed, fraction: monthFraction } = getMonthProgress();
   const currentValue = lastIsIncomplete ? values[values.length - 1] : null;
-  const projectedValue = lastIsIncomplete && cfg.projectable && currentValue !== null && monthFraction > 0
+  const monthsOfData = startMonthIdx >= 0 ? recent.length - startMonthIdx : recent.length;
+  const canProject = dayElapsed >= 7 && monthsOfData >= 4;
+  const projectedValue = lastIsIncomplete && cfg.projectable && canProject && currentValue !== null && monthFraction > 0
     ? Math.round(currentValue / monthFraction)
     : null;
 

@@ -17,11 +17,11 @@ function isCurrentMonth(monthStart: string): boolean {
   return d.getUTCFullYear() === now.getFullYear() && d.getUTCMonth() === now.getMonth();
 }
 
-function getMonthProgress(): { fraction: number } {
+function getMonthProgress(): { dayElapsed: number; fraction: number } {
   const now = new Date();
   const dayElapsed = now.getDate();
   const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-  return { fraction: dayElapsed / daysInMonth };
+  return { dayElapsed, fraction: dayElapsed / daysInMonth };
 }
 
 function MonthlyTrendChart({ data, startDate }: Props) {
@@ -36,7 +36,7 @@ function MonthlyTrendChart({ data, startDate }: Props) {
     return ms.getUTCFullYear() === sd.getFullYear() && ms.getUTCMonth() === sd.getMonth();
   }) : -1;
   const lastIsIncomplete = data.length > 0 && isCurrentMonth((data[data.length - 1] as any).month_start);
-  const { fraction: monthFraction } = getMonthProgress();
+  const { dayElapsed, fraction: monthFraction } = getMonthProgress();
 
   const qualityLeads = data.map((d) => {
     const total = parseInt(d.leads, 10) || 0;
@@ -51,9 +51,11 @@ function MonthlyTrendChart({ data, startDate }: Props) {
   });
   const cpl = data.map((d) => parseFloat(d.cpl));
 
-  // Projection
+  // Projection (suppress before day 7 or before 4 months of data)
+  const monthsOfData = startMonthIdx >= 0 ? data.length - startMonthIdx : data.length;
   const currentLeads = lastIsIncomplete ? qualityLeads[qualityLeads.length - 1] : null;
-  const projectedLeads = lastIsIncomplete && currentLeads !== null && monthFraction > 0
+  const canProject = dayElapsed >= 7 && monthsOfData >= 4;
+  const projectedLeads = lastIsIncomplete && canProject && currentLeads !== null && monthFraction > 0
     ? Math.round(currentLeads / monthFraction)
     : null;
 
