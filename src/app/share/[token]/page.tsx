@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SharedDashboard from './SharedDashboard';
 
@@ -18,6 +18,8 @@ type ClientInfo = {
 
 export default function SharePage() {
   const { token } = useParams<{ token: string }>();
+  const searchParams = useSearchParams();
+  const embed = searchParams.get('embed') === 'true';
   const [client, setClient] = useState<ClientInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -60,7 +62,7 @@ export default function SharePage() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SharedDashboard client={client} />
+      <SharedDashboard client={client} embed={embed} />
     </QueryClientProvider>
   );
 }

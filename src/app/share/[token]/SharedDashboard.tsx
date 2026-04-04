@@ -60,9 +60,10 @@ type Props = {
     field_management_software: string;
     start_date?: string;
   };
+  embed?: boolean;
 };
 
-export default function SharedDashboard({ client }: Props) {
+export default function SharedDashboard({ client, embed }: Props) {
   const customerId = client.customer_id;
   const [activeSource, setActiveSource] = useState('google_ads');
   const [activeTab, setActiveTab] = useState(0);
@@ -149,24 +150,26 @@ export default function SharedDashboard({ client }: Props) {
   return (
     <>
     <div className="min-h-screen" style={{ backgroundColor: '#ebe7de' }}>
-      {/* Branded header bar */}
-      <div style={{ backgroundColor: '#000' }}>
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 md:px-8">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg" style={{ backgroundColor: '#E85D4D' }}>
-              <span className="text-base font-black text-white">B</span>
+      {/* Branded header bar — hidden in embed mode */}
+      {!embed && (
+        <div style={{ backgroundColor: '#000' }}>
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3 md:px-8">
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg" style={{ backgroundColor: '#E85D4D' }}>
+                <span className="text-base font-black text-white">B</span>
+              </div>
+              <div>
+                <Typography className="text-lg font-extrabold text-white tracking-tight">{displayName}</Typography>
+                <Typography className="text-[10px]" style={{ color: '#5a554d' }}>Blueprint for Scale</Typography>
+              </div>
             </div>
-            <div>
-              <Typography className="text-lg font-extrabold text-white tracking-tight">{displayName}</Typography>
-              <Typography className="text-[10px]" style={{ color: '#5a554d' }}>Blueprint for Scale</Typography>
-            </div>
+            <Typography className="text-[10px]" style={{ color: '#5a554d' }}>{today}</Typography>
           </div>
-          <Typography className="text-[10px]" style={{ color: '#5a554d' }}>{today}</Typography>
         </div>
-      </div>
+      )}
 
       {/* Main container */}
-      <div className="mx-auto max-w-6xl px-4 py-6 md:px-6">
+      <div className={`mx-auto max-w-6xl ${embed ? 'px-2 py-2' : 'px-4 py-6 md:px-6'}`}>
         <div className="rounded-2xl shadow-sm" style={{ backgroundColor: '#F5F1E8' }}>
           {/* Controls bar */}
           <div className="flex flex-col gap-3 px-6 pt-5 pb-2 md:px-8">
