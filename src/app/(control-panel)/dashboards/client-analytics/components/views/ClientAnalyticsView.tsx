@@ -222,9 +222,9 @@ function ClientAnalyticsView() {
                 </motion.div>
                 {/* Conversion funnel + cohort tiles */}
                 <motion.div variants={item}>
-                  <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
-                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                  <div className="grid gap-6 lg:grid-cols-[1fr_2fr]">
                     <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                   </div>
                 </motion.div>
                 {/* Google Ads metrics (CPL, ROAS, Ad Spend) */}
