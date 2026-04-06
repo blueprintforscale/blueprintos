@@ -142,8 +142,8 @@ type Props = {
 function AdMetricsCards({ data, days, onCplClick, onRoasClick }: Props) {
   if (!data) return null;
 
-  const isShortRange = days !== null && days !== undefined && days <= 7;
-  const periodLabel = days ? `${days}-day` : 'Custom';
+  const isShortRange = days !== null && days !== undefined && days > 0 && days <= 7;
+  const periodLabel = days === -1 ? 'Lifetime' : days ? `${days}-day` : 'Custom';
 
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
