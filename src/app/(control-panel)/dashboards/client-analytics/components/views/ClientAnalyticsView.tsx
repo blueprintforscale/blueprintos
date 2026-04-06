@@ -150,8 +150,8 @@ function ClientAnalyticsView() {
     all_time_rev: parseFloat(f.all_time_rev) || 0,
     all_time_spend: parseFloat(f.all_time_spend) || 0,
     program_price: parseFloat(f.program_price) || 0,
-    guarantee: parseFloat(f.all_time_spend) > 0
-      ? (parseFloat(f.all_time_rev) || 0) / (parseFloat(f.all_time_spend) || 0) : 0,
+    guarantee: parseFloat(f.guarantee) > 0 ? parseFloat(f.guarantee)
+      : parseFloat(f.program_price) > 0 ? (parseFloat(f.all_time_rev) || 0) / parseFloat(f.program_price) : 0,
     projected_close_total: parseFloat(f.projected_close_total) || 0,
     months_in_program: parseInt(f.months_in_program) || 0,
     lsa_spend: 0, lsa_leads: 0,
