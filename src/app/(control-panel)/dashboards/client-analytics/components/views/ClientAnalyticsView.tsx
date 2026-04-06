@@ -76,7 +76,7 @@ function ClientAnalyticsView() {
   const dateFrom = dateRange.from;
   const dateTo = dateRange.to;
 
-  const isShortRange = dateRange.days !== null && dateRange.days <= 7;
+  const isShortRange = dateRange.days !== null && dateRange.days > 0 && dateRange.days <= 7;
   const ninetyDayFrom = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
