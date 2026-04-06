@@ -43,7 +43,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
   const visibleMetrics = showSuperQuality ? metricsList : metricsList.filter((m) => m.key !== 'super_quality');
   const cfg = visibleMetrics.find((m) => m.key === metric) || visibleMetrics[0];
   const getValue = (d: MonthlyTrend, key: Metric): number => {
-    if (key === 'contacts') return (parseFloat((d as any).leads) || 0) + (parseFloat((d as any).spam) || 0);
+    if (key === 'contacts') return parseFloat((d as any).leads) || 0;
     if (key === 'leads') {
       const leads = parseFloat((d as any).leads) || 0;
       const spam = parseFloat((d as any).spam) || 0;
