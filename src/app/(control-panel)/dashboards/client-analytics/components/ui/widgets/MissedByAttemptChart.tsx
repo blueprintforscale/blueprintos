@@ -15,9 +15,9 @@ function MissedByAttemptChart({ data }: Props) {
 
   const max = first;
   const steps = [
-    { label: '1st Call', count: first, pct: 100 },
-    { label: '2nd Call', count: second, pct: max > 0 ? Math.round((second / max) * 100) : 0 },
-    { label: '3rd Call', count: third, pct: max > 0 ? Math.round((third / max) * 100) : 0 },
+    { label: 'Missed once', count: first, pct: 100 },
+    { label: 'Missed twice', count: second, pct: max > 0 ? Math.round((second / max) * 100) : 0 },
+    { label: 'Missed 3x', count: third, pct: max > 0 ? Math.round((third / max) * 100) : 0 },
   ];
 
   return (
@@ -26,7 +26,7 @@ function MissedByAttemptChart({ data }: Props) {
         Repeat Missed Callers
       </Typography>
       <Typography className="mb-4 text-[11px] font-medium" style={{ color: '#8a8279' }}>
-        Of callers missed on their 1st attempt, how many were missed again?
+        {first} callers were missed. Of those, how many called back and were missed again?
       </Typography>
 
       <div className="flex flex-col gap-3">
