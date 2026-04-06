@@ -244,7 +244,7 @@ function ClientAnalyticsView() {
               <>
                 {/* Revenue cards */}
                 <motion.div variants={item}>
-                  <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                  <SummaryCards data={{ ...funnel as any, ...(hasRiskMetrics ? { closed_rev: f.risk_closed_rev, open_est_rev: f.risk_open_est_rev } : {}) }} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                 </motion.div>
                 {/* Conversion funnel + cohort tiles */}
                 <motion.div variants={item}>
