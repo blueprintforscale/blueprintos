@@ -159,6 +159,19 @@ function ClientAnalyticsView() {
     lsa_spend: 0, lsa_leads: 0,
   } : undefined;
 
+  // Build funnel data with risk-aligned overrides for leads, revenue, and contacts
+  const riskLeads = parseInt(f?.cpl_quality_leads) || 0;
+  const funnelLeads = parseInt(f?.quality_leads) || parseInt(f?.leads) || 0;
+  const alignedFunnel = funnel && hasRiskMetrics ? {
+    ...funnel,
+    leads: riskLeads,
+    quality_leads: riskLeads,
+    total_contacts: Math.max(parseInt(f.total_contacts) || 0, riskLeads),
+    spam_count: Math.max((parseInt(f.total_contacts) || 0) - riskLeads, 0),
+    closed_rev: f.risk_closed_rev,
+    open_est_rev: f.risk_open_est_rev,
+  } as typeof funnel : funnel;
+
   return (
     <>
     <FusePageSimple
@@ -244,13 +257,13 @@ function ClientAnalyticsView() {
               <>
                 {/* Revenue cards */}
                 <motion.div variants={item}>
-                  <SummaryCards data={{ ...funnel as any, ...(hasRiskMetrics ? { closed_rev: f.risk_closed_rev, open_est_rev: f.risk_open_est_rev } : {}) }} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                  <SummaryCards data={alignedFunnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                 </motion.div>
                 {/* Conversion funnel + cohort tiles */}
                 <motion.div variants={item}>
                   <div className="grid gap-6" style={{ gridTemplateColumns: '2fr 1fr' }}>
-                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
-                    <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                    <FunnelChart data={alignedFunnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                    <CohortTiles data={alignedFunnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                   </div>
                 </motion.div>
                 {/* Google Ads metrics (CPL, ROAS, Ad Spend) */}
