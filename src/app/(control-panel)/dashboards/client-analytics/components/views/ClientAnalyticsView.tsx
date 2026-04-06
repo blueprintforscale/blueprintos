@@ -130,47 +130,32 @@ function ClientAnalyticsView() {
   const clientName = selectedClientObj?.name || 'Select a client';
   const clientCrm = selectedClientObj?.field_management_software;
 
-  // Derive ad metrics from funnel — CPL uses CallRail-deduped leads (matches risk dashboard)
-  // Falls back to 90-day data on short ranges
+  // Derive ad metrics from funnel data (API returns unified risk-dashboard-aligned values)
+  // CPL falls back to 90-day data on short ranges
   const cplSource = isShortRange && funnel90 ? funnel90 : funnel;
-  const cplLeads = parseInt((cplSource as any)?.cpl_quality_leads) || parseInt((cplSource as any)?.quality_leads) || 0;
-  const cplFromApi = parseFloat((cplSource as any)?.cpl);
-  // Use risk-dashboard-aligned metrics when available (Google Ads source)
   const f = funnel as any;
   const cs = cplSource as any;
-  const hasRiskMetrics = f?.risk_ad_spend !== undefined;
+  const qualityLeads = parseInt(cs?.quality_leads) || 0;
+  const cplFromApi = parseFloat(cs?.cpl);
   const adMetrics = funnel ? {
-    ad_spend: hasRiskMetrics ? f.risk_ad_spend : (parseFloat(f.ad_spend) || 0),
+    ad_spend: parseFloat(f.ad_spend) || 0,
     quality_leads: parseInt(f.quality_leads) || 0,
-    actual_quality_leads: cplLeads,
+    actual_quality_leads: qualityLeads,
     cpl: !isNaN(cplFromApi) && cplFromApi > 0 ? cplFromApi
-      : cplLeads > 0 ? (parseFloat(cs?.ad_spend) || 0) / cplLeads : 0,
-    total_closed_rev: hasRiskMetrics ? f.risk_closed_rev : (parseFloat(f.closed_rev) || 0),
-    total_open_est_rev: hasRiskMetrics ? f.risk_open_est_rev : (parseFloat(f.open_est_rev) || 0),
-    roas: hasRiskMetrics ? f.risk_roas
-      : (parseFloat(f.ad_spend) || 0) > 0 ? (parseFloat(f.closed_rev) || 0) / (parseFloat(f.ad_spend) || 0) : 0,
-    all_time_rev: hasRiskMetrics ? f.risk_all_time_rev : (parseFloat(f.all_time_rev) || 0),
-    all_time_spend: hasRiskMetrics ? f.risk_all_time_spend : (parseFloat(f.all_time_spend) || 0),
+      : qualityLeads > 0 ? (parseFloat(cs?.ad_spend) || 0) / qualityLeads : 0,
+    total_closed_rev: parseFloat(f.closed_rev) || 0,
+    total_open_est_rev: parseFloat(f.open_est_rev) || 0,
+    roas: (parseFloat(f.ad_spend) || 0) > 0
+      ? (parseFloat(f.closed_rev) || 0) / (parseFloat(f.ad_spend) || 0) : 0,
+    all_time_rev: parseFloat(f.all_time_rev) || 0,
+    all_time_spend: parseFloat(f.all_time_spend) || 0,
     program_price: parseFloat(f.program_price) || 0,
-    guarantee: hasRiskMetrics ? f.risk_guarantee
-      : parseFloat(f.program_price) > 0 ? (parseFloat(f.all_time_rev) || 0) / parseFloat(f.program_price) : 0,
+    guarantee: parseFloat(f.all_time_spend) > 0
+      ? (parseFloat(f.all_time_rev) || 0) / (parseFloat(f.all_time_spend) || 0) : 0,
     projected_close_total: parseFloat(f.projected_close_total) || 0,
     months_in_program: parseInt(f.months_in_program) || 0,
     lsa_spend: 0, lsa_leads: 0,
   } : undefined;
-
-  // Build funnel data with risk-aligned overrides for leads, revenue, and contacts
-  const riskLeads = parseInt(f?.cpl_quality_leads) || 0;
-  const funnelLeads = parseInt(f?.quality_leads) || parseInt(f?.leads) || 0;
-  const alignedFunnel = funnel && hasRiskMetrics ? {
-    ...funnel,
-    leads: riskLeads,
-    quality_leads: riskLeads,
-    total_contacts: Math.max(parseInt(f.total_contacts) || 0, riskLeads),
-    spam_count: Math.max((parseInt(f.total_contacts) || 0) - riskLeads, 0),
-    closed_rev: f.risk_closed_rev,
-    open_est_rev: f.risk_open_est_rev,
-  } as typeof funnel : funnel;
 
   return (
     <>
@@ -257,13 +242,13 @@ function ClientAnalyticsView() {
               <>
                 {/* Revenue cards */}
                 <motion.div variants={item}>
-                  <SummaryCards data={alignedFunnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                  <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                 </motion.div>
                 {/* Conversion funnel + cohort tiles */}
                 <motion.div variants={item}>
                   <div className="grid gap-6" style={{ gridTemplateColumns: '2fr 1fr' }}>
-                    <FunnelChart data={alignedFunnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
-                    <CohortTiles data={alignedFunnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                    <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
+                    <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                   </div>
                 </motion.div>
                 {/* Google Ads metrics (CPL, ROAS, Ad Spend) */}
