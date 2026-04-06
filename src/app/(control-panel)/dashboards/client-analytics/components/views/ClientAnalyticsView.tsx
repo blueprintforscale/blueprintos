@@ -130,14 +130,17 @@ function ClientAnalyticsView() {
   const clientName = selectedClientObj?.name || 'Select a client';
   const clientCrm = selectedClientObj?.field_management_software;
 
-  // Derive ad metrics from funnel — CPL falls back to 90-day on short ranges
+  // Derive ad metrics from funnel — CPL uses CallRail-deduped leads (matches risk dashboard)
+  // Falls back to 90-day data on short ranges
   const cplSource = isShortRange && funnel90 ? funnel90 : funnel;
+  const cplLeads = parseInt((cplSource as any)?.cpl_quality_leads) || parseInt((cplSource as any)?.quality_leads) || 0;
+  const cplFromApi = parseFloat((cplSource as any)?.cpl);
   const adMetrics = funnel ? {
     ad_spend: parseFloat(funnel.ad_spend as any) || 0,
     quality_leads: parseInt(funnel.quality_leads as any) || 0,
-    actual_quality_leads: parseInt((cplSource as any)?.quality_leads) || 0,
-    cpl: (parseInt((cplSource as any)?.quality_leads) || 0) > 0
-      ? (parseFloat((cplSource as any)?.ad_spend) || 0) / parseInt((cplSource as any)?.quality_leads) : 0,
+    actual_quality_leads: cplLeads,
+    cpl: !isNaN(cplFromApi) && cplFromApi > 0 ? cplFromApi
+      : cplLeads > 0 ? (parseFloat((cplSource as any)?.ad_spend) || 0) / cplLeads : 0,
     total_closed_rev: parseFloat(funnel.closed_rev as any) || 0,
     total_open_est_rev: parseFloat(funnel.open_est_rev as any) || 0,
     roas: (parseFloat(funnel.ad_spend as any) || 0) > 0
