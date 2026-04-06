@@ -135,23 +135,27 @@ function ClientAnalyticsView() {
   const cplSource = isShortRange && funnel90 ? funnel90 : funnel;
   const cplLeads = parseInt((cplSource as any)?.cpl_quality_leads) || parseInt((cplSource as any)?.quality_leads) || 0;
   const cplFromApi = parseFloat((cplSource as any)?.cpl);
+  // Use risk-dashboard-aligned metrics when available (Google Ads source)
+  const f = funnel as any;
+  const cs = cplSource as any;
+  const hasRiskMetrics = f?.risk_ad_spend !== undefined;
   const adMetrics = funnel ? {
-    ad_spend: parseFloat(funnel.ad_spend as any) || 0,
-    quality_leads: parseInt(funnel.quality_leads as any) || 0,
+    ad_spend: hasRiskMetrics ? f.risk_ad_spend : (parseFloat(f.ad_spend) || 0),
+    quality_leads: parseInt(f.quality_leads) || 0,
     actual_quality_leads: cplLeads,
     cpl: !isNaN(cplFromApi) && cplFromApi > 0 ? cplFromApi
-      : cplLeads > 0 ? (parseFloat((cplSource as any)?.ad_spend) || 0) / cplLeads : 0,
-    total_closed_rev: parseFloat(funnel.closed_rev as any) || 0,
-    total_open_est_rev: parseFloat(funnel.open_est_rev as any) || 0,
-    roas: (parseFloat(funnel.ad_spend as any) || 0) > 0
-      ? (parseFloat(funnel.closed_rev as any) || 0) / (parseFloat(funnel.ad_spend as any) || 0) : 0,
-    all_time_rev: parseFloat((funnel as any).all_time_rev) || 0,
-    all_time_spend: parseFloat((funnel as any).all_time_spend) || 0,
-    program_price: parseFloat((funnel as any).program_price) || 0,
-    guarantee: parseFloat((funnel as any).program_price) > 0
-      ? (parseFloat((funnel as any).all_time_rev) || 0) / parseFloat((funnel as any).program_price) : 0,
-    projected_close_total: parseFloat((funnel as any).projected_close_total) || 0,
-    months_in_program: parseInt((funnel as any).months_in_program) || 0,
+      : cplLeads > 0 ? (parseFloat(cs?.ad_spend) || 0) / cplLeads : 0,
+    total_closed_rev: hasRiskMetrics ? f.risk_closed_rev : (parseFloat(f.closed_rev) || 0),
+    total_open_est_rev: hasRiskMetrics ? f.risk_open_est_rev : (parseFloat(f.open_est_rev) || 0),
+    roas: hasRiskMetrics ? f.risk_roas
+      : (parseFloat(f.ad_spend) || 0) > 0 ? (parseFloat(f.closed_rev) || 0) / (parseFloat(f.ad_spend) || 0) : 0,
+    all_time_rev: hasRiskMetrics ? f.risk_all_time_rev : (parseFloat(f.all_time_rev) || 0),
+    all_time_spend: hasRiskMetrics ? f.risk_all_time_spend : (parseFloat(f.all_time_spend) || 0),
+    program_price: parseFloat(f.program_price) || 0,
+    guarantee: hasRiskMetrics ? f.risk_guarantee
+      : parseFloat(f.program_price) > 0 ? (parseFloat(f.all_time_rev) || 0) / parseFloat(f.program_price) : 0,
+    projected_close_total: parseFloat(f.projected_close_total) || 0,
+    months_in_program: parseInt(f.months_in_program) || 0,
     lsa_spend: 0, lsa_leads: 0,
   } : undefined;
 
