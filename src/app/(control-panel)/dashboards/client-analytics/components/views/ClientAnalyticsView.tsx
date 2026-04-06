@@ -208,7 +208,7 @@ function ClientAnalyticsView() {
             <ClientSelector clients={clientList} selectedId={selectedClient} onSelect={setSelectedClient} />
           </div>
           <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
-          {activeTab !== 3 && <DateRangePicker value={dateRange} onChange={setDateRange} />}
+          {activeTab !== 3 && <DateRangePicker value={dateRange} onChange={setDateRange} startDate={selectedClientObj?.start_date} />}
           <Tabs
             value={activeTab}
             onChange={(_, v) => setActiveTab(v)}

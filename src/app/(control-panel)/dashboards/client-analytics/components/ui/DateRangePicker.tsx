@@ -12,6 +12,8 @@ const presets = [
   { label: '7d', days: 7 },
 ];
 
+const LIFETIME = -1;
+
 function toDateStr(d: Date) {
   return d.toISOString().split('T')[0];
 }
@@ -19,20 +21,41 @@ function toDateStr(d: Date) {
 type Props = {
   value: DateRange;
   onChange: (range: DateRange) => void;
+  startDate?: string;
 };
 
-function DateRangePicker({ value, onChange }: Props) {
+function DateRangePicker({ value, onChange, startDate }: Props) {
   const [showCustom, setShowCustom] = useState(false);
 
   const handlePreset = (days: number) => {
     const to = toDateStr(new Date());
-    const from = toDateStr(new Date(Date.now() - days * 86400000));
-    onChange({ from, to, days });
+    if (days === LIFETIME && startDate) {
+      onChange({ from: startDate, to, days: LIFETIME });
+    } else {
+      onChange({ from: toDateStr(new Date(Date.now() - days * 86400000)), to, days });
+    }
     setShowCustom(false);
   };
 
+  const isLifetime = value.days === LIFETIME;
+
   return (
     <div className="flex items-center gap-1.5">
+      {/* Lifetime pill */}
+      {startDate && (
+        <button
+          onClick={() => handlePreset(LIFETIME)}
+          className="rounded-md px-2.5 py-1 text-xs font-medium transition-colors"
+          style={{
+            backgroundColor: isLifetime && !showCustom ? '#000' : 'transparent',
+            color: isLifetime && !showCustom ? '#fff' : '#8a8279',
+            border: `1px solid ${isLifetime && !showCustom ? '#000' : '#ddd8cb'}`,
+          }}
+        >
+          Lifetime
+        </button>
+      )}
+
       {/* Preset pills */}
       {presets.map((p) => (
         <button
