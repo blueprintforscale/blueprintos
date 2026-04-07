@@ -120,6 +120,16 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
     );
   }
 
+  // Projection series: dashed line from last complete month value to projected value
+  // This creates the visual "trajectory" line showing where the month is heading
+  const projectionSeries: (number | null)[] | null = projectedValue !== null && lastIsIncomplete && currentValue !== null
+    ? values.map((_, i) => {
+        if (i === values.length - 2) return values[values.length - 2]; // last complete month
+        if (i === values.length - 1) return projectedValue; // projected at current month
+        return null;
+      })
+    : null;
+
   // Build series
   const series: ApexAxisChartSeries = [
     { name: cfg.label, data: values },
@@ -142,6 +152,15 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
     seriesColors.push('#ddd8cb');
     strokeWidth.push(1.5);
     dashArray.push(6);
+    strokeCurve.push('straight');
+  }
+
+  // Add projection series (dashed line from last complete month through actual to projected)
+  if (projectionSeries) {
+    series.push({ name: 'Projected', data: projectionSeries as any });
+    seriesColors.push(cfg.color);
+    strokeWidth.push(2);
+    dashArray.push(5);
     strokeCurve.push('straight');
   }
 
@@ -193,16 +212,16 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
         shape: 'circle',
       },
       label: {
-        text: `~${cfg.format(projectedValue)}`,
-        borderColor: cfg.color,
-        offsetY: -15,
-        offsetX: -40,
+        text: `→ ${cfg.format(projectedValue)}`,
+        borderColor: 'transparent',
+        offsetY: 0,
+        offsetX: 15,
         style: {
-          background: '#1a1a1a',
-          color: '#fff',
-          fontSize: '10px',
-          fontWeight: 600,
-          padding: { left: 6, right: 6, top: 3, bottom: 3 },
+          background: 'transparent',
+          color: cfg.color,
+          fontSize: '12px',
+          fontWeight: 700,
+          padding: { left: 2, right: 2, top: 0, bottom: 0 },
         },
       },
     }];
@@ -218,7 +237,11 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
     },
     colors: seriesColors,
     stroke: { width: strokeWidth, curve: strokeCurve as any, dashArray },
-    markers: { size: [4, ...new Array(series.length - 1).fill(0)], colors: seriesColors, strokeWidth: 0 },
+    markers: {
+      size: series.map((s, i) => i === 0 ? 4 : 0),
+      colors: seriesColors,
+      strokeWidth: 0,
+    },
     forecastDataPoints: { count: forecastCount, dashArray: 6, strokeWidth: 2 },
     xaxis: {
       categories: labels,
@@ -242,9 +265,12 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
       intersect: false,
       y: { formatter: (val: number, opts: { seriesIndex: number }) => {
         const idx = opts.seriesIndex;
+        const sName = series[idx]?.name;
+        // Hide Projected and Trend from tooltip
+        if (sName === 'Projected' || sName === 'Trend') return '';
         if (idx === 0) return cfg.format(val);
         if (hasPriorYear && idx === 1) return cfg.format(val);
-        const ovIdx = idx - (hasPriorYear ? 2 : 1);
+        const ovIdx = idx - (hasPriorYear ? 2 : 1) - (trendLine ? 1 : 0) - (projectionSeries ? 1 : 0);
         if (ovIdx >= 0 && ovIdx < overlays.length) {
           const ovCfg = metricsList.find((m) => m.key === overlays[ovIdx])!;
           return ovCfg.format(val);
