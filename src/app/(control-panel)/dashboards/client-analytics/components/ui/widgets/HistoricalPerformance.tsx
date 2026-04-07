@@ -266,8 +266,8 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
       y: { formatter: (val: number, opts: { seriesIndex: number }) => {
         const idx = opts.seriesIndex;
         const sName = series[idx]?.name;
-        // Hide Projected and Trend from tooltip
-        if (sName === 'Projected' || sName === 'Trend') return '';
+        if (sName === 'Trend') return val != null ? cfg.format(val) : '';
+        if (sName === 'Projected') return val != null ? `~${cfg.format(val)}` : '';
         if (idx === 0) return cfg.format(val);
         if (hasPriorYear && idx === 1) return cfg.format(val);
         const ovIdx = idx - (hasPriorYear ? 2 : 1) - (trendLine ? 1 : 0) - (projectionSeries ? 1 : 0);
