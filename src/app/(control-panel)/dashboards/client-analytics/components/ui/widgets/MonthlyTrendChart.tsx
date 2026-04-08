@@ -17,11 +17,11 @@ function isCurrentMonth(monthStart: string): boolean {
   return d.getUTCFullYear() === now.getFullYear() && d.getUTCMonth() === now.getMonth();
 }
 
-function getMonthProgress(): { dayElapsed: number; fraction: number } {
+function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction: number } {
   const now = new Date();
   const dayElapsed = now.getDate();
   const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-  return { dayElapsed, fraction: dayElapsed / daysInMonth };
+  return { dayElapsed, daysInMonth, fraction: dayElapsed / daysInMonth };
 }
 
 function MonthlyTrendChart({ data, startDate }: Props) {
@@ -36,7 +36,7 @@ function MonthlyTrendChart({ data, startDate }: Props) {
     return ms.getUTCFullYear() === sd.getFullYear() && ms.getUTCMonth() === sd.getMonth();
   }) : -1;
   const lastIsIncomplete = data.length > 0 && isCurrentMonth((data[data.length - 1] as any).month_start);
-  const { dayElapsed, fraction: monthFraction } = getMonthProgress();
+  const { dayElapsed, daysInMonth, fraction: monthFraction } = getMonthProgress();
 
   const qualityLeads = data.map((d) => {
     const total = parseInt(d.leads, 10) || 0;
@@ -55,9 +55,23 @@ function MonthlyTrendChart({ data, startDate }: Props) {
   const monthsOfData = startMonthIdx >= 0 ? data.length - startMonthIdx : data.length;
   const currentLeads = lastIsIncomplete ? qualityLeads[qualityLeads.length - 1] : null;
   const canProject = dayElapsed >= 7 && monthsOfData >= 4;
-  const projectedLeads = lastIsIncomplete && canProject && currentLeads !== null && monthFraction > 0
-    ? Math.round(currentLeads / monthFraction)
-    : null;
+
+  // Smart projection: historical pace + blend with recent average
+  const currentMonthData = lastIsIncomplete ? data[data.length - 1] : null;
+  const paceFraction = (currentMonthData as any)?.projection_pace_fraction ?? null;
+  const recentAvg = (currentMonthData as any)?.projection_recent_avg ?? null;
+
+  let projectedLeads: number | null = null;
+  if (lastIsIncomplete && canProject && currentLeads !== null && monthFraction > 0) {
+    const fraction = paceFraction && paceFraction > 0 ? paceFraction : monthFraction;
+    const paceProjection = Math.round(currentLeads / fraction);
+    const weight = dayElapsed / daysInMonth;
+    if (recentAvg !== null && recentAvg > 0) {
+      projectedLeads = Math.round(paceProjection * weight + recentAvg * (1 - weight));
+    } else {
+      projectedLeads = paceProjection;
+    }
+  }
 
   // Trend line (linear regression starting from program start)
   const trendStart = startMonthIdx >= 0 ? startMonthIdx : 0;

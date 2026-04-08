@@ -75,13 +75,31 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
   const forecastCount = lastIsIncomplete ? 1 : 0;
 
   // Projection for current month (suppress before day 7 or before 4 months of data)
-  const { dayElapsed, fraction: monthFraction } = getMonthProgress();
+  const { dayElapsed, daysInMonth, fraction: monthFraction } = getMonthProgress();
   const currentValue = lastIsIncomplete ? values[values.length - 1] : null;
   const monthsOfData = startMonthIdx >= 0 ? recent.length - startMonthIdx : recent.length;
   const canProject = dayElapsed >= 7 && monthsOfData >= 4;
-  const projectedValue = lastIsIncomplete && cfg.projectable && canProject && currentValue !== null && monthFraction > 0
-    ? Math.round(currentValue / monthFraction)
-    : null;
+
+  // Smart projection: blend historical pace extrapolation with recent average
+  const currentMonthData = lastIsIncomplete ? recent[recent.length - 1] : null;
+  const paceFraction = (currentMonthData as any)?.projection_pace_fraction ?? null;
+  const recentAvg = (currentMonthData as any)?.projection_recent_avg ?? null;
+
+  let projectedValue: number | null = null;
+  if (lastIsIncomplete && cfg.projectable && canProject && currentValue !== null && monthFraction > 0) {
+    // Pace-adjusted extrapolation: use historical day-of-month curve if available
+    const fraction = (metric === 'leads' || metric === 'super_quality') && paceFraction && paceFraction > 0
+      ? paceFraction : monthFraction;
+    const paceProjection = Math.round(currentValue / fraction);
+
+    // Blend with recent average: weight increases as month progresses
+    const weight = dayElapsed / daysInMonth;
+    if ((metric === 'leads' || metric === 'super_quality') && recentAvg !== null && recentAvg > 0) {
+      projectedValue = Math.round(paceProjection * weight + recentAvg * (1 - weight));
+    } else {
+      projectedValue = paceProjection;
+    }
+  }
 
   // Prior year for primary metric
   const priorValues = recent.map((d) => {
