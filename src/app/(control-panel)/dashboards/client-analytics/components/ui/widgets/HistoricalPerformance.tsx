@@ -9,7 +9,8 @@ import type { MonthlyTrend } from '../../../api/types';
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-type Props = { data: MonthlyTrend[] | undefined; startDate?: string; showSuperQuality?: boolean };
+type CampaignTrend = { name: string; data: { month_start: string; short_label: string; leads: number }[] };
+type Props = { data: MonthlyTrend[] | undefined; startDate?: string; showSuperQuality?: boolean; campaignTrend?: CampaignTrend[] };
 type Metric = 'leads' | 'contacts' | 'super_quality' | 'spend' | 'cpl' | 'conversions';
 
 const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; projectable: boolean }[] = [
@@ -34,9 +35,12 @@ function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction
   return { dayElapsed, daysInMonth, fraction: dayElapsed / daysInMonth };
 }
 
-function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
+const CAMPAIGN_COLORS = ['#6366f1', '#E85D4D', '#2A9D8F', '#D4A843', '#8B5CF6', '#F97316', '#06B6D4', '#EC4899'];
+
+function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTrend }: Props) {
   const [metric, setMetric] = useState<Metric>('leads');
   const [overlays, setOverlays] = useState<Metric[]>([]);
+  const [showCampaigns, setShowCampaigns] = useState(false);
 
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
@@ -192,6 +196,25 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
     dashArray.push(3);
     strokeCurve.push('smooth');
   });
+
+  // Campaign breakdown series (only when viewing leads and toggled on)
+  if (showCampaigns && (metric === 'leads' || metric === 'contacts') && campaignTrend?.length) {
+    campaignTrend.forEach((camp, ci) => {
+      // Map campaign data to match the recent months
+      const campValues = recent.map((d) => {
+        const ms = new Date((d as any).month_start).toISOString().slice(0, 10);
+        const match = camp.data.find((cd) => new Date(cd.month_start).toISOString().slice(0, 10) === ms);
+        return match?.leads ?? 0;
+      });
+      // Shorten campaign name for legend
+      const shortName = camp.name.length > 25 ? camp.name.slice(0, 22) + '...' : camp.name;
+      series.push({ name: shortName, data: campValues });
+      seriesColors.push(CAMPAIGN_COLORS[ci % CAMPAIGN_COLORS.length]);
+      strokeWidth.push(2);
+      dashArray.push(0);
+      strokeCurve.push('smooth');
+    });
+  }
 
   // Projection: point annotation at projected value for current month
   const annotations: ApexOptions['annotations'] = {};
@@ -404,8 +427,34 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
               </button>
             );
           })}
+          {/* Campaign breakdown toggle — only for leads/contacts metrics */}
+          {campaignTrend && campaignTrend.length > 0 && (metric === 'leads' || metric === 'contacts') && (
+            <button
+              onClick={() => setShowCampaigns((prev) => !prev)}
+              className="ml-2 rounded-full px-2 py-0.5 text-[10px] font-medium transition-colors"
+              style={{
+                backgroundColor: showCampaigns ? '#6366f1' : 'transparent',
+                color: showCampaigns ? '#fff' : '#c5bfb6',
+                border: `1px solid ${showCampaigns ? '#6366f1' : '#ddd8cb'}`,
+              }}
+            >
+              By Campaign
+            </button>
+          )}
         </div>
       </div>
+
+      {/* Campaign legend when active */}
+      {showCampaigns && campaignTrend && campaignTrend.length > 0 && (metric === 'leads' || metric === 'contacts') && (
+        <div className="flex flex-wrap gap-3 px-6 pb-2">
+          {campaignTrend.map((camp, ci) => (
+            <div key={camp.name} className="flex items-center gap-1">
+              <div className="h-2 w-2 rounded-full" style={{ backgroundColor: CAMPAIGN_COLORS[ci % CAMPAIGN_COLORS.length] }} />
+              <span className="text-[10px]" style={{ color: '#8a8279' }}>{camp.name}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Chart */}
       <div className="px-2 pb-4" style={{ height: 300 }}>

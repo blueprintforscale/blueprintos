@@ -100,17 +100,8 @@ function ClientAnalyticsView() {
     selectedClient!, dateFrom, dateTo
   );
 
-  // Source-aware labels
-  const isGoogleAds = activeSource === 'google_ads';
-  const sourceLabel: Record<string, string> = {
-    google_ads: 'Google Ads',
-    gbp: 'Google Business Profile',
-    lsa: 'Local Services Ads',
-    all: 'All Sources',
-  };
-  const activeSourceLabel = sourceLabel[activeSource] || 'Google Ads';
-
   // Google Ads panel data (only fetch on Overview with Google Ads source)
+  const isGoogleAds = activeSource === 'google_ads';
   const { data: campaignData } = useQuery({
     queryKey: ['campaignBreakdown', selectedClient, dateFrom, dateTo],
     queryFn: () => clientAnalyticsService.getCampaignBreakdown(selectedClient!, dateFrom, dateTo),
@@ -128,10 +119,14 @@ function ClientAnalyticsView() {
   });
 
   // Historical data (only fetch when on Performance tab — now tab 3)
-  const [activeCampaign, setActiveCampaign] = useState<string | undefined>(undefined);
   const { data: historicalData, isLoading: historicalLoading } = useQuery({
-    queryKey: ['historicalTrend', selectedClient, 24, activeCampaign],
-    queryFn: () => clientAnalyticsService.getMonthlyTrend(selectedClient!, 24, activeCampaign),
+    queryKey: ['historicalTrend', selectedClient, 24],
+    queryFn: () => clientAnalyticsService.getMonthlyTrend(selectedClient!, 24),
+    enabled: !!selectedClient && activeTab === 3,
+  });
+  const { data: campaignTrendData } = useQuery({
+    queryKey: ['campaignTrend', selectedClient, 24],
+    queryFn: () => clientAnalyticsService.getCampaignTrend(selectedClient!, 24),
     enabled: !!selectedClient && activeTab === 3,
   });
 
@@ -139,7 +134,6 @@ function ClientAnalyticsView() {
   const selectedClientObj = clientList.find((c) => c.customer_id === selectedClient);
   const clientName = selectedClientObj?.name || 'Select a client';
   const clientCrm = selectedClientObj?.field_management_software;
-  const campaignTabs: { key: string; label: string }[] = (selectedClientObj as any)?.dashboard_config?.campaign_tabs || [];
 
   // Derive ad metrics from funnel data (API returns unified risk-dashboard-aligned values)
   // CPL falls back to 90-day data on short ranges
@@ -324,7 +318,7 @@ function ClientAnalyticsView() {
             {activeTab === 2 && !callsLoading && (
               <>
                 <motion.div variants={item}>
-                  <CallDonutCharts data={callData} sourceLabel={activeSourceLabel} />
+                  <CallDonutCharts data={callData} />
                 </motion.div>
                 <motion.div variants={item}>
                   <HourlyMissedChart data={callData} dateFrom={dateFrom} dateTo={dateTo} />
@@ -343,53 +337,18 @@ function ClientAnalyticsView() {
 
             {/* ====== PERFORMANCE TAB ====== */}
             {activeTab === 3 && (
-              <>
-                {campaignTabs.length > 0 && (
-                  <motion.div variants={item}>
-                    <div className="flex gap-1 mb-4">
-                      <button
-                        onClick={() => setActiveCampaign(undefined)}
-                        className="rounded-md px-3 py-1.5 text-xs font-medium transition-colors"
-                        style={{
-                          backgroundColor: !activeCampaign ? '#000' : 'transparent',
-                          color: !activeCampaign ? '#fff' : '#8a8279',
-                          border: '1px solid',
-                          borderColor: !activeCampaign ? '#000' : '#ddd8cb',
-                        }}
-                      >
-                        All Campaigns
-                      </button>
-                      {campaignTabs.map((ct) => (
-                        <button
-                          key={ct.key}
-                          onClick={() => setActiveCampaign(ct.key)}
-                          className="rounded-md px-3 py-1.5 text-xs font-medium transition-colors"
-                          style={{
-                            backgroundColor: activeCampaign === ct.key ? '#000' : 'transparent',
-                            color: activeCampaign === ct.key ? '#fff' : '#8a8279',
-                            border: '1px solid',
-                            borderColor: activeCampaign === ct.key ? '#000' : '#ddd8cb',
-                          }}
-                        >
-                          {ct.label}
-                        </button>
-                      ))}
+              <motion.div variants={item}>
+                {historicalLoading ? (
+                  <div className="flex h-64 items-center justify-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
+                      <span className="text-xs" style={{ color: '#8a8279' }}>Loading performance data...</span>
                     </div>
-                  </motion.div>
+                  </div>
+                ) : (
+                  <HistoricalPerformance data={historicalData} startDate={selectedClientObj?.start_date} showSuperQuality={(selectedClientObj as any)?.dashboard_config?.show_super_quality} campaignTrend={campaignTrendData} />
                 )}
-                <motion.div variants={item}>
-                  {historicalLoading ? (
-                    <div className="flex h-64 items-center justify-center">
-                      <div className="flex flex-col items-center gap-3">
-                        <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-200" style={{ borderTopColor: '#000' }} />
-                        <span className="text-xs" style={{ color: '#8a8279' }}>Loading performance data...</span>
-                      </div>
-                    </div>
-                  ) : (
-                    <HistoricalPerformance data={historicalData} startDate={selectedClientObj?.start_date} showSuperQuality={(selectedClientObj as any)?.dashboard_config?.show_super_quality} />
-                  )}
-                </motion.div>
-              </>
+              </motion.div>
             )}
           </motion.div>
         ) : (
