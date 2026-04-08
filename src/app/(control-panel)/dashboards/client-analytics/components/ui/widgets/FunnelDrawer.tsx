@@ -34,6 +34,7 @@ type Lead = {
   service_address?: string | null;
   lost_reason?: string | null;
   is_spam?: boolean;
+  reactivated?: boolean;
 };
 
 export type FunnelStage =
@@ -414,6 +415,14 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSp
                           style={{ backgroundColor: '#fef9e6', color: '#c4a55a', border: '1px solid #e8d9a8' }}
                         >
                           Inferred
+                        </span>
+                      )}
+                      {lead.reactivated && (
+                        <span
+                          className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium"
+                          style={{ backgroundColor: '#eef6ff', color: '#2563eb', border: '1px solid #bfdbfe' }}
+                        >
+                          Reactivated
                         </span>
                       )}
                     </div>

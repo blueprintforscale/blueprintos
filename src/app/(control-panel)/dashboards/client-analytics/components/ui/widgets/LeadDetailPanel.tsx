@@ -109,7 +109,17 @@ function LeadDetailPanel({ customerId, hcpCustomerId, fieldMgmt }: Props) {
         {/* Header with CRM arrow link */}
         <div className="flex items-center justify-between">
           <div>
-            <Typography className="text-sm font-semibold">{data.first_name} {data.last_name}</Typography>
+            <div className="flex items-center gap-2">
+              <Typography className="text-sm font-semibold">{data.first_name} {data.last_name}</Typography>
+              {data.reactivated && (
+                <span
+                  className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium"
+                  style={{ backgroundColor: '#eef6ff', color: '#2563eb', border: '1px solid #bfdbfe' }}
+                >
+                  Reactivated
+                </span>
+              )}
+            </div>
             <div className="mt-0.5 flex flex-wrap gap-3 text-[11px]" style={{ color: '#8a8279' }}>
               {data.phone && <span>{data.phone}</span>}
               {data.email && <span>{data.email}</span>}
