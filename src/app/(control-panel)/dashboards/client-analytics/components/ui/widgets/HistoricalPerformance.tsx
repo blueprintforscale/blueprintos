@@ -157,7 +157,9 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
   const visibleCampaigns = showCampaigns && (metric === 'leads' || metric === 'contacts') && campaignTrend?.length
     ? (selectedCampaign ? campaignTrend.filter((c) => c.name === selectedCampaign) : campaignTrend)
     : [];
-  const campaignIsolated = selectedCampaign !== null && visibleCampaigns.length > 0;
+  // Only isolate if the selected campaign has actual data points
+  const campaignIsolated = selectedCampaign !== null && visibleCampaigns.length > 0
+    && visibleCampaigns[0].data.some((d) => d.leads > 0);
 
   // Build series — when a single campaign is isolated, hide the aggregate line so the chart rescales
   const series: ApexAxisChartSeries = [];
@@ -292,7 +294,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       colors: seriesColors,
       strokeWidth: 0,
     },
-    forecastDataPoints: campaignIsolated ? undefined : { count: forecastCount, dashArray: 6, strokeWidth: 2 },
+    forecastDataPoints: { count: campaignIsolated ? 0 : forecastCount, dashArray: 6, strokeWidth: 2 },
     xaxis: {
       categories: labels,
       axisBorder: { show: false },
@@ -314,6 +316,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       shared: true,
       intersect: false,
       y: { formatter: (val: number, opts: { seriesIndex: number; dataPointIndex: number }) => {
+        if (campaignIsolated) return val != null ? `${Math.round(val)} leads` : '';
         const idx = opts.seriesIndex;
         const sName = series[idx]?.name;
         if (sName === 'Trend') return val != null ? cfg.format(val) : '';
