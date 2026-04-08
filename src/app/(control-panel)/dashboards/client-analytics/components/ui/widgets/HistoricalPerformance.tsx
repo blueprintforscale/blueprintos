@@ -153,55 +153,61 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       })
     : null;
 
-  // Build series
-  const series: ApexAxisChartSeries = [
-    { name: cfg.label, data: values },
-  ];
-  const seriesColors = [cfg.color];
-  const strokeWidth = [3];
-  const dashArray = [0];
-  const strokeCurve: ('smooth' | 'straight')[] = ['smooth'];
-
-  if (hasPriorYear) {
-    series.push({ name: `${cfg.label} (prior year)`, data: priorValues as number[] });
-    seriesColors.push('#c5bfb6');
-    strokeWidth.push(2);
-    dashArray.push(5);
-    strokeCurve.push('smooth');
-  }
-
-  if (trendLine) {
-    series.push({ name: 'Trend', data: trendLine as any });
-    seriesColors.push('#ddd8cb');
-    strokeWidth.push(1.5);
-    dashArray.push(6);
-    strokeCurve.push('straight');
-  }
-
-  // Add projection series (dashed line from last complete month through actual to projected)
-  if (projectionSeries) {
-    series.push({ name: 'Projected', data: projectionSeries as any });
-    seriesColors.push(cfg.color);
-    strokeWidth.push(2);
-    dashArray.push(5);
-    strokeCurve.push('straight');
-  }
-
-  // Overlay series
-  overlays.forEach((ovKey) => {
-    const ovCfg = metricsList.find((m) => m.key === ovKey)!;
-    const ovValues = recent.map((d) => getValue(d, ovKey));
-    series.push({ name: ovCfg.label, data: ovValues });
-    seriesColors.push(ovCfg.color);
-    strokeWidth.push(2);
-    dashArray.push(3);
-    strokeCurve.push('smooth');
-  });
-
   // Campaign breakdown series (only when viewing leads and toggled on)
   const visibleCampaigns = showCampaigns && (metric === 'leads' || metric === 'contacts') && campaignTrend?.length
     ? (selectedCampaign ? campaignTrend.filter((c) => c.name === selectedCampaign) : campaignTrend)
     : [];
+  const campaignIsolated = selectedCampaign !== null && visibleCampaigns.length > 0;
+
+  // Build series — when a single campaign is isolated, hide the aggregate line so the chart rescales
+  const series: ApexAxisChartSeries = [];
+  const seriesColors: string[] = [];
+  const strokeWidth: number[] = [];
+  const dashArray: number[] = [];
+  const strokeCurve: ('smooth' | 'straight')[] = [];
+
+  if (!campaignIsolated) {
+    series.push({ name: cfg.label, data: values });
+    seriesColors.push(cfg.color);
+    strokeWidth.push(3);
+    dashArray.push(0);
+    strokeCurve.push('smooth');
+
+    if (hasPriorYear) {
+      series.push({ name: `${cfg.label} (prior year)`, data: priorValues as number[] });
+      seriesColors.push('#c5bfb6');
+      strokeWidth.push(2);
+      dashArray.push(5);
+      strokeCurve.push('smooth');
+    }
+
+    if (trendLine) {
+      series.push({ name: 'Trend', data: trendLine as any });
+      seriesColors.push('#ddd8cb');
+      strokeWidth.push(1.5);
+      dashArray.push(6);
+      strokeCurve.push('straight');
+    }
+
+    if (projectionSeries) {
+      series.push({ name: 'Projected', data: projectionSeries as any });
+      seriesColors.push(cfg.color);
+      strokeWidth.push(2);
+      dashArray.push(5);
+      strokeCurve.push('straight');
+    }
+
+    overlays.forEach((ovKey) => {
+      const ovCfg = metricsList.find((m) => m.key === ovKey)!;
+      const ovValues = recent.map((d) => getValue(d, ovKey));
+      series.push({ name: ovCfg.label, data: ovValues });
+      seriesColors.push(ovCfg.color);
+      strokeWidth.push(2);
+      dashArray.push(3);
+      strokeCurve.push('smooth');
+    });
+  }
+
   if (visibleCampaigns.length > 0) {
     visibleCampaigns.forEach((camp) => {
       const ci = campaignTrend!.findIndex((c) => c.name === camp.name);
@@ -213,7 +219,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       const shortName = camp.name.length > 25 ? camp.name.slice(0, 22) + '...' : camp.name;
       series.push({ name: shortName, data: campValues });
       seriesColors.push(CAMPAIGN_COLORS[ci % CAMPAIGN_COLORS.length]);
-      strokeWidth.push(selectedCampaign ? 3 : 2);
+      strokeWidth.push(campaignIsolated ? 3 : 2);
       dashArray.push(0);
       strokeCurve.push('smooth');
     });
@@ -221,7 +227,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
 
   // Projection: point annotation at projected value for current month
   const annotations: ApexOptions['annotations'] = {};
-  if (startMonthIdx >= 0) {
+  if (startMonthIdx >= 0 && !campaignIsolated) {
     annotations.xaxis = [{
       x: labels[startMonthIdx],
       borderColor: '#E85D4D',
@@ -243,7 +249,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       },
     }];
   }
-  if (projectedValue !== null && projectedValue > 0) {
+  if (projectedValue !== null && projectedValue > 0 && !campaignIsolated) {
     annotations.points = [{
       x: labels[labels.length - 1],
       y: projectedValue,
@@ -282,11 +288,11 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
     colors: seriesColors,
     stroke: { width: strokeWidth, curve: strokeCurve as any, dashArray },
     markers: {
-      size: series.map((s, i) => i === 0 ? 4 : 0),
+      size: series.map((_, i) => campaignIsolated ? 4 : (i === 0 ? 4 : 0)),
       colors: seriesColors,
       strokeWidth: 0,
     },
-    forecastDataPoints: { count: forecastCount, dashArray: 6, strokeWidth: 2 },
+    forecastDataPoints: campaignIsolated ? undefined : { count: forecastCount, dashArray: 6, strokeWidth: 2 },
     xaxis: {
       categories: labels,
       axisBorder: { show: false },
