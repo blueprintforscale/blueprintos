@@ -353,7 +353,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       <div className="flex flex-col gap-3 px-6 pt-5 pb-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <Typography className="text-sm font-semibold uppercase tracking-wide" style={{ color: '#8a8279' }}>
-            {cfg.label}
+            {campaignIsolated ? selectedCampaign : cfg.label}
           </Typography>
           <div className="flex items-baseline gap-2">
             <Typography className="text-3xl font-bold" style={{ color: '#000' }}>
@@ -491,7 +491,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
 
       {/* Chart */}
       <div className="px-2 pb-4" style={{ height: 300 }}>
-        <ReactApexChart options={chartOptions} series={series} type="line" height="100%" />
+        <ReactApexChart key={selectedCampaign || 'all'} options={chartOptions} series={series} type="line" height="100%" />
       </div>
 
       {/* Projection methodology note */}
