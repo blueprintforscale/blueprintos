@@ -120,6 +120,11 @@ export default function SharedDashboard({ client, embed }: Props) {
     queryFn: () => clientAnalyticsService.getMonthlyTrend(customerId, 24),
     enabled: activeTab === 3,
   });
+  const { data: campaignTrendData } = useQuery({
+    queryKey: ['campaignTrend', customerId, 24],
+    queryFn: () => clientAnalyticsService.getCampaignTrend(customerId, 24),
+    enabled: activeTab === 3,
+  });
 
   // Extract client display name (after " | " if present)
   const displayName = client.name.includes('|') ? client.name.split('|').pop()?.trim() : client.name;
@@ -301,7 +306,7 @@ export default function SharedDashboard({ client, embed }: Props) {
                     </div>
                   </div>
                 ) : (
-                  <HistoricalPerformance data={historicalData} startDate={client.start_date} />
+                  <HistoricalPerformance data={historicalData} startDate={client.start_date} campaignTrend={campaignTrendData} />
                 )}
               </motion.div>
             )}
