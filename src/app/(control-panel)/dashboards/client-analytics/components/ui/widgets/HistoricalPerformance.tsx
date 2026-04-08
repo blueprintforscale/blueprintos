@@ -41,6 +41,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
   const [metric, setMetric] = useState<Metric>('leads');
   const [overlays, setOverlays] = useState<Metric[]>([]);
   const [showCampaigns, setShowCampaigns] = useState(false);
+  const [selectedCampaign, setSelectedCampaign] = useState<string | null>(null);
 
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
@@ -198,19 +199,21 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
   });
 
   // Campaign breakdown series (only when viewing leads and toggled on)
-  if (showCampaigns && (metric === 'leads' || metric === 'contacts') && campaignTrend?.length) {
-    campaignTrend.forEach((camp, ci) => {
-      // Map campaign data to match the recent months
+  const visibleCampaigns = showCampaigns && (metric === 'leads' || metric === 'contacts') && campaignTrend?.length
+    ? (selectedCampaign ? campaignTrend.filter((c) => c.name === selectedCampaign) : campaignTrend)
+    : [];
+  if (visibleCampaigns.length > 0) {
+    visibleCampaigns.forEach((camp) => {
+      const ci = campaignTrend!.findIndex((c) => c.name === camp.name);
       const campValues = recent.map((d) => {
         const ms = new Date((d as any).month_start).toISOString().slice(0, 10);
         const match = camp.data.find((cd) => new Date(cd.month_start).toISOString().slice(0, 10) === ms);
         return match?.leads ?? 0;
       });
-      // Shorten campaign name for legend
       const shortName = camp.name.length > 25 ? camp.name.slice(0, 22) + '...' : camp.name;
       series.push({ name: shortName, data: campValues });
       seriesColors.push(CAMPAIGN_COLORS[ci % CAMPAIGN_COLORS.length]);
-      strokeWidth.push(2);
+      strokeWidth.push(selectedCampaign ? 3 : 2);
       dashArray.push(0);
       strokeCurve.push('smooth');
     });
@@ -430,7 +433,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
           {/* Campaign breakdown toggle — only for leads/contacts metrics */}
           {campaignTrend && campaignTrend.length > 0 && (metric === 'leads' || metric === 'contacts') && (
             <button
-              onClick={() => setShowCampaigns((prev) => !prev)}
+              onClick={() => { setShowCampaigns((prev) => !prev); setSelectedCampaign(null); }}
               className="ml-2 rounded-full px-2 py-0.5 text-[10px] font-medium transition-colors"
               style={{
                 backgroundColor: showCampaigns ? '#6366f1' : 'transparent',
@@ -444,15 +447,39 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
         </div>
       </div>
 
-      {/* Campaign legend when active */}
+      {/* Campaign legend when active — clickable to isolate */}
       {showCampaigns && campaignTrend && campaignTrend.length > 0 && (metric === 'leads' || metric === 'contacts') && (
-        <div className="flex flex-wrap gap-3 px-6 pb-2">
-          {campaignTrend.map((camp, ci) => (
-            <div key={camp.name} className="flex items-center gap-1">
-              <div className="h-2 w-2 rounded-full" style={{ backgroundColor: CAMPAIGN_COLORS[ci % CAMPAIGN_COLORS.length] }} />
-              <span className="text-[10px]" style={{ color: '#8a8279' }}>{camp.name}</span>
-            </div>
-          ))}
+        <div className="flex flex-wrap items-center gap-2 px-6 pb-2">
+          <button
+            onClick={() => setSelectedCampaign(null)}
+            className="rounded-full px-2 py-0.5 text-[10px] font-medium transition-colors"
+            style={{
+              backgroundColor: selectedCampaign === null ? '#000' : 'transparent',
+              color: selectedCampaign === null ? '#fff' : '#c5bfb6',
+              border: `1px solid ${selectedCampaign === null ? '#000' : '#ddd8cb'}`,
+            }}
+          >
+            All
+          </button>
+          {campaignTrend.map((camp, ci) => {
+            const isActive = selectedCampaign === camp.name;
+            const color = CAMPAIGN_COLORS[ci % CAMPAIGN_COLORS.length];
+            return (
+              <button
+                key={camp.name}
+                onClick={() => setSelectedCampaign(isActive ? null : camp.name)}
+                className="flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium transition-colors"
+                style={{
+                  backgroundColor: isActive ? color : 'transparent',
+                  color: isActive ? '#fff' : '#8a8279',
+                  border: `1px solid ${isActive ? color : '#ddd8cb'}`,
+                }}
+              >
+                <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: isActive ? '#fff' : color }} />
+                {camp.name}
+              </button>
+            );
+          })}
         </div>
       )}
 
