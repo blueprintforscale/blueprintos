@@ -411,6 +411,15 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
       <div className="px-2 pb-4" style={{ height: 300 }}>
         <ReactApexChart options={chartOptions} series={series} type="line" height="100%" />
       </div>
+
+      {/* Projection methodology note */}
+      {projectedValue !== null && (
+        <div className="px-6 pb-4">
+          <p className="text-[10px] leading-relaxed" style={{ color: '#c5bfb6' }}>
+            Projection blends your historical daily pace (what fraction of monthly leads typically arrive by this day) with your recent 3-month average. Early in the month the projection leans on recent history; as the month progresses, current pace takes over. Available after 4 months of data.
+          </p>
+        </div>
+      )}
     </Paper>
   );
 }
