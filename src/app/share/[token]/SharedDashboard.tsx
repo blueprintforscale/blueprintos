@@ -183,7 +183,7 @@ export default function SharedDashboard({ client, embed }: Props) {
               {activeTab !== 3 && (
                 <>
                   <div className="h-4 w-px" style={{ backgroundColor: '#ddd8cb' }} />
-                  <DateRangePicker value={dateRange} onChange={setDateRange} />
+                  <DateRangePicker value={dateRange} onChange={setDateRange} startDate={client.start_date} />
                 </>
               )}
             </div>
