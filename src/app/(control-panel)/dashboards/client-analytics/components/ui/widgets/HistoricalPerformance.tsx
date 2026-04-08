@@ -337,7 +337,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
               {lastYearValue !== null && lastYearValue > 0 && <span>Year ago: {cfg.format(lastYearValue)}</span>}
             </div>
             {incompleteValue !== null && (
-              <div className="flex gap-3 text-[11px]" style={{ color: '#c5bfb6' }}>
+              <div className="flex items-center gap-3 text-[11px]" style={{ color: '#c5bfb6' }}>
                 <span>{labels[labels.length - 1]} so far: {cfg.format(incompleteValue)}</span>
                 {projectedValue !== null && (() => {
                   const priorVal = lastCompleteIdx >= 0 ? values[lastCompleteIdx] : null;
@@ -350,6 +350,13 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
                           {pctChange >= 0 ? '↑' : '↓'} {pctChange >= 0 ? '+' : ''}{pctChange.toFixed(0)}% vs prior mo
                         </span>
                       )}
+                      <span
+                        title="Projection blends two signals: (1) your historical daily pace — what fraction of monthly leads typically arrive by this day, and (2) your recent 3-month average. Early in the month the projection leans on recent history; as the month progresses, current pace takes over. Requires 4+ months of data."
+                        className="cursor-help"
+                        style={{ color: '#c5bfb6', fontSize: '10px' }}
+                      >
+                        &#9432;
+                      </span>
                     </>
                   );
                 })()}
