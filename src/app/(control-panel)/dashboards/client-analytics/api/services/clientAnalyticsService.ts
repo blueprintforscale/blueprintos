@@ -43,8 +43,11 @@ export const clientAnalyticsService = {
     return fetchJson<LeadContact[]>(`clients/${customerId}/leads?${params}`);
   },
 
-  getMonthlyTrend: (customerId: number, months = 6) =>
-    fetchJson<MonthlyTrend[]>(`clients/${customerId}/monthly-trend?months=${months}`),
+  getMonthlyTrend: (customerId: number, months = 6, campaign?: string) => {
+    const params = new URLSearchParams({ months: String(months) });
+    if (campaign) params.set('campaign', campaign);
+    return fetchJson<MonthlyTrend[]>(`clients/${customerId}/monthly-trend?${params}`);
+  },
 
   getRecentActivity: (customerId: number, limit = 10) =>
     fetchJson<RecentActivity[]>(`clients/${customerId}/recent-activity?limit=${limit}`),

@@ -119,9 +119,11 @@ function ClientAnalyticsView() {
   });
 
   // Historical data (only fetch when on Performance tab — now tab 3)
+  // If active source is a campaign tab (e.g. "campaign:Search | Generic | Feb 2026 #2"), pass campaign filter
+  const activeCampaign = activeSource.startsWith('campaign:') ? activeSource.slice(9) : undefined;
   const { data: historicalData, isLoading: historicalLoading } = useQuery({
-    queryKey: ['historicalTrend', selectedClient, 24],
-    queryFn: () => clientAnalyticsService.getMonthlyTrend(selectedClient!, 24),
+    queryKey: ['historicalTrend', selectedClient, 24, activeCampaign],
+    queryFn: () => clientAnalyticsService.getMonthlyTrend(selectedClient!, 24, activeCampaign),
     enabled: !!selectedClient && activeTab === 3,
   });
 
@@ -251,8 +253,8 @@ function ClientAnalyticsView() {
                     <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                   </div>
                 </motion.div>
-                {/* Google Ads metrics (CPL, ROAS, Ad Spend) */}
-                {activeSource !== 'all' && (
+                {/* Google Ads metrics (CPL, ROAS, Ad Spend) — hidden for GBP (organic, no ad cost) */}
+                {activeSource !== 'all' && activeSource !== 'gbp' && (
                   <motion.div variants={item}>
                     <AdMetricsCards data={adMetrics} days={dateRange.days} onCplClick={() => {
                       setDrawerStage('cpl_leads');
@@ -277,8 +279,8 @@ function ClientAnalyticsView() {
                     />
                   </motion.div>
                 )}
-                {/* Guarantee progress bar */}
-                {activeSource !== 'all' && (
+                {/* Guarantee progress bar — hidden for GBP (no ad spend = no guarantee) */}
+                {activeSource !== 'all' && activeSource !== 'gbp' && (
                   <motion.div variants={item}>
                     <GuaranteeBar data={adMetrics} onClick={() => {
                       setDrawerStage('estimate_approved');
