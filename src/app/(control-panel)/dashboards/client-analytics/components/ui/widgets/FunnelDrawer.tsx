@@ -117,6 +117,7 @@ type Props = {
   leads: Lead[] | undefined;
   customerId?: number;
   crm?: string;
+  source?: string;
   adSpend?: number;
   programPrice?: number;
   closedRev?: number;
@@ -148,7 +149,14 @@ function getCrmUrl(id: string | null, crm?: string): string | null {
   return `https://pro.housecallpro.com/pro/customers/${id.replace('cus_', '')}`;
 }
 
-function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, programPrice, closedRev, periodAdSpend, onClose }: Props) {
+const SOURCE_BADGE: Record<string, { label: string; color: string }> = {
+  google_ads: { label: 'Google Ads', color: '#3b8a5a' },
+  gbp: { label: 'Google Business Profile', color: '#4285f4' },
+  lsa: { label: 'Local Services Ads', color: '#f59e0b' },
+  all: { label: 'All Sources', color: '#5a554d' },
+};
+
+function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSpend, programPrice, closedRev, periodAdSpend, onClose }: Props) {
   const [flagModal, setFlagModal] = useState<Lead | null>(null);
   const [projectedCloses, setProjectedCloses] = useState<Set<string>>(new Set());
   const [flaggedLocally, setFlaggedLocally] = useState<Set<string>>(new Set());
@@ -388,9 +396,9 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, adSpend, pro
                       </Typography>
                       <span
                         className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium text-white"
-                        style={{ backgroundColor: '#3b8a5a' }}
+                        style={{ backgroundColor: SOURCE_BADGE[source || 'google_ads']?.color || '#3b8a5a' }}
                       >
-                        Google Ads
+                        {SOURCE_BADGE[source || 'google_ads']?.label || 'Google Ads'}
                       </span>
                       {lead.client_flag_reason && (
                         <span

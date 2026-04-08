@@ -363,6 +363,7 @@ function ClientAnalyticsView() {
       leads={spreadsheetData}
       customerId={selectedClient!}
       crm={clientCrm}
+      source={activeSource}
       adSpend={drawerAdSpend}
       programPrice={drawerProgramPrice}
       closedRev={adMetrics?.total_closed_rev}
