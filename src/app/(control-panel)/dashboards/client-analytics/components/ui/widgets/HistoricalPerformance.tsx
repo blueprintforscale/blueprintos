@@ -263,11 +263,20 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
       theme: 'light',
       shared: true,
       intersect: false,
-      y: { formatter: (val: number, opts: { seriesIndex: number }) => {
+      y: { formatter: (val: number, opts: { seriesIndex: number; dataPointIndex: number }) => {
         const idx = opts.seriesIndex;
         const sName = series[idx]?.name;
         if (sName === 'Trend') return val != null ? cfg.format(val) : '';
-        if (sName === 'Projected') return val != null ? `~${cfg.format(val)}` : '';
+        if (sName === 'Projected' && val != null) {
+          const priorMonth = values.length >= 2 ? values[values.length - 2] : null;
+          if (priorMonth && priorMonth > 0) {
+            const pctChange = ((val - priorMonth) / priorMonth) * 100;
+            const sign = pctChange >= 0 ? '+' : '';
+            const arrow = pctChange >= 0 ? '↑' : '↓';
+            return `~${cfg.format(val)} (${arrow} ${sign}${pctChange.toFixed(0)}% vs prior mo)`;
+          }
+          return `~${cfg.format(val)}`;
+        }
         if (idx === 0) return cfg.format(val);
         if (hasPriorYear && idx === 1) return cfg.format(val);
         const ovIdx = idx - (hasPriorYear ? 2 : 1) - (trendLine ? 1 : 0) - (projectionSeries ? 1 : 0);
@@ -312,9 +321,20 @@ function HistoricalPerformance({ data, startDate, showSuperQuality }: Props) {
             {incompleteValue !== null && (
               <div className="flex gap-3 text-[11px]" style={{ color: '#c5bfb6' }}>
                 <span>{labels[labels.length - 1]} so far: {cfg.format(incompleteValue)}</span>
-                {projectedValue !== null && (
-                  <span>Projected: ~{cfg.format(projectedValue)}</span>
-                )}
+                {projectedValue !== null && (() => {
+                  const priorVal = lastCompleteIdx >= 0 ? values[lastCompleteIdx] : null;
+                  const pctChange = priorVal && priorVal > 0 ? ((projectedValue - priorVal) / priorVal) * 100 : null;
+                  return (
+                    <>
+                      <span>Projected: ~{cfg.format(projectedValue)}</span>
+                      {pctChange !== null && (
+                        <span style={{ color: pctChange >= 0 ? '#2A9D8F' : '#E85D4D' }}>
+                          {pctChange >= 0 ? '↑' : '↓'} {pctChange >= 0 ? '+' : ''}{pctChange.toFixed(0)}% vs prior mo
+                        </span>
+                      )}
+                    </>
+                  );
+                })()}
               </div>
             )}
           </div>

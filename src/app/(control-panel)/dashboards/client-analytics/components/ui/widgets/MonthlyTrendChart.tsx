@@ -202,7 +202,16 @@ function MonthlyTrendChart({ data, startDate }: Props) {
         html += `<div style="font-weight:700;color:#000;margin-bottom:2px">${month}${isIncomplete ? ' <span style="color:#c5bfb6;font-weight:400">(in progress)</span>' : ''}</div>`;
         html += `<div><span style="color:#000">&#9632;</span> Quality leads: <strong>${quality}</strong></div>`;
         if (isIncomplete && projectedLeads !== null) {
-          html += `<div style="color:#c5bfb6">Projected: ~${projectedLeads}</div>`;
+          const priorMonthLeads = dataPointIndex > 0 ? s[0][dataPointIndex - 1] : null;
+          let pctHtml = '';
+          if (priorMonthLeads && priorMonthLeads > 0) {
+            const pct = ((projectedLeads - priorMonthLeads) / priorMonthLeads) * 100;
+            const color = pct >= 0 ? '#2A9D8F' : '#E85D4D';
+            const arrow = pct >= 0 ? '↑' : '↓';
+            const sign = pct >= 0 ? '+' : '';
+            pctHtml = ` <span style="color:${color}">${arrow} ${sign}${pct.toFixed(0)}% vs prior mo</span>`;
+          }
+          html += `<div style="color:#c5bfb6">Projected: ~${projectedLeads}${pctHtml}</div>`;
         }
         if (spam > 0) {
           html += `<div><span style="color:#ddd8cb">&#9632;</span> Contacts: <strong>${total}</strong> <span style="color:#c5bfb6">(${spam} removed)</span></div>`;
