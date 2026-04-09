@@ -2,157 +2,206 @@
 
 import Typography from '@mui/material/Typography';
 
-const sections = [
+type Section = {
+  title: string;
+  icon: string;
+  content?: string[];
+  list?: [string, string][];
+  subsections?: { subtitle: string; content?: string[]; list?: [string, string][]; footer?: string }[];
+  footer?: string;
+  callout?: { text: string; color: 'green' | 'amber' };
+};
+
+const sections: Section[] = [
   {
     title: 'Your Leads',
+    icon: '01',
     content: [
       'When someone clicks one of your Google Ads and reaches out — whether they call your tracking number or fill out a form on your website — that counts as a lead. Each unique person is counted once, even if they call and submit a form.',
       'Your dashboard shows two numbers:',
     ],
     list: [
       ['Contacts', 'Everyone who reached out through your ads, including wrong numbers and spam.'],
-      ['Quality Leads', 'Contacts minus any that were marked as disqualified (see below).'],
+      ['Quality Leads', 'Contacts minus any that were disqualified (see below).'],
     ],
+    callout: { text: 'Your ads get credit for genuinely new business and reactivated cold leads — but not for returning customers or people who were already in your pipeline.', color: 'green' },
   },
   {
     title: 'Disqualified Leads',
+    icon: '02',
     content: [
       'Not every contact is a real opportunity. When a lead is marked in your CRM as "spam," "not a lead," "wrong number," "out of area," or "wrong service," that lead is automatically removed from your quality lead count.',
       'This means your quality lead number is something you have direct control over — if a lead is legitimate, make sure it\'s not marked with one of those statuses. If it\'s junk, mark it and your numbers will adjust automatically.',
-      'Once a contact is disqualified, it stays disqualified permanently — even if they call again months later.',
+    ],
+    callout: { text: 'Once a contact is disqualified, it stays disqualified permanently — even if they call again months later.', color: 'amber' },
+  },
+  {
+    title: 'Returning & Reactivated Leads',
+    icon: '03',
+    content: [
+      'Sometimes someone who previously contacted your business clicks a Google Ad and reaches out again. Your dashboard handles these automatically:',
+    ],
+    list: [
+      ['New lead', 'First time reaching out through your ads — counts as a new quality lead.'],
+      ['Recent contact', 'Already in touch within the last 60 days — not counted as a new ad lead. They were already engaged.'],
+      ['Reactivated lead', 'Contacted you 60+ days ago but never got treatment, then clicks an ad — this counts. Your ad brought back a cold lead.'],
+      ['Returning customer', 'Previously had treatment done — not counted as a new ad lead. They\'re an existing customer.'],
     ],
   },
   {
     title: 'Inspections vs. Jobs',
+    icon: '04',
     content: [
-      'Your dashboard distinguishes between inspections (assessments, testing, evaluations) and treatment jobs (remediation, dry fog, removal). How we tell the difference depends on your field management software.',
+      'Your dashboard distinguishes between inspections (assessments, testing, evaluations) and treatment jobs (remediation, dry fog, removal). How we tell the difference depends on your software.',
     ],
     subsections: [
       {
         subtitle: 'HouseCall Pro',
         content: ['We look at the job description and amount to classify each record:'],
         list: [
-          ['Inspection', 'Records that mention assessments, testing, mold inspections, sampling, consultations, or evaluations. Also includes any job under $1,000 that mentions pre-treatment testing or air quality tests.'],
-          ['Treatment Job', 'Records that mention remediation, dry fog, treatment, removal, abatement, or encapsulation. For jobs without those keywords, anything $1,000 or above is treated as a job rather than an inspection.'],
+          ['Inspection', 'Records mentioning assessments, testing, mold inspections, sampling, or evaluations. Also any job under $1,000 with pre-treatment testing or air quality tests.'],
+          ['Treatment Job', 'Records mentioning remediation, dry fog, treatment, removal, abatement, or encapsulation. Jobs without those keywords at $1,000+ are treated as jobs.'],
         ],
-        footer: 'If a record mentions both inspection and treatment terms — like "air quality test + remediation" — it counts as a treatment job, since the treatment is the primary service.',
+        footer: 'If a record mentions both — like "air quality test + remediation" — it counts as treatment, since that\'s the primary service.',
       },
       {
         subtitle: 'Jobber',
         content: ['Jobber uses a "request" and "job" structure:'],
         list: [
-          ['Inspection', 'Any Jobber request is treated as an inspection inquiry. When a request is converted to a quote or job, we track that progression.'],
+          ['Inspection', 'Any Jobber request is treated as an inspection inquiry. When converted to a quote or job, we track that progression.'],
           ['Treatment Job', 'Jobber jobs and quotes above the minimum threshold are classified as treatment work.'],
         ],
       },
     ],
-    footer: 'Sometimes a job description is vague or missing. Small amounts (under $1,000) default to inspection, larger amounts default to treatment job. If you notice something classified incorrectly, let your account manager know.',
+    footer: 'Sometimes a description is vague or missing. Small amounts (under $1,000) default to inspection, larger amounts default to treatment. If something looks wrong, let your account manager know.',
   },
   {
     title: 'Estimates & Revenue',
+    icon: '05',
     content: ['Your dashboard tracks the full sales pipeline from estimate to close:'],
     list: [
       ['Estimate Sent', 'A treatment estimate (not an inspection fee) was sent to the customer.'],
       ['Estimate Approved', 'The customer approved the estimate (minimum $1,000 for treatment work).'],
       ['Revenue Closed', 'The approved estimate amount or completed job total, whichever is higher.'],
     ],
-    footer: 'When you send multiple estimate options (good/better/best), they\'re grouped together and counted as one. If any option is approved, it counts as approved.',
-  },
-  {
-    title: 'Returning & Reactivated Leads',
-    content: [
-      'Sometimes someone who previously contacted your business clicks a Google Ad and reaches out again. Your dashboard handles these situations automatically:',
-    ],
-    list: [
-      ['New lead', 'If someone reaches out for the first time through your ads, they count as a new quality lead.'],
-      ['Recent contact', 'If someone was already in touch within the last 60 days and then clicks an ad, they\'re not counted as a new Google Ads lead. They were already engaged.'],
-      ['Reactivated lead', 'If someone contacted you more than 60 days ago but never moved forward with treatment, and then clicks an ad, they do count. Your ad brought back a lead that had gone cold.'],
-      ['Returning customer', 'If someone previously had treatment done and clicks an ad later, they\'re not counted as a new Google Ads lead. They\'re an existing customer.'],
-    ],
-    footer: 'The key idea: your ads get credit for genuinely bringing in new business or reviving cold leads, but not for customers who were already active or had already been treated.',
+    footer: 'When you send multiple options (good/better/best), they\'re grouped as one. If any option is approved, it counts as approved.',
   },
   {
     title: 'Ad Performance',
-    content: ['These metrics help you understand how efficiently your ad spend converts into revenue:'],
+    icon: '06',
+    content: ['These metrics show how efficiently your ad spend converts into revenue:'],
     list: [
       ['Ad Spend', 'How much was spent on your Google Ads during the selected period.'],
-      ['Cost Per Lead (CPL)', 'Your ad spend divided by your quality leads. Lower is better.'],
-      ['ROAS (Return on Ad Spend)', 'Your closed revenue divided by your ad spend. A 5x ROAS means you earned $5 for every $1 spent on ads.'],
+      ['Cost Per Lead (CPL)', 'Ad spend divided by quality leads. Lower is better.'],
+      ['ROAS (Return on Ad Spend)', 'Closed revenue divided by ad spend. A 5x ROAS means $5 earned for every $1 spent.'],
     ],
   },
   {
     title: 'Guarantee Progress',
+    icon: '07',
     content: [
       'Your guarantee tracks total closed revenue against your program investment over the life of your engagement — not just a single month. The progress bar shows how close you are to hitting your guarantee target.',
     ],
   },
   {
     title: 'Monthly Projection',
+    icon: '08',
     content: [
-      'When you\'re partway through a month, the dashboard projects where your lead count will land by month\'s end. This projection blends two signals:',
+      'When you\'re partway through a month, the dashboard projects where your lead count will land by month\'s end. This blends two signals:',
     ],
     list: [
-      ['Your current pace', 'How your leads are trending day by day compared to how past months played out at the same point.'],
-      ['Your recent average', 'Your typical monthly lead volume over the last few months.'],
+      ['Your current pace', 'How leads are trending day by day compared to past months at the same point.'],
+      ['Your recent average', 'Your typical monthly volume over the last few months.'],
     ],
-    footer: 'Early in the month, the projection leans more on your recent history. As the month progresses, your actual pace takes over. The projection appears after you have at least 4 months of data.',
+    footer: 'Early in the month, the projection leans on recent history. As the month progresses, your actual pace takes over.',
   },
   {
     title: 'Campaign Breakdown',
+    icon: '09',
     content: [
-      'If you\'re running multiple Google Ads campaigns, you can toggle "By Campaign" on the trends chart to see how each campaign contributes to your lead volume. Click any campaign name to isolate it and see its trend in detail.',
+      'If you\'re running multiple campaigns, toggle "By Campaign" on the trends chart to see how each campaign contributes. Click any campaign name to isolate it and see its trend in detail.',
     ],
   },
 ];
+
+const calloutStyles = {
+  green: { bg: '#e6f3ec', border: '#3b8a5a', color: '#2d6e46' },
+  amber: { bg: '#fef9e6', border: '#c4a55a', color: '#92400e' },
+};
 
 export default function HowItWorksPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#ebe7de' }}>
       {/* Header */}
       <div style={{ backgroundColor: '#000' }}>
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-3 md:px-8">
+        <div className="mx-auto flex max-w-2xl items-center justify-between px-6 py-4 md:px-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg" style={{ backgroundColor: '#E85D4D' }}>
-              <span className="text-base font-black text-white">B</span>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: '#E85D4D' }}>
+              <span className="text-lg font-black text-white">B</span>
             </div>
             <div>
               <Typography className="text-lg font-extrabold text-white tracking-tight">How Your Dashboard Works</Typography>
-              <Typography className="text-[10px]" style={{ color: '#5a554d' }}>Blueprint for Scale</Typography>
+              <Typography className="text-[10px]" style={{ color: '#8a8279' }}>Blueprint for Scale</Typography>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="mx-auto max-w-2xl px-4 py-10 md:px-6">
-        <div className="rounded-2xl shadow-sm px-8 py-8 md:px-10" style={{ backgroundColor: '#F5F1E8' }}>
-          <p className="text-[13px] leading-relaxed mb-8" style={{ color: '#8a8279' }}>
-            A quick guide to understanding the metrics on your performance dashboard.
+      {/* Hero */}
+      <div className="mx-auto max-w-2xl px-4 pt-10 md:px-6">
+        <div className="rounded-t-2xl px-8 py-6 md:px-10" style={{ backgroundColor: '#000' }}>
+          <p className="text-[15px] font-semibold text-white leading-relaxed">
+            Everything you need to know about your performance metrics.
           </p>
+          <p className="text-[12px] mt-1 leading-relaxed" style={{ color: '#8a8279' }}>
+            This guide explains how each number on your dashboard is calculated and what it means for your business.
+          </p>
+        </div>
+      </div>
 
-          <div className="flex flex-col gap-8">
+      {/* Content */}
+      <div className="mx-auto max-w-2xl px-4 pb-10 md:px-6">
+        <div className="rounded-b-2xl shadow-sm px-8 py-6 md:px-10" style={{ backgroundColor: '#F5F1E8' }}>
+
+          <div className="flex flex-col gap-0">
             {sections.map((section, si) => (
-              <div key={section.title}>
-                {si > 0 && <div className="mb-6" style={{ borderTop: '1px solid #ebe7de' }} />}
-                <h2 className="text-[13px] font-bold uppercase tracking-wide mb-3" style={{ color: '#000' }}>{section.title}</h2>
+              <div key={section.title} className="py-6" style={si > 0 ? { borderTop: '1px solid #ddd8cb' } : undefined}>
+                {/* Section header with number */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white" style={{ backgroundColor: '#E85D4D' }}>
+                    {section.icon}
+                  </div>
+                  <h2 className="text-[14px] font-bold uppercase tracking-wide" style={{ color: '#000' }}>{section.title}</h2>
+                </div>
 
                 {section.content?.map((p, i) => (
-                  <p key={i} className="text-[13px] leading-[1.7] mb-2.5" style={{ color: '#5a554d' }}>{p}</p>
+                  <p key={i} className="text-[13px] leading-[1.8] mb-2.5 ml-10" style={{ color: '#5a554d' }}>{p}</p>
                 ))}
 
                 {section.list && (
-                  <div className="flex flex-col gap-2.5 mb-3 mt-2">
+                  <div className="flex flex-col gap-3 mb-3 mt-3 ml-10">
                     {section.list.map(([term, desc]) => (
-                      <div key={term} className="flex gap-3 text-[13px] leading-[1.7]" style={{ color: '#5a554d' }}>
-                        <span className="shrink-0 mt-[2px] h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
-                        <span><span className="font-semibold" style={{ color: '#000' }}>{term}</span> — {desc}</span>
+                      <div key={term} className="flex gap-3 text-[13px] leading-[1.7]">
+                        <span className="shrink-0 mt-[7px] h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
+                        <span style={{ color: '#5a554d' }}><span className="font-semibold" style={{ color: '#000' }}>{term}</span> — {desc}</span>
                       </div>
                     ))}
                   </div>
                 )}
 
+                {section.callout && (
+                  <div className="ml-10 mt-4 rounded-lg px-4 py-3" style={{
+                    backgroundColor: calloutStyles[section.callout.color].bg,
+                    borderLeft: `3px solid ${calloutStyles[section.callout.color].border}`,
+                  }}>
+                    <p className="text-[12px] leading-[1.7] font-medium" style={{ color: calloutStyles[section.callout.color].color }}>
+                      {section.callout.text}
+                    </p>
+                  </div>
+                )}
+
                 {section.subsections?.map((sub) => (
-                  <div key={sub.subtitle} className="mb-4 mt-3 rounded-lg px-5 py-4" style={{ backgroundColor: '#ebe7de' }}>
+                  <div key={sub.subtitle} className="mb-3 mt-3 ml-10 rounded-lg px-5 py-4" style={{ backgroundColor: '#ebe7de' }}>
                     <h3 className="text-[12px] font-bold uppercase tracking-wide mb-2" style={{ color: '#000' }}>{sub.subtitle}</h3>
                     {sub.content?.map((p, i) => (
                       <p key={i} className="text-[13px] leading-[1.7] mb-2" style={{ color: '#5a554d' }}>{p}</p>
@@ -160,9 +209,9 @@ export default function HowItWorksPage() {
                     {sub.list && (
                       <div className="flex flex-col gap-2 mb-2">
                         {sub.list.map(([term, desc]) => (
-                          <div key={term} className="flex gap-3 text-[13px] leading-[1.7]" style={{ color: '#5a554d' }}>
-                            <span className="shrink-0 mt-[2px] h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
-                            <span><span className="font-semibold" style={{ color: '#000' }}>{term}</span> — {desc}</span>
+                          <div key={term} className="flex gap-3 text-[13px] leading-[1.7]">
+                            <span className="shrink-0 mt-[7px] h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
+                            <span style={{ color: '#5a554d' }}><span className="font-semibold" style={{ color: '#000' }}>{term}</span> — {desc}</span>
                           </div>
                         ))}
                       </div>
@@ -174,16 +223,16 @@ export default function HowItWorksPage() {
                 ))}
 
                 {section.footer && (
-                  <p className="text-[12px] leading-[1.7] mt-1" style={{ color: '#8a8279' }}>{section.footer}</p>
+                  <p className="text-[12px] leading-[1.7] mt-2 ml-10" style={{ color: '#8a8279' }}>{section.footer}</p>
                 )}
               </div>
             ))}
           </div>
 
           {/* Footer */}
-          <div className="mt-10 pt-5" style={{ borderTop: '1px solid #ddd8cb' }}>
-            <p className="text-[11px]" style={{ color: '#c5bfb6' }}>
-              Questions about your numbers? Reach out to your Blueprint for Scale account manager.
+          <div className="mt-4 pt-5" style={{ borderTop: '1px solid #ddd8cb' }}>
+            <p className="text-[12px] leading-relaxed" style={{ color: '#8a8279' }}>
+              Questions about your numbers? Reach out to your Blueprint for Scale account manager — we're happy to walk through anything on a call.
             </p>
           </div>
         </div>
