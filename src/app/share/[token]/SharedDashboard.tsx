@@ -186,6 +186,15 @@ export default function SharedDashboard({ client, embed }: Props) {
                   <DateRangePicker value={dateRange} onChange={setDateRange} startDate={client.start_date} />
                 </>
               )}
+              <a
+                href="/share/how-it-works"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto text-[10px] transition-colors hover:underline"
+                style={{ color: '#c5bfb6' }}
+              >
+                How does this work?
+              </a>
             </div>
             <Tabs
               value={activeTab}
