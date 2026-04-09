@@ -190,8 +190,8 @@ export default function SharedDashboard({ client, embed }: Props) {
                 href="/share/how-it-works"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-auto text-[10px] transition-colors hover:underline"
-                style={{ color: '#c5bfb6' }}
+                className="ml-auto text-[10px] no-underline transition-opacity hover:opacity-70"
+                style={{ color: '#c5bfb6', textDecoration: 'none' }}
               >
                 How does this work?
               </a>

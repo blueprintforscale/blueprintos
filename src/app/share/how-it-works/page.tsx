@@ -124,62 +124,65 @@ export default function HowItWorksPage() {
       </div>
 
       {/* Content */}
-      <div className="mx-auto max-w-3xl px-4 py-8 md:px-6">
-        <div className="rounded-2xl shadow-sm px-8 py-10 md:px-12" style={{ backgroundColor: '#F5F1E8' }}>
-          <p className="text-sm leading-relaxed mb-10" style={{ color: '#5a554d' }}>
+      <div className="mx-auto max-w-2xl px-4 py-10 md:px-6">
+        <div className="rounded-2xl shadow-sm px-8 py-8 md:px-10" style={{ backgroundColor: '#F5F1E8' }}>
+          <p className="text-[13px] leading-relaxed mb-8" style={{ color: '#8a8279' }}>
             A quick guide to understanding the metrics on your performance dashboard.
           </p>
 
-          <div className="flex flex-col gap-10">
-            {sections.map((section) => (
+          <div className="flex flex-col gap-8">
+            {sections.map((section, si) => (
               <div key={section.title}>
-                <h2 className="text-lg font-bold mb-3" style={{ color: '#000' }}>{section.title}</h2>
+                {si > 0 && <div className="mb-6" style={{ borderTop: '1px solid #ebe7de' }} />}
+                <h2 className="text-[13px] font-bold uppercase tracking-wide mb-3" style={{ color: '#000' }}>{section.title}</h2>
 
                 {section.content?.map((p, i) => (
-                  <p key={i} className="text-sm leading-relaxed mb-3" style={{ color: '#5a554d' }}>{p}</p>
+                  <p key={i} className="text-[13px] leading-[1.7] mb-2.5" style={{ color: '#5a554d' }}>{p}</p>
                 ))}
 
                 {section.list && (
-                  <ul className="flex flex-col gap-2 mb-3 ml-1">
+                  <div className="flex flex-col gap-2.5 mb-3 mt-2">
                     {section.list.map(([term, desc]) => (
-                      <li key={term} className="text-sm leading-relaxed" style={{ color: '#5a554d' }}>
-                        <span className="font-semibold" style={{ color: '#000' }}>{term}</span> — {desc}
-                      </li>
+                      <div key={term} className="flex gap-3 text-[13px] leading-[1.7]" style={{ color: '#5a554d' }}>
+                        <span className="shrink-0 mt-[2px] h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
+                        <span><span className="font-semibold" style={{ color: '#000' }}>{term}</span> — {desc}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 )}
 
                 {section.subsections?.map((sub) => (
-                  <div key={sub.subtitle} className="ml-1 mb-4">
-                    <h3 className="text-sm font-semibold mb-2" style={{ color: '#000' }}>{sub.subtitle}</h3>
+                  <div key={sub.subtitle} className="mb-4 mt-3 rounded-lg px-5 py-4" style={{ backgroundColor: '#ebe7de' }}>
+                    <h3 className="text-[12px] font-bold uppercase tracking-wide mb-2" style={{ color: '#000' }}>{sub.subtitle}</h3>
                     {sub.content?.map((p, i) => (
-                      <p key={i} className="text-sm leading-relaxed mb-2" style={{ color: '#5a554d' }}>{p}</p>
+                      <p key={i} className="text-[13px] leading-[1.7] mb-2" style={{ color: '#5a554d' }}>{p}</p>
                     ))}
                     {sub.list && (
-                      <ul className="flex flex-col gap-2 mb-2 ml-1">
+                      <div className="flex flex-col gap-2 mb-2">
                         {sub.list.map(([term, desc]) => (
-                          <li key={term} className="text-sm leading-relaxed" style={{ color: '#5a554d' }}>
-                            <span className="font-semibold" style={{ color: '#000' }}>{term}</span> — {desc}
-                          </li>
+                          <div key={term} className="flex gap-3 text-[13px] leading-[1.7]" style={{ color: '#5a554d' }}>
+                            <span className="shrink-0 mt-[2px] h-1.5 w-1.5 rounded-full" style={{ backgroundColor: '#E85D4D' }} />
+                            <span><span className="font-semibold" style={{ color: '#000' }}>{term}</span> — {desc}</span>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     )}
                     {sub.footer && (
-                      <p className="text-sm leading-relaxed" style={{ color: '#8a8279' }}>{sub.footer}</p>
+                      <p className="text-[12px] leading-[1.7] mt-2" style={{ color: '#8a8279' }}>{sub.footer}</p>
                     )}
                   </div>
                 ))}
 
                 {section.footer && (
-                  <p className="text-sm leading-relaxed" style={{ color: '#8a8279' }}>{section.footer}</p>
+                  <p className="text-[12px] leading-[1.7] mt-1" style={{ color: '#8a8279' }}>{section.footer}</p>
                 )}
               </div>
             ))}
           </div>
 
           {/* Footer */}
-          <div className="mt-12 pt-6" style={{ borderTop: '1px solid #ddd8cb' }}>
-            <p className="text-xs" style={{ color: '#c5bfb6' }}>
+          <div className="mt-10 pt-5" style={{ borderTop: '1px solid #ddd8cb' }}>
+            <p className="text-[11px]" style={{ color: '#c5bfb6' }}>
               Questions about your numbers? Reach out to your Blueprint for Scale account manager.
             </p>
           </div>
