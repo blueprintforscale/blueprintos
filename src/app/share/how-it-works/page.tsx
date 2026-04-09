@@ -32,8 +32,9 @@ const sections: Section[] = [
     content: [
       'Not every contact is a real opportunity. When a lead is marked in your CRM as "spam," "not a lead," "wrong number," "out of area," or "wrong service," that lead is automatically removed from your quality lead count.',
       'This means your quality lead number is something you have direct control over — if a lead is legitimate, make sure it\'s not marked with one of those statuses. If it\'s junk, mark it and your numbers will adjust automatically.',
+      'There is one exception: if a disqualified lead later gets booked for an inspection, receives an estimate, or has any real activity in your field management software, they\'re automatically rescued from the spam filter. Real business activity always wins.',
     ],
-    callout: { text: 'Once a contact is disqualified, it stays disqualified permanently — even if they call again months later.', color: 'amber' },
+    callout: { text: 'Once disqualified, a lead stays excluded unless they show real activity in your CRM — like a booked inspection or sent estimate. That automatically overrides the disqualification.', color: 'amber' },
   },
   {
     title: 'Returning & Reactivated Leads',
