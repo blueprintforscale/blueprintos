@@ -46,6 +46,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
   const [overlays, setOverlays] = useState<Metric[]>([]);
   const [showCampaigns, setShowCampaigns] = useState(false);
   const [selectedCampaign, setSelectedCampaign] = useState<string | null>(null);
+  const [rateDenom, setRateDenom] = useState<'quality' | 'contacts'>('quality');
 
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
@@ -64,6 +65,24 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       const spam = parseFloat((d as any).spam) || 0;
       const abandoned = parseFloat((d as any).abandoned) || 0;
       return leads - spam - abandoned;
+    }
+    // Compute book_rate and close_rate dynamically based on denominator toggle
+    if (key === 'book_rate') {
+      const insp = parseFloat((d as any).inspections_booked) || 0;
+      const denom = rateDenom === 'contacts'
+        ? (parseFloat((d as any).leads) || 0)
+        : (parseFloat((d as any).leads) || 0) - (parseFloat((d as any).spam) || 0) - (parseFloat((d as any).excluded_abandoned) || 0);
+      return denom > 0 ? Math.round(insp / denom * 1000) / 10 : 0;
+    }
+    if (key === 'close_rate') {
+      const estApp = parseFloat((d as any).estimates_approved) || 0;
+      if (rateDenom === 'contacts') {
+        const denom = parseFloat((d as any).leads) || 0;
+        return denom > 0 ? Math.round(estApp / denom * 1000) / 10 : 0;
+      }
+      // Default: est approved / inspections booked
+      const insp = parseFloat((d as any).inspections_booked) || 0;
+      return insp > 0 ? Math.round(estApp / insp * 1000) / 10 : 0;
     }
     return parseFloat((d as any)[key]) || 0;
   };
@@ -459,6 +478,36 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
           )}
         </div>
       </div>
+
+      {/* Denominator toggle for rate metrics */}
+      {(metric === 'book_rate' || metric === 'close_rate') && (
+        <div className="flex items-center gap-2 px-6 pb-2">
+          <span className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>
+            {metric === 'book_rate' ? 'Inspections /' : 'Est. Approved /'}</span>
+          <div className="flex gap-0.5 rounded-full p-0.5" style={{ backgroundColor: '#EEEAD9' }}>
+            <button
+              onClick={() => setRateDenom('quality')}
+              className="rounded-full px-2.5 py-0.5 text-[10px] font-medium transition-colors"
+              style={{
+                backgroundColor: rateDenom === 'quality' ? '#000' : 'transparent',
+                color: rateDenom === 'quality' ? '#fff' : '#8a8279',
+              }}
+            >
+              {metric === 'close_rate' ? 'Inspections' : 'Quality Leads'}
+            </button>
+            <button
+              onClick={() => setRateDenom('contacts')}
+              className="rounded-full px-2.5 py-0.5 text-[10px] font-medium transition-colors"
+              style={{
+                backgroundColor: rateDenom === 'contacts' ? '#000' : 'transparent',
+                color: rateDenom === 'contacts' ? '#fff' : '#8a8279',
+              }}
+            >
+              Contacts
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Campaign legend when active — clickable to isolate */}
       {showCampaigns && campaignTrend && campaignTrend.length > 0 && (metric === 'leads' || metric === 'contacts') && (
