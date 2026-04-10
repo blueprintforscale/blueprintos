@@ -11,7 +11,7 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 type CampaignTrend = { name: string; data: { month_start: string; short_label: string; leads: number }[] };
 type Props = { data: MonthlyTrend[] | undefined; startDate?: string; showSuperQuality?: boolean; campaignTrend?: CampaignTrend[] };
-type Metric = 'leads' | 'contacts' | 'super_quality' | 'spend' | 'cpl' | 'conversions' | 'close_rate' | 'book_rate';
+type Metric = 'leads' | 'contacts' | 'super_quality' | 'spend' | 'cpl' | 'conversions' | 'close_rate' | 'book_rate' | 'roas' | 'revenue';
 
 const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; projectable: boolean }[] = [
   { key: 'leads', label: 'Leads', format: (v) => String(Math.round(v)), color: '#000000', projectable: true },
@@ -22,6 +22,8 @@ const metricsList: { key: Metric; label: string; format: (v: number) => string; 
   { key: 'conversions', label: 'Conversions', format: (v) => String(Math.round(v)), color: '#6366f1', projectable: true },
   { key: 'close_rate', label: 'Close Rate', format: (v) => `${v.toFixed(0)}%`, color: '#2A9D8F', projectable: false },
   { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#D4A843', projectable: false },
+  { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#8B5CF6', projectable: false },
+  { key: 'revenue', label: 'Revenue', format: (v) => v >= 1000 ? `$${(v / 1000).toFixed(1)}K` : `$${Math.round(v)}`, color: '#3b8a5a', projectable: false },
 ];
 
 function isCurrentMonth(monthStart: string): boolean {
