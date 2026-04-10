@@ -479,8 +479,8 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
         </div>
       </div>
 
-      {/* Denominator toggle for rate metrics */}
-      {(metric === 'book_rate' || metric === 'close_rate') && (
+      {/* Denominator toggle for close rate */}
+      {metric === 'close_rate' && (
         <div className="flex items-center gap-2 px-6 pb-2">
           <span className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>
             {metric === 'book_rate' ? 'Inspections /' : 'Est. Approved /'}</span>
