@@ -13,15 +13,18 @@ type CampaignTrend = { name: string; data: { month_start: string; short_label: s
 type Props = { data: MonthlyTrend[] | undefined; startDate?: string; showSuperQuality?: boolean; campaignTrend?: CampaignTrend[] };
 type Metric = 'leads' | 'contacts' | 'super_quality' | 'spend' | 'cpl' | 'conversions' | 'close_rate' | 'book_rate' | 'roas' | 'revenue';
 
-const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; projectable: boolean }[] = [
+// Set to true to show book rate and close rate pills on the trend chart
+const SHOW_RATE_METRICS = false;
+
+const metricsList: { key: Metric; label: string; format: (v: number) => string; color: string; projectable: boolean; hidden?: boolean }[] = [
   { key: 'leads', label: 'Leads', format: (v) => String(Math.round(v)), color: '#000000', projectable: true },
   { key: 'contacts', label: 'Contacts', format: (v) => String(Math.round(v)), color: '#8a8279', projectable: true },
   { key: 'super_quality', label: 'Super Quality', format: (v) => String(Math.round(v)), color: '#375078', projectable: true },
   { key: 'spend', label: 'Ad Spend', format: (v) => `$${(v / 1000).toFixed(1)}K`, color: '#5a554d', projectable: true },
   { key: 'cpl', label: 'CPL', format: (v) => `$${v.toFixed(0)}`, color: '#E85D4D', projectable: false },
   { key: 'conversions', label: 'Conversions', format: (v) => String(Math.round(v)), color: '#6366f1', projectable: true },
-  { key: 'close_rate', label: 'Close Rate', format: (v) => `${v.toFixed(0)}%`, color: '#2A9D8F', projectable: false },
-  { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#D4A843', projectable: false },
+  { key: 'close_rate', label: 'Close Rate', format: (v) => `${v.toFixed(0)}%`, color: '#2A9D8F', projectable: false, hidden: !SHOW_RATE_METRICS },
+  { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#D4A843', projectable: false, hidden: !SHOW_RATE_METRICS },
   { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#8B5CF6', projectable: false },
   { key: 'revenue', label: 'Revenue', format: (v) => v >= 1000 ? `$${(v / 1000).toFixed(1)}K` : `$${Math.round(v)}`, color: '#3b8a5a', projectable: false },
 ];
@@ -51,7 +54,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
 
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
-  const visibleMetrics = showSuperQuality ? metricsList : metricsList.filter((m) => m.key !== 'super_quality');
+  const visibleMetrics = (showSuperQuality ? metricsList : metricsList.filter((m) => m.key !== 'super_quality')).filter((m) => !m.hidden);
   const cfg = visibleMetrics.find((m) => m.key === metric) || visibleMetrics[0];
   const getValue = (d: MonthlyTrend, key: Metric): number => {
     if (key === 'contacts') return parseFloat((d as any).leads) || 0;
