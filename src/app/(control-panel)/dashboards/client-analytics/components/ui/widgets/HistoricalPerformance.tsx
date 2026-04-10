@@ -325,10 +325,16 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       labels: { style: { colors: '#8a8279', fontSize: '11px' } },
     },
     yaxis: overlays.length > 0 ? [
-      { labels: { formatter: cfg.format, style: { colors: '#8a8279', fontSize: '11px' } }, min: 0 },
+      // Primary axis (index 0) — used by main series, prior year, trend, projection
+      { seriesName: cfg.label, labels: { formatter: cfg.format, style: { colors: '#8a8279', fontSize: '11px' } }, min: 0 },
+      // Hidden axes for prior year, trend, projection — bind to primary axis
+      ...(hasPriorYear ? [{ seriesName: `${cfg.label} (prior year)`, show: false, min: 0 }] : []),
+      ...(trendLine ? [{ seriesName: 'Trend', show: false, min: 0 }] : []),
+      ...(projectionSeries ? [{ seriesName: 'Projected', show: false, min: 0 }] : []),
+      // Overlay axes (opposite side)
       ...overlays.map((ovKey) => {
         const ovCfg = metricsList.find((m) => m.key === ovKey)!;
-        return { opposite: true, labels: { formatter: ovCfg.format, style: { colors: ovCfg.color, fontSize: '10px' } }, min: 0 };
+        return { seriesName: ovCfg.label, opposite: true, labels: { formatter: ovCfg.format, style: { colors: ovCfg.color, fontSize: '10px' } }, min: 0 };
       }),
     ] : {
       labels: { formatter: cfg.format, style: { colors: '#8a8279', fontSize: '11px' } },
@@ -545,7 +551,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       )}
 
       {/* Chart */}
-      <div className="px-2 pb-4" style={{ height: 300 }}>
+      <div className="px-2 pb-4" style={{ height: overlays.length > 0 ? 360 : 300 }}>
         <ReactApexChart key={selectedCampaign || 'all'} options={chartOptions} series={series} type="line" height="100%" />
       </div>
 
