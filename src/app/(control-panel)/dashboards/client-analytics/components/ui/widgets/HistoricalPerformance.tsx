@@ -482,8 +482,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       {/* Denominator toggle for close rate */}
       {metric === 'close_rate' && (
         <div className="flex items-center gap-2 px-6 pb-2">
-          <span className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>
-            {metric === 'book_rate' ? 'Inspections /' : 'Est. Approved /'}</span>
+          <span className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>Est. Approved /</span>
           <div className="flex gap-0.5 rounded-full p-0.5" style={{ backgroundColor: '#EEEAD9' }}>
             <button
               onClick={() => setRateDenom('quality')}
@@ -493,7 +492,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
                 color: rateDenom === 'quality' ? '#fff' : '#8a8279',
               }}
             >
-              {metric === 'close_rate' ? 'Inspections' : 'Quality Leads'}
+              Inspections
             </button>
             <button
               onClick={() => setRateDenom('contacts')}
