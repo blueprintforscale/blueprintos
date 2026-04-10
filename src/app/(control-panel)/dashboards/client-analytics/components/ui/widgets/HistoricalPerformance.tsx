@@ -76,12 +76,8 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       return denom > 0 ? Math.round(insp / denom * 1000) / 10 : 0;
     }
     if (key === 'close_rate') {
+      // Always: est approved / inspections booked (no toggle)
       const estApp = parseFloat((d as any).estimates_approved) || 0;
-      if (rateDenom === 'contacts') {
-        const denom = parseFloat((d as any).leads) || 0;
-        return denom > 0 ? Math.round(estApp / denom * 1000) / 10 : 0;
-      }
-      // Default: est approved / inspections booked
       const insp = parseFloat((d as any).inspections_booked) || 0;
       return insp > 0 ? Math.round(estApp / insp * 1000) / 10 : 0;
     }
@@ -492,10 +488,10 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
         </div>
       </div>
 
-      {/* Denominator toggle for close rate */}
-      {metric === 'close_rate' && (
+      {/* Denominator toggle for book rate */}
+      {metric === 'book_rate' && (
         <div className="flex items-center gap-2 px-6 pb-2">
-          <span className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>Est. Approved /</span>
+          <span className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>Inspections /</span>
           <div className="flex gap-0.5 rounded-full p-0.5" style={{ backgroundColor: '#EEEAD9' }}>
             <button
               onClick={() => setRateDenom('quality')}
@@ -505,7 +501,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
                 color: rateDenom === 'quality' ? '#fff' : '#8a8279',
               }}
             >
-              Inspections
+              Quality Leads
             </button>
             <button
               onClick={() => setRateDenom('contacts')}
