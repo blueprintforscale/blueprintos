@@ -47,6 +47,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
   const [showCampaigns, setShowCampaigns] = useState(false);
   const [selectedCampaign, setSelectedCampaign] = useState<string | null>(null);
   const [rateDenom, setRateDenom] = useState<'quality' | 'contacts'>('quality');
+  const [revSource, setRevSource] = useState<'waterfall' | 'invoices'>('waterfall');
 
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
@@ -83,6 +84,12 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       // Default: est approved / inspections booked
       const insp = parseFloat((d as any).inspections_booked) || 0;
       return insp > 0 ? Math.round(estApp / insp * 1000) / 10 : 0;
+    }
+    if (key === 'revenue') {
+      return parseFloat((d as any)[revSource === 'invoices' ? 'invoice_revenue' : 'revenue']) || 0;
+    }
+    if (key === 'roas') {
+      return parseFloat((d as any)[revSource === 'invoices' ? 'invoice_roas' : 'roas']) || 0;
     }
     return parseFloat((d as any)[key]) || 0;
   };
@@ -509,6 +516,35 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
               }}
             >
               Contacts
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Revenue source toggle for revenue and ROAS */}
+      {(metric === 'revenue' || metric === 'roas') && (
+        <div className="flex items-center gap-2 px-6 pb-2">
+          <span className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>Revenue from:</span>
+          <div className="flex gap-0.5 rounded-full p-0.5" style={{ backgroundColor: '#EEEAD9' }}>
+            <button
+              onClick={() => setRevSource('waterfall')}
+              className="rounded-full px-2.5 py-0.5 text-[10px] font-medium transition-colors"
+              style={{
+                backgroundColor: revSource === 'waterfall' ? '#000' : 'transparent',
+                color: revSource === 'waterfall' ? '#fff' : '#8a8279',
+              }}
+            >
+              Approved Estimates
+            </button>
+            <button
+              onClick={() => setRevSource('invoices')}
+              className="rounded-full px-2.5 py-0.5 text-[10px] font-medium transition-colors"
+              style={{
+                backgroundColor: revSource === 'invoices' ? '#000' : 'transparent',
+                color: revSource === 'invoices' ? '#fff' : '#8a8279',
+              }}
+            >
+              Invoices
             </button>
           </div>
         </div>
