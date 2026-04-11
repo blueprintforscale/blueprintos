@@ -29,6 +29,7 @@ import type { FunnelStage } from '../../(control-panel)/dashboards/client-analyt
 import DateRangePicker from '../../(control-panel)/dashboards/client-analytics/components/ui/DateRangePicker';
 import {
   useFunnel,
+  useGroupFunnel,
   useMonthlyTrend,
   useRecentActivity,
   useSourceTabs,
@@ -46,25 +47,53 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
-const VIEW_TABS = [
+const VIEW_TABS_CLIENT = [
   { label: 'Overview' },
   { label: 'Leads' },
   { label: 'Calls' },
   { label: 'Trends' },
 ];
 
+// Group dashboards only support the Overview tab for now.
+// Leads/Calls/Trends require per-customer endpoints that haven't been group-refactored yet.
+const VIEW_TABS_GROUP = [
+  { label: 'Overview' },
+];
+
+type ClientResource = {
+  type: 'client';
+  customer_id: number;
+  name: string;
+  field_management_software: string;
+  start_date?: string;
+};
+
+type GroupResource = {
+  type: 'group';
+  group_id: number;
+  name: string;
+  slug: string;
+  description?: string;
+  member_ids: (number | string)[];
+  member_names: string[];
+  start_date?: string;
+};
+
+export type Resource = ClientResource | GroupResource;
+
 type Props = {
-  client: {
-    customer_id: number;
-    name: string;
-    field_management_software: string;
-    start_date?: string;
-  };
+  resource: Resource;
   embed?: boolean;
 };
 
-export default function SharedDashboard({ client, embed }: Props) {
-  const customerId = client.customer_id;
+export default function SharedDashboard({ resource, embed }: Props) {
+  const isGroup = resource.type === 'group';
+  // For client: use customer_id. For group: use the first member as a "representative" for the
+  // few per-customer widgets we still show (none right now, but leaving it for future).
+  const customerId = isGroup
+    ? Number((resource as GroupResource).member_ids[0])
+    : (resource as ClientResource).customer_id;
+  const groupSlug = isGroup ? (resource as GroupResource).slug : '';
   const [activeSource, setActiveSource] = useState('google_ads');
   const [activeTab, setActiveTab] = useState(0);
   const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
@@ -83,51 +112,61 @@ export default function SharedDashboard({ client, embed }: Props) {
   const ninetyDayFrom = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
-  const { data: funnel } = useFunnel(customerId, activeSource, dateFrom, dateTo);
-  const { data: funnel90 } = useFunnel(customerId, activeSource, ninetyDayFrom, ninetyDayTo);
-  const { data: trend } = useMonthlyTrend(customerId, 6);
-  const { data: activity } = useRecentActivity(customerId);
-  const { data: sourceTabs } = useSourceTabs(customerId);
+  // Funnel data — use group endpoint for groups, client endpoint for individual clients.
+  // Only one of the two queries is enabled at a time (the other is disabled via `enabled: !!id`).
+  const clientFunnel = useFunnel(isGroup ? 0 : customerId, activeSource, dateFrom, dateTo);
+  const clientFunnel90 = useFunnel(isGroup ? 0 : customerId, activeSource, ninetyDayFrom, ninetyDayTo);
+  const groupFunnelQ = useGroupFunnel(isGroup ? groupSlug : '', activeSource, dateFrom, dateTo);
+  const groupFunnel90Q = useGroupFunnel(isGroup ? groupSlug : '', activeSource, ninetyDayFrom, ninetyDayTo);
+  const funnel = isGroup ? groupFunnelQ.data : clientFunnel.data;
+  const funnel90 = isGroup ? groupFunnel90Q.data : clientFunnel90.data;
+
+  const { data: trend } = useMonthlyTrend(isGroup ? 0 : customerId, 6);
+  const { data: activity } = useRecentActivity(isGroup ? 0 : customerId);
+  const { data: sourceTabs } = useSourceTabs(isGroup ? 0 : customerId);
 
   const { data: spreadsheetData } = useQuery({
     queryKey: ['leadSpreadsheet', customerId, activeSource, dateFrom, dateTo],
     queryFn: () => fetch(`/api/blueprint/clients/${customerId}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`).then(r => r.json()),
-    enabled: activeTab === 1 || drawerStage !== null,
+    enabled: !isGroup && (activeTab === 1 || drawerStage !== null),
   });
 
-  const { data: callData, isLoading: callsLoading } = useCallAnalytics(customerId, dateFrom, dateTo);
+  const { data: callData, isLoading: callsLoading } = useCallAnalytics(isGroup ? 0 : customerId, dateFrom, dateTo);
 
-  // Google Ads panel data
+  // Google Ads panel data — per-customer only (hidden for groups)
   const isGoogleAds = activeSource === 'google_ads';
   const { data: campaignData } = useQuery({
     queryKey: ['campaignBreakdown', customerId, dateFrom, dateTo],
     queryFn: () => clientAnalyticsService.getCampaignBreakdown(customerId, dateFrom, dateTo),
-    enabled: activeTab === 0 && isGoogleAds,
+    enabled: !isGroup && activeTab === 0 && isGoogleAds,
   });
   const { data: searchTermsData } = useQuery({
     queryKey: ['searchTerms', customerId, dateFrom, dateTo],
     queryFn: () => clientAnalyticsService.getSearchTerms(customerId, dateFrom, dateTo),
-    enabled: activeTab === 0 && isGoogleAds,
+    enabled: !isGroup && activeTab === 0 && isGoogleAds,
   });
   const { data: dailySpendData } = useQuery({
     queryKey: ['dailySpend', customerId, dateFrom, dateTo],
     queryFn: () => clientAnalyticsService.getDailySpend(customerId, dateFrom, dateTo),
-    enabled: activeTab === 0 && isGoogleAds,
+    enabled: !isGroup && activeTab === 0 && isGoogleAds,
   });
 
   const { data: historicalData, isLoading: historicalLoading } = useQuery({
     queryKey: ['historicalTrend', customerId, 24],
     queryFn: () => clientAnalyticsService.getMonthlyTrend(customerId, 24),
-    enabled: activeTab === 3,
+    enabled: !isGroup && activeTab === 3,
   });
   const { data: campaignTrendData } = useQuery({
     queryKey: ['campaignTrend', customerId, 24],
     queryFn: () => clientAnalyticsService.getCampaignTrend(customerId, 24),
-    enabled: activeTab === 3,
+    enabled: !isGroup && activeTab === 3,
   });
 
-  // Extract client display name (after " | " if present)
-  const displayName = client.name.includes('|') ? client.name.split('|').pop()?.trim() : client.name;
+  // Extract display name (after " | " if present)
+  const displayName = resource.name.includes('|') ? resource.name.split('|').pop()?.trim() : resource.name;
+  // For client: field_management_software. For group: always housecall_pro (enforced by API).
+  const fms = isGroup ? 'housecall_pro' : (resource as ClientResource).field_management_software;
+  const startDate = resource.start_date;
 
   const cplSource = isShortRange && funnel90 ? funnel90 : funnel;
   const adMetrics = funnel ? {
@@ -183,7 +222,7 @@ export default function SharedDashboard({ client, embed }: Props) {
               {activeTab !== 3 && (
                 <>
                   <div className="h-4 w-px" style={{ backgroundColor: '#ddd8cb' }} />
-                  <DateRangePicker value={dateRange} onChange={setDateRange} startDate={client.start_date} />
+                  <DateRangePicker value={dateRange} onChange={setDateRange} startDate={startDate} />
                 </>
               )}
               <a
@@ -201,7 +240,7 @@ export default function SharedDashboard({ client, embed }: Props) {
               onChange={(_, v) => setActiveTab(v)}
               sx={{ minHeight: 36, '& .MuiTab-root': { minHeight: 36, py: 0.5, fontSize: '0.8rem', textTransform: 'none' } }}
             >
-              {VIEW_TABS.map((t) => (
+              {(isGroup ? VIEW_TABS_GROUP : VIEW_TABS_CLIENT).map((t) => (
                 <Tab key={t.label} label={t.label} />
               ))}
             </Tabs>
@@ -244,8 +283,8 @@ export default function SharedDashboard({ client, embed }: Props) {
                     }} />
                   </motion.div>
                 )}
-                {/* Google Ads details */}
-                {isGoogleAds && (
+                {/* Google Ads details — per-customer only (hidden in group view) */}
+                {isGoogleAds && !isGroup && (
                   <motion.div variants={item}>
                     <GoogleAdsPanel
                       campaigns={campaignData}
@@ -265,15 +304,29 @@ export default function SharedDashboard({ client, embed }: Props) {
                     }} />
                   </motion.div>
                 )}
-                <motion.div variants={item}>
-                  <RecentActivityWidget data={activity} />
-                </motion.div>
+                {!isGroup && (
+                  <motion.div variants={item}>
+                    <RecentActivityWidget data={activity} />
+                  </motion.div>
+                )}
+                {isGroup && (
+                  <motion.div variants={item}>
+                    <div className="rounded-xl px-5 py-4" style={{ backgroundColor: '#ebe7de' }}>
+                      <Typography className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: '#5a554d' }}>
+                        Combined View
+                      </Typography>
+                      <Typography className="mt-1 text-xs" style={{ color: '#8a8279' }}>
+                        This dashboard rolls up {(resource as GroupResource).member_names?.join(' + ')}. Phones that appear in more than one business are deduplicated.
+                      </Typography>
+                    </div>
+                  </motion.div>
+                )}
               </>
             )}
 
-            {activeTab === 1 && (
+            {activeTab === 1 && !isGroup && (
               <motion.div variants={item}>
-                <LeadSpreadsheet data={spreadsheetData} customerId={customerId} crm={client.field_management_software} />
+                <LeadSpreadsheet data={spreadsheetData} customerId={customerId} crm={fms} />
               </motion.div>
             )}
 
@@ -315,7 +368,7 @@ export default function SharedDashboard({ client, embed }: Props) {
                     </div>
                   </div>
                 ) : (
-                  <HistoricalPerformance data={historicalData} startDate={client.start_date} campaignTrend={campaignTrendData} />
+                  <HistoricalPerformance data={historicalData} startDate={startDate} campaignTrend={campaignTrendData} />
                 )}
               </motion.div>
             )}
@@ -337,7 +390,7 @@ export default function SharedDashboard({ client, embed }: Props) {
       title={drawerTitle}
       leads={spreadsheetData}
       customerId={customerId}
-      crm={client.field_management_software}
+      crm={fms}
       adSpend={drawerAdSpend}
       programPrice={drawerProgramPrice}
       closedRev={adMetrics?.total_closed_rev}

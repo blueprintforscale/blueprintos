@@ -3,24 +3,17 @@
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import SharedDashboard from './SharedDashboard';
+import SharedDashboard, { type Resource } from './SharedDashboard';
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 30_000, refetchOnWindowFocus: false } },
 });
 
-type ClientInfo = {
-  customer_id: number;
-  name: string;
-  field_management_software: string;
-  start_date?: string;
-};
-
 export default function SharePage() {
   const { token } = useParams<{ token: string }>();
   const searchParams = useSearchParams();
   const embed = searchParams.get('embed') === 'true';
-  const [client, setClient] = useState<ClientInfo | null>(null);
+  const [resource, setResource] = useState<Resource | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +24,7 @@ export default function SharePage() {
         if (data.error) {
           setError(data.error);
         } else {
-          setClient(data);
+          setResource(data as Resource);
         }
       })
       .catch(() => setError('Unable to load dashboard'))
@@ -49,7 +42,7 @@ export default function SharePage() {
     );
   }
 
-  if (error || !client) {
+  if (error || !resource) {
     return (
       <div className="flex h-screen items-center justify-center" style={{ backgroundColor: '#F5F1E8' }}>
         <div className="text-center">
@@ -62,7 +55,7 @@ export default function SharePage() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SharedDashboard client={client} embed={embed} />
+      <SharedDashboard resource={resource} embed={embed} />
     </QueryClientProvider>
   );
 }
