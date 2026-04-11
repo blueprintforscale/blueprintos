@@ -12,6 +12,17 @@ export type Client = {
   dashboard_token?: string;
 };
 
+export type Group = {
+  group_id: number;
+  name: string;
+  slug: string;
+  description?: string;
+  dashboard_token?: string;
+  start_date?: string;
+  member_ids: (number | string)[];
+  member_names: string[];
+};
+
 export type AdPerformance = {
   ad_spend: number;
   quality_leads: number;

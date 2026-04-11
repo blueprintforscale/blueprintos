@@ -1,5 +1,6 @@
 import type {
   Client,
+  Group,
   AdPerformance,
   FunnelData,
   LeadContact,
@@ -23,6 +24,8 @@ async function fetchJson<T>(path: string): Promise<T> {
 
 export const clientAnalyticsService = {
   getClients: () => fetchJson<Client[]>('clients'),
+
+  getGroups: () => fetchJson<Group[]>('groups'),
 
   getClient: (customerId: number) => fetchJson<Client>(`clients/${customerId}`),
 

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import FusePageSimple from '@fuse/core/FusePageSimple';
-import ClientSelector from '../ui/ClientSelector';
+import ClientSelector, { type Selection } from '../ui/ClientSelector';
 import SourceTabs from '../ui/SourceTabs';
 import AdMetricsCards from '../ui/widgets/AdMetricsCards';
 import SummaryCards from '../ui/widgets/SummaryCards';
@@ -28,7 +28,9 @@ import type { FunnelStage } from '../ui/widgets/FunnelDrawer';
 import DateRangePicker from '../ui/DateRangePicker';
 import {
   useClients,
+  useGroups,
   useFunnel,
+  useGroupFunnel,
   useMonthlyTrend,
   useRecentActivity,
   useLeads,
@@ -57,8 +59,15 @@ const VIEW_TABS = [
   { label: 'Trends', icon: 'lucide:trending-up' },
 ];
 
+// Group dashboards only support the Overview tab — Leads/Calls/Trends require
+// per-customer endpoints that haven't been refactored for groups yet.
+const VIEW_TABS_GROUP = [{ label: 'Overview', icon: 'lucide:layout-dashboard' }];
+
 function ClientAnalyticsView() {
-  const [selectedClient, setSelectedClient] = useState<number | null>(DEFAULT_CLIENT);
+  const [selected, setSelected] = useState<Selection | null>({ type: 'client', id: DEFAULT_CLIENT });
+  const isGroup = selected?.type === 'group';
+  const groupSlug = selected?.type === 'group' ? selected.slug : '';
+  const selectedClient = selected?.type === 'client' ? selected.id : null;
   const [activeSource, setActiveSource] = useState('google_ads');
   const [activeTab, setActiveTab] = useState(0);
   const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
@@ -81,23 +90,32 @@ function ClientAnalyticsView() {
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
   const { data: clients } = useClients();
-  const { data: funnel, isLoading: funnelLoading } = useFunnel(selectedClient!, activeSource, dateFrom, dateTo);
-  // 90-day funnel for CPL fallback on short ranges
-  const { data: funnel90 } = useFunnel(selectedClient!, activeSource, ninetyDayFrom, ninetyDayTo);
-  const { data: trend } = useMonthlyTrend(selectedClient!, 6);
-  const { data: activity } = useRecentActivity(selectedClient!);
-  const { data: sourceTabs } = useSourceTabs(selectedClient!);
+  const { data: groups } = useGroups();
+  // Per-client funnel — disabled when a group is selected
+  const clientFunnelQ = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, dateFrom, dateTo);
+  const clientFunnel90Q = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, ninetyDayFrom, ninetyDayTo);
+  // Group funnel — disabled unless a group is selected
+  const groupFunnelQ = useGroupFunnel(isGroup ? groupSlug : '', activeSource, dateFrom, dateTo);
+  const groupFunnel90Q = useGroupFunnel(isGroup ? groupSlug : '', activeSource, ninetyDayFrom, ninetyDayTo);
+  const funnel = isGroup ? groupFunnelQ.data : clientFunnelQ.data;
+  const funnel90 = isGroup ? groupFunnel90Q.data : clientFunnel90Q.data;
+  const funnelLoading = isGroup ? groupFunnelQ.isLoading : clientFunnelQ.isLoading;
 
-  // Lead spreadsheet — always fetch so drawer data is ready on click
+  // Per-client widgets — disabled when a group is selected
+  const { data: trend } = useMonthlyTrend(isGroup ? 0 : (selectedClient ?? 0), 6);
+  const { data: activity } = useRecentActivity(isGroup ? 0 : (selectedClient ?? 0));
+  const { data: sourceTabs } = useSourceTabs(isGroup ? 0 : (selectedClient ?? 0));
+
+  // Lead spreadsheet — per-client only
   const { data: spreadsheetData } = useQuery({
     queryKey: ['leadSpreadsheet', selectedClient, activeSource, dateFrom, dateTo],
     queryFn: () => fetch(`/api/blueprint/clients/${selectedClient}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`).then(r => r.json()),
-    enabled: !!selectedClient,
+    enabled: !isGroup && !!selectedClient,
   });
 
   // Call analytics data (only fetch when on Calls tab)
   const { data: callData, isLoading: callsLoading } = useCallAnalytics(
-    selectedClient!, dateFrom, dateTo
+    isGroup ? 0 : (selectedClient ?? 0), dateFrom, dateTo
   );
 
   // Google Ads panel data (only fetch on Overview with Google Ads source)
@@ -105,35 +123,49 @@ function ClientAnalyticsView() {
   const { data: campaignData } = useQuery({
     queryKey: ['campaignBreakdown', selectedClient, dateFrom, dateTo],
     queryFn: () => clientAnalyticsService.getCampaignBreakdown(selectedClient!, dateFrom, dateTo),
-    enabled: !!selectedClient && activeTab === 0 && isGoogleAds,
+    enabled: !isGroup && !!selectedClient && activeTab === 0 && isGoogleAds,
   });
   const { data: searchTermsData } = useQuery({
     queryKey: ['searchTerms', selectedClient, dateFrom, dateTo],
     queryFn: () => clientAnalyticsService.getSearchTerms(selectedClient!, dateFrom, dateTo),
-    enabled: !!selectedClient && activeTab === 0 && isGoogleAds,
+    enabled: !isGroup && !!selectedClient && activeTab === 0 && isGoogleAds,
   });
   const { data: dailySpendData } = useQuery({
     queryKey: ['dailySpend', selectedClient, dateFrom, dateTo],
     queryFn: () => clientAnalyticsService.getDailySpend(selectedClient!, dateFrom, dateTo),
-    enabled: !!selectedClient && activeTab === 0 && isGoogleAds,
+    enabled: !isGroup && !!selectedClient && activeTab === 0 && isGoogleAds,
   });
 
   // Historical data (only fetch when on Performance tab — now tab 3)
   const { data: historicalData, isLoading: historicalLoading } = useQuery({
     queryKey: ['historicalTrend', selectedClient, 24],
     queryFn: () => clientAnalyticsService.getMonthlyTrend(selectedClient!, 24),
-    enabled: !!selectedClient && activeTab === 3,
+    enabled: !isGroup && !!selectedClient && activeTab === 3,
   });
   const { data: campaignTrendData } = useQuery({
     queryKey: ['campaignTrend', selectedClient, 24],
     queryFn: () => clientAnalyticsService.getCampaignTrend(selectedClient!, 24),
-    enabled: !!selectedClient && activeTab === 3,
+    enabled: !isGroup && !!selectedClient && activeTab === 3,
   });
 
   const clientList = Array.isArray(clients) ? clients : [];
+  const groupList = Array.isArray(groups) ? groups : [];
   const selectedClientObj = clientList.find((c) => c.customer_id === selectedClient);
-  const clientName = selectedClientObj?.name || 'Select a client';
-  const clientCrm = selectedClientObj?.field_management_software;
+  const selectedGroupObj = isGroup ? groupList.find((g) => g.slug === groupSlug) : undefined;
+  const clientName = isGroup
+    ? selectedGroupObj?.name || 'Select a client'
+    : selectedClientObj?.name || 'Select a client';
+  // For groups, the API enforces HCP-only members today
+  const clientCrm = isGroup ? 'housecall_pro' : selectedClientObj?.field_management_software;
+  const headerStartDate = isGroup ? selectedGroupObj?.start_date : selectedClientObj?.start_date;
+  const headerToken = isGroup
+    ? (selectedGroupObj as any)?.dashboard_token
+    : (selectedClientObj as any)?.dashboard_token;
+  const hasSelection = isGroup ? !!groupSlug : !!selectedClient;
+  // Drawer needs a numeric customer_id even in group mode — use first member as a representative
+  const drawerCustomerId = isGroup
+    ? Number(selectedGroupObj?.member_ids?.[0] ?? 0)
+    : (selectedClient ?? 0);
 
   // Derive ad metrics from funnel data (API returns unified risk-dashboard-aligned values)
   // CPL falls back to 90-day data on short ranges
@@ -172,10 +204,10 @@ function ClientAnalyticsView() {
               <Typography className="text-2xl font-extrabold uppercase tracking-tight" sx={{ color: '#000000' }}>Client Analytics</Typography>
               <div className="flex items-center gap-2">
                 <Typography className="text-sm" sx={{ color: '#5a554d' }}>{clientName}</Typography>
-                {(selectedClientObj as any)?.dashboard_token && (
+                {headerToken && (
                   <button
                     onClick={() => {
-                      const url = `${window.location.origin}/share/${(selectedClientObj as any).dashboard_token}`;
+                      const url = `${window.location.origin}/share/${headerToken}`;
                       navigator.clipboard.writeText(url);
                       setShareCopied(true);
                       setTimeout(() => setShareCopied(false), 2000);
@@ -190,10 +222,10 @@ function ClientAnalyticsView() {
                     {shareCopied ? 'Link copied!' : 'Share'}
                   </button>
                 )}
-                {(selectedClientObj as any)?.dashboard_token && (
+                {headerToken && (
                   <button
                     onClick={() => {
-                      const url = `${window.location.origin}/share/${(selectedClientObj as any).dashboard_token}?embed=true`;
+                      const url = `${window.location.origin}/share/${headerToken}?embed=true`;
                       navigator.clipboard.writeText(url);
                       setEmbedCopied(true);
                       setTimeout(() => setEmbedCopied(false), 2000);
@@ -210,23 +242,32 @@ function ClientAnalyticsView() {
                 )}
               </div>
             </div>
-            <ClientSelector clients={clientList} selectedId={selectedClient} onSelect={setSelectedClient} />
+            <ClientSelector
+              clients={clientList}
+              groups={groupList}
+              selected={selected}
+              onSelect={(s) => {
+                setSelected(s);
+                // Group dashboards only support Overview — snap back if on a hidden tab
+                if (s?.type === 'group' && activeTab > 0) setActiveTab(0);
+              }}
+            />
           </div>
           <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
-          {activeTab !== 3 && <DateRangePicker value={dateRange} onChange={setDateRange} startDate={selectedClientObj?.start_date} />}
+          {activeTab !== 3 && <DateRangePicker value={dateRange} onChange={setDateRange} startDate={headerStartDate} />}
           <Tabs
             value={activeTab}
             onChange={(_, v) => setActiveTab(v)}
             sx={{ minHeight: 36, '& .MuiTab-root': { minHeight: 36, py: 0.5, fontSize: '0.8rem', textTransform: 'none' } }}
           >
-            {VIEW_TABS.map((t) => (
+            {(isGroup ? VIEW_TABS_GROUP : VIEW_TABS).map((t) => (
               <Tab key={t.label} label={t.label} />
             ))}
           </Tabs>
         </div>
       }
       content={
-        selectedClient ? (
+        hasSelection ? (
           <motion.div
             key={activeTab}
             className="flex w-full flex-col gap-6 px-6 py-6 md:px-8"
@@ -272,8 +313,8 @@ function ClientAnalyticsView() {
                     }} />
                   </motion.div>
                 )}
-                {/* Google Ads details panel */}
-                {isGoogleAds && (
+                {/* Google Ads details panel — per-customer only */}
+                {isGoogleAds && !isGroup && (
                   <motion.div variants={item}>
                     <GoogleAdsPanel
                       campaigns={campaignData}
@@ -293,14 +334,28 @@ function ClientAnalyticsView() {
                     }} />
                   </motion.div>
                 )}
-                <motion.div variants={item}>
-                  <RecentActivityWidget data={activity} />
-                </motion.div>
+                {!isGroup && (
+                  <motion.div variants={item}>
+                    <RecentActivityWidget data={activity} />
+                  </motion.div>
+                )}
+                {isGroup && selectedGroupObj && (
+                  <motion.div variants={item}>
+                    <div className="rounded-xl px-5 py-4" style={{ backgroundColor: '#ebe7de' }}>
+                      <Typography className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: '#5a554d' }}>
+                        Combined View
+                      </Typography>
+                      <Typography className="mt-1 text-xs" style={{ color: '#8a8279' }}>
+                        This dashboard rolls up {selectedGroupObj.member_names?.join(' + ')}. Phones that appear in more than one business are deduplicated.
+                      </Typography>
+                    </div>
+                  </motion.div>
+                )}
               </>
             )}
 
             {/* ====== LEADS TAB ====== */}
-            {activeTab === 1 && (
+            {activeTab === 1 && !isGroup && (
               <motion.div variants={item}>
                 <LeadSpreadsheet data={spreadsheetData} customerId={selectedClient!} crm={clientCrm} />
               </motion.div>
@@ -366,7 +421,7 @@ function ClientAnalyticsView() {
       stage={drawerStage || 'leads'}
       title={drawerTitle}
       leads={spreadsheetData}
-      customerId={selectedClient!}
+      customerId={drawerCustomerId}
       crm={clientCrm}
       source={activeSource}
       adSpend={drawerAdSpend}

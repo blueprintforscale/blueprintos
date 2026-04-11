@@ -10,6 +10,13 @@ export function useClients() {
   });
 }
 
+export function useGroups() {
+  return useQuery({
+    queryKey: ['groups'],
+    queryFn: clientAnalyticsService.getGroups,
+  });
+}
+
 export function useClient(customerId: number) {
   return useQuery({
     queryKey: ['client', customerId],
