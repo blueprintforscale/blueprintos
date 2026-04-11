@@ -34,6 +34,14 @@ export function useFunnel(customerId: number, source = 'all', dateFrom?: string,
   });
 }
 
+export function useGroupFunnel(slug: string, source = 'all', dateFrom?: string, dateTo?: string) {
+  return useQuery({
+    queryKey: ['groupFunnel', slug, source, dateFrom, dateTo],
+    queryFn: () => clientAnalyticsService.getGroupFunnel(slug, source, dateFrom, dateTo),
+    enabled: !!slug,
+  });
+}
+
 export function useLeads(customerId: number, source = 'google_ads', dateFrom?: string, dateTo?: string) {
   return useQuery({
     queryKey: ['leads', customerId, source, dateFrom, dateTo],

@@ -36,6 +36,14 @@ export const clientAnalyticsService = {
     return fetchJson<FunnelData>(`clients/${customerId}/funnel?${params}`);
   },
 
+  // Multi-client rollup via client_groups (HCP only)
+  getGroupFunnel: (slug: string, source = 'all', dateFrom?: string, dateTo?: string) => {
+    const params = new URLSearchParams({ source });
+    if (dateFrom) params.set('date_from', dateFrom);
+    if (dateTo) params.set('date_to', dateTo);
+    return fetchJson<FunnelData>(`groups/${slug}/funnel?${params}`);
+  },
+
   getLeads: (customerId: number, source = 'google_ads', dateFrom?: string, dateTo?: string, limit = 50) => {
     const params = new URLSearchParams({ source, limit: String(limit) });
     if (dateFrom) params.set('date_from', dateFrom);
