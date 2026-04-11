@@ -106,11 +106,16 @@ function ClientAnalyticsView() {
   const { data: activity } = useRecentActivity(isGroup ? 0 : (selectedClient ?? 0));
   const { data: sourceTabs } = useSourceTabs(isGroup ? 0 : (selectedClient ?? 0));
 
-  // Lead spreadsheet — per-client only
+  // Lead spreadsheet — per-client or per-group (fans out to members server-side)
   const { data: spreadsheetData } = useQuery({
-    queryKey: ['leadSpreadsheet', selectedClient, activeSource, dateFrom, dateTo],
-    queryFn: () => fetch(`/api/blueprint/clients/${selectedClient}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`).then(r => r.json()),
-    enabled: !isGroup && !!selectedClient,
+    queryKey: ['leadSpreadsheet', isGroup ? `group:${groupSlug}` : selectedClient, activeSource, dateFrom, dateTo],
+    queryFn: () => {
+      const url = isGroup
+        ? `/api/blueprint/groups/${groupSlug}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`
+        : `/api/blueprint/clients/${selectedClient}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`;
+      return fetch(url).then(r => r.json());
+    },
+    enabled: isGroup ? !!groupSlug : !!selectedClient,
   });
 
   // Call analytics data (only fetch when on Calls tab)

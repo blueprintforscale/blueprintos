@@ -126,9 +126,14 @@ export default function SharedDashboard({ resource, embed }: Props) {
   const { data: sourceTabs } = useSourceTabs(isGroup ? 0 : customerId);
 
   const { data: spreadsheetData } = useQuery({
-    queryKey: ['leadSpreadsheet', customerId, activeSource, dateFrom, dateTo],
-    queryFn: () => fetch(`/api/blueprint/clients/${customerId}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`).then(r => r.json()),
-    enabled: !isGroup && (activeTab === 1 || drawerStage !== null),
+    queryKey: ['leadSpreadsheet', isGroup ? `group:${groupSlug}` : customerId, activeSource, dateFrom, dateTo],
+    queryFn: () => {
+      const url = isGroup
+        ? `/api/blueprint/groups/${groupSlug}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`
+        : `/api/blueprint/clients/${customerId}/lead-spreadsheet?source=${activeSource}&date_from=${dateFrom}&date_to=${dateTo}`;
+      return fetch(url).then(r => r.json());
+    },
+    enabled: isGroup ? !!groupSlug : (activeTab === 1 || drawerStage !== null),
   });
 
   const { data: callData, isLoading: callsLoading } = useCallAnalytics(isGroup ? 0 : customerId, dateFrom, dateTo);
