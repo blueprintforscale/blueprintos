@@ -308,7 +308,7 @@ function ClientAnalyticsView() {
                   </div>
                 </motion.div>
                 {/* Google Ads metrics (CPL, ROAS, Ad Spend) — hidden for GBP (organic, no ad cost) */}
-                {activeSource !== 'all' && activeSource !== 'gbp' && (
+                {(activeSource === 'google_ads' || activeSource === 'lsa') && (
                   <motion.div variants={item}>
                     <AdMetricsCards data={adMetrics} days={dateRange.days} onCplClick={() => {
                       setDrawerStage('cpl_leads');
@@ -334,7 +334,7 @@ function ClientAnalyticsView() {
                   </motion.div>
                 )}
                 {/* Guarantee progress bar — hidden for GBP (no ad spend = no guarantee) */}
-                {activeSource !== 'all' && activeSource !== 'gbp' && (
+                {(activeSource === 'google_ads' || activeSource === 'lsa') && (
                   <motion.div variants={item}>
                     <GuaranteeBar data={adMetrics} onClick={() => {
                       setDrawerStage('estimate_approved');

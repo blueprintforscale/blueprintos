@@ -277,8 +277,8 @@ export default function SharedDashboard({ resource, embed }: Props) {
                     )}
                   </div>
                 </motion.div>
-                {/* Google Ads metrics */}
-                {activeSource !== 'all' && (
+                {/* Ad metrics (CPL, ROAS, Ad Spend) — only for paid sources */}
+                {(activeSource === 'google_ads' || activeSource === 'lsa') && (
                   <motion.div variants={item}>
                     <AdMetricsCards data={adMetrics} days={dateRange.days} onCplClick={() => {
                       setDrawerStage('cpl_leads');
@@ -303,8 +303,8 @@ export default function SharedDashboard({ resource, embed }: Props) {
                     />
                   </motion.div>
                 )}
-                {/* Guarantee */}
-                {activeSource !== 'all' && (
+                {/* Guarantee — only for paid sources */}
+                {(activeSource === 'google_ads' || activeSource === 'lsa') && (
                   <motion.div variants={item}>
                     <GuaranteeBar data={adMetrics} onClick={() => {
                       setDrawerStage('estimate_approved');
