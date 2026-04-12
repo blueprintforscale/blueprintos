@@ -79,7 +79,7 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
 };
 
 function getHighestStage(lead: Lead): string {
-  if (lead.job_completed || lead.revenue_closed) return 'Job Completed';
+  if (lead.job_completed || (lead.invoiced_revenue && lead.invoiced_revenue > 0)) return 'Job Completed';
   if (lead.job_scheduled) return 'Job Scheduled';
   if (lead.estimate_approved) return 'Estimate Approved';
   if (lead.estimate_sent) return 'Estimate Sent';
@@ -101,7 +101,7 @@ function filterByStage(leads: Lead[], stage: FunnelStage, showExcluded?: boolean
     return leads.filter((l) => l.job_scheduled || l.estimate_approved);
   }
   if (stage === 'job_completed') {
-    return leads.filter((l) => l.job_completed || l.revenue_closed);
+    return leads.filter((l) => l.job_completed || (l.invoiced_revenue && l.invoiced_revenue > 0));
   }
   return leads.filter((l) => l[stage] === true);
 }
