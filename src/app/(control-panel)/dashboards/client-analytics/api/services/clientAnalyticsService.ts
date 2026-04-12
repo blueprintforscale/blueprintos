@@ -68,6 +68,9 @@ export const clientAnalyticsService = {
   getSourceTabs: (customerId: number) =>
     fetchJson<SourceTab[]>(`clients/${customerId}/source-tabs`),
 
+  getGroupSourceTabs: (slug: string) =>
+    fetchJson<SourceTab[]>(`groups/${slug}/source-tabs`),
+
   getCallAnalytics: (customerId: number, dateFrom?: string, dateTo?: string) => {
     const params = new URLSearchParams();
     if (dateFrom) params.set('date_from', dateFrom);

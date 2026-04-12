@@ -35,6 +35,7 @@ import {
   useRecentActivity,
   useLeads,
   useSourceTabs,
+  useGroupSourceTabs,
   useCallAnalytics,
 } from '../../api/hooks/useClientAnalytics';
 import { clientAnalyticsService } from '../../api/services/clientAnalyticsService';
@@ -104,7 +105,9 @@ function ClientAnalyticsView() {
   // Per-client widgets — disabled when a group is selected
   const { data: trend } = useMonthlyTrend(isGroup ? 0 : (selectedClient ?? 0), 6);
   const { data: activity } = useRecentActivity(isGroup ? 0 : (selectedClient ?? 0));
-  const { data: sourceTabs } = useSourceTabs(isGroup ? 0 : (selectedClient ?? 0));
+  const clientSourceTabs = useSourceTabs(isGroup ? 0 : (selectedClient ?? 0));
+  const groupSourceTabs = useGroupSourceTabs(isGroup ? groupSlug : '');
+  const sourceTabs = isGroup ? groupSourceTabs.data : clientSourceTabs.data;
 
   // Lead spreadsheet — per-client or per-group (fans out to members server-side)
   const { data: spreadsheetData } = useQuery({

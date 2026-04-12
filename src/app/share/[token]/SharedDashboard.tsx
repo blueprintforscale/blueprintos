@@ -33,6 +33,7 @@ import {
   useMonthlyTrend,
   useRecentActivity,
   useSourceTabs,
+  useGroupSourceTabs,
   useCallAnalytics,
 } from '../../(control-panel)/dashboards/client-analytics/api/hooks/useClientAnalytics';
 import { clientAnalyticsService } from '../../(control-panel)/dashboards/client-analytics/api/services/clientAnalyticsService';
@@ -123,7 +124,9 @@ export default function SharedDashboard({ resource, embed }: Props) {
 
   const { data: trend } = useMonthlyTrend(isGroup ? 0 : customerId, 6);
   const { data: activity } = useRecentActivity(isGroup ? 0 : customerId);
-  const { data: sourceTabs } = useSourceTabs(isGroup ? 0 : customerId);
+  const clientSourceTabs = useSourceTabs(isGroup ? 0 : customerId);
+  const groupSourceTabs = useGroupSourceTabs(isGroup ? groupSlug : '');
+  const sourceTabs = isGroup ? groupSourceTabs.data : clientSourceTabs.data;
 
   const { data: spreadsheetData } = useQuery({
     queryKey: ['leadSpreadsheet', isGroup ? `group:${groupSlug}` : customerId, activeSource, dateFrom, dateTo],

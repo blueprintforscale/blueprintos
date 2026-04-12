@@ -81,6 +81,14 @@ export function useSourceTabs(customerId: number) {
   });
 }
 
+export function useGroupSourceTabs(slug: string) {
+  return useQuery({
+    queryKey: ['groupSourceTabs', slug],
+    queryFn: () => clientAnalyticsService.getGroupSourceTabs(slug),
+    enabled: !!slug,
+  });
+}
+
 export function useCallAnalytics(customerId: number, dateFrom?: string, dateTo?: string) {
   return useQuery({
     queryKey: ['callAnalytics', customerId, dateFrom, dateTo],
