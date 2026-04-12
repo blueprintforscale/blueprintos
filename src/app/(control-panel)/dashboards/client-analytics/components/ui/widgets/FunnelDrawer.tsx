@@ -79,7 +79,7 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
 };
 
 function getHighestStage(lead: Lead): string {
-  if (lead.job_completed) return 'Job Completed';
+  if (lead.job_completed || lead.revenue_closed) return 'Job Completed';
   if (lead.job_scheduled) return 'Job Scheduled';
   if (lead.estimate_approved) return 'Estimate Approved';
   if (lead.estimate_sent) return 'Estimate Sent';
