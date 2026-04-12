@@ -154,6 +154,7 @@ const SOURCE_BADGE: Record<string, { label: string; color: string }> = {
   google_ads: { label: 'Google Ads', color: '#3b8a5a' },
   gbp: { label: 'Google Business Profile', color: '#4285f4' },
   lsa: { label: 'Local Services Ads', color: '#f59e0b' },
+  referral: { label: 'Referral', color: '#8b5cf6' },
   all: { label: 'All Sources', color: '#5a554d' },
 };
 

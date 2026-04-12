@@ -401,6 +401,7 @@ export default function SharedDashboard({ resource, embed }: Props) {
       leads={spreadsheetData}
       customerId={customerId}
       crm={fms}
+      source={activeSource}
       adSpend={drawerAdSpend}
       programPrice={drawerProgramPrice}
       closedRev={adMetrics?.total_closed_rev}
