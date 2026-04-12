@@ -304,7 +304,7 @@ export default function SharedDashboard({ resource, embed }: Props) {
                   </motion.div>
                 )}
                 {/* Guarantee — only for paid sources */}
-                {(activeSource === 'google_ads' || activeSource === 'lsa') && (
+                {activeSource === 'google_ads' && (
                   <motion.div variants={item}>
                     <GuaranteeBar data={adMetrics} onClick={() => {
                       setDrawerStage('estimate_approved');

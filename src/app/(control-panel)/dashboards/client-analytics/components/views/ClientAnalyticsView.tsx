@@ -334,7 +334,7 @@ function ClientAnalyticsView() {
                   </motion.div>
                 )}
                 {/* Guarantee progress bar — hidden for GBP (no ad spend = no guarantee) */}
-                {(activeSource === 'google_ads' || activeSource === 'lsa') && (
+                {activeSource === 'google_ads' && (
                   <motion.div variants={item}>
                     <GuaranteeBar data={adMetrics} onClick={() => {
                       setDrawerStage('estimate_approved');
