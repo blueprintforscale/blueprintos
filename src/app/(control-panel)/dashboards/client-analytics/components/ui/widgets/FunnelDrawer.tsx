@@ -94,6 +94,15 @@ function filterByStage(leads: Lead[], stage: FunnelStage, showExcluded?: boolean
   if (stage === 'open_estimates') {
     return leads.filter((l) => l.estimate_sent && !l.estimate_approved && !l.revenue_closed);
   }
+  // mv_funnel_leads fallbacks: job_scheduled includes approved estimates,
+  // job_completed includes treatment invoices. Match that logic here so
+  // drawer counts align with the funnel chart.
+  if (stage === 'job_scheduled') {
+    return leads.filter((l) => l.job_scheduled || l.estimate_approved);
+  }
+  if (stage === 'job_completed') {
+    return leads.filter((l) => l.job_completed || l.revenue_closed);
+  }
   return leads.filter((l) => l[stage] === true);
 }
 
