@@ -268,11 +268,13 @@ export default function SharedDashboard({ resource, embed }: Props) {
                 <motion.div variants={item}>
                   <SummaryCards data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                 </motion.div>
-                {/* Conversion funnel + cohort tiles */}
+                {/* Conversion funnel + cohort tiles (cohort hidden on GBP) */}
                 <motion.div variants={item}>
-                  <div className="grid gap-6" style={{ gridTemplateColumns: '2fr 1fr' }}>
+                  <div className="grid gap-6" style={{ gridTemplateColumns: activeSource === 'gbp' ? '1fr' : '2fr 1fr' }}>
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
-                    <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                    {activeSource !== 'gbp' && (
+                      <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                    )}
                   </div>
                 </motion.div>
                 {/* Google Ads metrics */}
