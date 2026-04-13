@@ -174,9 +174,17 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSp
   const isSpamFiltered = (l: Lead) => l.lost_reason ? spamPattern.test(l.lost_reason) : false;
 
   const allForStage = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
-  const filtered = stage === 'cpl_leads' && !showExcluded
+  const unsorted = stage === 'cpl_leads' && !showExcluded
     ? allForStage.filter((l) => !isSpamFiltered(l))
     : allForStage;
+  // For estimate_approved drawer: show leads that haven't progressed further first
+  const filtered = stage === 'estimate_approved'
+    ? [...unsorted].sort((a, b) => {
+        const aProgressed = a.job_scheduled || a.job_completed ? 1 : 0;
+        const bProgressed = b.job_scheduled || b.job_completed ? 1 : 0;
+        return aProgressed - bProgressed;
+      })
+    : unsorted;
   const excludedCount = stage === 'cpl_leads' ? allForStage.filter((l) => isSpamFiltered(l)).length : 0;
 
   const handleFlag = async (reason: string, notes: string) => {
