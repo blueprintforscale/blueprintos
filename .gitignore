@@ -65,3 +65,5 @@ amplifytools.xcconfig
 # Local Netlify folder
 .netlify
 .vercel
+tsconfig.tsbuildinfo
+=
