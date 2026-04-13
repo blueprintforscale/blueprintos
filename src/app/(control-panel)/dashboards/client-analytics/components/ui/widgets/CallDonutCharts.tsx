@@ -90,15 +90,19 @@ function DonutCard({ donut, subtitle }: { donut: CallDonut; subtitle: string }) 
   );
 }
 
-type Props = { data: CallAnalyticsData | undefined };
+type Props = { data: CallAnalyticsData | undefined; sourceLabel?: string };
 
-function CallDonutCharts({ data }: Props) {
+function CallDonutCharts({ data, sourceLabel }: Props) {
   if (!data) return null;
+
+  const adsDonut = sourceLabel
+    ? { ...data.donut_google_ads, label: sourceLabel }
+    : data.donut_google_ads;
 
   return (
     <Paper className="rounded-xl p-4 shadow-sm">
       <div className="grid grid-cols-2 gap-4">
-        <DonutCard donut={data.donut_google_ads} subtitle="First-Time Callers · Business Hours" />
+        <DonutCard donut={adsDonut} subtitle="First-Time Callers · Business Hours" />
         <DonutCard donut={data.donut_overall} subtitle="All Sources · Business Hours" />
       </div>
     </Paper>

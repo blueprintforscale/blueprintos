@@ -81,8 +81,8 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
 };
 
 function getHighestStage(lead: Lead): string {
-  if (lead.job_completed) return 'Job Completed';
-  if (lead.job_scheduled) return 'Job Scheduled';
+  if (lead.job_completed && !lead.job_completed_inferred) return 'Job Completed';
+  if (lead.job_scheduled && !lead.job_scheduled_inferred) return 'Job Scheduled';
   if (lead.estimate_approved) return 'Estimate Approved';
   if (lead.estimate_sent) return 'Estimate Sent';
   if (lead.inspection_completed) return 'Inspection Complete';
@@ -179,13 +179,14 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSp
   const unsorted = stage === 'cpl_leads' && !showExcluded
     ? allForStage.filter((l) => !isSpamFiltered(l))
     : allForStage;
-  // For estimate_approved drawer: show leads that haven't progressed further first
+  // For estimate_approved drawer: show stalled leads (no REAL job scheduled) first.
+  // Inferred job_scheduled/job_completed means there's no actual HCP job -- just an
+  // estimate/invoice fallback -- so those leads are still stalled from a scheduling POV.
+  const isProgressed = (l: Lead) =>
+    (l.job_scheduled && !l.job_scheduled_inferred) ||
+    (l.job_completed && !l.job_completed_inferred);
   const filtered = stage === 'estimate_approved'
-    ? [...unsorted].sort((a, b) => {
-        const aProgressed = a.job_scheduled || a.job_completed ? 1 : 0;
-        const bProgressed = b.job_scheduled || b.job_completed ? 1 : 0;
-        return aProgressed - bProgressed;
-      })
+    ? [...unsorted].sort((a, b) => (isProgressed(a) ? 1 : 0) - (isProgressed(b) ? 1 : 0))
     : unsorted;
   const excludedCount = stage === 'cpl_leads' ? allForStage.filter((l) => isSpamFiltered(l)).length : 0;
 
@@ -407,7 +408,7 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSp
                   style={{
                     borderColor: '#f0ede6',
                     borderLeft: lead.client_flag_reason ? '3px solid #c4890a' : stage === 'cpl_leads' && isSpamFiltered(lead) ? '3px solid #c5bfb6' : undefined,
-                    backgroundColor: stage === 'estimate_approved' && !lead.job_scheduled && !lead.job_completed ? '#fdf0ef' : undefined,
+                    backgroundColor: stage === 'estimate_approved' && !((lead.job_scheduled && !lead.job_scheduled_inferred) || (lead.job_completed && !lead.job_completed_inferred)) ? '#fdf0ef' : undefined,
                   }}
                 >
                   {/* Row 1: Name + source badge + flag badge + revenue + HCP link */}
