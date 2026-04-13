@@ -5,6 +5,7 @@ export type Client = {
   ads_manager: string;
   budget: number;
   start_date: string;
+  tracking_start_date?: string;
   field_management_software: string;
   inspection_type: string;
   months_in_program: number;
@@ -19,6 +20,7 @@ export type Group = {
   description?: string;
   dashboard_token?: string;
   start_date?: string;
+  tracking_start_date?: string;
   member_ids: (number | string)[];
   member_names: string[];
 };

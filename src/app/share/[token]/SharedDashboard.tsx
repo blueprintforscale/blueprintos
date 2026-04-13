@@ -175,6 +175,7 @@ export default function SharedDashboard({ resource, embed }: Props) {
   // For client: field_management_software. For group: always housecall_pro (enforced by API).
   const fms = isGroup ? 'housecall_pro' : (resource as ClientResource).field_management_software;
   const startDate = resource.start_date;
+  const trackingStartDate = (resource as any).tracking_start_date;
 
   const cplSource = isShortRange && funnel90 ? funnel90 : funnel;
   const adMetrics = funnel ? {
@@ -230,7 +231,7 @@ export default function SharedDashboard({ resource, embed }: Props) {
               {activeTab !== 3 && (
                 <>
                   <div className="h-4 w-px" style={{ backgroundColor: '#ddd8cb' }} />
-                  <DateRangePicker value={dateRange} onChange={setDateRange} startDate={startDate} />
+                  <DateRangePicker value={dateRange} onChange={setDateRange} startDate={startDate} trackingStartDate={trackingStartDate} />
                 </>
               )}
               <a

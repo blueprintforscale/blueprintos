@@ -166,6 +166,7 @@ function ClientAnalyticsView() {
   // For groups, the API enforces HCP-only members today
   const clientCrm = isGroup ? 'housecall_pro' : selectedClientObj?.field_management_software;
   const headerStartDate = isGroup ? selectedGroupObj?.start_date : selectedClientObj?.start_date;
+  const headerTrackingStartDate = isGroup ? selectedGroupObj?.tracking_start_date : selectedClientObj?.tracking_start_date;
   const headerToken = isGroup
     ? (selectedGroupObj as any)?.dashboard_token
     : (selectedClientObj as any)?.dashboard_token;
@@ -262,7 +263,7 @@ function ClientAnalyticsView() {
             />
           </div>
           <SourceTabs tabs={sourceTabs} activeTab={activeSource} onTabChange={setActiveSource} />
-          {activeTab !== 3 && <DateRangePicker value={dateRange} onChange={setDateRange} startDate={headerStartDate} />}
+          {activeTab !== 3 && <DateRangePicker value={dateRange} onChange={setDateRange} startDate={headerStartDate} trackingStartDate={headerTrackingStartDate} />}
           <Tabs
             value={activeTab}
             onChange={(_, v) => setActiveTab(v)}
