@@ -79,7 +79,7 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
 };
 
 function getHighestStage(lead: Lead): string {
-  if (lead.job_completed || (lead.invoiced_revenue && lead.invoiced_revenue > 0)) return 'Job Completed';
+  if (lead.job_completed) return 'Job Completed';
   if (lead.job_scheduled) return 'Job Scheduled';
   if (lead.estimate_approved) return 'Estimate Approved';
   if (lead.estimate_sent) return 'Estimate Sent';
@@ -402,7 +402,11 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSp
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.03, duration: 0.2 }}
                   className={`border-b px-5 py-3 hover:bg-gray-50 ${lead.client_flag_reason ? 'opacity-70' : ''} ${stage === 'cpl_leads' && isSpamFiltered(lead) ? 'opacity-50' : ''}`}
-                  style={{ borderColor: '#f0ede6', borderLeft: lead.client_flag_reason ? '3px solid #c4890a' : stage === 'cpl_leads' && isSpamFiltered(lead) ? '3px solid #c5bfb6' : undefined }}
+                  style={{
+                    borderColor: '#f0ede6',
+                    borderLeft: lead.client_flag_reason ? '3px solid #c4890a' : stage === 'cpl_leads' && isSpamFiltered(lead) ? '3px solid #c5bfb6' : undefined,
+                    backgroundColor: stage === 'estimate_approved' && !lead.job_scheduled && !lead.job_completed ? '#fdf0ef' : undefined,
+                  }}
                 >
                   {/* Row 1: Name + source badge + flag badge + revenue + HCP link */}
                   <div className="flex items-center justify-between">
