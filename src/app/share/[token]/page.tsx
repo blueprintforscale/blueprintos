@@ -9,10 +9,39 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 30_000, refetchOnWindowFocus: false } },
 });
 
+// Map URL ?tab= values to tab indices in SharedDashboard.
+const TAB_MAP: Record<string, number> = {
+  overview: 0,
+  leads: 1,
+  calls: 2,
+  trends: 3,
+};
+
+// Whitelist of FunnelStage drawer values that can be opened via ?drawer=.
+const DRAWER_STAGES = new Set([
+  'leads',
+  'inspection_scheduled',
+  'inspection_completed',
+  'estimate_sent',
+  'estimate_approved',
+  'job_scheduled',
+  'job_completed',
+  'revenue_closed',
+  'open_estimates',
+  'cpl_leads',
+]);
+
 export default function SharePage() {
   const { token } = useParams<{ token: string }>();
   const searchParams = useSearchParams();
   const embed = searchParams.get('embed') === 'true';
+  const tabParam = (searchParams.get('tab') || '').toLowerCase();
+  const drawerParam = (searchParams.get('drawer') || '').toLowerCase();
+  const initialTab = TAB_MAP[tabParam] ?? 0;
+  const initialDrawerStage = (DRAWER_STAGES.has(drawerParam) ? drawerParam : null) as
+    | 'leads' | 'inspection_scheduled' | 'inspection_completed' | 'estimate_sent'
+    | 'estimate_approved' | 'job_scheduled' | 'job_completed' | 'revenue_closed'
+    | 'open_estimates' | 'cpl_leads' | null;
   const [resource, setResource] = useState<Resource | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -55,7 +84,7 @@ export default function SharePage() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SharedDashboard resource={resource} embed={embed} />
+      <SharedDashboard resource={resource} embed={embed} initialTab={initialTab} initialDrawerStage={initialDrawerStage} />
     </QueryClientProvider>
   );
 }

@@ -86,9 +86,11 @@ export type Resource = ClientResource | GroupResource;
 type Props = {
   resource: Resource;
   embed?: boolean;
+  initialTab?: number;
+  initialDrawerStage?: FunnelStage | null;
 };
 
-export default function SharedDashboard({ resource, embed }: Props) {
+export default function SharedDashboard({ resource, embed, initialTab, initialDrawerStage }: Props) {
   const isGroup = resource.type === 'group';
   // For client: use customer_id. For group: use the first member as a "representative" for the
   // few per-customer widgets we still show (none right now, but leaving it for future).
@@ -97,8 +99,8 @@ export default function SharedDashboard({ resource, embed }: Props) {
     : (resource as ClientResource).customer_id;
   const groupSlug = isGroup ? (resource as GroupResource).slug : '';
   const [activeSource, setActiveSource] = useState('google_ads');
-  const [activeTab, setActiveTab] = useState(0);
-  const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(null);
+  const [activeTab, setActiveTab] = useState(initialTab ?? 0);
+  const [drawerStage, setDrawerStage] = useState<FunnelStage | null>(initialDrawerStage ?? null);
   const [drawerTitle, setDrawerTitle] = useState<string | undefined>(undefined);
   const [drawerAdSpend, setDrawerAdSpend] = useState<number | undefined>(undefined);
   const [drawerProgramPrice, setDrawerProgramPrice] = useState<number | undefined>(undefined);
