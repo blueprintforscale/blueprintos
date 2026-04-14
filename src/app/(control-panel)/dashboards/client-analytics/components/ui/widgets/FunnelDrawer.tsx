@@ -82,8 +82,11 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
 };
 
 function getHighestStage(lead: Lead): string {
-  if (lead.job_completed && !lead.job_completed_inferred) return 'Job Completed';
-  if (lead.job_scheduled && !lead.job_scheduled_inferred) return 'Job Scheduled';
+  // Use the raw booleans (including inferred) so badges match the funnel counts.
+  // The Inferred yellow pill next to the badge indicates when a stage came from
+  // inference rather than an explicit CRM record.
+  if (lead.job_completed) return 'Job Completed';
+  if (lead.job_scheduled) return 'Job Scheduled';
   if (lead.estimate_approved) return 'Estimate Approved';
   if (lead.estimate_sent) return 'Estimate Sent';
   if (lead.inspection_completed) return 'Inspection Complete';
