@@ -326,7 +326,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
       },
     }];
   }
-  if (projectedValue !== null && projectedValue > 0 && !campaignIsolated) {
+  if (projectedValue !== null && projectedValue > 0 && !campaignIsolated && cfg.projectable) {
     annotations.points = [{
       x: labels[labels.length - 1],
       y: projectedValue,
