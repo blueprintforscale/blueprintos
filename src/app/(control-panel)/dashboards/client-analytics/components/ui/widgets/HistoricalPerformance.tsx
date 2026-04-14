@@ -10,8 +10,16 @@ import type { MonthlyTrend } from '../../../api/types';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 type CampaignTrend = { name: string; data: { month_start: string; short_label: string; leads: number }[] };
-type Props = { data: MonthlyTrend[] | undefined; startDate?: string; showSuperQuality?: boolean; campaignTrend?: CampaignTrend[] };
-type Metric = 'leads' | 'contacts' | 'super_quality' | 'spend' | 'cpl' | 'conversions' | 'close_rate' | 'book_rate' | 'roas' | 'revenue';
+type SeoMonthlyPoint = { month_start: string; short_label: string; leads: number };
+type SeoTrendData = { monthly: SeoMonthlyPoint[]; seo_start: string | null; baseline_per_mo: number | null };
+type Props = {
+  data: MonthlyTrend[] | undefined;
+  startDate?: string;
+  showSuperQuality?: boolean;
+  campaignTrend?: CampaignTrend[];
+  seoTrend?: SeoTrendData;
+};
+type Metric = 'leads' | 'contacts' | 'super_quality' | 'spend' | 'cpl' | 'conversions' | 'close_rate' | 'book_rate' | 'roas' | 'revenue' | 'seo_leads';
 
 // Set to true to show book rate and close rate pills on the trend chart
 const SHOW_RATE_METRICS = false;
@@ -27,6 +35,7 @@ const metricsList: { key: Metric; label: string; format: (v: number) => string; 
   { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#D4A843', projectable: false, hidden: !SHOW_RATE_METRICS },
   { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#8B5CF6', projectable: false },
   { key: 'revenue', label: 'Revenue', format: (v) => v >= 1000 ? `$${(v / 1000).toFixed(1)}K` : `$${Math.round(v)}`, color: '#3b8a5a', projectable: false },
+  { key: 'seo_leads', label: 'SEO Leads', format: (v) => String(Math.round(v)), color: '#0ea5e9', projectable: false },
 ];
 
 function isCurrentMonth(monthStart: string): boolean {
@@ -44,7 +53,7 @@ function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction
 
 const CAMPAIGN_COLORS = ['#6366f1', '#E85D4D', '#2A9D8F', '#D4A843', '#8B5CF6', '#F97316', '#06B6D4', '#EC4899'];
 
-function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTrend }: Props) {
+function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTrend, seoTrend }: Props) {
   const [metric, setMetric] = useState<Metric>('leads');
   const [overlays, setOverlays] = useState<Metric[]>([]);
   const [showCampaigns, setShowCampaigns] = useState(false);
@@ -54,9 +63,29 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
 
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
-  const visibleMetrics = (showSuperQuality ? metricsList : metricsList.filter((m) => m.key !== 'super_quality')).filter((m) => !m.hidden);
+  // Build month-keyed map of SEO leads for quick lookup
+  const seoLeadsByMonth = new Map<string, number>();
+  if (seoTrend?.monthly) {
+    for (const m of seoTrend.monthly) {
+      // Key by YYYY-MM for matching
+      const d = new Date(m.month_start);
+      const key = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+      seoLeadsByMonth.set(key, m.leads);
+    }
+  }
+  const hasSeoData = seoLeadsByMonth.size > 0;
+
+  const visibleMetrics = (showSuperQuality ? metricsList : metricsList.filter((m) => m.key !== 'super_quality'))
+    .filter((m) => !m.hidden)
+    .filter((m) => m.key !== 'seo_leads' || hasSeoData); // only show SEO Leads pill when client has SEO
+
   const cfg = visibleMetrics.find((m) => m.key === metric) || visibleMetrics[0];
   const getValue = (d: MonthlyTrend, key: Metric): number => {
+    if (key === 'seo_leads') {
+      const ms = new Date((d as any).month_start);
+      const k = `${ms.getUTCFullYear()}-${String(ms.getUTCMonth() + 1).padStart(2, '0')}`;
+      return seoLeadsByMonth.get(k) || 0;
+    }
     if (key === 'contacts') return parseFloat((d as any).leads) || 0;
     if (key === 'leads') {
       const leads = parseFloat((d as any).leads) || 0;

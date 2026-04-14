@@ -10,7 +10,6 @@ import ClientSelector, { type Selection } from '../ui/ClientSelector';
 import SourceTabs from '../ui/SourceTabs';
 import AdMetricsCards from '../ui/widgets/AdMetricsCards';
 import SeoMetricsCards from '../ui/widgets/SeoMetricsCards';
-import SeoTrendChart from '../ui/widgets/SeoTrendChart';
 import SummaryCards from '../ui/widgets/SummaryCards';
 import FunnelChart from '../ui/widgets/FunnelChart';
 import MonthlyTrendChart from '../ui/widgets/MonthlyTrendChart';
@@ -135,11 +134,11 @@ function ClientAnalyticsView() {
     queryFn: () => fetch(`/api/blueprint/clients/${selectedClient}/seo-metrics`).then(r => r.json()),
     enabled: !isGroup && !!selectedClient && isSeo,
   });
-  // SEO monthly trend (only fetch on SEO + Trends tab)
+  // SEO monthly trend (fetched on Trends tab regardless of source)
   const { data: seoTrend } = useQuery({
     queryKey: ['seoMonthlyTrend', selectedClient],
     queryFn: () => fetch(`/api/blueprint/clients/${selectedClient}/seo-monthly-trend?months=24`).then(r => r.json()),
-    enabled: !isGroup && !!selectedClient && isSeo && activeTab === 3,
+    enabled: !isGroup && !!selectedClient && activeTab === 3,
   });
 
   // Google Ads panel data (only fetch on Overview with Google Ads source)
@@ -425,11 +424,7 @@ function ClientAnalyticsView() {
 
             {/* ====== PERFORMANCE TAB ====== */}
             {activeTab === 3 && (
-              <motion.div variants={item} className="flex flex-col gap-4">
-                {/* SEO trend chart shows when SEO source is active and client has SEO data */}
-                {isSeo && seoTrend && seoTrend.monthly && seoTrend.monthly.length > 0 && (
-                  <SeoTrendChart data={seoTrend} />
-                )}
+              <motion.div variants={item}>
                 {historicalLoading ? (
                   <div className="flex h-64 items-center justify-center">
                     <div className="flex flex-col items-center gap-3">
@@ -438,7 +433,7 @@ function ClientAnalyticsView() {
                     </div>
                   </div>
                 ) : (
-                  <HistoricalPerformance data={historicalData} startDate={selectedClientObj?.start_date} showSuperQuality={(selectedClientObj as any)?.dashboard_config?.show_super_quality} campaignTrend={campaignTrendData} />
+                  <HistoricalPerformance data={historicalData} startDate={selectedClientObj?.start_date} showSuperQuality={(selectedClientObj as any)?.dashboard_config?.show_super_quality} campaignTrend={campaignTrendData} seoTrend={seoTrend} />
                 )}
               </motion.div>
             )}
