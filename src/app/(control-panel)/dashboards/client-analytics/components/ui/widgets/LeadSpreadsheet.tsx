@@ -29,10 +29,11 @@ type Lead = {
   service_address?: string | null;
   client_flag_reason?: string | null;
   client_flag_at?: string | null;
+  source_label?: string;
 };
 
-function getSource(_lead: Lead): string {
-  return 'Google Ads';
+function getSource(lead: Lead): string {
+  return lead.source_label || 'Unknown';
 }
 
 function getHighestStage(lead: Lead): string {
@@ -68,10 +69,23 @@ function formatPhone(p: string) {
 
 const sourceBgColors: Record<string, string> = {
   'Google Ads': '#3b8a5a',
-  'Google Business Profile': '#c4890a',
-  'Direct / Organic': '#5a554d',
-  'Referral': '#E85D4D',
   'LSA': '#000000',
+  'Google Business Profile': '#c4890a',
+  'Google Organic': '#1a73e8',
+  'Bing Organic': '#0078d4',
+  'Yahoo Organic': '#6001d2',
+  'DuckDuckGo Organic': '#de5833',
+  'AI Search': '#10a37f',
+  'Direct': '#5a554d',
+  'Direct / Organic': '#5a554d',
+  'Facebook': '#1877f2',
+  'Instagram': '#e1306c',
+  'Yelp': '#d32323',
+  'Referral': '#E85D4D',
+  'Self-Gen': '#7c3aed',
+  'Internal': '#9ca3af',
+  'Unknown': '#6b7280',
+  'Unknown Source': '#6b7280',
 };
 
 const stageStyles: Record<string, { bg: string; text: string }> = {
