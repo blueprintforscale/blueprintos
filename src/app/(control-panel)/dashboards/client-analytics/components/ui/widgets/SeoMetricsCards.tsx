@@ -104,16 +104,16 @@ function SeoMetricsCards({ data }: Props) {
           </Typography>
         </div>
         {isEarly ? (
-          <Typography className="mt-1 text-xs" sx={{ color: '#c5bfb6' }}>
+          <Typography className="mt-1 text-xs font-medium" sx={{ color: '#ddd8cb' }}>
             Revenue maturing — accumulates over 60–90 days
           </Typography>
         ) : (
-          <Typography className="mt-1 text-xs" sx={{ color: '#c5bfb6' }}>
+          <Typography className="mt-1 text-xs font-medium" sx={{ color: '#ddd8cb' }}>
             {data.revenue_lift_per_mo > 0 ? '+' : ''}{formatDollars(data.revenue_lift_per_mo)}/mo revenue
             {leadsLiftPct !== null && ` · ${leadsLiftPct > 0 ? '+' : ''}${leadsLiftPct}%`}
           </Typography>
         )}
-        <Typography className="mt-1 text-[10px]" sx={{ color: '#5a554d' }}>
+        <Typography className="mt-1 text-xs" sx={{ color: '#8a8279' }}>
           Above pre-SEO baseline
         </Typography>
       </Paper>
