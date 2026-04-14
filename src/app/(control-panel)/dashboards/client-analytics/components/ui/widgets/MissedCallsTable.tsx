@@ -26,6 +26,14 @@ function formatTime(iso: string) {
   }
 }
 
+function formatDuration(seconds: number | null | undefined) {
+  if (seconds == null || seconds === 0) return '\u2014';
+  if (seconds < 60) return `${seconds}s`;
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return s === 0 ? `${m}m` : `${m}m ${s}s`;
+}
+
 type Props = { data: MissedCallRow[] | undefined };
 
 function MissedCallsTable({ data }: Props) {
@@ -68,7 +76,7 @@ function MissedCallsTable({ data }: Props) {
             <tr style={{ color: '#8a8279' }}>
               <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>Phone</th>
               <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>When</th>
-              <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>Caller ID</th>
+              <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>Duration</th>
               <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>Source</th>
               <th className="border-b px-3 py-2 text-[9px] font-bold uppercase tracking-widest" style={{ borderColor: '#ddd8cb' }}>Status</th>
             </tr>
@@ -90,8 +98,8 @@ function MissedCallsTable({ data }: Props) {
                       style={{ backgroundColor: '#fef3d1', color: '#a87408' }}>Biz Hrs</span>
                   )}
                 </td>
-                <td className="border-b px-3 py-2 text-[11px]" style={{ borderColor: '#eee', color: '#5a554d' }}>
-                  {call.customer_name || '\u2014'}
+                <td className="border-b px-3 py-2 text-[11px] font-mono" style={{ borderColor: '#eee', color: '#5a554d' }}>
+                  {formatDuration(call.duration)}
                 </td>
                 <td className="border-b px-3 py-2" style={{ borderColor: '#eee' }}>
                   {call.classified_source === 'google_ads' ? (
