@@ -99,21 +99,33 @@ function SeoMetricsCards({ data }: Props) {
           >
             {leadsLiftPositive ? '+' : ''}{data.leads_lift_per_mo.toFixed(1)}
           </Typography>
-          <Typography className="text-base" sx={{ color: '#c5bfb6' }}>
+          <Typography className="text-base font-medium" sx={{ color: '#fff' }}>
             leads/mo
           </Typography>
         </div>
         {isEarly ? (
-          <Typography className="mt-1 text-xs font-medium" sx={{ color: '#ddd8cb' }}>
+          <Typography className="mt-1 text-sm font-semibold" sx={{ color: '#ddd8cb' }}>
             Revenue maturing — accumulates over 60–90 days
           </Typography>
         ) : (
-          <Typography className="mt-1 text-xs font-medium" sx={{ color: '#ddd8cb' }}>
-            {data.revenue_lift_per_mo > 0 ? '+' : ''}{formatDollars(data.revenue_lift_per_mo)}/mo revenue
-            {leadsLiftPct !== null && ` · ${leadsLiftPct > 0 ? '+' : ''}${leadsLiftPct}%`}
-          </Typography>
+          <div className="mt-1 flex items-baseline gap-2">
+            <Typography
+              className="text-xl font-bold tracking-tight"
+              sx={{ color: data.revenue_lift_per_mo > 0 ? '#fff' : '#5a554d' }}
+            >
+              {data.revenue_lift_per_mo > 0 ? '+' : ''}{formatDollars(data.revenue_lift_per_mo)}
+            </Typography>
+            <Typography className="text-sm font-medium" sx={{ color: '#ddd8cb' }}>
+              /mo revenue
+            </Typography>
+            {leadsLiftPct !== null && (
+              <Typography className="text-sm font-semibold" sx={{ color: '#E85D4D' }}>
+                {leadsLiftPct > 0 ? '+' : ''}{leadsLiftPct}%
+              </Typography>
+            )}
+          </div>
         )}
-        <Typography className="mt-1 text-xs" sx={{ color: '#8a8279' }}>
+        <Typography className="mt-2 text-xs" sx={{ color: '#8a8279' }}>
           Above pre-SEO baseline
         </Typography>
       </Paper>
