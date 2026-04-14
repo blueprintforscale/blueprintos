@@ -25,6 +25,7 @@ import CohortTiles from '../../(control-panel)/dashboards/client-analytics/compo
 import GoogleAdsPanel from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/GoogleAdsPanel';
 import GuaranteeBar from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/GuaranteeBar';
 import SeoMetricsCards from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/SeoMetricsCards';
+import SeoTrendChart from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/SeoTrendChart';
 import FunnelDrawer from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
 import type { FunnelStage } from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
 import DateRangePicker from '../../(control-panel)/dashboards/client-analytics/components/ui/DateRangePicker';
@@ -150,6 +151,12 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
     queryKey: ['seoMetrics', customerId],
     queryFn: () => fetch(`/api/blueprint/clients/${customerId}/seo-metrics`).then(r => r.json()),
     enabled: !isGroup && isSeo,
+  });
+  // SEO monthly trend — only when SEO + Trends tab
+  const { data: seoTrend } = useQuery({
+    queryKey: ['seoMonthlyTrend', customerId],
+    queryFn: () => fetch(`/api/blueprint/clients/${customerId}/seo-monthly-trend?months=24`).then(r => r.json()),
+    enabled: !isGroup && isSeo && activeTab === 3,
   });
 
   // Google Ads panel data — per-customer only (hidden for groups)
@@ -387,7 +394,11 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
             )}
 
             {activeTab === 3 && (
-              <motion.div variants={item}>
+              <motion.div variants={item} className="flex flex-col gap-4">
+                {/* SEO trend chart shows when SEO source is active and client has SEO data */}
+                {isSeo && seoTrend && seoTrend.monthly && seoTrend.monthly.length > 0 && (
+                  <SeoTrendChart data={seoTrend} />
+                )}
                 {historicalLoading ? (
                   <div className="flex h-64 items-center justify-center">
                     <div className="flex flex-col items-center gap-3">
