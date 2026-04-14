@@ -37,6 +37,7 @@ type Lead = {
   lost_reason?: string | null;
   is_spam?: boolean;
   reactivated?: boolean;
+  source_label?: string;
 };
 
 export type FunnelStage =
@@ -163,7 +164,29 @@ const SOURCE_BADGE: Record<string, { label: string; color: string }> = {
   gbp: { label: 'Google Business Profile', color: '#4285f4' },
   lsa: { label: 'Local Services Ads', color: '#f59e0b' },
   referral: { label: 'Referral', color: '#8b5cf6' },
+  seo: { label: 'Local SEO', color: '#0ea5e9' },
   all: { label: 'All Sources', color: '#5a554d' },
+};
+
+// Per-lead source label colors (used when lead.source_label is set)
+const LEAD_SOURCE_COLORS: Record<string, string> = {
+  'Google Ads': '#3b8a5a',
+  'LSA': '#f59e0b',
+  'Google Business Profile': '#c4890a',
+  'Google Organic': '#1a73e8',
+  'Bing Organic': '#0078d4',
+  'Yahoo Organic': '#6001d2',
+  'DuckDuckGo Organic': '#de5833',
+  'AI Search': '#10a37f',
+  'Direct': '#5a554d',
+  'Facebook': '#1877f2',
+  'Instagram': '#e1306c',
+  'Yelp': '#d32323',
+  'Referral': '#E85D4D',
+  'Self-Gen': '#7c3aed',
+  'Internal': '#9ca3af',
+  'Unknown': '#6b7280',
+  'Unknown Source': '#6b7280',
 };
 
 function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSpend, programPrice, closedRev, periodAdSpend, onClose }: Props) {
@@ -419,9 +442,13 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSp
                       </Typography>
                       <span
                         className="inline-block rounded px-1.5 py-0.5 text-[10px] font-medium text-white"
-                        style={{ backgroundColor: SOURCE_BADGE[source || 'google_ads']?.color || '#3b8a5a' }}
+                        style={{
+                          backgroundColor: lead.source_label
+                            ? (LEAD_SOURCE_COLORS[lead.source_label] || '#5a554d')
+                            : (SOURCE_BADGE[source || 'google_ads']?.color || '#3b8a5a')
+                        }}
                       >
-                        {SOURCE_BADGE[source || 'google_ads']?.label || 'Google Ads'}
+                        {lead.source_label || SOURCE_BADGE[source || 'google_ads']?.label || 'Google Ads'}
                       </span>
                       {lead.client_flag_reason && (
                         <span
