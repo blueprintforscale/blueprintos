@@ -63,6 +63,23 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
 
   if (!data || !Array.isArray(data) || data.length === 0) return null;
 
+  // Trim leading months: start from MIN(program_start, today - 12 months) — capped at full data range
+  // This avoids long flat zero regions before the program existed
+  const trimmedData = (() => {
+    if (!startDate) return data;
+    const programStart = new Date(startDate);
+    const twelveMonthsAgo = new Date();
+    twelveMonthsAgo.setUTCMonth(twelveMonthsAgo.getUTCMonth() - 12);
+    twelveMonthsAgo.setUTCDate(1);
+    // Effective start = earlier of (program start) or (12 months ago)
+    const effectiveStart = programStart < twelveMonthsAgo ? programStart : twelveMonthsAgo;
+    return data.filter((d) => {
+      const ms = new Date((d as any).month_start);
+      return ms >= effectiveStart;
+    });
+  })();
+  const chartData = trimmedData.length > 0 ? trimmedData : data;
+
   // Build month-keyed map of SEO leads for quick lookup
   const seoLeadsByMonth = new Map<string, number>();
   if (seoTrend?.monthly) {
@@ -122,7 +139,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
     return parseFloat((d as any)[key]) || 0;
   };
 
-  const recent = data.slice(-24);
+  const recent = chartData.slice(-24);
   const labels = recent.map((d) => (d as any).short_label || d.label);
 
   // Detect program start month index
