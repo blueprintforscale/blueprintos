@@ -93,7 +93,7 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
     return parseFloat((d as any)[key]) || 0;
   };
 
-  const recent = data.slice(-12);
+  const recent = data.slice(-24);
   const labels = recent.map((d) => (d as any).short_label || d.label);
 
   // Detect program start month index
