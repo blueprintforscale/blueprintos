@@ -88,9 +88,10 @@ type Props = {
   embed?: boolean;
   initialTab?: number;
   initialDrawerStage?: FunnelStage | null;
+  initialDays?: number | null;
 };
 
-export default function SharedDashboard({ resource, embed, initialTab, initialDrawerStage }: Props) {
+export default function SharedDashboard({ resource, embed, initialTab, initialDrawerStage, initialDays }: Props) {
   const isGroup = resource.type === 'group';
   // For client: use customer_id. For group: use the first member as a "representative" for the
   // few per-customer widgets we still show (none right now, but leaving it for future).
@@ -105,9 +106,9 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
   const [drawerAdSpend, setDrawerAdSpend] = useState<number | undefined>(undefined);
   const [drawerProgramPrice, setDrawerProgramPrice] = useState<number | undefined>(undefined);
   const [dateRange, setDateRange] = useState({
-    from: new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0],
+    from: new Date(Date.now() - (initialDays ?? 90) * 86400000).toISOString().split('T')[0],
     to: new Date().toISOString().split('T')[0],
-    days: 90 as number | null,
+    days: (initialDays ?? 90) as number | null,
   });
 
   const dateFrom = dateRange.from;

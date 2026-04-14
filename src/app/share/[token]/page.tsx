@@ -37,6 +37,8 @@ export default function SharePage() {
   const embed = searchParams.get('embed') === 'true';
   const tabParam = (searchParams.get('tab') || '').toLowerCase();
   const drawerParam = (searchParams.get('drawer') || '').toLowerCase();
+  const daysParam = parseInt(searchParams.get('days') || '', 10);
+  const initialDays = (daysParam > 0 && daysParam <= 365) ? daysParam : null; // null = use 90-day default
   const initialTab = TAB_MAP[tabParam] ?? 0;
   const initialDrawerStage = (DRAWER_STAGES.has(drawerParam) ? drawerParam : null) as
     | 'leads' | 'inspection_scheduled' | 'inspection_completed' | 'estimate_sent'
@@ -84,7 +86,7 @@ export default function SharePage() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SharedDashboard resource={resource} embed={embed} initialTab={initialTab} initialDrawerStage={initialDrawerStage} />
+      <SharedDashboard resource={resource} embed={embed} initialTab={initialTab} initialDrawerStage={initialDrawerStage} initialDays={initialDays} />
     </QueryClientProvider>
   );
 }
