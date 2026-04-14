@@ -9,6 +9,7 @@ import FusePageSimple from '@fuse/core/FusePageSimple';
 import ClientSelector, { type Selection } from '../ui/ClientSelector';
 import SourceTabs from '../ui/SourceTabs';
 import AdMetricsCards from '../ui/widgets/AdMetricsCards';
+import SeoMetricsCards from '../ui/widgets/SeoMetricsCards';
 import SummaryCards from '../ui/widgets/SummaryCards';
 import FunnelChart from '../ui/widgets/FunnelChart';
 import MonthlyTrendChart from '../ui/widgets/MonthlyTrendChart';
@@ -125,6 +126,14 @@ function ClientAnalyticsView() {
   const { data: callData, isLoading: callsLoading } = useCallAnalytics(
     isGroup ? 0 : (selectedClient ?? 0), dateFrom, dateTo
   );
+
+  // SEO metrics (only fetch on SEO source)
+  const isSeo = activeSource === 'seo';
+  const { data: seoMetrics } = useQuery({
+    queryKey: ['seoMetrics', selectedClient],
+    queryFn: () => fetch(`/api/blueprint/clients/${selectedClient}/seo-metrics`).then(r => r.json()),
+    enabled: !isGroup && !!selectedClient && isSeo,
+  });
 
   // Google Ads panel data (only fetch on Overview with Google Ads source)
   const isGoogleAds = activeSource === 'google_ads';
@@ -308,6 +317,12 @@ function ClientAnalyticsView() {
                     )}
                   </div>
                 </motion.div>
+                {/* SEO metrics (Baseline, Current, Lift) — only for SEO source */}
+                {isSeo && !isGroup && seoMetrics?.has_seo && (
+                  <motion.div variants={item}>
+                    <SeoMetricsCards data={seoMetrics} />
+                  </motion.div>
+                )}
                 {/* Google Ads metrics (CPL, ROAS, Ad Spend) — hidden for GBP (organic, no ad cost) */}
                 {(activeSource === 'google_ads' || activeSource === 'lsa') && (
                   <motion.div variants={item}>

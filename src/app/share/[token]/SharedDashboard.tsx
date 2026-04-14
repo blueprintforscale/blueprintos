@@ -24,6 +24,7 @@ import MissedCallsTable from '../../(control-panel)/dashboards/client-analytics/
 import CohortTiles from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/CohortTiles';
 import GoogleAdsPanel from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/GoogleAdsPanel';
 import GuaranteeBar from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/GuaranteeBar';
+import SeoMetricsCards from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/SeoMetricsCards';
 import FunnelDrawer from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
 import type { FunnelStage } from '../../(control-panel)/dashboards/client-analytics/components/ui/widgets/FunnelDrawer';
 import DateRangePicker from '../../(control-panel)/dashboards/client-analytics/components/ui/DateRangePicker';
@@ -140,6 +141,14 @@ export default function SharedDashboard({ resource, embed }: Props) {
   });
 
   const { data: callData, isLoading: callsLoading } = useCallAnalytics(isGroup ? 0 : customerId, dateFrom, dateTo);
+
+  // SEO metrics — only when SEO tab is active
+  const isSeo = activeSource === 'seo';
+  const { data: seoMetrics } = useQuery({
+    queryKey: ['seoMetrics', customerId],
+    queryFn: () => fetch(`/api/blueprint/clients/${customerId}/seo-metrics`).then(r => r.json()),
+    enabled: !isGroup && isSeo,
+  });
 
   // Google Ads panel data — per-customer only (hidden for groups)
   const isGoogleAds = activeSource === 'google_ads';
@@ -278,6 +287,12 @@ export default function SharedDashboard({ resource, embed }: Props) {
                     )}
                   </div>
                 </motion.div>
+                {/* SEO metrics — only for SEO source */}
+                {isSeo && !isGroup && seoMetrics?.has_seo && (
+                  <motion.div variants={item}>
+                    <SeoMetricsCards data={seoMetrics} />
+                  </motion.div>
+                )}
                 {/* Ad metrics (CPL, ROAS, Ad Spend) — only for paid sources */}
                 {(activeSource === 'google_ads' || activeSource === 'lsa') && (
                   <motion.div variants={item}>
