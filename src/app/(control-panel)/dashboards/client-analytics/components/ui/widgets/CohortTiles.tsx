@@ -203,23 +203,9 @@ function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCo
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1 px-1">
-        <Typography className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#E85D4D' }}>
-          Cohort Benchmarks
-        </Typography>
-        <Typography className="text-[11px]" style={{ color: '#8a8279' }}>
-          Follows the date range above, excluding recent leads that haven't had time to progress —{' '}
-          <a
-            href="/share/how-it-works#cohort-benchmarks"
-            target="_blank"
-            rel="noreferrer"
-            className="underline"
-            style={{ color: '#8a8279' }}
-          >
-            how this works
-          </a>
-        </Typography>
-      </div>
+      <Typography className="px-1 text-xs font-semibold uppercase tracking-wider" style={{ color: '#E85D4D' }}>
+        Cohort Benchmarks
+      </Typography>
       {tiles.map((tile) => (
         <Paper
           key={tile.label}
@@ -238,6 +224,20 @@ function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCo
           {tile.bar}
         </Paper>
       ))}
+      {/* Methodology blurb sits at the bottom so it's available without
+          competing with the tiles for attention. */}
+      <Typography className="px-1 text-[11px]" style={{ color: '#8a8279' }}>
+        Follows the date range above, excluding recent leads that haven't had time to progress —{' '}
+        <a
+          href="/share/how-it-works#cohort-benchmarks"
+          target="_blank"
+          rel="noreferrer"
+          className="underline"
+          style={{ color: '#8a8279' }}
+        >
+          how this works
+        </a>
+      </Typography>
     </div>
   );
 }
