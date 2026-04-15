@@ -94,20 +94,23 @@ function ClientAnalyticsView() {
   const { data: clients } = useClients();
   const { data: groups } = useGroups();
 
-  // Cohort tile windows — follow the selected date range, but cap `to` at
-  // today − delay so only mature leads are counted (see /share/how-it-works#cohort-benchmarks).
-  // Book rate: today − 14d; close rate + full funnel: today − 30d.
-  // When the cap falls before `from`, the selection is entirely inside the delay window —
-  // flag it so the tile shows a "leads too new" message.
+  // Cohort tile windows — follow the selected date range. If the range
+  // extends into the maturation window (today − 14d for book, today − 30d
+  // for close/full), we still compute the rate using the user's range
+  // but flag `immature` so the tile shows an "early read" disclaimer.
+  // If the entire range is inside the delay window, we use the user's
+  // range as-is instead of capping (which would collapse it).
   const daysAgoStrCT = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoffCT = daysAgoStrCT(14);
   const closeCutoffCT = daysAgoStrCT(30);
-  const bookToCT = dateTo <= bookCutoffCT ? dateTo : bookCutoffCT;
-  const closeToCT = dateTo <= closeCutoffCT ? dateTo : closeCutoffCT;
-  const bookCollapsed = dateFrom > bookToCT;
-  const closeCollapsed = dateFrom > closeToCT;
-  const bookFromCT = bookCollapsed ? bookToCT : dateFrom;
-  const closeFromCT = closeCollapsed ? closeToCT : dateFrom;
+  const bookAllImmature = dateFrom > bookCutoffCT;
+  const closeAllImmature = dateFrom > closeCutoffCT;
+  const bookToCT = bookAllImmature ? dateTo : (dateTo <= bookCutoffCT ? dateTo : bookCutoffCT);
+  const closeToCT = closeAllImmature ? dateTo : (dateTo <= closeCutoffCT ? dateTo : closeCutoffCT);
+  const bookFromCT = dateFrom;
+  const closeFromCT = dateFrom;
+  const bookImmature = dateTo > bookCutoffCT;
+  const closeImmature = dateTo > closeCutoffCT;
 
   // Per-client funnel — disabled when a group is selected
   const clientFunnelQ = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, dateFrom, dateTo);
@@ -343,7 +346,7 @@ function ClientAnalyticsView() {
                   <div className="grid gap-6" style={{ gridTemplateColumns: activeSource === 'gbp' ? '1fr' : '2fr 1fr' }}>
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                     {activeSource !== 'gbp' && (
-                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} bookCollapsed={bookCollapsed} closeCollapsed={closeCollapsed} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} bookImmature={bookImmature} closeImmature={closeImmature} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                     )}
                   </div>
                 </motion.div>

@@ -117,23 +117,28 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
   const ninetyDayFrom = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
-  // Cohort tile windows — follow the selected date range, but cap `to` at
-  // today − delay so only mature leads are counted (see /share/how-it-works#cohort-benchmarks).
-  // Book rate:  cap at today − 14d
-  // Close rate + full funnel: cap at today − 30d
-  // When the cap falls before `from`, the selection is entirely inside the
-  // maturation window — we flag that case so the tile shows a "leads too new" message.
+  // Cohort tile windows — follow the selected date range. When the range
+  // extends into the maturation window (today − 14d for book, today − 30d
+  // for close/full), we still compute and show the rate using the user's
+  // full range, but flag it as "immature" so the tile can display an
+  // "early read" disclaimer. See /share/how-it-works#cohort-benchmarks.
   const daysAgoStr = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoff = daysAgoStr(14);
   const closeCutoff = daysAgoStr(30);
-  const bookTo = dateTo <= bookCutoff ? dateTo : bookCutoff;
-  const closeTo = dateTo <= closeCutoff ? dateTo : closeCutoff;
-  const bookCollapsed = dateFrom > bookTo;
-  const closeCollapsed = dateFrom > closeTo;
-  // When collapsed, fetch a safe single-day window so the API doesn't error;
-  // the tile ignores the data and shows the "leads too new" message instead.
-  const bookFrom = bookCollapsed ? bookTo : dateFrom;
-  const closeFrom = closeCollapsed ? closeTo : dateFrom;
+  // For "mature" ranges we cap `to` at the cutoff so immature leads
+  // don't drag the rate down. For ranges that are entirely inside the
+  // delay window we use the user's range as-is (capping would collapse
+  // it to an empty window) and let the disclaimer do the explaining.
+  const bookAllImmature = dateFrom > bookCutoff;
+  const closeAllImmature = dateFrom > closeCutoff;
+  const bookTo = bookAllImmature ? dateTo : (dateTo <= bookCutoff ? dateTo : bookCutoff);
+  const closeTo = closeAllImmature ? dateTo : (dateTo <= closeCutoff ? dateTo : closeCutoff);
+  const bookFrom = dateFrom;
+  const closeFrom = dateFrom;
+  // Disclaimer fires whenever any portion of the range is still maturing —
+  // i.e., `to` wasn't capped at the cutoff because `dateTo` is newer.
+  const bookImmature = dateTo > bookCutoff;
+  const closeImmature = dateTo > closeCutoff;
 
   // Funnel data — use group endpoint for groups, client endpoint for individual clients.
   // Only one of the two queries is enabled at a time (the other is disabled via `enabled: !!id`).
@@ -318,7 +323,7 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
                   <div className="grid gap-6" style={{ gridTemplateColumns: activeSource === 'gbp' ? '1fr' : '2fr 1fr' }}>
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                     {activeSource !== 'gbp' && (
-                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} bookCollapsed={bookCollapsed} closeCollapsed={closeCollapsed} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} bookImmature={bookImmature} closeImmature={closeImmature} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                     )}
                   </div>
                 </motion.div>

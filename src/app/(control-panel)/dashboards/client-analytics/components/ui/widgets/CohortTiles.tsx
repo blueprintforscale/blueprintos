@@ -103,20 +103,23 @@ type ExtendedFunnel = FunnelData & {
 
 type Props = {
   data: ExtendedFunnel | undefined;
-  /** Book rate uses the selected date range capped at today − 14d. Falls back to `data`. */
+  /** Book rate data source. Falls back to `data` if not provided. */
   bookRateData?: ExtendedFunnel;
-  /** Close rate + full funnel use the selected date range capped at today − 30d. Falls back to `data`. */
+  /** Close rate + full funnel data source. Falls back to `data`. */
   closeRateData?: ExtendedFunnel;
-  /** True when the selected date range is entirely inside the 14-day maturation window. */
-  bookCollapsed?: boolean;
-  /** True when the selected date range is entirely inside the 30-day maturation window. */
-  closeCollapsed?: boolean;
+  /** True when the selected range extends into the last 14 days — book-rate data
+   *  still includes leads that haven't had time to book yet. Rate is shown with
+   *  a disclaimer so users read it as an early indicator, not a final number. */
+  bookImmature?: boolean;
+  /** Same idea for close rate / full funnel: true when range extends into the
+   *  last 30 days (inspections haven't had time to close). */
+  closeImmature?: boolean;
   onStageClick?: (stage: FunnelStage, title?: string) => void;
 };
 
 const MIN_SAMPLE = 10; // below this, show dash rather than a misleading %
 
-function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCollapsed, onStageClick }: Props) {
+function CohortTiles({ data, bookRateData, closeRateData, bookImmature, closeImmature, onStageClick }: Props) {
   if (!data) return null;
 
   const rawContacts = parseInt(data.total_contacts as any) || 0;
@@ -124,51 +127,42 @@ function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCo
   const contacts = Math.max(rawContacts, quality);
   const spam = Math.max(contacts - quality, 0);
 
-  // Book rate uses the selected range minus the last 14 days (maturation delay).
+  // Book rate — always compute from whatever data the parent passes; the
+  // parent is responsible for choosing whether that's capped-to-mature or
+  // the user's full range. `bookImmature` just flags "this number includes
+  // leads still in the delay window, show a disclaimer".
   const bookSource = bookRateData || data;
   const bookQuality = parseInt(bookSource.quality_leads as any) || parseInt(bookSource.leads as any) || 0;
   const bookInspScheduled = parseInt(bookSource.inspection_scheduled as any) || 0;
-  const bookRate = bookCollapsed
-    ? null
-    : bookQuality >= MIN_SAMPLE
+  const bookRate = bookQuality >= MIN_SAMPLE
     ? (bookInspScheduled / bookQuality) * 100
     : null;
 
-  // Close rate + full funnel use the selected range minus the last 30 days.
+  // Close rate + full funnel — same idea, different delay window.
   const closeSource = closeRateData || data;
   const closeQuality = parseInt(closeSource.quality_leads as any) || parseInt(closeSource.leads as any) || 0;
   const closeInspScheduled = parseInt(closeSource.inspection_scheduled as any) || 0;
   const closeEstApproved = parseInt(closeSource.estimate_approved as any) || 0;
-  const closeRate = closeCollapsed
-    ? null
-    : closeInspScheduled >= MIN_SAMPLE
+  const closeRate = closeInspScheduled >= MIN_SAMPLE
     ? (closeEstApproved / closeInspScheduled) * 100
     : null;
-  const fullFunnel = closeCollapsed
-    ? null
-    : closeQuality >= MIN_SAMPLE
+  const fullFunnel = closeQuality >= MIN_SAMPLE
     ? (closeEstApproved / closeQuality) * 100
     : null;
 
   const fmtRate = (v: number | null) => v == null ? '—' : `${v.toFixed(1)}%`;
 
-  const bookSub = bookCollapsed
-    ? 'Leads too new — 14d delay not met'
-    : bookRate == null
-    ? `Need ${MIN_SAMPLE}+ leads (has ${bookQuality}) · 14d delay`
-    : `${bookInspScheduled} of ${bookQuality} leads · 14d delay`;
+  const bookSub = bookRate == null
+    ? `Need ${MIN_SAMPLE}+ leads (has ${bookQuality})`
+    : `${bookInspScheduled} of ${bookQuality} leads`;
 
-  const closeSub = closeCollapsed
-    ? 'Leads too new — 30d delay not met'
-    : closeRate == null
-    ? `Need ${MIN_SAMPLE}+ inspections (has ${closeInspScheduled}) · 30d delay`
-    : `${closeEstApproved} of ${closeInspScheduled} inspections · 30d delay`;
+  const closeSub = closeRate == null
+    ? `Need ${MIN_SAMPLE}+ inspections (has ${closeInspScheduled})`
+    : `${closeEstApproved} of ${closeInspScheduled} inspections`;
 
-  const fullFunnelSub = closeCollapsed
-    ? 'Leads too new — 30d delay not met'
-    : fullFunnel == null
-    ? `Need ${MIN_SAMPLE}+ leads (has ${closeQuality}) · 30d delay`
-    : `${closeEstApproved} of ${closeQuality} leads · 30d delay`;
+  const fullFunnelSub = fullFunnel == null
+    ? `Need ${MIN_SAMPLE}+ leads (has ${closeQuality})`
+    : `${closeEstApproved} of ${closeQuality} leads`;
 
   const tiles = [
     {
@@ -176,6 +170,7 @@ function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCo
       value: String(contacts),
       sub: spam > 0 ? `${quality} quality leads · ${spam} removed` : `${quality} quality leads`,
       bar: null,
+      immatureNote: null as string | null,
       stage: 'cpl_leads' as FunnelStage,
     },
     {
@@ -183,6 +178,7 @@ function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCo
       value: fmtRate(bookRate),
       sub: bookSub,
       bar: bookRate != null ? <CohortRangeBar value={bookRate} range={BOOK_RATE_RANGE} scaleMax={BOOK_RATE_SCALE} /> : null,
+      immatureNote: bookImmature ? 'Early read — leads still within 14-day maturation window' : null,
       stage: 'inspection_scheduled' as FunnelStage,
     },
     {
@@ -190,6 +186,7 @@ function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCo
       value: fmtRate(closeRate),
       sub: closeSub,
       bar: closeRate != null ? <CohortRangeBar value={closeRate} range={CLOSE_RATE_RANGE} scaleMax={CLOSE_RATE_SCALE} /> : null,
+      immatureNote: closeImmature ? 'Early read — inspections still within 30-day maturation window' : null,
       stage: 'estimate_approved' as FunnelStage,
     },
     {
@@ -197,6 +194,7 @@ function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCo
       value: fmtRate(fullFunnel),
       sub: fullFunnelSub,
       bar: fullFunnel != null ? <CohortRangeBar value={fullFunnel} range={FULL_FUNNEL_RANGE} scaleMax={FULL_FUNNEL_SCALE} /> : null,
+      immatureNote: closeImmature ? 'Early read — leads still within 30-day maturation window' : null,
       stage: 'estimate_approved' as FunnelStage,
     },
   ];
@@ -219,6 +217,11 @@ function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCo
             {tile.sub}
           </Typography>
           {tile.bar}
+          {tile.immatureNote && (
+            <Typography className="mt-2 text-[10px] italic" style={{ color: '#c4890a' }}>
+              ⚠ {tile.immatureNote}
+            </Typography>
+          )}
         </Paper>
       ))}
       {/* Methodology blurb sits at the bottom so it's available without
