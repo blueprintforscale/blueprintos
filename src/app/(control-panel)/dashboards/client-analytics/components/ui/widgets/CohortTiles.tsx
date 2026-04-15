@@ -203,9 +203,6 @@ function CohortTiles({ data, bookRateData, closeRateData, bookCollapsed, closeCo
 
   return (
     <div className="flex flex-col gap-4">
-      <Typography className="px-1 text-xs font-semibold uppercase tracking-wider" style={{ color: '#E85D4D' }}>
-        Cohort Benchmarks
-      </Typography>
       {tiles.map((tile) => (
         <Paper
           key={tile.label}
