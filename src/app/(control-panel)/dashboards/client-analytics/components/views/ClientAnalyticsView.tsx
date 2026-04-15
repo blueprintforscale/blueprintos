@@ -94,12 +94,20 @@ function ClientAnalyticsView() {
   const { data: clients } = useClients();
   const { data: groups } = useGroups();
 
-  // Cohort tile windows — fixed maturation delays (see /share/how-it-works#cohort-benchmarks).
+  // Cohort tile windows — follow the selected date range, but cap `to` at
+  // today − delay so only mature leads are counted (see /share/how-it-works#cohort-benchmarks).
+  // Book rate: today − 14d; close rate + full funnel: today − 30d.
+  // When the cap falls before `from`, the selection is entirely inside the delay window —
+  // flag it so the tile shows a "leads too new" message.
   const daysAgoStrCT = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
-  const bookFromCT = daysAgoStrCT(74);
-  const bookToCT = daysAgoStrCT(14);
-  const closeFromCT = daysAgoStrCT(90);
-  const closeToCT = daysAgoStrCT(30);
+  const bookCutoffCT = daysAgoStrCT(14);
+  const closeCutoffCT = daysAgoStrCT(30);
+  const bookToCT = dateTo <= bookCutoffCT ? dateTo : bookCutoffCT;
+  const closeToCT = dateTo <= closeCutoffCT ? dateTo : closeCutoffCT;
+  const bookCollapsed = dateFrom > bookToCT;
+  const closeCollapsed = dateFrom > closeToCT;
+  const bookFromCT = bookCollapsed ? bookToCT : dateFrom;
+  const closeFromCT = closeCollapsed ? closeToCT : dateFrom;
 
   // Per-client funnel — disabled when a group is selected
   const clientFunnelQ = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, dateFrom, dateTo);
@@ -335,7 +343,7 @@ function ClientAnalyticsView() {
                   <div className="grid gap-6" style={{ gridTemplateColumns: activeSource === 'gbp' ? '1fr' : '2fr 1fr' }}>
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                     {activeSource !== 'gbp' && (
-                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} bookCollapsed={bookCollapsed} closeCollapsed={closeCollapsed} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                     )}
                   </div>
                 </motion.div>

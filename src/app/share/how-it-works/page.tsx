@@ -101,11 +101,11 @@ const sections: Section[] = [
     title: 'Cohort Benchmarks',
     icon: '07',
     content: [
-      'The four tiles labeled Contacts, Book Rate, Close Rate, and Full Funnel compare your performance to aspirational ranges we see across similar clients. These are different from the main conversion funnel above them, in two important ways:',
+      'The four tiles labeled Contacts, Book Rate, Close Rate, and Full Funnel compare your performance to aspirational ranges we see across similar clients. They follow the date range you\'ve selected above, with one important twist:',
     ],
     list: [
-      ['Fixed time window', 'The cohort tiles always use a 60-day window regardless of the date range selected on the main dashboard, because rates need enough data to be meaningful.'],
-      ['Maturation delay', 'The rates exclude leads from the most recent 14–30 days so those leads have time to book, close, or be invoiced before being counted. See below.'],
+      ['Maturation delay', 'The rate tiles exclude leads from the most recent 14 days (for Book Rate) or 30 days (for Close Rate and Full Funnel) so those leads have time to book, close, or be invoiced before being counted.'],
+      ['Short ranges', 'If your selected range is entirely inside the delay window — say, the last 7 days — the affected tile shows "Leads too new" since no leads have had enough time to progress yet.'],
     ],
     subsections: [
       {
@@ -119,7 +119,7 @@ const sections: Section[] = [
           ['Close Rate', '30-day delay. Closes take longer — by day 30, about 74% of eventual closes are in.'],
           ['Full Funnel', '30-day delay, same as close rate.'],
         ],
-        footer: 'Recent leads still show up everywhere else on the dashboard — in your lead table, in the main conversion funnel, in new-lead counts. They just don\'t feed into these four cohort rate tiles yet.',
+        footer: 'Recent leads still show up everywhere else on the dashboard — in your lead table, in the main conversion funnel, in new-lead counts. They just don\'t feed into these cohort rate tiles yet.',
       },
       {
         subtitle: 'What the benchmark ranges mean',
@@ -132,7 +132,7 @@ const sections: Section[] = [
         footer: 'These are aspirational targets based on client data. Landing inside the range is healthy performance. Above the range is top-tier.',
       },
     ],
-    callout: { text: 'Your cohort tiles reflect mature data — what your real book rate, close rate, and funnel look like once recent leads have had time to progress. The main conversion funnel above shows activity in the exact date range you selected.', color: 'green' },
+    callout: { text: 'Your cohort tiles follow the same date range as the funnel above, but exclude recent leads that haven\'t had time to progress. That way the rates reflect mature performance, not activity that\'s still in flight.', color: 'green' },
   },
   {
     title: 'Guarantee Progress',

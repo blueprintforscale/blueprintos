@@ -117,14 +117,23 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
   const ninetyDayFrom = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
-  // Cohort tile windows — fixed maturation delays (see /share/how-it-works#cohort-benchmarks).
-  // Book rate: 14d delay + 60d window → leads 14-74 days old.
-  // Close rate + full funnel: 30d delay + 60d window → leads 30-90 days old.
+  // Cohort tile windows — follow the selected date range, but cap `to` at
+  // today − delay so only mature leads are counted (see /share/how-it-works#cohort-benchmarks).
+  // Book rate:  cap at today − 14d
+  // Close rate + full funnel: cap at today − 30d
+  // When the cap falls before `from`, the selection is entirely inside the
+  // maturation window — we flag that case so the tile shows a "leads too new" message.
   const daysAgoStr = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
-  const bookFrom = daysAgoStr(74);
-  const bookTo = daysAgoStr(14);
-  const closeFrom = daysAgoStr(90);
-  const closeTo = daysAgoStr(30);
+  const bookCutoff = daysAgoStr(14);
+  const closeCutoff = daysAgoStr(30);
+  const bookTo = dateTo <= bookCutoff ? dateTo : bookCutoff;
+  const closeTo = dateTo <= closeCutoff ? dateTo : closeCutoff;
+  const bookCollapsed = dateFrom > bookTo;
+  const closeCollapsed = dateFrom > closeTo;
+  // When collapsed, fetch a safe single-day window so the API doesn't error;
+  // the tile ignores the data and shows the "leads too new" message instead.
+  const bookFrom = bookCollapsed ? bookTo : dateFrom;
+  const closeFrom = closeCollapsed ? closeTo : dateFrom;
 
   // Funnel data — use group endpoint for groups, client endpoint for individual clients.
   // Only one of the two queries is enabled at a time (the other is disabled via `enabled: !!id`).
@@ -309,7 +318,7 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
                   <div className="grid gap-6" style={{ gridTemplateColumns: activeSource === 'gbp' ? '1fr' : '2fr 1fr' }}>
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                     {activeSource !== 'gbp' && (
-                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} bookCollapsed={bookCollapsed} closeCollapsed={closeCollapsed} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                     )}
                   </div>
                 </motion.div>
