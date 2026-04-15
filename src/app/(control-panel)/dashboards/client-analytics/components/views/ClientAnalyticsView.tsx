@@ -94,12 +94,12 @@ function ClientAnalyticsView() {
   const { data: clients } = useClients();
   const { data: groups } = useGroups();
 
-  // Cohort tile windows — follow the selected date range. If the range
-  // extends into the maturation window (today − 14d for book, today − 30d
-  // for close/full), we still compute the rate using the user's range
-  // but flag `immature` so the tile shows an "early read" disclaimer.
-  // If the entire range is inside the delay window, we use the user's
-  // range as-is instead of capping (which would collapse it).
+  // Cohort tile windows — cap `to` at the maturation cutoff so mature
+  // data flows through whenever the range has any. Long ranges (60d, 90d,
+  // lifetime) still get clean mature rates with no disclaimer.
+  // Only when the entire range sits inside the delay window (e.g., "last
+  // 7 days") does capping collapse it — then fall back to the user's
+  // range as-is and flag "immature" so the disclaimer fires on the tile.
   const daysAgoStrCT = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoffCT = daysAgoStrCT(14);
   const closeCutoffCT = daysAgoStrCT(30);
@@ -109,8 +109,8 @@ function ClientAnalyticsView() {
   const closeToCT = closeAllImmature ? dateTo : (dateTo <= closeCutoffCT ? dateTo : closeCutoffCT);
   const bookFromCT = dateFrom;
   const closeFromCT = dateFrom;
-  const bookImmature = dateTo > bookCutoffCT;
-  const closeImmature = dateTo > closeCutoffCT;
+  const bookImmature = bookAllImmature;
+  const closeImmature = closeAllImmature;
 
   // Per-client funnel — disabled when a group is selected
   const clientFunnelQ = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, dateFrom, dateTo);

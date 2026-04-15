@@ -117,28 +117,27 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
   const ninetyDayFrom = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
-  // Cohort tile windows — follow the selected date range. When the range
-  // extends into the maturation window (today − 14d for book, today − 30d
-  // for close/full), we still compute and show the rate using the user's
-  // full range, but flag it as "immature" so the tile can display an
-  // "early read" disclaimer. See /share/how-it-works#cohort-benchmarks.
+  // Cohort tile windows — cap `to` at the maturation cutoff (today − 14d
+  // for book, today − 30d for close/full) so mature data flows through
+  // for any range that has it. For long ranges (60d, 90d, lifetime) this
+  // gives clean mature rates with no disclaimer.
+  //
+  // Only when the entire range sits inside the delay window (e.g., user
+  // picks "last 7 days") does capping become impossible — then we fall
+  // back to the user's range as-is and flag it with an "early read"
+  // disclaimer so the rate reads as a preview, not a final cohort number.
   const daysAgoStr = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoff = daysAgoStr(14);
   const closeCutoff = daysAgoStr(30);
-  // For "mature" ranges we cap `to` at the cutoff so immature leads
-  // don't drag the rate down. For ranges that are entirely inside the
-  // delay window we use the user's range as-is (capping would collapse
-  // it to an empty window) and let the disclaimer do the explaining.
   const bookAllImmature = dateFrom > bookCutoff;
   const closeAllImmature = dateFrom > closeCutoff;
   const bookTo = bookAllImmature ? dateTo : (dateTo <= bookCutoff ? dateTo : bookCutoff);
   const closeTo = closeAllImmature ? dateTo : (dateTo <= closeCutoff ? dateTo : closeCutoff);
   const bookFrom = dateFrom;
   const closeFrom = dateFrom;
-  // Disclaimer fires whenever any portion of the range is still maturing —
-  // i.e., `to` wasn't capped at the cutoff because `dateTo` is newer.
-  const bookImmature = dateTo > bookCutoff;
-  const closeImmature = dateTo > closeCutoff;
+  // Disclaimer only fires when we couldn't serve mature data at all.
+  const bookImmature = bookAllImmature;
+  const closeImmature = closeAllImmature;
 
   // Funnel data — use group endpoint for groups, client endpoint for individual clients.
   // Only one of the two queries is enabled at a time (the other is disabled via `enabled: !!id`).
