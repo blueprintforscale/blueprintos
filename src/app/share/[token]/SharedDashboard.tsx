@@ -129,8 +129,12 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
   const daysAgoStr = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoff = daysAgoStr(14);
   const closeCutoff = daysAgoStr(30);
-  const bookAllImmature = dateFrom > bookCutoff;
-  const closeAllImmature = dateFrom > closeCutoff;
+  // `>=` not `>`: when `dateFrom` exactly equals the cutoff (e.g., 30d
+  // picker with the close-rate 30d cutoff), capping would produce an
+  // empty [cutoff, cutoff] range and return zero rows. We need strictly
+  // older leads for any mature data to exist.
+  const bookAllImmature = dateFrom >= bookCutoff;
+  const closeAllImmature = dateFrom >= closeCutoff;
   const bookTo = bookAllImmature ? dateTo : (dateTo <= bookCutoff ? dateTo : bookCutoff);
   const closeTo = closeAllImmature ? dateTo : (dateTo <= closeCutoff ? dateTo : closeCutoff);
   const bookFrom = dateFrom;

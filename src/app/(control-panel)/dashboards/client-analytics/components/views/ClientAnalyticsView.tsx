@@ -103,8 +103,11 @@ function ClientAnalyticsView() {
   const daysAgoStrCT = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoffCT = daysAgoStrCT(14);
   const closeCutoffCT = daysAgoStrCT(30);
-  const bookAllImmature = dateFrom > bookCutoffCT;
-  const closeAllImmature = dateFrom > closeCutoffCT;
+  // `>=` not `>`: when `dateFrom` exactly equals the cutoff (e.g., 30d
+  // picker with the close-rate 30d cutoff), capping would produce an
+  // empty range. Strict inequality ensures any mature data exists.
+  const bookAllImmature = dateFrom >= bookCutoffCT;
+  const closeAllImmature = dateFrom >= closeCutoffCT;
   const bookToCT = bookAllImmature ? dateTo : (dateTo <= bookCutoffCT ? dateTo : bookCutoffCT);
   const closeToCT = closeAllImmature ? dateTo : (dateTo <= closeCutoffCT ? dateTo : closeCutoffCT);
   const bookFromCT = dateFrom;
