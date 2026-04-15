@@ -429,7 +429,7 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
                     </div>
                   </div>
                 ) : (
-                  <HistoricalPerformance data={historicalData} startDate={startDate} campaignTrend={campaignTrendData} seoTrend={seoTrend} />
+                  <HistoricalPerformance data={historicalData} startDate={startDate} campaignTrend={campaignTrendData} seoTrend={seoTrend} activeSource={activeSource} />
                 )}
               </motion.div>
             )}

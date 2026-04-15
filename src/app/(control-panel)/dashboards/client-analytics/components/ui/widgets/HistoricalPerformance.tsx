@@ -10,7 +10,7 @@ import type { MonthlyTrend } from '../../../api/types';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 type CampaignTrend = { name: string; data: { month_start: string; short_label: string; leads: number }[] };
-type SeoMonthlyPoint = { month_start: string; short_label: string; leads: number };
+type SeoMonthlyPoint = { month_start: string; short_label: string; leads: number; contacts?: number };
 type SeoTrendData = { monthly: SeoMonthlyPoint[]; seo_start: string | null; baseline_per_mo: number | null };
 type Props = {
   data: MonthlyTrend[] | undefined;
@@ -18,6 +18,7 @@ type Props = {
   showSuperQuality?: boolean;
   campaignTrend?: CampaignTrend[];
   seoTrend?: SeoTrendData;
+  activeSource?: string;
 };
 type Metric = 'leads' | 'contacts' | 'super_quality' | 'spend' | 'cpl' | 'conversions' | 'close_rate' | 'book_rate' | 'roas' | 'revenue' | 'seo_leads';
 
@@ -53,7 +54,8 @@ function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction
 
 const CAMPAIGN_COLORS = ['#6366f1', '#E85D4D', '#2A9D8F', '#D4A843', '#8B5CF6', '#F97316', '#06B6D4', '#EC4899'];
 
-function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTrend, seoTrend }: Props) {
+function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTrend, seoTrend, activeSource }: Props) {
+  const isSeoSource = activeSource === 'seo';
   const [metric, setMetric] = useState<Metric>('leads');
   const [overlays, setOverlays] = useState<Metric[]>([]);
   const [showCampaigns, setShowCampaigns] = useState(false);
@@ -80,14 +82,16 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
   })();
   const chartData = trimmedData.length > 0 ? trimmedData : data;
 
-  // Build month-keyed map of SEO leads for quick lookup
+  // Build month-keyed maps of SEO leads + contacts for quick lookup
   const seoLeadsByMonth = new Map<string, number>();
+  const seoContactsByMonth = new Map<string, number>();
   if (seoTrend?.monthly) {
     for (const m of seoTrend.monthly) {
       // Key by YYYY-MM for matching
       const d = new Date(m.month_start);
       const key = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
       seoLeadsByMonth.set(key, m.leads);
+      if (typeof m.contacts === 'number') seoContactsByMonth.set(key, m.contacts);
     }
   }
   const hasSeoData = seoLeadsByMonth.size > 0;
@@ -98,11 +102,12 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
 
   const cfg = visibleMetrics.find((m) => m.key === metric) || visibleMetrics[0];
   const getValue = (d: MonthlyTrend, key: Metric): number => {
-    if (key === 'seo_leads') {
-      const ms = new Date((d as any).month_start);
-      const k = `${ms.getUTCFullYear()}-${String(ms.getUTCMonth() + 1).padStart(2, '0')}`;
-      return seoLeadsByMonth.get(k) || 0;
-    }
+    const ms = new Date((d as any).month_start);
+    const k = `${ms.getUTCFullYear()}-${String(ms.getUTCMonth() + 1).padStart(2, '0')}`;
+    if (key === 'seo_leads') return seoLeadsByMonth.get(k) || 0;
+    // When SEO source is active, route Contacts + Leads to SEO-filtered data
+    if (isSeoSource && key === 'contacts') return seoContactsByMonth.get(k) || 0;
+    if (isSeoSource && key === 'leads') return seoLeadsByMonth.get(k) || 0;
     if (key === 'contacts') return parseFloat((d as any).leads) || 0;
     if (key === 'leads') {
       const leads = parseFloat((d as any).leads) || 0;

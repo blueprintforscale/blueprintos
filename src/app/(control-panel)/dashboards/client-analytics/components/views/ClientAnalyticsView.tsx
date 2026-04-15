@@ -457,7 +457,7 @@ function ClientAnalyticsView() {
                     </div>
                   </div>
                 ) : (
-                  <HistoricalPerformance data={historicalData} startDate={selectedClientObj?.start_date} showSuperQuality={(selectedClientObj as any)?.dashboard_config?.show_super_quality} campaignTrend={campaignTrendData} seoTrend={seoTrend} />
+                  <HistoricalPerformance data={historicalData} startDate={selectedClientObj?.start_date} showSuperQuality={(selectedClientObj as any)?.dashboard_config?.show_super_quality} campaignTrend={campaignTrendData} seoTrend={seoTrend} activeSource={activeSource} />
                 )}
               </motion.div>
             )}
