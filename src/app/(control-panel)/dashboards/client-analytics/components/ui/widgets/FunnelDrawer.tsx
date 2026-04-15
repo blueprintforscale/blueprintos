@@ -82,11 +82,13 @@ const stageStyles: Record<string, { bg: string; text: string }> = {
 };
 
 function getHighestStage(lead: Lead): string {
-  // Use the raw booleans (including inferred) so badges match the funnel counts.
-  // The Inferred yellow pill next to the badge indicates when a stage came from
-  // inference rather than an explicit CRM record.
-  if (lead.job_completed) return 'Job Completed';
-  if (lead.job_scheduled) return 'Job Scheduled';
+  // Badges reflect the lead's actual highest explicit stage (not inferred).
+  // A lead with only an approved estimate (even if job_scheduled is inferred from it)
+  // should show "Estimate Approved" — that's the real state in HCP. The funnel count
+  // may still include them as Job Scheduled via inference, but the per-lead badge
+  // should tell the truth about what's actually in the CRM.
+  if (lead.job_completed && !lead.job_completed_inferred) return 'Job Completed';
+  if (lead.job_scheduled && !lead.job_scheduled_inferred) return 'Job Scheduled';
   if (lead.estimate_approved) return 'Estimate Approved';
   if (lead.estimate_sent) return 'Estimate Sent';
   if (lead.inspection_completed) return 'Inspection Complete';
