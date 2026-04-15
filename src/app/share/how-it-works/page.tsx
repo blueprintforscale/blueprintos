@@ -98,15 +98,52 @@ const sections: Section[] = [
     ],
   },
   {
-    title: 'Guarantee Progress',
+    title: 'Cohort Benchmarks',
     icon: '07',
+    content: [
+      'The four tiles labeled Contacts, Book Rate, Close Rate, and Full Funnel compare your performance to aspirational ranges we see across similar clients. These are different from the main conversion funnel above them, in two important ways:',
+    ],
+    list: [
+      ['Fixed time window', 'The cohort tiles always use a 60-day window regardless of the date range selected on the main dashboard, because rates need enough data to be meaningful.'],
+      ['Maturation delay', 'The rates exclude leads from the most recent 14–30 days so those leads have time to book, close, or be invoiced before being counted. See below.'],
+    ],
+    subsections: [
+      {
+        subtitle: 'Why a maturation delay',
+        content: [
+          'A lead that came in 3 days ago hasn\'t had time to book an inspection, let alone close an estimate. Including them in the rate would make the rate look worse than it is. To give an honest picture, we only count leads that have had enough time to progress through your funnel.',
+          'Different metrics need different delays because sales cycles vary:',
+        ],
+        list: [
+          ['Book Rate', '14-day delay. By day 14, about 93% of bookings that will happen have already happened.'],
+          ['Close Rate', '30-day delay. Closes take longer — by day 30, about 74% of eventual closes are in.'],
+          ['Full Funnel', '30-day delay, same as close rate.'],
+        ],
+        footer: 'Recent leads still show up everywhere else on the dashboard — in your lead table, in the main conversion funnel, in new-lead counts. They just don\'t feed into these four cohort rate tiles yet.',
+      },
+      {
+        subtitle: 'What the benchmark ranges mean',
+        content: ['Each tile shows your current rate against a target range:'],
+        list: [
+          ['Book Rate', '30% – 45% target. Share of quality leads that schedule an inspection.'],
+          ['Close Rate', '25% – 35% target. Share of inspections that result in an approved estimate.'],
+          ['Full Funnel', '5% – 10% target. Share of quality leads that become approved estimates.'],
+        ],
+        footer: 'These are aspirational targets based on client data. Landing inside the range is healthy performance. Above the range is top-tier.',
+      },
+    ],
+    callout: { text: 'Your cohort tiles reflect mature data — what your real book rate, close rate, and funnel look like once recent leads have had time to progress. The main conversion funnel above shows activity in the exact date range you selected.', color: 'green' },
+  },
+  {
+    title: 'Guarantee Progress',
+    icon: '08',
     content: [
       'Your guarantee tracks total closed revenue against your program investment over the life of your engagement — not just a single month. The progress bar shows how close you are to hitting your guarantee target.',
     ],
   },
   {
     title: 'Monthly Projection',
-    icon: '08',
+    icon: '09',
     content: [
       'When you\'re partway through a month, the dashboard projects where your lead count will land by month\'s end. This blends two signals:',
     ],
@@ -118,7 +155,7 @@ const sections: Section[] = [
   },
   {
     title: 'Campaign Breakdown',
-    icon: '09',
+    icon: '10',
     content: [
       'If you\'re running multiple campaigns, toggle "By Campaign" on the trends chart to see how each campaign contributes. Click any campaign name to isolate it and see its trend in detail.',
     ],
@@ -166,7 +203,12 @@ export default function HowItWorksPage() {
 
           <div className="flex flex-col gap-0">
             {sections.map((section, si) => (
-              <div key={section.title} className="py-6" style={si > 0 ? { borderTop: '1px solid #ddd8cb' } : undefined}>
+              <div
+                key={section.title}
+                id={section.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                className="py-6 scroll-mt-20"
+                style={si > 0 ? { borderTop: '1px solid #ddd8cb' } : undefined}
+              >
                 {/* Section header with number */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white" style={{ backgroundColor: '#E85D4D' }}>

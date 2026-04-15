@@ -117,6 +117,15 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
   const ninetyDayFrom = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
+  // Cohort tile windows — fixed maturation delays (see /share/how-it-works#cohort-benchmarks).
+  // Book rate: 14d delay + 60d window → leads 14-74 days old.
+  // Close rate + full funnel: 30d delay + 60d window → leads 30-90 days old.
+  const daysAgoStr = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
+  const bookFrom = daysAgoStr(74);
+  const bookTo = daysAgoStr(14);
+  const closeFrom = daysAgoStr(90);
+  const closeTo = daysAgoStr(30);
+
   // Funnel data — use group endpoint for groups, client endpoint for individual clients.
   // Only one of the two queries is enabled at a time (the other is disabled via `enabled: !!id`).
   const clientFunnel = useFunnel(isGroup ? 0 : customerId, activeSource, dateFrom, dateTo);
@@ -125,6 +134,14 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
   const groupFunnel90Q = useGroupFunnel(isGroup ? groupSlug : '', activeSource, ninetyDayFrom, ninetyDayTo);
   const funnel = isGroup ? groupFunnelQ.data : clientFunnel.data;
   const funnel90 = isGroup ? groupFunnel90Q.data : clientFunnel90.data;
+
+  // Cohort-specific funnel queries (delayed windows for book rate + close rate tiles)
+  const bookCohortFunnel = useFunnel(isGroup ? 0 : customerId, activeSource, bookFrom, bookTo);
+  const closeCohortFunnel = useFunnel(isGroup ? 0 : customerId, activeSource, closeFrom, closeTo);
+  const bookCohortGroup = useGroupFunnel(isGroup ? groupSlug : '', activeSource, bookFrom, bookTo);
+  const closeCohortGroup = useGroupFunnel(isGroup ? groupSlug : '', activeSource, closeFrom, closeTo);
+  const bookRateData = isGroup ? bookCohortGroup.data : bookCohortFunnel.data;
+  const closeRateData = isGroup ? closeCohortGroup.data : closeCohortFunnel.data;
 
   const { data: trend } = useMonthlyTrend(isGroup ? 0 : customerId, 6);
   const { data: activity } = useRecentActivity(isGroup ? 0 : customerId);
@@ -292,7 +309,7 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
                   <div className="grid gap-6" style={{ gridTemplateColumns: activeSource === 'gbp' ? '1fr' : '2fr 1fr' }}>
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                     {activeSource !== 'gbp' && (
-                      <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                     )}
                   </div>
                 </motion.div>

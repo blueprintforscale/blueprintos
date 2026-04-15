@@ -93,6 +93,14 @@ function ClientAnalyticsView() {
 
   const { data: clients } = useClients();
   const { data: groups } = useGroups();
+
+  // Cohort tile windows — fixed maturation delays (see /share/how-it-works#cohort-benchmarks).
+  const daysAgoStrCT = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
+  const bookFromCT = daysAgoStrCT(74);
+  const bookToCT = daysAgoStrCT(14);
+  const closeFromCT = daysAgoStrCT(90);
+  const closeToCT = daysAgoStrCT(30);
+
   // Per-client funnel — disabled when a group is selected
   const clientFunnelQ = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, dateFrom, dateTo);
   const clientFunnel90Q = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, ninetyDayFrom, ninetyDayTo);
@@ -102,6 +110,14 @@ function ClientAnalyticsView() {
   const funnel = isGroup ? groupFunnelQ.data : clientFunnelQ.data;
   const funnel90 = isGroup ? groupFunnel90Q.data : clientFunnel90Q.data;
   const funnelLoading = isGroup ? groupFunnelQ.isLoading : clientFunnelQ.isLoading;
+
+  // Cohort-specific funnel queries (delayed windows for book rate + close rate tiles)
+  const bookCohortFunnelQ = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, bookFromCT, bookToCT);
+  const closeCohortFunnelQ = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, closeFromCT, closeToCT);
+  const bookCohortGroupQ = useGroupFunnel(isGroup ? groupSlug : '', activeSource, bookFromCT, bookToCT);
+  const closeCohortGroupQ = useGroupFunnel(isGroup ? groupSlug : '', activeSource, closeFromCT, closeToCT);
+  const bookRateData = isGroup ? bookCohortGroupQ.data : bookCohortFunnelQ.data;
+  const closeRateData = isGroup ? closeCohortGroupQ.data : closeCohortFunnelQ.data;
 
   // Per-client widgets — disabled when a group is selected
   const { data: trend } = useMonthlyTrend(isGroup ? 0 : (selectedClient ?? 0), 6);
@@ -319,7 +335,7 @@ function ClientAnalyticsView() {
                   <div className="grid gap-6" style={{ gridTemplateColumns: activeSource === 'gbp' ? '1fr' : '2fr 1fr' }}>
                     <FunnelChart data={funnel} onStageClick={(stage) => { setDrawerStage(stage); setDrawerTitle(undefined); }} />
                     {activeSource !== 'gbp' && (
-                      <CohortTiles data={funnel as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
+                      <CohortTiles data={funnel as any} bookRateData={bookRateData as any} closeRateData={closeRateData as any} onStageClick={(stage, title) => { setDrawerStage(stage); setDrawerTitle(title); }} />
                     )}
                   </div>
                 </motion.div>

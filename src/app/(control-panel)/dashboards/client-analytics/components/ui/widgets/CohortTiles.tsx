@@ -103,22 +103,38 @@ type ExtendedFunnel = FunnelData & {
 
 type Props = {
   data: ExtendedFunnel | undefined;
+  /** 14-day-delayed funnel data for book rate tile. If undefined, falls back to `data`. */
+  bookRateData?: ExtendedFunnel;
+  /** 30-day-delayed funnel data for close rate + full funnel tiles. If undefined, falls back to `data`. */
+  closeRateData?: ExtendedFunnel;
   onStageClick?: (stage: FunnelStage, title?: string) => void;
 };
 
-function CohortTiles({ data, onStageClick }: Props) {
+const MIN_SAMPLE = 10; // below this, show dash rather than a misleading %
+
+function CohortTiles({ data, bookRateData, closeRateData, onStageClick }: Props) {
   if (!data) return null;
 
   const rawContacts = parseInt(data.total_contacts as any) || 0;
   const quality = parseInt(data.quality_leads as any) || parseInt(data.leads as any) || 0;
   const contacts = Math.max(rawContacts, quality);
   const spam = Math.max(contacts - quality, 0);
-  const inspScheduled = parseInt(data.inspection_scheduled as any) || 0;
-  const estApproved = parseInt(data.estimate_approved as any) || 0;
 
-  const bookRate = quality > 0 ? (inspScheduled / quality) * 100 : 0;
-  const closeRate = inspScheduled > 0 ? (estApproved / inspScheduled) * 100 : 0;
-  const fullFunnel = quality > 0 ? (estApproved / quality) * 100 : 0;
+  // Book rate uses 14-day-delayed data (leads that have had 2+ weeks to book)
+  const bookSource = bookRateData || data;
+  const bookQuality = parseInt(bookSource.quality_leads as any) || parseInt(bookSource.leads as any) || 0;
+  const bookInspScheduled = parseInt(bookSource.inspection_scheduled as any) || 0;
+  const bookRate = bookQuality >= MIN_SAMPLE ? (bookInspScheduled / bookQuality) * 100 : null;
+
+  // Close rate + full funnel use 30-day-delayed data (inspections that have had a month to close)
+  const closeSource = closeRateData || data;
+  const closeQuality = parseInt(closeSource.quality_leads as any) || parseInt(closeSource.leads as any) || 0;
+  const closeInspScheduled = parseInt(closeSource.inspection_scheduled as any) || 0;
+  const closeEstApproved = parseInt(closeSource.estimate_approved as any) || 0;
+  const closeRate = closeInspScheduled >= MIN_SAMPLE ? (closeEstApproved / closeInspScheduled) * 100 : null;
+  const fullFunnel = closeQuality >= MIN_SAMPLE ? (closeEstApproved / closeQuality) * 100 : null;
+
+  const fmtRate = (v: number | null) => v == null ? '—' : `${v.toFixed(1)}%`;
 
   const tiles = [
     {
@@ -130,29 +146,52 @@ function CohortTiles({ data, onStageClick }: Props) {
     },
     {
       label: 'Inspection Book Rate',
-      value: `${bookRate.toFixed(1)}%`,
-      sub: `${inspScheduled} inspections / ${quality} leads`,
-      bar: <CohortRangeBar value={bookRate} range={BOOK_RATE_RANGE} scaleMax={BOOK_RATE_SCALE} />,
+      value: fmtRate(bookRate),
+      sub: bookRate == null
+        ? `Need ${MIN_SAMPLE}+ leads (has ${bookQuality}) · 14d delay · 60d window`
+        : `${bookInspScheduled} of ${bookQuality} leads · 14d delay · 60d window`,
+      bar: bookRate != null ? <CohortRangeBar value={bookRate} range={BOOK_RATE_RANGE} scaleMax={BOOK_RATE_SCALE} /> : null,
       stage: 'inspection_scheduled' as FunnelStage,
     },
     {
       label: 'Estimate Close Rate',
-      value: `${closeRate.toFixed(1)}%`,
-      sub: `${estApproved} approved / ${inspScheduled} inspections`,
-      bar: <CohortRangeBar value={closeRate} range={CLOSE_RATE_RANGE} scaleMax={CLOSE_RATE_SCALE} />,
+      value: fmtRate(closeRate),
+      sub: closeRate == null
+        ? `Need ${MIN_SAMPLE}+ inspections (has ${closeInspScheduled}) · 30d delay · 60d window`
+        : `${closeEstApproved} of ${closeInspScheduled} inspections · 30d delay · 60d window`,
+      bar: closeRate != null ? <CohortRangeBar value={closeRate} range={CLOSE_RATE_RANGE} scaleMax={CLOSE_RATE_SCALE} /> : null,
       stage: 'estimate_approved' as FunnelStage,
     },
     {
       label: 'Full Funnel',
-      value: `${fullFunnel.toFixed(1)}%`,
-      sub: `${estApproved} approved / ${quality} leads`,
-      bar: <CohortRangeBar value={fullFunnel} range={FULL_FUNNEL_RANGE} scaleMax={FULL_FUNNEL_SCALE} />,
+      value: fmtRate(fullFunnel),
+      sub: fullFunnel == null
+        ? `Need ${MIN_SAMPLE}+ leads (has ${closeQuality}) · 30d delay · 60d window`
+        : `${closeEstApproved} of ${closeQuality} leads · 30d delay · 60d window`,
+      bar: fullFunnel != null ? <CohortRangeBar value={fullFunnel} range={FULL_FUNNEL_RANGE} scaleMax={FULL_FUNNEL_SCALE} /> : null,
       stage: 'estimate_approved' as FunnelStage,
     },
   ];
 
   return (
     <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1 px-1">
+        <Typography className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#E85D4D' }}>
+          Cohort Benchmarks
+        </Typography>
+        <Typography className="text-[11px]" style={{ color: '#8a8279' }}>
+          Mature data vs similar clients. Different window than the funnel above —{' '}
+          <a
+            href="/share/how-it-works#cohort-benchmarks"
+            target="_blank"
+            rel="noreferrer"
+            className="underline"
+            style={{ color: '#8a8279' }}
+          >
+            how this works
+          </a>
+        </Typography>
+      </div>
       {tiles.map((tile) => (
         <Paper
           key={tile.label}
