@@ -29,6 +29,9 @@ type Lead = {
   revenue_closed: boolean;
   approved_revenue: number;
   invoiced_revenue: number;
+  /** Card-matching ROAS revenue (inspection + MAX(treatment invoiced, approved)).
+   *  Set from mv_funnel_leads so the drawer total reconciles to the Revenue Closed tile. */
+  closed_rev?: number;
   invoice_breakdown?: { amount: number; type: string; status: string }[];
   estimate_value?: number;
   client_flag_reason?: string | null;
@@ -234,11 +237,13 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSp
     const approved = parseFloat(String(lead.approved_revenue)) || 0;
     const invoiced = parseFloat(String(lead.invoiced_revenue)) || 0;
     const estVal = parseFloat(String(lead.estimate_value)) || 0;
+    // card_rev matches the Revenue Closed tile's ROAS formula (inspection + MAX(treatment, approved)).
+    const cardRev = parseFloat(String(lead.closed_rev ?? 0)) || 0;
     let rev = 0;
     if (stage === 'estimate_sent') rev = estVal;
     else if (stage === 'estimate_approved') rev = approved;
-    else if (stage === 'job_scheduled' || stage === 'job_completed') rev = Math.max(invoiced, approved);
-    else if (stage === 'revenue_closed') rev = Math.max(invoiced, approved);
+    else if (stage === 'job_scheduled' || stage === 'job_completed') rev = cardRev > 0 ? cardRev : Math.max(invoiced, approved);
+    else if (stage === 'revenue_closed') rev = cardRev > 0 ? cardRev : Math.max(invoiced, approved);
     else rev = (approved + invoiced) > 0 ? Math.max(approved, invoiced) : estVal;
     return sum + rev;
   }, 0);
@@ -408,12 +413,14 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSp
               const approvedRev = parseFloat(String(lead.approved_revenue)) || 0;
               const invoicedRev = parseFloat(String(lead.invoiced_revenue)) || 0;
               const estValue = parseFloat(String(lead.estimate_value)) || 0;
-              // Revenue is contextual to the funnel stage we drilled into
+              const cardRev = parseFloat(String(lead.closed_rev ?? 0)) || 0;
+              // Revenue is contextual to the funnel stage we drilled into.
+              // For revenue_closed/job stages, prefer card_rev so per-lead amounts sum to the Revenue Closed tile.
               let revenue = 0;
               if (stage === 'estimate_sent') revenue = estValue;
               else if (stage === 'estimate_approved') revenue = approvedRev;
-              else if (stage === 'job_scheduled' || stage === 'job_completed') revenue = Math.max(invoicedRev, approvedRev);
-              else if (stage === 'revenue_closed') revenue = Math.max(invoicedRev, approvedRev) || estValue;
+              else if (stage === 'job_scheduled' || stage === 'job_completed') revenue = cardRev > 0 ? cardRev : Math.max(invoicedRev, approvedRev);
+              else if (stage === 'revenue_closed') revenue = cardRev > 0 ? cardRev : (Math.max(invoicedRev, approvedRev) || estValue);
               else revenue = (approvedRev + invoicedRev) > 0 ? Math.max(approvedRev, invoicedRev) : estValue;
               const highestStage = getHighestStage(lead);
               const stageStyle = stageStyles[highestStage] || stageStyles['Lead'];
