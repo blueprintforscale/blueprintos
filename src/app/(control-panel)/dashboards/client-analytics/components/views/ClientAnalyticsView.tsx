@@ -94,22 +94,22 @@ function ClientAnalyticsView() {
   const { data: clients } = useClients();
   const { data: groups } = useGroups();
 
-  // Cohort tile windows — compare the picker's range length to each
-  // metric's maturation delay. Range > delay → cap for mature data
-  // (no disclaimer). Range == delay → use as-is (boundary case, no
-  // disclaimer). Range < delay → use as-is with ⚠ early-read disclaimer.
+  // Cohort tile windows — single 30-day threshold for simplicity:
+  // range < 30d → use full range on all tiles + ⚠ early-read disclaimer.
+  // range ≥ 30d → no disclaimer; cap each metric at its own cutoff for
+  // mature data (except when capping would collapse the window to empty,
+  // in which case fall back to the full range).
   const daysAgoStrCT = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoffCT = daysAgoStrCT(14);
   const closeCutoffCT = daysAgoStrCT(30);
   const rangeDaysCT = Math.round((new Date(dateTo).getTime() - new Date(dateFrom).getTime()) / 86400000);
-  const bookHasMature = rangeDaysCT > 14;
-  const closeHasMature = rangeDaysCT > 30;
-  const bookToCT = bookHasMature ? bookCutoffCT : dateTo;
-  const closeToCT = closeHasMature ? closeCutoffCT : dateTo;
+  const showEarlyRead = rangeDaysCT < 30;
+  const bookToCT = !showEarlyRead && rangeDaysCT > 14 ? bookCutoffCT : dateTo;
+  const closeToCT = !showEarlyRead && rangeDaysCT > 30 ? closeCutoffCT : dateTo;
   const bookFromCT = dateFrom;
   const closeFromCT = dateFrom;
-  const bookImmature = rangeDaysCT < 14;
-  const closeImmature = rangeDaysCT < 30;
+  const bookImmature = showEarlyRead;
+  const closeImmature = showEarlyRead;
 
   // Per-client funnel — disabled when a group is selected
   const clientFunnelQ = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, dateFrom, dateTo);

@@ -117,28 +117,28 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
   const ninetyDayFrom = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
-  // Cohort tile windows — compare the picker's range length to each
-  // metric's maturation delay:
-  //   - Range strictly longer than delay → cap `to` at the cutoff so only
-  //     mature leads count. Clean number, no disclaimer.
-  //   - Range equal to delay → use the user's range as-is. The oldest
-  //     leads sit right at the maturation boundary, so the number is
-  //     "mature enough" to show without a disclaimer.
-  //   - Range shorter than delay → use the user's range as-is AND show
-  //     the ⚠ early-read disclaimer, because nothing in the range has
-  //     been given enough time to progress.
+  // Cohort tile windows — single 30-day threshold for simplicity:
+  //   - Picker range < 30 days  → include all leads (no capping anywhere)
+  //                               and show the ⚠ early-read disclaimer on
+  //                               all three cohort tiles.
+  //   - Picker range ≥ 30 days  → no disclaimer. Cap each metric at its
+  //                               own maturation cutoff (today−14 for book,
+  //                               today−30 for close/full) so only mature
+  //                               data flows through — except when the cap
+  //                               would collapse the window to empty (e.g.,
+  //                               30d picker against 30d close cutoff), in
+  //                               which case we fall back to the full range.
   const daysAgoStr = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoff = daysAgoStr(14);
   const closeCutoff = daysAgoStr(30);
   const rangeDays = Math.round((new Date(dateTo).getTime() - new Date(dateFrom).getTime()) / 86400000);
-  const bookHasMature = rangeDays > 14;
-  const closeHasMature = rangeDays > 30;
-  const bookTo = bookHasMature ? bookCutoff : dateTo;
-  const closeTo = closeHasMature ? closeCutoff : dateTo;
+  const showEarlyRead = rangeDays < 30;
+  const bookTo = !showEarlyRead && rangeDays > 14 ? bookCutoff : dateTo;
+  const closeTo = !showEarlyRead && rangeDays > 30 ? closeCutoff : dateTo;
   const bookFrom = dateFrom;
   const closeFrom = dateFrom;
-  const bookImmature = rangeDays < 14;
-  const closeImmature = rangeDays < 30;
+  const bookImmature = showEarlyRead;
+  const closeImmature = showEarlyRead;
 
   // Funnel data — use group endpoint for groups, client endpoint for individual clients.
   // Only one of the two queries is enabled at a time (the other is disabled via `enabled: !!id`).
