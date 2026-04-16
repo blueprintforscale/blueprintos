@@ -94,18 +94,17 @@ function ClientAnalyticsView() {
   const { data: clients } = useClients();
   const { data: groups } = useGroups();
 
-  // Cohort tile windows — single 30-day threshold for simplicity:
-  // range < 30d → use full range on all tiles + ⚠ early-read disclaimer.
-  // range ≥ 30d → no disclaimer; cap each metric at its own cutoff for
-  // mature data (except when capping would collapse the window to empty,
-  // in which case fall back to the full range).
+  // Cohort tile windows — single 30-day threshold:
+  // range ≤ 30d → full range on all tiles + ⚠ early-read disclaimer.
+  // range > 30d  → no disclaimer; cap each metric at its own cutoff for
+  // mature data.
   const daysAgoStrCT = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoffCT = daysAgoStrCT(14);
   const closeCutoffCT = daysAgoStrCT(30);
   const rangeDaysCT = Math.round((new Date(dateTo).getTime() - new Date(dateFrom).getTime()) / 86400000);
-  const showEarlyRead = rangeDaysCT < 30;
-  const bookToCT = !showEarlyRead && rangeDaysCT > 14 ? bookCutoffCT : dateTo;
-  const closeToCT = !showEarlyRead && rangeDaysCT > 30 ? closeCutoffCT : dateTo;
+  const showEarlyRead = rangeDaysCT <= 30;
+  const bookToCT = showEarlyRead ? dateTo : bookCutoffCT;
+  const closeToCT = showEarlyRead ? dateTo : closeCutoffCT;
   const bookFromCT = dateFrom;
   const closeFromCT = dateFrom;
   const bookImmature = showEarlyRead;

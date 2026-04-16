@@ -117,24 +117,22 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
   const ninetyDayFrom = new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0];
   const ninetyDayTo = new Date().toISOString().split('T')[0];
 
-  // Cohort tile windows — single 30-day threshold for simplicity:
-  //   - Picker range < 30 days  → include all leads (no capping anywhere)
-  //                               and show the ⚠ early-read disclaimer on
-  //                               all three cohort tiles.
-  //   - Picker range ≥ 30 days  → no disclaimer. Cap each metric at its
+  // Cohort tile windows — single 30-day threshold:
+  //   - Picker range ≤ 30 days  → include all leads (no capping). Show
+  //                               the ⚠ early-read disclaimer on all
+  //                               three cohort tiles, since the close-rate
+  //                               maturation window is 30 days.
+  //   - Picker range > 30 days  → no disclaimer. Cap each metric at its
   //                               own maturation cutoff (today−14 for book,
   //                               today−30 for close/full) so only mature
-  //                               data flows through — except when the cap
-  //                               would collapse the window to empty (e.g.,
-  //                               30d picker against 30d close cutoff), in
-  //                               which case we fall back to the full range.
+  //                               data flows through.
   const daysAgoStr = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoff = daysAgoStr(14);
   const closeCutoff = daysAgoStr(30);
   const rangeDays = Math.round((new Date(dateTo).getTime() - new Date(dateFrom).getTime()) / 86400000);
-  const showEarlyRead = rangeDays < 30;
-  const bookTo = !showEarlyRead && rangeDays > 14 ? bookCutoff : dateTo;
-  const closeTo = !showEarlyRead && rangeDays > 30 ? closeCutoff : dateTo;
+  const showEarlyRead = rangeDays <= 30;
+  const bookTo = showEarlyRead ? dateTo : bookCutoff;
+  const closeTo = showEarlyRead ? dateTo : closeCutoff;
   const bookFrom = dateFrom;
   const closeFrom = dateFrom;
   const bookImmature = showEarlyRead;
