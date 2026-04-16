@@ -309,8 +309,9 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
 
   // Projection: point annotation at projected value for current month
   const annotations: ApexOptions['annotations'] = {};
+  const xaxisAnnotations: NonNullable<ApexOptions['annotations']>['xaxis'] = [];
   if (startMonthIdx >= 0 && !campaignIsolated) {
-    annotations.xaxis = [{
+    xaxisAnnotations.push({
       x: labels[startMonthIdx],
       borderColor: '#E85D4D',
       strokeDashArray: 3,
@@ -329,7 +330,40 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
           padding: { left: 4, right: 4, top: 2, bottom: 2 },
         },
       },
-    }];
+    });
+  }
+  // SEO Started vertical line — only on SEO source tab
+  if (isSeoSource && seoTrend?.seo_start && !campaignIsolated) {
+    const seoStartDate = new Date(seoTrend.seo_start);
+    const seoMonthIdx = recent.findIndex((d) => {
+      const ms = new Date((d as any).month_start);
+      return ms.getUTCFullYear() === seoStartDate.getUTCFullYear() && ms.getUTCMonth() === seoStartDate.getUTCMonth();
+    });
+    if (seoMonthIdx >= 0) {
+      xaxisAnnotations.push({
+        x: labels[seoMonthIdx],
+        borderColor: '#0ea5e9',
+        strokeDashArray: 3,
+        opacity: 0.7,
+        label: {
+          text: 'SEO Started',
+          borderColor: 'transparent',
+          position: 'top',
+          orientation: 'horizontal',
+          offsetY: -5,
+          style: {
+            background: '#0ea5e9',
+            color: '#fff',
+            fontSize: '9px',
+            fontWeight: 600,
+            padding: { left: 4, right: 4, top: 2, bottom: 2 },
+          },
+        },
+      });
+    }
+  }
+  if (xaxisAnnotations.length > 0) {
+    annotations.xaxis = xaxisAnnotations;
   }
   if (projectedValue !== null && projectedValue > 0 && !campaignIsolated && cfg.projectable) {
     annotations.points = [{
