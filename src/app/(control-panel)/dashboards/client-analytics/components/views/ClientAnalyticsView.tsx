@@ -94,26 +94,22 @@ function ClientAnalyticsView() {
   const { data: clients } = useClients();
   const { data: groups } = useGroups();
 
-  // Cohort tile windows — cap `to` at the maturation cutoff so mature
-  // data flows through whenever the range has any. Long ranges (60d, 90d,
-  // lifetime) still get clean mature rates with no disclaimer.
-  // Only when the entire range sits inside the delay window (e.g., "last
-  // 7 days") does capping collapse it — then fall back to the user's
-  // range as-is and flag "immature" so the disclaimer fires on the tile.
+  // Cohort tile windows — compare the picker's range length to each
+  // metric's maturation delay. Range > delay → cap for mature data
+  // (no disclaimer). Range == delay → use as-is (boundary case, no
+  // disclaimer). Range < delay → use as-is with ⚠ early-read disclaimer.
   const daysAgoStrCT = (n: number) => new Date(Date.now() - n * 86400000).toISOString().split('T')[0];
   const bookCutoffCT = daysAgoStrCT(14);
   const closeCutoffCT = daysAgoStrCT(30);
-  // `>=` not `>`: when `dateFrom` exactly equals the cutoff (e.g., 30d
-  // picker with the close-rate 30d cutoff), capping would produce an
-  // empty range. Strict inequality ensures any mature data exists.
-  const bookAllImmature = dateFrom >= bookCutoffCT;
-  const closeAllImmature = dateFrom >= closeCutoffCT;
-  const bookToCT = bookAllImmature ? dateTo : (dateTo <= bookCutoffCT ? dateTo : bookCutoffCT);
-  const closeToCT = closeAllImmature ? dateTo : (dateTo <= closeCutoffCT ? dateTo : closeCutoffCT);
+  const rangeDaysCT = Math.round((new Date(dateTo).getTime() - new Date(dateFrom).getTime()) / 86400000);
+  const bookHasMature = rangeDaysCT > 14;
+  const closeHasMature = rangeDaysCT > 30;
+  const bookToCT = bookHasMature ? bookCutoffCT : dateTo;
+  const closeToCT = closeHasMature ? closeCutoffCT : dateTo;
   const bookFromCT = dateFrom;
   const closeFromCT = dateFrom;
-  const bookImmature = bookAllImmature;
-  const closeImmature = closeAllImmature;
+  const bookImmature = rangeDaysCT < 14;
+  const closeImmature = rangeDaysCT < 30;
 
   // Per-client funnel — disabled when a group is selected
   const clientFunnelQ = useFunnel(isGroup ? 0 : (selectedClient ?? 0), activeSource, dateFrom, dateTo);
