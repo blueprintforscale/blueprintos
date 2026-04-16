@@ -6,7 +6,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SharedDashboard, { type Resource } from './SharedDashboard';
 
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { staleTime: 30_000, refetchOnWindowFocus: false } },
+  // 60s stale + refetchOnWindowFocus keeps share/embed pages in sync with data updates
+  // without hammering the API. Clients returning to the tab see fresh numbers.
+  defaultOptions: { queries: { staleTime: 60_000, refetchOnWindowFocus: true } },
 });
 
 // Map URL ?tab= values to tab indices in SharedDashboard.

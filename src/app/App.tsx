@@ -21,7 +21,10 @@ import { NavigationContextProvider } from '@/components/theme-layouts/components
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
-			staleTime: 5 * 60 * 1000, // 5 minutes
+			// 60s stale keeps a fresh feel while still respecting the 30s Next.js proxy cache.
+			// Before: 5min caused users to see stale funnel counts after data updates.
+			staleTime: 60 * 1000,
+			refetchOnWindowFocus: true,
 			retry: 1
 		}
 	}
