@@ -134,35 +134,43 @@ function CohortTiles({ data, bookRateData, closeRateData, bookImmature, closeImm
   const bookSource = bookRateData || data;
   const bookQuality = parseInt(bookSource.quality_leads as any) || parseInt(bookSource.leads as any) || 0;
   const bookInspScheduled = parseInt(bookSource.inspection_scheduled as any) || 0;
-  const bookRate = bookQuality >= MIN_SAMPLE
-    ? (bookInspScheduled / bookQuality) * 100
-    : null;
+  // Show rate whenever we have any sample; add a "small sample" disclaimer when below MIN_SAMPLE.
+  // Matches how Sy's dashboard surfaces early-read rates — we let clients see the number + a caveat
+  // rather than hiding it behind a dash.
+  const bookRate = bookQuality > 0 ? (bookInspScheduled / bookQuality) * 100 : null;
+  const bookSmallSample = bookQuality > 0 && bookQuality < MIN_SAMPLE;
 
   // Close rate + full funnel — same idea, different delay window.
   const closeSource = closeRateData || data;
   const closeQuality = parseInt(closeSource.quality_leads as any) || parseInt(closeSource.leads as any) || 0;
   const closeInspScheduled = parseInt(closeSource.inspection_scheduled as any) || 0;
   const closeEstApproved = parseInt(closeSource.estimate_approved as any) || 0;
-  const closeRate = closeInspScheduled >= MIN_SAMPLE
-    ? (closeEstApproved / closeInspScheduled) * 100
-    : null;
-  const fullFunnel = closeQuality >= MIN_SAMPLE
-    ? (closeEstApproved / closeQuality) * 100
-    : null;
+  const closeRate = closeInspScheduled > 0 ? (closeEstApproved / closeInspScheduled) * 100 : null;
+  const closeSmallSample = closeInspScheduled > 0 && closeInspScheduled < MIN_SAMPLE;
+  const fullFunnel = closeQuality > 0 ? (closeEstApproved / closeQuality) * 100 : null;
+  const fullFunnelSmallSample = closeQuality > 0 && closeQuality < MIN_SAMPLE;
 
   const fmtRate = (v: number | null) => v == null ? '—' : `${v.toFixed(1)}%`;
 
   const bookSub = bookRate == null
-    ? `Need ${MIN_SAMPLE}+ leads (has ${bookQuality})`
+    ? `No leads in window yet`
     : `${bookInspScheduled} of ${bookQuality} leads`;
 
   const closeSub = closeRate == null
-    ? `Need ${MIN_SAMPLE}+ inspections (has ${closeInspScheduled})`
+    ? `No inspections in window yet`
     : `${closeEstApproved} of ${closeInspScheduled} inspections`;
 
   const fullFunnelSub = fullFunnel == null
-    ? `Need ${MIN_SAMPLE}+ leads (has ${closeQuality})`
+    ? `No leads in window yet`
     : `${closeEstApproved} of ${closeQuality} leads`;
+
+  // Build disclaimer strings — combine early-read + small-sample into one line when both apply
+  const buildNote = (immature: boolean, immatureText: string, smallSample: boolean, sampleLabel: string, sampleCount: number): string | null => {
+    if (immature && smallSample) return `Early read — limited sample (${sampleCount} ${sampleLabel}, best with ${MIN_SAMPLE}+)`;
+    if (immature) return immatureText;
+    if (smallSample) return `Limited sample — ${sampleCount} ${sampleLabel} (best with ${MIN_SAMPLE}+)`;
+    return null;
+  };
 
   const tiles = [
     {
@@ -178,7 +186,7 @@ function CohortTiles({ data, bookRateData, closeRateData, bookImmature, closeImm
       value: fmtRate(bookRate),
       sub: bookSub,
       bar: bookRate != null ? <CohortRangeBar value={bookRate} range={BOOK_RATE_RANGE} scaleMax={BOOK_RATE_SCALE} /> : null,
-      immatureNote: bookImmature ? 'Early read — leads still within 14-day maturation window' : null,
+      immatureNote: buildNote(!!bookImmature, 'Early read — leads still within 14-day maturation window', bookSmallSample, 'leads', bookQuality),
       stage: 'inspection_scheduled' as FunnelStage,
     },
     {
@@ -186,7 +194,7 @@ function CohortTiles({ data, bookRateData, closeRateData, bookImmature, closeImm
       value: fmtRate(closeRate),
       sub: closeSub,
       bar: closeRate != null ? <CohortRangeBar value={closeRate} range={CLOSE_RATE_RANGE} scaleMax={CLOSE_RATE_SCALE} /> : null,
-      immatureNote: closeImmature ? 'Early read — inspections still within 30-day maturation window' : null,
+      immatureNote: buildNote(!!closeImmature, 'Early read — inspections still within 30-day maturation window', closeSmallSample, 'inspections', closeInspScheduled),
       stage: 'estimate_approved' as FunnelStage,
     },
     {
@@ -194,7 +202,7 @@ function CohortTiles({ data, bookRateData, closeRateData, bookImmature, closeImm
       value: fmtRate(fullFunnel),
       sub: fullFunnelSub,
       bar: fullFunnel != null ? <CohortRangeBar value={fullFunnel} range={FULL_FUNNEL_RANGE} scaleMax={FULL_FUNNEL_SCALE} /> : null,
-      immatureNote: closeImmature ? 'Early read — leads still within 30-day maturation window' : null,
+      immatureNote: buildNote(!!closeImmature, 'Early read — leads still within 30-day maturation window', fullFunnelSmallSample, 'leads', closeQuality),
       stage: 'estimate_approved' as FunnelStage,
     },
   ];
