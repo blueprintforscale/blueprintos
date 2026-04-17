@@ -58,34 +58,38 @@ const sections: Section[] = [
     subsections: [
       {
         subtitle: 'HouseCall Pro',
-        content: ['We look at the job description and amount to classify each record:'],
+        content: ['We classify every record using a cascade of signals — the first one that gives a clear answer wins:'],
         list: [
-          ['Inspection', 'Records mentioning assessments, testing, mold inspections, sampling, or evaluations. Also any job under $1,000 with pre-treatment testing or air quality tests.'],
-          ['Treatment Job', 'Records mentioning remediation, dry fog, treatment, removal, abatement, or encapsulation. Jobs without those keywords at $1,000+ are treated as jobs.'],
+          ['Tags', 'If your team tagged the job as treatment (Mold Treatment, Water Mitigation, Encapsulation, Remediation, Containment, Demolition) or as inspection (Inspection, Assessment, Air Quality Test, Mold Test), we use that tag.'],
+          ['Linked estimate option', 'If the job was created from an estimate, we look at which option the customer picked.'],
+          ['Line items', 'We check the billed services line by line and use the dollar majority — with priority phrases like "pre-treatment" or "air quality test" overriding treatment branding on small jobs.'],
+          ['Description', 'Keywords like "remediation," "dry fog," "treatment," or "removal" point to treatment. Keywords like "assessment," "testing," or "evaluation" point to inspection.'],
+          ['Amount as a tiebreaker', 'When no other signal is clear: under $1,000 defaults to inspection; $1,000+ defaults to treatment.'],
         ],
-        footer: 'If a record mentions both — like "air quality test + remediation" — it counts as treatment, since that\'s the primary service.',
+        footer: 'A few specifics worth knowing: multi-phase work counts (each phase of a split job feeds into your scheduled and completed totals); "needs scheduling" jobs stay unscheduled on your dashboard, even if an estimate is approved (we trust HCP\'s status); and $0 "Work Authorization" placeholder estimates don\'t count as estimates sent — they only count once a real priced estimate goes out.',
       },
       {
         subtitle: 'Jobber',
         content: ['Jobber uses a "request" and "job" structure:'],
         list: [
           ['Inspection', 'Any Jobber request is treated as an inspection inquiry. When converted to a quote or job, we track that progression.'],
-          ['Treatment Job', 'Jobber jobs and quotes above the minimum threshold are classified as treatment work.'],
+          ['Treatment Job', 'Jobber jobs and quotes above the minimum threshold are classified as treatment work. Archived jobs count as completed (Jobber uses archive to mark workflow done, not deleted).'],
         ],
       },
     ],
-    footer: 'Sometimes a description is vague or missing. Small amounts (under $1,000) default to inspection, larger amounts default to treatment. If something looks wrong, let your account manager know.',
+    footer: 'Sometimes a description is vague or missing and the classifier flags the record for human review. If something looks wrong on your dashboard, let your account manager know — most fixes are a tag, line item, or description tweak in your CRM and the dashboard updates automatically on the next sync.',
   },
   {
     title: 'Estimates & Revenue',
     icon: '05',
     content: ['Your dashboard tracks the full sales pipeline from estimate to close:'],
     list: [
-      ['Estimate Sent', 'A treatment estimate (not an inspection fee) was sent to the customer.'],
-      ['Estimate Approved', 'The customer approved the estimate (minimum $1,000 for treatment work).'],
-      ['Revenue Closed', 'The approved estimate amount or completed job total, whichever is higher.'],
+      ['Estimate Sent', 'A real priced treatment estimate of $1,000 or more was sent. Inspection fees and $0 "Work Authorization" placeholders don\'t count here — they only count once a real priced estimate goes out.'],
+      ['Estimate Approved', 'The customer approved a treatment estimate of $1,000 or more. When you send multiple options (good/better/best), they\'re grouped as one — if any option is approved, it counts as approved.'],
+      ['Open Estimates', 'Estimates that have been sent but not yet approved or invoiced — these are your active sales opportunities. Once approved or invoiced, they move out of the Open bucket.'],
+      ['Revenue Closed', 'The higher of the approved estimate amount or the completed job total. We also include inspection fees recorded directly on a job (when the inspection wasn\'t separately invoiced) so nothing slips through the cracks.'],
     ],
-    footer: 'When you send multiple options (good/better/best), they\'re grouped as one. If any option is approved, it counts as approved.',
+    footer: 'Approved estimates that haven\'t been invoiced yet are tracked separately — your account manager may flag long-stalled approvals so you can chase them down before they go cold.',
   },
   {
     title: 'Ad Performance',
