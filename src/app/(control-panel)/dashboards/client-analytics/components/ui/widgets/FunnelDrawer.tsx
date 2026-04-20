@@ -41,6 +41,7 @@ type Lead = {
   is_spam?: boolean;
   reactivated?: boolean;
   source_label?: string;
+  excluded_from_quality?: boolean;
 };
 
 export type FunnelStage =
@@ -100,18 +101,21 @@ function getHighestStage(lead: Lead): string {
 }
 
 function filterByStage(leads: Lead[], stage: FunnelStage, showExcluded?: boolean): Lead[] {
-  if (stage === 'leads') return leads;
-  if (stage === 'cpl_leads') return leads; // all leads shown, toggle handled in UI
+  // Contacts drawer shows everything (spam/excluded toggle handled in UI).
+  // All other drawers are sub-stages of Quality Leads → drop excluded.
+  if (stage === 'cpl_leads') return leads;
+  const quality = leads.filter((l) => !l.excluded_from_quality);
+  if (stage === 'leads') return quality;
   if (stage === 'open_estimates') {
-    return leads.filter((l) => l.estimate_sent && !l.estimate_approved && !l.revenue_closed);
+    return quality.filter((l) => l.estimate_sent && !l.estimate_approved && !l.revenue_closed);
   }
   if (stage === 'job_scheduled') {
-    return leads.filter((l) => l.job_scheduled);
+    return quality.filter((l) => l.job_scheduled);
   }
   if (stage === 'job_completed') {
-    return leads.filter((l) => l.job_completed);
+    return quality.filter((l) => l.job_completed);
   }
-  return leads.filter((l) => l[stage] === true);
+  return quality.filter((l) => l[stage] === true);
 }
 
 function formatDate(d: string) {
@@ -204,7 +208,8 @@ function FunnelDrawer({ open, stage, title, leads, customerId, crm, source, adSp
   const [showExcluded, setShowExcluded] = useState(true);
 
   const spamPattern = /spam|not a lead|wrong number|out of area|wrong service|abandoned/i;
-  const isSpamFiltered = (l: Lead) => l.lost_reason ? spamPattern.test(l.lost_reason) : false;
+  const isSpamFiltered = (l: Lead) =>
+    l.excluded_from_quality || (l.lost_reason ? spamPattern.test(l.lost_reason) : false);
 
   const allForStage = leads && Array.isArray(leads) ? filterByStage(leads, stage) : [];
   const unsorted = stage === 'cpl_leads' && !showExcluded

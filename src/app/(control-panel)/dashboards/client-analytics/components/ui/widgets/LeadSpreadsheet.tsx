@@ -30,6 +30,7 @@ type Lead = {
   client_flag_reason?: string | null;
   client_flag_at?: string | null;
   source_label?: string;
+  excluded_from_quality?: boolean;
 };
 
 function getSource(lead: Lead): string {
@@ -114,8 +115,9 @@ function LeadSpreadsheet({ data, customerId, crm }: Props) {
 
   if (!data || !Array.isArray(data)) return null;
 
-  const lostCount = data.filter((l) => l.lost_reason).length;
-  const afterLost = showLost ? data : data.filter((l) => !l.lost_reason);
+  const isExcluded = (l: Lead) => l.excluded_from_quality || !!l.lost_reason;
+  const lostCount = data.filter(isExcluded).length;
+  const afterLost = showLost ? data : data.filter((l) => !isExcluded(l));
   const filtered = search.trim()
     ? afterLost.filter((l) => {
         const q = search.toLowerCase().replace(/[^a-z0-9]/g, '');
