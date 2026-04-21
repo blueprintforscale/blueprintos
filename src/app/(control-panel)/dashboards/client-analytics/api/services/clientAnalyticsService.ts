@@ -16,8 +16,28 @@ import type {
 
 const BASE = '/api/blueprint';
 
+/**
+ * Forward the `?preview=X` URL param from the current browser URL to the API.
+ * Used by Susie/Martin for side-by-side validation of the new
+ * v_dashboard_contacts view against legacy before Phase 1b cutover. The API
+ * recognizes `preview=v_dashboard_contacts` and overlays top-of-funnel tiles
+ * from the new view. Without the param, legacy behavior is unchanged.
+ *
+ * Note: React Query caches by queryKey (not URL), so if you toggle preview
+ * on/off during a session you may see cached results. Hard-refresh (Cmd+Shift+R)
+ * after changing the preview param to bust the cache.
+ */
+function previewQueryString(): string {
+  if (typeof window === 'undefined') return '';
+  const preview = new URLSearchParams(window.location.search).get('preview');
+  return preview ? `preview=${encodeURIComponent(preview)}` : '';
+}
+
 async function fetchJson<T>(path: string): Promise<T> {
-  const res = await fetch(`${BASE}/${path}`);
+  const preview = previewQueryString();
+  const separator = path.includes('?') ? '&' : '?';
+  const fullPath = preview ? `${path}${separator}${preview}` : path;
+  const res = await fetch(`${BASE}/${fullPath}`);
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   return res.json();
 }
