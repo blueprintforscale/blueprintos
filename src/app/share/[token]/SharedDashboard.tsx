@@ -432,7 +432,7 @@ export default function SharedDashboard({ resource, embed, initialTab, initialDr
                     </div>
                   </div>
                 ) : (
-                  <HistoricalPerformance data={historicalData} startDate={startDate} hiddenMetrics={(resource as any)?.dashboard_config?.hidden_trend_metrics} campaignTrend={campaignTrendData} seoTrend={seoTrend} activeSource={activeSource} />
+                  <HistoricalPerformance data={historicalData} startDate={startDate} trendStartDate={(resource as any)?.dashboard_config?.trend_start_date} hiddenMetrics={(resource as any)?.dashboard_config?.hidden_trend_metrics} campaignTrend={campaignTrendData} seoTrend={seoTrend} activeSource={activeSource} />
                 )}
               </motion.div>
             )}

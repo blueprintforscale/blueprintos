@@ -15,6 +15,7 @@ type SeoTrendData = { monthly: SeoMonthlyPoint[]; seo_start: string | null; base
 type Props = {
   data: MonthlyTrend[] | undefined;
   startDate?: string;
+  trendStartDate?: string;
   showSuperQuality?: boolean;
   hiddenMetrics?: string[];
   campaignTrend?: CampaignTrend[];
@@ -55,7 +56,7 @@ function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction
 
 const CAMPAIGN_COLORS = ['#6366f1', '#E85D4D', '#2A9D8F', '#D4A843', '#8B5CF6', '#F97316', '#06B6D4', '#EC4899'];
 
-function HistoricalPerformance({ data, startDate, showSuperQuality, hiddenMetrics, campaignTrend, seoTrend, activeSource }: Props) {
+function HistoricalPerformance({ data, startDate, trendStartDate, showSuperQuality, hiddenMetrics, campaignTrend, seoTrend, activeSource }: Props) {
   const isSeoSource = activeSource === 'seo';
   const [metric, setMetric] = useState<Metric>('leads');
   const [overlays, setOverlays] = useState<Metric[]>([]);
@@ -68,14 +69,19 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, hiddenMetric
 
   // Trim leading months: start from MIN(program_start, today - 12 months) — capped at full data range
   // This avoids long flat zero regions before the program existed
+  // Per-client override via dashboard_config.trend_start_date takes priority
   const trimmedData = (() => {
-    if (!startDate) return data;
-    const programStart = new Date(startDate);
-    const twelveMonthsAgo = new Date();
-    twelveMonthsAgo.setUTCMonth(twelveMonthsAgo.getUTCMonth() - 12);
-    twelveMonthsAgo.setUTCDate(1);
-    // Effective start = earlier of (program start) or (12 months ago)
-    const effectiveStart = programStart < twelveMonthsAgo ? programStart : twelveMonthsAgo;
+    if (!startDate && !trendStartDate) return data;
+    let effectiveStart: Date;
+    if (trendStartDate) {
+      effectiveStart = new Date(trendStartDate);
+    } else {
+      const programStart = new Date(startDate!);
+      const twelveMonthsAgo = new Date();
+      twelveMonthsAgo.setUTCMonth(twelveMonthsAgo.getUTCMonth() - 12);
+      twelveMonthsAgo.setUTCDate(1);
+      effectiveStart = programStart < twelveMonthsAgo ? programStart : twelveMonthsAgo;
+    }
     return data.filter((d) => {
       const ms = new Date((d as any).month_start);
       return ms >= effectiveStart;
