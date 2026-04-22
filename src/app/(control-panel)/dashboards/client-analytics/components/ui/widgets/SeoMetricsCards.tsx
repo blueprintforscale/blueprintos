@@ -92,42 +92,49 @@ function SeoMetricsCards({ data }: Props) {
         <Typography className="text-xs font-semibold uppercase tracking-wide" sx={{ color: '#E85D4D' }}>
           SEO Lift
         </Typography>
-        <div className="mt-1 flex items-baseline gap-2">
-          <Typography
-            className="text-3xl font-bold tracking-tight"
-            sx={{ color: leadsLiftPositive ? '#fff' : '#5a554d' }}
-          >
-            {leadsLiftPositive ? '+' : ''}{data.leads_lift_per_mo.toFixed(1)}
-          </Typography>
-          <Typography className="text-base font-medium" sx={{ color: '#fff' }}>
-            leads/mo
-          </Typography>
-        </div>
         {isEarly ? (
-          <Typography className="mt-1 text-sm font-semibold" sx={{ color: '#ddd8cb' }}>
-            Revenue maturing — accumulates over 60–90 days
-          </Typography>
+          <>
+            <Typography className="mt-1 text-3xl font-bold tracking-tight" sx={{ color: '#ddd8cb' }}>
+              Coming Soon
+            </Typography>
+            <Typography className="mt-1 text-sm" sx={{ color: '#8a8279' }}>
+              Needs ~60 days of SEO-era data for a reliable comparison. Currently at {data.days_on_seo} days.
+            </Typography>
+          </>
         ) : (
-          <div className="mt-1 flex items-baseline gap-2">
-            <Typography
-              className="text-xl font-bold tracking-tight"
-              sx={{ color: data.revenue_lift_per_mo > 0 ? '#fff' : '#5a554d' }}
-            >
-              {data.revenue_lift_per_mo > 0 ? '+' : ''}{formatDollars(data.revenue_lift_per_mo)}
-            </Typography>
-            <Typography className="text-sm font-medium" sx={{ color: '#ddd8cb' }}>
-              /mo revenue
-            </Typography>
-            {leadsLiftPct !== null && (
-              <Typography className="text-sm font-semibold" sx={{ color: '#E85D4D' }}>
-                {leadsLiftPct > 0 ? '+' : ''}{leadsLiftPct}%
+          <>
+            <div className="mt-1 flex items-baseline gap-2">
+              <Typography
+                className="text-3xl font-bold tracking-tight"
+                sx={{ color: leadsLiftPositive ? '#fff' : '#5a554d' }}
+              >
+                {leadsLiftPositive ? '+' : ''}{data.leads_lift_per_mo.toFixed(1)}
               </Typography>
-            )}
-          </div>
+              <Typography className="text-base font-medium" sx={{ color: '#fff' }}>
+                leads/mo
+              </Typography>
+            </div>
+            <div className="mt-1 flex items-baseline gap-2">
+              <Typography
+                className="text-xl font-bold tracking-tight"
+                sx={{ color: data.revenue_lift_per_mo > 0 ? '#fff' : '#5a554d' }}
+              >
+                {data.revenue_lift_per_mo > 0 ? '+' : ''}{formatDollars(data.revenue_lift_per_mo)}
+              </Typography>
+              <Typography className="text-sm font-medium" sx={{ color: '#ddd8cb' }}>
+                /mo revenue
+              </Typography>
+              {leadsLiftPct !== null && (
+                <Typography className="text-sm font-semibold" sx={{ color: '#E85D4D' }}>
+                  {leadsLiftPct > 0 ? '+' : ''}{leadsLiftPct}%
+                </Typography>
+              )}
+            </div>
+            <Typography className="mt-2 text-xs" sx={{ color: '#8a8279' }}>
+              Above pre-SEO baseline
+            </Typography>
+          </>
         )}
-        <Typography className="mt-2 text-xs" sx={{ color: '#8a8279' }}>
-          Above pre-SEO baseline
-        </Typography>
       </Paper>
     </div>
   );
