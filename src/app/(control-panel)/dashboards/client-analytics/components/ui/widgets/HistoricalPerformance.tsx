@@ -36,8 +36,8 @@ const metricsList: { key: Metric; label: string; format: (v: number) => string; 
   { key: 'conversions', label: 'Conversions', format: (v) => String(Math.round(v)), color: '#6366f1', projectable: true },
   { key: 'close_rate', label: 'Close Rate', format: (v) => `${v.toFixed(0)}%`, color: '#2A9D8F', projectable: false, hidden: !SHOW_RATE_METRICS },
   { key: 'book_rate', label: 'Book Rate', format: (v) => `${v.toFixed(0)}%`, color: '#D4A843', projectable: false, hidden: !SHOW_RATE_METRICS },
-  { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#8B5CF6', projectable: false },
-  { key: 'revenue', label: 'Revenue', format: (v) => v >= 1000 ? `$${(v / 1000).toFixed(1)}K` : `$${Math.round(v)}`, color: '#3b8a5a', projectable: false },
+  { key: 'roas', label: 'ROAS', format: (v) => `${v.toFixed(1)}x`, color: '#8B5CF6', projectable: false, hidden: true },
+  { key: 'revenue', label: 'Revenue', format: (v) => v >= 1000 ? `$${(v / 1000).toFixed(1)}K` : `$${Math.round(v)}`, color: '#3b8a5a', projectable: false, hidden: true },
   { key: 'seo_leads', label: 'SEO Leads', format: (v) => String(Math.round(v)), color: '#0ea5e9', projectable: false },
 ];
 
