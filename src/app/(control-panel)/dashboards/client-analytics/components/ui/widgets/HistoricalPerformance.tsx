@@ -16,6 +16,7 @@ type Props = {
   data: MonthlyTrend[] | undefined;
   startDate?: string;
   showSuperQuality?: boolean;
+  hiddenMetrics?: string[];
   campaignTrend?: CampaignTrend[];
   seoTrend?: SeoTrendData;
   activeSource?: string;
@@ -54,7 +55,7 @@ function getMonthProgress(): { dayElapsed: number; daysInMonth: number; fraction
 
 const CAMPAIGN_COLORS = ['#6366f1', '#E85D4D', '#2A9D8F', '#D4A843', '#8B5CF6', '#F97316', '#06B6D4', '#EC4899'];
 
-function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTrend, seoTrend, activeSource }: Props) {
+function HistoricalPerformance({ data, startDate, showSuperQuality, hiddenMetrics, campaignTrend, seoTrend, activeSource }: Props) {
   const isSeoSource = activeSource === 'seo';
   const [metric, setMetric] = useState<Metric>('leads');
   const [overlays, setOverlays] = useState<Metric[]>([]);
@@ -96,9 +97,11 @@ function HistoricalPerformance({ data, startDate, showSuperQuality, campaignTren
   }
   const hasSeoData = seoLeadsByMonth.size > 0;
 
+  const hidden = new Set(hiddenMetrics || []);
   const visibleMetrics = (showSuperQuality ? metricsList : metricsList.filter((m) => m.key !== 'super_quality'))
     .filter((m) => !m.hidden)
-    .filter((m) => m.key !== 'seo_leads' || hasSeoData); // only show SEO Leads pill when client has SEO
+    .filter((m) => m.key !== 'seo_leads' || hasSeoData) // only show SEO Leads pill when client has SEO
+    .filter((m) => !hidden.has(m.key)); // per-client hidden metrics from dashboard_config
 
   const cfg = visibleMetrics.find((m) => m.key === metric) || visibleMetrics[0];
   const getValue = (d: MonthlyTrend, key: Metric): number => {
