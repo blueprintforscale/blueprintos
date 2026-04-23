@@ -436,7 +436,7 @@ function ClientAnalyticsView() {
                   <HourlyMissedChart data={callData} dateFrom={dateFrom} dateTo={dateTo} />
                 </motion.div>
                 <motion.div variants={item}>
-                  <MissedByAttemptChart data={callData} />
+                  <MissedByAttemptChart data={callData} dateFrom={dateFrom} dateTo={dateTo} />
                 </motion.div>
                 <motion.div variants={item}>
                   <CallSummaryCards data={callData} />

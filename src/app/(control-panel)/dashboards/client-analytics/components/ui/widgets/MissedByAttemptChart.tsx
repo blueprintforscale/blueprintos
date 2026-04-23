@@ -5,14 +5,22 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import type { CallAnalyticsData } from '../../../api/types';
 
-type Props = { data: CallAnalyticsData | undefined };
+type Props = { data: CallAnalyticsData | undefined; dateFrom?: string; dateTo?: string };
 
-function MissedByAttemptChart({ data }: Props) {
+function formatRange(from?: string, to?: string): string | null {
+  if (!from || !to) return null;
+  const fmt = (s: string) =>
+    new Date(s + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return `${fmt(from)} – ${fmt(to)}`;
+}
+
+function MissedByAttemptChart({ data, dateFrom, dateTo }: Props) {
   if (!data?.missed_by_attempt) return null;
 
   const { first, second, third } = data.missed_by_attempt;
   if (first === 0) return null;
 
+  const range = formatRange(dateFrom, dateTo);
   const max = first;
   const steps = [
     { label: 'Missed once', count: first, pct: 100 },
@@ -22,9 +30,16 @@ function MissedByAttemptChart({ data }: Props) {
 
   return (
     <Paper className="rounded-xl p-6 shadow-sm">
-      <Typography className="mb-1 text-sm font-extrabold uppercase tracking-wider" style={{ color: '#000' }}>
-        Repeat Missed Callers
-      </Typography>
+      <div className="mb-1 flex items-baseline justify-between gap-2">
+        <Typography className="text-sm font-extrabold uppercase tracking-wider" style={{ color: '#000' }}>
+          Repeat Missed Callers
+        </Typography>
+        {range && (
+          <Typography className="text-[10px] font-medium" style={{ color: '#c5bfb6' }}>
+            {range}
+          </Typography>
+        )}
+      </div>
       <Typography className="mb-4 text-[11px] font-medium" style={{ color: '#8a8279' }}>
         {first} callers were missed. Of those, how many called back and were missed again?
       </Typography>
