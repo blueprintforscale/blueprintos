@@ -345,8 +345,9 @@ function HistoricalPerformance({ data, startDate, trendStartDate, showSuperQuali
       },
     });
   }
-  // SEO Started vertical line — only on SEO source tab
-  if (isSeoSource && seoTrend?.seo_start && !campaignIsolated) {
+  // SEO Started vertical line — shown on any source tab when client has SEO, to give context
+  // for how SEO era correlates with other channels (Google Ads, etc.)
+  if (seoTrend?.seo_start && !campaignIsolated) {
     const seoStartDate = new Date(seoTrend.seo_start);
     const seoMonthIdx = recent.findIndex((d) => {
       const ms = new Date((d as any).month_start);
