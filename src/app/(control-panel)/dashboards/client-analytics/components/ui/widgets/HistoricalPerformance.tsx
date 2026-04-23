@@ -153,10 +153,11 @@ function HistoricalPerformance({ data, startDate, trendStartDate, showSuperQuali
     return parseFloat((d as any)[key]) || 0;
   };
 
-  const recent = chartData.slice(-24);
-  // Use the full label (e.g., "Mar 2026") as the underlying category key so annotations
-  // can anchor unambiguously — a 24-month window spans two years and short_label ("Mar")
-  // duplicates confuse apex annotation positioning. Display is shortened via xaxis formatter below.
+  // Display last 12 months on the chart. Prior-year lookups below still traverse the full
+  // data array, so year-over-year comparison is preserved.
+  const recent = chartData.slice(-12);
+  // Use the full label ("Mar 2026") as the internal category key so annotations anchor
+  // unambiguously. Display is shortened to just the month name via xaxis.labels.formatter.
   const labels = recent.map((d) => d.label || (d as any).short_label);
 
   // Detect program start month index
