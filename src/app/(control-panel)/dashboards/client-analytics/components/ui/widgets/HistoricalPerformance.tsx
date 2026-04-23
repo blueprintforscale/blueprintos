@@ -154,7 +154,10 @@ function HistoricalPerformance({ data, startDate, trendStartDate, showSuperQuali
   };
 
   const recent = chartData.slice(-24);
-  const labels = recent.map((d) => (d as any).short_label || d.label);
+  // Use the full label (e.g., "Mar 2026") as the underlying category key so annotations
+  // can anchor unambiguously — a 24-month window spans two years and short_label ("Mar")
+  // duplicates confuse apex annotation positioning. Display is shortened via xaxis formatter below.
+  const labels = recent.map((d) => d.label || (d as any).short_label);
 
   // Detect program start month index
   const startMonthIdx = startDate ? recent.findIndex((d) => {
@@ -422,7 +425,11 @@ function HistoricalPerformance({ data, startDate, trendStartDate, showSuperQuali
       categories: labels,
       axisBorder: { show: false },
       axisTicks: { show: false },
-      labels: { style: { colors: '#8a8279', fontSize: '11px' } },
+      labels: {
+        style: { colors: '#8a8279', fontSize: '11px' },
+        // Categories are "Mon YYYY" for uniqueness; display just "Mon" (chart stays readable)
+        formatter: (val: string) => (val || '').split(' ')[0],
+      },
     },
     yaxis: overlays.length > 0 ? [
       // Primary axis (index 0) — used by main series, prior year, trend, projection
