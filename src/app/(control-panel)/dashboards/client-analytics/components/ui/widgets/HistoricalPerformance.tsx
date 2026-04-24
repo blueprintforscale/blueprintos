@@ -345,6 +345,37 @@ function HistoricalPerformance({ data, startDate, trendStartDate, showSuperQuali
       },
     });
   }
+  // Program start vertical line — marks when Blueprint engagement began. Distinguishes
+  // pre-program traffic (client's prior history) from the Blueprint era.
+  if (startDate && !campaignIsolated) {
+    const programStartDate = new Date(startDate);
+    const programMonthIdx = recent.findIndex((d) => {
+      const ms = new Date((d as any).month_start);
+      return ms.getUTCFullYear() === programStartDate.getUTCFullYear() && ms.getUTCMonth() === programStartDate.getUTCMonth();
+    });
+    if (programMonthIdx >= 0) {
+      xaxisAnnotations.push({
+        x: labels[programMonthIdx],
+        borderColor: '#9ca3af',
+        strokeDashArray: 3,
+        opacity: 0.6,
+        label: {
+          text: 'Program start',
+          borderColor: 'transparent',
+          position: 'top',
+          orientation: 'horizontal',
+          offsetY: -5,
+          style: {
+            background: '#9ca3af',
+            color: '#fff',
+            fontSize: '9px',
+            fontWeight: 600,
+            padding: { left: 4, right: 4, top: 2, bottom: 2 },
+          },
+        },
+      });
+    }
+  }
   // SEO Started vertical line — shown on any source tab when client has SEO, to give context
   // for how SEO era correlates with other channels (Google Ads, etc.)
   if (seoTrend?.seo_start && !campaignIsolated) {
